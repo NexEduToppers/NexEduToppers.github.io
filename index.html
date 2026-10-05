@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Kids Learning Quiz</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #f2f7ff;
+            padding: 20px;
+        }
+
+        .quiz-box {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 0 15px #ccc;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #question {
+            font-size: 24px;
+            margin: 20px;
+        }
+
+        #quizImage {
+            display: block;
+            width: 350px;
+            height: 250px;
+            object-fit: contain;
+            margin: 20px auto;
+        }
+
+        .option {
+            display: block;
+            width: 90%;
+            margin: 10px auto;
+            padding: 15px;
+            font-size: 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            background: #e6e6e6;
+        }
+
+        .option:hover {
+            background: #d5d5d5;
+        }
+
+        .option.correct {
+            background: #28a745;
+            color: white;
+            animation: pop 0.3s ease;
+        }
+
+        @keyframes pop {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .option.wrong {
+            background: #dc3545;
+            color: white;
+            animation: shake 0.3s ease;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-6px);
+            }
+
+            50% {
+                transform: translateX(6px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        #nextBtn {
+            padding: 12px 30px;
+            background: #4CAF50;
+            font-size: 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            color: white;
+            margin-top: 15px;
+        }
+
+        #message {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 15px;
+        }
+
+        #progress {
+            font-size: 16px;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="quiz-box">
+
+        <h1>🌟 Welcome to Kids Learning Quiz 🌟</h1>
+
+        <div id="progress"></div>
+
+        <div id="question"></div>
+
+        <img id="quizImage" src="" alt="Question Image">
+
+        <div id="options"></div>
+
+        <div id="message"></div>
+
+        <button id="nextBtn" onclick="nextQuestion()">
+            Next ➡️
+        </button>
+
+    </div>
+
+    <script>
+
+        const questions = [
+
+            {
+                question: "What is this?",
+                image: "flower.png",
+                options: ["Flower", "Ball", "Cat", "Dog"],
+                answer: "Flower"
+            },
+
+            {
+                question: "Which animal says Meow?",
+                image: "",
+                options: ["Dog", "Cat", "Cow", "Lion"],
+                answer: "Cat"
+            },
+
+            {
+                question: "How many fingers are on one hand?",
+                image: "",
+                options: ["3", "4", "5", "6"],
+                answer: "5"
+            },
+
+            {
+                question: "Which animal is shown in this picture?",
+                image: "dog.png",
+                options: ["Cat", "Dog", "Fish", "Bird"],
+                answer: "Dog"
+            },
+
+            {
+                question: "How many legs does a spider have?",
+                image: "",
+                options: ["4", "6", "8", "10"],
+                answer: "8"
+            },
+
+            {
+                question: "Which fruit is yellow and curved?",
+                image: "",
+                options: ["Apple", "Banana", "Orange", "Grapes"],
+                answer: "Banana"
+            },
+
+            {
+                question: "What do bees make?",
+                image: "",
+                options: ["Milk", "Honey", "Juice", "Water"],
+                answer: "Honey"
+            },
+
+            {
+                question: "Which of these is shown in this picture?",
+                image: "car.png",
+                options: ["Car", "House", "Tree", "Book"],
+                answer: "Car"
+            },
+
+            {
+                question: "What do cows give us to drink?",
+                image: "",
+                options: ["Juice", "Water", "Milk", "Soda"],
+                answer: "Milk"
+            },
+
+            {
+                question: "Which animal is shown in this picture?",
+                image: "elephant.png",
+                options: ["Lion", "Elephant", "Monkey", "Zebra"],
+                answer: "Elephant"
+            }
+
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+
+        function loadQuestion() {
+
+            answered = false;
+
+            let q = questions[currentQuestion];
+
+            document.getElementById("question").innerText = q.question;
+
+            document.getElementById("progress").innerText =
+                "Question " +
+                (currentQuestion + 1) +
+                " of " +
+                questions.length;
+
+            let image = document.getElementById("quizImage");
+
+            if (q.image !== "") {
+
+                image.src = q.image;
+                image.style.display = "block";
+
+            } else {
+
+                image.style.display = "none";
+
+            }
