@@ -349,7 +349,22 @@
                     questions.length +
                     "</h1>" +
 
-                    "<p>Great job! 👏</p>" +
+                    "<p>" +
+(
+    score === questions.length
+        ? "🎉 Outstanding! Perfect Score!"
+        : score / questions.length >= 0.9
+        ? "🏆 Excellent Job!"
+        : score / questions.length >= 0.7
+        ? "🌟 Great Job!"
+        : score / questions.length >= 0.5
+        ? "👍 Keep Practising!"
+        : score / questions.length >= 0.3
+        ? "🙂 Keep Practising!"
+        : "😟 Keep Practising!"
+) +
+"</p>" +
+
 
                     "<button id='nextBtn' " +
                     "onclick='location.reload()'>" +
