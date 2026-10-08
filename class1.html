@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Class 1 - NexEduToppers Learning Academy</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f8ff;
+            color: #222;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1565c0, #42a5f5);
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 17px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 25px 15px;
+        }
+
+        .back {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #1565c0;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #1565c0;
+            margin: 25px 0 18px;
+        }
+
+        .subjects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+        }
+
+        .subject-card {
+            background: white;
+            padding: 25px 15px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-decoration: none;
+            color: #222;
+            transition: 0.2s;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .subject-card h3 {
+            margin: 0 0 8px;
+            color: #1565c0;
+        }
+
+        .subject-card p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .practice {
+            margin-top: 35px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        footer {
+            margin-top: 40px;
+            background: #1565c0;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Class 1</h1>
+    <p>Learn • Practice • Improve • Succeed</p>
+</header>
+
+<div class="container">
+
+    <a href="index.html" class="back">← Back to Home</a>
+
+    <h2 class="section-title">Choose Your Subject</h2>
+
+    <div class="subjects">
+
+        <a href="#" class="subject-card">
+            <h3>English</h3>
+            <p>Chapters • Grammar • Speaking • Quizzes</p>
+        </a>
+
+        <a href="#" class="subject-card">
+            <h3>Maths</h3>
+            <p>Chapters • Formulas • Practice • Quizzes</p>
+        </a>
+
+        <a href="#" class="subject-card">
+            <h3>EVS</h3>
+            <p>Chapters • Questions • Practice • Quizzes</p>
+        </a>
+
+        <a href="#" class="subject-card">
+            <h3>GK</h3>
+            <p>General Knowledge • Practice • Quizzes</p>
+        </a>
+
+        <a href="#" class="subject-card">
+            <h3>Hindi</h3>
+            <p>Chapters • Grammar • Practice • Quizzes</p>
+        </a>
+
+        <a href="#" class="subject-card">
+            <h3>General Practice</h3>
+            <p>Mixed Questions • Reasoning • Revision</p>
+        </a>
+
+    </div>
+
+    <section class="practice">
+        <h2>Daily Practice</h2>
+        <p>
+            Daily quizzes and practice activities will be added
+            subject-wise and chapter-wise.
+        </p>
+    </section>
+
+</div>
+
+<footer>
+    <p>© 2026 RawaRajpootNexEduToppers Learning Academy</p>
+    <p>Learning Today • Succeeding Tomorrow</p>
+</footer>
+
+</body>
+</html>
