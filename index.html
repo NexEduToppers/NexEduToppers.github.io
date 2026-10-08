@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RawaRajpootNexEduToppers Learning Academy</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f8ff;
+            color: #222;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1565c0, #42a5f5);
+            color: white;
+            text-align: center;
+            padding: 35px 15px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        header p {
+            font-size: 18px;
+            margin-top: 12px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 25px 15px;
+        }
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .welcome h2 {
+            color: #1565c0;
+        }
+
+        .classes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+        }
+
+        .class-card {
+            background: white;
+            padding: 22px 10px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .class-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .class-card h3 {
+            margin: 0;
+            color: #1565c0;
+        }
+
+        .quiz-section {
+            text-align: center;
+            margin-top: 35px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .quiz-button {
+            display: inline-block;
+            background: #2e7d32;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .quiz-button:hover {
+            background: #1b5e20;
+        }
+
+        footer {
+            margin-top: 40px;
+            background: #1565c0;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 24px;
+            }
+
+            header p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+    <p>Learn • Practice • Improve • Succeed</p>
+</header>
+
+<div class="container">
+
+    <section class="welcome">
+        <h2>Welcome to Our Learning Academy</h2>
+        <p>
+            Study material, practice questions, worksheets and daily quizzes
+            for school students.
+        </p>
+    </section>
+
+    <h2 style="text-align:center;">Choose Your Class</h2>
+
+    <div class="classes">
+
+        <div class="class-card">
+            <h3>Class 1</h3>
+        </div>
+
+        <div class="class-card">
+            <h3>Class 2</h3>
+        </div>
+
+        <div class="class-card">
+            <h3>Class 3</h3>
+        </div>
+
+        <div class="class-card">
+            <h3>Class 4</h3>
+        </div>
+
+        <div class="class-card">
+            <h3>Class 5</h3>
+        </div>
+
+        <div class="class-card">
+            <h3>Class 6</h3>
+        </div>
+
+        <div class="class-card">
+            <h3>Class 7</h3>
+        </div>
+
+        <div class="class-card">
+            <h3>Class 8</h3>
+        </div>
+
+        <div class="class-card">
+            <h3>Class 9</h3>
+        </div>
+
+        <div class="class-card">
+            <h3>Class 10</h3>
+        </div>
+
+    </div>
+
+    <section class="quiz-section">
+        <h2>Daily Kids Quiz</h2>
+
+        <p>
+            Test your knowledge with our interactive quiz.
+        </p>
+
+        <a href="quiz.html" class="quiz-button">
+            Start Quiz
+        </a>
+    </section>
+
+</div>
+
+<footer>
+    <p>© 2026 RawaRajpootNexEduToppers Learning Academy</p>
+    <p>Learning Today • Succeeding Tomorrow</p>
+</footer>
+
+</body>
+</html>
