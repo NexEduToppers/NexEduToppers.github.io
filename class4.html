@@ -1,0 +1,229 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 4 | RawaRajpootNexEduToppers Learning Academy</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f2f7ff;
+            color: #243247;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0755b5, #1688e8);
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            font-size: 27px;
+        }
+
+        header p {
+            margin: 6px 0;
+            font-size: 15px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 25px auto;
+            padding: 0 16px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .intro h2 {
+            color: #0755b5;
+            margin-bottom: 8px;
+        }
+
+        .subjects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .subject-card {
+            background: white;
+            border-radius: 14px;
+            padding: 22px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 50, 100, 0.09);
+            border: 1px solid #e1eafa;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 7px 18px rgba(0, 50, 100, 0.14);
+        }
+
+        .subject-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .subject-card h3 {
+            color: #0755b5;
+            margin: 5px 0 10px;
+            font-size: 20px;
+        }
+
+        .subject-card p {
+            font-size: 14px;
+            line-height: 1.5;
+            min-height: 42px;
+        }
+
+        .subject-card a {
+            display: inline-block;
+            background: #087bdb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .subject-card a:hover {
+            background: #0559a8;
+        }
+
+        .coming-soon {
+            display: inline-block;
+            background: #e8eef7;
+            color: #53647a;
+            padding: 10px 16px;
+            border-radius: 8px;
+            margin-top: 8px;
+            font-size: 13px;
+        }
+
+        .note {
+            background: #fff;
+            border-left: 4px solid #1688e8;
+            border-radius: 8px;
+            padding: 14px;
+            margin-top: 25px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            background: #073d7a;
+            color: white;
+            padding: 20px 12px;
+            margin-top: 35px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 22px;
+            }
+
+            .subjects {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>RawaRajpootNexEduToppers</h1>
+    <p>Learning Academy</p>
+    <p>Learn • Practise • Improve</p>
+</header>
+
+<main class="container">
+
+    <section class="intro">
+        <h2>Class 4 Learning Centre</h2>
+        <p>Choose a subject to explore lessons and practise questions.</p>
+    </section>
+
+    <section class="subjects">
+
+        <div class="subject-card">
+            <div class="subject-icon">📘</div>
+            <h3>English</h3>
+            <p>Reading, vocabulary, grammar and chapter-wise practice.</p>
+            <a href="class4-english.html">Open English</a>
+        </div>
+
+        <div class="subject-card">
+            <div class="subject-icon">📗</div>
+            <h3>Hindi</h3>
+            <p>भाषा, शब्द ज्ञान, व्याकरण और अभ्यास प्रश्न।</p>
+            <span class="coming-soon">Coming Soon</span>
+        </div>
+
+        <div class="subject-card">
+            <div class="subject-icon">🔢</div>
+            <h3>Mathematics</h3>
+            <p>Numbers, calculations, concepts and practice questions.</p>
+            <span class="coming-soon">Coming Soon</span>
+        </div>
+
+        <div class="subject-card">
+            <div class="subject-icon">🌍</div>
+            <h3>Our World</h3>
+            <p>Explore people, places, nature and the world around us.</p>
+            <span class="coming-soon">Coming Soon</span>
+        </div>
+
+        <div class="subject-card">
+            <div class="subject-icon">🎨</div>
+            <h3>Arts Education</h3>
+            <p>Creative activities, drawing ideas and art appreciation.</p>
+            <span class="coming-soon">Coming Soon</span>
+        </div>
+
+        <div class="subject-card">
+            <div class="subject-icon">⚽</div>
+            <h3>Physical Education</h3>
+            <p>Movement, fitness, yoga and healthy habits.</p>
+            <span class="coming-soon">Coming Soon</span>
+        </div>
+
+    </section>
+
+    <div class="note">
+        <strong>For students and parents:</strong>
+        This learning centre is being developed step by step.
+        Please check your school's actual textbooks and edition before
+        using chapter-specific materials.
+    </div>
+
+</main>
+
+<footer>
+    <strong>RawaRajpootNexEduToppers Learning Academy</strong>
+    <br>
+    Class 4 Learning Resources
+    <br>
+    Learn something new every day!
+</footer>
+
+</body>
+</html>
+```
