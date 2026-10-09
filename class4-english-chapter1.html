@@ -262,25 +262,143 @@ Try answering these questions in your own words. Read the textbook carefully, th
 <p class="small-note">चित्र और नक्शे पर आधारित प्रश्नों के सही उत्तर के लिए अपनी पाठ्यपुस्तक के चित्र देखें।</p>
 </section>
 
-<section class="panel">
-<h2>8. Interactive Quiz / अभ्यास प्रश्नोत्तरी</h2>
-<p>Choose one answer for each question. / हर प्रश्न के लिए एक उत्तर चुनें।</p>
-<div id="quizProgress"><div id="quizProgressBar"></div></div>
-<p id="quizCounter" aria-live="polite"></p>
-<h3 id="quizQuestion"></h3>
-<p id="quizHindi"></p>
-<div id="quizOptions"></div>
-<div id="quizFeedback" aria-live="polite" hidden></div>
-<div id="quizControls">
-<button class="button" id="nextButton" type="button" disabled>Next Question / अगला प्रश्न</button>
-</div>
-<div id="quizResult" hidden>
-<h3>Quiz Complete! / प्रश्नोत्तरी पूरी हुई!</h3>
-<p id="scoreText"></p>
-<p id="percentageText"></p>
-<button class="button" id="restartButton" type="button">Try Again / फिर प्रयास करें</button>
-</div>
+<!-- Chapter 1 Quiz Menu -->
+<section class="learning-section" id="chapter-quizzes">
+  <h2>8. Interactive Quizzes / अभ्यास प्रश्नोत्तरी</h2>
+
+  <p>
+    Choose a quiz, answer the questions and learn from your mistakes.
+  </p>
+  <p>
+    कोई भी quiz चुनें, प्रश्न हल करें और अपनी गलतियों से सीखें।
+  </p>
+
+  <div class="chapter-quiz-grid">
+
+    <a class="chapter-quiz-button"
+       href="class4-english-chapter1-quiz1.html">
+      <span class="quiz-number">Quiz 1</span>
+      <strong>Chapter Understanding & Teamwork</strong>
+      <span>अध्याय की समझ और मिलकर काम करना</span>
+      <span class="quiz-action">Start Quiz →</span>
+    </a>
+
+    <a class="chapter-quiz-button"
+       href="class4-english-chapter1-quiz2.html">
+      <span class="quiz-number">Quiz 2</span>
+      <strong>Word Meanings & Vocabulary</strong>
+      <span>शब्दों के अर्थ और शब्दावली</span>
+      <span class="quiz-action">Start Quiz →</span>
+    </a>
+
+    <a class="chapter-quiz-button"
+       href="class4-english-chapter1-quiz3.html">
+      <span class="quiz-number">Quiz 3</span>
+      <strong>Collective Nouns</strong>
+      <span>समूहवाचक संज्ञाएँ</span>
+      <span class="quiz-action">Start Quiz →</span>
+    </a>
+
+    <a class="chapter-quiz-button"
+       href="class4-english-chapter1-quiz4.html">
+      <span class="quiz-number">Quiz 4</span>
+      <strong>Prepositions</strong>
+      <span>स्थान बताने वाले शब्द</span>
+      <span class="quiz-action">Start Quiz →</span>
+    </a>
+
+    <a class="chapter-quiz-button"
+       href="class4-english-chapter1-quiz5.html">
+      <span class="quiz-number">Quiz 5</span>
+      <strong>Future Tense — “Will”</strong>
+      <span>भविष्य काल में वाक्य बनाना</span>
+      <span class="quiz-action">Start Quiz →</span>
+    </a>
+
+    <a class="chapter-quiz-button"
+       href="class4-english-chapter1-quiz6.html">
+      <span class="quiz-number">Quiz 6</span>
+      <strong>Comprehension & Sentence Making</strong>
+      <span>पढ़कर समझना और वाक्य बनाना</span>
+      <span class="quiz-action">Start Quiz →</span>
+    </a>
+
+    <a class="chapter-quiz-button"
+       href="class4-english-chapter1-quiz7.html">
+      <span class="quiz-number">Quiz 7</span>
+      <strong>Picture, Map & Real-Life Activities</strong>
+      <span>चित्र, नक्शा और रोजमर्रा की परिस्थितियाँ</span>
+      <span class="quiz-action">Start Quiz →</span>
+    </a>
+
+    <a class="chapter-quiz-button"
+       href="class4-english-chapter1-quiz8.html">
+      <span class="quiz-number">Quiz 8</span>
+      <strong>Mixed Revision Challenge</strong>
+      <span>पूरे अध्याय की दोहराई</span>
+      <span class="quiz-action">Start Quiz →</span>
+    </a>
+
+  </div>
 </section>
+
+<style>
+.chapter-quiz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+  margin: 22px 0;
+}
+
+.chapter-quiz-button {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 19px;
+  background: #ffffff;
+  border: 2px solid #d7e6f7;
+  border-radius: 13px;
+  text-decoration: none;
+  color: #26364b;
+  box-shadow: 0 3px 10px rgba(25, 65, 110, 0.07);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.chapter-quiz-button:hover {
+  border-color: #2478bd;
+  transform: translateY(-3px);
+}
+
+.quiz-number {
+  align-self: flex-start;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #e4f0ff;
+  color: #175b9a;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.chapter-quiz-button strong {
+  color: #175b9a;
+  font-size: 17px;
+}
+
+.chapter-quiz-button > span:not(.quiz-number):not(.quiz-action) {
+  font-size: 14px;
+  color: #53677d;
+}
+
+.quiz-action {
+  margin-top: 5px;
+  padding: 9px 12px;
+  border-radius: 7px;
+  background: #218849;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
+</style>
 
 <div class="button-row">
 <a href="class4-english.html" class="button">← Back to English Chapters</a>
