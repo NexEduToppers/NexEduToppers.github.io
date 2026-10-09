@@ -2,329 +2,498 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Chapter 1: Together We Can | Class 4 English</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f2f7ff;
-            color: #243247;
-            line-height: 1.7;
-        }
-
-        header {
-            background: linear-gradient(135deg, #0755b5, #1688e8);
-            color: white;
-            text-align: center;
-            padding: 25px 15px;
-        }
-
-        header h1 {
-            margin: 0 0 8px;
-            font-size: 25px;
-        }
-
-        header p {
-            margin: 5px 0;
-        }
-
-        main {
-            max-width: 850px;
-            margin: 25px auto;
-            padding: 0 15px;
-        }
-
-        .panel {
-            background: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 13px;
-            border: 1px solid #e1eafa;
-            box-shadow: 0 4px 12px rgba(0, 50, 100, 0.07);
-        }
-
-        h2 {
-            color: #0755b5;
-            margin-top: 0;
-            font-size: 22px;
-        }
-
-        h3 {
-            color: #0755b5;
-        }
-
-        .english {
-            border-left: 4px solid #1688e8;
-            padding-left: 14px;
-            margin-bottom: 20px;
-        }
-
-        .hindi {
-            border-left: 4px solid #159447;
-            padding-left: 14px;
-        }
-
-        .notice {
-            background: #fff8df;
-            border-left: 5px solid #e5a000;
-        }
-
-        .steps {
-            padding-left: 22px;
-        }
-
-        .words {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .words th,
-        .words td {
-            border: 1px solid #d8e3f2;
-            padding: 10px;
-            text-align: left;
-            vertical-align: top;
-        }
-
-        .words th {
-            background: #e3f0ff;
-            color: #0755b5;
-        }
-
-        .question {
-            background: #f5f9ff;
-            padding: 14px;
-            border-radius: 9px;
-            margin: 14px 0;
-        }
-
-        .answer-line {
-            display: block;
-            border-bottom: 1px solid #8b9bb0;
-            height: 27px;
-            margin-top: 5px;
-        }
-
-        .button {
-            display: inline-block;
-            text-decoration: none;
-            text-align: center;
-            background: #087bdb;
-            color: white;
-            padding: 12px 18px;
-            margin: 5px;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-
-        .button:hover {
-            background: #0559a8;
-        }
-
-        .button-row {
-            text-align: center;
-            margin: 22px 0;
-        }
-
-        footer {
-            background: #073d7a;
-            color: white;
-            text-align: center;
-            padding: 20px 12px;
-            margin-top: 35px;
-        }
-
-        @media (max-width: 520px) {
-            header h1 {
-                font-size: 21px;
-            }
-
-            .panel {
-                padding: 15px;
-            }
-
-            .words th,
-            .words td {
-                padding: 7px;
-                font-size: 14px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 1: Together We Can | Class 4 English</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f2f7ff;color:#243247;line-height:1.7}
+header{background:linear-gradient(135deg,#0755b5,#1688e8);color:white;text-align:center;padding:25px 15px}
+header h1{margin:0 0 8px;font-size:25px}
+header p{margin:5px 0}
+main{max-width:850px;margin:25px auto;padding:0 15px}
+.panel{background:white;padding:20px;margin-bottom:20px;border-radius:13px;border:1px solid #e1eafa;box-shadow:0 4px 12px rgba(0,50,100,.07)}
+h2{color:#0755b5;margin-top:0;font-size:22px}
+h3{color:#0755b5}
+.english{border-left:4px solid #1688e8;padding-left:14px;margin-bottom:20px}
+.hindi{border-left:4px solid #159447;padding-left:14px}
+.notice{background:#fff8df;border-left:5px solid #e5a000}
+.words{width:100%;border-collapse:collapse}
+.words th,.words td{border:1px solid #d8e3f2;padding:10px;text-align:left;vertical-align:top}
+.words th{background:#e3f0ff;color:#0755b5}
+.question{background:#f5f9ff;padding:14px;border-radius:9px;margin:14px 0}
+.answer-line{display:block;width:100%;border:0;border-bottom:1px solid #8b9bb0;background:transparent;height:32px;margin-top:5px;font:inherit}
+.button{display:inline-block;text-decoration:none;text-align:center;background:#087bdb;color:white;padding:12px 18px;margin:5px;border:0;border-radius:8px;font-weight:bold;cursor:pointer}
+.button:hover{background:#0559a8}
+.button-row{text-align:center;margin:22px 0}
+footer{background:#073d7a;color:white;text-align:center;padding:20px 12px;margin-top:35px}
+.small-note{font-size:14px;color:#52647b}
+.quiz-option{display:block;width:100%;text-align:left;background:#f5f9ff;color:#243247;border:1px solid #cbd9ec;padding:12px;margin:8px 0;border-radius:8px;cursor:pointer;font-size:16px}
+.quiz-option:hover{background:#e3f0ff}
+.quiz-option.correct{background:#d9f7e4;border-color:#159447}
+.quiz-option.wrong{background:#ffe2e2;border-color:#d93030}
+#quizFeedback{padding:12px;border-radius:8px;margin-top:12px}
+#quizProgress{height:10px;background:#e0e8f3;border-radius:10px;overflow:hidden}
+#quizProgressBar{height:100%;width:0;background:#1688e8;transition:width .2s}
+@media(max-width:520px){
+header h1{font-size:21px}.panel{padding:15px}
+.words th,.words td{padding:7px;font-size:13px}
+.button{max-width:100%}
+}
+</style>
 </head>
-
 <body>
 
 <header>
-    <h1>RawaRajpootNexEduToppers</h1>
-    <p>Learning Academy</p>
-    <p>Class 4 English | Chapter 1</p>
+<h1>RawaRajpootNexEduToppers</h1>
+<p>Learning Academy</p>
+<p>Class 4 English | Unit 1: My Land</p>
 </header>
 
 <main>
+<section class="panel">
+<h2>Chapter 1: Together We Can</h2>
+<p><strong>Topic:</strong> Teamwork, unity, helping others and working together.</p>
+<p><strong>विषय:</strong> टीमवर्क, एकता, दूसरों की सहायता और मिल-जुलकर काम करना।</p>
+</section>
 
-    <section class="panel">
-        <h2>Chapter 1: Together We Can</h2>
-            </section>
+<section class="panel notice">
+<h2>📖 Before You Begin / शुरू करने से पहले</h2>
+<div class="english">
+<h3>Read Your Textbook First</h3>
+Read the entire chapter carefully from your textbook. Pay attention to its ideas, new words, activities and message. Then study this learning page and attempt the practice questions.
+</div>
+<div class="hindi">
+<h3>पहले अपनी किताब पढ़ें</h3>
+सबसे पहले अपनी पाठ्यपुस्तक से पूरा अध्याय ध्यानपूर्वक पढ़ें। नए शब्दों, गतिविधियों और अध्याय के संदेश पर ध्यान दें। इसके बाद इस learning page को पढ़ें और अभ्यास प्रश्न हल करें।
+</div>
+</section>
 
-    <section class="panel notice">
-        <h2>📖 Before You Begin / शुरू करने से पहले</h2>
+<section class="panel">
+<h2>1. Chapter Introduction / अध्याय का परिचय</h2>
+<div class="english">
+<h3>English</h3>
+This chapter focuses on teamwork and the importance of helping one another. When people cooperate, listen to different ideas and share responsibilities, they can work towards a common goal. A good team respects every member and supports one another in both success and failure.
+</div>
+<div class="hindi">
+<h3>हिंदी</h3>
+यह अध्याय टीमवर्क और एक-दूसरे की सहायता करने के महत्व पर आधारित है। जब लोग मिल-जुलकर काम करते हैं, दूसरों के विचार सुनते हैं और जिम्मेदारियाँ बाँटते हैं, तो वे साझा लक्ष्य प्राप्त कर सकते हैं। एक अच्छी टीम में हर सदस्य का सम्मान किया जाता है और जीत तथा हार दोनों परिस्थितियों में एक-दूसरे का साथ दिया जाता है।
+</div>
+</section>
 
-        <div class="english">
-            <h3>Read Your Textbook First</h3>
-            First, read the entire chapter carefully from your
-            textbook. Pay attention to the characters, important
-            events, new words and the main message.
-            Then study the summary and attempt the practice questions.
-        </div>
+<section class="panel">
+<h2>2. Chapter Summary / अध्याय का सारांश</h2>
+<div class="english">
+<h3>Summary in English</h3>
+The main idea of this chapter is that people can achieve more when they work together. Teamwork teaches us to help others, trust our teammates, share responsibilities and respect different opinions. Children are encouraged to talk about their favourite foods and festivals and learn about one another's traditions. The chapter also includes activities that develop vocabulary, speaking, writing and grammar skills. Through these activities, learners practise collective nouns, prepositions and the use of “will” for future actions. The chapter's central message is that cooperation, kindness and unity help a group become stronger.
+</div>
+<div class="hindi">
+<h3>हिंदी में सारांश</h3>
+इस अध्याय का मुख्य विचार है कि मिल-जुलकर काम करने से लोग अधिक अच्छा काम कर सकते हैं और अपने लक्ष्य प्राप्त कर सकते हैं। टीमवर्क हमें दूसरों की मदद करना, साथियों पर विश्वास करना, जिम्मेदारियाँ बाँटना और अलग-अलग विचारों का सम्मान करना सिखाता है। बच्चों को अपने पसंदीदा भोजन और त्योहारों के बारे में बात करने तथा दूसरों की परंपराओं को समझने के लिए प्रोत्साहित किया जाता है। अध्याय में शब्दावली, बोलने, लिखने और व्याकरण से जुड़ी गतिविधियाँ भी हैं। इनके माध्यम से बच्चे collective nouns, prepositions और भविष्य की बात बताने के लिए “will” का प्रयोग सीखते हैं। अध्याय का मुख्य संदेश है कि सहयोग, दयालुता और एकता किसी भी समूह को मजबूत बनाते हैं।
+</div>
+<p class="small-note">This is an original summary of the chapter's main ideas. Read your textbook for the complete lesson and activities.</p>
+</section>
 
-        <div class="hindi">
-            <h3>पहले अपनी किताब पढ़ें</h3>
-            सबसे पहले अपनी पाठ्यपुस्तक से पूरा अध्याय ध्यानपूर्वक पढ़ें।
-            मुख्य पात्रों, महत्वपूर्ण घटनाओं, नए शब्दों और अध्याय के
-            संदेश पर ध्यान दें। इसके बाद सारांश पढ़ें और अभ्यास प्रश्न हल करें।
-        </div>
-    </section>
+<section class="panel">
+<h2>3. Word Meanings / शब्दार्थ</h2>
+<table class="words">
+<thead><tr><th>English Word</th><th>Simple English Meaning</th><th>हिंदी अर्थ</th></tr></thead>
+<tbody>
+<tr><td>Together</td><td>With one another</td><td>साथ-साथ</td></tr>
+<tr><td>Teamwork</td><td>Working as a group</td><td>मिल-जुलकर काम करना</td></tr>
+<tr><td>Unity</td><td>Being united</td><td>एकता</td></tr>
+<tr><td>Helping</td><td>Giving support</td><td>सहायता करना</td></tr>
+<tr><td>Trust</td><td>Belief in someone</td><td>विश्वास</td></tr>
+<tr><td>Goal</td><td>Something we want to achieve</td><td>लक्ष्य</td></tr>
+<tr><td>Bond</td><td>A close connection</td><td>जुड़ाव या संबंध</td></tr>
+<tr><td>Joyful</td><td>Feeling happy</td><td>खुश या आनंदित</td></tr>
+<tr><td>Tradition</td><td>A custom followed by people</td><td>परंपरा</td></tr>
+<tr><td>Festival</td><td>A special celebration</td><td>त्योहार</td></tr>
+<tr><td>Disagree</td><td>To have different opinions</td><td>असहमत होना</td></tr>
+<tr><td>Injured</td><td>Hurt physically</td><td>घायल</td></tr>
+<tr><td>Togetherness</td><td>The state of being together</td><td>एकजुटता</td></tr>
+<tr><td>Cooperation</td><td>Working well with others</td><td>सहयोग</td></tr>
+</tbody>
+</table>
+</section>
 
-    <section class="panel">
-        <h2>1. Chapter Summary / अध्याय का सारांश</h2>
+<section class="panel">
+<h2>4. Grammar Corner / व्याकरण</h2>
+<h3>A. Collective Nouns / समूहवाचक संज्ञाएँ</h3>
+<p><strong>English:</strong> A collective noun names a group of people, animals or things.</p>
+<p><strong>हिंदी:</strong> Collective noun किसी व्यक्ति, जानवर या वस्तु के समूह को बताने वाला शब्द है।</p>
+<table class="words">
+<thead><tr><th>Phrase</th><th>Hindi Meaning</th></tr></thead>
+<tbody>
+<tr><td>A bunch of keys</td><td>चाबियों का गुच्छा</td></tr>
+<tr><td>A bouquet of flowers</td><td>फूलों का गुलदस्ता</td></tr>
+<tr><td>A herd of sheep</td><td>भेड़ों का झुंड</td></tr>
+<tr><td>A pack of wolves</td><td>भेड़ियों का झुंड</td></tr>
+<tr><td>A grove of trees</td><td>पेड़ों का समूह</td></tr>
+<tr><td>A bundle of sticks</td><td>लकड़ियों का बंडल</td></tr>
+<tr><td>A swarm of bees</td><td>मधुमक्खियों का झुंड</td></tr>
+<tr><td>A choir of singers</td><td>गायकों का समूह</td></tr>
+</tbody>
+</table>
 
-        <div class="english">
-            <h3>Summary in English</h3>
-            <p>
-                The chapter-specific summary will be added after
-                checking the actual textbook lesson. Read the original
-                chapter first so you can connect the lesson with
-                the explanation provided here.
-            </p>
-        </div>
+<h3>B. Prepositions / स्थान बताने वाले शब्द</h3>
+<table class="words">
+<thead><tr><th>Word</th><th>हिंदी अर्थ</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td>Behind</td><td>के पीछे</td><td>The bag is behind the chair.</td></tr>
+<tr><td>Between</td><td>के बीच</td><td>The ball is between two boxes.</td></tr>
+<tr><td>Near</td><td>के पास</td><td>The school is near the park.</td></tr>
+<tr><td>In front of</td><td>के सामने</td><td>The bus is in front of the school.</td></tr>
+</tbody>
+</table>
+<p>These words tell us where a person or thing is located.</p>
+<p>ये शब्द बताते हैं कि कोई व्यक्ति या वस्तु कहाँ स्थित है।</p>
 
-        <div class="hindi">
-            <h3>हिंदी में सारांश</h3>
-            <p>
-                वास्तविक पाठ्यपुस्तक के अध्याय को देखने के बाद
-                उसका विस्तृत और सरल हिंदी सारांश जोड़ा जाएगा।
-                पहले अपनी किताब से अध्याय पढ़ें, ताकि यहाँ दी गई
-                व्याख्या को बेहतर ढंग से समझ सकें।
-            </p>
-        </div>
-    </section>
+<h3>C. Future Actions with “Will” / भविष्य की बात</h3>
+<p><strong>Rule:</strong> Subject + will + base form of the verb.</p>
+<p><strong>नियम:</strong> Subject के बाद will और फिर verb का मूल रूप आता है।</p>
+<ul>
+<li>I will help my friend. — मैं अपने मित्र की मदद करूँगा/करूँगी।</li>
+<li>We will play together. — हम साथ खेलेंगे।</li>
+<li>She will visit the park. — वह पार्क जाएगी।</li>
+<li>They will complete the work. — वे काम पूरा करेंगे।</li>
+</ul>
+<p><strong>Remember:</strong> “She will help” is correct. “She will helps” is incorrect.</p>
+<p><strong>याद रखें:</strong> Will के बाद verb का मूल रूप आता है।</p>
+</section>
 
-    <section class="panel">
-        <h2>2. Word Meanings / शब्दार्थ</h2>
+<section class="panel">
+<h2>5. Question–Answers / प्रश्न-उत्तर</h2>
+<p>Read the chapter first. The following model answers explain its main ideas. / पहले अध्याय पढ़ें। नीचे दिए गए नमूना उत्तर मुख्य विचारों को समझाते हैं।</p>
 
-        <p>
-            Write down new words from your textbook and learn
-            their meanings in both languages.
-        </p>
-        <p>
-            अपनी किताब से नए शब्द चुनें और उनके English तथा
-            Hindi meanings लिखकर याद करें।
-        </p>
+<div class="question">
+<strong>Q1. What happens when you join hands with your team?</strong>
+<p><strong>प्रश्न 1.</strong> टीम के साथ मिलकर काम करने से क्या होता है?</p>
+<p><strong>Answer:</strong> We can overcome difficulties and achieve our common goals.</p>
+<p><strong>उत्तर:</strong> हम कठिनाइयों को दूर करके अपने साझा लक्ष्य प्राप्त कर सकते हैं।</p>
+</div>
 
-        <table class="words">
-            <thead>
-                <tr>
-                    <th>English Word</th>
-                    <th>Simple English Meaning</th>
-                    <th>हिंदी अर्थ</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Word 1</td>
-                    <td>Add after reading the chapter</td>
-                    <td>अध्याय पढ़ने के बाद जोड़ें</td>
-                </tr>
-                <tr>
-                    <td>Word 2</td>
-                    <td>Add after reading the chapter</td>
-                    <td>अध्याय पढ़ने के बाद जोड़ें</td>
-                </tr>
-                <tr>
-                    <td>Word 3</td>
-                    <td>Add after reading the chapter</td>
-                    <td>अध्याय पढ़ने के बाद जोड़ें</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
+<div class="question">
+<strong>Q2. Why is helping each other important?</strong>
+<p><strong>प्रश्न 2.</strong> एक-दूसरे की मदद करना क्यों जरूरी है?</p>
+<p><strong>Answer:</strong> It builds trust, friendship and cooperation.</p>
+<p><strong>उत्तर:</strong> इससे विश्वास, मित्रता और सहयोग बढ़ता है।</p>
+</div>
 
-    <section class="panel">
-        <h2>3. Check Your Understanding / अपनी समझ जाँचें</h2>
+<div class="question">
+<strong>Q3. What makes you feel joyful?</strong>
+<p><strong>प्रश्न 3.</strong> आपको किन बातों से खुशी मिलती है?</p>
+<p><strong>Sample answer:</strong> Playing with my friends and helping my family make me feel joyful.</p>
+<p><strong>नमूना उत्तर:</strong> अपने दोस्तों के साथ खेलना और परिवार की मदद करना मुझे खुशी देता है।</p>
+</div>
 
-        <p>
-            Answer these questions after reading your textbook.
-            Write your answers in your own words.
-        </p>
-        <p>
-            किताब पढ़ने के बाद इन प्रश्नों के उत्तर अपने शब्दों में लिखें।
-        </p>
+<div class="question">
+<strong>Q4. What activity can you do together with a friend?</strong>
+<p><strong>प्रश्न 4.</strong> आप अपने मित्र के साथ कौन-सी गतिविधि कर सकते हैं?</p>
+<p><strong>Sample answer:</strong> My friend and I can plant trees together.</p>
+<p><strong>नमूना उत्तर:</strong> मैं और मेरा मित्र मिलकर पेड़ लगा सकते हैं।</p>
+</div>
 
-        <div class="question">
-            <strong>Q1. What is the main message of the chapter?</strong>
-            <br>
-            <strong>प्रश्न 1. अध्याय का मुख्य संदेश क्या है?</strong>
-            <span class="answer-line"></span>
-            <span class="answer-line"></span>
-        </div>
+<div class="question">
+<strong>Q5. How can a team leader unite teammates who disagree?</strong>
+<p><strong>प्रश्न 5.</strong> असहमत साथियों को टीम लीडर फिर से एकजुट कैसे कर सकता है?</p>
+<p><strong>Sample answer:</strong> The leader should listen to both sides and help them find a fair solution.</p>
+<p><strong>नमूना उत्तर:</strong> लीडर को दोनों की बात सुनकर उचित समाधान खोजने में मदद करनी चाहिए।</p>
+</div>
+</section>
 
-        <div class="question">
-            <strong>Q2. Which event or idea did you find important?</strong>
-            <br>
-            <strong>प्रश्न 2. आपको कौन-सी घटना या विचार महत्वपूर्ण लगा?</strong>
-            <span class="answer-line"></span>
-            <span class="answer-line"></span>
-        </div>
+<section class="panel">
+<h2>6. Speaking Activity / बोलने का अभ्यास</h2>
+<div class="english">
+<h3>English Conversation</h3>
+<p>Hello! My name is ______.</p>
+<p>My favourite food is ______.</p>
+<p>My favourite festival is ______.</p>
+<p>During this festival, my family and I ______.</p>
+<p>I enjoy sharing my traditions with my friends.</p>
+</div>
+<div class="hindi">
+<h3>हिंदी में अभ्यास</h3>
+<p>नमस्ते! मेरा नाम ______ है।</p>
+<p>मेरा पसंदीदा भोजन ______ है।</p>
+<p>मेरा पसंदीदा त्योहार ______ है।</p>
+<p>इस त्योहार के दौरान, मैं और मेरा परिवार ______।</p>
+<p>मुझे अपने दोस्तों के साथ अपनी परंपराएँ साझा करना अच्छा लगता है।</p>
+</div>
+<p><strong>Activity:</strong> Practise this conversation with a friend. Listen carefully and take turns speaking.</p>
+<p><strong>गतिविधि:</strong> इस बातचीत का अभ्यास मित्र के साथ करें। एक-दूसरे की बात ध्यान से सुनें और बारी-बारी से बोलें।</p>
+</section>
 
-        <div class="question">
-            <strong>Q3. What new words did you learn?</strong>
-            <br>
-            <strong>प्रश्न 3. आपने कौन-से नए शब्द सीखे?</strong>
-            <span class="answer-line"></span>
-            <span class="answer-line"></span>
-        </div>
-    </section>
+<section class="panel">
+<h2>7. Think & Try Yourself / स्वयं सोचें और उत्तर लिखें</h2>
+<div class="english">
+Try answering these questions in your own words. Read the textbook carefully, think about what you have learned and write your answers before checking any suggested solutions. If you find a question difficult, review the chapter and try again.
+</div>
+<div class="hindi">
+इन प्रश्नों के उत्तर अपने शब्दों में लिखने का प्रयास करें। पाठ्यपुस्तक ध्यान से पढ़ें और उत्तर देखने से पहले स्वयं सोचें। यदि कठिनाई हो, तो अध्याय दोबारा पढ़ें और फिर प्रयास करें।
+</div>
 
-    <section class="panel">
-        <h2>4. Learn to Retell / अपने शब्दों में बताइए</h2>
+<div class="question">
+<strong>Q1. What would you do if your friend needed help?</strong>
+<p>यदि आपके मित्र को सहायता चाहिए, तो आप क्या करेंगे?</p>
+<textarea class="answer-line" rows="2" aria-label="Answer question 1"></textarea>
+</div>
+<div class="question">
+<strong>Q2. Describe an activity that you can do better as a team.</strong>
+<p>ऐसी गतिविधि बताइए जिसे आप टीम के रूप में बेहतर कर सकते हैं।</p>
+<textarea class="answer-line" rows="2" aria-label="Answer question 2"></textarea>
+</div>
+<div class="question">
+<strong>Q3. Look at the map in your textbook and complete the preposition exercise.</strong>
+<p>पाठ्यपुस्तक में दिए गए नक्शे को देखकर prepositions वाले प्रश्न पूरे करें।</p>
+<textarea class="answer-line" rows="2" aria-label="Answer question 3"></textarea>
+</div>
+<div class="question">
+<strong>Q4. Look at the textbook pictures. What are the people doing, and what might they do next?</strong>
+<p>पाठ्यपुस्तक के चित्र देखकर बताइए कि लोग क्या कर रहे हैं और आगे क्या कर सकते हैं।</p>
+<textarea class="answer-line" rows="2" aria-label="Answer question 4"></textarea>
+</div>
+<div class="question">
+<strong>Q5. Write three sentences about your favourite food and festival.</strong>
+<p>अपने पसंदीदा भोजन और त्योहार के बारे में तीन वाक्य लिखिए।</p>
+<textarea class="answer-line" rows="3" aria-label="Answer question 5"></textarea>
+</div>
+<p class="small-note">Picture-based and map-based answers depend on the actual textbook illustrations. Use your book to answer accurately.</p>
+<p class="small-note">चित्र और नक्शे पर आधारित प्रश्नों के सही उत्तर के लिए अपनी पाठ्यपुस्तक के चित्र देखें।</p>
+</section>
 
-        <div class="english">
-            Close your textbook and explain the chapter in five
-            sentences. Try to speak in English first.
-        </div>
+<section class="panel">
+<h2>8. Interactive Quiz / अभ्यास प्रश्नोत्तरी</h2>
+<p>Choose one answer for each question. / हर प्रश्न के लिए एक उत्तर चुनें।</p>
+<div id="quizProgress"><div id="quizProgressBar"></div></div>
+<p id="quizCounter" aria-live="polite"></p>
+<h3 id="quizQuestion"></h3>
+<p id="quizHindi"></p>
+<div id="quizOptions"></div>
+<div id="quizFeedback" aria-live="polite" hidden></div>
+<div id="quizControls">
+<button class="button" id="nextButton" type="button" disabled>Next Question / अगला प्रश्न</button>
+</div>
+<div id="quizResult" hidden>
+<h3>Quiz Complete! / प्रश्नोत्तरी पूरी हुई!</h3>
+<p id="scoreText"></p>
+<p id="percentageText"></p>
+<button class="button" id="restartButton" type="button">Try Again / फिर प्रयास करें</button>
+</div>
+</section>
 
-        <div class="hindi">
-            अपनी किताब बंद करके पाँच वाक्यों में अध्याय समझाइए।
-            पहले English में बोलने का प्रयास करें, फिर जरूरत हो
-            तो हिंदी में अपनी समझ जाँचें।
-        </div>
-    </section>
-
-    <div class="button-row">
-        <a href="class4-english.html" class="button">
-            ← Back to English Chapters
-        </a>
-        <a href="class4" class="button">
-            Back to Class 4
-        </a>
-    </div>
-
+<div class="button-row">
+<a href="class4-english.html" class="button">← Back to English Chapters</a>
+<a href="class4" class="button">Back to Class 4</a>
+</div>
 </main>
 
 <footer>
-    <strong>RawaRajpootNexEduToppers Learning Academy</strong>
-    <br>
-    Class 4 English Learning Resources
-    <br>
-    Learn Today • Improve Every Day
+<strong>RawaRajpootNexEduToppers Learning Academy</strong><br>
+Class 4 English Learning Resources<br>
+Learn Today • Improve Every Day
 </footer>
 
+<script>
+const questions = [
+{
+q:"Why is teamwork important?",
+hi:"टीमवर्क क्यों महत्वपूर्ण है?",
+options:["It helps people cooperate","It stops people from talking","It makes everyone work alone","It prevents people from helping"],
+hindiOptions:["यह लोगों को सहयोग करना सिखाता है","यह लोगों को बात करने से रोकता है","यह सबको अकेले काम करवाता है","यह लोगों को मदद करने से रोकता है"],
+answer:0,
+explain:"Teamwork helps people cooperate and work towards shared goals.",
+explainHi:"टीमवर्क लोगों को सहयोग करने और साझा लक्ष्य पाने में मदद करता है।"
+},
+{
+q:"A _____ of flowers.",
+hi:"फूलों का एक _____।",
+options:["pack","bouquet","herd","grove"],
+hindiOptions:["pack","bouquet","herd","grove"],
+answer:1,
+explain:"A bouquet is an arrangement or bunch of flowers.",
+explainHi:"Bouquet फूलों के गुलदस्ते को कहते हैं।"
+},
+{
+q:"A _____ of wolves.",
+hi:"भेड़ियों का एक _____।",
+options:["choir","bunch","pack","bouquet"],
+hindiOptions:["choir","bunch","pack","bouquet"],
+answer:2,
+explain:"A pack is a collective noun commonly used for wolves.",
+explainHi:"Pack भेड़ियों के समूह के लिए इस्तेमाल होने वाला शब्द है।"
+},
+{
+q:"The bag is _____ the chair. (पीछे)",
+hi:"बैग कुर्सी के _____ है।",
+options:["near","behind","between","in front of"],
+hindiOptions:["पास","पीछे","बीच में","सामने"],
+answer:1,
+explain:"Behind means at the back of something.",
+explainHi:"Behind का अर्थ है किसी वस्तु के पीछे।"
+},
+{
+q:"The ball is _____ two boxes.",
+hi:"गेंद दो डिब्बों के _____ है।",
+options:["between","behind","near","in front of"],
+hindiOptions:["बीच में","पीछे","पास","सामने"],
+answer:0,
+explain:"Between describes a position in the space separating two things.",
+explainHi:"Between का अर्थ है दो वस्तुओं के बीच में।"
+},
+{
+q:"Choose the correct sentence.",
+hi:"सही वाक्य चुनिए।",
+options:["She will helps me.","She will help me.","She will helping me.","She will helped me."],
+hindiOptions:["She will helps me.","She will help me.","She will helping me.","She will helped me."],
+answer:1,
+explain:"Use will followed by the base form of the verb: help.",
+explainHi:"Will के बाद verb का मूल रूप आता है: help।"
+},
+{
+q:"Which action shows teamwork?",
+hi:"कौन-सा काम टीमवर्क दर्शाता है?",
+options:["Refusing to listen","Blaming every teammate","Sharing tasks and helping","Leaving all work to one person"],
+hindiOptions:["बात सुनने से मना करना","हर साथी को दोष देना","काम बाँटना और मदद करना","सारा काम एक व्यक्ति पर छोड़ना"],
+answer:2,
+explain:"Sharing tasks and helping one another are examples of teamwork.",
+explainHi:"काम बाँटना और एक-दूसरे की मदद करना टीमवर्क के उदाहरण हैं।"
+},
+{
+q:"What should a team leader do when two members disagree?",
+hi:"जब दो सदस्य असहमत हों, तो टीम लीडर को क्या करना चाहिए?",
+options:["Ignore both members","Listen to both sides","Stop the whole activity forever","Allow only one person to speak"],
+hindiOptions:["दोनों को अनदेखा करना","दोनों की बात सुनना","गतिविधि हमेशा के लिए रोक देना","केवल एक व्यक्ति को बोलने देना"],
+answer:1,
+explain:"Listening to both sides helps the leader find a fair solution.",
+explainHi:"दोनों की बात सुनने से उचित समाधान खोजने में मदद मिलती है।"
+},
+{
+q:"A _____ of keys.",
+hi:"चाबियों का एक _____।",
+options:["bunch","herd","pack","grove"],
+hindiOptions:["bunch","herd","pack","grove"],
+answer:0,
+explain:"A bunch of keys is a common collective phrase.",
+explainHi:"चाबियों के समूह के लिए “a bunch of keys” कहा जाता है।"
+},
+{
+q:"Choose the sentence about the future.",
+hi:"भविष्य के बारे में बताने वाला वाक्य चुनिए।",
+options:["I played yesterday.","I play every day.","I will help tomorrow.","I am helping now."],
+hindiOptions:["मैं कल खेला/खेली।","मैं हर दिन खेलता/खेलती हूँ।","मैं कल मदद करूँगा/करूँगी।","मैं अभी मदद कर रहा/रही हूँ।"],
+answer:2,
+explain:"Will help describes an action expected in the future.",
+explainHi:"Will help भविष्य में होने वाले काम को बताता है।"
+}
+];
+
+let current = 0;
+let score = 0;
+let locked = false;
+
+const questionEl = document.getElementById("quizQuestion");
+const hindiEl = document.getElementById("quizHindi");
+const optionsEl = document.getElementById("quizOptions");
+const feedbackEl = document.getElementById("quizFeedback");
+const nextButton = document.getElementById("nextButton");
+const counterEl = document.getElementById("quizCounter");
+const progressBar = document.getElementById("quizProgressBar");
+const controlsEl = document.getElementById("quizControls");
+const resultEl = document.getElementById("quizResult");
+
+function showQuestion() {
+    locked = false;
+    const item = questions[current];
+    questionEl.textContent = (current + 1) + ". " + item.q;
+    hindiEl.textContent = item.hi;
+    counterEl.textContent = "Question / प्रश्न " + (current + 1) + " of " + questions.length;
+    progressBar.style.width = (current / questions.length * 100) + "%";
+    optionsEl.innerHTML = "";
+    feedbackEl.hidden = true;
+    feedbackEl.textContent = "";
+    nextButton.disabled = true;
+    nextButton.textContent = current === questions.length - 1
+        ? "See Result / परिणाम देखें"
+        : "Next Question / अगला प्रश्न";
+
+    item.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "quiz-option";
+        button.textContent = String.fromCharCode(65 + index) + ". " + option
+            + " / " + item.hindiOptions[index];
+        button.addEventListener("click", () => chooseAnswer(index));
+        optionsEl.appendChild(button);
+    });
+}
+
+function chooseAnswer(selected) {
+    if (locked) return;
+    locked = true;
+    const item = questions[current];
+    const buttons = optionsEl.querySelectorAll("button");
+    buttons.forEach((button, index) => {
+        button.disabled = true;
+        if (index === item.answer) button.classList.add("correct");
+        if (index === selected && selected !== item.answer) button.classList.add("wrong");
+    });
+
+    feedbackEl.hidden = false;
+    if (selected === item.answer) {
+        score++;
+        feedbackEl.style.background = "#d9f7e4";
+        feedbackEl.style.color = "#14532d";
+        feedbackEl.textContent = "Correct! / सही उत्तर! " + item.explain + " " + item.explainHi;
+    } else {
+        feedbackEl.style.background = "#ffe2e2";
+        feedbackEl.style.color = "#8b1d1d";
+        feedbackEl.textContent = "Not quite. / फिर प्रयास करें। Correct answer: "
+            + item.options[item.answer] + ". " + item.explain + " " + item.explainHi;
+    }
+    nextButton.disabled = false;
+}
+
+nextButton.addEventListener("click", () => {
+    if (!locked) return;
+    if (current < questions.length - 1) {
+        current++;
+        showQuestion();
+    } else {
+        showResult();
+    }
+});
+
+function showResult() {
+    questionEl.hidden = true;
+    hindiEl.hidden = true;
+    counterEl.hidden = true;
+    optionsEl.hidden = true;
+    feedbackEl.hidden = true;
+    controlsEl.hidden = true;
+    resultEl.hidden = false;
+    progressBar.style.width = "100%";
+    const percent = Math.round(score / questions.length * 100);
+    document.getElementById("scoreText").textContent =
+        "Your score / आपका स्कोर: " + score + " / " + questions.length;
+    document.getElementById("percentageText").textContent =
+        "Percentage / प्रतिशत: " + percent + "%";
+}
+
+document.getElementById("restartButton").addEventListener("click", () => {
+    current = 0;
+    score = 0;
+    locked = false;
+    questionEl.hidden = false;
+    hindiEl.hidden = false;
+    counterEl.hidden = false;
+    optionsEl.hidden = false;
+    controlsEl.hidden = false;
+    resultEl.hidden = true;
+    showQuestion();
+});
+
+showQuestion();
+</script>
 </body>
+</html>
