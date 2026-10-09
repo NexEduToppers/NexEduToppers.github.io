@@ -1,0 +1,496 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 1 English - Interactive Quiz</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f0f6ff;
+  color: #243047;
+}
+
+header {
+  background: #2457c5;
+  color: white;
+  text-align: center;
+  padding: 22px 12px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+header p {
+  margin: 6px 0 0;
+}
+
+.container {
+  width: 92%;
+  max-width: 650px;
+  margin: 22px auto;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 15px;
+  color: #2457c5;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.quiz-card {
+  background: white;
+  padding: 22px;
+  border-radius: 18px;
+  box-shadow: 0 5px 20px #00000012;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.subtitle {
+  text-align: center;
+  color: #64748b;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+  margin: 22px 0 8px;
+}
+
+.progress-track {
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 25px;
+}
+
+#progress {
+  height: 100%;
+  width: 0;
+  background: #2457c5;
+  transition: width 0.2s;
+}
+
+#question {
+  font-size: 21px;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+#options {
+  display: grid;
+  gap: 12px;
+}
+
+.option {
+  width: 100%;
+  padding: 15px;
+  background: white;
+  border: 2px solid #dbe4f0;
+  border-radius: 12px;
+  font-size: 17px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.option:hover:not(:disabled) {
+  background: #edf4ff;
+  border-color: #2457c5;
+}
+
+.option:disabled {
+  cursor: default;
+}
+
+.option.correct {
+  background: #d9fbe5;
+  border-color: #168447;
+  color: #126333;
+}
+
+.option.wrong {
+  background: #ffe1e1;
+  border-color: #d62828;
+  color: #a31313;
+}
+
+#feedback {
+  margin-top: 18px;
+  padding: 15px;
+  border-radius: 12px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+#feedback.good {
+  color: #126333;
+  background: #d9fbe5;
+}
+
+#feedback.bad {
+  color: #a31313;
+  background: #ffe1e1;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.button-row {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.main-button {
+  padding: 13px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #2457c5;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.main-button:hover {
+  background: #173f99;
+}
+
+.main-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+#result {
+  text-align: center;
+  padding: 15px 0;
+}
+
+#resultEmoji {
+  font-size: 60px;
+  margin: 10px 0;
+}
+
+#resultMessage {
+  line-height: 1.6;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+@media (max-width: 420px) {
+  .quiz-card {
+    padding: 17px;
+  }
+
+  #question {
+    font-size: 19px;
+  }
+
+  .option {
+    font-size: 16px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>RawaRajpootNexEduToppers</h1>
+  <p>Learning Academy | Class 1 English</p>
+</header>
+
+<main class="container">
+
+  <a class="back" href="class1-english-chapter1.html">
+    ← Back to Chapter 1 Lesson
+  </a>
+
+  <section class="quiz-card">
+
+    <h2>Chapter 1: Interactive Quiz</h2>
+    <p class="subtitle">Choose the correct answer!</p>
+
+    <div id="quizArea">
+
+      <div class="progress-info">
+        <span id="counter">Question 1 of 7</span>
+        <span id="score">Score: 0</span>
+      </div>
+
+      <div class="progress-track">
+        <div id="progress"></div>
+      </div>
+
+      <h3 id="question">Question appears here</h3>
+
+      <div id="options"></div>
+
+      <div id="feedback" class="hidden" role="status"
+           aria-live="polite"></div>
+
+      <div class="button-row">
+        <button id="nextButton" class="main-button" disabled>
+          Next Question →
+        </button>
+      </div>
+
+    </div>
+
+    <div id="result" class="hidden">
+      <div id="resultEmoji">🏆</div>
+      <h2 id="resultTitle">Quiz Complete!</h2>
+      <h3 id="finalScore"></h3>
+      <p id="resultMessage"></p>
+      <button id="restartButton" class="main-button">
+        Play Again ↻
+      </button>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 RawaRajpootNexEduToppers Learning Academy</p>
+  <p>Learning Today • Succeeding Tomorrow</p>
+</footer>
+
+<script>
+const questions = [
+  {
+    q: "Which body part helps us see?",
+    options: ["Ears", "Eyes", "Legs", "Hands"],
+    answer: 1
+  },
+  {
+    q: "Which body part helps us hear sounds?",
+    options: ["Nose", "Mouth", "Ears", "Head"],
+    answer: 2
+  },
+  {
+    q: "Which body part helps us smell?",
+    options: ["Nose", "Eyes", "Hands", "Legs"],
+    answer: 0
+  },
+  {
+    q: "Which body parts help us walk and run?",
+    options: ["Ears", "Eyes", "Legs", "Mouth"],
+    answer: 2
+  },
+  {
+    q: "Which body parts can we use to clap?",
+    options: ["Hands", "Nose", "Head", "Ears"],
+    answer: 0
+  },
+  {
+    q: "Which body part do we use to eat and speak?",
+    options: ["Leg", "Mouth", "Eye", "Ear"],
+    answer: 1
+  },
+  {
+    q: "Which body part is above our neck?",
+    options: ["Foot", "Hand", "Head", "Nose"],
+    answer: 2
+  }
+];
+
+const goodMessages = [
+  "Good Job! 🌟",
+  "Great! 🎉",
+  "Excellent! 🏆",
+  "Brilliant! ✨",
+  "Well Done! 👏",
+  "Fantastic! 🚀",
+  "Super Work! 🌈"
+];
+
+const tryMessages = [
+  "Not quite! Keep learning. 💪",
+  "Good try! Let's learn from this. 🌱",
+  "Keep trying! You can do it. ⭐",
+  "That's okay! Every mistake helps us learn. 💛"
+];
+
+let current = 0;
+let points = 0;
+let answered = false;
+let goodIndex = 0;
+let tryIndex = 0;
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const feedbackEl = document.getElementById("feedback");
+const nextButton = document.getElementById("nextButton");
+
+function showQuestion() {
+  answered = false;
+
+  const item = questions[current];
+
+  document.getElementById("counter").textContent =
+    `Question ${current + 1} of ${questions.length}`;
+
+  document.getElementById("score").textContent =
+    `Score: ${points}`;
+
+  document.getElementById("progress").style.width =
+    `${(current / questions.length) * 100}%`;
+
+  questionEl.textContent = item.q;
+  optionsEl.innerHTML = "";
+
+  feedbackEl.textContent = "";
+  feedbackEl.className = "hidden";
+
+  nextButton.disabled = true;
+  nextButton.textContent =
+    current === questions.length - 1
+      ? "See My Result 🏆"
+      : "Next Question →";
+
+  item.options.forEach((text, index) => {
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "option";
+    button.textContent =
+      `${String.fromCharCode(65 + index)}. ${text}`;
+
+    button.addEventListener("click", () => {
+      checkAnswer(index, button);
+    });
+
+    optionsEl.appendChild(button);
+  });
+}
+
+function checkAnswer(selected, selectedButton) {
+  if (answered) return;
+
+  answered = true;
+
+  const item = questions[current];
+  const buttons = [...optionsEl.querySelectorAll(".option")];
+
+  buttons.forEach(button => {
+    button.disabled = true;
+  });
+
+  if (selected === item.answer) {
+    points++;
+
+    selectedButton.classList.add("correct");
+    feedbackEl.className = "good";
+
+    feedbackEl.textContent =
+      goodMessages[goodIndex % goodMessages.length];
+
+    goodIndex++;
+  } else {
+    selectedButton.classList.add("wrong");
+    buttons[item.answer].classList.add("correct");
+
+    feedbackEl.className = "bad";
+
+    feedbackEl.textContent =
+      `${tryMessages[tryIndex % tryMessages.length]} ` +
+      `Correct answer: ${item.options[item.answer]}.`;
+
+    tryIndex++;
+  }
+
+  document.getElementById("score").textContent =
+    `Score: ${points}`;
+
+  nextButton.disabled = false;
+}
+
+function showResult() {
+  document.getElementById("quizArea").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+
+  document.getElementById("progress").style.width = "100%";
+
+  document.getElementById("finalScore").textContent =
+    `Your score: ${points} out of ${questions.length}`;
+
+  let emoji;
+  let title;
+  let message;
+
+  if (points === questions.length) {
+    emoji = "🏆";
+    title = "Excellent Work!";
+    message = "You answered every question correctly. Keep shining!";
+  } else if (points >= 5) {
+    emoji = "🌟";
+    title = "Great Job!";
+    message = "You did well! Review your mistakes and keep learning.";
+  } else if (points >= 3) {
+    emoji = "👏";
+    title = "Good Effort!";
+    message = "You are learning step by step. Try again to improve.";
+  } else {
+    emoji = "🌱";
+    title = "Keep Practising!";
+    message = "Every try helps you learn. Review the lesson and play again.";
+  }
+
+  document.getElementById("resultEmoji").textContent = emoji;
+  document.getElementById("resultTitle").textContent = title;
+  document.getElementById("resultMessage").textContent = message;
+}
+
+nextButton.addEventListener("click", () => {
+  if (!answered) return;
+
+  if (current < questions.length - 1) {
+    current++;
+    showQuestion();
+  } else {
+    showResult();
+  }
+});
+
+document.getElementById("restartButton").addEventListener("click", () => {
+  current = 0;
+  points = 0;
+  answered = false;
+  goodIndex = 0;
+  tryIndex = 0;
+
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quizArea").classList.remove("hidden");
+
+  showQuestion();
+});
+
+showQuestion();
+</script>
+
+</body>
+</html>
+```
