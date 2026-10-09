@@ -1,0 +1,743 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz 1 - Together We Can | RawaRajpootNexEduToppers</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #eef5ff;
+  color: #26364b;
+  line-height: 1.6;
+}
+
+header {
+  background: linear-gradient(135deg, #1769aa, #4c91df);
+  color: white;
+  text-align: center;
+  padding: 24px 15px;
+}
+
+header h1 { margin: 0 0 6px; }
+header p { margin: 4px 0; }
+
+.container {
+  width: 92%;
+  max-width: 720px;
+  margin: 22px auto;
+}
+
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 14px rgba(25, 65, 110, 0.09);
+}
+
+.notice {
+  background: #fff6dc;
+  border-left: 5px solid #e6ac27;
+  padding: 12px;
+  border-radius: 7px;
+  margin-bottom: 15px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.progress-track {
+  height: 10px;
+  background: #dce6f3;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0;
+  background: #24844c;
+  transition: width 0.25s;
+}
+
+#questionText {
+  font-size: 21px;
+  line-height: 1.45;
+  margin-bottom: 8px;
+}
+
+.hindi {
+  color: #52677e;
+  margin: 0 0 18px;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  margin: 10px 0;
+  background: #f7faff;
+  border: 2px solid #d8e4f2;
+  border-radius: 9px;
+  text-align: left;
+  font-size: 16px;
+  color: #26364b;
+  cursor: pointer;
+}
+
+.option:hover:not(:disabled) {
+  border-color: #3b82c4;
+  background: #edf6ff;
+}
+
+.option:disabled { cursor: default; }
+
+.option.correct {
+  background: #d9f5e2;
+  border-color: #218849;
+}
+
+.option.wrong {
+  background: #ffe0e0;
+  border-color: #cf3535;
+}
+
+#feedback {
+  display: none;
+  padding: 13px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+#feedback.good { display: block; background: #e0f7e7; }
+#feedback.bad { display: block; background: #ffebeb; }
+
+button.action {
+  display: inline-block;
+  border: 0;
+  border-radius: 8px;
+  padding: 12px 17px;
+  margin: 8px 6px 0 0;
+  background: #1769aa;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button.action:hover { background: #105489; }
+
+button.secondary { background: #53677d; }
+button.green { background: #218849; }
+
+button:focus-visible, .option:focus-visible {
+  outline: 3px solid #f2b632;
+  outline-offset: 2px;
+}
+
+#nextBtn { display: none; }
+
+.result-score {
+  font-size: 34px;
+  font-weight: bold;
+  color: #1769aa;
+  margin: 5px 0;
+}
+
+.result-message {
+  padding: 15px;
+  border-radius: 10px;
+  margin: 18px 0;
+}
+
+textarea {
+  width: 100%;
+  min-height: 90px;
+  padding: 10px;
+  border: 1px solid #bdcde0;
+  border-radius: 8px;
+  font: inherit;
+  resize: vertical;
+}
+
+.review-item {
+  border-top: 1px solid #dce6f3;
+  padding: 14px 0;
+}
+
+.small { color: #60738a; font-size: 14px; }
+
+footer {
+  text-align: center;
+  padding: 22px 12px;
+  color: #53677d;
+  font-size: 14px;
+}
+
+[hidden] { display: none !important; }
+
+@media (max-width: 480px) {
+  .card { padding: 16px; }
+  #questionText { font-size: 19px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>📘 Together We Can</h1>
+  <p>Class 4 English — Chapter 1</p>
+  <p><strong>Quiz 1: Chapter Understanding & Teamwork</strong></p>
+  <p>RawaRajpootNexEduToppers Learning Academy</p>
+</header>
+
+<main class="container">
+
+  <section class="card" id="intro">
+    <h2>Before You Begin | शुरू करने से पहले</h2>
+
+    <p>
+      Read the chapter carefully before attempting this quiz.
+      Think about teamwork, helping others and the main ideas.
+    </p>
+
+    <p class="hindi">
+      Quiz शुरू करने से पहले chapter को ध्यान से पढ़ें।
+      मिलकर काम करने, दूसरों की मदद करने और मुख्य विचारों को समझें।
+    </p>
+
+    <div class="notice">
+      <strong>Remember:</strong> This quiz checks your understanding.
+      A low score does not mean you cannot learn. Revise and try again!
+      <br>
+      <strong>याद रखें:</strong> यह quiz आपकी समझ जाँचने के लिए है।
+      कम अंक आने पर दोबारा पढ़ें और फिर प्रयास करें।
+    </div>
+
+    <p><strong>12 questions · One question at a time</strong></p>
+    <p class="small">Correct answers earn 1 point. No negative marking.</p>
+
+    <button class="action green" id="startBtn" type="button">
+      Start Quiz / शुरू करें
+    </button>
+  </section>
+
+  <section class="card" id="quizCard" hidden>
+    <div class="progress-info">
+      <span id="questionCounter">Question 1 of 12</span>
+      <span id="scoreCounter">Score: 0</span>
+    </div>
+
+    <div class="progress-track" role="progressbar"
+         aria-label="Quiz progress" aria-valuemin="0"
+         aria-valuemax="12" aria-valuenow="0" id="progressTrack">
+      <div id="progressBar"></div>
+    </div>
+
+    <h2 id="questionText"></h2>
+    <p class="hindi" id="questionHindi"></p>
+
+    <div id="options"></div>
+
+    <div id="feedback" role="status" aria-live="polite"></div>
+
+    <button class="action" id="nextBtn" type="button">
+      Next Question / अगला प्रश्न
+    </button>
+  </section>
+
+  <section class="card" id="resultCard" hidden>
+    <h2>Quiz Result | आपका परिणाम</h2>
+    <p id="scoreText" class="result-score"></p>
+    <p id="percentageText"></p>
+
+    <div id="resultMessage" class="result-message"></div>
+
+    <h3>What should you do next? | अब क्या करें?</h3>
+    <p id="nextSteps"></p>
+
+    <button class="action" id="reviewBtn" type="button">
+      Review Wrong Answers / गलत उत्तर देखें
+    </button>
+
+    <button class="action green" id="retryBtn" type="button">
+      Try Again / फिर से प्रयास करें
+    </button>
+
+    <a href="class4-english-chapter1.html">
+      <button class="action secondary" type="button">
+        Back to Chapter / Chapter पर जाएँ
+      </button>
+    </a>
+  </section>
+
+  <section class="card" id="reviewCard" hidden>
+    <h2>Review Your Answers | अपने उत्तर दोहराएँ</h2>
+    <p>
+      Read each explanation carefully. Then return to the chapter
+      if you need more practice.
+    </p>
+    <p class="hindi">
+      हर explanation ध्यान से पढ़ें। जरूरत हो तो chapter दोबारा पढ़ें।
+    </p>
+
+    <div id="reviewList"></div>
+
+    <button class="action green" id="reviewRetryBtn" type="button">
+      Try Quiz Again / फिर से quiz दें
+    </button>
+    <button class="action secondary" id="backResultBtn" type="button">
+      Back to Result / परिणाम पर लौटें
+    </button>
+  </section>
+
+  <section class="card" id="writtenCard" hidden>
+    <h2>Think & Write | सोचें और लिखें</h2>
+
+    <p>
+      How can you help your class work as a team?
+    </p>
+    <p class="hindi">
+      आप अपनी कक्षा को मिलकर काम करने में कैसे मदद कर सकते हैं?
+    </p>
+
+    <textarea id="writtenAnswer"
+      placeholder="Write your answer in your own words..."></textarea>
+
+    <button class="action" id="sampleBtn" type="button">
+      Show Sample Answer / उदाहरण देखें
+    </button>
+
+    <div id="sampleAnswer" hidden>
+      <p><strong>Sample answer:</strong> I can share materials,
+      help my classmates and do my part of the work.</p>
+      <p class="hindi">
+        मैं सामान बाँट सकता/सकती हूँ, सहपाठियों की मदद कर सकता/सकती हूँ
+        और अपना काम जिम्मेदारी से कर सकता/सकती हूँ।
+      </p>
+      <p class="small">
+        This is one possible answer. Your own answer may be different.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  RawaRajpootNexEduToppers Learning Academy
+</footer>
+
+<script>
+const questions = [
+  {
+    q: "What is the main idea of “Together We Can”?",
+    hi: "“Together We Can” का मुख्य विचार क्या है?",
+    options: [
+      "Working alone",
+      "Working together",
+      "Avoiding everyone",
+      "Never helping"
+    ],
+    answer: 1,
+    why: "The title highlights the value of doing things together.",
+    whyHi: "शीर्षक मिलकर काम करने के महत्व को दर्शाता है।"
+  },
+  {
+    q: "Why is teamwork useful?",
+    hi: "मिलकर काम करना उपयोगी क्यों है?",
+    options: [
+      "It helps people cooperate.",
+      "It creates more arguments.",
+      "It stops all learning.",
+      "It prevents friendship."
+    ],
+    answer: 0,
+    why: "Teamwork helps people share tasks and support one another.",
+    whyHi: "Teamwork में लोग काम बाँटते हैं और एक-दूसरे का साथ देते हैं।"
+  },
+  {
+    q: "What should you do if your friend needs help?",
+    hi: "अगर आपके दोस्त को मदद चाहिए, तो क्या करना चाहिए?",
+    options: [
+      "Ignore the friend",
+      "Laugh at the friend",
+      "Help the friend",
+      "Walk away every time"
+    ],
+    answer: 2,
+    why: "Helping a friend shows kindness and cooperation.",
+    whyHi: "दोस्त की मदद करना दयालुता और सहयोग दिखाता है।"
+  },
+  {
+    q: "Which action shows teamwork?",
+    hi: "कौन-सा काम teamwork दिखाता है?",
+    options: [
+      "One child does everything.",
+      "Children share the work.",
+      "Children refuse to cooperate.",
+      "Children spoil others’ work."
+    ],
+    answer: 1,
+    why: "Team members share tasks and work towards a common goal.",
+    whyHi: "टीम के सदस्य काम बाँटकर एक लक्ष्य की ओर बढ़ते हैं।"
+  },
+  {
+    q: "Complete the sentence: We can do more when we _____.",
+    hi: "वाक्य पूरा करें: हम अधिक काम कर सकते हैं जब हम _____.",
+    options: [
+      "work together",
+      "quarrel always",
+      "stop trying",
+      "refuse to help"
+    ],
+    answer: 0,
+    why: "Working together lets people combine their efforts.",
+    whyHi: "मिलकर काम करने से सभी के प्रयास जुड़ते हैं।"
+  },
+  {
+    q: "What does “helping each other” mean?",
+    hi: "“Helping each other” का क्या अर्थ है?",
+    options: [
+      "Helping only ourselves",
+      "Giving support to one another",
+      "Making fun of others",
+      "Keeping everything to ourselves"
+    ],
+    answer: 1,
+    why: "It means giving help and support to other people.",
+    whyHi: "इसका अर्थ दूसरे लोगों की मदद और सहायता करना है।"
+  },
+  {
+    q: "A child falls down in the playground. What should you do?",
+    hi: "खेल के मैदान में बच्चा गिर जाए, तो आप क्या करेंगे?",
+    options: [
+      "Laugh at the child",
+      "Ask if the child is okay and get help",
+      "Ignore the child",
+      "Push another child"
+    ],
+    answer: 1,
+    why: "Check whether the child is safe and ask an adult for help if needed.",
+    whyHi: "बच्चे की कुशलता पूछें और जरूरत होने पर बड़े से मदद लें।"
+  },
+  {
+    q: "Which is an example of sharing work?",
+    hi: "काम बाँटकर करने का उदाहरण कौन-सा है?",
+    options: [
+      "Everyone waits for one child.",
+      "Each child takes a small task.",
+      "No one starts the work.",
+      "Everyone hides the materials."
+    ],
+    answer: 1,
+    why: "Sharing tasks lets everyone contribute.",
+    whyHi: "काम बाँटने से हर व्यक्ति अपना योगदान दे सकता है।"
+  },
+  {
+    q: "True or False: Teamwork means helping and cooperating with others.",
+    hi: "सही या गलत: Teamwork का अर्थ दूसरों की मदद और सहयोग करना है।",
+    options: ["True / सही", "False / गलत"],
+    answer: 0,
+    why: "Teamwork involves cooperation and shared effort.",
+    whyHi: "Teamwork में सहयोग और मिलकर प्रयास करना शामिल है।"
+  },
+  {
+    q: "True or False: Asking for help is always a sign of weakness.",
+    hi: "सही या गलत: मदद माँगना हमेशा कमजोरी की निशानी है।",
+    options: ["True / सही", "False / गलत"],
+    answer: 1,
+    why: "Asking for help can be a sensible way to solve a problem.",
+    whyHi: "मदद माँगना समस्या सुलझाने का समझदारी भरा तरीका हो सकता है।"
+  },
+  {
+    q: "Choose the kind action.",
+    hi: "सही और दयालु व्यवहार चुनें।",
+    options: [
+      "Sharing materials with a classmate",
+      "Hiding a classmate’s book",
+      "Refusing to listen",
+      "Breaking another child’s work"
+    ],
+    answer: 0,
+    why: "Sharing materials is considerate and helpful.",
+    whyHi: "सामान बाँटना दूसरों के प्रति मददगार व्यवहार है।"
+  },
+  {
+    q: "What can make a team work better?",
+    hi: "टीम को बेहतर काम करने में क्या मदद करता है?",
+    options: [
+      "Listening and sharing ideas",
+      "Ignoring every suggestion",
+      "Arguing about every task",
+      "Leaving all the work to one person"
+    ],
+    answer: 0,
+    why: "Listening and sharing ideas help team members cooperate.",
+    whyHi: "एक-दूसरे की बात सुनने और विचार बाँटने से सहयोग बढ़ता है।"
+  }
+];
+
+let current = 0;
+let score = 0;
+let locked = false;
+let answers = [];
+
+const intro = document.getElementById("intro");
+const quizCard = document.getElementById("quizCard");
+const resultCard = document.getElementById("resultCard");
+const reviewCard = document.getElementById("reviewCard");
+const writtenCard = document.getElementById("writtenCard");
+
+document.getElementById("startBtn").addEventListener("click", startQuiz);
+document.getElementById("nextBtn").addEventListener("click", nextQuestion);
+document.getElementById("retryBtn").addEventListener("click", startQuiz);
+document.getElementById("reviewRetryBtn").addEventListener("click", startQuiz);
+document.getElementById("reviewBtn").addEventListener("click", showReview);
+document.getElementById("backResultBtn").addEventListener("click", () => {
+  reviewCard.hidden = true;
+  resultCard.hidden = false;
+});
+document.getElementById("sampleBtn").addEventListener("click", () => {
+  document.getElementById("sampleAnswer").hidden = false;
+});
+
+function startQuiz() {
+  current = 0;
+  score = 0;
+  locked = false;
+  answers = [];
+
+  intro.hidden = true;
+  resultCard.hidden = true;
+  reviewCard.hidden = true;
+  writtenCard.hidden = true;
+  quizCard.hidden = false;
+
+  showQuestion();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function showQuestion() {
+  locked = false;
+  const item = questions[current];
+
+  document.getElementById("questionCounter").textContent =
+    `Question ${current + 1} of ${questions.length}`;
+  document.getElementById("scoreCounter").textContent = `Score: ${score}`;
+  document.getElementById("progressBar").style.width =
+    `${(current / questions.length) * 100}%`;
+  document.getElementById("progressTrack").setAttribute("aria-valuenow", current);
+
+  document.getElementById("questionText").textContent = item.q;
+  document.getElementById("questionHindi").textContent = item.hi;
+
+  const optionsBox = document.getElementById("options");
+  optionsBox.replaceChildren();
+
+  item.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option";
+    button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+    button.addEventListener("click", () => chooseAnswer(index, button));
+    optionsBox.appendChild(button);
+  });
+
+  const feedback = document.getElementById("feedback");
+  feedback.className = "";
+  feedback.textContent = "";
+  feedback.style.display = "none";
+
+  const next = document.getElementById("nextBtn");
+  next.style.display = "none";
+  next.textContent = current === questions.length - 1
+    ? "See Result / परिणाम देखें"
+    : "Next Question / अगला प्रश्न";
+}
+
+function chooseAnswer(index, selectedButton) {
+  if (locked) return;
+  locked = true;
+
+  const item = questions[current];
+  const correct = index === item.answer;
+  if (correct) score++;
+
+  answers[current] = index;
+
+  const buttons = document.querySelectorAll("#options .option");
+  buttons.forEach((button, i) => {
+    button.disabled = true;
+    if (i === item.answer) button.classList.add("correct");
+  });
+
+  if (!correct) selectedButton.classList.add("wrong");
+
+  const feedback = document.getElementById("feedback");
+  feedback.style.display = "block";
+  feedback.className = correct ? "good" : "bad";
+
+  const heading = correct ? "Correct! / सही उत्तर!" : "Not quite! / फिर प्रयास करें!";
+  feedback.replaceChildren();
+
+  const strong = document.createElement("strong");
+  strong.textContent = heading;
+  feedback.appendChild(strong);
+
+  const explanation = document.createElement("p");
+  explanation.textContent = item.why;
+  feedback.appendChild(explanation);
+
+  const hindi = document.createElement("p");
+  hindi.textContent = item.whyHi;
+  feedback.appendChild(hindi);
+
+  if (!correct) {
+    const correctAnswer = document.createElement("p");
+    correctAnswer.textContent = "Correct answer: " + item.options[item.answer];
+    feedback.appendChild(correctAnswer);
+  }
+
+  document.getElementById("scoreCounter").textContent = `Score: ${score}`;
+  document.getElementById("nextBtn").style.display = "inline-block";
+}
+
+function nextQuestion() {
+  if (!locked) return;
+
+  current++;
+  if (current < questions.length) {
+    showQuestion();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  quizCard.hidden = true;
+  resultCard.hidden = false;
+  writtenCard.hidden = false;
+
+  const percentage = Math.round((score / questions.length) * 100);
+
+  document.getElementById("progressBar").style.width = "100%";
+  document.getElementById("scoreText").textContent =
+    `${score} / ${questions.length}`;
+  document.getElementById("percentageText").textContent =
+    `Percentage: ${percentage}%`;
+
+  let title, message, nextSteps, color;
+
+  if (percentage >= 90) {
+    title = "Excellent! / बहुत बढ़िया!";
+    message = "You have shown a strong understanding of teamwork. Keep it up!";
+    nextSteps = "You can move to Quiz 2. Review any mistakes before continuing.";
+    color = "#d9f5e2";
+  } else if (percentage >= 75) {
+    title = "Very Good! / बहुत अच्छा!";
+    message = "You understand most of the ideas. A little revision will help.";
+    nextSteps = "Review your wrong answers and read those parts of the chapter again.";
+    color = "#e5f2ff";
+  } else if (percentage >= 50) {
+    title = "Good Effort! / अच्छा प्रयास!";
+    message = "You are learning. Some ideas need more practice.";
+    nextSteps = "Read the chapter carefully again, then retry this quiz.";
+    color = "#fff1ce";
+  } else {
+    title = "Let's Revise and Try Again! / दोबारा पढ़ें और प्रयास करें!";
+    message = "Do not worry. Learning takes practice.";
+    nextSteps = "Please read the textbook chapter carefully, review the main ideas and try this quiz again.";
+    color = "#ffe4e4";
+  }
+
+  const resultMessage = document.getElementById("resultMessage");
+  resultMessage.style.background = color;
+  resultMessage.replaceChildren();
+
+  const heading = document.createElement("h3");
+  heading.textContent = title;
+  resultMessage.appendChild(heading);
+
+  const para = document.createElement("p");
+  para.textContent = message;
+  resultMessage.appendChild(para);
+
+  document.getElementById("nextSteps").textContent = nextSteps;
+
+  document.getElementById("reviewBtn").textContent =
+    answers.some((answer, i) => answer !== questions[i].answer)
+      ? "Review Wrong Answers / गलत उत्तर देखें"
+      : "Review All Answers / सभी उत्तर देखें";
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function showReview() {
+  resultCard.hidden = true;
+  reviewCard.hidden = false;
+
+  const list = document.getElementById("reviewList");
+  list.replaceChildren();
+
+  const wrong = questions
+    .map((item, index) => ({ item, index }))
+    .filter(({ item, index }) => answers[index] !== item.answer);
+
+  const toShow = wrong.length ? wrong :
+    questions.map((item, index) => ({ item, index }));
+
+  if (wrong.length === 0) {
+    const message = document.createElement("p");
+    message.textContent = "Excellent! You answered every question correctly.";
+    list.appendChild(message);
+  }
+
+  toShow.forEach(({ item, index }) => {
+    const block = document.createElement("div");
+    block.className = "review-item";
+
+    const q = document.createElement("strong");
+    q.textContent = `${index + 1}. ${item.q}`;
+    block.appendChild(q);
+
+    const hi = document.createElement("p");
+    hi.className = "hindi";
+    hi.textContent = item.hi;
+    block.appendChild(hi);
+
+    const yours = document.createElement("p");
+    yours.textContent = "Your answer: " +
+      (answers[index] === undefined ? "Not answered" : item.options[answers[index]]);
+    block.appendChild(yours);
+
+    const correct = document.createElement("p");
+    correct.textContent = "Correct answer: " + item.options[item.answer];
+    block.appendChild(correct);
+
+    const explanation = document.createElement("p");
+    explanation.textContent = item.why + " " + item.whyHi;
+    block.appendChild(explanation);
+
+    list.appendChild(block);
+  });
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+</script>
+
+</body>
+</html>
