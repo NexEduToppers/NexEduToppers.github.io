@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English - Quiz 4: Prepositions</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f1f6fc;
+  color: #243247;
+  margin: 0;
+  padding: 16px;
+}
+
+.container {
+  max-width: 720px;
+  margin: 20px auto;
+  padding: 22px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 18px #00000012;
+}
+
+h1, h2 { text-align: center; color: #175b9a; }
+.subtitle { text-align: center; line-height: 1.7; }
+
+.topline {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.progress {
+  height: 9px;
+  background: #e1e9f2;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 18px 0;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0;
+  background: #25865b;
+  transition: width .2s;
+}
+
+#question {
+  font-size: 20px;
+  line-height: 1.8;
+  margin: 22px 0;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  margin: 10px 0;
+  border: 2px solid #d7e1ed;
+  border-radius: 10px;
+  background: white;
+  color: #243247;
+  font-size: 16px;
+  line-height: 1.7;
+  text-align: left;
+  cursor: pointer;
+}
+
+.option:disabled { cursor: default; }
+.option.correct { border-color: #16834a; background: #e3f7eb; }
+.option.wrong { border-color: #c83c3c; background: #ffebeb; }
+
+#answerFeedback {
+  min-height: 35px;
+  margin: 16px 0;
+  font-weight: bold;
+  line-height: 1.8;
+}
+
+.button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 9px;
+  background: #175b9a;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button:disabled { background: #9ba9b8; cursor: default; }
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+#result { display: none; }
+
+.result-card {
+  background: #f0f6fc;
+  padding: 18px;
+  border-radius: 12px;
+  text-align: center;
+  line-height: 1.8;
+}
+
+#resultMessage { font-size: 23px; color: #175b9a; }
+
+.review-item {
+  padding: 13px 0;
+  border-bottom: 1px solid #d7e1ed;
+  line-height: 1.8;
+}
+
+.site-disclaimer {
+  margin-top: 30px;
+  padding: 18px;
+  background: #f0f5fb;
+  color: #35465a;
+  border-top: 2px solid #cbdced;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.site-disclaimer h3 { color: #175b9a; }
+
+@media (max-width: 480px) {
+  .container { padding: 16px; }
+  .button-row .button { flex: 1; }
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+
+<h1>RawaRajpootNexEduToppers</h1>
+<p class="subtitle">
+  Learning Academy | शिक्षण अकादमी<br>
+  Class 4 English | कक्षा 4 अंग्रेज़ी
+</p>
+
+<h2>Quiz 4: Prepositions</h2>
+<p class="subtitle">
+  संबंधसूचक शब्द (Prepositions)<br>
+  Choose the correct answer. | सही उत्तर चुनिए।
+</p>
+
+<section id="quiz">
+  <div class="topline">
+    <span id="questionNumber">Question 1 of 20</span>
+    <span id="liveScore">Score: 0 | अंक: 0</span>
+  </div>
+
+  <div class="progress">
+    <div id="progressBar"></div>
+  </div>
+
+  <div id="question"></div>
+  <div id="options"></div>
+  <div id="answerFeedback" aria-live="polite"></div>
+
+  <div class="button-row">
+    <button class="button" id="nextBtn" disabled>
+      Next Question | अगला प्रश्न
+    </button>
+  </div>
+</section>
+
+<section id="result">
+  <h2>Quiz Results | क्विज़ का परिणाम</h2>
+
+  <div class="result-card">
+    <p id="finalScore"></p>
+    <p id="percentage"></p>
+    <h3 id="resultMessage"></h3>
+    <p id="resultFeedback"></p>
+  </div>
+
+  <div class="button-row">
+    <button class="button" id="reviewBtn">
+      Review Answers | उत्तर देखें
+    </button>
+    <button class="button" id="retryBtn">
+      Try Again | फिर से प्रयास करें
+    </button>
+  </div>
+
+  <div id="review" hidden>
+    <h2>Answer Review | उत्तरों की समीक्षा</h2>
+    <div id="reviewList"></div>
+  </div>
+</section>
+
+<footer class="site-disclaimer">
+  <h3>Disclaimer | अस्वीकरण</h3>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy is an independent
+    educational platform and is not affiliated with, endorsed by,
+    or associated with NCERT. NCERT textbook names, chapters, and
+    curriculum topics belong exclusively to NCERT. All solutions
+    and study notes provided here are original practice aids.
+    For official textbooks, visit
+    <a href="https://ncert.nic.in/" target="_blank"
+       rel="noopener noreferrer">ncert.nic.in</a>.
+  </p>
+</footer>
+
+</main>
+
+<script>
+const questions = [
+  {
+    q: 'The book is ___ the table. | किताब मेज ___ है।',
+    options: ['in | में', 'on | पर', 'under | नीचे', 'behind | पीछे'],
+    answer: 1,
+    explanation: '“On” means on top of a surface. | “On” का अर्थ किसी सतह के ऊपर होना है।'
+  },
+  {
+    q: 'The cat is ___ the table. It is below it. | बिल्ली मेज के ___ है। वह उसके नीचे है।',
+    options: ['under | नीचे', 'over | ऊपर', 'between | बीच में', 'near | पास'],
+    answer: 0,
+    explanation: '“Under” means below something. | “Under” का अर्थ किसी चीज़ के नीचे है।'
+  },
+  {
+    q: 'The milk is ___ the glass. | दूध गिलास ___ है।',
+    options: ['at | पर', 'on | ऊपर', 'in | में', 'behind | पीछे'],
+    answer: 2,
+    explanation: '“In” shows that something is inside. | “In” का अर्थ किसी चीज़ के अंदर है।'
+  },
+  {
+    q: 'Ravi sits ___ Amit and Neha. | रवि अमित और नेहा के ___ बैठता है।',
+    options: ['between | बीच में', 'over | ऊपर', 'through | के आर-पार', 'from | से'],
+    answer: 0,
+    explanation: '“Between” is used for the position separating two people or things. | “Between” का प्रयोग दो लोगों या चीज़ों के बीच के लिए होता है।'
+  },
+  {
+    q: 'The school is ___ my house. It is close to my house. | स्कूल मेरे घर के ___ है।',
+    options: ['far from | दूर', 'near | पास', 'inside | अंदर', 'under | नीचे'],
+    answer: 1,
+    explanation: '“Near” means close to something. | “Near” का अर्थ पास होना है।'
+  },
+  {
+    q: 'We go to school ___ Monday. | हम सोमवार ___ स्कूल जाते हैं।',
+    options: ['in | में', 'at | पर', 'on | को', 'under | नीचे'],
+    answer: 2,
+    explanation: 'Use “on” with days of the week. | सप्ताह के दिनों के साथ “On” का प्रयोग होता है।'
+  },
+  {
+    q: 'I wake up ___ 6 o’clock. | मैं 6 बजे उठता/उठती हूँ।',
+    options: ['at | पर', 'in | में', 'on | को', 'under | नीचे'],
+    answer: 0,
+    explanation: 'Use “at” for a specific clock time. | घड़ी के निश्चित समय के साथ “At” का प्रयोग होता है।'
+  },
+  {
+    q: 'My birthday is ___ July. | मेरा जन्मदिन जुलाई ___ है।',
+    options: ['on | को', 'at | पर', 'in | में', 'under | नीचे'],
+    answer: 2,
+    explanation: 'Use “in” with months. | महीनों के साथ “In” का प्रयोग होता है।'
+  },
+  {
+    q: 'The bird is flying ___ the tree. | पक्षी पेड़ के ___ उड़ रहा है।',
+    options: ['above | ऊपर', 'inside | अंदर', 'between | बीच में', 'under | नीचे'],
+    answer: 0,
+    explanation: '“Above” means at a higher position. | “Above” का अर्थ ऊँची स्थिति में होना है।'
+  },
+  {
+    q: 'The boy is standing ___ the door. | लड़का दरवाज़े के ___ खड़ा है।',
+    options: ['at | पर', 'into | के अंदर', 'during | के दौरान', 'from | से'],
+    answer: 0,
+    explanation: '“At” can show a particular place or position. | “At” किसी निश्चित स्थान या स्थिति को बताता है।'
+  },
+  {
+    q: 'The ball rolled ___ the chair. It went from one side to the other. | गेंद कुर्सी के ___ लुढ़की और एक तरफ से दूसरी तरफ चली गई।',
+    options: ['through | के अंदर से', 'across | आर-पार', 'behind | पीछे', 'above | ऊपर'],
+    answer: 1,
+    explanation: '“Across” means from one side to another. | “Across” का अर्थ एक तरफ से दूसरी तरफ जाना है।'
+  },
+  {
+    q: 'The boy jumped ___ the pool. He entered the water. | लड़का पूल ___ कूद गया। वह पानी में चला गया।',
+    options: ['into | के अंदर', 'onto | के ऊपर', 'beside | बगल में', 'above | ऊपर'],
+    answer: 0,
+    explanation: '“Into” shows movement from outside to inside. | “Into” बाहर से अंदर जाने की गति बताता है।'
+  },
+  {
+    q: 'The shoes are ___ the bed. | जूते बिस्तर के ___ हैं।',
+    options: ['under | नीचे', 'during | के दौरान', 'from | से', 'into | के अंदर'],
+    answer: 0,
+    explanation: '“Under” is correct when something is below the bed. | जब कोई चीज़ बिस्तर के नीचे हो, तो “Under” सही है।'
+  },
+  {
+    q: 'The boy walked ___ the bridge. He went from one end to the other. | लड़का पुल ___ चला। वह एक छोर से दूसरे छोर तक गया।',
+    options: ['across | पार', 'at | पर', 'under | नीचे', 'in | में'],
+    answer: 0,
+    explanation: '“Across” shows movement from one side to another. | “Across” एक तरफ से दूसरी तरफ जाने को बताता है।'
+  },
+  {
+    q: 'The dog is hiding ___ the door. | कुत्ता दरवाज़े के ___ छिपा है।',
+    options: ['behind | पीछे', 'inside | अंदर', 'over | ऊपर', 'onto | के ऊपर'],
+    answer: 0,
+    explanation: '“Behind” means at the back of something. | “Behind” का अर्थ किसी चीज़ के पीछे है।'
+  },
+  {
+    q: 'The teacher is standing ___ the students. | शिक्षक विद्यार्थियों के ___ खड़े हैं।',
+    options: ['in front of | सामने', 'under | नीचे', 'into | अंदर', 'during | के दौरान'],
+    answer: 0,
+    explanation: '“In front of” means ahead of someone or something. | “In front of” का अर्थ किसी के सामने है।'
+  },
+  {
+    q: 'The children ran ___ the classroom. They went outside it. | बच्चे कक्षा ___ भागे। वे बाहर चले गए।',
+    options: ['out of | से बाहर', 'into | के अंदर', 'above | ऊपर', 'between | बीच में'],
+    answer: 0,
+    explanation: '“Out of” shows movement from inside to outside. | “Out of” अंदर से बाहर जाने को बताता है।'
+  },
+  {
+    q: 'The train passed ___ the tunnel. | ट्रेन सुरंग ___ गुज़री।',
+    options: ['through | के अंदर से', 'above | ऊपर', 'at | पर', 'between | बीच में'],
+    answer: 0,
+    explanation: '“Through” shows movement inside and from one end to another. | “Through” किसी चीज़ के अंदर से होकर गुजरने को बताता है।'
+  },
+  {
+    q: 'We played ___ the rain stopped. | बारिश रुकने ___ हमने खेला।',
+    options: ['after | बाद', 'under | नीचे', 'on | पर', 'between | बीच में'],
+    answer: 0,
+    explanation: '“After” means later than something. | “After” का अर्थ किसी घटना के बाद है।'
+  },
+  {
+    q: 'Wash your hands ___ eating. | खाना खाने ___ अपने हाथ धोएँ।',
+    options: ['before | पहले', 'behind | पीछे', 'over | ऊपर', 'between | बीच में'],
+    answer: 0,
+    explanation: '“Before” means earlier than an event. | “Before” का अर्थ किसी घटना से पहले है।'
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+let userAnswers = [];
+
+const questionEl = document.getElementById('question');
+const optionsEl = document.getElementById('options');
+const feedbackEl = document.getElementById('answerFeedback');
+const nextBtn = document.getElementById('nextBtn');
+
+function showQuestion() {
+  answered = false;
+  const q = questions[currentQuestion];
+
+  document.getElementById('questionNumber').textContent =
+    `Question ${currentQuestion + 1} of ${questions.length} | प्रश्न ${currentQuestion + 1} / ${questions.length}`;
+
+  document.getElementById('liveScore').textContent =
+    `Score: ${score} | अंक: ${score}`;
+
+  document.getElementById('progressBar').style.width =
+    `${(currentQuestion / questions.length) * 100}%`;
+
+  questionEl.textContent = q.q;
+  optionsEl.replaceChildren();
+  feedbackEl.textContent = '';
+  nextBtn.disabled = true;
+
+  nextBtn.textContent = currentQuestion === questions.length - 1
+    ? 'See Results | परिणाम देखें'
+    : 'Next Question | अगला प्रश्न';
+
+  q.options.forEach((option, index) => {
+    const button = document.createElement('button');
+    button.className = 'option';
+    button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+    button.addEventListener('click', () => checkAnswer(index, button));
+    optionsEl.appendChild(button);
+  });
+}
+
+function checkAnswer(selectedIndex, selectedButton) {
+  if (answered) return;
+  answered = true;
+
+  const q = questions[currentQuestion];
+  const correct = selectedIndex === q.answer;
+  userAnswers[currentQuestion] = selectedIndex;
+
+  if (correct) {
+    score++;
+    selectedButton.classList.add('correct');
+    feedbackEl.textContent =
+      `Correct! Well done! | सही उत्तर! बहुत अच्छा! ${q.explanation}`;
+  } else {
+    selectedButton.classList.add('wrong');
+    feedbackEl.textContent =
+      `Not quite! | अभी सही नहीं। Correct answer: ${q.options[q.answer]}. | सही उत्तर: ${q.options[q.answer]}. ${q.explanation}`;
+  }
+
+  [...optionsEl.children].forEach((button, index) => {
+    button.disabled = true;
+    if (index === q.answer) button.classList.add('correct');
+  });
+
+  document.getElementById('liveScore').textContent =
+    `Score: ${score} | अंक: ${score}`;
+
+  nextBtn.disabled = false;
+}
+
+nextBtn.addEventListener('click', () => {
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    showQuestion();
+  } else {
+    showResults();
+  }
+});
+
+function showResults() {
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+
+  const percent = Math.round((score / questions.length) * 100);
+
+  document.getElementById('finalScore').textContent =
+    `Final Score: ${score} out of ${questions.length} | कुल अंक: ${score} / ${questions.length}`;
+
+  document.getElementById('percentage').textContent =
+    `Percentage: ${percent}% | प्रतिशत: ${percent}%`;
+
+  let message;
+  let hindiMessage;
+
+  if (percent === 100) {
+    message = 'Fantastic! Perfect score! 🎉';
+    hindiMessage = 'शानदार! पूरे अंक! 🎉';
+  } else if (percent >= 81) {
+    message = 'Excellent!';
+    hindiMessage = 'उत्कृष्ट!';
+  } else if (percent >= 61) {
+    message = 'Very good!';
+    hindiMessage = 'बहुत अच्छा!';
+  } else if (percent >= 41) {
+    message = 'Good job!';
+    hindiMessage = 'अच्छा काम!';
+  } else if (percent >= 21) {
+    message = 'Good try!';
+    hindiMessage = 'अच्छा प्रयास!';
+  } else {
+    message = 'Keep trying!';
+    hindiMessage = 'कोशिश करते रहें!';
+  }
+
+  document.getElementById('resultMessage').textContent =
+    `${message} | ${hindiMessage}`;
+
+  document.getElementById('resultFeedback').textContent =
+    'Review your answers to learn from mistakes. | गलतियों से सीखने के लिए अपने उत्तरों की समीक्षा करें।';
+
+  document.getElementById('progressBar').style.width = '100%';
+}
+
+document.getElementById('reviewBtn').addEventListener('click', () => {
+  const review = document.getElementById('review');
+  const list = document.getElementById('reviewList');
+
+  if (!review.hidden) {
+    review.hidden = true;
+    document.getElementById('reviewBtn').textContent =
+      'Review Answers | उत्तर देखें';
+    return;
+  }
+
+  list.replaceChildren();
+
+  questions.forEach((q, i) => {
+    const item = document.createElement('div');
+    item.className = 'review-item';
+
+    const selected = userAnswers[i];
+    const yourAnswer = selected === undefined
+      ? 'Not answered | उत्तर नहीं दिया'
+      : q.options[selected];
+
+    const result = selected === q.answer
+      ? 'Correct | सही'
+      : 'Incorrect | गलत';
+
+    item.textContent =
+      `${i + 1}. ${q.q} Your answer: ${yourAnswer}. | आपका उत्तर: ${yourAnswer}. Correct answer: ${q.options[q.answer]}. | सही उत्तर: ${q.options[q.answer]}. ${result}. ${q.explanation}`;
+
+    list.appendChild(item);
+  });
+
+  review.hidden = false;
+  document.getElementById('reviewBtn').textContent =
+    'Hide Review | समीक्षा छिपाएँ';
+});
+
+document.getElementById('retryBtn').addEventListener('click', () => {
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+  userAnswers = [];
+
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  document.getElementById('review').hidden = true;
+
+  document.getElementById('reviewBtn').textContent =
+    'Review Answers | उत्तर देखें';
+
+  showQuestion();
+});
+
+showQuestion();
+</script>
+</body>
+</html>
