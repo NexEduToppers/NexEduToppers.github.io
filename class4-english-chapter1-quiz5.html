@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English - Quiz 5: Future Tense with Will</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f1f6fc;color:#243247;margin:0;padding:16px}
+.container{max-width:720px;margin:20px auto;padding:22px;background:white;border-radius:16px;box-shadow:0 4px 18px #00000012}
+h1,h2{text-align:center;color:#175b9a}
+.subtitle{text-align:center;line-height:1.8}
+.topline{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.progress{height:9px;background:#e1e9f2;border-radius:8px;overflow:hidden;margin:18px 0}
+#progressBar{height:100%;width:0;background:#25865b;transition:width .2s}
+#question{font-size:20px;line-height:1.8;margin:22px 0}
+.option{display:block;width:100%;padding:14px;margin:10px 0;border:2px solid #d7e1ed;border-radius:10px;background:white;color:#243247;font-size:16px;line-height:1.7;text-align:left;cursor:pointer}
+.option:disabled{cursor:default}
+.option.correct{border-color:#16834a;background:#e3f7eb}
+.option.wrong{border-color:#c83c3c;background:#ffebeb}
+#answerFeedback{min-height:35px;margin:16px 0;font-weight:bold;line-height:1.8}
+.button{padding:12px 18px;border:none;border-radius:9px;background:#175b9a;color:white;font-size:16px;cursor:pointer}
+.button:disabled{background:#9ba9b8;cursor:default}
+.button-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:20px}
+#result{display:none}
+.result-card{background:#f0f6fc;padding:18px;border-radius:12px;text-align:center;line-height:1.8}
+#resultMessage{font-size:23px;color:#175b9a}
+.review-item{padding:13px 0;border-bottom:1px solid #d7e1ed;line-height:1.8}
+.site-disclaimer{margin-top:30px;padding:18px;background:#f0f5fb;color:#35465a;border-top:2px solid #cbdced;font-size:13px;line-height:1.8}
+.site-disclaimer h3{color:#175b9a}
+@media(max-width:480px){.container{padding:16px}.button-row .button{flex:1}}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>RawaRajpootNexEduToppers</h1>
+<p class="subtitle">Learning Academy | शिक्षण अकादमी<br>Class 4 English | कक्षा 4 अंग्रेज़ी</p>
+<h2>Quiz 5: Future Tense with “Will”</h2>
+<p class="subtitle">भविष्य काल में “Will” का प्रयोग<br>Choose the correct answer. | सही उत्तर चुनिए।</p>
+
+<section id="quiz">
+  <div class="topline">
+    <span id="questionNumber"></span>
+    <span id="liveScore">Score: 0 | अंक: 0</span>
+  </div>
+  <div class="progress"><div id="progressBar"></div></div>
+  <div id="question"></div>
+  <div id="options"></div>
+  <div id="answerFeedback" aria-live="polite"></div>
+  <div class="button-row">
+    <button class="button" id="nextBtn" disabled>Next Question | अगला प्रश्न</button>
+  </div>
+</section>
+
+<section id="result">
+  <h2>Quiz Results | क्विज़ का परिणाम</h2>
+  <div class="result-card">
+    <p id="finalScore"></p>
+    <p id="percentage"></p>
+    <h3 id="resultMessage"></h3>
+    <p id="resultFeedback"></p>
+  </div>
+  <div class="button-row">
+    <button class="button" id="reviewBtn">Review Answers | उत्तर देखें</button>
+    <button class="button" id="retryBtn">Try Again | फिर से प्रयास करें</button>
+  </div>
+  <div id="review" hidden>
+    <h2>Answer Review | उत्तरों की समीक्षा</h2>
+    <div id="reviewList"></div>
+  </div>
+</section>
+
+<footer class="site-disclaimer">
+  <h3>Disclaimer | अस्वीकरण</h3>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy is an independent
+    educational platform and is not affiliated with, endorsed by,
+    or associated with NCERT. NCERT textbook names, chapters, and
+    curriculum topics belong exclusively to NCERT. All solutions
+    and study notes provided here are original practice aids.
+    For official textbooks, visit
+    <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">ncert.nic.in</a>.
+  </p>
+</footer>
+</main>
+
+<script>
+const questions = [
+{
+q:'Choose the correct sentence. | सही वाक्य चुनिए।',
+options:['I will goes to school. | मैं स्कूल जाता होगा।','I will go to school. | मैं स्कूल जाऊँगा।','I will going to school. | मैं स्कूल जा रहा होगा।','I will went to school. | मैं स्कूल गया होगा।'],
+answer:1,
+explanation:'Use will + the base form of the verb: will go. | Will के बाद क्रिया का मूल रूप आता है: will go।'
+},
+{
+q:'She ___ help her mother tomorrow. | वह कल अपनी माँ की मदद ___।',
+options:['will','will be','will to','wills'],
+answer:0,
+explanation:'Use will before the base verb help. | मूल क्रिया help से पहले will आएगा।'
+},
+{
+q:'Which word completes the sentence? They will ___ cricket. | वाक्य पूरा करने के लिए सही शब्द चुनिए: वे क्रिकेट खेलेंगे।',
+options:['played','plays','play','playing'],
+answer:2,
+explanation:'After will, use play, not played, plays, or playing. | Will के बाद play का प्रयोग होता है।'
+},
+{
+q:'Choose the correct negative sentence. | सही नकारात्मक वाक्य चुनिए।',
+options:['He will not come. | वह नहीं आएगा।','He not will come. | वह नहीं आएगा।','He will comes not. | वह नहीं आएगा।','He does not will come. | वह नहीं आएगा।'],
+answer:0,
+explanation:'The negative form is will not + base verb. | नकारात्मक रूप है: will not + क्रिया का मूल रूप।'
+},
+{
+q:'___ you visit us tomorrow? | क्या तुम कल हमसे मिलने ___?',
+options:['Will','Are','Did','Does'],
+answer:0,
+explanation:'Questions about the future can begin with Will. | भविष्य के बारे में प्रश्न Will से शुरू हो सकता है।'
+},
+{
+q:'I think it ___ rain tonight. | मुझे लगता है कि आज रात बारिश ___।',
+options:['will','did','has','was'],
+answer:0,
+explanation:'Will can express a prediction about the future. | Will भविष्य के बारे में अनुमान बताने के लिए प्रयोग होता है।'
+},
+{
+q:'We ___ travel to Jaipur next week. | हम अगले सप्ताह जयपुर ___।',
+options:['will travelled','will travels','will travel','will travelling'],
+answer:2,
+explanation:'Use will + travel, the base form. | Will के बाद travel का मूल रूप आएगा।'
+},
+{
+q:'Choose the correct question. | सही प्रश्न चुनिए।',
+options:['Will Riya sing? | क्या रिया गाएगी?','Riya will sings? | क्या रिया गाएगी?','Does will Riya sing? | क्या रिया गाएगी?','Will Riya sang? | क्या रिया गाएगी?'],
+answer:0,
+explanation:'Place Will before the subject in a question. | प्रश्न में Will को कर्ता से पहले रखें।'
+},
+{
+q:'He will ___ his homework later. | वह बाद में अपना गृहकार्य ___।',
+options:['finished','finishes','finish','finishing'],
+answer:2,
+explanation:'The base verb finish follows will. | Will के बाद finish का मूल रूप आएगा।'
+},
+{
+q:'Which sentence expresses a future action? | कौन-सा वाक्य भविष्य की क्रिया बताता है?',
+options:['I ate lunch. | मैंने दोपहर का खाना खाया।','I eat lunch every day. | मैं हर दिन खाना खाता हूँ।','I will eat lunch later. | मैं बाद में खाना खाऊँगा।','I am eating lunch now. | मैं अभी खाना खा रहा हूँ।'],
+answer:2,
+explanation:'“Later” and “will eat” indicate a future action. | Later और will eat भविष्य की क्रिया बताते हैं।'
+},
+{
+q:'You ___ be happy to hear the news. | यह खबर सुनकर तुम खुश ___।',
+options:['will','were','did','are yesterday'],
+answer:0,
+explanation:'Will be is a correct future form. | Will be भविष्य बताने का सही रूप है।'
+},
+{
+q:'Choose the correct contraction of “will not”. | “Will not” का सही संक्षिप्त रूप चुनिए।',
+options:["won't","willn't","don't","wasn't"],
+answer:0,
+explanation:'Will not can be shortened to won’t. | Will not का संक्षिप्त रूप won’t है।'
+},
+{
+q:'I promise I ___ tell anyone. | मैं वादा करता हूँ कि मैं किसी को नहीं बताऊँगा।',
+options:["won't","didn't","am not","wasn't"],
+answer:0,
+explanation:'Won’t means will not and can express a future promise. | Won’t का अर्थ will not है और यह भविष्य के वादे में आ सकता है।'
+},
+{
+q:'The children will ___ the room. | बच्चे कमरा ___।',
+options:['cleaned','clean','cleans','cleaning'],
+answer:1,
+explanation:'Use the base verb clean after will. | Will के बाद clean का मूल रूप आएगा।'
+},
+{
+q:'Choose the correct sentence. | सही वाक्य चुनिए।',
+options:['Will they arrive soon? | क्या वे जल्द पहुँचेंगे?','They will arrives soon? | क्या वे जल्द पहुँचेंगे?','Do they will arrive soon? | क्या वे जल्द पहुँचेंगे?','Will they arrived soon? | क्या वे जल्द पहुँचेंगे?'],
+answer:0,
+explanation:'Use Will + subject + base verb in a future question. | भविष्य के प्रश्न में Will + कर्ता + मूल क्रिया का प्रयोग करें।'
+},
+{
+q:'My father ___ buy a new phone next month. | मेरे पिता अगले महीने नया फोन ___।',
+options:['will','did','were','has yesterday'],
+answer:0,
+explanation:'Next month refers to the future, so will fits. | Next month भविष्य के समय को बताता है, इसलिए will सही है।'
+},
+{
+q:'Which is the correct negative form of “She will play”? | “She will play” का सही नकारात्मक रूप कौन-सा है?',
+options:["She won't play. | वह नहीं खेलेगी।","She doesn't will play. | वह नहीं खेलेगी।","She will not plays. | वह नहीं खेलेगी।","She not will playing. | वह नहीं खेलेगी।"],
+answer:0,
+explanation:'Use will not or won’t + base verb. | Will not या won’t के बाद मूल क्रिया आती है।'
+},
+{
+q:'I ___ call you when I reach home. | घर पहुँचने पर मैं तुम्हें फोन ___।',
+options:['will','am yesterday','did','has'],
+answer:0,
+explanation:'Will call describes a future action. | Will call भविष्य में होने वाली क्रिया बताता है।'
+},
+{
+q:'Choose the correct answer: “Will Aman come?” — “Yes, he ___.” | सही उत्तर चुनिए: “क्या अमन आएगा?” — “हाँ, वह ___।” ',
+options:['will','does','is','did'],
+answer:0,
+explanation:'A short answer to “Will Aman come?” is “Yes, he will.” | “Will Aman come?” का छोटा सकारात्मक उत्तर “Yes, he will” है।'
+},
+{
+q:'Which sentence is grammatically correct? | कौन-सा वाक्य व्याकरण की दृष्टि से सही है?',
+options:['We will see you tomorrow. | हम कल तुमसे मिलेंगे।','We will saw you tomorrow. | हम कल तुमसे मिलेंगे।','We will sees you tomorrow. | हम कल तुमसे मिलेंगे।','We will seeing you tomorrow. | हम कल तुमसे मिलेंगे।'],
+answer:0,
+explanation:'Will is followed by the base verb see. | Will के बाद see का मूल रूप आता है।'
+}
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+let userAnswers = [];
+
+const questionEl = document.getElementById('question');
+const optionsEl = document.getElementById('options');
+const feedbackEl = document.getElementById('answerFeedback');
+const nextBtn = document.getElementById('nextBtn');
+
+function showQuestion() {
+  answered = false;
+  const q = questions[currentQuestion];
+
+  document.getElementById('questionNumber').textContent =
+    `Question ${currentQuestion + 1} of ${questions.length} | प्रश्न ${currentQuestion + 1} / ${questions.length}`;
+
+  document.getElementById('liveScore').textContent =
+    `Score: ${score} | अंक: ${score}`;
+
+  document.getElementById('progressBar').style.width =
+    `${(currentQuestion / questions.length) * 100}%`;
+
+  questionEl.textContent = q.q;
+  optionsEl.replaceChildren();
+  feedbackEl.textContent = '';
+  nextBtn.disabled = true;
+
+  nextBtn.textContent = currentQuestion === questions.length - 1
+    ? 'See Results | परिणाम देखें'
+    : 'Next Question | अगला प्रश्न';
+
+  q.options.forEach((option, index) => {
+    const button = document.createElement('button');
+    button.className = 'option';
+    button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+    button.addEventListener('click', () => checkAnswer(index, button));
+    optionsEl.appendChild(button);
+  });
+}
+
+function checkAnswer(selectedIndex, selectedButton) {
+  if (answered) return;
+  answered = true;
+
+  const q = questions[currentQuestion];
+  const correct = selectedIndex === q.answer;
+  userAnswers[currentQuestion] = selectedIndex;
+
+  if (correct) {
+    score++;
+    selectedButton.classList.add('correct');
+    feedbackEl.textContent =
+      `Correct! Well done! | सही उत्तर! बहुत अच्छा! ${q.explanation}`;
+  } else {
+    selectedButton.classList.add('wrong');
+    feedbackEl.textContent =
+      `Not quite! | अभी सही नहीं। Correct answer: ${q.options[q.answer]}. | सही उत्तर: ${q.options[q.answer]}. ${q.explanation}`;
+  }
+
+  [...optionsEl.children].forEach((button, index) => {
+    button.disabled = true;
+    if (index === q.answer) button.classList.add('correct');
+  });
+
+  document.getElementById('liveScore').textContent =
+    `Score: ${score} | अंक: ${score}`;
+
+  nextBtn.disabled = false;
+}
+
+nextBtn.addEventListener('click', () => {
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    showQuestion();
+  } else {
+    showResults();
+  }
+});
+
+function showResults() {
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+
+  const percent = Math.round((score / questions.length) * 100);
+
+  document.getElementById('finalScore').textContent =
+    `Final Score: ${score} out of ${questions.length} | कुल अंक: ${score} / ${questions.length}`;
+
+  document.getElementById('percentage').textContent =
+    `Percentage: ${percent}% | प्रतिशत: ${percent}%`;
+
+  let message;
+  let hindiMessage;
+
+  if (percent === 100) {
+    message = 'Fantastic! Perfect score! 🎉';
+    hindiMessage = 'शानदार! पूरे अंक! 🎉';
+  } else if (percent >= 81) {
+    message = 'Excellent!';
+    hindiMessage = 'उत्कृष्ट!';
+  } else if (percent >= 61) {
+    message = 'Very good!';
+    hindiMessage = 'बहुत अच्छा!';
+  } else if (percent >= 41) {
+    message = 'Good job!';
+    hindiMessage = 'अच्छा काम!';
+  } else if (percent >= 21) {
+    message = 'Good try!';
+    hindiMessage = 'अच्छा प्रयास!';
+  } else {
+    message = 'Keep trying!';
+    hindiMessage = 'कोशिश करते रहें!';
+  }
+
+  document.getElementById('resultMessage').textContent =
+    `${message} | ${hindiMessage}`;
+
+  document.getElementById('resultFeedback').textContent =
+    'Review your answers to learn from mistakes. | गलतियों से सीखने के लिए अपने उत्तरों की समीक्षा करें।';
+  document.getElementById('progressBar').style.width = '100%';
+}
+
+document.getElementById('reviewBtn').addEventListener('click', () => {
+  const review = document.getElementById('review');
+  const list = document.getElementById('reviewList');
+
+  if (!review.hidden) {
+    review.hidden = true;
+    document.getElementById('reviewBtn').textContent =
+      'Review Answers | उत्तर देखें';
+    return;
+  }
+
+  list.replaceChildren();
+
+  questions.forEach((q, i) => {
+    const item = document.createElement('div');
+    item.className = 'review-item';
+
+    const selected = userAnswers[i];
+    const yourAnswer = selected === undefined
+      ? 'Not answered | उत्तर नहीं दिया'
+      : q.options[selected];
+
+    const result = selected === q.answer
+      ? 'Correct | सही'
+      : 'Incorrect | गलत';
+
+    item.textContent =
+      `${i + 1}. ${q.q} Your answer: ${yourAnswer}. | आपका उत्तर: ${yourAnswer}. Correct answer: ${q.options[q.answer]}. | सही उत्तर: ${q.options[q.answer]}. ${result}. ${q.explanation}`;
+
+    list.appendChild(item);
+  });
+
+  review.hidden = false;
+  document.getElementById('reviewBtn').textContent =
+    'Hide Review | समीक्षा छिपाएँ';
+});
+
+document.getElementById('retryBtn').addEventListener('click', () => {
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+  userAnswers = [];
+
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  document.getElementById('review').hidden = true;
+
+  document.getElementById('reviewBtn').textContent =
+    'Review Answers | उत्तर देखें';
+
+  showQuestion();
+});
+
+showQuestion();
+</script>
+</body>
+</html>
