@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Quiz 6 | Honesty in Daily Life</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f7ff;color:#243047;line-height:1.6}
+header{background:linear-gradient(135deg,#174ea6,#287be0);color:white;text-align:center;padding:22px 12px}
+header h1{margin:0 0 8px;font-size:25px}
+header p{margin:4px 0}
+.container{width:94%;max-width:760px;margin:22px auto}
+.info,.quiz-card,.result-card,.review-card{background:white;padding:20px;border-radius:14px;margin-bottom:18px;box-shadow:0 3px 12px #00000012}
+.progress-line{height:10px;background:#e0e7f0;border-radius:20px;overflow:hidden;margin:12px 0}
+#progress{width:0%;height:100%;background:#20864a;transition:width .2s}
+#questionText{font-size:21px;margin:12px 0 18px}
+.option{display:block;width:100%;text-align:left;padding:13px;margin:10px 0;border:2px solid #d5dfec;background:white;border-radius:10px;cursor:pointer;font-size:16px;color:#243047}
+.option:hover:not(:disabled){background:#edf5ff}
+.option:disabled{cursor:default;opacity:1}
+.option.correct{background:#d8f5df;border-color:#198744}
+.option.wrong{background:#ffe0e0;border-color:#d83232}
+#feedback{display:none;padding:12px;border-radius:9px;margin:15px 0;font-weight:600}
+.action{border:0;border-radius:9px;padding:12px 18px;margin:6px 5px 6px 0;background:#175fc0;color:white;font-size:16px;cursor:pointer}
+.action:disabled{opacity:.45;cursor:not-allowed}
+.secondary{background:#536579}
+.green{background:#187b43}
+#result,#reviewArea{display:none}
+.review-item{padding:12px 0;border-bottom:1px solid #e2e8f0}
+.site-disclaimer{background:#e7edf5;padding:20px;margin-top:25px;font-size:13px;color:#39475a;border-radius:10px}
+.site-disclaimer h3{margin-top:0}
+footer{text-align:center;padding:18px 10px;color:#536579;font-size:13px}
+@media(max-width:480px){header h1{font-size:21px}.info,.quiz-card,.result-card,.review-card{padding:15px}#questionText{font-size:19px}}
+</style>
+</head>
+<body>
+<header>
+<h1>RawaRajpootNexEduToppers Learning Academy</h1>
+<p>Class 4 English | Chapter 2: The Tinkling Bells</p>
+<p><strong>Quiz 6: Honesty in Daily Life</strong></p>
+</header>
+
+<main class="container">
+<section class="info">
+<h2>Instructions | निर्देश</h2>
+<p>Choose the best answer for each question about honesty and good behaviour.</p>
+<p>ईमानदारी और अच्छे व्यवहार से जुड़े प्रत्येक प्रश्न का सही उत्तर चुनें।</p>
+<p><strong>Total Questions:</strong> 20 | <strong>Marks:</strong> 20</p>
+</section>
+
+<section class="quiz-card" id="quizCard">
+<div><strong id="questionNumber">Question 1 of 20</strong><span id="scoreLive" style="float:right">Score: 0</span></div>
+<div class="progress-line"><div id="progress"></div></div>
+<h2 id="questionText"></h2>
+<div id="options"></div>
+<div id="feedback" role="status" aria-live="polite"></div>
+<button class="action" id="nextBtn" disabled>Next Question →</button>
+</section>
+
+<section class="result-card" id="result">
+<h2>Quiz Completed!</h2>
+<p id="finalScore"></p>
+<p id="finalMessage"></p>
+<button class="action green" id="retryBtn">Try Again</button>
+<button class="action secondary" id="reviewBtn">Review Answers</button>
+</section>
+
+<section class="review-card" id="reviewArea">
+<h2>Answer Review</h2>
+<div id="reviewContent"></div>
+</section>
+
+<section class="site-disclaimer">
+<h3>Disclaimer | अस्वीकरण</h3>
+<p>RawaRajpootNexEduToppers Learning Academy is an independent educational platform and is not affiliated with, endorsed by, or associated with NCERT. NCERT textbook names, chapters, and curriculum topics belong exclusively to NCERT. All solutions and study notes provided here are original practice aids. For official textbooks, visit <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">ncert.nic.in</a>.</p>
+</section>
+</main>
+
+<footer>Learn • Practise • Improve<br>RawaRajpootNexEduToppers Learning Academy</footer>
+
+<script>
+const questions = [
+{q:"What does honesty mean?",options:["Always telling the truth","Hiding every mistake","Taking things without asking","Blaming others"],answer:0,explanation:"Honesty means telling the truth and acting truthfully."},
+{q:"Chinna receives more change than he should. What should he do?",options:["Keep it secretly","Return the extra money","Spend it quickly","Give it to a friend"],answer:1,explanation:"Returning extra money is an honest action."},
+{q:"You find a pencil in your classroom. What is the best action?",options:["Keep it without asking","Throw it away","Give it to the teacher or find its owner","Hide it in your bag"],answer:2,explanation:"Try to return lost property to its rightful owner."},
+{q:"You accidentally break a glass at home. What should you do?",options:["Blame your sibling","Hide the pieces","Pretend nothing happened","Tell an adult the truth"],answer:3,explanation:"Admitting what happened is more honest than hiding it."},
+{q:"A shopkeeper gives you too much change. You should:",options:["Return the extra amount","Keep it because it is their mistake","Buy sweets with it","Say nothing and leave"],answer:0,explanation:"The extra money does not belong to you."},
+{q:"Which action shows honesty during a test?",options:["Copying a friend's answers","Answering using your own knowledge","Looking at another paper","Asking a friend to whisper answers"],answer:1,explanation:"Doing your own work shows honesty."},
+{q:"Your friend asks you to lie to the teacher. What should you do?",options:["Lie to protect your friend","Make up another story","Tell the truth politely","Blame someone else"],answer:2,explanation:"Be truthful even when someone asks you to lie."},
+{q:"Why is honesty important?",options:["It helps us trick people","It lets us avoid every duty","It makes others afraid","It builds trust"],answer:3,explanation:"People can trust someone who is honest."},
+{q:"You make a mistake in your homework. What should you do?",options:["Correct it and learn from it","Erase someone else's work","Say the teacher made the mistake","Copy the answer secretly"],answer:0,explanation:"Accepting mistakes helps you learn and improve."},
+{q:"Which person is acting honestly?",options:["A child who hides a found wallet","A child who returns a lost wallet","A child who lies about a wallet","A child who takes money from a wallet"],answer:1,explanation:"Returning a lost wallet respects its owner."},
+{q:"What should you do if you do not know an answer?",options:["Copy secretly","Invent a false fact","Say you do not know and ask for help","Blame another student"],answer:2,explanation:"It is honest to admit when you do not know something."},
+{q:"Your friend tells you the truth about a mistake. How should you respond?",options:["Make fun of them","Spread the story to embarrass them","Tell everyone immediately","Listen calmly and encourage them to make it right"],answer:3,explanation:"Responding kindly encourages people to be truthful and responsible."},
+{q:"Which is an example of responsibility?",options:["Doing a task you promised to do","Leaving all work for others","Denying your duties","Breaking a promise deliberately"],answer:0,explanation:"Responsible people try to fulfil their commitments."},
+{q:"You accidentally take home a classmate's notebook. What should you do?",options:["Keep it forever","Return it and explain the mistake","Tear out a page","Hide it from the classmate"],answer:1,explanation:"Returning the notebook and explaining honestly fixes the mistake."},
+{q:"Which sentence expresses an honest statement?",options:["I did it, but I will blame someone else.","I never make mistakes.","I made a mistake, and I will try to correct it.","I will hide what happened."],answer:2,explanation:"An honest statement admits the mistake and accepts responsibility."},
+{q:"Someone gives you credit for work you did not do. What should you do?",options:["Accept the praise silently","Say you did everything","Blame another person","Explain politely who actually did the work"],answer:3,explanation:"Giving credit fairly is part of honesty."},
+{q:"What should you do if you promise to help at home?",options:["Try to keep your promise","Forget it on purpose","Pretend you never promised","Wait for someone else to do everything"],answer:0,explanation:"Keeping promises shows honesty and responsibility."},
+{q:"Why did Chinna's decision to return extra money matter?",options:["He wanted to hide the money","He chose to do what was right","He wanted to blame the seller","He wanted to avoid the market"],answer:1,explanation:"Chinna chose honesty instead of keeping money that was not his."},
+{q:"Which action shows respect for other people's property?",options:["Using it without permission","Hiding it as a joke","Asking permission before using it","Keeping it after finding it"],answer:2,explanation:"Asking permission respects the owner's rights."},
+{q:"What is a good way to practise honesty every day?",options:["Tell the truth only when watched","Hide every small mistake","Blame others when things go wrong","Tell the truth, admit mistakes, and return things that are not yours"],answer:3,explanation:"Honesty is practised through truthful words and responsible actions."}
+];
+
+let currentQuestion=0;
+let score=0;
+let answered=false;
+let userAnswers=[];
+
+const questionNumber=document.getElementById("questionNumber");
+const scoreLive=document.getElementById("scoreLive");
+const questionText=document.getElementById("questionText");
+const optionsBox=document.getElementById("options");
+const feedback=document.getElementById("feedback");
+const nextBtn=document.getElementById("nextBtn");
+const quizCard=document.getElementById("quizCard");
+const result=document.getElementById("result");
+const reviewArea=document.getElementById("reviewArea");
+
+function showQuestion(){
+  answered=false;
+  const item=questions[currentQuestion];
+  questionNumber.textContent=`Question ${currentQuestion+1} of ${questions.length}`;
+  scoreLive.textContent=`Score: ${score}`;
+  questionText.textContent=item.q;
+  optionsBox.innerHTML="";
+  feedback.style.display="none";
+  feedback.textContent="";
+  nextBtn.disabled=true;
+  document.getElementById("progress").style.width=`${currentQuestion/questions.length*100}%`;
+
+  item.options.forEach((option,index)=>{
+    const button=document.createElement("button");
+    button.type="button";
+    button.className="option";
+    button.textContent=`${String.fromCharCode(65+index)}. ${option}`;
+    button.addEventListener("click",()=>selectAnswer(index));
+    optionsBox.appendChild(button);
+  });
+
+  nextBtn.textContent=currentQuestion===questions.length-1?"Finish Quiz":"Next Question →";
+}
+
+function selectAnswer(index){
+  if(answered)return;
+  answered=true;
+  const item=questions[currentQuestion];
+  const buttons=optionsBox.querySelectorAll(".option");
+  const correct=index===item.answer;
+  userAnswers[currentQuestion]=index;
+
+  if(correct){
+    score++;
+    feedback.textContent="Correct Answer! "+item.explanation;
+    feedback.style.background="#d8f5df";
+    feedback.style.color="#155b30";
+  }else{
+    feedback.textContent="Wrong Answer. Correct answer: "+item.options[item.answer]+". "+item.explanation;
+    feedback.style.background="#ffe0e0";
+    feedback.style.color="#8a2020";
+  }
+
+  buttons.forEach((button,i)=>{
+    button.disabled=true;
+    if(i===item.answer)button.classList.add("correct");
+    else if(i===index)button.classList.add("wrong");
+  });
+
+  feedback.style.display="block";
+  scoreLive.textContent=`Score: ${score}`;
+  nextBtn.disabled=false;
+}
+
+function finishQuiz(){
+  quizCard.style.display="none";
+  result.style.display="block";
+  document.getElementById("finalScore").textContent=`Your score: ${score} out of ${questions.length}`;
+  const percentage=score/questions.length*100;
+  let message;
+  if(percentage===100)message="Excellent job! You answered every question correctly.";
+  else if(percentage>=80)message="Very good job! Keep practising.";
+  else if(percentage>=60)message="Good effort! Review your mistakes and try again.";
+  else message="Keep practising. Every honest action matters!";
+  document.getElementById("finalMessage").textContent=message;
+}
+
+function buildReview(){
+  const reviewContent=document.getElementById("reviewContent");
+  reviewContent.innerHTML="";
+  questions.forEach((item,index)=>{
+    const block=document.createElement("div");
+    block.className="review-item";
+    const heading=document.createElement("strong");
+    heading.textContent=`${index+1}. ${item.q}`;
+    block.appendChild(heading);
+    const chosen=document.createElement("p");
+    chosen.textContent=`Your answer: ${userAnswers[index]===undefined?"Not answered":item.options[userAnswers[index]]}`;
+    block.appendChild(chosen);
+    const correct=document.createElement("p");
+    correct.textContent=`Correct answer: ${item.options[item.answer]}`;
+    correct.style.color="#187b43";
+    block.appendChild(correct);
+    const explanation=document.createElement("p");
+    explanation.textContent=item.explanation;
+    block.appendChild(explanation);
+    reviewContent.appendChild(block);
+  });
+}
+
+nextBtn.addEventListener("click",()=>{
+  if(!answered)return;
+  if(currentQuestion<questions.length-1){
+    currentQuestion++;
+    showQuestion();
+  }else{
+    finishQuiz();
+  }
+});
+
+document.getElementById("reviewBtn").addEventListener("click",()=>{
+  buildReview();
+  reviewArea.style.display=reviewArea.style.display==="none"?"block":"none";
+  if(reviewArea.style.display==="block")reviewArea.scrollIntoView({behavior:"smooth"});
+});
+
+document.getElementById("retryBtn").addEventListener("click",()=>{
+  currentQuestion=0;
+  score=0;
+  answered=false;
+  userAnswers=[];
+  result.style.display="none";
+  quizCard.style.display="block";
+  reviewArea.style.display="none";
+  showQuestion();
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+showQuestion();
+</script>
+</body>
+</html>
