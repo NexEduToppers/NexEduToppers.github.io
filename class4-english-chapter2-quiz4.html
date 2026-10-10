@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 2 Quiz 4 | Opposite Words</title>
+<style>
+:root {
+  --navy:#12315a; --blue:#1769aa; --light-blue:#eaf4ff;
+  --green:#16834a; --red:#c62828; --border:#cbd9e8; --text:#172b4d;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; padding:16px; font-family:Arial,sans-serif;
+  color:var(--text); background:#f2f7fc; line-height:1.6;
+}
+.container { max-width:760px; margin:0 auto; }
+.header {
+  background:var(--navy); color:white; text-align:center;
+  padding:22px 16px; border-radius:16px; margin-bottom:18px;
+}
+.header h1 { margin:0 0 8px; font-size:25px; }
+.header p { margin:4px 0; }
+.card {
+  background:white; padding:20px; border-radius:14px;
+  margin-bottom:18px; border:1px solid var(--border);
+  box-shadow:0 3px 10px rgba(18,49,90,.06);
+}
+.progress-row {
+  display:flex; justify-content:space-between; gap:10px;
+  flex-wrap:wrap; font-weight:bold; margin-bottom:10px;
+}
+.progress-track {
+  height:10px; background:#dce7f3; border-radius:20px;
+  overflow:hidden; margin-bottom:20px;
+}
+#progressBar { height:100%; width:0%; background:var(--blue); }
+.question { font-size:20px; font-weight:bold; margin:12px 0 18px; }
+.hindi {
+  display:block; color:#4b5f79; font-size:16px;
+  font-weight:normal; margin-top:5px;
+}
+.options { display:grid; gap:11px; }
+.option {
+  width:100%; padding:13px 15px; text-align:left;
+  background:white; color:var(--text); border:2px solid var(--border);
+  border-radius:10px; font-size:16px; cursor:pointer; line-height:1.5;
+}
+.option:hover:not(:disabled) { background:var(--light-blue); border-color:var(--blue); }
+.option:focus-visible,.action-btn:focus-visible { outline:3px solid #f0a500; outline-offset:3px; }
+.option:disabled { cursor:default; opacity:1; }
+.option.correct { background:#e6f7ed; border-color:var(--green); color:#075c2e; }
+.option.wrong { background:#fff0f0; border-color:var(--red); color:#9b1717; }
+.feedback {
+  display:none; padding:14px; border-radius:10px; margin-top:18px;
+  background:var(--light-blue); border-left:5px solid var(--blue);
+}
+.feedback.show { display:block; }
+.feedback p { margin:6px 0 0; }
+.action-row { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+.action-btn {
+  flex:1; min-width:130px; border:none; border-radius:9px;
+  padding:13px 16px; font-size:16px; font-weight:bold;
+  cursor:pointer; background:var(--blue); color:white; text-align:center;
+}
+.action-btn.secondary { background:#e4edf7; color:var(--navy); }
+.action-btn:disabled { opacity:.5; cursor:not-allowed; }
+#result { display:none; }
+#result.show { display:block; }
+.score { font-size:30px; font-weight:bold; color:var(--navy); text-align:center; }
+.score-message { font-size:21px; font-weight:bold; text-align:center; margin:10px 0; }
+.review-item { border-top:1px solid var(--border); padding:14px 0; }
+.review-item p { margin:5px 0; }
+.site-disclaimer {
+  background:#e7edf5; border-radius:12px; padding:18px;
+  margin-top:20px; font-size:14px;
+}
+.site-disclaimer h3 { margin-top:0; color:var(--navy); }
+.site-disclaimer a { color:#075eaa; }
+@media(max-width:480px) {
+  body { padding:10px; }
+  .header h1 { font-size:21px; }
+  .card { padding:15px; }
+  .question { font-size:18px; }
+  .option { font-size:15px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+  <p>Class 4 English | Mridang</p>
+  <p><strong>Chapter 2: The Tinkling Bells</strong></p>
+  <p>Quiz 4: Opposite Words | विलोम शब्द</p>
+</header>
+
+<section class="card" id="quizCard">
+  <div class="progress-row">
+    <span id="questionCount">Question 1 of 20</span>
+    <span id="liveScore">Score: 0</span>
+  </div>
+  <div class="progress-track"><div id="progressBar"></div></div>
+  <div id="questionText" class="question"></div>
+  <div id="options" class="options"></div>
+  <div id="feedback" class="feedback" aria-live="polite">
+    <strong id="feedbackTitle"></strong>
+    <p id="explanation"></p>
+  </div>
+  <div class="action-row">
+    <button class="action-btn" id="nextBtn" disabled>Next Question / अगला प्रश्न</button>
+  </div>
+</section>
+
+<section class="card" id="result">
+  <h2 style="text-align:center;">Quiz Completed! / प्रश्नोत्तरी पूरी हुई!</h2>
+  <div class="score" id="finalScore"></div>
+  <div id="percentage" style="text-align:center;"></div>
+  <div class="score-message" id="scoreMessage"></div>
+  <p id="scoreAdvice" style="text-align:center;"></p>
+  <div class="action-row">
+    <button class="action-btn" id="reviewBtn">Review Answers / उत्तर देखें</button>
+    <button class="action-btn secondary" id="retryBtn">Try Again / फिर से प्रयास करें</button>
+  </div>
+  <div id="reviewArea" style="display:none;margin-top:20px;">
+    <h3>Answer Review / उत्तरों की समीक्षा</h3>
+    <div id="reviewList"></div>
+  </div>
+</section>
+
+<section class="card">
+  <h3>Vocabulary Tip / शब्दावली की सलाह</h3>
+  <p>An opposite word has a meaning that is different from another word.</p>
+  <p>विलोम शब्द का अर्थ दूसरे शब्द के अर्थ से उलटा होता है।</p>
+  <p>Example: beautiful → ugly; buy → sell.</p>
+</section>
+
+<div class="action-row">
+  <a class="action-btn secondary" href="class4-english-chapter2.html" style="text-decoration:none;">
+    Back to Chapter 2 / अध्याय पर वापस जाएँ
+  </a>
+  <a class="action-btn" href="class4-english-chapter2-quiz3.html" style="text-decoration:none;">
+    Quiz 3 / प्रश्नोत्तरी 3
+  </a>
+</div>
+
+<footer class="site-disclaimer">
+  <h3>Disclaimer | अस्वीकरण</h3>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy is an independent
+    educational platform and is not affiliated with, endorsed by,
+    or associated with NCERT. NCERT textbook names, chapters, and
+    curriculum topics belong exclusively to NCERT. All solutions
+    and study notes provided here are original practice aids.
+    For official textbooks, visit
+    <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">ncert.nic.in</a>.
+  </p>
+</footer>
+</div>
+
+<script>
+const questions = [
+  {
+    q:"What is the opposite of “beautiful”?",
+    hi:"“Beautiful” का विलोम शब्द क्या है?",
+    options:["Ugly","Pretty","Lovely","Attractive"],
+    hindi:["बदसूरत","सुंदर","प्यारा","आकर्षक"],
+    answer:0,
+    explanation:"Ugly means not beautiful, so it is an opposite of beautiful."
+  },
+  {
+    q:"What is the opposite of “reward”?",
+    hi:"“Reward” का विलोम शब्द क्या है?",
+    options:["Punishment","Prize","Gift","Award"],
+    hindi:["सज़ा","इनाम","उपहार","पुरस्कार"],
+    answer:0,
+    explanation:"A reward is something given for good work; punishment is the opposite idea."
+  },
+  {
+    q:"What is the opposite of “buy”?",
+    hi:"“Buy” का विलोम शब्द क्या है?",
+    options:["Sell","Pay","Choose","Keep"],
+    hindi:["बेचना","भुगतान करना","चुनना","रखना"],
+    answer:0,
+    explanation:"Buy means to get something by paying; sell means to give something in exchange for money."
+  },
+  {
+    q:"What is the opposite of “whispered”?",
+    hi:"“Whispered” का विलोम शब्द क्या है?",
+    options:["Shouted","Murmured","Mumbled","Said softly"],
+    hindi:["ज़ोर से चिल्लाया","धीरे बुदबुदाया","अस्पष्ट बोला","धीरे कहा"],
+    answer:0,
+    explanation:"Whispered means spoke very softly; shouted means spoke very loudly."
+  },
+  {
+    q:"What is the opposite of “hot”?",
+    hi:"“Hot” का विलोम शब्द क्या है?",
+    options:["Cold","Warm","Boiling","Heated"],
+    hindi:["ठंडा","गुनगुना","उबलता हुआ","गर्म किया हुआ"],
+    answer:0,
+    explanation:"Cold is the opposite of hot."
+  },
+  {
+    q:"What is the opposite of “happy”?",
+    hi:"“Happy” का विलोम शब्द क्या है?",
+    options:["Sad","Glad","Cheerful","Pleased"],
+    hindi:["उदास","खुश","प्रसन्न","संतुष्ट"],
+    answer:0,
+    explanation:"Sad describes the opposite feeling to happy."
+  },
+  {
+    q:"What is the opposite of “early”?",
+    hi:"“Early” का विलोम शब्द क्या है?",
+    options:["Late","Soon","Quick","First"],
+    hindi:["देर से","जल्दी","तेज़","पहला"],
+    answer:0,
+    explanation:"Late is the opposite of early."
+  },
+  {
+    q:"What is the opposite of “big”?",
+    hi:"“Big” का विलोम शब्द क्या है?",
+    options:["Small","Large","Huge","Giant"],
+    hindi:["छोटा","बड़ा","विशाल","बहुत बड़ा"],
+    answer:0,
+    explanation:"Small is the opposite of big."
+  },
+  {
+    q:"What is the opposite of “strong”?",
+    hi:"“Strong” का विलोम शब्द क्या है?",
+    options:["Weak","Powerful","Firm","Mighty"],
+    hindi:["कमज़ोर","शक्तिशाली","मज़बूत","बलवान"],
+    answer:0,
+    explanation:"Weak means lacking strength, the opposite of strong."
+  },
+  {
+    q:"What is the opposite of “kind”?",
+    hi:"“Kind” का विलोम शब्द क्या है?",
+    options:["Unkind","Helpful","Caring","Gentle"],
+    hindi:["निर्दयी","मददगार","देखभाल करने वाला","कोमल"],
+    answer:0,
+    explanation:"Unkind means not kind or not considerate."
+  },
+  {
+    q:"What is the opposite of “clean”?",
+    hi:"“Clean” का विलोम शब्द क्या है?",
+    options:["Dirty","Neat","Fresh","Tidy"],
+    hindi:["गंदा","साफ-सुथरा","ताज़ा","व्यवस्थित"],
+    answer:0,
+    explanation:"Dirty is the opposite of clean."
+  },
+  {
+    q:"What is the opposite of “open”?",
+    hi:"“Open” का विलोम शब्द क्या है?",
+    options:["Closed","Wide","Unlocked","Available"],
+    hindi:["बंद","चौड़ा","बिना ताले का","उपलब्ध"],
+    answer:0,
+    explanation:"Closed is the opposite of open when talking about a door or container."
+  },
+  {
+    q:"What is the opposite of “start”?",
+    hi:"“Start” का विलोम शब्द क्या है?",
+    options:["Finish","Begin","Open","Continue"],
+    hindi:["समाप्त करना","शुरू करना","खोलना","जारी रखना"],
+    answer:0,
+    explanation:"Finish means to bring something to an end; start means to begin."
+  },
+  {
+    q:"What is the opposite of “full”?",
+    hi:"“Full” का विलोम शब्द क्या है?",
+    options:["Empty","Complete","Packed","Filled"],
+    hindi:["खाली","पूरा","भरा हुआ","भरा हुआ"],
+    answer:0,
+    explanation:"Empty means containing nothing, the opposite of full."
+  },
+  {
+    q:"What is the opposite of “near”?",
+    hi:"“Near” का विलोम शब्द क्या है?",
+    options:["Far","Close","Next","Nearby"],
+    hindi:["दूर","पास","अगला","आस-पास"],
+    answer:0,
+    explanation:"Far means at a great distance, the opposite of near."
+  },
+  {
+    q:"What is the opposite of “remember”?",
+    hi:"“Remember” का विलोम शब्द क्या है?",
+    options:["Forget","Recall","Know","Learn"],
+    hindi:["भूलना","याद करना","जानना","सीखना"],
+    answer:0,
+    explanation:"Forget means to fail to remember."
+  },
+  {
+    q:"What is the opposite of “give”?",
+    hi:"“Give” का विलोम शब्द क्या है?",
+    options:["Take","Offer","Share","Donate"],
+    hindi:["लेना","प्रस्ताव देना","बाँटना","दान देना"],
+    answer:0,
+    explanation:"Give means to hand something to someone; take means to receive or get it."
+  },
+  {
+    q:"What is the opposite of “truth”?",
+    hi:"“Truth” का विलोम शब्द क्या है?",
+    options:["Falsehood","Fact","Honesty","Reality"],
+    hindi:["झूठ","तथ्य","ईमानदारी","वास्तविकता"],
+    answer:0,
+    explanation:"Falsehood means something that is not true."
+  },
+  {
+    q:"What is the opposite of “careful”?",
+    hi:"“Careful” का विलोम शब्द क्या है?",
+    options:["Careless","Cautious","Alert","Attentive"],
+    hindi:["लापरवाह","सावधान","सतर्क","ध्यान देने वाला"],
+    answer:0,
+    explanation:"Careless means not taking enough care."
+  },
+  {
+    q:"What is the opposite of “honest”?",
+    hi:"“Honest” का विलोम शब्द क्या है?",
+    options:["Dishonest","Truthful","Fair","Trustworthy"],
+    hindi:["बेईमान","सच्चा","निष्पक्ष","विश्वसनीय"],
+    answer:0,
+    explanation:"Dishonest means not truthful or not honest."
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+let userAnswers = [];
+
+const questionCount = document.getElementById("questionCount");
+const liveScore = document.getElementById("liveScore");
+const progressBar = document.getElementById("progressBar");
+const questionText = document.getElementById("questionText");
+const optionsContainer = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const feedbackTitle = document.getElementById("feedbackTitle");
+const explanation = document.getElementById("explanation");
+const nextBtn = document.getElementById("nextBtn");
+const quizCard = document.getElementById("quizCard");
+const result = document.getElementById("result");
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, function(char) {
+    return {
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[char];
+  });
+}
+
+function showQuestion() {
+  answered = false;
+  const item = questions[currentQuestion];
+  questionCount.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+  liveScore.textContent = `Score: ${score}`;
+  progressBar.style.width = `${(currentQuestion / questions.length) * 100}%`;
+
+  questionText.innerHTML = `${escapeHTML(item.q)}
+    <span class="hindi">${escapeHTML(item.hi)}</span>`;
+
+  optionsContainer.innerHTML = "";
+  feedback.className = "feedback";
+  feedbackTitle.textContent = "";
+  explanation.textContent = "";
+  nextBtn.disabled = true;
+  nextBtn.textContent = currentQuestion === questions.length - 1
+    ? "See Result / परिणाम देखें"
+    : "Next Question / अगला प्रश्न";
+
+  item.options.forEach((option,index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option";
+    button.innerHTML = `${String.fromCharCode(65 + index)}. ${escapeHTML(option)}
+      <span class="hindi">${escapeHTML(item.hindi[index])}</span>`;
+    button.addEventListener("click", () => chooseAnswer(index));
+    optionsContainer.appendChild(button);
+  });
+}
+
+function chooseAnswer(selectedIndex) {
+  if (answered) return;
+  answered = true;
+
+  const item = questions[currentQuestion];
+  const buttons = optionsContainer.querySelectorAll(".option");
+  const isCorrect = selectedIndex === item.answer;
+  userAnswers[currentQuestion] = selectedIndex;
+
+  buttons.forEach((button,index) => {
+    button.disabled = true;
+    if (index === item.answer) button.classList.add("correct");
+    else if (index === selectedIndex) button.classList.add("wrong");
+  });
+
+  if (isCorrect) {
+    score++;
+    feedbackTitle.textContent = "Correct! / सही उत्तर!";
+    explanation.textContent = item.explanation;
+  } else {
+    feedbackTitle.textContent = "Not quite! / सही उत्तर नहीं है।";
+    explanation.textContent =
+      `Correct answer: ${item.options[item.answer]} — ${item.hindi[item.answer]}. ${item.explanation}`;
+  }
+
+  feedback.classList.add("show");
+  liveScore.textContent = `Score: ${score}`;
+  nextBtn.disabled = false;
+}
+
+function finishQuiz() {
+  quizCard.style.display = "none";
+  result.classList.add("show");
+  const percentage = Math.round((score / questions.length) * 100);
+
+  document.getElementById("finalScore").textContent = `${score} / ${questions.length}`;
+  document.getElementById("percentage").textContent = `Percentage: ${percentage}%`;
+
+  let message, advice;
+  if (percentage <= 20) {
+    message = "Keep trying! / कोशिश करते रहें!";
+    advice = "Revise the opposite words and try again.";
+  } else if (percentage <= 40) {
+    message = "Good try! / अच्छा प्रयास!";
+    advice = "Practise the vocabulary words once more.";
+  } else if (percentage <= 60) {
+    message = "Good job! / अच्छा काम!";
+    advice = "Review your missed answers and practise again.";
+  } else if (percentage <= 80) {
+    message = "Very good! / बहुत अच्छा!";
+    advice = "You are improving. Keep practising!";
+  } else if (percentage < 100) {
+    message = "Excellent! / उत्कृष्ट!";
+    advice = "You know most of these opposite words.";
+  } else {
+    message = "Fantastic! Perfect score! 🎉 / शानदार! पूरे अंक! 🎉";
+    advice = "You answered every question correctly!";
+  }
+
+  document.getElementById("scoreMessage").textContent = message;
+  document.getElementById("scoreAdvice").textContent = advice;
+  progressBar.style.width = "100%";
+}
+
+function buildReview() {
+  const reviewList = document.getElementById("reviewList");
+  reviewList.innerHTML = "";
+
+  questions.forEach((item,index) => {
+    const chosen = userAnswers[index];
+    const isCorrect = chosen === item.answer;
+    const reviewItem = document.createElement("div");
+    reviewItem.className = "review-item";
+
+    reviewItem.innerHTML = `
+      <strong>${index + 1}. ${escapeHTML(item.q)}</strong>
+      <span class="hindi">${escapeHTML(item.hi)}</span>
+      <p>Your answer / आपका उत्तर:
+        ${chosen === undefined ? "Not answered" :
+          escapeHTML(item.options[chosen]) + " — " + escapeHTML(item.hindi[chosen])}
+      </p>
+      <p>Correct answer / सही उत्तर:
+        ${escapeHTML(item.options[item.answer])} — ${escapeHTML(item.hindi[item.answer])}
+      </p>
+      <p>${isCorrect ? "✓ Correct / सही" : "✗ Review this answer / फिर से देखें"}</p>
+      <p>${escapeHTML(item.explanation)}</p>
+    `;
+    reviewList.appendChild(reviewItem);
+  });
+}
+
+nextBtn.addEventListener("click", () => {
+  if (!answered) return;
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    showQuestion();
+  } else {
+    finishQuiz();
+  }
+});
+
+document.getElementById("reviewBtn").addEventListener("click", () => {
+  buildReview();
+  const reviewArea = document.getElementById("reviewArea");
+  reviewArea.style.display = reviewArea.style.display === "none" ? "block" : "none";
+});
+
+document.getElementById("retryBtn").addEventListener("click", () => {
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+  userAnswers = [];
+  result.classList.remove("show");
+  quizCard.style.display = "block";
+  document.getElementById("reviewArea").style.display = "none";
+  showQuestion();
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+showQuestion();
+</script>
+</body>
+</html>
