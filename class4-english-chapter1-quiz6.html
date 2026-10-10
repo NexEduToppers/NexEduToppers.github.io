@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English - Quiz 6: Comprehension and Sentence Making</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f1f6fc;color:#243247;margin:0;padding:16px}
+.container{max-width:760px;margin:20px auto;padding:22px;background:white;border-radius:16px;box-shadow:0 4px 18px #00000012}
+h1,h2{text-align:center;color:#175b9a}
+.subtitle{text-align:center;line-height:1.8}
+.topline{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.progress{height:9px;background:#e1e9f2;border-radius:8px;overflow:hidden;margin:18px 0}
+#progressBar{height:100%;width:0;background:#25865b;transition:width .2s}
+.passage{background:#eef6ff;padding:15px;border-radius:10px;line-height:1.8;margin:18px 0}
+#question{font-size:20px;line-height:1.8;margin:22px 0}
+.option{display:block;width:100%;padding:14px;margin:10px 0;border:2px solid #d7e1ed;border-radius:10px;background:white;color:#243247;font-size:16px;line-height:1.7;text-align:left;cursor:pointer}
+.option:disabled{cursor:default}
+.option.correct{border-color:#16834a;background:#e3f7eb}
+.option.wrong{border-color:#c83c3c;background:#ffebeb}
+#answerFeedback{min-height:35px;margin:16px 0;font-weight:bold;line-height:1.8}
+.button{padding:12px 18px;border:none;border-radius:9px;background:#175b9a;color:white;font-size:16px;cursor:pointer}
+.button:disabled{background:#9ba9b8;cursor:default}
+.button-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:20px}
+#result{display:none}
+.result-card{background:#f0f6fc;padding:18px;border-radius:12px;text-align:center;line-height:1.8}
+#resultMessage{font-size:23px;color:#175b9a}
+.review-item{padding:13px 0;border-bottom:1px solid #d7e1ed;line-height:1.8}
+.site-disclaimer{margin-top:30px;padding:18px;background:#f0f5fb;color:#35465a;border-top:2px solid #cbdced;font-size:13px;line-height:1.8}
+.site-disclaimer h3{color:#175b9a}
+@media(max-width:480px){.container{padding:16px}.button-row .button{flex:1}}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>RawaRajpootNexEduToppers</h1>
+<p class="subtitle">Learning Academy | शिक्षण अकादमी<br>Class 4 English | कक्षा 4 अंग्रेज़ी</p>
+<h2>Quiz 6: Comprehension and Sentence Making</h2>
+<p class="subtitle">गद्यांश समझना और वाक्य बनाना<br>Read carefully and choose the best answer. | ध्यान से पढ़िए और सही उत्तर चुनिए।</p>
+
+<section id="quiz">
+  <div class="topline">
+    <span id="questionNumber"></span>
+    <span id="liveScore">Score: 0 | अंक: 0</span>
+  </div>
+  <div class="progress"><div id="progressBar"></div></div>
+
+  <div class="passage">
+    <strong>Passage | गद्यांश</strong><br>
+    Riya has a small garden behind her house. She waters the plants every morning. There are roses, sunflowers, and marigolds in the garden. Butterflies often visit the flowers. Riya keeps the garden clean and never plucks flowers without permission.
+    <hr>
+    रिया के घर के पीछे एक छोटा बगीचा है। वह हर सुबह पौधों को पानी देती है। बगीचे में गुलाब, सूरजमुखी और गेंदा के फूल हैं। तितलियाँ अक्सर फूलों पर आती हैं। रिया बगीचे को साफ रखती है और बिना अनुमति फूल नहीं तोड़ती।
+  </div>
+
+  <div id="question"></div>
+  <div id="options"></div>
+  <div id="answerFeedback" aria-live="polite"></div>
+  <div class="button-row">
+    <button class="button" id="nextBtn" disabled>Next Question | अगला प्रश्न</button>
+  </div>
+</section>
+
+<section id="result">
+  <h2>Quiz Results | क्विज़ का परिणाम</h2>
+  <div class="result-card">
+    <p id="finalScore"></p>
+    <p id="percentage"></p>
+    <h3 id="resultMessage"></h3>
+    <p id="resultFeedback"></p>
+  </div>
+  <div class="button-row">
+    <button class="button" id="reviewBtn">Review Answers | उत्तर देखें</button>
+    <button class="button" id="retryBtn">Try Again | फिर से प्रयास करें</button>
+  </div>
+  <div id="review" hidden>
+    <h2>Answer Review | उत्तरों की समीक्षा</h2>
+    <div id="reviewList"></div>
+  </div>
+</section>
+
+<footer class="site-disclaimer">
+  <h3>Disclaimer | अस्वीकरण</h3>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy is an independent
+    educational platform and is not affiliated with, endorsed by,
+    or associated with NCERT. NCERT textbook names, chapters, and
+    curriculum topics belong exclusively to NCERT. All solutions
+    and study notes provided here are original practice aids.
+    For official textbooks, visit
+    <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">ncert.nic.in</a>.
+  </p>
+</footer>
+</main>
+
+<script>
+const questions = [
+{
+q:'Where is Riya’s garden? | रिया का बगीचा कहाँ है?',
+options:['In front of her school | उसके स्कूल के सामने','Behind her house | उसके घर के पीछे','On the roof | छत पर','Near a market | बाज़ार के पास'],
+answer:1,
+explanation:'The passage says the garden is behind her house. | गद्यांश में बताया गया है कि बगीचा उसके घर के पीछे है।'
+},
+{
+q:'When does Riya water the plants? | रिया पौधों को कब पानी देती है?',
+options:['Every evening | हर शाम','Every afternoon | हर दोपहर','Every morning | हर सुबह','Every night | हर रात'],
+answer:2,
+explanation:'Riya waters the plants every morning. | रिया हर सुबह पौधों को पानी देती है।'
+},
+{
+q:'Which flowers grow in the garden? | बगीचे में कौन-से फूल उगते हैं?',
+options:['Roses, sunflowers, and marigolds | गुलाब, सूरजमुखी और गेंदा','Only roses | केवल गुलाब','Lilies and lotuses | लिली और कमल','Only sunflowers | केवल सूरजमुखी'],
+answer:0,
+explanation:'The passage names roses, sunflowers, and marigolds. | गद्यांश में गुलाब, सूरजमुखी और गेंदा का नाम है।'
+},
+{
+q:'Which insects visit the flowers? | फूलों पर कौन-से कीट आते हैं?',
+options:['Ants | चींटियाँ','Bees only | केवल मधुमक्खियाँ','Butterflies | तितलियाँ','Mosquitoes | मच्छर'],
+answer:2,
+explanation:'Butterflies often visit the flowers. | तितलियाँ अक्सर फूलों पर आती हैं।'
+},
+{
+q:'What does Riya do to keep the garden nice? | रिया बगीचे को अच्छा रखने के लिए क्या करती है?',
+options:['Throws rubbish there | वहाँ कचरा फेंकती है','Keeps it clean | उसे साफ रखती है','Plucks every flower | सारे फूल तोड़ती है','Never waters plants | पौधों को पानी नहीं देती'],
+answer:1,
+explanation:'Riya keeps the garden clean. | रिया बगीचे को साफ रखती है।'
+},
+{
+q:'Choose the correct sentence. | सही वाक्य चुनिए।',
+options:['Riya water the plants every morning. | रिया हर सुबह पौधों को पानी देती है।','Riya waters the plants every morning. | रिया हर सुबह पौधों को पानी देती है।','Riya watering plants every morning. | रिया हर सुबह पौधों को पानी देती है।','Riya waters plants yesterday. | रिया कल पौधों को पानी देती है।'],
+answer:1,
+explanation:'With “Riya” (she), use “waters” in the simple present tense. | Riya के साथ वर्तमान काल में waters का प्रयोग होता है।'
+},
+{
+q:'Put the words in the correct order: “school / I / to / walk”. | शब्दों को सही क्रम में लगाएँ।',
+options:['School I walk to. | स्कूल मैं पैदल जाता हूँ।','I walk to school. | मैं पैदल स्कूल जाता हूँ।','Walk I school to. | पैदल मैं स्कूल को।','To walk school I. | को पैदल स्कूल मैं।'],
+answer:1,
+explanation:'A simple sentence usually follows Subject + Verb + other words. | साधारण वाक्य में सामान्य क्रम कर्ता + क्रिया + अन्य शब्द होता है।'
+},
+{
+q:'Choose the correct sentence about a cat. | बिल्ली के बारे में सही वाक्य चुनिए।',
+options:['The cat are sleeping. | बिल्ली सो रही हैं।','The cat sleeping is. | बिल्ली सो रही है।','The cat is sleeping. | बिल्ली सो रही है।','Cat the sleeping are. | बिल्ली सो रही हैं।'],
+answer:2,
+explanation:'“The cat” is singular, so use “is sleeping.” | The cat एकवचन है, इसलिए is sleeping सही है।'
+},
+{
+q:'Complete the sentence: “My friends ___ kind.” | वाक्य पूरा करें: मेरे दोस्त दयालु ___।',
+options:['is','am','are','was yesterday'],
+answer:2,
+explanation:'“Friends” is plural, so use “are.” | Friends बहुवचन है, इसलिए are का प्रयोग करें।'
+},
+{
+q:'Choose the correct past-tense sentence. | भूतकाल का सही वाक्य चुनिए।',
+options:['We play yesterday. | हमने कल खेला।','We played yesterday. | हमने कल खेला।','We playing yesterday. | हमने कल खेला।','We plays yesterday. | हमने कल खेला।'],
+answer:1,
+explanation:'“Yesterday” refers to the past; “played” is the past form. | Yesterday बीते समय को बताता है, इसलिए played सही है।'
+},
+{
+q:'Choose the correct question. | सही प्रश्न चुनिए।',
+options:['Where you live? | तुम कहाँ रहते हो?','Where do you live? | तुम कहाँ रहते हो?','Where does you live? | तुम कहाँ रहते हो?','Where living you? | तुम कहाँ रहते हो?'],
+answer:1,
+explanation:'Use “Where do you live?” for a question with you in the simple present. | Simple present में you के साथ Where do you live? सही है।'
+},
+{
+q:'Choose the correct sentence with “because”. | Because वाला सही वाक्य चुनिए।',
+options:['I wore a coat because it was cold. | मैंने कोट पहना क्योंकि ठंड थी।','Because cold I coat wore. | क्योंकि ठंड मैंने कोट पहना।','I because coat cold. | मैं क्योंकि कोट ठंड।','It cold because wore coat. | ठंड क्योंकि पहना कोट।'],
+answer:0,
+explanation:'“Because” connects an action with its reason. | Because किसी काम और उसके कारण को जोड़ता है।'
+},
+{
+q:'Choose the correct sentence with “and”. | And वाला सही वाक्य चुनिए।',
+options:['I like apples and bananas. | मुझे सेब और केले पसंद हैं।','I and like apples bananas. | मैं और पसंद सेब केले।','And apples I like bananas. | और सेब मैं पसंद केले।','I like and apples bananas. | मुझे पसंद और सेब केले।'],
+answer:0,
+explanation:'“And” joins similar words or ideas. | And समान शब्दों या विचारों को जोड़ता है।'
+},
+{
+q:'Which sentence begins with a capital letter and ends correctly? | किस वाक्य में बड़ा अक्षर और सही अंत है?',
+options:['my dog is brown','My dog is brown.','my dog is brown.','My dog is brown'],
+answer:1,
+explanation:'Begin a sentence with a capital letter and use a full stop for a statement. | वाक्य का पहला अक्षर बड़ा रखें और कथन के अंत में पूर्ण विराम लगाएँ।'
+},
+{
+q:'Choose the correct sentence about two birds. | दो पक्षियों के बारे में सही वाक्य चुनिए।',
+options:['The birds is flying. | पक्षी उड़ रहे हैं।','The birds are flying. | पक्षी उड़ रहे हैं।','The birds am flying. | पक्षी उड़ रहे हैं।','The birds flies. | पक्षी उड़ रहे हैं।'],
+answer:1,
+explanation:'“Birds” is plural, so “are flying” is correct. | Birds बहुवचन है, इसलिए are flying सही है।'
+},
+{
+q:'Choose the best sentence: “happy / very / am / I”. | शब्दों को सही क्रम में लगाएँ।',
+options:['Happy very I am. | खुश बहुत मैं हूँ।','I am very happy. | मैं बहुत खुश हूँ।','Very happy am I are. | बहुत खुश हूँ मैं हैं।','Am I happy very. | हूँ मैं खुश बहुत।'],
+answer:1,
+explanation:'The correct order is “I am very happy.” | सही क्रम है: I am very happy.।'
+},
+{
+q:'What is the main idea of the passage? | गद्यांश का मुख्य विचार क्या है?',
+options:['Riya’s garden and how she cares for it | रिया का बगीचा और उसकी देखभाल','A trip to a zoo | चिड़ियाघर की यात्रा','A rainy school day | बारिश वाला स्कूल का दिन','How to bake a cake | केक बनाने का तरीका'],
+answer:0,
+explanation:'The passage mainly describes Riya’s garden and her care for it. | गद्यांश मुख्य रूप से रिया के बगीचे और उसकी देखभाल के बारे में है।'
+},
+{
+q:'Choose the correct sentence using “but”. | But का सही प्रयोग वाला वाक्य चुनिए।',
+options:['I was tired, but I finished my work. | मैं थका था, लेकिन मैंने काम पूरा किया।','But I tired work finished. | लेकिन मैं थका काम पूरा।','I but was finished tired. | मैं लेकिन था पूरा थका।','I was but tired finished work. | मैं था लेकिन थका पूरा काम।'],
+answer:0,
+explanation:'“But” connects two ideas that contrast. | But दो विपरीत विचारों को जोड़ता है।'
+},
+{
+q:'Choose the correct sentence for a future plan. | भविष्य की योजना बताने वाला सही वाक्य चुनिए।',
+options:['I will visit my grandmother tomorrow. | मैं कल अपनी दादी से मिलने जाऊँगा।','I visited tomorrow my grandmother. | मैं कल अपनी दादी से मिला।','I will visits my grandmother. | मैं अपनी दादी से मिलूँगा।','I visiting my grandmother tomorrow. | मैं कल अपनी दादी से मिलना।'],
+answer:0,
+explanation:'Use “will” + the base verb “visit” to express the future. | भविष्य बताने के लिए will + visit का प्रयोग करें।'
+},
+{
+q:'Choose the clearest sentence. | सबसे स्पष्ट वाक्य चुनिए।',
+options:['The little boy carefully carried the glass of water. | छोटे लड़के ने पानी का गिलास सावधानी से उठाया।','Boy little glass carefully water. | लड़का छोटा गिलास सावधानी पानी।','Carefully the carried little boy water glass. | सावधानी से उठाया छोटा लड़का पानी गिलास।','The boy water carefully glass little. | लड़का पानी सावधानी गिलास छोटा।'],
+answer:0,
+explanation:'A clear sentence puts the words in a logical order. | स्पष्ट वाक्य में शब्द सही और तार्किक क्रम में होते हैं।'
+}
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+let userAnswers = [];
+
+const questionEl = document.getElementById('question');
+const optionsEl = document.getElementById('options');
+const feedbackEl = document.getElementById('answerFeedback');
+const nextBtn = document.getElementById('nextBtn');
+
+function showQuestion() {
+  answered = false;
+  const q = questions[currentQuestion];
+
+  document.getElementById('questionNumber').textContent =
+    `Question ${currentQuestion + 1} of ${questions.length} | प्रश्न ${currentQuestion + 1} / ${questions.length}`;
+
+  document.getElementById('liveScore').textContent =
+    `Score: ${score} | अंक: ${score}`;
+
+  document.getElementById('progressBar').style.width =
+    `${(currentQuestion / questions.length) * 100}%`;
+
+  questionEl.textContent = q.q;
+  optionsEl.replaceChildren();
+  feedbackEl.textContent = '';
+  nextBtn.disabled = true;
+
+  nextBtn.textContent = currentQuestion === questions.length - 1
+    ? 'See Results | परिणाम देखें'
+    : 'Next Question | अगला प्रश्न';
+
+  q.options.forEach((option, index) => {
+    const button = document.createElement('button');
+    button.className = 'option';
+    button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+    button.addEventListener('click', () => checkAnswer(index, button));
+    optionsEl.appendChild(button);
+  });
+}
+
+function checkAnswer(selectedIndex, selectedButton) {
+  if (answered) return;
+  answered = true;
+
+  const q = questions[currentQuestion];
+  const correct = selectedIndex === q.answer;
+  userAnswers[currentQuestion] = selectedIndex;
+
+  if (correct) {
+    score++;
+    selectedButton.classList.add('correct');
+    feedbackEl.textContent =
+      `Correct! Well done! | सही उत्तर! बहुत अच्छा! ${q.explanation}`;
+  } else {
+    selectedButton.classList.add('wrong');
+    feedbackEl.textContent =
+      `Not quite! | अभी सही नहीं। Correct answer: ${q.options[q.answer]}. | सही उत्तर: ${q.options[q.answer]}. ${q.explanation}`;
+  }
+
+  [...optionsEl.children].forEach((button, index) => {
+    button.disabled = true;
+    if (index === q.answer) button.classList.add('correct');
+  });
+
+  document.getElementById('liveScore').textContent =
+    `Score: ${score} | अंक: ${score}`;
+
+  nextBtn.disabled = false;
+}
+
+nextBtn.addEventListener('click', () => {
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    showQuestion();
+  } else {
+    showResults();
+  }
+});
+
+function showResults() {
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('result').style.display = 'block';
+
+  const percent = Math.round((score / questions.length) * 100);
+
+  document.getElementById('finalScore').textContent =
+    `Final Score: ${score} out of ${questions.length} | कुल अंक: ${score} / ${questions.length}`;
+
+  document.getElementById('percentage').textContent =
+    `Percentage: ${percent}% | प्रतिशत: ${percent}%`;
+
+  let message;
+  let hindiMessage;
+
+  if (percent === 100) {
+    message = 'Fantastic! Perfect score! 🎉';
+    hindiMessage = 'शानदार! पूरे अंक! 🎉';
+  } else if (percent >= 81) {
+    message = 'Excellent!';
+    hindiMessage = 'उत्कृष्ट!';
+  } else if (percent >= 61) {
+    message = 'Very good!';
+    hindiMessage = 'बहुत अच्छा!';
+  } else if (percent >= 41) {
+    message = 'Good job!';
+    hindiMessage = 'अच्छा काम!';
+  } else if (percent >= 21) {
+    message = 'Good try!';
+    hindiMessage = 'अच्छा प्रयास!';
+  } else {
+    message = 'Keep trying!';
+    hindiMessage = 'कोशिश करते रहें!';
+  }
+
+  document.getElementById('resultMessage').textContent =
+    `${message} | ${hindiMessage}`;
+
+  document.getElementById('resultFeedback').textContent =
+    'Review your answers to learn from mistakes. | गलतियों से सीखने के लिए अपने उत्तरों की समीक्षा करें।';
+
+  document.getElementById('progressBar').style.width = '100%';
+}
+
+document.getElementById('reviewBtn').addEventListener('click', () => {
+  const review = document.getElementById('review');
+  const list = document.getElementById('reviewList');
+
+  if (!review.hidden) {
+    review.hidden = true;
+    document.getElementById('reviewBtn').textContent =
+      'Review Answers | उत्तर देखें';
+    return;
+  }
+
+  list.replaceChildren();
+
+  questions.forEach((q, i) => {
+    const item = document.createElement('div');
+    item.className = 'review-item';
+
+    const selected = userAnswers[i];
+    const yourAnswer = selected === undefined
+      ? 'Not answered | उत्तर नहीं दिया'
+      : q.options[selected];
+
+    const result = selected === q.answer
+      ? 'Correct | सही'
+      : 'Incorrect | गलत';
+
+    item.textContent =
+      `${i + 1}. ${q.q} Your answer: ${yourAnswer}. | आपका उत्तर: ${yourAnswer}. Correct answer: ${q.options[q.answer]}. | सही उत्तर: ${q.options[q.answer]}. ${result}. ${q.explanation}`;
+
+    list.appendChild(item);
+  });
+
+  review.hidden = false;
+  document.getElementById('reviewBtn').textContent =
+    'Hide Review | समीक्षा छिपाएँ';
+});
+
+document.getElementById('retryBtn').addEventListener('click', () => {
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+  userAnswers = [];
+
+  document.getElementById('result').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  document.getElementById('review').hidden = true;
+
+  document.getElementById('reviewBtn').textContent =
+    'Review Answers | उत्तर देखें';
+
+  showQuestion();
+});
+
+showQuestion();
+</script>
+</body>
+</html>
