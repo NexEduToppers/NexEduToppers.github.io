@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 2 Quiz 3 | Comparative Adjectives</title>
+
+<style>
+:root {
+  --navy: #12315a;
+  --blue: #1769aa;
+  --light-blue: #eaf4ff;
+  --green: #16834a;
+  --red: #c62828;
+  --border: #cbd9e8;
+  --text: #172b4d;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+  color: var(--text);
+  background: #f2f7fc;
+  line-height: 1.6;
+}
+.container { max-width: 760px; margin: 0 auto; }
+.header {
+  background: var(--navy);
+  color: white;
+  text-align: center;
+  padding: 22px 16px;
+  border-radius: 16px;
+  margin-bottom: 18px;
+}
+.header h1 { margin: 0 0 8px; font-size: 25px; }
+.header p { margin: 4px 0; }
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  border: 1px solid var(--border);
+  box-shadow: 0 3px 10px rgba(18,49,90,.06);
+}
+.progress-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.progress-track {
+  height: 10px;
+  background: #dce7f3;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: var(--blue);
+  transition: width .2s ease;
+}
+.question { font-size: 20px; font-weight: bold; margin: 12px 0 18px; }
+.hindi {
+  display: block;
+  color: #4b5f79;
+  font-size: 16px;
+  font-weight: normal;
+  margin-top: 5px;
+}
+.options { display: grid; gap: 11px; }
+.option {
+  width: 100%;
+  padding: 13px 15px;
+  text-align: left;
+  background: white;
+  color: var(--text);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1.5;
+}
+.option:hover:not(:disabled) {
+  background: var(--light-blue);
+  border-color: var(--blue);
+}
+.option:focus-visible, .action-btn:focus-visible {
+  outline: 3px solid #f0a500;
+  outline-offset: 3px;
+}
+.option:disabled { cursor: default; opacity: 1; }
+.option.correct {
+  background: #e6f7ed;
+  border-color: var(--green);
+  color: #075c2e;
+}
+.option.wrong {
+  background: #fff0f0;
+  border-color: var(--red);
+  color: #9b1717;
+}
+.feedback {
+  display: none;
+  padding: 14px;
+  border-radius: 10px;
+  margin-top: 18px;
+  background: var(--light-blue);
+  border-left: 5px solid var(--blue);
+}
+.feedback.show { display: block; }
+.feedback p { margin: 6px 0 0; }
+.action-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+.action-btn {
+  flex: 1;
+  min-width: 130px;
+  border: none;
+  border-radius: 9px;
+  padding: 13px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: var(--blue);
+  color: white;
+  text-align: center;
+}
+.action-btn.secondary { background: #e4edf7; color: var(--navy); }
+.action-btn:disabled { opacity: .5; cursor: not-allowed; }
+#result { display: none; }
+#result.show { display: block; }
+.score {
+  font-size: 30px;
+  font-weight: bold;
+  color: var(--navy);
+  text-align: center;
+}
+.score-message {
+  font-size: 21px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0;
+}
+.review-item { border-top: 1px solid var(--border); padding: 14px 0; }
+.review-item p { margin: 5px 0; }
+.site-disclaimer {
+  background: #e7edf5;
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 20px;
+  font-size: 14px;
+}
+.site-disclaimer h3 { margin-top: 0; color: var(--navy); }
+.site-disclaimer a { color: #075eaa; }
+@media (max-width: 480px) {
+  body { padding: 10px; }
+  .header h1 { font-size: 21px; }
+  .card { padding: 15px; }
+  .question { font-size: 18px; }
+  .option { font-size: 15px; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+  <p>Class 4 English | Mridang</p>
+  <p><strong>Chapter 2: The Tinkling Bells</strong></p>
+  <p>Quiz 3: Comparative Adjectives | तुलनात्मक विशेषण</p>
+</header>
+
+<section class="card" id="quizCard">
+  <div class="progress-row">
+    <span id="questionCount">Question 1 of 20</span>
+    <span id="liveScore">Score: 0</span>
+  </div>
+
+  <div class="progress-track" aria-label="Quiz progress">
+    <div id="progressBar"></div>
+  </div>
+
+  <div id="questionText" class="question"></div>
+  <div id="options" class="options"></div>
+
+  <div id="feedback" class="feedback" aria-live="polite">
+    <strong id="feedbackTitle"></strong>
+    <p id="explanation"></p>
+  </div>
+
+  <div class="action-row">
+    <button class="action-btn" id="nextBtn" disabled>
+      Next Question / अगला प्रश्न
+    </button>
+  </div>
+</section>
+
+<section class="card" id="result">
+  <h2 style="text-align:center;">Quiz Completed! / प्रश्नोत्तरी पूरी हुई!</h2>
+  <div class="score" id="finalScore"></div>
+  <div id="percentage" style="text-align:center;"></div>
+  <div class="score-message" id="scoreMessage"></div>
+  <p id="scoreAdvice" style="text-align:center;"></p>
+
+  <div class="action-row">
+    <button class="action-btn" id="reviewBtn">
+      Review Answers / उत्तर देखें
+    </button>
+    <button class="action-btn secondary" id="retryBtn">
+      Try Again / फिर से प्रयास करें
+    </button>
+  </div>
+
+  <div id="reviewArea" style="display:none; margin-top:20px;">
+    <h3>Answer Review / उत्तरों की समीक्षा</h3>
+    <div id="reviewList"></div>
+  </div>
+</section>
+
+<section class="card">
+  <h3>Grammar Tip / व्याकरण की सलाह</h3>
+  <p><strong>Comparative:</strong> taller than, smaller than, smarter than.</p>
+  <p><strong>Superlative:</strong> tallest, smallest, smartest.</p>
+  <p>Use comparative adjectives to compare two people, animals, or things.</p>
+  <p>दो व्यक्तियों, जानवरों या वस्तुओं की तुलना करने के लिए comparative adjectives का प्रयोग करें।</p>
+</section>
+
+<div class="action-row">
+  <a class="action-btn secondary"
+     href="class4-english-chapter2.html"
+     style="text-decoration:none;">
+    Back to Chapter 2 / अध्याय पर वापस जाएँ
+  </a>
+  <a class="action-btn"
+     href="class4-english-chapter2-quiz2.html"
+     style="text-decoration:none;">
+    Quiz 2 / प्रश्नोत्तरी 2
+  </a>
+</div>
+
+<footer class="site-disclaimer">
+  <h3>Disclaimer | अस्वीकरण</h3>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy is an independent
+    educational platform and is not affiliated with, endorsed by,
+    or associated with NCERT. NCERT textbook names, chapters, and
+    curriculum topics belong exclusively to NCERT. All solutions
+    and study notes provided here are original practice aids.
+    For official textbooks, visit
+    <a href="https://ncert.nic.in/" target="_blank"
+       rel="noopener noreferrer">ncert.nic.in</a>.
+  </p>
+</footer>
+
+</div>
+
+<script>
+const questions = [
+  {
+    q: "Choose the correct comparative form of “tall”.",
+    hi: "“Tall” का सही comparative form चुनिए।",
+    options: ["Taller", "Tallest", "More tall", "Tall"],
+    hindi: ["अधिक लंबा", "सबसे लंबा", "More tall", "लंबा"],
+    answer: 0,
+    explanation: "For most short adjectives, add -er: tall → taller."
+  },
+  {
+    q: "Complete the sentence: Rani is ___ than Mina.",
+    hi: "वाक्य पूरा करें: Rani is ___ than Mina.",
+    options: ["taller", "tallest", "tall", "more tallest"],
+    hindi: ["अधिक लंबी", "सबसे लंबी", "लंबी", "सबसे अधिक लंबी"],
+    answer: 0,
+    explanation: "The word “than” signals a comparison, so use “taller”."
+  },
+  {
+    q: "What is the comparative form of “small”?",
+    hi: "“Small” का comparative form क्या है?",
+    options: ["Smaller", "Smallest", "More small", "Small"],
+    hindi: ["छोटा/अधिक छोटा", "सबसे छोटा", "More small", "छोटा"],
+    answer: 0,
+    explanation: "Small becomes smaller when comparing two things."
+  },
+  {
+    q: "Choose the comparative form of “fast”.",
+    hi: "“Fast” का comparative form चुनिए।",
+    options: ["Faster", "Fastest", "More fast", "Fast"],
+    hindi: ["अधिक तेज़", "सबसे तेज़", "More fast", "तेज़"],
+    answer: 0,
+    explanation: "Fast → faster. “Fastest” is the superlative form."
+  },
+  {
+    q: "Complete: A cheetah is ___ than a goat.",
+    hi: "पूरा करें: A cheetah is ___ than a goat.",
+    options: ["faster", "fastest", "fast", "most fast"],
+    hindi: ["अधिक तेज़", "सबसे तेज़", "तेज़", "सबसे अधिक तेज़"],
+    answer: 0,
+    explanation: "We compare two animals with the comparative form “faster”."
+  },
+  {
+    q: "What is the comparative form of “smart”?",
+    hi: "“Smart” का comparative form क्या है?",
+    options: ["Smarter", "Smartest", "More smartest", "Smart"],
+    hindi: ["अधिक समझदार", "सबसे समझदार", "सबसे अधिक समझदार", "समझदार"],
+    answer: 0,
+    explanation: "Smart → smarter. Smartest is the superlative form."
+  },
+  {
+    q: "Complete: This box is ___ than that box.",
+    hi: "पूरा करें: This box is ___ than that box.",
+    options: ["heavier", "heaviest", "heavy", "most heavy"],
+    hindi: ["उस डिब्बे से भारी", "सबसे भारी", "भारी", "सबसे अधिक भारी"],
+    answer: 0,
+    explanation: "Heavy changes to heavier: replace -y with -ier."
+  },
+  {
+    q: "Choose the comparative form of “happy”.",
+    hi: "“Happy” का comparative form चुनिए।",
+    options: ["Happier", "Happiest", "More happiest", "Happy"],
+    hindi: ["अधिक खुश", "सबसे खुश", "सबसे अधिक खुश", "खुश"],
+    answer: 0,
+    explanation: "For happy, change y to i and add -er: happier."
+  },
+  {
+    q: "Which word correctly completes this sentence? “Today is ___ than yesterday.”",
+    hi: "कौन-सा शब्द वाक्य को सही पूरा करता है? “Today is ___ than yesterday.”",
+    options: ["colder", "coldest", "cold", "most coldest"],
+    hindi: ["कल से अधिक ठंडा", "सबसे ठंडा", "ठंडा", "सबसे अधिक ठंडा"],
+    answer: 0,
+    explanation: "The sentence compares two days, so “colder” is appropriate."
+  },
+  {
+    q: "Choose the comparative form of “beautiful”.",
+    hi: "“Beautiful” का comparative form चुनिए।",
+    options: ["More beautiful", "Beautifulest", "Most beautiful", "Beautiful"],
+    hindi: ["अधिक सुंदर", "Beautifulest", "सबसे सुंदर", "सुंदर"],
+    answer: 0,
+    explanation: "Longer adjectives usually use “more”: more beautiful."
+  },
+  {
+    q: "Complete: An elephant is ___ than a dog.",
+    hi: "पूरा करें: An elephant is ___ than a dog.",
+    options: ["bigger", "biggest", "big", "most biggest"],
+    hindi: ["अधिक बड़ा", "सबसे बड़ा", "बड़ा", "सबसे अधिक बड़ा"],
+    answer: 0,
+    explanation: "Big doubles its final consonant before -er: bigger."
+  },
+  {
+    q: "Which sentence uses a comparative adjective correctly?",
+    hi: "किस वाक्य में comparative adjective का सही प्रयोग हुआ है?",
+    options: [
+      "Mohan is taller than Ravi.",
+      "Mohan is tallest than Ravi.",
+      "Mohan is more taller than Ravi.",
+      "Mohan is tall than Ravi."
+    ],
+    hindi: [
+      "मोहन रवि से लंबा है।",
+      "मोहन रवि से सबसे लंबा है।",
+      "मोहन रवि से अधिक लंबा है।",
+      "मोहन रवि से लंबा है।"
+    ],
+    answer: 0,
+    explanation: "Use “taller than”, not “tallest than” or “more taller than”."
+  },
+  {
+    q: "Choose the correct comparative form of “good”.",
+    hi: "“Good” का सही comparative form चुनिए।",
+    options: ["Better", "Gooder", "Best", "More good"],
+    hindi: ["बेहतर", "Gooder", "सबसे अच्छा", "More good"],
+    answer: 0,
+    explanation: "Good has an irregular comparative form: better."
+  },
+  {
+    q: "Choose the correct comparative form of “bad”.",
+    hi: "“Bad” का सही comparative form चुनिए।",
+    options: ["Worse", "Badder", "Worst", "More bad"],
+    hindi: ["और खराब", "Badder", "सबसे खराब", "More bad"],
+    answer: 0,
+    explanation: "Bad has an irregular comparative form: worse."
+  },
+  {
+    q: "Which word is a superlative, not a comparative?",
+    hi: "कौन-सा शब्द comparative नहीं, बल्कि superlative है?",
+    options: ["Tallest", "Taller", "Smaller", "Faster"],
+    hindi: ["सबसे लंबा", "अधिक लंबा", "अधिक छोटा", "अधिक तेज़"],
+    answer: 0,
+    explanation: "“Tallest” compares one with a whole group; it is a superlative."
+  },
+  {
+    q: "Complete: My pencil is ___ than yours.",
+    hi: "पूरा करें: My pencil is ___ than yours.",
+    options: ["shorter", "shortest", "short", "most short"],
+    hindi: ["तुम्हारी पेंसिल से छोटी", "सबसे छोटी", "छोटी", "सबसे अधिक छोटी"],
+    answer: 0,
+    explanation: "Short → shorter when comparing two pencils."
+  },
+  {
+    q: "Choose the correct comparative form of “large”.",
+    hi: "“Large” का सही comparative form चुनिए।",
+    options: ["Larger", "Largger", "Largest", "More largest"],
+    hindi: ["अधिक बड़ा", "Largger", "सबसे बड़ा", "सबसे अधिक बड़ा"],
+    answer: 0,
+    explanation: "Large becomes larger. Do not double the g."
+  },
+  {
+    q: "Complete: This road is ___ than the other road.",
+    hi: "पूरा करें: This road is ___ than the other road.",
+    options: ["wider", "widest", "wide", "most wide"],
+    hindi: ["दूसरी सड़क से चौड़ी", "सबसे चौड़ी", "चौड़ी", "सबसे अधिक चौड़ी"],
+    answer: 0,
+    explanation: "Wide → wider when comparing two roads."
+  },
+  {
+    q: "Choose the correct comparative form of “interesting”.",
+    hi: "“Interesting” का सही comparative form चुनिए।",
+    options: ["More interesting", "Interestinger", "Most interesting", "Interestingest"],
+    hindi: ["अधिक रोचक", "Interestinger", "सबसे रोचक", "Interestingest"],
+    answer: 0,
+    explanation: "Long adjectives generally use “more” to make the comparative."
+  },
+  {
+    q: "Which sentence correctly compares two things?",
+    hi: "कौन-सा वाक्य दो चीज़ों की सही तुलना करता है?",
+    options: [
+      "This mango is sweeter than that mango.",
+      "This mango is sweetest than that mango.",
+      "This mango is more sweeter than that mango.",
+      "This mango is sweet than that mango."
+    ],
+    hindi: [
+      "यह आम उस आम से अधिक मीठा है।",
+      "यह आम उस आम से सबसे मीठा है।",
+      "यह आम उस आम से अधिक मीठा है।",
+      "यह आम उस आम से मीठा है।"
+    ],
+    answer: 0,
+    explanation: "Sweet → sweeter. Do not use “more” with the -er form."
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+let userAnswers = [];
+
+const questionCount = document.getElementById("questionCount");
+const liveScore = document.getElementById("liveScore");
+const progressBar = document.getElementById("progressBar");
+const questionText = document.getElementById("questionText");
+const optionsContainer = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const feedbackTitle = document.getElementById("feedbackTitle");
+const explanation = document.getElementById("explanation");
+const nextBtn = document.getElementById("nextBtn");
+const quizCard = document.getElementById("quizCard");
+const result = document.getElementById("result");
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, function(char) {
+    return {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[char];
+  });
+}
+
+function showQuestion() {
+  answered = false;
+  const item = questions[currentQuestion];
+
+  questionCount.textContent =
+    `Question ${currentQuestion + 1} of ${questions.length}`;
+  liveScore.textContent = `Score: ${score}`;
+  progressBar.style.width =
+    `${(currentQuestion / questions.length) * 100}%`;
+
+  questionText.innerHTML =
+    `${escapeHTML(item.q)}
+     <span class="hindi">${escapeHTML(item.hi)}</span>`;
+
+  optionsContainer.innerHTML = "";
+  feedback.className = "feedback";
+  feedbackTitle.textContent = "";
+  explanation.textContent = "";
+  nextBtn.disabled = true;
+  nextBtn.textContent = currentQuestion === questions.length - 1
+    ? "See Result / परिणाम देखें"
+    : "Next Question / अगला प्रश्न";
+
+  item.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option";
+    button.innerHTML =
+      `${String.fromCharCode(65 + index)}. ${escapeHTML(option)}
+       <span class="hindi">${escapeHTML(item.hindi[index])}</span>`;
+    button.addEventListener("click", () => chooseAnswer(index));
+    optionsContainer.appendChild(button);
+  });
+}
+
+function chooseAnswer(selectedIndex) {
+  if (answered) return;
+  answered = true;
+
+  const item = questions[currentQuestion];
+  const buttons = optionsContainer.querySelectorAll(".option");
+  const isCorrect = selectedIndex === item.answer;
+  userAnswers[currentQuestion] = selectedIndex;
+
+  buttons.forEach((button, index) => {
+    button.disabled = true;
+    if (index === item.answer) {
+      button.classList.add("correct");
+    } else if (index === selectedIndex) {
+      button.classList.add("wrong");
+    }
+  });
+
+  if (isCorrect) {
+    score++;
+    feedbackTitle.textContent = "Correct! / सही उत्तर!";
+    explanation.textContent = item.explanation;
+  } else {
+    feedbackTitle.textContent = "Not quite! / सही उत्तर नहीं है।";
+    explanation.textContent =
+      `Correct answer: ${item.options[item.answer]} — ` +
+      `${item.hindi[item.answer]}. ${item.explanation}`;
+  }
+
+  feedback.classList.add("show");
+  liveScore.textContent = `Score: ${score}`;
+  nextBtn.disabled = false;
+}
+
+function finishQuiz() {
+  quizCard.style.display = "none";
+  result.classList.add("show");
+
+  const percentage = Math.round((score / questions.length) * 100);
+  document.getElementById("finalScore").textContent =
+    `${score} / ${questions.length}`;
+  document.getElementById("percentage").textContent =
+    `Percentage: ${percentage}%`;
+
+  let message, advice;
+
+  if (percentage <= 20) {
+    message = "Keep trying! / कोशिश करते रहें!";
+    advice = "Review the grammar tip and try again.";
+  } else if (percentage <= 40) {
+    message = "Good try! / अच्छा प्रयास!";
+    advice = "Practise the comparative forms once more.";
+  } else if (percentage <= 60) {
+    message = "Good job! / अच्छा काम!";
+    advice = "Review your missed answers and practise again.";
+  } else if (percentage <= 80) {
+    message = "Very good! / बहुत अच्छा!";
+    advice = "You are improving. Keep practising!";
+  } else if (percentage < 100) {
+    message = "Excellent! / उत्कृष्ट!";
+    advice = "You understand comparative adjectives very well.";
+  } else {
+    message = "Fantastic! Perfect score! 🎉 / शानदार! पूरे अंक! 🎉";
+    advice = "You answered every question correctly!";
+  }
+
+  document.getElementById("scoreMessage").textContent = message;
+  document.getElementById("scoreAdvice").textContent = advice;
+  progressBar.style.width = "100%";
+}
+
+function buildReview() {
+  const reviewList = document.getElementById("reviewList");
+  reviewList.innerHTML = "";
+
+  questions.forEach((item, index) => {
+    const chosen = userAnswers[index];
+    const isCorrect = chosen === item.answer;
+    const reviewItem = document.createElement("div");
+    reviewItem.className = "review-item";
+
+    reviewItem.innerHTML = `
+      <strong>${index + 1}. ${escapeHTML(item.q)}</strong>
+      <span class="hindi">${escapeHTML(item.hi)}</span>
+      <p>Your answer / आपका उत्तर:
+        ${chosen === undefined ? "Not answered" :
+          escapeHTML(item.options[chosen]) + " — " +
+          escapeHTML(item.hindi[chosen])}
+      </p>
+      <p>Correct answer / सही उत्तर:
+        ${escapeHTML(item.options[item.answer])} —
+        ${escapeHTML(item.hindi[item.answer])}
+      </p>
+      <p>${isCorrect ? "✓ Correct / सही" :
+        "✗ Review this answer / फिर से देखें"}</p>
+      <p>${escapeHTML(item.explanation)}</p>
+    `;
+    reviewList.appendChild(reviewItem);
+  });
+}
+
+nextBtn.addEventListener("click", () => {
+  if (!answered) return;
+
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    showQuestion();
+  } else {
+    finishQuiz();
+  }
+});
+
+document.getElementById("reviewBtn").addEventListener("click", () => {
+  buildReview();
+  const reviewArea = document.getElementById("reviewArea");
+  reviewArea.style.display =
+    reviewArea.style.display === "none" ? "block" : "none";
+});
+
+document.getElementById("retryBtn").addEventListener("click", () => {
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+  userAnswers = [];
+
+  result.classList.remove("show");
+  quizCard.style.display = "block";
+  document.getElementById("reviewArea").style.display = "none";
+
+  showQuestion();
+  window.scrollTo({ top: 0, behavio
