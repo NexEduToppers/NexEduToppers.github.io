@@ -1,0 +1,609 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 2 - Mixed Revision Quiz</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 5px 22px rgba(0,0,0,.09);
+}
+
+header {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: white;
+  padding: 25px 18px;
+  text-align: center;
+}
+
+header h1 { margin: 0 0 10px; font-size: 25px; }
+header p { margin: 5px 0; }
+
+.content { padding: 22px; }
+
+.progress-area { margin-bottom: 20px; }
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.progress-track {
+  height: 9px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: #2563eb;
+  transition: width .2s;
+}
+
+.question {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.5;
+  margin: 18px 0;
+}
+
+.options {
+  display: grid;
+  gap: 11px;
+}
+
+.option {
+  width: 100%;
+  text-align: left;
+  padding: 14px;
+  border: 2px solid #cbd5e1;
+  border-radius: 10px;
+  background: white;
+  color: #1e293b;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.option:hover:not(:disabled) {
+  background: #eff6ff;
+  border-color: #60a5fa;
+}
+
+.option:focus-visible, button:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+.option:disabled { cursor: default; }
+
+.option.correct {
+  border-color: #16a34a;
+  background: #dcfce7;
+}
+
+.option.wrong {
+  border-color: #dc2626;
+  background: #fee2e2;
+}
+
+#feedback {
+  display: none;
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 10px;
+  line-height: 1.5;
+}
+
+#feedback.correct-feedback {
+  display: block;
+  background: #dcfce7;
+  color: #166534;
+}
+
+#feedback.wrong-feedback {
+  display: block;
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+button.action {
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 18px;
+  font-size: 16px;
+  cursor: pointer;
+  background: #2563eb;
+  color: white;
+}
+
+button.action:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+button.secondary { background: #475569; }
+
+#result, #review {
+  display: none;
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+#result h2 { margin-top: 0; }
+
+.review-item {
+  padding: 14px 0;
+  border-bottom: 1px solid #cbd5e1;
+  line-height: 1.55;
+}
+
+.site-disclaimer {
+  border-top: 1px solid #cbd5e1;
+  margin-top: 24px;
+  padding: 18px 22px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #475569;
+  background: #f8fafc;
+}
+
+.site-disclaimer h3 { margin-top: 0; }
+.site-disclaimer a { color: #1d4ed8; }
+
+@media (max-width: 480px) {
+  body { padding: 8px; }
+  .content { padding: 16px; }
+  header h1 { font-size: 22px; }
+  .question { font-size: 18px; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <header>
+    <h1>Mixed Revision Quiz</h1>
+    <p>Class 4 English | Chapter 2</p>
+    <p><strong>The Tinkling Bells</strong></p>
+    <p>RawaRajpootNexEduToppers Learning Academy</p>
+  </header>
+
+  <main class="content">
+    <div class="progress-area">
+      <div class="progress-label">
+        <span id="questionCount">Question 1 of 20</span>
+        <span id="scoreCount">Score: 0</span>
+      </div>
+      <div
+        class="progress-track"
+        role="progressbar"
+        aria-label="Quiz progress"
+        aria-valuemin="0"
+        aria-valuemax="20"
+        aria-valuenow="0"
+        id="progressTrack"
+      >
+        <div id="progressBar"></div>
+      </div>
+    </div>
+
+    <div id="quiz">
+      <div class="question" id="questionText"></div>
+      <div class="options" id="options"></div>
+      <div id="feedback" role="status" aria-live="polite"></div>
+
+      <div class="actions">
+        <button class="action" id="nextBtn" disabled>Next Question</button>
+      </div>
+    </div>
+
+    <section id="result" aria-live="polite">
+      <h2>Quiz Completed!</h2>
+      <p id="finalScore"></p>
+      <p id="resultMessage"></p>
+      <div class="actions">
+        <button class="action" id="reviewBtn">Review Answers</button>
+        <button class="action secondary" id="retryBtn">Try Again</button>
+      </div>
+    </section>
+
+    <section id="review">
+      <h2>Answer Review</h2>
+      <div id="reviewContent"></div>
+      <div class="actions">
+        <button class="action secondary" id="backBtn">Back to Result</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-disclaimer">
+    <h3>Disclaimer | अस्वीकरण</h3>
+    <p>
+      RawaRajpootNexEduToppers Learning Academy is an independent
+      educational platform and is not affiliated with, endorsed by,
+      or associated with NCERT. NCERT textbook names, chapters, and
+      curriculum topics belong exclusively to NCERT. All solutions
+      and study notes provided here are original practice aids.
+      For official textbooks, visit
+      <a href="https://ncert.nic.in/" target="_blank"
+         rel="noopener noreferrer">ncert.nic.in</a>.
+    </p>
+  </footer>
+</div>
+
+<script>
+const questions = [
+  {
+    q: "1. Who is the main boy in the story?",
+    options: ["Chinna", "Raju", "Aman", "Mohan"],
+    answer: 0,
+    explanation: "Chinna is the boy at the centre of the story."
+  },
+  {
+    q: "2. What is the name of Chinna's pet goat kid?",
+    options: ["Moti", "Tara", "Gudiya", "Rani"],
+    answer: 1,
+    explanation: "Chinna's pet goat kid is named Tara."
+  },
+  {
+    q: "3. What did Chinna want to buy for Tara?",
+    options: ["A ball", "A book", "Tinkling bells", "A new bag"],
+    answer: 2,
+    explanation: "Chinna wanted bells to put around Tara's neck."
+  },
+  {
+    q: "4. What happened to the money Dadaji gave Chinna?",
+    options: [
+      "He spent it on sweets",
+      "He could not find it",
+      "He gave it to Tara",
+      "He bought a book"
+    ],
+    answer: 1,
+    explanation: "Chinna discovered that the money was missing."
+  },
+  {
+    q: "5. Who comforted Chinna when he was upset?",
+    options: ["The fruit seller", "Chacha", "His mother Kamala", "His teacher"],
+    answer: 2,
+    explanation: "His mother, Kamala, comforted him."
+  },
+  {
+    q: "6. Which word means a sound made by small bells?",
+    options: ["Tinkling", "Whispering", "Roaring", "Crying"],
+    answer: 0,
+    explanation: "Tinkling describes a light, clear sound such as small bells make."
+  },
+  {
+    q: "7. Which is the opposite of 'honest'?",
+    options: ["Kind", "Dishonest", "Helpful", "Polite"],
+    answer: 1,
+    explanation: "Dishonest is the opposite of honest."
+  },
+  {
+    q: "8. Which sentence is written correctly?",
+    options: [
+      "chinna wanted bells.",
+      "Chinna wanted bells.",
+      "Chinna wanted bells",
+      "chinna wanted bells"
+    ],
+    answer: 1,
+    explanation: "A sentence begins with a capital letter and ends with suitable punctuation."
+  },
+  {
+    q: "9. Each pineapple cost ₹45. What was the cost of two pineapples?",
+    options: ["₹45", "₹80", "₹90", "₹100"],
+    answer: 2,
+    explanation: "₹45 + ₹45 = ₹90."
+  },
+  {
+    q: "10. If Kamala paid ₹100 for goods costing ₹90, what was the correct change?",
+    options: ["₹5", "₹10", "₹20", "₹15"],
+    answer: 1,
+    explanation: "₹100 − ₹90 = ₹10."
+  },
+  {
+    q: "11. The seller accidentally gave Chinna ₹20 change instead of ₹10. How much extra did he receive?",
+    options: ["₹5", "₹10", "₹15", "₹20"],
+    answer: 1,
+    explanation: "He received ₹10 extra because ₹20 − ₹10 = ₹10."
+  },
+  {
+    q: "12. Choose the correct comparative form of 'small'.",
+    options: ["Smallest", "More small", "Smaller", "Smallly"],
+    answer: 2,
+    explanation: "The comparative form of small is smaller."
+  },
+  {
+    q: "13. Choose the opposite of 'missing'.",
+    options: ["Lost", "Found", "Hidden", "Gone"],
+    answer: 1,
+    explanation: "Found is the opposite of missing in this context."
+  },
+  {
+    q: "14. What should a person do after receiving too much change by mistake?",
+    options: [
+      "Keep it secretly",
+      "Spend it quickly",
+      "Return the extra money",
+      "Ignore the seller"
+    ],
+    answer: 2,
+    explanation: "Returning extra money is the honest thing to do."
+  },
+  {
+    q: "15. Which sentence has the correct word order?",
+    options: [
+      "Chinna the money returned.",
+      "Returned Chinna money the.",
+      "The money Chinna returned the.",
+      "Chinna returned the money."
+    ],
+    answer: 3,
+    explanation: "The correct order is subject, verb, and object: Chinna returned the money."
+  },
+  {
+    q: "16. What did Chinna decide to do with the extra money?",
+    options: [
+      "Buy chocolates",
+      "Buy more fruit",
+      "Return it to the seller",
+      "Hide it at home"
+    ],
+    answer: 2,
+    explanation: "Chinna chose to return the extra money."
+  },
+  {
+    q: "17. Which word best describes Chinna's action?",
+    options: ["Selfish", "Honest", "Careless", "Angry"],
+    answer: 1,
+    explanation: "Returning money that was not his showed honesty."
+  },
+  {
+    q: "18. Which event happened first?",
+    options: [
+      "Chinna bought bells",
+      "Chinna returned the extra money",
+      "Chinna noticed the bells at Chacha's shop",
+      "Chinna put bells around Tara's neck"
+    ],
+    answer: 2,
+    explanation: "Chinna first noticed the bells at Chacha's shop."
+  },
+  {
+    q: "19. Which is the correct way to write a question?",
+    options: [
+      "Where are the bells.",
+      "Where are the bells?",
+      "where are the bells?",
+      "Where are the bells!"
+    ],
+    answer: 1,
+    explanation: "A direct question begins with a capital letter and ends with a question mark."
+  },
+  {
+    q: "20. What is one important lesson from the story?",
+    options: [
+      "Always buy expensive things",
+      "Never visit a market",
+      "Honesty is important even when nobody is watching",
+      "Money is more important than kindness"
+    ],
+    answer: 2,
+    explanation: "Chinna's decision teaches us the value of honesty."
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+let userAnswers = [];
+
+const questionText = document.getElementById("questionText");
+const optionsContainer = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const nextBtn = document.getElementById("nextBtn");
+const questionCount = document.getElementById("questionCount");
+const scoreCount = document.getElementById("scoreCount");
+const progressBar = document.getElementById("progressBar");
+const progressTrack = document.getElementById("progressTrack");
+const quiz = document.getElementById("quiz");
+const result = document.getElementById("result");
+const review = document.getElementById("review");
+
+function showQuestion() {
+  answered = false;
+  const item = questions[currentQuestion];
+
+  questionCount.textContent =
+    `Question ${currentQuestion + 1} of ${questions.length}`;
+  scoreCount.textContent = `Score: ${score}`;
+  progressBar.style.width =
+    `${(currentQuestion / questions.length) * 100}%`;
+  progressTrack.setAttribute("aria-valuenow", currentQuestion);
+
+  questionText.textContent = item.q;
+  optionsContainer.innerHTML = "";
+  feedback.className = "";
+  feedback.textContent = "";
+  nextBtn.disabled = true;
+  nextBtn.textContent =
+    currentQuestion === questions.length - 1
+      ? "See Results"
+      : "Next Question";
+
+  item.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option";
+    button.textContent =
+      `${String.fromCharCode(65 + index)}. ${option}`;
+    button.addEventListener("click", () => selectAnswer(index));
+    optionsContainer.appendChild(button);
+  });
+}
+
+function selectAnswer(selected) {
+  if (answered) return;
+  answered = true;
+
+  const item = questions[currentQuestion];
+  const buttons = optionsContainer.querySelectorAll(".option");
+  const isCorrect = selected === item.answer;
+
+  userAnswers[currentQuestion] = selected;
+
+  if (isCorrect) score++;
+
+  buttons.forEach((button, index) => {
+    button.disabled = true;
+    if (index === item.answer) button.classList.add("correct");
+    if (index === selected && !isCorrect) {
+      button.classList.add("wrong");
+    }
+  });
+
+  feedback.className =
+    isCorrect ? "correct-feedback" : "wrong-feedback";
+
+  feedback.textContent = isCorrect
+    ? `Correct! ${item.explanation}`
+    : `Not quite. Correct answer: ${item.options[item.answer]}. ${item.explanation}`;
+
+  scoreCount.textContent = `Score: ${score}`;
+  nextBtn.disabled = false;
+}
+
+function finishQuiz() {
+  quiz.style.display = "none";
+  result.style.display = "block";
+  review.style.display = "none";
+
+  const percentage = Math.round((score / questions.length) * 100);
+  document.getElementById("finalScore").textContent =
+    `Your score: ${score} out of ${questions.length} (${percentage}%).`;
+
+  let message;
+  if (percentage === 100) {
+    message = "Excellent job! You answered every question correctly.";
+  } else if (percentage >= 80) {
+    message = "Very good job! Review the questions you missed.";
+  } else if (percentage >= 50) {
+    message = "Good effort! Practise again to improve your score.";
+  } else {
+    message = "Keep practising. Read the chapter again and try once more.";
+  }
+
+  document.getElementById("resultMessage").textContent = message;
+  progressBar.style.width = "100%";
+  progressTrack.setAttribute("aria-valuenow", questions.length);
+}
+
+function buildReview() {
+  const reviewContent = document.getElementById("reviewContent");
+  reviewContent.innerHTML = "";
+
+  questions.forEach((item, index) => {
+    const selected = userAnswers[index];
+    const correct = selected === item.answer;
+
+    const entry = document.createElement("div");
+    entry.className = "review-item";
+
+    const heading = document.createElement("strong");
+    heading.textContent = `${index + 1}. ${item.q}`;
+    entry.appendChild(heading);
+
+    const yourAnswer = document.createElement("p");
+    yourAnswer.textContent =
+      `Your answer: ${
+        selected === undefined ? "Not answered" : item.options[selected]
+      }`;
+    entry.appendChild(yourAnswer);
+
+    const correctAnswer = document.createElement("p");
+    correctAnswer.textContent =
+      `Correct answer: ${item.options[item.answer]}`;
+    entry.appendChild(correctAnswer);
+
+    const explanation = document.createElement("p");
+    explanation.textContent = item.explanation;
+    entry.appendChild(explanation);
+
+    const status = document.createElement("p");
+    status.textContent = correct ? "✓ Correct" : "✗ Incorrect";
+    status.style.color = correct ? "#15803d" : "#b91c1c";
+    entry.appendChild(status);
+
+    reviewContent.appendChild(entry);
+  });
+
+  result.style.display = "none";
+  review.style.display = "block";
+}
+
+nextBtn.addEventListener("click", () => {
+  if (!answered) return;
+
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    showQuestion();
+  } else {
+    finishQuiz();
+  }
+});
+
+document.getElementById("reviewBtn").addEventListener("click", buildReview);
+
+document.getElementById("backBtn").addEventListener("click", () => {
+  review.style.display = "none";
+  result.style.display = "block";
+});
+
+document.getElementById("retryBtn").addEventListener("click", () => {
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+  userAnswers = [];
+  result.style.display = "none";
+  review.style.display = "none";
+  quiz.style.display = "block";
+  showQuestion();
+});
+
+showQuestion();
+</script>
+</body>
+</html
