@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz 8 - Mixed Revision Challenge</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f7ff;
+  color: #24344d;
+  margin: 0;
+  padding: 16px;
+  line-height: 1.6;
+}
+.container {
+  max-width: 760px;
+  margin: auto;
+  background: white;
+  padding: 22px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px #00000012;
+}
+h1 { color: #174ea6; text-align: center; }
+.subtitle { text-align: center; }
+.progress {
+  background: #e3eaf5;
+  height: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: #2878d0;
+  transition: width .2s;
+}
+.question {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 18px 0;
+}
+.option {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  margin: 9px 0;
+  border: 2px solid #d8e2f0;
+  background: #fff;
+  border-radius: 10px;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+}
+.option:hover { background: #f2f7ff; }
+.option:disabled { cursor: default; opacity: 1; }
+.correct { background: #d9f5e2; border-color: #23964d; }
+.wrong { background: #ffe1e1; border-color: #d93025; }
+#feedback {
+  padding: 12px;
+  margin-top: 14px;
+  border-radius: 10px;
+  background: #f0f5fb;
+  display: none;
+}
+button.action {
+  background: #174ea6;
+  color: white;
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 18px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px 6px 0 0;
+}
+button.action:disabled { opacity: .5; }
+#result, #review { display: none; }
+.review-item {
+  border-bottom: 1px solid #dce4ef;
+  padding: 12px 0;
+}
+.site-disclaimer {
+  margin-top: 30px;
+  padding: 18px;
+  background: #f0f5fb;
+  color: #35465a;
+  border-top: 2px solid #cbdced;
+  font-size: 13px;
+  line-height: 1.8;
+}
+@media (max-width: 480px) {
+  .container { padding: 15px; }
+  .question { font-size: 18px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🏆 Quiz 8: Mixed Revision Challenge</h1>
+  <p class="subtitle">
+    Class 4 English | कक्षा 4 अंग्रेज़ी<br>
+    20 Questions • 20 अंक
+  </p>
+
+  <div id="quiz">
+    <div id="questionCount"></div>
+    <div class="progress"><div id="progressBar"></div></div>
+    <div class="question" id="question"></div>
+    <div id="options"></div>
+    <div id="feedback" aria-live="polite"></div>
+    <button class="action" id="nextBtn" disabled>Next / अगला</button>
+  </div>
+
+  <div id="result">
+    <h2>Challenge Complete! / चुनौती पूरी हुई!</h2>
+    <h3 id="score"></h3>
+    <h3 id="message"></h3>
+    <p id="summary"></p>
+    <button class="action" onclick="showReview()">Review Answers / उत्तर देखें</button>
+    <button class="action" onclick="restartQuiz()">Try Again / फिर से प्रयास करें</button>
+  </div>
+
+  <div id="review">
+    <h2>Answer Review / उत्तरों की समीक्षा</h2>
+    <div id="reviewList"></div>
+    <button class="action" onclick="restartQuiz()">Try Again / फिर से प्रयास करें</button>
+    <button class="action" onclick="backToResult()">Back to Result / परिणाम पर लौटें</button>
+  </div>
+
+  <p><a href="class4-english-chapter1.html">← Back to Chapter / अध्याय पर वापस जाएँ</a></p>
+
+  <footer class="site-disclaimer">
+    <h3>Disclaimer | अस्वीकरण</h3>
+    <p>
+      RawaRajpootNexEduToppers Learning Academy is an independent
+      educational platform and is not affiliated with, endorsed by,
+      or associated with NCERT. NCERT textbook names, chapters, and
+      curriculum topics belong exclusively to NCERT. All solutions
+      and study notes provided here are original practice aids.
+      For official textbooks, visit
+      <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">ncert.nic.in</a>.
+    </p>
+  </footer>
+</div>
+
+<script>
+const questions = [
+  {
+    q: "A group of bees is called a _____. / मधुमक्खियों के समूह को क्या कहते हैं?",
+    o: ["Flock / झुंड", "Swarm / झुंड", "Team / टीम", "Bunch / गुच्छा"],
+    a: 1,
+    e: "A group of bees is called a swarm. / मधुमक्खियों के समूह को swarm कहते हैं।"
+  },
+  {
+    q: "The book is _____ the table. / किताब मेज _____ है।",
+    o: ["under / नीचे", "between / बीच में", "on / पर", "behind / पीछे"],
+    a: 2,
+    e: "Use 'on' when something rests on a surface. / किसी सतह पर रखी वस्तु के लिए 'on' का प्रयोग होता है।"
+  },
+  {
+    q: "Choose the correct future sentence. / भविष्य काल का सही वाक्य चुनें।",
+    o: [
+      "She will visits us.",
+      "She will visit us.",
+      "She visiting us.",
+      "She will visited us."
+    ],
+    a: 1,
+    e: "Use will + base verb: will visit. / Will के बाद क्रिया का मूल रूप आता है।"
+  },
+  {
+    q: "Read: Riya waters her plants every morning. What does she do every morning? / रिया हर सुबह क्या करती है?",
+    o: ["Waters her plants / पौधों को पानी देती है", "Plays football / फुटबॉल खेलती है", "Goes shopping / खरीदारी करती है", "Watches a film / फिल्म देखती है"],
+    a: 0,
+    e: "The passage says Riya waters her plants every morning. / अनुच्छेद में यही बताया गया है।"
+  },
+  {
+    q: "Choose the complete sentence. / पूरा वाक्य चुनें।",
+    o: ["The little bird.", "Running in the park.", "The little bird sings sweetly.", "Because it is sunny."],
+    a: 2,
+    e: "A complete sentence expresses a complete thought. / पूरा वाक्य एक पूर्ण विचार बताता है।"
+  },
+  {
+    q: "A group of players is called a _____. / खिलाड़ियों के समूह को क्या कहते हैं?",
+    o: ["Team / टीम", "Bouquet / फूलों का गुलदस्ता", "Pack / झुंड", "Swarm / मधुमक्खियों का झुंड"],
+    a: 0,
+    e: "A group of players is a team. / खिलाड़ियों के समूह को team कहते हैं।"
+  },
+  {
+    q: "The school is _____ the park and the hospital. / स्कूल पार्क और अस्पताल के _____ है।",
+    o: ["between / बीच", "inside / अंदर", "above / ऊपर", "through / के आर-पार"],
+    a: 0,
+    e: "'Between' describes a position in the middle of two things. / दो चीज़ों के बीच की स्थिति के लिए between प्रयोग होता है।"
+  },
+  {
+    q: "Which sentence uses 'will' correctly? / 'Will' का सही प्रयोग किस वाक्य में है?",
+    o: ["I will went home.", "I will go home.", "I will going home.", "I will goes home."],
+    a: 1,
+    e: "After will, use the base form 'go'. / Will के बाद go आता है, went या goes नहीं।"
+  },
+  {
+    q: "Read: Aman found a wallet and gave it to his teacher. What did Aman do? / अमन ने क्या किया?",
+    o: ["Kept the wallet / बटुआ रख लिया", "Threw it away / फेंक दिया", "Gave it to his teacher / शिक्षक को दे दिया", "Sold it / बेच दिया"],
+    a: 2,
+    e: "Aman gave the wallet to his teacher. / अमन ने बटुआ शिक्षक को दिया।"
+  },
+  {
+    q: "Choose the correct sentence order. / सही शब्द क्रम चुनें।",
+    o: ["Every day school I go to.", "I go to school every day.", "To school every I day go.", "Go I every school day to."],
+    a: 1,
+    e: "The natural order is subject + verb + place + time. / सामान्य क्रम है कर्ता + क्रिया + स्थान + समय।"
+  },
+  {
+    q: "A group of flowers is called a _____. / फूलों के समूह को क्या कहते हैं?",
+    o: ["Bouquet / गुलदस्ता", "Flock / पक्षियों का झुंड", "Fleet / जहाज़ों का बेड़ा", "Pack / झुंड"],
+    a: 0,
+    e: "A bouquet is a bunch or arrangement of flowers. / फूलों के गुच्छे को bouquet कहते हैं।"
+  },
+  {
+    q: "The cat is hiding _____ the bed. / बिल्ली बिस्तर _____ छिपी है।",
+    o: ["under / नीचे", "during / दौरान", "until / तक", "towards / की ओर"],
+    a: 0,
+    e: "'Under' means below something. / Under का अर्थ किसी चीज़ के नीचे है।"
+  },
+  {
+    q: "Complete the sentence: Tomorrow, we _____ visit our grandmother. / कल हम अपनी दादी से मिलने _____।",
+    o: ["will / जाएँगे", "did / गए", "are / हैं", "was / था"],
+    a: 0,
+    e: "'Tomorrow' points to the future; use will visit. / Tomorrow भविष्य का संकेत देता है।"
+  },
+  {
+    q: "Read: Neha carries a reusable water bottle to school. Why might she do this? / नेहा स्कूल में दोबारा इस्तेमाल होने वाली बोतल क्यों ले जाती होगी?",
+    o: ["To reduce disposable plastic / एक बार इस्तेमाल होने वाला प्लास्टिक कम करने के लिए", "To make more rubbish / अधिक कचरा बनाने के लिए", "To waste water / पानी बर्बाद करने के लिए", "To lose her books / किताबें खोने के लिए"],
+    a: 0,
+    e: "A reusable bottle can help reduce single-use plastic waste. / दोबारा इस्तेमाल होने वाली बोतल प्लास्टिक कचरा कम कर सकती है।"
+  },
+  {
+    q: "Which is a polite request? / विनम्र अनुरोध कौन-सा है?",
+    o: ["Give me that now!", "Move!", "Could you please help me?", "You must do it!"],
+    a: 2,
+    e: "'Could you please...' is a polite way to ask for help. / यह मदद माँगने का विनम्र तरीका है।"
+  },
+  {
+    q: "On a map, what does a symbol or legend help us understand? / नक्शे में संकेत या legend किसमें मदद करता है?",
+    o: ["What map symbols mean / नक्शे के संकेतों का अर्थ", "The weather next year / अगले साल का मौसम", "A person's thoughts / किसी के विचार", "The taste of food / भोजन का स्वाद"],
+    a: 0,
+    e: "A map legend explains the symbols used on the map. / Legend नक्शे के संकेतों का अर्थ समझाता है।"
+  },
+  {
+    q: "Choose the correct preposition: We walked _____ the bridge. / हम पुल _____ चले।",
+    o: ["across / पार", "since / से", "unless / जब तक नहीं", "although / हालांकि"],
+    a: 0,
+    e: "'Across' means from one side to the other. / Across का अर्थ एक तरफ से दूसरी तरफ है।"
+  },
+  {
+    q: "What should you do before crossing a road? / सड़क पार करने से पहले क्या करना चाहिए?",
+    o: ["Run without looking / बिना देखे दौड़ना", "Look both ways and use a safe crossing / दोनों ओर देखकर सुरक्षित स्थान से पार करना", "Play on the road / सड़क पर खेलना", "Follow a stranger into traffic / किसी अजनबी के साथ यातायात में जाना"],
+    a: 1,
+    e: "Look carefully in both directions and cross at a safe place. / दोनों ओर ध्यान से देखकर सुरक्षित जगह से सड़क पार करें।"
+  },
+  {
+    q: "Which word completes the sentence? The children _____ happy yesterday. / कल बच्चे खुश _____।",
+    o: ["will", "were", "is", "be"],
+    a: 1,
+    e: "'Yesterday' refers to the past; use 'were' with children. / Yesterday भूतकाल है; children के साथ were आता है।"
+  },
+  {
+    q: "Mixed challenge: Choose the sentence with correct grammar and punctuation. / सही व्याकरण और विराम चिह्न वाला वाक्य चुनें।",
+    o: [
+      "where are you going.",
+      "Where are you going?",
+      "Where you are going?",
+      "where are you going?"
+    ],
+    a: 1,
+    e: "Start with a capital letter and use a question mark for a direct question. / प्रश्न का पहला अक्षर बड़ा और अंत में प्रश्न चिह्न होना चाहिए।"
+  }
+];
+
+let current = 0;
+let score = 0;
+let answers = [];
+let locked = false;
+
+function renderQuestion() {
+  locked = false;
+  const item = questions[current];
+  document.getElementById("questionCount").textContent =
+    `Question ${current + 1} of ${questions.length} / प्रश्न ${current + 1} / ${questions.length}`;
+  document.getElementById("progressBar").style.width =
+    `${(current / questions.length) * 100}%`;
+  document.getElementById("question").textContent = item.q;
+  const options = document.getElementById("options");
+  options.innerHTML = "";
+  item.o.forEach((option, index) => {
+    const btn = document.createElement("button");
+    btn.className = "option";
+    btn.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+    btn.onclick = () => chooseAnswer(index);
+    options.appendChild(btn);
+  });
+  document.getElementById("feedback").style.display = "none";
+  document.getElementById("nextBtn").disabled = true;
+  document.getElementById("nextBtn").textContent =
+    current === questions.length - 1 ? "See Result / परिणाम देखें" : "Next / अगला";
+}
+
+function chooseAnswer(index) {
+  if (locked) return;
+  locked = true;
+  const item = questions[current];
+  const isCorrect = index === item.a;
+  answers[current] = index;
+  if (isCorrect) score++;
+
+  document.querySelectorAll(".option").forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === item.a) btn.classList.add("correct");
+    if (i === index && !isCorrect) btn.classList.add("wrong");
+  });
+
+  const feedback = document.getElementById("feedback");
+  feedback.style.display = "block";
+  feedback.innerHTML =
+    `<strong>${isCorrect ? "Correct! Well done! / सही उत्तर! बहुत अच्छा!" : "Not quite! / अभी सही नहीं।"}</strong><br>` +
+    `Correct answer / सही उत्तर: ${item.o[item.a]}<br>${item.e}`;
+  document.getElementById("nextBtn").disabled = false;
+}
+
+document.getElementById("nextBtn").onclick = () => {
+  if (!locked) return;
+  if (current < questions.length - 1) {
+    current++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
+};
+
+function showResult() {
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("review").style.display = "none";
+  document.getElementById("result").style.display = "block";
+  const percent = Math.round((score / questions.length) * 100);
+  document.getElementById("progressBar").style.width = "100%";
+  document.getElementById("score").textContent =
+    `Your Score: ${score}/${questions.length} (${percent}%) | आपका स्कोर`;
+  let message;
+  if (percent === 100) message = "Fantastic! Perfect score! 🎉 | शानदार! पूरे अंक! 🎉";
+  else if (percent >= 81) message = "Excellent! | उत्कृष्ट!";
+  else if (percent >= 61) message = "Very good! | बहुत अच्छा!";
+  else if (percent >= 41) message = "Good job! | अच्छा काम!";
+  else if (percent >= 21) message = "Good try! | अच्छा प्रयास!";
+  else message = "Keep trying! | कोशिश करते रहें!";
+  document.getElementById("message").textContent = message;
+  document.getElementById("summary").textContent =
+    `Correct answers: ${score}; Incorrect answers: ${questions.length - score}. Review your answers and try again. / सही उत्तर: ${score}; गलत उत्तर: ${questions.length - score}. उत्तरों की समीक्षा करें और फिर प्रयास करें।`;
+}
+
+function showReview() {
+  document.getElementById("result").style.display = "none";
+  document.getElementById("review").style.display = "block";
+  const list = document.getElementById("reviewList");
+  list.innerHTML = "";
+  questions.forEach((item, i) => {
+    const div = document.createElement("div");
+    div.className = "review-item";
+    const picked = answers[i] === undefined ? "Not answered / उत्तर नहीं दिया" : item.o[answers[i]];
+    div.innerHTML =
+      `<strong>Q${i + 1}. ${item.q}</strong><br>` +
+      `Your answer / आपका उत्तर: ${picked}<br>` +
+      `Correct answer / सही उत्तर: ${item.o[item.a]}<br>` +
+      `${item.e}`;
+    list.appendChild(div);
+  });
+}
+
+function backToResult() {
+  document.getElementById("review").style.display = "none";
+  document.getElementById("result").style.display = "block";
+}
+
+function restartQuiz() {
+  current = 0;
+  score = 0;
+  answers = [];
+  document.getElementById("result").style.display = "none";
+  document.getElementById("review").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>
