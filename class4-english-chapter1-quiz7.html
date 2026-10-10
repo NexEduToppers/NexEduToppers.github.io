@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English - Quiz 7: Picture Map and Real-Life Activities</title>
+<style>
+*{box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#f1f6fc;color:#243247;margin:0;padding:14px}
+.container{max-width:760px;margin:18px auto;padding:20px;background:white;border-radius:16px;box-shadow:0 4px 18px #00000012}
+h1,h2{color:#175b9a;text-align:center}
+.subtitle{text-align:center;line-height:1.8}
+.topline{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.progress{height:9px;background:#e1e9f2;border-radius:8px;overflow:hidden;margin:16px 0}
+#progressBar{height:100%;width:0;background:#25865b;transition:width .2s}
+.map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;background:#e8f5e9;padding:10px;border:2px solid #9ac8a0;border-radius:12px;margin:16px 0}
+.map-cell{min-height:75px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border:1px solid #b8d7bd;border-radius:8px;background:#fff;font-size:14px;line-height:1.5;padding:5px}
+.map-cell.road{background:#e3e7eb;border-style:dashed}
+.map-cell.park{background:#d8f3dc}
+.map-label{text-align:center;font-weight:bold}
+#question{font-size:20px;line-height:1.8;margin:20px 0}
+.option{display:block;width:100%;padding:13px;margin:10px 0;border:2px solid #d7e1ed;border-radius:10px;background:white;color:#243247;font-size:16px;line-height:1.7;text-align:left;cursor:pointer}
+.option:disabled{cursor:default}
+.option.correct{border-color:#16834a;background:#e3f7eb}
+.option.wrong{border-color:#c83c3c;background:#ffebeb}
+#answerFeedback{min-height:36px;margin:16px 0;font-weight:bold;line-height:1.8}
+.button{padding:12px 16px;border:0;border-radius:9px;background:#175b9a;color:white;font-size:16px;cursor:pointer}
+.button:disabled{background:#9ba9b8}
+.button-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:18px}
+#result{display:none}
+.result-card{background:#f0f6fc;padding:18px;border-radius:12px;text-align:center;line-height:1.8}
+#resultMessage{font-size:22px;color:#175b9a}
+.review-item{padding:13px 0;border-bottom:1px solid #d7e1ed;line-height:1.8}
+.site-disclaimer{margin-top:28px;padding:18px;background:#f0f5fb;color:#35465a;border-top:2px solid #cbdced;font-size:13px;line-height:1.8}
+@media(max-width:420px){.container{padding:13px}.map-cell{font-size:12px;min-height:68px}.option{font-size:15px}.button-row .button{flex:1}}
+</style>
+</head>
+<body>
+<main class="container">
+<h1>RawaRajpootNexEduToppers</h1>
+<p class="subtitle">Learning Academy | शिक्षण अकादमी<br>
+Class 4 English | कक्षा 4 अंग्रेज़ी</p>
+
+<h2>Quiz 7: Picture Map and Real-Life Activities</h2>
+<p class="subtitle">चित्र मानचित्र और रोज़मर्रा की गतिविधियाँ<br>
+Read the map and choose the correct answer. | मानचित्र पढ़िए और सही उत्तर चुनिए।</p>
+
+<section id="quiz">
+  <div class="topline">
+    <span id="questionNumber"></span>
+    <span id="liveScore">Score: 0 | अंक: 0</span>
+  </div>
+  <div class="progress"><div id="progressBar"></div></div>
+
+  <p class="map-label">Picture Map | चित्र मानचित्र</p>
+  <p class="subtitle">A small neighbourhood | एक छोटा मोहल्ला</p>
+
+  <div class="map" role="img" aria-label="Schematic neighbourhood map with school, hospital, park, market, library and bus stop">
+    <div class="map-cell">🏫<br>School<br>स्कूल</div>
+    <div class="map-cell road">⬆️<br>Road<br>सड़क</div>
+    <div class="map-cell">🏥<br>Hospital<br>अस्पताल</div>
+    <div class="map-cell park">🌳<br>Park<br>पार्क</div>
+    <div class="map-cell road">↔️<br>Main Road<br>मुख्य सड़क</div>
+    <div class="map-cell">📚<br>Library<br>पुस्तकालय</div>
+    <div class="map-cell">🚌<br>Bus Stop<br>बस स्टॉप</div>
+    <div class="map-cell road">⬆️<br>Road<br>सड़क</div>
+    <div class="map-cell">🛒<br>Market<br>बाज़ार</div>
+  </div>
+  <p class="subtitle">This is a simple practice map, not a real street map.<br>
+  यह अभ्यास के लिए बनाया गया सरल मानचित्र है, वास्तविक सड़क का नक्शा नहीं।</p>
+
+  <div id="question"></div>
+  <div id="options"></div>
+  <div id="answerFeedback" aria-live="polite"></div>
+  <div class="button-row">
+    <button class="button" id="nextBtn" disabled>Next Question | अगला प्रश्न</button>
+  </div>
+</section>
+
+<section id="result">
+  <h2>Quiz Results | क्विज़ का परिणाम</h2>
+  <div class="result-card">
+    <p id="finalScore"></p>
+    <p id="percentage"></p>
+    <h3 id="resultMessage"></h3>
+    <p id="resultFeedback"></p>
+  </div>
+  <div class="button-row">
+    <button class="button" id="reviewBtn">Review Answers | उत्तर देखें</button>
+    <button class="button" id="retryBtn">Try Again | फिर से प्रयास करें</button>
+  </div>
+  <div id="review" hidden>
+    <h2>Answer Review | उत्तरों की समीक्षा</h2>
+    <div id="reviewList"></div>
+  </div>
+</section>
+
+<footer class="site-disclaimer">
+  <h3>Disclaimer | अस्वीकरण</h3>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy is an independent
+    educational platform and is not affiliated with, endorsed by,
+    or associated with NCERT. NCERT textbook names, chapters, and
+    curriculum topics belong exclusively to NCERT. All solutions
+    and study notes provided here are original practice aids.
+    For official textbooks, visit
+    <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">ncert.nic.in</a>.
+  </p>
+</footer>
+</main>
+
+<script>
+const questions = [
+{
+q:"Which place is used for studying and borrowing books? | पढ़ने और किताबें लेने के लिए कौन-सी जगह है?",
+options:["Hospital | अस्पताल","Library | पुस्तकालय","Market | बाज़ार","Bus stop | बस स्टॉप"],
+answer:1,
+explanation:"A library is a place where people read and borrow books. | पुस्तकालय में लोग किताबें पढ़ते और लेते हैं।"
+},
+{
+q:"Where should you go if you need medical help? | चिकित्सा सहायता के लिए कहाँ जाना चाहिए?",
+options:["Park | पार्क","Market | बाज़ार","Hospital | अस्पताल","Bus stop | बस स्टॉप"],
+answer:2,
+explanation:"A hospital provides medical care. | अस्पताल में चिकित्सा सहायता मिलती है।"
+},
+{
+q:"Where can you buy vegetables? | आप सब्ज़ियाँ कहाँ खरीद सकते हैं?",
+options:["Market | बाज़ार","Library | पुस्तकालय","School | स्कूल","Hospital | अस्पताल"],
+answer:0,
+explanation:"People buy vegetables and other goods at a market. | लोग बाज़ार से सब्ज़ियाँ और अन्य सामान खरीदते हैं।"
+},
+{
+q:"Which place is shown at the bottom-left of the map? | मानचित्र के नीचे बाईं ओर कौन-सी जगह है?",
+options:["Park | पार्क","Bus stop | बस स्टॉप","Market | बाज़ार","School | स्कूल"],
+answer:1,
+explanation:"The bus stop is in the bottom-left cell of the map. | मानचित्र के नीचे बाईं ओर बस स्टॉप है।"
+},
+{
+q:"Which place is in the top-right corner? | सबसे ऊपर दाईं ओर कौन-सी जगह है?",
+options:["School | स्कूल","Hospital | अस्पताल","Library | पुस्तकालय","Market | बाज़ार"],
+answer:1,
+explanation:"The hospital is in the top-right corner. | अस्पताल सबसे ऊपर दाईं ओर है।"
+},
+{
+q:"Which place is in the centre of the map? | मानचित्र के बीच में कौन-सी जगह है?",
+options:["Park | पार्क","Market | बाज़ार","Hospital | अस्पताल","Library | पुस्तकालय"],
+answer:0,
+explanation:"The park is shown in the centre-left cell, next to the middle road. | पार्क बीच वाली पंक्ति के बाएँ खाने में है।"
+},
+{
+q:"What should you do before crossing a road? | सड़क पार करने से पहले क्या करना चाहिए?",
+options:["Run without looking | बिना देखे दौड़ना","Look both ways and cross safely | दोनों ओर देखकर सुरक्षित पार करना","Play in the road | सड़क पर खेलना","Close your eyes | आँखें बंद करना"],
+answer:1,
+explanation:"Look both ways and cross at a safe crossing when available. | दोनों ओर देखकर और जहाँ उपलब्ध हो सुरक्षित क्रॉसिंग से सड़क पार करें।"
+},
+{
+q:"You want to catch a bus. Where should you wait? | आपको बस पकड़नी है। कहाँ इंतज़ार करना चाहिए?",
+options:["In the middle of the road | सड़क के बीच में","At the bus stop | बस स्टॉप पर","Inside the market | बाज़ार के अंदर","In the hospital | अस्पताल में"],
+answer:1,
+explanation:"Wait at the bus stop and stay away from moving traffic. | बस स्टॉप पर इंतज़ार करें और चलती गाड़ियों से दूर रहें।"
+},
+{
+q:"You are lost in an unfamiliar area. What should you do? | आप अनजान जगह पर रास्ता भूल गए हैं। क्या करना चाहिए?",
+options:["Follow a stranger anywhere | किसी अनजान व्यक्ति के साथ कहीं भी चले जाएँ","Ask a trusted adult or official for help | किसी भरोसेमंद बड़े या अधिकारी से मदद लें","Run away | भाग जाएँ","Hide in the road | सड़क पर छिप जाएँ"],
+answer:1,
+explanation:"Ask a trusted adult, police officer, or authorised staff member for help. | किसी भरोसेमंद बड़े, पुलिसकर्मी या अधिकृत कर्मचारी से मदद लें।"
+},
+{
+q:"What does a map help us do? | मानचित्र हमारी किस काम में मदद करता है?",
+options:["Find places and directions | जगहें और दिशाएँ ढूँढ़ना","Cook food | खाना पकाना","Wash clothes | कपड़े धोना","Measure our weight | वज़न मापना"],
+answer:0,
+explanation:"A map helps people understand locations and directions. | मानचित्र से स्थान और दिशाएँ समझने में मदद मिलती है।"
+},
+{
+q:"Which direction is usually at the top of a standard map? | सामान्य मानचित्र में ऊपर की दिशा कौन-सी होती है?",
+options:["South | दक्षिण","East | पूर्व","North | उत्तर","West | पश्चिम"],
+answer:2,
+explanation:"On most standard maps, north is at the top unless the map says otherwise. | अधिकांश सामान्य मानचित्रों में ऊपर उत्तर दिशा होती है, जब तक कुछ और न बताया गया हो।"
+},
+{
+q:"You borrow a book from the library. What should you do after reading it? | पुस्तकालय से किताब लेने के बाद पढ़कर क्या करना चाहिए?",
+options:["Keep it forever | हमेशा अपने पास रखना","Return it on time | समय पर लौटाना","Throw it away | फेंक देना","Write on every page | हर पन्ने पर लिखना"],
+answer:1,
+explanation:"Return borrowed library books on time and keep them in good condition. | पुस्तकालय की किताब समय पर लौटाएँ और उसे अच्छी हालत में रखें।"
+},
+{
+q:"You are going to school. Which behaviour is safe? | आप स्कूल जा रहे हैं। कौन-सा व्यवहार सुरक्षित है?",
+options:["Walk on the footpath when available | फुटपाथ उपलब्ध हो तो उस पर चलना","Push people | लोगों को धक्का देना","Play while crossing | सड़क पार करते समय खेलना","Ignore traffic signals | ट्रैफिक सिग्नल अनदेखा करना"],
+answer:0,
+explanation:"Use the footpath when available and follow road-safety rules. | फुटपाथ उपलब्ध हो तो उसका उपयोग करें और सड़क सुरक्षा नियम मानें।"
+},
+{
+q:"What should you do if you see rubbish in the park? | पार्क में कचरा दिखे तो क्या करना चाहिए?",
+options:["Throw more rubbish | और कचरा फेंकना","Leave it on a path | रास्ते पर छोड़ना","Use a suitable bin | उचित कूड़ेदान का उपयोग करना","Throw it into a pond | तालाब में फेंकना"],
+answer:2,
+explanation:"Use a suitable bin to help keep public places clean. | सार्वजनिक जगहों को साफ रखने के लिए कूड़ेदान का उपयोग करें।"
+},
+{
+q:"Which item is useful for finding a location on a map? | मानचित्र पर जगह ढूँढ़ने में क्या मदद कर सकता है?",
+options:["Map symbols and labels | मानचित्र के चिह्न और नाम","A spoon | चम्मच","A pillow | तकिया","A toothbrush | टूथब्रश"],
+answer:0,
+explanation:"Symbols and labels show places and features on a map. | मानचित्र पर चिह्न और नाम जगहों को पहचानने में मदद करते हैं।"
+},
+{
+q:"You arrive at a shop and want to buy bread politely. What could you say? | आप दुकान पर ब्रेड खरीदना चाहते हैं। विनम्रता से क्या कहेंगे?",
+options:["Give it now! | अभी दो!","May I have a loaf of bread, please? | कृपया मुझे एक ब्रेड दे दीजिए।","Go away! | चले जाओ!","I won't ask. | मैं नहीं पूछूँगा।"],
+answer:1,
+explanation:"Polite requests often use “May I…?” and “please.” | विनम्र अनुरोध में “May I…?” और “please” का प्रयोग किया जा सकता है।"
+},
+{
+q:"What should you do when you receive help from someone? | कोई आपकी मदद करे तो क्या करना चाहिए?",
+options:["Say thank you | धन्यवाद कहना","Shout at them | उन पर चिल्लाना","Ignore them | अनदेखा करना","Push them | धक्का देना"],
+answer:0,
+explanation:"Saying thank you is a polite way to show gratitude. | धन्यवाद कहना आभार जताने का विनम्र तरीका है।"
+},
+{
+q:"It is raining heavily and you are outdoors. What is a sensible choice? | बाहर तेज़ बारिश हो रही है। समझदारी भरा कदम क्या है?",
+options:["Stand under an isolated tall tree during lightning | बिजली चमकने पर अकेले ऊँचे पेड़ के नीचे खड़े होना","Seek safe shelter in a suitable building | किसी सुरक्षित इमारत में आश्रय लेना","Play in floodwater | बाढ़ के पानी में खेलना","Touch fallen electrical wires | गिरे बिजली के तार छूना"],
+answer:1,
+explanation:"Seek safe shelter and stay away from floodwater and electrical hazards. | सुरक्षित आश्रय लें और बाढ़ के पानी तथा बिजली के खतरों से दूर रहें।"
+},
+{
+q:"A sign shows a person throwing rubbish into a bin. What does it remind us to do? | कूड़ेदान में कचरा डालते व्यक्ति का चिह्न क्या याद दिलाता है?",
+options:["Keep the area clean | जगह साफ रखें","Waste water | पानी बर्बाद करें","Make noise | शोर करें","Block the road | सड़क रोकें"],
+answer:0,
+explanation:"The sign reminds people to put rubbish in a bin. | यह चिह्न कचरा कूड़ेदान में डालने की याद दिलाता है।"
+},
+{
+q:"You need to find a route to the school on a map. What should you check? | मानचित्र पर स्कूल का रास्ता ढूँढ़ने के लिए क्या देखना चाहिए?",
+options:["The map labels, roads and directions | मानचित्र के नाम, सड़कें और दिशाएँ","Only the page colour | केवल पन्ने का रंग","The book cover | किताब का कवर","The weather yesterday | कल का मौसम"],
+answer:0,
+explanation:"Labels, roads and directions help you plan a route. | नाम, सड़कें और दिशाएँ रास्ता तय करने में मदद करती हैं।"
+}
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+let userAnswers = [];
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const feedbackEl = document.getElementById("answerFeedback");
+const nextBtn = document.getElementById("nextBtn");
+
+function showQuestion() {
+  answered = false;
+  const q = questions[currentQuestion];
+
+  document.getElementById("questionNumber").textContent =
+    `Question ${currentQuestion + 1} of ${questions.length} | प्रश्न ${currentQuestion + 1} / ${questions.length}`;
+
+  document.getElementById("liveScore").textContent =
+    `Score: ${score} | अंक: ${score}`;
+
+  document.getElementById("progressBar").style.width =
+    `${(currentQuestion / questions.length) * 100}%`;
+
+  questionEl.textContent = q.q;
+  optionsEl.replaceChildren();
+  feedbackEl.textContent = "";
+  nextBtn.disabled = true;
+
+  nextBtn.textContent = currentQuestion === questions.length - 1
+    ? "See Results | परिणाम देखें"
+    : "Next Question | अगला प्रश्न";
+
+  q.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.className = "option";
+    button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+    button.addEventListener("click", () => checkAnswer(index, button));
+    optionsEl.appendChild(button);
+  });
+}
+
+function checkAnswer(selectedIndex, selectedButton) {
+  if (answered) return;
+  answered = true;
+
+  const q = questions[currentQuestion];
+  const correct = selectedIndex === q.answer;
+  userAnswers[currentQuestion] = selectedIndex;
+
+  if (correct) {
+    score++;
+    selectedButton.classList.add("correct");
+    feedbackEl.textContent =
+      `Correct! Well done! | सही उत्तर! बहुत अच्छा! ${q.explanation}`;
+  } else {
+    selectedButton.classList.add("wrong");
+    feedbackEl.textContent =
+      `Not quite! | अभी सही नहीं। Correct answer: ${q.options[q.answer]}. | सही उत्तर: ${q.options[q.answer]}. ${q.explanation}`;
+  }
+
+  [...optionsEl.children].forEach((button, index) => {
+    button.disabled = true;
+    if (index === q.answer) button.classList.add("correct");
+  });
+
+  document.getElementById("liveScore").textContent =
+    `Score: ${score} | अंक: ${score}`;
+
+  nextBtn.disabled = false;
+}
+
+nextBtn.addEventListener("click", () => {
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    showQuestion();
+  } else {
+    showResults();
+  }
+});
+
+function showResults() {
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("result").style.display = "block";
+
+  const percent = Math.round((score / questions.length) * 100);
+
+  document.getElementById("finalScore").textContent =
+    `Final Score: ${score} out of ${questions.length} | कुल अंक: ${score} / ${questions.length}`;
+
+  document.getElementById("percentage").textContent =
+    `Percentage: ${percent}% | प्रतिशत: ${percent}%`;
+
+  let message;
+  let hindiMessage;
+
+  if (percent === 100) {
+    message = "Fantastic! Perfect score! 🎉";
+    hindiMessage = "शानदार! पूरे अंक! 🎉";
+  } else if (percent >= 81) {
+    message = "Excellent!";
+    hindiMessage = "उत्कृष्ट!";
+  } else if (percent >= 61) {
+    message = "Very good!";
+    hindiMessage = "बहुत अच्छा!";
+  } else if (percent >= 41) {
+    message = "Good job!";
+    hindiMessage = "अच्छा काम!";
+  } else if (percent >= 21) {
+    message = "Good try!";
+    hindiMessage = "अच्छा प्रयास!";
+  } else {
+    message = "Keep trying!";
+    hindiMessage = "कोशिश करते रहें!";
+  }
+
+  document.getElementById("resultMessage").textContent =
+    `${message} | ${hindiMessage}`;
+
+  document.getElementById("resultFeedback").textContent =
+    "Review your answers to learn from mistakes. | गलतियों से सीखने के लिए अपने उत्तरों की समीक्षा करें।";
+
+  document.getElementById("progressBar").style.width = "100%";
+}
+
+document.getElementById("reviewBtn").addEventListener("click", () => {
+  const review = document.getElementById("review");
+  const list = document.getElementById("reviewList");
+
+  if (!review.hidden) {
+    review.hidden = true;
+    document.getElementById("reviewBtn").textContent =
+      "Review Answers | उत्तर देखें";
+    return;
+  }
+
+  list.replaceChildren();
+
+  questions.forEach((q, i) => {
+    const item = document.createElement("div");
+    item.className = "review-item";
+
+    const selected = userAnswers[i];
+    const yourAnswer = selected === undefined
+      ? "Not answered | उत्तर नहीं दिया"
+      : q.options[selected];
+
+    const result = selected === q.answer
+      ? "Correct | सही"
+      : "Incorrect | गलत";
+
+    item.textContent =
+      `${i + 1}. ${q.q} Your answer: ${yourAnswer}. | आपका उत्तर: ${yourAnswer}. Correct answer: ${q.options[q.answer]}. | सही उत्तर: ${q.options[q.answer]}. ${result}. ${q.explanation}`;
+
+    list.appendChild(item);
+  });
+
+  review.hidden = false;
+  document.getElementById("reviewBtn").textContent =
+    "Hide Review | समीक्षा छिपाएँ";
+});
+
+document.getElementById("retryBtn").addEventListener("click", () => {
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+  userAnswers = [];
+
+  document.getElementById("result").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+  document.getElementById("review").hidden = true;
+
+  document.getElementById("reviewBtn").textContent =
+    "Review Answers | उत्तर देखें";
+
+  showQuestion();
+});
+
+showQuestion();
+</script>
+</body>
+</html>
