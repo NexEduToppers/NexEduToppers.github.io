@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 2 Quiz 2 | Comprehension</title>
+
+<style>
+:root {
+  --navy: #12315a;
+  --blue: #1769aa;
+  --light-blue: #eaf4ff;
+  --green: #16834a;
+  --red: #c62828;
+  --border: #cbd9e8;
+  --text: #172b4d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+  color: var(--text);
+  background: #f2f7fc;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.header {
+  background: var(--navy);
+  color: white;
+  text-align: center;
+  padding: 22px 16px;
+  border-radius: 16px;
+  margin-bottom: 18px;
+}
+
+.header h1 {
+  margin: 0 0 8px;
+  font-size: 25px;
+}
+
+.header p {
+  margin: 4px 0;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  border: 1px solid var(--border);
+  box-shadow: 0 3px 10px rgba(18, 49, 90, 0.06);
+}
+
+.progress-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.progress-track {
+  height: 10px;
+  background: #dce7f3;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: var(--blue);
+  transition: width 0.2s ease;
+}
+
+.question {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 12px 0 18px;
+}
+
+.hindi {
+  display: block;
+  color: #4b5f79;
+  font-size: 16px;
+  font-weight: normal;
+  margin-top: 5px;
+}
+
+.options {
+  display: grid;
+  gap: 11px;
+}
+
+.option {
+  width: 100%;
+  padding: 13px 15px;
+  text-align: left;
+  background: white;
+  color: var(--text);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.option:hover:not(:disabled) {
+  background: var(--light-blue);
+  border-color: var(--blue);
+}
+
+.option:focus-visible,
+.action-btn:focus-visible {
+  outline: 3px solid #f0a500;
+  outline-offset: 3px;
+}
+
+.option:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.option.correct {
+  background: #e6f7ed;
+  border-color: var(--green);
+  color: #075c2e;
+}
+
+.option.wrong {
+  background: #fff0f0;
+  border-color: var(--red);
+  color: #9b1717;
+}
+
+.feedback {
+  display: none;
+  padding: 14px;
+  border-radius: 10px;
+  margin-top: 18px;
+  background: var(--light-blue);
+  border-left: 5px solid var(--blue);
+}
+
+.feedback.show {
+  display: block;
+}
+
+.feedback p {
+  margin: 6px 0 0;
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.action-btn {
+  flex: 1;
+  min-width: 130px;
+  border: none;
+  border-radius: 9px;
+  padding: 13px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: var(--blue);
+  color: white;
+}
+
+.action-btn.secondary {
+  background: #e4edf7;
+  color: var(--navy);
+}
+
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#result {
+  display: none;
+}
+
+#result.show {
+  display: block;
+}
+
+.score {
+  font-size: 30px;
+  font-weight: bold;
+  color: var(--navy);
+  text-align: center;
+}
+
+.score-message {
+  font-size: 21px;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.review-item {
+  border-top: 1px solid var(--border);
+  padding: 14px 0;
+}
+
+.review-item p {
+  margin: 5px 0;
+}
+
+.site-disclaimer {
+  background: #e7edf5;
+  border-radius: 12px;
+  padding: 18px;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.site-disclaimer h3 {
+  margin-top: 0;
+  color: var(--navy);
+}
+
+.site-disclaimer a {
+  color: #075eaa;
+}
+
+.small-note {
+  font-size: 14px;
+  color: #526780;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  .header h1 {
+    font-size: 21px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .question {
+    font-size: 18px;
+  }
+
+  .option {
+    font-size: 15px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <header class="header">
+    <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+    <p>Class 4 English | Mridang</p>
+    <p><strong>Chapter 2: The Tinkling Bells</strong></p>
+    <p>Quiz 2: Comprehension | समझ पर आधारित प्रश्न</p>
+  </header>
+
+  <section class="card" id="quizCard">
+    <div class="progress-row">
+      <span id="questionCount">Question 1 of 20</span>
+      <span id="liveScore">Score: 0</span>
+    </div>
+
+    <div class="progress-track" aria-label="Quiz progress">
+      <div id="progressBar"></div>
+    </div>
+
+    <div id="questionText" class="question"></div>
+    <div id="options" class="options"></div>
+
+    <div id="feedback" class="feedback" aria-live="polite">
+      <strong id="feedbackTitle"></strong>
+      <p id="explanation"></p>
+    </div>
+
+    <div class="action-row">
+      <button class="action-btn" id="nextBtn" disabled>
+        Next Question / अगला प्रश्न
+      </button>
+    </div>
+  </section>
+
+  <section class="card" id="result">
+    <h2 style="text-align:center;">Quiz Completed! / प्रश्नोत्तरी पूरी हुई!</h2>
+    <div class="score" id="finalScore"></div>
+    <div id="percentage" style="text-align:center;"></div>
+    <div class="score-message" id="scoreMessage"></div>
+    <p id="scoreAdvice" style="text-align:center;"></p>
+
+    <div class="action-row">
+      <button class="action-btn" id="reviewBtn">
+        Review Answers / उत्तर देखें
+      </button>
+      <button class="action-btn secondary" id="retryBtn">
+        Try Again / फिर से प्रयास करें
+      </button>
+    </div>
+
+    <div id="reviewArea" style="display:none; margin-top:20px;">
+      <h3>Answer Review / उत्तरों की समीक्षा</h3>
+      <div id="reviewList"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3>Learning Tip / सीखने की सलाह</h3>
+    <p>
+      Read each question carefully and think about the events in the story
+      before selecting an answer.
+    </p>
+    <p>
+      हर प्रश्न को ध्यान से पढ़ें और उत्तर चुनने से पहले कहानी की घटनाओं
+      के बारे में सोचें।
+    </p>
+  </section>
+
+  <div class="action-row">
+    <a class="action-btn secondary"
+       href="class4-english-chapter2.html"
+       style="text-align:center; text-decoration:none;">
+      Back to Chapter 2 / अध्याय पर वापस जाएँ
+    </a>
+    <a class="action-btn"
+       href="class4-english-chapter2-quiz1.html"
+       style="text-align:center; text-decoration:none;">
+      Quiz 1 / प्रश्नोत्तरी 1
+    </a>
+  </div>
+
+  <footer class="site-disclaimer">
+    <h3>Disclaimer | अस्वीकरण</h3>
+    <p>
+      RawaRajpootNexEduToppers Learning Academy is an independent
+      educational platform and is not affiliated with, endorsed by,
+      or associated with NCERT. NCERT textbook names, chapters, and
+      curriculum topics belong exclusively to NCERT. All solutions
+      and study notes provided here are original practice aids.
+      For official textbooks, visit
+      <a href="https://ncert.nic.in/" target="_blank"
+         rel="noopener noreferrer">ncert.nic.in</a>.
+    </p>
+  </footer>
+
+</div>
+
+<script>
+const questions = [
+  {
+    q: "Who is the main boy in the story?",
+    hi: "कहानी में मुख्य लड़का कौन है?",
+    options: ["Chinna", "Ravi", "Aman", "Mohan"],
+    hindi: ["चिन्ना", "रवि", "अमन", "मोहन"],
+    answer: 0,
+    explanation: "Chinna is the boy whose experience teaches the lesson of honesty."
+  },
+  {
+    q: "What was the name of Chinna's pet goat kid?",
+    hi: "चिन्ना के पालतू बकरी के बच्चे का नाम क्या था?",
+    options: ["Tara", "Moti", "Gauri", "Rani"],
+    hindi: ["तारा", "मोती", "गौरी", "रानी"],
+    answer: 0,
+    explanation: "The young goat in the story is named Tara."
+  },
+  {
+    q: "What colour was Tara?",
+    hi: "तारा का रंग कैसा था?",
+    options: ["Milky white", "Dark brown", "Black", "Grey"],
+    hindi: ["दूध जैसा सफेद", "गहरा भूरा", "काला", "स्लेटी"],
+    answer: 0,
+    explanation: "Tara is described as milky white."
+  },
+  {
+    q: "What did Chinna want to buy for Tara?",
+    hi: "चिन्ना तारा के लिए क्या खरीदना चाहता था?",
+    options: ["Tinkling bells", "A new basket", "A ball", "A blanket"],
+    hindi: ["छनछनाने वाली घंटियाँ", "नई टोकरी", "गेंद", "कंबल"],
+    answer: 0,
+    explanation: "Chinna wanted bells that would make a tinkling sound around Tara's neck."
+  },
+  {
+    q: "Where did Chinna see the bells?",
+    hi: "चिन्ना ने घंटियाँ कहाँ देखीं?",
+    options: ["At Chacha's shop", "At school", "At the park", "At the hospital"],
+    hindi: ["चाचा की दुकान पर", "स्कूल में", "पार्क में", "अस्पताल में"],
+    answer: 0,
+    explanation: "He saw the bells at Chacha's shop."
+  },
+  {
+    q: "How much did the bells cost?",
+    hi: "घंटियों की कीमत कितनी थी?",
+    options: ["₹10", "₹20", "₹45", "₹100"],
+    hindi: ["10 रुपये", "20 रुपये", "45 रुपये", "100 रुपये"],
+    answer: 0,
+    explanation: "The bells cost ₹10."
+  },
+  {
+    q: "Who had given money to Chinna?",
+    hi: "चिन्ना को पैसे किसने दिए थे?",
+    options: ["Dadaji", "His teacher", "His friend", "The fruit seller"],
+    hindi: ["दादाजी", "उसके शिक्षक", "उसके मित्र", "फल विक्रेता"],
+    answer: 0,
+    explanation: "Dadaji had given Chinna money."
+  },
+  {
+    q: "What happened to Chinna's money?",
+    hi: "चिन्ना के पैसों के साथ क्या हुआ?",
+    options: [
+      "He could not find it",
+      "He bought a toy",
+      "He gave it to a friend",
+      "He put it in a shop"
+    ],
+    hindi: [
+      "उसे पैसे नहीं मिले",
+      "उसने खिलौना खरीदा",
+      "उसने मित्र को दे दिए",
+      "उसने दुकान में रख दिए"
+    ],
+    answer: 0,
+    explanation: "Chinna discovered that the money he had been given was missing."
+  },
+  {
+    q: "How did Chinna feel when he could not find his money?",
+    hi: "पैसे न मिलने पर चिन्ना को कैसा लगा?",
+    options: ["Sad", "Proud", "Angry with Tara", "Sleepy"],
+    hindi: ["उदास", "गर्व महसूस हुआ", "तारा पर गुस्सा", "नींद आई"],
+    answer: 0,
+    explanation: "Chinna felt sad because he could not buy the bells."
+  },
+  {
+    q: "Who comforted Chinna?",
+    hi: "चिन्ना को किसने समझाया और सांत्वना दी?",
+    options: ["His mother Kamala", "His neighbour", "His teacher", "The shopkeeper"],
+    hindi: ["उसकी माँ कमला ने", "पड़ोसी ने", "शिक्षक ने", "दुकानदार ने"],
+    answer: 0,
+    explanation: "His mother, Kamala, comforted him and offered to help."
+  },
+  {
+    q: "Where did Chinna and Kamala go?",
+    hi: "चिन्ना और कमला कहाँ गए?",
+    options: ["To the market", "To the railway station", "To the zoo", "To the library"],
+    hindi: ["बाज़ार", "रेलवे स्टेशन", "चिड़ियाघर", "पुस्तकालय"],
+    answer: 0,
+    explanation: "They went to the market to buy fruit and vegetables."
+  },
+  {
+    q: "Which fruit did they buy at the market?",
+    hi: "उन्होंने बाज़ार से कौन-से फल खरीदे?",
+    options: [
+      "Apples and mangoes",
+      "Only grapes",
+      "Only oranges",
+      "Only bananas"
+    ],
+    hindi: [
+      "सेब और आम",
+      "केवल अंगूर",
+      "केवल संतरे",
+      "केवल केले"
+    ],
+    answer: 0,
+    explanation: "The story mentions apples and mangoes among the items they bought."
+  },
+  {
+    q: "What else did they buy besides fruit?",
+    hi: "फलों के अलावा उन्होंने क्या खरीदा?",
+    options: [
+      "Tomatoes and brinjals",
+      "Books and pencils",
+      "Shoes and socks",
+      "Rice and flour"
+    ],
+    hindi: [
+      "टमाटर और बैंगन",
+      "किताबें और पेंसिल",
+      "जूते और मोज़े",
+      "चावल और आटा"
+    ],
+    answer: 0,
+    explanation: "They also bought tomatoes and brinjals."
+  },
+  {
+    q: "How much did one pineapple cost?",
+    hi: "एक अनानास की कीमत कितनी थी?",
+    options: ["₹45", "₹10", "₹20", "₹100"],
+    hindi: ["45 रुपये", "10 रुपये", "20 रुपये", "100 रुपये"],
+    answer: 0,
+    explanation: "The pineapple seller charged ₹45 for one pineapple."
+  },
+  {
+    q: "How many pineapples did Kamala buy?",
+    hi: "कमला ने कितने अनानास खरीदे?",
+    options: ["Two", "One", "Three", "Four"],
+    hindi: ["दो", "एक", "तीन", "चार"],
+    answer: 0,
+    explanation: "Kamala bought two pineapples."
+  },
+  {
+    q: "How much money did Kamala give the pineapple seller?",
+    hi: "कमला ने अनानास वाले को कितने रुपये दिए?",
+    options: ["₹100", "₹45", "₹50", "₹20"],
+    hindi: ["100 रुपये", "45 रुपये", "50 रुपये", "20 रुपये"],
+    answer: 0,
+    explanation: "Kamala paid ₹100 for the two pineapples."
+  },
+  {
+    q: "How much change should Kamala receive for two ₹45 pineapples paid with ₹100?",
+    hi: "45 रुपये के दो अनानास के लिए 100 रुपये देने पर कितने रुपये वापस मिलने चाहिए?",
+    options: ["₹10", "₹20", "₹45", "₹5"],
+    hindi: ["10 रुपये", "20 रुपये", "45 रुपये", "5 रुपये"],
+    answer: 0,
+    explanation: "Two pineapples cost ₹90. ₹100 − ₹90 = ₹10 change."
+  },
+  {
+    q: "What mistake did the fruit seller make?",
+    hi: "फल विक्रेता से क्या गलती हुई?",
+    options: [
+      "He gave ₹10 extra",
+      "He charged nothing",
+      "He gave no fruit",
+      "He asked for ₹100 extra"
+    ],
+    hindi: [
+      "उसने 10 रुपये ज़्यादा दे दिए",
+      "उसने कोई पैसे नहीं लिए",
+      "उसने फल नहीं दिए",
+      "उसने 100 रुपये ज़्यादा माँगे"
+    ],
+    answer: 0,
+    explanation: "The seller gave Chinna two ₹10 notes instead of the correct ₹10 change, so ₹10 extra was returned."
+  },
+  {
+    q: "What did Chinna think about doing with the extra money?",
+    hi: "चिन्ना ने ज़्यादा मिले पैसों से क्या करने के बारे में सोचा?",
+    options: [
+      "Buying bells and chocolates",
+      "Buying school books",
+      "Giving it to Dadaji",
+      "Buying vegetables"
+    ],
+    hindi: [
+      "घंटियाँ और चॉकलेट खरीदना",
+      "स्कूल की किताबें खरीदना",
+      "दादाजी को देना",
+      "सब्ज़ियाँ खरीदना"
+    ],
+    answer: 0,
+    explanation: "Chinna wondered whether he could use the extra money to buy bells and chocolates."
+  },
+  {
+    q: "What lesson does Chinna learn at the end?",
+    hi: "अंत में चिन्ना क्या सीखता है?",
+    options: [
+      "Always be honest",
+      "Keep money that is not yours",
+      "Never go to the market",
+      "Do not help other people"
+    ],
+    hindi: [
+      "हमेशा ईमानदार रहना",
+      "दूसरों के पैसे रख लेना",
+      "बाज़ार कभी न जाना",
+      "दूसरों की मदद न करना"
+    ],
+    answer: 0,
+    explanation: "Chinna returns the extra money, showing that honesty is more important than getting something for free."
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+let userAnswers = [];
+
+const questionCount = document.getElementById("questionCount");
+const liveScore = document.getElementById("liveScore");
+const progressBar = document.getElementById("progressBar");
+const questionText = document.getElementById("questionText");
+const optionsContainer = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const feedbackTitle = document.getElementById("feedbackTitle");
+const explanation = document.getElementById("explanation");
+const nextBtn = document.getElementById("nextBtn");
+const quizCard = document.getElementById("quizCard");
+const result = document.getElementById("result");
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, function (char) {
+    return {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[char];
+  });
+}
+
+function showQuestion() {
+  answered = false;
+  const item = questions[currentQuestion];
+
+  questionCount.textContent =
+    `Question ${currentQuestion + 1} of ${questions.length}`;
+  liveScore.textContent = `Score: ${score}`;
+  progressBar.style.width =
+    `${(currentQuestion / questions.length) * 100}%`;
+
+  questionText.innerHTML =
+    `${escapeHTML(item.q)}
+     <span class="hindi">${escapeHTML(item.hi)}</span>`;
+
+  optionsContainer.innerHTML = "";
+  feedback.className = "feedback";
+  feedbackTitle.textContent = "";
+  explanation.textContent = "";
+  nextBtn.disabled = true;
+
+  item.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option";
+    button.innerHTML =
+      `${String.fromCharCode(65 + index)}. ${escapeHTML(option)}
+       <span class="hindi">${escapeHTML(item.hindi[index])}</span>`;
+
+    button.addEventListener("click", () => chooseAnswer(index));
+    optionsContainer.appendChild(button);
+  });
+}
+
+function chooseAnswer(selectedIndex) {
+  if (answered) return;
+  answered = true;
+
+  const item = questions[currentQuestion];
+  const buttons = optionsContainer.querySelectorAll(".option");
+  const isCorrect = selectedIndex === item.answer;
+
+  userAnswers[currentQuestion] = selectedIndex;
+
+  buttons.forEach((button, index) => {
+    button.disabled = true;
+    if (index === item.answer) {
+      button.classList.add("correct");
+    } else if (index === selectedIndex) {
+      button.classList.add("wrong");
+    }
+  });
+
+  if (isCorrect) {
+    score++;
+    feedbackTitle.textContent = "Correct! / सही उत्तर!";
+    explanation.textContent = item.explanation;
+  } else {
+    feedbackTitle.textContent = "Not quite! / सही उत्तर नहीं है।";
+    explanation.textContent =
+      `Correct answer: ${item.options[item.answer]} — ` +
+      `${item.hindi[item.answer]}. ${item.explanation}`;
+  }
+
+  feedback.classList.add("show");
+  liveScore.textContent = `Score: ${score}`;
+  nextBtn.disabled = false;
+  nextBtn.textContent =
+    currentQuestion === questions.length - 1
+      ? "See Result / परिणाम देखें"
+      : "Next Question / अगला प्रश्न";
+}
+
+function finishQuiz() {
+  quizCard.style.display = "none";
+  result.classList.add("show");
+
+  const percentage = Math.round((score / questions.length) * 100);
+  document.getElementById("finalScore").textContent =
+    `${score} / ${questions.length}`;
+  document.getElementById("percentage").textContent =
+    `Percentage: ${percentage}%`;
+
+  let message;
+  let advice;
+
+  if (percentage <= 20) {
+    message = "Keep trying! / कोशिश करते रहें!";
+    advice = "Read the story summary again and try once more.";
+  } else if (percentage <= 40) {
+    message = "Good try! / अच्छा प्रयास!";
+    advice = "Review the story events and practise again.";
+  } else if (percentage <= 60) {
+    message = "Good job! / अच्छा काम!";
+    advice = "You are learning. Review any missed answers.";
+  } else if (percentage <= 80) {
+    message = "Very good! / बहुत अच्छा!";
+    advice = "Well done. A little more revision will help.";
+  } else if (percentage < 100) {
+    message = "Excellent! / उत्कृष्ट!";
+    advice = "You understand the story very well.";
+  } else {
+    message = "Fantastic! Perfect score! 🎉 / शानदार! पूरे अंक! 🎉";
+    advice = "You answered every question correctly!";
+  }
+
+  document.getElementById("scoreMessage").textContent = message;
+  document.getElementById("scoreAdvice").textContent = advice;
+  progressBar.style.width = "100%";
+}
+
+function buildReview() {
+  const reviewList = document.getElementById("reviewList");
+  reviewList.innerHTML = "";
+
+  questions.forEach((item, index) => {
+    const chosen = userAnswers[index];
+    const isCorrect = chosen === item.answer;
+    const reviewItem = document.createElement("div");
+    reviewItem.className = "review-item";
+
+    reviewItem.innerHTML = `
+      <strong>${index + 1}. ${escapeHTML(item.q)}</strong>
+      <span class="hindi">${escapeHTML(item.hi)}</span>
+      <p>Your answer / आपका उत्तर:
+        ${chosen === undefined ? "Not answered" :
+          escapeHTML(item.options[chosen]) + " — " +
+          escapeHTML(item.hindi[chosen])}
+      </p>
+      <p>Correct answer / सही उत्तर:
+        ${escapeHTML(item.options[item.answer])} —
+        ${escapeHTML(item.hindi[item.answer])}
+      </p>
+      <p>${isCorrect ? "✓ Correct / सही" : "✗ Review this answer / फिर से देखें"}</p>
+      <p>${escapeHTML(item.explanation)}</p>
+    `;
+
+    reviewList.appendChild(reviewItem);
+  });
+}
+
+nextBtn.addEventListener("click", () => {
+  if (!answered) return;
+
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    showQuestion();
+  } else {
+    finishQuiz();
+  }
+});
+
+document.getElementById("reviewBtn").addEventListener("click", () => {
+  buildReview();
+  const reviewArea = document.getElementById("reviewArea");
+  reviewArea.style.display =
+    reviewArea.style.display === "none" ? "block" : "none";
+});
+
+document.getElementById("retryBtn").addEventListene
