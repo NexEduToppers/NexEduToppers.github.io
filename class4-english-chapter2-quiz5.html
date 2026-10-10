@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Quiz 5 | Sentence Making</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f1f7ff;
+  color: #243047;
+  line-height: 1.6;
+}
+
+header {
+  background: linear-gradient(135deg, #174ea6, #287be0);
+  color: white;
+  text-align: center;
+  padding: 22px 12px;
+}
+
+header h1 { margin: 0 0 8px; font-size: 25px; }
+header p { margin: 4px 0; }
+
+.container {
+  width: 94%;
+  max-width: 760px;
+  margin: 22px auto;
+}
+
+.info, .quiz-card, .result-card, .review-card {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  box-shadow: 0 3px 12px #00000012;
+}
+
+.progress-line {
+  height: 10px;
+  background: #e0e7f0;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+#progress {
+  width: 0%;
+  height: 100%;
+  background: #20864a;
+  transition: width .2s;
+}
+
+#questionText {
+  font-size: 21px;
+  margin: 12px 0 18px;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 13px;
+  margin: 10px 0;
+  border: 2px solid #d5dfec;
+  background: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #243047;
+}
+
+.option:hover:not(:disabled) { background: #edf5ff; }
+.option:disabled { cursor: default; opacity: 1; }
+
+.option.correct {
+  background: #d8f5df;
+  border-color: #198744;
+}
+
+.option.wrong {
+  background: #ffe0e0;
+  border-color: #d83232;
+}
+
+#feedback {
+  display: none;
+  padding: 12px;
+  border-radius: 9px;
+  margin: 15px 0;
+  font-weight: 600;
+}
+
+button.action {
+  border: 0;
+  border-radius: 9px;
+  padding: 12px 18px;
+  margin: 6px 5px 6px 0;
+  background: #175fc0;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button.action:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.secondary { background: #536579 !important; }
+.green { background: #187b43 !important; }
+
+#result { display: none; }
+#reviewArea { display: none; }
+
+.review-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.site-disclaimer {
+  background: #e7edf5;
+  padding: 20px;
+  margin-top: 25px;
+  font-size: 13px;
+  color: #39475a;
+  border-radius: 10px;
+}
+
+.site-disclaimer h3 { margin-top: 0; }
+
+footer {
+  text-align: center;
+  padding: 18px 10px;
+  color: #536579;
+  font-size: 13px;
+}
+
+@media (max-width: 480px) {
+  header h1 { font-size: 21px; }
+  .info, .quiz-card, .result-card, .review-card {
+    padding: 15px;
+  }
+  #questionText { font-size: 19px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+  <p>Class 4 English | Chapter 2: The Tinkling Bells</p>
+  <p><strong>Quiz 5: Sentence Making</strong></p>
+</header>
+
+<main class="container">
+
+  <section class="info">
+    <h2>Instructions | निर्देश</h2>
+    <p>Choose the correctly formed sentence or the correct word order.</p>
+    <p>सही वाक्य या शब्दों का सही क्रम चुनें।</p>
+    <p><strong>Total Questions:</strong> 20</p>
+    <p><strong>Marks:</strong> 1 mark per question</p>
+  </section>
+
+  <section class="quiz-card" id="quizCard">
+    <div>
+      <strong id="questionNumber">Question 1 of 20</strong>
+      <span id="scoreLive" style="float:right">Score: 0</span>
+    </div>
+
+    <div class="progress-line">
+      <div id="progress"></div>
+    </div>
+
+    <h2 id="questionText"></h2>
+    <div id="options"></div>
+
+    <div id="feedback" role="status" aria-live="polite"></div>
+
+    <button class="action" id="nextBtn" disabled>Next Question →</button>
+  </section>
+
+  <section class="result-card" id="result">
+    <h2>Quiz Completed!</h2>
+    <p id="finalScore"></p>
+    <p id="finalMessage"></p>
+    <button class="action green" id="retryBtn">Try Again</button>
+    <button class="action secondary" id="reviewBtn">Review Answers</button>
+  </section>
+
+  <section class="review-card" id="reviewArea">
+    <h2>Answer Review</h2>
+    <div id="reviewContent"></div>
+  </section>
+
+  <section class="site-disclaimer">
+    <h3>Disclaimer | अस्वीकरण</h3>
+    <p>
+      RawaRajpootNexEduToppers Learning Academy is an independent
+      educational platform and is not affiliated with, endorsed by,
+      or associated with NCERT. NCERT textbook names, chapters, and
+      curriculum topics belong exclusively to NCERT. All solutions
+      and study notes provided here are original practice aids.
+      For official textbooks, visit
+      <a href="https://ncert.nic.in/" target="_blank"
+         rel="noopener noreferrer">ncert.nic.in</a>.
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  Learn • Practise • Improve
+  <br>
+  RawaRajpootNexEduToppers Learning Academy
+</footer>
+
+<script>
+const questions = [
+  {
+    q: "Choose the correctly formed sentence.",
+    options: [
+      "Chinna a boy is.",
+      "Chinna is a boy.",
+      "Is Chinna boy a.",
+      "Boy Chinna is a."
+    ],
+    answer: 1,
+    explanation: "The correct order is subject + verb + complement."
+  },
+  {
+    q: "Choose the correct sentence about Tara.",
+    options: [
+      "Tara is a little goat.",
+      "Tara a little is goat.",
+      "Is a goat Tara little.",
+      "Little goat Tara a is."
+    ],
+    answer: 0,
+    explanation: "The words are arranged in a complete, meaningful sentence."
+  },
+  {
+    q: "Arrange the words correctly: 'Chinna / bells / likes'.",
+    options: [
+      "Likes Chinna bells.",
+      "Bells likes Chinna.",
+      "Chinna likes bells.",
+      "Chinna bells likes."
+    ],
+    answer: 2,
+    explanation: "A simple statement usually follows subject + verb + object."
+  },
+  {
+    q: "Choose the correctly punctuated sentence.",
+    options: [
+      "Chinna went to the market",
+      "Chinna went to the market.",
+      "Chinna went to the market?",
+      "chinna went to the market."
+    ],
+    answer: 1,
+    explanation: "A statement begins with a capital letter and ends with a full stop."
+  },
+  {
+    q: "Which sentence asks a question correctly?",
+    options: [
+      "Where is my money?",
+      "Where is my money.",
+      "where is my money?",
+      "Where my money is."
+    ],
+    answer: 0,
+    explanation: "A direct question begins with a capital letter and ends with a question mark."
+  },
+  {
+    q: "Choose the correct sentence.",
+    options: [
+      "Kamala buy some fruits.",
+      "Kamala buying some fruits.",
+      "Kamala bought some fruits.",
+      "Kamala buys yesterday fruits."
+    ],
+    answer: 2,
+    explanation: "Bought is the past-tense form of buy."
+  },
+  {
+    q: "Choose the sentence with correct capital letters.",
+    options: [
+      "chinna went with kamala.",
+      "Chinna went with Kamala.",
+      "Chinna went with kamala.",
+      "chinna went with Kamala."
+    ],
+    answer: 1,
+    explanation: "Names of people begin with capital letters."
+  },
+  {
+    q: "Arrange the words: 'the / seller / money / returned'.",
+    options: [
+      "The money returned seller.",
+      "Seller the returned money.",
+      "Returned the seller money.",
+      "The seller returned the money."
+    ],
+    answer: 3,
+    explanation: "The sentence needs a subject, verb and object in the correct order."
+  },
+  {
+    q: "Choose the correct sentence about honesty.",
+    options: [
+      "Honesty is a good quality.",
+      "Honesty a quality good is.",
+      "Is honesty quality a good.",
+      "Good is a honesty quality."
+    ],
+    answer: 0,
+    explanation: "The correct sentence uses a natural English word order."
+  },
+  {
+    q: "Choose the correct negative sentence.",
+    options: [
+      "Chinna did not kept the extra money.",
+      "Chinna did not keep the extra money.",
+      "Chinna not did keep the extra money.",
+      "Chinna did keep not the extra money."
+    ],
+    answer: 1,
+    explanation: "After did not, use the base form of the verb: keep."
+  },
+  {
+    q: "Choose the correctly formed sentence.",
+    options: [
+      "The bells around Tara's neck tinkled.",
+      "The bells Tara's neck around tinkled.",
+      "Around tinkled the neck Tara's bells.",
+      "Tinkled around bells the Tara's neck."
+    ],
+    answer: 0,
+    explanation: "The subject comes before the verb; the remaining words complete the idea."
+  },
+  {
+    q: "Choose the correct sentence.",
+    options: [
+      "He were honest.",
+      "He honest were.",
+      "He was honest.",
+      "Was honest he."
+    ],
+    answer: 2,
+    explanation: "He is singular, so was is the correct past form of be."
+  },
+  {
+    q: "Choose the correct sentence about the apples.",
+    options: [
+      "Chinna some apples saw.",
+      "Chinna saw some apples.",
+      "Saw some Chinna apples.",
+      "Some saw apples Chinna."
+    ],
+    answer: 1,
+    explanation: "The correct word order is Chinna + saw + some apples."
+  },
+  {
+    q: "Which sentence uses 'and' correctly?",
+    options: [
+      "Chinna and Kamala went to the market.",
+      "Chinna went and the market Kamala.",
+      "And Chinna Kamala market went.",
+      "Chinna Kamala and to went market."
+    ],
+    answer: 0,
+    explanation: "And joins the two names as the subject of the sentence."
+  },
+  {
+    q: "Choose the correctly formed sentence.",
+    options: [
+      "The seller extra gave money him.",
+      "The gave seller him extra money.",
+      "Extra the money seller him gave.",
+      "The seller gave him extra money."
+    ],
+    answer: 3,
+    explanation: "The sentence has a clear subject, verb and objects."
+  },
+  {
+    q: "Choose the correct sentence using 'because'.",
+    options: [
+      "Chinna returned the money because honest he was.",
+      "Chinna returned the money because he was honest.",
+      "Because honest Chinna the money returned he.",
+      "Chinna because returned money he honest was the."
+    ],
+    answer: 1,
+    explanation: "Because introduces a reason, followed by a correctly ordered clause."
+  },
+  {
+    q: "Choose the correct command.",
+    options: [
+      "Please return the extra money.",
+      "Please the extra return money.",
+      "Return please money the extra.",
+      "The money please extra return."
+    ],
+    answer: 0,
+    explanation: "A command can begin with the base form of the verb."
+  },
+  {
+    q: "Choose the correctly punctuated exclamation.",
+    options: [
+      "What a lovely sound.",
+      "what a lovely sound!",
+      "What a lovely sound!",
+      "What a lovely sound?"
+    ],
+    answer: 2,
+    explanation: "An exclamation expresses strong feeling and ends with an exclamation mark."
+  },
+  {
+    q: "Choose the correct sentence.",
+    options: [
+      "Tara wearing the bells is.",
+      "Wearing Tara the bells is.",
+      "The bells is wearing Tara.",
+      "Tara is wearing the bells."
+    ],
+    answer: 3,
+    explanation: "The correct order is subject + is + verb form + object."
+  },
+  {
+    q: "Choose the best sentence about Chinna's action.",
+    options: [
+      "Chinna the extra money returned seller to the.",
+      "Chinna returned the extra money to the seller.",
+      "Returned Chinna to the money extra seller.",
+      "The seller Chinna money to returned extra."
+    ],
+    answer: 1,
+    explanation: "This sentence has the correct word order and clearly expresses the action."
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+let userAnswers = [];
+
+const questionNumber = document.getElementById("questionNumber");
+const scoreLive = document.getElementById("scoreLive");
+const questionText = document.getElementById("questionText");
+const optionsBox = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const nextBtn = document.getElementById("nextBtn");
+const quizCard = document.getElementById("quizCard");
+const result = document.getElementById("result");
+const reviewArea = document.getElementById("reviewArea");
+
+function showQuestion() {
+  answered = false;
+  const item = questions[currentQuestion];
+
+  questionNumber.textContent =
+    `Question ${currentQuestion + 1} of ${questions.length}`;
+
+  scoreLive.textContent = `Score: ${score}`;
+  questionText.textContent = item.q;
+  optionsBox.innerHTML = "";
+  feedback.style.display = "none";
+  feedback.textContent = "";
+  nextBtn.disabled = true;
+
+  document.getElementById("progress").style.width =
+    `${(currentQuestion / questions.length) * 100}%`;
+
+  item.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option";
+    button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+
+    button.addEventListener("click", () => selectAnswer(index));
+    optionsBox.appendChild(button);
+  });
+
+  nextBtn.textContent =
+    currentQuestion === questions.length - 1
+      ? "Finish Quiz"
+      : "Next Question →";
+}
+
+function selectAnswer(index) {
+  if (answered) return;
+  answered = true;
+
+  const item = questions[currentQuestion];
+  const buttons = optionsBox.querySelectorAll(".option");
+  const isCorrect = index === item.answer;
+
+  userAnswers[currentQuestion] = index;
+
+  if (isCorrect) {
+    score++;
+    feedback.textContent = "Correct Answer! " + item.explanation;
+    feedback.style.background = "#d8f5df";
+    feedback.style.color = "#155b30";
+  } else {
+    feedback.textContent =
+      "Wrong Answer. Correct answer: " +
+      item.options[item.answer] + ". " + item.explanation;
+    feedback.style.background = "#ffe0e0";
+    feedback.style.color = "#8a2020";
+  }
+
+  buttons.forEach((button, buttonIndex) => {
+    button.disabled = true;
+
+    if (buttonIndex === item.answer) {
+      button.classList.add("correct");
+    } else if (buttonIndex === index) {
+      button.classList.add("wrong");
+    }
+  });
+
+  feedback.style.display = "block";
+  scoreLive.textContent = `Score: ${score}`;
+  nextBtn.disabled = false;
+}
+
+function finishQuiz() {
+  quizCard.style.display = "none";
+  result.style.display = "block";
+
+  document.getElementById("progress").style.width = "100%";
+  document.getElementById("finalScore").textContent =
+    `Your score: ${score} out of ${questions.length}`;
+
+  const percentage = (score / questions.length) * 100;
+  let message = "";
+
+  if (percentage === 100) {
+    message = "Excellent job! You answered every question correctly.";
+  } else if (percentage >= 80) {
+    message = "Very good job! Keep practising.";
+  } else if (percentage >= 60) {
+    message = "Good effort! Review your mistakes and try again.";
+  } else {
+    message = "Keep practising. Read each sentence carefully and try again.";
+  }
+
+  document.getElementById("finalMessage").textContent = message;
+}
+
+function buildReview() {
+  const reviewContent = document.getElementById("reviewContent");
+  reviewContent.innerHTML = "";
+
+  questions.forEach((item, index) => {
+    const chosen = userAnswers[index];
+    const block = document.createElement("div");
+    block.className = "review-item";
+
+    const heading = document.createElement("strong");
+    heading.textContent = `${index + 1}. ${item.q}`;
+    block.appendChild(heading);
+
+    const answer = document.createElement("p");
+    answer.textContent =
+      `Your answer: ${chosen === undefined ? "Not answered" : item.options[chosen]}`;
+    block.appendChild(answer);
+
+    const correct = document.createElement("p");
+    correct.textContent = `Correct answer: ${item.options[item.answer]}`;
+    correct.style.color = "#187b43";
+    block.appendChild(correct);
+
+    const explanation = document.createElement("p");
+    explanation.textContent = item.explanation;
+    block.appendChild(explanation);
+
+    reviewContent.appendChild(block);
+  });
+}
+
+nextBtn.addEventListener("click", () => {
+  if (!answered) return;
+
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    showQuestion();
+  } else {
+    finishQuiz();
+  }
+});
+
+document.getElementById("reviewBtn").addEventListener("click", () => {
+  buildReview();
+  reviewArea.style.display =
+    reviewArea.style.display === "none" ? "block" : "none";
+
+  if (reviewArea.style.display === "block") {
+    reviewArea.scrollIntoView({ behavior: "smooth" });
+  }
+});
+
+document.getElementById("retryBtn").addEventListener("click", () => {
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+  userAnswers = [];
+
+  result.style.display = "none";
+  quizCard.style.display = "block";
+  reviewArea.style.display = "none";
+
+  showQuestion();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+showQuestion();
+</script>
+
+</body>
+</html>
