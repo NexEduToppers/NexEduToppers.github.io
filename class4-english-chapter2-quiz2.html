@@ -778,4 +778,21 @@ document.getElementById("reviewBtn").addEventListener("click", () => {
     reviewArea.style.display === "none" ? "block" : "none";
 });
 
-document.getElementById("retryBtn").addEventListene
+document.getElementById("retryBtn").addEventListener("click", () => {
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+  userAnswers = [];
+
+  result.classList.remove("show");
+  quizCard.style.display = "block";
+  document.getElementById("reviewArea").style.display = "none";
+
+  showQuestion();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+showQuestion();
+</script>
+</body>
+</html>
