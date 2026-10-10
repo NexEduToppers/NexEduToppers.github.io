@@ -589,20 +589,21 @@
     document.getElementById("percentage").textContent =
       "Percentage: " + percent + "%";
 
-    let message;
+   let message;
 
-    if (percent === 100) {
-      message = "Outstanding! You answered every question correctly!";
-    } else if (percent >= 80) {
-      message = "Excellent work! Keep learning and practising.";
-    } else if (percent >= 60) {
-      message = "Good effort! Review a few words and try again.";
-    } else if (percent >= 40) {
-      message = "Keep practising. You can improve with revision.";
-    } else {
-      message = "Keep going! Learn the word meanings and try again.";
-    }
-
+if (percent === 100) {
+  message = "Fantastic! Perfect score! 🎉";
+} else if (percent >= 81) {
+  message = "Excellent!";
+} else if (percent >= 61) {
+  message = "Very good!";
+} else if (percent >= 41) {
+  message = "Good job!";
+} else if (percent >= 21) {
+  message = "Good try!";
+} else {
+  message = "Keep trying!";
+}
     document.getElementById("resultMessage").textContent = message;
     document.getElementById("resultFeedback").textContent =
       "Review your answers to learn from any mistakes.";
