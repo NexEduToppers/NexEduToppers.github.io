@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Quiz 7 | Story Sequencing</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f7ff;color:#243047;line-height:1.6}
+header{background:linear-gradient(135deg,#174ea6,#287be0);color:white;text-align:center;padding:22px 12px}
+header h1{margin:0 0 8px;font-size:25px}
+header p{margin:4px 0}
+.container{width:94%;max-width:760px;margin:22px auto}
+.info,.quiz-card,.result-card,.review-card{background:white;padding:20px;border-radius:14px;margin-bottom:18px;box-shadow:0 3px 12px #00000012}
+.progress-line{height:10px;background:#e0e7f0;border-radius:20px;overflow:hidden;margin:12px 0}
+#progress{width:0%;height:100%;background:#20864a;transition:width .2s}
+#questionText{font-size:21px;margin:12px 0 18px}
+.option{display:block;width:100%;text-align:left;padding:13px;margin:10px 0;border:2px solid #d5dfec;background:white;border-radius:10px;cursor:pointer;font-size:16px;color:#243047}
+.option:hover:not(:disabled){background:#edf5ff}
+.option:disabled{cursor:default;opacity:1}
+.option.correct{background:#d8f5df;border-color:#198744}
+.option.wrong{background:#ffe0e0;border-color:#d83232}
+#feedback{display:none;padding:12px;border-radius:9px;margin:15px 0;font-weight:600}
+.action{border:0;border-radius:9px;padding:12px 18px;margin:6px 5px 6px 0;background:#175fc0;color:white;font-size:16px;cursor:pointer}
+.action:disabled{opacity:.45;cursor:not-allowed}
+.secondary{background:#536579}
+.green{background:#187b43}
+#result,#reviewArea{display:none}
+.review-item{padding:12px 0;border-bottom:1px solid #e2e8f0}
+.site-disclaimer{background:#e7edf5;padding:20px;margin-top:25px;font-size:13px;color:#39475a;border-radius:10px}
+.site-disclaimer h3{margin-top:0}
+footer{text-align:center;padding:18px 10px;color:#536579;font-size:13px}
+@media(max-width:480px){header h1{font-size:21px}.info,.quiz-card,.result-card,.review-card{padding:15px}#questionText{font-size:19px}}
+</style>
+</head>
+<body>
+<header>
+<h1>RawaRajpootNexEduToppers Learning Academy</h1>
+<p>Class 4 English | Chapter 2: The Tinkling Bells</p>
+<p><strong>Quiz 7: Story Sequencing</strong></p>
+</header>
+
+<main class="container">
+<section class="info">
+<h2>Instructions | निर्देश</h2>
+<p>Choose the event that happened first, next, or last in the story.</p>
+<p>कहानी में सबसे पहले, उसके बाद या अंत में हुई घटना चुनें।</p>
+<p><strong>Total Questions:</strong> 20 | <strong>Marks:</strong> 20</p>
+</section>
+
+<section class="quiz-card" id="quizCard">
+<div><strong id="questionNumber">Question 1 of 20</strong><span id="scoreLive" style="float:right">Score: 0</span></div>
+<div class="progress-line"><div id="progress"></div></div>
+<h2 id="questionText"></h2>
+<div id="options"></div>
+<div id="feedback" role="status" aria-live="polite"></div>
+<button class="action" id="nextBtn" disabled>Next Question →</button>
+</section>
+
+<section class="result-card" id="result">
+<h2>Quiz Completed!</h2>
+<p id="finalScore"></p>
+<p id="finalMessage"></p>
+<button class="action green" id="retryBtn">Try Again</button>
+<button class="action secondary" id="reviewBtn">Review Answers</button>
+</section>
+
+<section class="review-card" id="reviewArea">
+<h2>Answer Review</h2>
+<div id="reviewContent"></div>
+</section>
+
+<section class="site-disclaimer">
+<h3>Disclaimer | अस्वीकरण</h3>
+<p>RawaRajpootNexEduToppers Learning Academy is an independent educational platform and is not affiliated with, endorsed by, or associated with NCERT. NCERT textbook names, chapters, and curriculum topics belong exclusively to NCERT. All solutions and study notes provided here are original practice aids. For official textbooks, visit <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">ncert.nic.in</a>.</p>
+</section>
+</main>
+
+<footer>Learn • Practise • Improve<br>RawaRajpootNexEduToppers Learning Academy</footer>
+
+<script>
+const questions = [
+{
+q:"What happened first in the story?",
+options:["Chinna bought bells for Tara.","Chinna noticed the tinkling bells at Chacha's shop.","The seller gave Chinna extra change.","Chinna returned the extra money."],
+answer:1,
+explanation:"Chinna first noticed the bells he wanted to buy."
+},
+{
+q:"What did Chinna discover after seeing the bells?",
+options:["His money was missing.","Tara had run away.","The shop was closed.","His mother had bought bells."],
+answer:0,
+explanation:"Chinna realised that the money given to him was missing."
+},
+{
+q:"Who comforted Chinna when he was upset?",
+options:["The fruit seller","Chacha","His mother, Kamala","A classmate"],
+answer:2,
+explanation:"Kamala comforted her son when he was upset."
+},
+{
+q:"What did Chinna and Kamala do after this?",
+options:["They went straight home.","They bought a new goat.","They returned to school.","They went to the market."],
+answer:3,
+explanation:"Chinna went to the market with his mother."
+},
+{
+q:"Which items did Kamala buy at the market?",
+options:["Apples, mangoes, tomatoes and brinjals","Bells, toys and books","Shoes, shirts and bags","Rice, milk and bread only"],
+answer:0,
+explanation:"The story mentions apples, mangoes, tomatoes and brinjals."
+},
+{
+q:"What was the price of each pineapple?",
+options:["₹10","₹45","₹20","₹100"],
+answer:1,
+explanation:"Each pineapple cost ₹45."
+},
+{
+q:"How many pineapples did Kamala buy?",
+options:["One","Three","Two","Four"],
+answer:2,
+explanation:"Kamala bought two pineapples."
+},
+{
+q:"How much money did Kamala give the pineapple seller?",
+options:["₹10","₹45","₹90","₹100"],
+answer:3,
+explanation:"She gave the seller ₹100."
+},
+{
+q:"How much change should the seller have returned?",
+options:["₹10","₹20","₹45","₹55"],
+answer:0,
+explanation:"Two pineapples cost ₹90, so the change from ₹100 was ₹10."
+},
+{
+q:"What mistake did the seller make?",
+options:["He gave no change.","He gave Chinna two ₹10 notes as change.","He gave Kamala two pineapples for free.","He charged ₹100 for one pineapple."],
+answer:1,
+explanation:"The seller accidentally returned ₹20 instead of ₹10."
+},
+{
+q:"What did Chinna think about buying with the extra money?",
+options:["A school uniform","A new bicycle","Bells and chocolates","A new house"],
+answer:2,
+explanation:"Chinna considered buying bells and chocolates with the extra money."
+},
+{
+q:"What helped Chinna decide what to do?",
+options:["He wanted to leave quickly.","The seller told him to keep it.","He forgot about the money.","He thought about his own missing money and chose to be honest."],
+answer:3,
+explanation:"Chinna reflected on his own experience and decided to return the extra money."
+},
+{
+q:"What did Chinna do with the extra money?",
+options:["He returned it to the seller.","He spent it on chocolates.","He hid it at home.","He gave it to another child."],
+answer:0,
+explanation:"Chinna returned the extra money to the seller."
+},
+{
+q:"How did the seller react to Chinna's honesty?",
+options:["He became angry.","He praised Chinna.","He refused to speak.","He asked him to leave without a word."],
+answer:1,
+explanation:"The seller praised Chinna for doing the right thing."
+},
+{
+q:"What did Kamala do after Chinna returned the money?",
+options:["She went home alone.","She bought another pineapple.","She took Chinna to Chacha's shop.","She asked him to hide the money."],
+answer:2,
+explanation:"Kamala took Chinna to Chacha's shop to buy the bells."
+},
+{
+q:"What did Chinna finally buy?",
+options:["Chocolates for the seller","A new bag","More pineapples","Tinkling bells for Tara"],
+answer:3,
+explanation:"Chinna finally bought the bells he had wanted."
+},
+{
+q:"What did Chinna do with the bells?",
+options:["He put them around Tara's neck.","He left them at the market.","He gave them to the fruit seller.","He kept them in a cupboard."],
+answer:0,
+explanation:"Chinna put the bells around Tara's neck."
+},
+{
+q:"Which event happened after Chinna returned the extra money?",
+options:["He first noticed the bells.","The seller praised him.","He discovered his money was missing.","He first went to the market."],
+answer:1,
+explanation:"The seller praised Chinna after he returned the extra money."
+},
+{
+q:"Which event happened last in the story?",
+options:["Kamala bought fruit.","Chinna saw the bells in the shop.","Chinna put the bells around Tara's neck.","The seller gave extra change."],
+answer:2,
+explanation:"The story ends with Chinna putting the bells around Tara's neck."
+},
+{
+q:"Which sequence best matches the main events of the story?",
+options:[
+"Chinna buys bells → loses money → visits market → returns extra change",
+"Chinna returns money → sees bells → buys fruit → loses money",
+"Chinna visits market → buys bells → loses money → sees Tara",
+"Chinna sees bells → realises his money is missing → goes to market → returns extra change → buys bells for Tara"
+],
+answer:3,
+explanation:"This sequence follows the main events in their correct order."
+}
+];
+
+let currentQuestion=0;
+let score=0;
+let answered=false;
+let userAnswers=[];
+
+const questionNumber=document.getElementById("questionNumber");
+const scoreLive=document.getElementById("scoreLive");
+const questionText=document.getElementById("questionText");
+const optionsBox=document.getElementById("options");
+const feedback=document.getElementById("feedback");
+const nextBtn=document.getElementById("nextBtn");
+const quizCard=document.getElementById("quizCard");
+const result=document.getElementById("result");
+const reviewArea=document.getElementById("reviewArea");
+
+function showQuestion(){
+  answered=false;
+  const item=questions[currentQuestion];
+  questionNumber.textContent=`Question ${currentQuestion+1} of ${questions.length}`;
+  scoreLive.textContent=`Score: ${score}`;
+  questionText.textContent=item.q;
+  optionsBox.innerHTML="";
+  feedback.style.display="none";
+  feedback.textContent="";
+  nextBtn.disabled=true;
+  document.getElementById("progress").style.width=`${currentQuestion/questions.length*100}%`;
+
+  item.options.forEach((option,index)=>{
+    const button=document.createElement("button");
+    button.type="button";
+    button.className="option";
+    button.textContent=`${String.fromCharCode(65+index)}. ${option}`;
+    button.addEventListener("click",()=>selectAnswer(index));
+    optionsBox.appendChild(button);
+  });
+
+  nextBtn.textContent=currentQuestion===questions.length-1?"Finish Quiz":"Next Question →";
+}
+
+function selectAnswer(index){
+  if(answered)return;
+  answered=true;
+  const item=questions[currentQuestion];
+  const buttons=optionsBox.querySelectorAll(".option");
+  const correct=index===item.answer;
+  userAnswers[currentQuestion]=index;
+
+  if(correct){
+    score++;
+    feedback.textContent="Correct Answer! "+item.explanation;
+    feedback.style.background="#d8f5df";
+    feedback.style.color="#155b30";
+  }else{
+    feedback.textContent="Wrong Answer. Correct answer: "+item.options[item.answer]+". "+item.explanation;
+    feedback.style.background="#ffe0e0";
+    feedback.style.color="#8a2020";
+  }
+
+  buttons.forEach((button,i)=>{
+    button.disabled=true;
+    if(i===item.answer)button.classList.add("correct");
+    else if(i===index)button.classList.add("wrong");
+  });
+
+  feedback.style.display="block";
+  scoreLive.textContent=`Score: ${score}`;
+  nextBtn.disabled=false;
+}
+
+function finishQuiz(){
+  quizCard.style.display="none";
+  result.style.display="block";
+  document.getElementById("finalScore").textContent=`Your score: ${score} out of ${questions.length}`;
+  const percentage=score/questions.length*100;
+  let message;
+  if(percentage===100)message="Excellent job! You know the story's sequence very well.";
+  else if(percentage>=80)message="Very good job! Keep practising.";
+  else if(percentage>=60)message="Good effort! Review the story and try again.";
+  else message="Keep practising. Read the story again and follow the events in order.";
+  document.getElementById("finalMessage").textContent=message;
+}
+
+function buildReview(){
+  const reviewContent=document.getElementById("reviewContent");
+  reviewContent.innerHTML="";
+  questions.forEach((item,index)=>{
+    const block=document.createElement("div");
+    block.className="review-item";
+    const heading=document.createElement("strong");
+    heading.textContent=`${index+1}. ${item.q}`;
+    block.appendChild(heading);
+    const chosen=document.createElement("p");
+    chosen.textContent=`Your answer: ${userAnswers[index]===undefined?"Not answered":item.options[userAnswers[index]]}`;
+    block.appendChild(chosen);
+    const correct=document.createElement("p");
+    correct.textContent=`Correct answer: ${item.options[item.answer]}`;
+    correct.style.color="#187b43";
+    block.appendChild(correct);
+    const explanation=document.createElement("p");
+    explanation.textContent=item.explanation;
+    block.appendChild(explanation);
+    reviewContent.appendChild(block);
+  });
+}
+
+nextBtn.addEventListener("click",()=>{
+  if(!answered)return;
+  if(currentQuestion<questions.length-1){
+    currentQuestion++;
+    showQuestion();
+  }else{
+    finishQuiz();
+  }
+});
+
+document.getElementById("reviewBtn").addEventListener("click",()=>{
+  buildReview();
+  reviewArea.style.display=reviewArea.style.display==="none"?"block":"none";
+  if(reviewArea.style.display==="block")reviewArea.scrollIntoView({behavior:"smooth"});
+});
+
+document.getElementById("retryBtn").addEventListener("click",()=>{
+  currentQuestion=0;
+  score=0;
+  answered=false;
+  userAnswers=[];
+  result.style.display="none";
+  quizCard.style.display="block";
+  reviewArea.style.display="none";
+  showQuestion();
+  window.scrollTo({top:0,behavior:"smooth"});
+});
+
+showQuestion();
+</script>
+</body>
+</html>
