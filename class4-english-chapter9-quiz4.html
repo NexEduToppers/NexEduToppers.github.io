@@ -1,0 +1,628 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Class 4 English Chapter 9 Hekko Quiz 4: Past Simple Tense grammar practice in English and Hindi.">
+  <title>Class 4 English Chapter 9 Quiz 4 - Grammar | RawaRajpootNexEduToppers</title>
+
+  <style>
+    :root {
+      --primary: #174ea6;
+      --secondary: #087f8c;
+      --light: #eef6ff;
+      --text: #243247;
+      --white: #ffffff;
+      --border: #dce6f2;
+      --green: #e8f7ed;
+      --green-text: #176534;
+      --red: #fdecec;
+      --red-text: #a32121;
+      --muted: #5d6b7c;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #eef4fb;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #174ea6, #087f8c);
+      color: white;
+      text-align: center;
+      padding: 28px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(23px, 5vw, 34px);
+    }
+
+    header p { margin: 5px 0; }
+
+    .container {
+      width: min(100% - 24px, 800px);
+      margin: 22px auto;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 14px rgba(26, 53, 87, 0.06);
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-top: 0;
+      font-size: 23px;
+    }
+
+    .hindi {
+      color: #45566b;
+      margin-top: 5px;
+    }
+
+    .quiz-info {
+      background: var(--light);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 18px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 12px;
+      background: #dbe5f1;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: var(--secondary);
+      transition: width 0.25s ease;
+    }
+
+    .question-number {
+      color: var(--secondary);
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .question-text {
+      font-size: 19px;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .option-button {
+      width: 100%;
+      text-align: left;
+      font-size: 16px;
+      font-family: inherit;
+      color: var(--text);
+      background: #f8fbff;
+      border: 2px solid #d7e2f0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      line-height: 1.5;
+    }
+
+    .option-button:hover:not(:disabled) {
+      background: #eaf3ff;
+      border-color: #8eb4e8;
+    }
+
+    .option-button:focus-visible,
+    .action-button:focus-visible,
+    .back-link:focus-visible {
+      outline: 3px solid #f0ad4e;
+      outline-offset: 3px;
+    }
+
+    .option-button:disabled {
+      cursor: default;
+      opacity: 1;
+    }
+
+    .option-button.correct {
+      background: var(--green);
+      border-color: #42a66b;
+      color: var(--green-text);
+    }
+
+    .option-button.wrong {
+      background: var(--red);
+      border-color: #d9534f;
+      color: var(--red-text);
+    }
+
+    .feedback {
+      display: none;
+      border-radius: 10px;
+      padding: 14px;
+      margin-top: 18px;
+    }
+
+    .feedback.correct-feedback {
+      display: block;
+      background: var(--green);
+      color: var(--green-text);
+    }
+
+    .feedback.wrong-feedback {
+      display: block;
+      background: var(--red);
+      color: var(--red-text);
+    }
+
+    .feedback h3 {
+      margin: 0 0 5px;
+      font-size: 18px;
+    }
+
+    .action-button {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 9px;
+      padding: 12px 18px;
+      margin-top: 16px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .action-button:hover { background: #103d84; }
+
+    #nextButton { display: none; }
+
+    #resultPanel {
+      display: none;
+      text-align: center;
+    }
+
+    .score-number {
+      color: var(--primary);
+      font-size: 34px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .result-message {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .back-link {
+      display: inline-block;
+      background: var(--light);
+      color: var(--primary);
+      text-decoration: none;
+      border: 1px solid #c9dcf5;
+      border-radius: 9px;
+      padding: 11px 16px;
+      margin: 8px 5px 0;
+      font-weight: bold;
+    }
+
+    .back-link:hover { background: #dcecff; }
+
+    .site-disclaimer {
+      background: #e9eef5;
+      border-top: 1px solid #cbd5e1;
+      padding: 24px 16px;
+      color: #344256;
+      font-size: 14px;
+    }
+
+    .site-disclaimer h2 { font-size: 19px; }
+
+    .site-disclaimer a {
+      color: #174ea6;
+      overflow-wrap: anywhere;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin: 15px 0 0;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 23px 12px; }
+      .card { padding: 17px; }
+      h2 { font-size: 21px; }
+      .question-text { font-size: 18px; }
+      .option-button { padding: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+    <p>Class 4 English | Chapter 9</p>
+    <h2 style="color:white; margin:10px 0;">HEKKO</h2>
+    <p>Quiz 4 — Grammar: Past Simple Tense</p>
+    <p lang="hi">प्रश्नोत्तरी 4 — व्याकरण: सामान्य भूतकाल</p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Past Simple Tense | सामान्य भूतकाल</h2>
+      <p>
+        Choose the correct past-tense verb or sentence in each question.
+        Read the English question and Hindi translation carefully.
+      </p>
+      <p class="hindi" lang="hi">
+        प्रत्येक प्रश्न में सही भूतकाल की क्रिया या वाक्य चुनें।
+        अंग्रेज़ी प्रश्न और हिंदी अनुवाद ध्यान से पढ़ें।
+      </p>
+
+      <div class="quiz-info">
+        <strong>Questions:</strong> 10
+        <span lang="hi"> | प्रश्न: 10</span>
+        <br>
+        <strong>Score:</strong>
+        <span id="scoreDisplay" aria-live="polite">0 / 10</span>
+        <br>
+        <strong>Progress:</strong>
+        <span id="progressText">0 / 10</span>
+
+        <div
+          class="progress-track"
+          id="progressBar"
+          role="progressbar"
+          aria-label="Quiz progress"
+          aria-valuemin="0"
+          aria-valuemax="10"
+          aria-valuenow="0">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="quizPanel">
+      <div class="question-number" id="questionNumber">Question 1 of 10</div>
+      <div class="question-text" id="questionText"></div>
+      <p class="hindi" lang="hi" id="questionHindi"></p>
+
+      <div class="options" id="optionsContainer"></div>
+
+      <div class="feedback" id="feedbackBox" aria-live="polite">
+        <h3 id="feedbackTitle"></h3>
+        <p id="feedbackEnglish"></p>
+        <p class="hindi" lang="hi" id="feedbackHindi"></p>
+      </div>
+
+      <button class="action-button" id="nextButton" type="button">
+        Next Question | अगला प्रश्न
+      </button>
+    </section>
+
+    <section class="card" id="resultPanel" aria-live="polite">
+      <h2>Quiz Completed! | प्रश्नोत्तरी पूरी हुई!</h2>
+      <p>Your final score is:</p>
+      <p class="score-number" id="finalScore">0 / 10</p>
+      <p class="hindi" lang="hi" id="finalScoreHindi"></p>
+      <p class="result-message" id="resultMessage"></p>
+      <p class="hindi" lang="hi" id="resultMessageHindi"></p>
+
+      <button class="action-button" id="restartButton" type="button">
+        Try Again | फिर से प्रयास करें
+      </button>
+
+      <div>
+        <a class="back-link" href="class4-english-chapter9.html">
+          Back to Chapter 9 | अध्याय 9 पर वापस जाएँ
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="site-disclaimer">
+      <h2>Disclaimer | अस्वीकरण</h2>
+      <p>
+        RawaRajpootNexEduToppers Learning Academy is an independent
+        educational platform and is not affiliated with, endorsed by,
+        or associated with NCERT. NCERT textbook names, chapters, and
+        curriculum topics belong exclusively to NCERT. All explanations,
+        examples, and practice material provided here are educational aids.
+        For official textbooks, visit
+        <a href="https://ncert.nic.in/" target="_blank"
+           rel="noopener noreferrer">ncert.nic.in</a>.
+      </p>
+      <p lang="hi">
+        RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+        इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+        पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+        यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
+        लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+        <a href="https://ncert.nic.in/" target="_blank"
+           rel="noopener noreferrer">ncert.nic.in</a> पर जाएँ।
+      </p>
+      <p class="footer-note">
+        Independent learning resource | स्वतंत्र शैक्षिक संसाधन
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    "use strict";
+
+    const questions = [
+      {
+        question: "What is the past tense of “play”?",
+        hindi: "“Play” का भूतकाल क्या है?",
+        options: ["Playing", "Plays", "Played", "Play"],
+        answer: 2,
+        explanation: "Played is the past tense of the regular verb play.",
+        explanationHindi: "Played, नियमित क्रिया play का भूतकाल है।"
+      },
+      {
+        question: "Choose the correct past-tense verb: “Yesterday, we _____ the park.”",
+        hindi: "सही भूतकाल की क्रिया चुनें: “कल हम पार्क _____।”",
+        options: ["visit", "visited", "visiting", "visits"],
+        answer: 1,
+        explanation: "Visited is correct because the sentence describes a completed action in the past.",
+        explanationHindi: "Visited सही है क्योंकि वाक्य बीते समय में पूरी हुई क्रिया बताता है।"
+      },
+      {
+        question: "What is the past tense of “go”?",
+        hindi: "“Go” का भूतकाल क्या है?",
+        options: ["Goed", "Gone", "Going", "Went"],
+        answer: 3,
+        explanation: "Went is the past tense of go. It is an irregular verb.",
+        explanationHindi: "Went, go का भूतकाल है। यह एक अनियमित क्रिया है।"
+      },
+      {
+        question: "Choose the correct sentence.",
+        hindi: "सही वाक्य चुनें।",
+        options: [
+          "She play yesterday.",
+          "She played yesterday.",
+          "She plays yesterday.",
+          "She playing yesterday."
+        ],
+        answer: 1,
+        explanation: "She played yesterday is correct. The past-tense verb played describes yesterday's action.",
+        explanationHindi: "She played yesterday सही है। Played बीते समय की क्रिया बताता है।"
+      },
+      {
+        question: "What is the past tense of “see”?",
+        hindi: "“See” का भूतकाल क्या है?",
+        options: ["Seed", "Seeing", "Saw", "Seen"],
+        answer: 2,
+        explanation: "Saw is the simple past tense of see.",
+        explanationHindi: "Saw, see का सामान्य भूतकाल है।"
+      },
+      {
+        question: "Complete the sentence: “The children _____ a game yesterday.”",
+        hindi: "वाक्य पूरा करें: “बच्चों ने कल एक खेल _____।”",
+        options: ["played", "play", "plays", "playing"],
+        answer: 0,
+        explanation: "Played is correct because yesterday refers to the past.",
+        explanationHindi: "Played सही है क्योंकि yesterday बीते समय को दर्शाता है।"
+      },
+      {
+        question: "What is the past tense of “drink”?",
+        hindi: "“Drink” का भूतकाल क्या है?",
+        options: ["Drinked", "Drank", "Drunk", "Drinking"],
+        answer: 1,
+        explanation: "Drank is the simple past tense of drink.",
+        explanationHindi: "Drank, drink का सामान्य भूतकाल है।"
+      },
+      {
+        question: "Choose the correct past-tense verb: “He _____ home after the game.”",
+        hindi: "सही भूतकाल की क्रिया चुनें: “वह खेल के बाद घर _____।”",
+        options: ["go", "gone", "going", "went"],
+        answer: 3,
+        explanation: "Went is correct because it is the past tense of go.",
+        explanationHindi: "Went सही है क्योंकि यह go का भूतकाल है।"
+      },
+      {
+        question: "Which verb is irregular in the past tense?",
+        hindi: "कौन-सी क्रिया अनियमित भूतकाल वाली क्रिया है?",
+        options: ["Jump → jumped", "Watch → watched", "Come → came", "Play → played"],
+        answer: 2,
+        explanation: "Come changes to came instead of adding -ed, so it is irregular.",
+        explanationHindi: "Come का भूतकाल came होता है। इसमें केवल -ed नहीं जुड़ता, इसलिए यह अनियमित क्रिया है।"
+      },
+      {
+        question: "Choose the correct sentence in the past simple tense.",
+        hindi: "Past Simple Tense में सही वाक्य चुनें।",
+        options: [
+          "They watched the match last week.",
+          "They watch the match last week.",
+          "They watching the match last week.",
+          "They watches the match last week."
+        ],
+        answer: 0,
+        explanation: "Watched is the correct past-tense form because the action happened last week.",
+        explanationHindi: "Watched सही भूतकाल की क्रिया है क्योंकि यह कार्य पिछले सप्ताह हुआ था।"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+
+    const questionNumber = document.getElementById("questionNumber");
+    const questionText = document.getElementById("questionText");
+    const questionHindi = document.getElementById("questionHindi");
+    const optionsContainer = document.getElementById("optionsContainer");
+    const feedbackBox = document.getElementById("feedbackBox");
+    const feedbackTitle = document.getElementById("feedbackTitle");
+    const feedbackEnglish = document.getElementById("feedbackEnglish");
+    const feedbackHindi = document.getElementById("feedbackHindi");
+    const nextButton = document.getElementById("nextButton");
+    const scoreDisplay = document.getElementById("scoreDisplay");
+    const progressText = document.getElementById("progressText");
+    const progressFill = document.getElementById("progressFill");
+    const progressBar = document.getElementById("progressBar");
+    const quizPanel = document.getElementById("quizPanel");
+    const resultPanel = document.getElementById("resultPanel");
+
+    function updateProgress() {
+      const completed = currentQuestion + (answered ? 1 : 0);
+      progressFill.style.width = (completed / questions.length * 100) + "%";
+      progressText.textContent = completed + " / " + questions.length;
+      progressBar.setAttribute("aria-valuenow", String(completed));
+      scoreDisplay.textContent = score + " / " + questions.length;
+    }
+
+    function renderQuestion() {
+      answered = false;
+      const q = questions[currentQuestion];
+
+      questionNumber.textContent =
+        "Question " + (currentQuestion + 1) + " of " + questions.length;
+      questionText.textContent = q.question;
+      questionHindi.textContent = q.hindi;
+      optionsContainer.replaceChildren();
+
+      feedbackBox.className = "feedback";
+      feedbackTitle.textContent = "";
+      feedbackEnglish.textContent = "";
+      feedbackHindi.textContent = "";
+      nextButton.style.display = "none";
+
+      q.options.forEach(function(option, index) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option-button";
+        button.textContent = String.fromCharCode(65 + index) + ". " + option;
+        button.addEventListener("click", function() {
+          checkAnswer(index);
+        });
+        optionsContainer.appendChild(button);
+      });
+
+      updateProgress();
+    }
+
+    function checkAnswer(selectedIndex) {
+      if (answered) return;
+      answered = true;
+
+      const q = questions[currentQuestion];
+      const buttons = optionsContainer.querySelectorAll(".option-button");
+      const isCorrect = selectedIndex === q.answer;
+
+      buttons.forEach(function(button, index) {
+        button.disabled = true;
+        if (index === q.answer) button.classList.add("correct");
+        if (index === selectedIndex && !isCorrect) {
+          button.classList.add("wrong");
+        }
+      });
+
+      if (isCorrect) {
+        score++;
+        feedbackBox.className = "feedback correct-feedback";
+        feedbackTitle.textContent = "Correct Answer! | सही उत्तर!";
+        feedbackHindi.textContent = "बहुत अच्छा! आपका उत्तर सही है।";
+      } else {
+        feedbackBox.className = "feedback wrong-feedback";
+        feedbackTitle.textContent = "Wrong Answer | गलत उत्तर";
+        feedbackHindi.textContent = "सही उत्तर हरे रंग में दिखाया गया है।";
+      }
+
+      feedbackEnglish.textContent = q.explanation;
+      updateProgress();
+
+      nextButton.style.display = "inline-block";
+      nextButton.textContent =
+        currentQuestion === questions.length - 1
+          ? "See Final Result | अंतिम परिणाम देखें"
+          : "Next Question | अगला प्रश्न";
+    }
+
+    function showResult() {
+      quizPanel.style.display = "none";
+      resultPanel.style.display = "block";
+
+      document.getElementById("finalScore").textContent =
+        score + " / " + questions.length;
+      document.getElementById("finalScoreHindi").textContent =
+        "आपका स्कोर " + questions.length + " में से " + score + " है।";
+
+      let message;
+      let messageHindi;
+
+      if (score === questions.length) {
+        message = "Excellent work! You answered every question correctly.";
+        messageHindi = "शानदार! आपने सभी प्रश्नों के सही उत्तर दिए।";
+      } else if (score >= 8) {
+        message = "Very good work! Review the questions you missed.";
+        messageHindi = "बहुत अच्छा! जिन प्रश्नों में गलती हुई, उन्हें दोहराएँ।";
+      } else if (score >= 5) {
+        message = "Good effort! Review the past-tense rules and try again.";
+        messageHindi = "अच्छा प्रयास! भूतकाल के नियम दोहराएँ और फिर से कोशिश करें।";
+      } else {
+        message = "Keep practising. Revise regular and irregular verbs and try again.";
+        messageHindi = "अभ्यास जारी रखें। नियमित और अनियमित क्रियाएँ दोहराएँ और फिर से प्रयास करें।";
+      }
+
+      document.getElementById("resultMessage").textContent = message;
+      document.getElementById("resultMessageHindi").textContent = messageHindi;
+
+      progressFill.style.width = "100%";
+      progressText.textContent = questions.length + " / " + questions.length;
+      progressBar.setAttribute("aria-valuenow", String(questions.length));
+      scoreDisplay.textContent = score + " / " + questions.length;
+    }
+
+    nextButton.addEventListener("click", function() {
+      if (!answered) return;
+
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    document.getElementById("restartButton").addEventListener("click", function() {
+      currentQuestion = 0;
+      score = 0;
+      answered = false;
+      quizPanel.style.display = "block";
+      resultPanel.style.display = "none";
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: "auto" });
+    });
+
+    renderQuestion();
+  </script>
+</body>
+</html>
