@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 7 Quiz 8 | Mixed Revision</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:16px;font-family:Arial,sans-serif;background:#eef5ff;color:#243047}
+.container{max-width:650px;margin:20px auto;padding:24px;background:#fff;border-radius:18px;box-shadow:0 5px 18px #00000012}
+header{text-align:center;border-bottom:2px solid #e5edfa;padding-bottom:16px;margin-bottom:20px}
+.brand{color:#155eab;font-weight:bold;font-size:16px}
+h1{color:#174b8c;font-size:24px;margin:12px 0}
+.subtitle{color:#5b6578;line-height:1.6}
+.progress-area{margin:18px 0}
+.progress-label{display:flex;justify-content:space-between;gap:10px;font-size:14px;margin-bottom:7px}
+.progress-track{height:9px;background:#e2e8f0;border-radius:10px;overflow:hidden}
+#progressBar{height:100%;width:0;background:#16834a;transition:width .25s}
+.question-number{color:#1762a8;font-weight:bold;margin-bottom:10px}
+.question{font-size:20px;font-weight:bold;line-height:1.5;margin-bottom:8px}
+.hindi-question{color:#586477;line-height:1.6;margin-bottom:18px}
+.option{display:block;width:100%;text-align:left;padding:13px 14px;margin:10px 0;border:2px solid #dbe5f2;border-radius:10px;background:#fff;color:#243047;font-size:16px;cursor:pointer}
+.option:hover:not(:disabled){background:#f0f7ff;border-color:#4387d3}
+.option:disabled{cursor:default;opacity:1}
+.option.correct{background:#e2f8e9;border-color:#24934b}
+.option.wrong{background:#fff0f0;border-color:#d63a3a}
+#feedback{display:none;margin-top:18px;padding:14px;border-radius:10px;line-height:1.6;white-space:pre-line}
+#feedback.good{display:block;background:#e7f8ec;color:#155d2d}
+#feedback.bad{display:block;background:#fff0f0;color:#9e2525}
+#nextBtn,#restartBtn{width:100%;border:0;border-radius:10px;padding:14px;margin-top:18px;background:#1762a8;color:#fff;font-size:17px;font-weight:bold;cursor:pointer}
+#nextBtn:disabled{background:#9aa9bc;cursor:not-allowed}
+#result{display:none;text-align:center;line-height:1.7}
+#result h2{color:#1762a8}
+.score{font-size:28px;font-weight:bold;color:#16834a}
+.small-note{text-align:center;font-size:14px;color:#657086;margin-top:18px;line-height:1.6}
+@media(max-width:480px){body{padding:9px}.container{padding:16px;margin:8px auto}h1{font-size:21px}.question{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+<div class="brand">RawaRajpootNexEduToppers Learning Academy</div>
+<h1>Class 4 English — Chapter 7</h1>
+<div class="subtitle">
+Fit Body, Fit Mind, Fit Nation<br>
+<strong>Quiz 8: Mixed Revision</strong><br>
+मिश्रित पुनरावृत्ति प्रश्नोत्तरी
+</div>
+</header>
+
+<div id="quizArea">
+<div class="progress-area">
+<div class="progress-label">
+<span id="progressText">Question 1 of 10</span>
+<span id="scoreText">Score: 0</span>
+</div>
+<div class="progress-track"><div id="progressBar"></div></div>
+</div>
+<div class="question-number" id="questionNumber">Question 1</div>
+<div class="question" id="questionText"></div>
+<div class="hindi-question" id="hindiQuestion"></div>
+<div id="options"></div>
+<div id="feedback" aria-live="polite"></div>
+<button id="nextBtn" disabled>Next Question / अगला प्रश्न</button>
+</div>
+
+<div id="result">
+<h2>Quiz Completed! / प्रश्नोत्तरी पूरी हुई!</h2>
+<p>Your final score / आपका अंतिम स्कोर</p>
+<div class="score" id="finalScore"></div>
+<p id="resultMessage"></p>
+<button id="restartBtn">Try Again / फिर से प्रयास करें</button>
+</div>
+
+<div class="small-note">
+Read carefully and learn from each answer.<br>
+ध्यान से पढ़ें और हर उत्तर से सीखें।
+</div>
+</div>
+
+<script>
+const questions = [
+{
+q:"Who plays hockey in the poem?",
+hi:"कविता में हॉकी कौन खेलता है?",
+options:["Anant","Geeta","Meena","Shabana"],
+answer:0,
+exp:"Anant plays hockey, even when the ground is rocky.",
+hiExp:"अनंत ऊबड़-खाबड़ मैदान में भी हॉकी खेलता है।"
+},
+{
+q:"Which instruments are mentioned in the poem?",
+hi:"कविता में किन वाद्य यंत्रों का उल्लेख है?",
+options:["Flute and drum","Guitar and sitar","Piano and violin","Tabla and trumpet"],
+answer:1,
+exp:"The poem mentions a guitar and a sitar.",
+hiExp:"कविता में गिटार और सितार का उल्लेख है।"
+},
+{
+q:"Choose the adjective in the phrase “blue sky”.",
+hi:"“Blue sky” में विशेषण चुनिए।",
+options:["Sky","Blue","The","Is"],
+answer:1,
+exp:"Blue describes the noun sky, so blue is an adjective.",
+hiExp:"Blue, sky की विशेषता बताता है, इसलिए यह विशेषण है।"
+},
+{
+q:"What does the word “swift” mean?",
+hi:"“Swift” शब्द का क्या अर्थ है?",
+options:["Very slow","Very tired","Quick or fast","Very quiet"],
+answer:2,
+exp:"Swift means quick or fast.",
+hiExp:"Swift का अर्थ तेज या शीघ्र होता है।"
+},
+{
+q:"Which word has a double letter?",
+hi:"किस शब्द में दो समान अक्षर साथ-साथ हैं?",
+options:["Skate","Green","Race","Joy"],
+answer:1,
+exp:"Green contains double e: g-r-e-e-n.",
+hiExp:"Green में दो e साथ-साथ आते हैं।"
+},
+{
+q:"Which pair of words rhymes?",
+hi:"कौन-सी शब्द-जोड़ी तुक मिलाती है?",
+options:["Guitar — Hockey","Green — Race","Skates — Mistakes","Sitar — Joy"],
+answer:2,
+exp:"Skates and mistakes have matching ending sounds.",
+hiExp:"Skates और mistakes की अंतिम ध्वनियाँ मिलती हैं।"
+},
+{
+q:"What does “cheerful” mean?",
+hi:"“Cheerful” का क्या अर्थ है?",
+options:["Happy and positive","Angry and rude","Sad and worried","Weak and sleepy"],
+answer:0,
+exp:"Cheerful means happy and in good spirits.",
+hiExp:"Cheerful का अर्थ खुशमिजाज और प्रसन्न होता है।"
+},
+{
+q:"In “hardworking children”, which word is the naming word?",
+hi:"“Hardworking children” में नाम बताने वाला शब्द कौन-सा है?",
+options:["Hardworking","Children","Very","Quickly"],
+answer:1,
+exp:"Children is a noun because it names people. Hardworking describes them.",
+hiExp:"Children संज्ञा है क्योंकि यह लोगों के नाम का बोध कराता है। Hardworking उनकी विशेषता बताता है।"
+},
+{
+q:"What does “rhythm” mean in music?",
+hi:"संगीत में “Rhythm” का क्या अर्थ है?",
+options:["A type of shoe","A spelling mistake","A kind of race","A regular pattern of beats or sounds"],
+answer:3,
+exp:"Rhythm is the regular pattern of beats or sounds in music.",
+hiExp:"Rhythm का अर्थ संगीत में ताल या ध्वनियों का नियमित क्रम है।"
+},
+{
+q:"What lesson can we learn from the children in the poem?",
+hi:"कविता के बच्चों से हम क्या सीख सकते हैं?",
+options:["Never try new activities","Only winning is important","Enjoy activities and keep practising","Avoid learning from mistakes"],
+answer:2,
+exp:"The poem celebrates different activities, practice, joy, and learning from mistakes.",
+hiExp:"कविता अलग-अलग गतिविधियों, अभ्यास, आनंद और गलतियों से सीखने का संदेश देती है।"
+}
+];
+
+let currentQuestion=0;
+let score=0;
+let answered=false;
+
+const questionNumber=document.getElementById("questionNumber");
+const questionText=document.getElementById("questionText");
+const hindiQuestion=document.getElementById("hindiQuestion");
+const optionsDiv=document.getElementById("options");
+const feedback=document.getElementById("feedback");
+const nextBtn=document.getElementById("nextBtn");
+
+function showQuestion(){
+answered=false;
+const item=questions[currentQuestion];
+questionNumber.textContent="Question "+(currentQuestion+1);
+questionText.textContent=item.q;
+hindiQuestion.textContent=item.hi;
+document.getElementById("progressText").textContent=
+"Question "+(currentQuestion+1)+" of "+questions.length;
+document.getElementById("scoreText").textContent="Score: "+score;
+document.getElementById("progressBar").style.width=
+(currentQuestion/questions.length*100)+"%";
+
+optionsDiv.innerHTML="";
+feedback.className="";
+feedback.style.display="none";
+feedback.textContent="";
+nextBtn.disabled=true;
+nextBtn.textContent=currentQuestion===questions.length-1
+?"See Result / परिणाम देखें"
+:"Next Question / अगला प्रश्न";
+
+item.options.forEach(function(option,index){
+const button=document.createElement("button");
+button.type="button";
+button.className="option";
+button.textContent=String.fromCharCode(65+index)+". "+option;
+button.addEventListener("click",function(){checkAnswer(index);});
+optionsDiv.appendChild(button);
+});
+}
+
+function checkAnswer(selected){
+if(answered)return;
+answered=true;
+const item=questions[currentQuestion];
+const buttons=optionsDiv.querySelectorAll(".option");
+
+buttons.forEach(function(button,index){
+button.disabled=true;
+if(index===item.answer)button.classList.add("correct");
+});
+
+if(selected===item.answer){
+score++;
+feedback.className="good";
+feedback.textContent="Correct! / सही उत्तर!\n"+item.exp+"\n"+item.hiExp;
+}else{
+buttons[selected].classList.add("wrong");
+feedback.className="bad";
+feedback.textContent="Wrong answer. / गलत उत्तर।\nCorrect answer: "+
+item.options[item.answer]+"\n"+item.exp+"\n"+item.hiExp;
+}
+
+feedback.style.display="block";
+document.getElementById("scoreText").textContent="Score: "+score;
+document.getElementById("progressBar").style.width=
+((currentQuestion+1)/questions.length*100)+"%";
+nextBtn.disabled=false;
+}
+
+function showResult(){
+document.getElementById("quizArea").style.display="none";
+document.getElementById("result").style.display="block";
+document.getElementById("finalScore").textContent=score+" / "+questions.length;
+
+let message;
+if(score===10){
+message="Excellent work! You have revised the chapter very well. / शानदार! आपने अध्याय की बहुत अच्छी पुनरावृत्ति की है।";
+}else if(score>=7){
+message="Good job! Revise the questions you missed. / बहुत अच्छा! जिन प्रश्नों में गलती हुई, उन्हें दोहराएँ।";
+}else if(score>=4){
+message="Keep practising. You are improving. / अभ्यास करते रहें। आप बेहतर हो रहे हैं।";
+}else{
+message="Read the chapter again and try once more. / अध्याय को फिर से पढ़ें और दोबारा प्रयास करें।";
+}
+document.getElementById("resultMessage").textContent=message;
+}
+
+nextBtn.addEventListener("click",function(){
+if(!answered)return;
+if(currentQuestion<questions.length-1){
+currentQuestion++;
+showQuestion();
+}else{
+showResult();
+}
+});
+
+document.getElementById("restartBtn").addEventListener("click",function(){
+currentQuestion=0;
+score=0;
+document.getElementById("quizArea").style.display="block";
+document.getElementById("result").style.display="none";
+showQuestion();
+});
+
+showQuestion();
+</script>
+</body>
+</html>
