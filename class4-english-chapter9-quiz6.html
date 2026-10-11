@@ -1,0 +1,607 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 9 Quiz 6 | Hekko</title>
+
+<style>
+:root {
+  --primary: #2457a7;
+  --primary-dark: #173c79;
+  --bg: #f1f6ff;
+  --text: #202b3c;
+  --green: #187642;
+  --red: #b42318;
+  --border: #d8e2f0;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 20px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+.quiz-container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 26px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(28, 56, 100, 0.12);
+}
+
+header {
+  text-align: center;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 18px;
+  margin-bottom: 22px;
+}
+
+.academy-name {
+  color: var(--primary);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.class-label { font-weight: 700; margin: 6px 0; }
+
+h1 {
+  color: var(--primary-dark);
+  margin: 8px 0;
+  font-size: clamp(1.7rem, 5vw, 2.3rem);
+}
+
+.subtitle { margin: 0; color: #52647c; }
+
+.progress-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.progress-track {
+  height: 12px;
+  overflow: hidden;
+  background: #e6edf7;
+  border-radius: 20px;
+  margin-bottom: 22px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: #2d71cb;
+  transition: width 0.2s ease;
+}
+
+.question-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 18px;
+}
+
+.question-number {
+  color: var(--primary);
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.question-en {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 5px;
+}
+
+.question-hi { margin: 0 0 16px; color: #475569; }
+
+.options { display: grid; gap: 10px; }
+
+.option-button {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.option-button:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: #f5f8ff;
+}
+
+.option-button:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #80b5ff;
+  outline-offset: 3px;
+}
+
+.option-button:disabled { cursor: default; opacity: 1; }
+
+.option-button.correct {
+  border-color: var(--green);
+  background: #e9f8ef;
+  color: #115c32;
+}
+
+.option-button.wrong {
+  border-color: var(--red);
+  background: #fff0ef;
+  color: #8e1c13;
+}
+
+.feedback {
+  display: none;
+  padding: 12px;
+  margin-top: 14px;
+  border-radius: 10px;
+}
+
+.feedback.show { display: block; }
+.feedback.correct { background: #e9f8ef; border-left: 5px solid var(--green); }
+.feedback.wrong { background: #fff0ef; border-left: 5px solid var(--red); }
+.feedback p { margin: 4px 0; }
+
+button.action {
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--primary);
+  color: #fff;
+}
+
+button.action:hover { background: var(--primary-dark); }
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.result {
+  display: none;
+  text-align: center;
+  padding: 22px;
+  margin-top: 20px;
+  background: #eef5ff;
+  border-radius: 14px;
+}
+
+.result.show { display: block; }
+.result h2 { color: var(--primary-dark); }
+
+.back-link {
+  display: inline-block;
+  margin: 12px 0 24px;
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.back-link:hover { text-decoration: underline; }
+
+.site-disclaimer {
+  border-top: 2px solid var(--border);
+  margin-top: 24px;
+  padding-top: 18px;
+  font-size: 0.92rem;
+  color: #475569;
+}
+
+.site-disclaimer h2 { font-size: 1.1rem; color: var(--primary-dark); }
+.site-disclaimer a { color: var(--primary); overflow-wrap: anywhere; }
+
+@media (max-width: 520px) {
+  body { padding: 10px; }
+  .quiz-container { padding: 16px; }
+  .question-card { padding: 14px; }
+}
+</style>
+</head>
+
+<body>
+<main class="quiz-container">
+
+<header>
+  <div class="academy-name">
+    RawaRajpootNexEduToppers Learning Academy
+  </div>
+  <p class="class-label">Class 4 English | Chapter 9</p>
+  <h1>HEKKO</h1>
+  <p class="subtitle">Quiz 6: Vocabulary and Word Meanings</p>
+  <p class="subtitle" lang="hi">क्विज़ 6: शब्दावली और शब्दों के अर्थ</p>
+</header>
+
+<div class="progress-row">
+  <span id="progressText">Question 1 of 10</span>
+  <span id="scoreText">Score: 0</span>
+</div>
+
+<div
+  class="progress-track"
+  id="progressBar"
+  role="progressbar"
+  aria-label="Quiz progress"
+  aria-valuemin="0"
+  aria-valuemax="10"
+  aria-valuenow="0"
+>
+  <div class="progress-fill" id="progressFill"></div>
+</div>
+
+<section class="question-card" id="questionCard" aria-live="polite">
+  <div class="question-number" id="questionNumber"></div>
+  <p class="question-en" id="questionEnglish"></p>
+  <p class="question-hi" id="questionHindi" lang="hi"></p>
+  <div class="options" id="options"></div>
+
+  <div class="feedback" id="feedback" aria-live="polite">
+    <p id="feedbackEnglish"></p>
+    <p id="feedbackHindi" lang="hi"></p>
+  </div>
+</section>
+
+<div class="action-row">
+  <button class="action" id="nextButton" type="button" hidden>
+    Next Question / अगला प्रश्न
+  </button>
+  <button class="action" id="restartButton" type="button">
+    Restart Quiz / दोबारा शुरू करें
+  </button>
+</div>
+
+<section class="result" id="result" aria-live="polite">
+  <h2>Quiz Completed! / क्विज़ पूरा हुआ!</h2>
+  <p id="finalScore"></p>
+  <p id="finalMessage"></p>
+  <p id="finalMessageHindi" lang="hi"></p>
+  <button class="action" id="playAgainButton" type="button">
+    Try Again / फिर से प्रयास करें
+  </button>
+</section>
+
+<div style="text-align:center">
+  <a class="back-link" href="class4-english-chapter9.html">
+    ← Back to Chapter 9 / अध्याय 9 पर वापस जाएँ
+  </a>
+</div>
+
+<footer class="site-disclaimer">
+  <h2>Disclaimer | अस्वीकरण</h2>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy is an independent
+    educational platform and is not affiliated with, endorsed by,
+    or associated with NCERT. NCERT textbook names, chapters, and
+    curriculum topics belong exclusively to NCERT. All explanations,
+    examples, and practice material provided here are educational aids.
+    For official textbooks, visit
+    <a href="https://ncert.nic.in/" target="_blank"
+       rel="noopener noreferrer">ncert.nic.in</a>.
+  </p>
+  <p lang="hi">
+    RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+    इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+    पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+    यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
+    लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+    <a href="https://ncert.nic.in/" target="_blank"
+       rel="noopener noreferrer">ncert.nic.in</a> पर जाएँ।
+  </p>
+</footer>
+
+</main>
+
+<script>
+const questions = [
+  {
+    en: "What does “traditional” mean?",
+    hi: "“Traditional” का क्या अर्थ है?",
+    options: [
+      { en: "Connected with customs passed down over time", hi: "समय के साथ चली आ रही परंपराओं से जुड़ा" },
+      { en: "Made only yesterday", hi: "केवल कल बनाया गया" },
+      { en: "Used only once", hi: "केवल एक बार इस्तेमाल किया गया" },
+      { en: "Impossible to learn", hi: "जिसे सीखना असंभव हो" }
+    ],
+    answer: 0,
+    explainEn: "Traditional describes something connected with customs or practices passed down through generations.",
+    explainHi: "Traditional ऐसी चीज़ को कहते हैं जो पीढ़ियों से चली आ रही परंपराओं या रीति-रिवाजों से जुड़ी हो।"
+  },
+  {
+    en: "Which word means “to work together”?",
+    hi: "किस शब्द का अर्थ “मिलकर काम करना” है?",
+    options: [
+      { en: "Cooperate", hi: "सहयोग करना" },
+      { en: "Compete", hi: "प्रतिस्पर्धा करना" },
+      { en: "Complain", hi: "शिकायत करना" },
+      { en: "Refuse", hi: "मना करना" }
+    ],
+    answer: 0,
+    explainEn: "To cooperate means to work together to achieve something.",
+    explainHi: "Cooperate का अर्थ किसी काम को पूरा करने के लिए मिलकर काम करना है।"
+  },
+  {
+    en: "What is the meaning of “respect”?",
+    hi: "“Respect” का क्या अर्थ है?",
+    options: [
+      { en: "Showing regard and consideration for others", hi: "दूसरों के प्रति आदर और ध्यान दिखाना" },
+      { en: "Making fun of others", hi: "दूसरों का मज़ाक उड़ाना" },
+      { en: "Ignoring everyone", hi: "सबकी अनदेखी करना" },
+      { en: "Breaking promises", hi: "वादे तोड़ना" }
+    ],
+    answer: 0,
+    explainEn: "Respect means treating people with consideration and regard.",
+    explainHi: "Respect का अर्थ दूसरों के साथ आदर और विचारशीलता से व्यवहार करना है।"
+  },
+  {
+    en: "Which word is closest in meaning to “fair” in a game?",
+    hi: "खेल के संदर्भ में “Fair” के सबसे करीब कौन-सा अर्थ है?",
+    options: [
+      { en: "Just and following the rules", hi: "न्यायपूर्ण और नियमों के अनुसार" },
+      { en: "Confusing and secret", hi: "उलझाने वाला और गुप्त" },
+      { en: "Unkind and rude", hi: "निर्दयी और असभ्य" },
+      { en: "Careless and unsafe", hi: "लापरवाह और असुरक्षित" }
+    ],
+    answer: 0,
+    explainEn: "A fair game follows agreed rules and treats players justly.",
+    explainHi: "निष्पक्ष खेल में तय नियमों का पालन होता है और खिलाड़ियों के साथ न्याय किया जाता है।"
+  },
+  {
+    en: "What does “teamwork” mean?",
+    hi: "“Teamwork” का क्या अर्थ है?",
+    options: [
+      { en: "Working together as a team", hi: "एक टीम के रूप में मिलकर काम करना" },
+      { en: "Working against every teammate", hi: "हर साथी के विरुद्ध काम करना" },
+      { en: "Avoiding all responsibilities", hi: "सभी जिम्मेदारियों से बचना" },
+      { en: "Refusing to share ideas", hi: "विचार साझा करने से मना करना" }
+    ],
+    answer: 0,
+    explainEn: "Teamwork means people cooperate to reach a shared goal.",
+    explainHi: "Teamwork का अर्थ एक साझा लक्ष्य पाने के लिए लोगों का सहयोग करना है।"
+  },
+  {
+    en: "Which word means “to practise in order to become better”?",
+    hi: "बेहतर बनने के लिए अभ्यास करने का अर्थ कौन-सा शब्द देता है?",
+    options: [
+      { en: "Improve", hi: "सुधार करना" },
+      { en: "Forget", hi: "भूलना" },
+      { en: "Damage", hi: "नुकसान पहुँचाना" },
+      { en: "Hide", hi: "छिपाना" }
+    ],
+    answer: 0,
+    explainEn: "Improve means to make or become better.",
+    explainHi: "Improve का अर्थ किसी चीज़ को बेहतर बनाना या बेहतर होना है।"
+  },
+  {
+    en: "What does “opponent” mean in a game?",
+    hi: "खेल में “Opponent” का क्या अर्थ है?",
+    options: [
+      { en: "A person or team playing against you", hi: "आपके विरुद्ध खेलने वाला व्यक्ति या दल" },
+      { en: "A person who keeps the score only", hi: "केवल अंक लिखने वाला व्यक्ति" },
+      { en: "A person watching from home", hi: "घर से देखने वाला व्यक्ति" },
+      { en: "A person who teaches a lesson", hi: "पाठ पढ़ाने वाला व्यक्ति" }
+    ],
+    answer: 0,
+    explainEn: "An opponent is someone you compete against.",
+    explainHi: "Opponent वह व्यक्ति या दल है जिसके विरुद्ध आप प्रतिस्पर्धा करते हैं।"
+  },
+  {
+    en: "Which word means “a set of instructions to follow”?",
+    hi: "पालन करने के लिए दिए गए निर्देशों के समूह को क्या कहते हैं?",
+    options: [
+      { en: "Rules", hi: "नियम" },
+      { en: "Prizes", hi: "पुरस्कार" },
+      { en: "Stories", hi: "कहानियाँ" },
+      { en: "Hobbies", hi: "शौक" }
+    ],
+    answer: 0,
+    explainEn: "Rules tell us what is allowed and expected.",
+    explainHi: "नियम बताते हैं कि क्या करना उचित है और किसका पालन करना चाहिए।"
+  },
+  {
+    en: "What does “celebrate” mean?",
+    hi: "“Celebrate” का क्या अर्थ है?",
+    options: [
+      { en: "To mark a happy or special occasion", hi: "खुशी या विशेष अवसर मनाना" },
+      { en: "To hide from everyone", hi: "सबसे छिपना" },
+      { en: "To break something", hi: "किसी चीज़ को तोड़ना" },
+      { en: "To stop learning", hi: "सीखना बंद करना" }
+    ],
+    answer: 0,
+    explainEn: "Celebrate means to do something special for a happy event or occasion.",
+    explainHi: "Celebrate का अर्थ खुशी या विशेष अवसर पर कुछ खास करना या उत्सव मनाना है।"
+  },
+  {
+    en: "Which word means “not giving up easily”?",
+    hi: "आसानी से हार न मानने का अर्थ कौन-सा शब्द देता है?",
+    options: [
+      { en: "Determined", hi: "दृढ़ निश्चयी" },
+      { en: "Careless", hi: "लापरवाह" },
+      { en: "Confused", hi: "उलझन में" },
+      { en: "Lazy", hi: "आलसी" }
+    ],
+    answer: 0,
+    explainEn: "A determined person keeps trying to reach a goal.",
+    explainHi: "दृढ़ निश्चयी व्यक्ति लक्ष्य तक पहुँचने के लिए प्रयास जारी रखता है।"
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+const questionNumber = document.getElementById("questionNumber");
+const questionEnglish = document.getElementById("questionEnglish");
+const questionHindi = document.getElementById("questionHindi");
+const optionsContainer = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const feedbackEnglish = document.getElementById("feedbackEnglish");
+const feedbackHindi = document.getElementById("feedbackHindi");
+const nextButton = document.getElementById("nextButton");
+const restartButton = document.getElementById("restartButton");
+const playAgainButton = document.getElementById("playAgainButton");
+const result = document.getElementById("result");
+const progressText = document.getElementById("progressText");
+const scoreText = document.getElementById("scoreText");
+const progressFill = document.getElementById("progressFill");
+const progressBar = document.getElementById("progressBar");
+const questionCard = document.getElementById("questionCard");
+
+function renderQuestion() {
+  answered = false;
+  const q = questions[currentQuestion];
+
+  questionNumber.textContent =
+    `Question ${currentQuestion + 1} / प्रश्न ${currentQuestion + 1}`;
+  questionEnglish.textContent = q.en;
+  questionHindi.textContent = q.hi;
+  optionsContainer.innerHTML = "";
+  feedback.className = "feedback";
+  feedbackEnglish.textContent = "";
+  feedbackHindi.textContent = "";
+  nextButton.hidden = true;
+  result.classList.remove("show");
+  questionCard.hidden = false;
+
+  q.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option-button";
+
+    const letter = document.createElement("strong");
+    letter.textContent = `${String.fromCharCode(65 + index)}. `;
+    button.append(letter, document.createTextNode(`${option.en} / ${option.hi}`));
+
+    button.addEventListener("click", () => selectAnswer(index));
+    optionsContainer.appendChild(button);
+  });
+
+  progressText.textContent =
+    `Question ${currentQuestion + 1} of ${questions.length}`;
+  scoreText.textContent = `Score: ${score} / ${questions.length}`;
+  progressFill.style.width =
+    `${(currentQuestion / questions.length) * 100}%`;
+  progressBar.setAttribute("aria-valuenow", currentQuestion);
+}
+
+function selectAnswer(selectedIndex) {
+  if (answered) return;
+  answered = true;
+
+  const q = questions[currentQuestion];
+  const buttons = [...optionsContainer.querySelectorAll("button")];
+  const isCorrect = selectedIndex === q.answer;
+
+  buttons.forEach((button, index) => {
+    button.disabled = true;
+    if (index === q.answer) button.classList.add("correct");
+    if (index === selectedIndex && !isCorrect) {
+      button.classList.add("wrong");
+    }
+  });
+
+  if (isCorrect) {
+    score++;
+    feedbackEnglish.textContent = "Correct! " + q.explainEn;
+    feedbackHindi.textContent = "सही उत्तर! " + q.explainHi;
+    feedback.className = "feedback show correct";
+  } else {
+    const correctOption = q.options[q.answer];
+    feedbackEnglish.textContent =
+      `Not quite. Correct answer: ${correctOption.en}. ${q.explainEn}`;
+    feedbackHindi.textContent =
+      `सही उत्तर: ${correctOption.hi}। ${q.explainHi}`;
+    feedback.className = "feedback show wrong";
+  }
+
+  scoreText.textContent = `Score: ${score} / ${questions.length}`;
+  progressFill.style.width =
+    `${((currentQuestion + 1) / questions.length) * 100}%`;
+  progressBar.setAttribute("aria-valuenow", currentQuestion + 1);
+
+  nextButton.hidden = false;
+  nextButton.textContent =
+    currentQuestion === questions.length - 1
+      ? "See Result / परिणाम देखें"
+      : "Next Question / अगला प्रश्न";
+}
+
+function showResult() {
+  questionCard.hidden = true;
+  nextButton.hidden = true;
+  result.classList.add("show");
+  progressFill.style.width = "100%";
+  progressBar.setAttribute("aria-valuenow", questions.length);
+
+  document.getElementById("finalScore").textContent =
+    `Your score: ${score} out of ${questions.length} / आपका स्कोर: ${questions.length} में से ${score}`;
+
+  let messageEn;
+  let messageHi;
+
+  if (score === 10) {
+    messageEn = "Excellent work! You know these word meanings very well.";
+    messageHi = "बहुत शानदार! आपको इन शब्दों के अर्थ अच्छी तरह याद हैं।";
+  } else if (score >= 7) {
+    messageEn = "Good job! Review the words you missed.";
+    messageHi = "बहुत अच्छा! जिन शब्दों में गलती हुई, उन्हें दोबारा पढ़ें।";
+  } else if (score >= 4) {
+    messageEn = "Keep practising. Read the meanings again and retry.";
+    messageHi = "अभ्यास जारी रखें। शब्दों के अर्थ फिर पढ़ें और दोबारा प्रयास करें।";
+  } else {
+    messageEn = "Keep learning. Review each word and its meaning.";
+    messageHi = "सीखते रहें। हर शब्द और उसका अर्थ दोबारा पढ़ें।";
+  }
+
+  document.getElementById("finalMessage").textContent = messageEn;
+  document.getElementById("finalMessageHindi").textContent = messageHi;
+}
+
+nextButton.addEventListener("click", () => {
+  if (!answered) return;
+
+  if (currentQuestion === questions.length - 1) {
+    showResult();
+    return;
+  }
+
+  currentQuestion++;
+  renderQuestion();
+});
+
+function restartQuiz() {
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+  renderQuestion();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+restartButton.addEventListener("click", restartQuiz);
+playAgainButton.addEventListener("click", restartQuiz);
+
+renderQuestion();
+</script>
+
+</body>
+</html>
