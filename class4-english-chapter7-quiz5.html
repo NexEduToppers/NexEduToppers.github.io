@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 7 Quiz 5 | RawaRajpootNexEduToppers</title>
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 20px 12px;
+  font-family: Arial, sans-serif;
+  background: #eef6ff;
+  color: #243247;
+}
+
+.quiz-container {
+  max-width: 680px;
+  margin: auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(30,64,100,.12);
+}
+
+.brand {
+  text-align: center;
+  color: #174ea6;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.subtitle {
+  text-align: center;
+  color: #526579;
+  line-height: 1.6;
+  margin: 8px 0 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #173f7a;
+  font-size: 25px;
+}
+
+.topic {
+  text-align: center;
+  background: #e7f0ff;
+  padding: 12px;
+  border-radius: 10px;
+  line-height: 1.7;
+  margin: 16px 0;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+  margin: 18px 0 8px;
+}
+
+.progress-track {
+  height: 9px;
+  background: #dce6f2;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: #2878d0;
+  transition: width .2s;
+}
+
+.question {
+  margin-top: 24px;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.hindi-question {
+  margin: 8px 0 16px;
+  color: #58677b;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.option {
+  width: 100%;
+  padding: 13px 15px;
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.6;
+  background: #f8fbff;
+  border: 2px solid #d5e1ef;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.option:hover:not(:disabled) {
+  background: #eaf3ff;
+  border-color: #4388d5;
+}
+
+.option:disabled {
+  cursor: default;
+  opacity: 1;
+  color: #243247;
+}
+
+.option.correct {
+  background: #e3f7e8;
+  border-color: #259447;
+}
+
+.option.wrong {
+  background: #ffebeb;
+  border-color: #d43d3d;
+}
+
+.feedback {
+  display: none;
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 10px;
+  line-height: 1.7;
+}
+
+.feedback.correct-feedback {
+  display: block;
+  background: #e8f8ed;
+  color: #17652e;
+}
+
+.feedback.wrong-feedback {
+  display: block;
+  background: #fff0f0;
+  color: #9c2525;
+}
+
+.feedback div + div { margin-top: 7px; }
+
+.controls { margin-top: 20px; }
+
+.action {
+  border: 0;
+  border-radius: 9px;
+  padding: 13px 18px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#nextBtn {
+  width: 100%;
+  background: #1769c2;
+  color: white;
+}
+
+#nextBtn:disabled {
+  background: #9aacc0;
+  cursor: not-allowed;
+}
+
+.result {
+  display: none;
+  text-align: center;
+  padding: 20px 5px;
+}
+
+.result h2 { color: #174ea6; }
+
+.result-score {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 16px 0;
+}
+
+.result-message {
+  line-height: 1.8;
+  font-size: 17px;
+}
+
+#restartBtn {
+  width: 100%;
+  margin-top: 18px;
+  background: #16804a;
+  color: white;
+}
+
+.small-note {
+  text-align: center;
+  color: #65758a;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+  .quiz-container { padding: 17px; }
+  .brand { font-size: 18px; }
+  h1 { font-size: 22px; }
+  .question { font-size: 18px; }
+  .option { font-size: 15px; }
+}
+</style>
+</head>
+
+<body>
+<div class="quiz-container">
+
+  <div class="brand">
+    RawaRajpootNexEduToppers<br>
+    Learning Academy
+  </div>
+
+  <div class="subtitle">
+    Class 4 English | Santoor<br>
+    कक्षा 4 अंग्रेज़ी
+  </div>
+
+  <h1>Chapter 7: Quiz 5</h1>
+
+  <div class="topic">
+    <strong>Double-Letter Words</strong><br>
+    दोहरे अक्षर वाले शब्द
+  </div>
+
+  <div id="quizArea">
+    <div class="progress-info">
+      <span id="questionCount">Question 1 of 10</span>
+      <span id="scoreCount">Score: 0</span>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="question" id="questionText"></div>
+    <div class="hindi-question" id="hindiQuestion"></div>
+    <div class="options" id="optionsArea"></div>
+    <div class="feedback" id="feedback" aria-live="polite"></div>
+
+    <div class="controls">
+      <button class="action" id="nextBtn" disabled>
+        Next Question / अगला प्रश्न
+      </button>
+    </div>
+  </div>
+
+  <div class="result" id="resultArea" aria-live="polite">
+    <h2>Quiz Completed! / प्रश्नोत्तरी पूरी हुई!</h2>
+    <div class="result-score" id="finalScore"></div>
+    <div class="result-message" id="resultMessage"></div>
+    <button class="action" id="restartBtn">
+      Try Again / फिर से प्रयास करें
+    </button>
+  </div>
+
+  <div class="small-note">
+    Read each question carefully before answering.<br>
+    उत्तर देने से पहले हर प्रश्न ध्यान से पढ़ें।
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    en: "Which word contains a double letter?",
+    hi: "किस शब्द में एक अक्षर लगातार दो बार आया है?",
+    options: ["Cat", "Bell", "Dog", "Sun"],
+    hindiOptions: ["बिल्ली", "घंटी", "कुत्ता", "सूरज"],
+    answer: 1,
+    explanation: "Bell has two l's together.",
+    hindiExplanation: "Bell में l अक्षर लगातार दो बार आता है।"
+  },
+  {
+    en: "Which word has double 'p'?",
+    hi: "किस शब्द में p अक्षर लगातार दो बार आता है?",
+    options: ["Apple", "Pencil", "Paper", "Plant"],
+    hindiOptions: ["सेब", "पेंसिल", "कागज़", "पौधा"],
+    answer: 0,
+    explanation: "Apple is spelled with pp.",
+    hindiExplanation: "Apple की वर्तनी में pp आता है।"
+  },
+  {
+    en: "Choose the correctly spelled word.",
+    hi: "सही वर्तनी वाला शब्द चुनिए।",
+    options: ["Rabit", "Rabbit", "Rabbitt", "Rabitt"],
+    hindiOptions: ["गलत वर्तनी", "सही वर्तनी", "गलत वर्तनी", "गलत वर्तनी"],
+    answer: 1,
+    explanation: "Rabbit is spelled with double b.",
+    hindiExplanation: "Rabbit में b अक्षर लगातार दो बार आता है।"
+  },
+  {
+    en: "Which word has double 's'?",
+    hi: "किस शब्द में s अक्षर लगातार दो बार आता है?",
+    options: ["Basic", "Grass", "Music", "House"],
+    hindiOptions: ["बुनियादी", "घास", "संगीत", "घर"],
+    answer: 1,
+    explanation: "Grass ends with ss.",
+    hindiExplanation: "Grass के अंत में ss आता है।"
+  },
+  {
+    en: "Which word has double 'e'?",
+    hi: "किस शब्द में e अक्षर लगातार दो बार आता है?",
+    options: ["Green", "Great", "Grow", "Garden"],
+    hindiOptions: ["हरा", "महान", "उगना", "बगीचा"],
+    answer: 0,
+    explanation: "Green contains ee.",
+    hindiExplanation: "Green में ee लगातार आता है।"
+  },
+  {
+    en: "Which word has double 't'?",
+    hi: "किस शब्द में t अक्षर लगातार दो बार आता है?",
+    options: ["Water", "Little", "Tiger", "Table"],
+    hindiOptions: ["पानी", "छोटा", "बाघ", "मेज़"],
+    answer: 1,
+    explanation: "Little contains tt.",
+    hindiExplanation: "Little में tt लगातार आता है।"
+  },
+  {
+    en: "Complete the word: ba__oon (a toy filled with air).",
+    hi: "शब्द पूरा कीजिए: ba__oon (हवा से भरा खिलौना)।",
+    options: ["ll", "tt", "pp", "ss"],
+    hindiOptions: ["ll", "tt", "pp", "ss"],
+    answer: 0,
+    explanation: "The correct spelling is balloon, with ll.",
+    hindiExplanation: "सही वर्तनी balloon है, जिसमें ll आता है।"
+  },
+  {
+    en: "Which word has double 'm'?",
+    hi: "किस शब्द में m अक्षर लगातार दो बार आता है?",
+    options: ["Summer", "Smile", "Small", "Smart"],
+    hindiOptions: ["गर्मी का मौसम", "मुस्कान", "छोटा", "होशियार"],
+    answer: 0,
+    explanation: "Summer contains mm.",
+    hindiExplanation: "Summer में mm लगातार आता है।"
+  },
+  {
+    en: "Which word has double 'l' in the middle?",
+    hi: "किस शब्द के बीच में ll आता है?",
+    options: ["Pillow", "Piano", "Paper", "Pilot"],
+    hindiOptions: ["तकिया", "पियानो", "कागज़", "पायलट"],
+    answer: 0,
+    explanation: "Pillow contains ll in the middle.",
+    hindiExplanation: "Pillow के बीच में ll आता है।"
+  },
+  {
+    en: "Which pair contains two words with double letters?",
+    hi: "किस जोड़ी के दोनों शब्दों में दोहरे अक्षर हैं?",
+    options: [
+      "Book and happy",
+      "Cat and dog",
+      "Sun and pen",
+      "Fish and tree"
+    ],
+    hindiOptions: [
+      "Book और happy",
+      "Cat और dog",
+      "Sun और pen",
+      "Fish और tree"
+    ],
+    answer: 0,
+    explanation: "Book has oo and happy has pp.",
+    hindiExplanation: "Book में oo और happy में pp आता है।"
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+const questionText = document.getElementById("questionText");
+const hindiQuestion = document.getElementById("hindiQuestion");
+const optionsArea = document.getElementById("optionsArea");
+const feedback = document.getElementById("feedback");
+const nextBtn = document.getElementById("nextBtn");
+const questionCount = document.getElementById("questionCount");
+const scoreCount = document.getElementById("scoreCount");
+const progressBar = document.getElementById("progressBar");
+const quizArea = document.getElementById("quizArea");
+const resultArea = document.getElementById("resultArea");
+
+function loadQuestion() {
+  answered = false;
+  const q = questions[currentQuestion];
+
+  questionCount.textContent =
+    `Question ${currentQuestion + 1} of ${questions.length}`;
+  scoreCount.textContent = `Score: ${score}`;
+  progressBar.style.width =
+    `${(currentQuestion / questions.length) * 100}%`;
+
+  questionText.textContent = q.en;
+  hindiQuestion.textContent = q.hi;
+  optionsArea.innerHTML = "";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+  nextBtn.disabled = true;
+
+  q.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option";
+
+    const letter = String.fromCharCode(65 + index);
+    button.innerHTML =
+      `<strong>${letter}.</strong> ${option}<br>` +
+      `<span lang="hi">${q.hindiOptions[index]}</span>`;
+
+    button.addEventListener("click", () => selectAnswer(index));
+    optionsArea.appendChild(button);
+  });
+}
+
+function selectAnswer(selectedIndex) {
+  if (answered) return;
+  answered = true;
+
+  const q = questions[currentQuestion];
+  const buttons = optionsArea.querySelectorAll(".option");
+  const isCorrect = selectedIndex === q.answer;
+
+  buttons.forEach((button, index) => {
+    button.disabled = true;
+    if (index === q.answer) button.classList.add("correct");
+    if (index === selectedIndex && !isCorrect) {
+      button.classList.add("wrong");
+    }
+  });
+
+  if (isCorrect) {
+    score++;
+    feedback.className = "feedback correct-feedback";
+    feedback.innerHTML =
+      `<div><strong>Correct!</strong> ${q.explanation}</div>` +
+      `<div lang="hi"><strong>सही उत्तर!</strong> ${q.hindiExplanation}</div>`;
+  } else {
+    feedback.className = "feedback wrong-feedback";
+    feedback.innerHTML =
+      `<div><strong>Try again next time.</strong> Correct answer: ` +
+      `${q.options[q.answer]}. ${q.explanation}</div>` +
+      `<div lang="hi"><strong>सही उत्तर:</strong> ` +
+      `${q.hindiOptions[q.answer]}। ${q.hindiExplanation}</div>`;
+  }
+
+  scoreCount.textContent = `Score: ${score}`;
+  progressBar.style.width =
+    `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+  nextBtn.disabled = false;
+
+  if (currentQuestion === questions.length - 1) {
+    nextBtn.textContent = "See Result / परिणाम देखें";
+  }
+}
+
+function showResult() {
+  quizArea.style.display = "none";
+  resultArea.style.display = "block";
+
+  document.getElementById("finalScore").textContent =
+    `${score} / ${questions.length}`;
+
+  const percentage = score / questions.length * 100;
+  let messageEn;
+  let messageHi;
+
+  if (percentage === 100) {
+    messageEn = "Excellent job! You answered every question correctly.";
+    messageHi = "शानदार! आपने सभी प्रश्नों के सही उत्तर दिए।";
+  } else if (percentage >= 80) {
+    messageEn = "Very good work! Keep practising.";
+    messageHi = "बहुत अच्छा! अभ्यास जारी रखें।";
+  } else if (percentage >= 50) {
+    messageEn = "Good effort! Review the answers and try again.";
+    messageHi = "अच्छा प्रयास! उत्तर दोबारा पढ़ें और फिर प्रयास करें।";
+  } else {
+    messageEn = "Keep learning! Practise double-letter words and try again.";
+    messageHi = "सीखते रहें! दोहरे अक्षर वाले शब्दों का अभ्यास करें।";
+  }
+
+  document.getElementById("resultMessage").innerHTML =
+    `<div>${messageEn}</div><div lang="hi">${messageHi}</div>`;
+}
+
+nextBtn.addEventListener("click", () => {
+  if (!answered) return;
+
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    nextBtn.textContent = "Next Question / अगला प्रश्न";
+    loadQuestion();
+  } else {
+    showResult();
+  }
+});
+
+document.getElementById("restartBtn").addEventListener("click", () => {
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+
+  quizArea.style.display = "block";
+  resultArea.style.display = "none";
+  nextBtn.textContent = "Next Question / अगला प्रश्न";
+  loadQuestion();
+});
+
+loadQuestion();
+</script>
+</body>
+</html>
