@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 7 - Quiz 2</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+  background: #f0f7ff;
+  color: #243247;
+}
+
+.container {
+  max-width: 720px;
+  margin: auto;
+  padding: 24px;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px #00000012;
+}
+
+h1 {
+  text-align: center;
+  color: #1557a6;
+  font-size: 26px;
+}
+
+.subtitle {
+  text-align: center;
+  line-height: 1.6;
+}
+
+.progress {
+  height: 10px;
+  background: #e5eaf1;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+
+#progressBar {
+  width: 0%;
+  height: 100%;
+  background: #16834a;
+  transition: width .25s;
+}
+
+#question {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.hindi {
+  color: #526174;
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 10px 0 16px;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  margin: 10px 0;
+  text-align: left;
+  font-size: 17px;
+  background: white;
+  border: 2px solid #d7e1ef;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.option:hover:not(:disabled) {
+  background: #edf5ff;
+  border-color: #5591d8;
+}
+
+.option:disabled { cursor: default; }
+
+.correct {
+  background: #e1f7e8;
+  border-color: #258447;
+}
+
+.wrong {
+  background: #ffe8e8;
+  border-color: #c63737;
+}
+
+#feedback {
+  display: none;
+  margin-top: 16px;
+  padding: 13px;
+  border-radius: 10px;
+  line-height: 1.6;
+}
+
+#nextBtn, #restartBtn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #1557a6;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#nextBtn:disabled {
+  background: #9aa8ba;
+  cursor: not-allowed;
+}
+
+#result {
+  display: none;
+  text-align: center;
+  line-height: 1.7;
+}
+
+#result h2 { color: #16834a; }
+
+.small {
+  text-align: center;
+  color: #637083;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+  body { padding: 10px; }
+  .container { padding: 17px; }
+  h1 { font-size: 23px; }
+  #question { font-size: 18px; }
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+
+<h1>RawaRajpootNexEduToppers Learning Academy</h1>
+
+<p class="subtitle">
+  <strong>Class 4 English | कक्षा 4 अंग्रेज़ी</strong><br>
+  Chapter 7: Fit Body, Fit Mind, Fit Nation<br>
+  <strong>Quiz 2: Reading Comprehension</strong><br>
+  कविता की समझ
+</p>
+
+<div id="quizArea">
+  <p id="questionCount"></p>
+  <div class="progress"><div id="progressBar"></div></div>
+
+  <div id="question"></div>
+  <div id="questionHindi" class="hindi"></div>
+  <div id="options"></div>
+
+  <div id="feedback" aria-live="polite"></div>
+
+  <button id="nextBtn" disabled>
+    Next Question | अगला प्रश्न
+  </button>
+</div>
+
+<section id="result">
+  <h2 id="resultHeading"></h2>
+  <p id="scoreText"></p>
+  <p id="resultHindi"></p>
+  <button id="restartBtn">Try Again | फिर से प्रयास करें</button>
+</section>
+
+<p class="small">
+  Learn • Understand • Improve<br>
+  सीखें • समझें • बेहतर बनें
+</p>
+
+</main>
+
+<script>
+const questions = [
+  {
+    q: "Why does the poem describe Anant as an active boy?",
+    hi: "कविता में अनंत को सक्रिय लड़का क्यों बताया गया है?",
+    options: [
+      "He plays hockey.",
+      "He plays the guitar.",
+      "He sings in rhythm.",
+      "He wins a cycle race."
+    ],
+    answer: 0,
+    explain: "Anant is described as active because he plays hockey.",
+    explainHi: "अनंत को सक्रिय बताया गया है क्योंकि वह हॉकी खेलता है।"
+  },
+  {
+    q: "What can Geeta learn from her mistakes?",
+    hi: "गीता अपनी गलतियों से क्या सीख सकती है?",
+    options: [
+      "To stop practising",
+      "To improve her skating",
+      "To avoid all games",
+      "To stop learning"
+    ],
+    answer: 1,
+    explain: "Geeta practises skating and learns from her mistakes.",
+    explainHi: "गीता स्केटिंग का अभ्यास करती है और अपनी गलतियों से सीखती है।"
+  },
+  {
+    q: "What does the word 'graceful' suggest about Geeta?",
+    hi: "'Graceful' शब्द गीता के बारे में क्या बताता है?",
+    options: [
+      "She moves with beauty and ease.",
+      "She is always angry.",
+      "She never practises.",
+      "She dislikes outdoor activities."
+    ],
+    answer: 0,
+    explain: "Graceful describes someone who moves in a smooth and pleasing way.",
+    explainHi: "Graceful का अर्थ है सुंदर और सहज ढंग से चलने या हिलने वाला।"
+  },
+  {
+    q: "How does Lhamo feel when he plays the guitar?",
+    hi: "गिटार बजाते समय ल्हामो कैसा महसूस करता है?",
+    options: [
+      "Ashamed",
+      "Bored",
+      "Proud",
+      "Frightened"
+    ],
+    answer: 2,
+    explain: "The poem says that Lhamo proudly plays the guitar.",
+    explainHi: "कविता में कहा गया है कि ल्हामो गर्व से गिटार बजाता है।"
+  },
+  {
+    q: "Which activity helps Shabana celebrate her achievement?",
+    hi: "शबाना अपनी उपलब्धि का जश्न किस गतिविधि के बाद मनाती है?",
+    options: [
+      "Winning a cycle race",
+      "Learning to play sitar",
+      "Practising hockey",
+      "Singing a song"
+    ],
+    answer: 0,
+    explain: "Shabana celebrates after winning a cycle race.",
+    explainHi: "शबाना साइकिल दौड़ जीतने के बाद जश्न मनाती है।"
+  },
+  {
+    q: "What does Meena do in the poem?",
+    hi: "कविता में मीना क्या करती है?",
+    options: [
+      "She plays hockey.",
+      "She sings in rhythm.",
+      "She practises skating.",
+      "She wins a cycle race."
+    ],
+    answer: 1,
+    explain: "Meena sings in rhythm.",
+    explainHi: "मीना लय में गाती है।"
+  },
+  {
+    q: "What do the children in the poem enjoy?",
+    hi: "कविता के बच्चे किस चीज़ का आनंद लेते हैं?",
+    options: [
+      "Only studying",
+      "Only winning prizes",
+      "Playing and taking part in activities",
+      "Avoiding practice"
+    ],
+    answer: 2,
+    explain: "The poem presents playing and different activities as a source of joy.",
+    explainHi: "कविता में खेलना और अलग-अलग गतिविधियाँ खुशी का स्रोत हैं।"
+  },
+  {
+    q: "Which pair of words best describes the poem's mood?",
+    hi: "कौन-से दो शब्द कविता के भाव को सबसे अच्छी तरह बताते हैं?",
+    options: [
+      "Sad and fearful",
+      "Cheerful and joyful",
+      "Angry and upset",
+      "Quiet and gloomy"
+    ],
+    answer: 1,
+    explain: "The poem describes cheerful children and the joy of playing.",
+    explainHi: "कविता खुशमिज़ाज बच्चों और खेलने की खुशी का वर्णन करती है।"
+  },
+  {
+    q: "What is one lesson we can learn from Geeta?",
+    hi: "हम गीता से क्या सीख सकते हैं?",
+    options: [
+      "Mistakes mean we must give up.",
+      "Practice and learning from mistakes help us improve.",
+      "We should never try new things.",
+      "Only winning is important."
+    ],
+    answer: 1,
+    explain: "Geeta learns daily from mistakes, showing that practice helps us improve.",
+    explainHi: "गीता रोज़ गलतियों से सीखती है, जिससे पता चलता है कि अभ्यास हमें बेहतर बनाता है।"
+  },
+  {
+    q: "Which statement best expresses the poem's main message?",
+    hi: "कौन-सा वाक्य कविता का मुख्य संदेश बताता है?",
+    options: [
+      "Every child must play the same game.",
+      "Only sports are important.",
+      "Different activities can bring joy and help children learn.",
+      "Children should avoid music and games."
+    ],
+    answer: 2,
+    explain: "The poem celebrates different sports, music, practice and the joy of taking part.",
+    explainHi: "कविता अलग-अलग खेलों, संगीत, अभ्यास और भाग लेने की खुशी का महत्व बताती है।"
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+const questionEl = document.getElementById("question");
+const questionHindiEl = document.getElementById("questionHindi");
+const optionsEl = document.getElementById("options");
+const feedbackEl = document.getElementById("feedback");
+const nextBtn = document.getElementById("nextBtn");
+
+function showQuestion() {
+  answered = false;
+  const item = questions[current];
+
+  document.getElementById("questionCount").textContent =
+    `Question ${current + 1} of ${questions.length} | प्रश्न ${current + 1} / ${questions.length}`;
+
+  document.getElementById("progressBar").style.width =
+    `${(current / questions.length) * 100}%`;
+
+  questionEl.textContent = `${current + 1}. ${item.q}`;
+  questionHindiEl.textContent = item.hi;
+  optionsEl.innerHTML = "";
+  feedbackEl.style.display = "none";
+  feedbackEl.textContent = "";
+  nextBtn.disabled = true;
+
+  item.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.className = "option";
+    button.type = "button";
+    button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+    button.addEventListener("click", () => chooseAnswer(index, button));
+    optionsEl.appendChild(button);
+  });
+}
+
+function chooseAnswer(index, selectedButton) {
+  if (answered) return;
+  answered = true;
+
+  const item = questions[current];
+  const allOptions = optionsEl.querySelectorAll(".option");
+  allOptions.forEach(button => button.disabled = true);
+
+  if (index === item.answer) {
+    score++;
+    selectedButton.classList.add("correct");
+    feedbackEl.style.background = "#e1f7e8";
+    feedbackEl.style.color = "#155b2c";
+    feedbackEl.textContent =
+      "Correct Answer! Well done! | सही उत्तर! बहुत अच्छा! " +
+      item.explain + " " + item.explainHi;
+  } else {
+    selectedButton.classList.add("wrong");
+    allOptions[item.answer].classList.add("correct");
+    feedbackEl.style.background = "#ffe8e8";
+    feedbackEl.style.color = "#8a2222";
+    feedbackEl.textContent =
+      "Not quite. Read the correct answer and keep learning. | " +
+      "सही उत्तर पढ़ें और सीखते रहें। Correct answer: " +
+      item.options[item.answer] + ". " +
+      item.explain + " " + item.explainHi;
+  }
+
+  feedbackEl.style.display = "block";
+  nextBtn.disabled = false;
+  nextBtn.textContent = current === questions.length - 1
+    ? "View Result | परिणाम देखें"
+    : "Next Question | अगला प्रश्न";
+}
+
+function showResult() {
+  document.getElementById("quizArea").style.display = "none";
+  document.getElementById("result").style.display = "block";
+  document.getElementById("progressBar").style.width = "100%";
+
+  const percent = Math.round((score / questions.length) * 100);
+  let heading, hindi;
+
+  if (percent === 100) {
+    heading = "Excellent Work!";
+    hindi = "शानदार! आपने सभी प्रश्नों के सही उत्तर दिए।";
+  } else if (percent >= 80) {
+    heading = "Very Good Job!";
+    hindi = "बहुत अच्छा! आपका प्रदर्शन बेहतरीन है।";
+  } else if (percent >= 50) {
+    heading = "Good Effort! Keep Practising.";
+    hindi = "अच्छा प्रयास! अभ्यास जारी रखें।";
+  } else {
+    heading = "Keep Learning and Try Again.";
+    hindi = "सीखते रहें और फिर से प्रयास करें।";
+  }
+
+  document.getElementById("resultHeading").textContent = heading;
+  document.getElementById("scoreText").textContent =
+    `Your score: ${score} / ${questions.length} (${percent}%)`;
+  document.getElementById("resultHindi").textContent = hindi;
+}
+
+nextBtn.addEventListener("click", () => {
+  if (!answered) return;
+
+  if (current < questions.length - 1) {
+    current++;
+    showQuestion();
+  } else {
+    showResult();
+  }
+});
+
+document.getElementById("restartBtn").addEventListener("click", () => {
+  current = 0;
+  score = 0;
+  document.getElementById("quizArea").style.display = "block";
+  document.getElementById("result").style.display = "none";
+  nextBtn.textContent = "Next Question | अगला प्रश्न";
+  showQuestion();
+});
+
+showQuestion();
+</script>
+</body>
+</html>
