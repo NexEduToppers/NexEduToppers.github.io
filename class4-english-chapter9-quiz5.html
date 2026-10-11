@@ -1,0 +1,661 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 9 Quiz 5 | Hekko</title>
+
+<style>
+:root {
+  --primary: #2457a7;
+  --primary-dark: #173c79;
+  --bg: #f1f6ff;
+  --text: #202b3c;
+  --green: #187642;
+  --red: #b42318;
+  --border: #d8e2f0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+.quiz-container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 26px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 6px 24px rgba(28, 56, 100, 0.12);
+}
+
+header {
+  text-align: center;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 18px;
+  margin-bottom: 22px;
+}
+
+.academy-name {
+  color: var(--primary);
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.class-label {
+  margin: 6px 0;
+  font-weight: 700;
+}
+
+h1 {
+  color: var(--primary-dark);
+  margin: 8px 0;
+  font-size: clamp(1.7rem, 5vw, 2.3rem);
+}
+
+.subtitle {
+  margin: 0;
+  color: #52647c;
+}
+
+.progress-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.progress-track {
+  height: 12px;
+  overflow: hidden;
+  background: #e6edf7;
+  border-radius: 20px;
+  margin-bottom: 22px;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: #2d71cb;
+  transition: width 0.2s ease;
+}
+
+.question-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 18px;
+}
+
+.question-number {
+  color: var(--primary);
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.question-en {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 5px;
+}
+
+.question-hi {
+  margin: 0 0 16px;
+  color: #475569;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.option-button {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.option-button:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: #f5f8ff;
+}
+
+.option-button:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid #80b5ff;
+  outline-offset: 3px;
+}
+
+.option-button:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.option-button.correct {
+  border-color: var(--green);
+  background: #e9f8ef;
+  color: #115c32;
+}
+
+.option-button.wrong {
+  border-color: var(--red);
+  background: #fff0ef;
+  color: #8e1c13;
+}
+
+.feedback {
+  display: none;
+  padding: 12px;
+  margin-top: 14px;
+  border-radius: 10px;
+}
+
+.feedback.show {
+  display: block;
+}
+
+.feedback.correct {
+  background: #e9f8ef;
+  border-left: 5px solid var(--green);
+}
+
+.feedback.wrong {
+  background: #fff0ef;
+  border-left: 5px solid var(--red);
+}
+
+.feedback p {
+  margin: 4px 0;
+}
+
+button.action {
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--primary);
+  color: #fff;
+}
+
+button.action:hover {
+  background: var(--primary-dark);
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.result {
+  display: none;
+  text-align: center;
+  padding: 22px;
+  margin-top: 20px;
+  background: #eef5ff;
+  border-radius: 14px;
+}
+
+.result.show {
+  display: block;
+}
+
+.result h2 {
+  color: var(--primary-dark);
+}
+
+.back-link {
+  display: inline-block;
+  margin: 12px 0 24px;
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.site-disclaimer {
+  border-top: 2px solid var(--border);
+  margin-top: 24px;
+  padding-top: 18px;
+  font-size: 0.92rem;
+  color: #475569;
+}
+
+.site-disclaimer h2 {
+  font-size: 1.1rem;
+  color: var(--primary-dark);
+}
+
+.site-disclaimer a {
+  color: var(--primary);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 520px) {
+  body {
+    padding: 10px;
+  }
+
+  .quiz-container {
+    padding: 16px;
+  }
+
+  .question-card {
+    padding: 14px;
+  }
+}
+</style>
+</head>
+
+<body>
+<main class="quiz-container">
+
+<header>
+  <div class="academy-name">
+    RawaRajpootNexEduToppers Learning Academy
+  </div>
+  <p class="class-label">Class 4 English | Chapter 9</p>
+  <h1>HEKKO</h1>
+  <p class="subtitle">Quiz 5: Reading Comprehension</p>
+  <p class="subtitle" lang="hi">
+    क्विज़ 5: पढ़कर समझने का अभ्यास
+  </p>
+</header>
+
+<div class="progress-row">
+  <span id="progressText">Question 1 of 10</span>
+  <span id="scoreText">Score: 0</span>
+</div>
+
+<div
+  class="progress-track"
+  role="progressbar"
+  aria-label="Quiz progress"
+  aria-valuemin="0"
+  aria-valuemax="10"
+  aria-valuenow="0"
+  id="progressBar"
+>
+  <div class="progress-fill" id="progressFill"></div>
+</div>
+
+<section class="question-card" aria-live="polite">
+  <div class="question-number" id="questionNumber">Question 1</div>
+  <p class="question-en" id="questionEnglish"></p>
+  <p class="question-hi" id="questionHindi" lang="hi"></p>
+
+  <div class="options" id="options"></div>
+
+  <div class="feedback" id="feedback" aria-live="polite">
+    <p id="feedbackEnglish"></p>
+    <p id="feedbackHindi" lang="hi"></p>
+  </div>
+</section>
+
+<div class="action-row">
+  <button class="action" id="nextButton" type="button" hidden>
+    Next Question / अगला प्रश्न
+  </button>
+  <button class="action" id="restartButton" type="button">
+    Restart Quiz / दोबारा शुरू करें
+  </button>
+</div>
+
+<section class="result" id="result" aria-live="polite">
+  <h2>Quiz Completed! / क्विज़ पूरा हुआ!</h2>
+  <p id="finalScore"></p>
+  <p id="finalMessage"></p>
+  <p id="finalMessageHindi" lang="hi"></p>
+  <button class="action" id="playAgainButton" type="button">
+    Try Again / फिर से प्रयास करें
+  </button>
+</section>
+
+<div style="text-align:center">
+  <a class="back-link" href="class4-english-chapter9.html">
+    ← Back to Chapter 9 / अध्याय 9 पर वापस जाएँ
+  </a>
+</div>
+
+<footer class="site-disclaimer">
+  <h2>Disclaimer | अस्वीकरण</h2>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy is an independent
+    educational platform and is not affiliated with, endorsed by,
+    or associated with NCERT. NCERT textbook names, chapters, and
+    curriculum topics belong exclusively to NCERT. All explanations,
+    examples, and practice material provided here are educational aids.
+    For official textbooks, visit
+    <a href="https://ncert.nic.in/" target="_blank"
+       rel="noopener noreferrer">ncert.nic.in</a>.
+  </p>
+  <p lang="hi">
+    RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+    इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+    पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+    यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
+    लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+    <a href="https://ncert.nic.in/" target="_blank"
+       rel="noopener noreferrer">ncert.nic.in</a> पर जाएँ।
+  </p>
+</footer>
+
+</main>
+
+<script>
+const questions = [
+  {
+    en: "What is the main subject of the chapter “Hekko”?",
+    hi: "“हेक्को” अध्याय का मुख्य विषय क्या है?",
+    options: [
+      { en: "A traditional game", hi: "एक पारंपरिक खेल" },
+      { en: "A cooking competition", hi: "खाना बनाने की प्रतियोगिता" },
+      { en: "A school picnic", hi: "स्कूल की पिकनिक" },
+      { en: "A drawing lesson", hi: "चित्र बनाने का पाठ" }
+    ],
+    answer: 0,
+    explainEn: "The chapter introduces Hekko as a traditional game.",
+    explainHi: "इस अध्याय में हेक्को को एक पारंपरिक खेल के रूप में बताया गया है।"
+  },
+  {
+    en: "Which Indian state is associated with Hekko in the chapter?",
+    hi: "अध्याय में हेक्को का संबंध भारत के किस राज्य से बताया गया है?",
+    options: [
+      { en: "Nagaland", hi: "नागालैंड" },
+      { en: "Punjab", hi: "पंजाब" },
+      { en: "Gujarat", hi: "गुजरात" },
+      { en: "Kerala", hi: "केरल" }
+    ],
+    answer: 0,
+    explainEn: "The chapter connects Hekko with Nagaland.",
+    explainHi: "अध्याय में हेक्को का संबंध नागालैंड से बताया गया है।"
+  },
+  {
+    en: "What is one important quality players need in a team game?",
+    hi: "टीम वाले खेल में खिलाड़ियों के लिए कौन-सा गुण महत्त्वपूर्ण है?",
+    options: [
+      { en: "Teamwork", hi: "मिल-जुलकर काम करना" },
+      { en: "Ignoring teammates", hi: "साथियों की अनदेखी करना" },
+      { en: "Breaking the rules", hi: "नियम तोड़ना" },
+      { en: "Refusing to listen", hi: "बात सुनने से मना करना" }
+    ],
+    answer: 0,
+    explainEn: "Teamwork helps players cooperate and play together.",
+    explainHi: "मिल-जुलकर काम करने से खिलाड़ी सहयोग करते हैं और साथ खेलते हैं।"
+  },
+  {
+    en: "Why should players follow the rules of a game?",
+    hi: "खिलाड़ियों को खेल के नियमों का पालन क्यों करना चाहिए?",
+    options: [
+      { en: "To keep the game fair", hi: "खेल को निष्पक्ष रखने के लिए" },
+      { en: "To confuse other players", hi: "दूसरे खिलाड़ियों को उलझाने के लिए" },
+      { en: "To stop the game", hi: "खेल रोकने के लिए" },
+      { en: "To avoid taking turns", hi: "अपनी बारी से बचने के लिए" }
+    ],
+    answer: 0,
+    explainEn: "Rules help everyone understand how to play fairly.",
+    explainHi: "नियम सभी को निष्पक्ष ढंग से खेलने में मदद करते हैं।"
+  },
+  {
+    en: "What should a player do after making a mistake?",
+    hi: "गलती होने पर खिलाड़ी को क्या करना चाहिए?",
+    options: [
+      { en: "Learn from it and try again", hi: "उससे सीखकर फिर प्रयास करना" },
+      { en: "Blame every teammate", hi: "हर साथी को दोष देना" },
+      { en: "Stop learning", hi: "सीखना बंद कर देना" },
+      { en: "Change the rules secretly", hi: "चुपके से नियम बदल देना" }
+    ],
+    answer: 0,
+    explainEn: "Mistakes can help us learn and improve.",
+    explainHi: "गलतियों से हमें सीखने और बेहतर बनने में मदद मिल सकती है।"
+  },
+  {
+    en: "Which action shows respect during a game?",
+    hi: "खेल के दौरान कौन-सा काम सम्मान दिखाता है?",
+    options: [
+      { en: "Listening to teammates", hi: "साथियों की बात सुनना" },
+      { en: "Laughing at a mistake", hi: "गलती पर हँसना" },
+      { en: "Pushing other players", hi: "दूसरे खिलाड़ियों को धक्का देना" },
+      { en: "Ignoring the referee", hi: "रेफरी की अनदेखी करना" }
+    ],
+    answer: 0,
+    explainEn: "Listening politely shows respect for other players.",
+    explainHi: "ध्यान से और विनम्रता से सुनना दूसरे खिलाड़ियों के प्रति सम्मान दिखाता है।"
+  },
+  {
+    en: "If your team loses, what is a good response?",
+    hi: "यदि आपकी टीम हार जाए, तो अच्छा व्यवहार क्या होगा?",
+    options: [
+      { en: "Congratulate the other team and keep practising", hi: "दूसरी टीम को बधाई देना और अभ्यास जारी रखना" },
+      { en: "Argue with everyone", hi: "सबसे बहस करना" },
+      { en: "Refuse to play again", hi: "दोबारा खेलने से मना करना" },
+      { en: "Blame the weakest player", hi: "सबसे कमजोर खिलाड़ी को दोष देना" }
+    ],
+    answer: 0,
+    explainEn: "A good sport accepts the result and continues learning.",
+    explainHi: "अच्छा खिलाड़ी परिणाम स्वीकार करता है और सीखना जारी रखता है।"
+  },
+  {
+    en: "What can children learn from traditional games?",
+    hi: "बच्चे पारंपरिक खेलों से क्या सीख सकते हैं?",
+    options: [
+      { en: "Cooperation and respect", hi: "सहयोग और सम्मान" },
+      { en: "Dishonesty", hi: "बेईमानी" },
+      { en: "Always blaming others", hi: "हमेशा दूसरों को दोष देना" },
+      { en: "Ignoring instructions", hi: "निर्देशों की अनदेखी करना" }
+    ],
+    answer: 0,
+    explainEn: "Traditional games can help children practise cooperation and respect.",
+    explainHi: "पारंपरिक खेल बच्चों को सहयोग और सम्मान का अभ्यास करने में मदद कर सकते हैं।"
+  },
+  {
+    en: "Which sentence best expresses the value of playing together?",
+    hi: "साथ मिलकर खेलने का महत्त्व कौन-सा वाक्य सबसे अच्छी तरह बताता है?",
+    options: [
+      { en: "We learn to work with others.", hi: "हम दूसरों के साथ मिलकर काम करना सीखते हैं।" },
+      { en: "Only one person should make every decision.", hi: "हर निर्णय केवल एक व्यक्ति को लेना चाहिए।" },
+      { en: "Rules do not matter.", hi: "नियम महत्त्वपूर्ण नहीं हैं।" },
+      { en: "Players should never help one another.", hi: "खिलाड़ियों को कभी एक-दूसरे की मदद नहीं करनी चाहिए।" }
+    ],
+    answer: 0,
+    explainEn: "Playing together gives children opportunities to cooperate.",
+    explainHi: "साथ खेलने से बच्चों को सहयोग करना सीखने के अवसर मिलते हैं।"
+  },
+  {
+    en: "What is the best way to understand a story or chapter?",
+    hi: "कहानी या अध्याय को समझने का सबसे अच्छा तरीका क्या है?",
+    options: [
+      { en: "Read carefully and think about the events", hi: "ध्यान से पढ़ना और घटनाओं के बारे में सोचना" },
+      { en: "Guess without reading", hi: "बिना पढ़े अनुमान लगाना" },
+      { en: "Skip every question", hi: "हर प्रश्न छोड़ देना" },
+      { en: "Memorise words without understanding", hi: "बिना समझे शब्द याद करना" }
+    ],
+    answer: 0,
+    explainEn: "Careful reading helps us understand details and the main idea.",
+    explainHi: "ध्यान से पढ़ने से हमें विवरण और मुख्य विचार समझने में मदद मिलती है।"
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+const questionNumber = document.getElementById("questionNumber");
+const questionEnglish = document.getElementById("questionEnglish");
+const questionHindi = document.getElementById("questionHindi");
+const optionsContainer = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const feedbackEnglish = document.getElementById("feedbackEnglish");
+const feedbackHindi = document.getElementById("feedbackHindi");
+const nextButton = document.getElementById("nextButton");
+const restartButton = document.getElementById("restartButton");
+const playAgainButton = document.getElementById("playAgainButton");
+const result = document.getElementById("result");
+const progressText = document.getElementById("progressText");
+const scoreText = document.getElementById("scoreText");
+const progressFill = document.getElementById("progressFill");
+const progressBar = document.getElementById("progressBar");
+
+function renderQuestion() {
+  answered = false;
+  const q = questions[currentQuestion];
+
+  questionNumber.textContent =
+    `Question ${currentQuestion + 1} / प्रश्न ${currentQuestion + 1}`;
+  questionEnglish.textContent = q.en;
+  questionHindi.textContent = q.hi;
+  optionsContainer.innerHTML = "";
+  feedback.className = "feedback";
+  feedbackEnglish.textContent = "";
+  feedbackHindi.textContent = "";
+  nextButton.hidden = true;
+  result.classList.remove("show");
+
+  q.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option-button";
+    button.innerHTML = `<strong>${String.fromCharCode(65 + index)}.</strong> `;
+    button.append(document.createTextNode(option.en + " / " + option.hi));
+    button.addEventListener("click", () => selectAnswer(index));
+    optionsContainer.appendChild(button);
+  });
+
+  progressText.textContent =
+    `Question ${currentQuestion + 1} of ${questions.length}`;
+  scoreText.textContent = `Score: ${score} / ${questions.length}`;
+  progressFill.style.width =
+    `${(currentQuestion / questions.length) * 100}%`;
+  progressBar.setAttribute("aria-valuenow", currentQuestion);
+}
+
+function selectAnswer(selectedIndex) {
+  if (answered) return;
+  answered = true;
+
+  const q = questions[currentQuestion];
+  const buttons = [...optionsContainer.querySelectorAll("button")];
+  const isCorrect = selectedIndex === q.answer;
+
+  buttons.forEach((button, index) => {
+    button.disabled = true;
+    if (index === q.answer) button.classList.add("correct");
+    if (index === selectedIndex && !isCorrect) {
+      button.classList.add("wrong");
+    }
+  });
+
+  if (isCorrect) {
+    score++;
+    feedbackEnglish.textContent = "Correct! " + q.explainEn;
+    feedbackHindi.textContent = "सही उत्तर! " + q.explainHi;
+    feedback.className = "feedback show correct";
+  } else {
+    const correctOption = q.options[q.answer];
+    feedbackEnglish.textContent =
+      `Not quite. Correct answer: ${correctOption.en}. ${q.explainEn}`;
+    feedbackHindi.textContent =
+      `सही उत्तर: ${correctOption.hi}। ${q.explainHi}`;
+    feedback.className = "feedback show wrong";
+  }
+
+  scoreText.textContent = `Score: ${score} / ${questions.length}`;
+  progressFill.style.width =
+    `${((currentQuestion + 1) / questions.length) * 100}%`;
+  progressBar.setAttribute("aria-valuenow", currentQuestion + 1);
+  nextButton.hidden = false;
+  nextButton.textContent =
+    currentQuestion === questions.length - 1
+      ? "See Result / परिणाम देखें"
+      : "Next Question / अगला प्रश्न";
+}
+
+function showResult() {
+  document.querySelector(".question-card").hidden = true;
+  nextButton.hidden = true;
+  result.classList.add("show");
+  progressFill.style.width = "100%";
+  progressBar.setAttribute("aria-valuenow", questions.length);
+
+  document.getElementById("finalScore").textContent =
+    `Your score: ${score} out of ${questions.length} / आपका स्कोर: ${questions.length} में से ${score}`;
+
+  let messageEn;
+  let messageHi;
+
+  if (score === 10) {
+    messageEn = "Excellent work! You understood the questions very well.";
+    messageHi = "बहुत शानदार! आपने प्रश्नों को बहुत अच्छी तरह समझा।";
+  } else if (score >= 7) {
+    messageEn = "Good job! Review the questions you missed.";
+    messageHi = "बहुत अच्छा! जिन प्रश्नों में गलती हुई, उन्हें दोबारा पढ़ें।";
+  } else if (score >= 4) {
+    messageEn = "Keep practising. Read the chapter again and try once more.";
+    messageHi = "अभ्यास जारी रखें। अध्याय फिर से पढ़ें और दोबारा प्रयास करें।";
+  } else {
+    messageEn = "Keep learning. Read the notes carefully and try again.";
+    messageHi = "सीखते रहें। नोट्स ध्यान से पढ़ें और फिर प्रयास करें।";
+  }
+
+  document.getElementById("finalMessage").textContent = messageEn;
+  document.getElementById("finalMessageHindi").textContent = messageHi;
+}
+
+nextButton.addEventListener("click", () => {
+  if (!answered) return;
+
+  if (currentQuestion === questions.length - 1) {
+    showResult();
+    return;
+  }
+
+  currentQuestion++;
+  renderQuestion();
+});
+
+function restartQuiz() {
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+  document.querySelector(".question-card").hidden = false;
+  result.classList.remove("show");
+  renderQuestion();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+restartButton.addEventListener("click", restartQuiz);
+playAgainButton.addEventListener("click", restartQuiz);
+
+renderQuestion();
+</script>
+
+</body>
+</html>
