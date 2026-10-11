@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 7 - Quiz 3</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+  background: #f0f7ff;
+  color: #243247;
+}
+
+.container {
+  max-width: 720px;
+  margin: auto;
+  padding: 24px;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px #00000012;
+}
+
+h1 {
+  text-align: center;
+  color: #1557a6;
+  font-size: 26px;
+}
+
+.subtitle {
+  text-align: center;
+  line-height: 1.6;
+}
+
+.progress {
+  height: 10px;
+  background: #e5eaf1;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+
+#progressBar {
+  width: 0%;
+  height: 100%;
+  background: #16834a;
+  transition: width .25s;
+}
+
+#question {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.hindi {
+  color: #526174;
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 10px 0 16px;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  margin: 10px 0;
+  text-align: left;
+  font-size: 17px;
+  background: white;
+  border: 2px solid #d7e1ef;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.option:hover:not(:disabled) {
+  background: #edf5ff;
+  border-color: #5591d8;
+}
+
+.option:disabled { cursor: default; }
+
+.correct {
+  background: #e1f7e8;
+  border-color: #258447;
+}
+
+.wrong {
+  background: #ffe8e8;
+  border-color: #c63737;
+}
+
+#feedback {
+  display: none;
+  margin-top: 16px;
+  padding: 13px;
+  border-radius: 10px;
+  line-height: 1.6;
+}
+
+#nextBtn, #restartBtn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #1557a6;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#nextBtn:disabled {
+  background: #9aa8ba;
+  cursor: not-allowed;
+}
+
+#result {
+  display: none;
+  text-align: center;
+  line-height: 1.7;
+}
+
+#result h2 { color: #16834a; }
+
+.small {
+  text-align: center;
+  color: #637083;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+  body { padding: 10px; }
+  .container { padding: 17px; }
+  h1 { font-size: 23px; }
+  #question { font-size: 18px; }
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+
+<h1>RawaRajpootNexEduToppers Learning Academy</h1>
+
+<p class="subtitle">
+  <strong>Class 4 English | कक्षा 4 अंग्रेज़ी</strong><br>
+  Chapter 7: Fit Body, Fit Mind, Fit Nation<br>
+  <strong>Quiz 3: Adjectives (Describing Words)</strong><br>
+  विशेषण — किसी व्यक्ति, वस्तु या स्थान की विशेषता बताने वाले शब्द
+</p>
+
+<div id="quizArea">
+  <p id="questionCount"></p>
+  <div class="progress"><div id="progressBar"></div></div>
+
+  <div id="question"></div>
+  <div id="questionHindi" class="hindi"></div>
+  <div id="options"></div>
+
+  <div id="feedback" aria-live="polite"></div>
+
+  <button id="nextBtn" disabled>
+    Next Question | अगला प्रश्न
+  </button>
+</div>
+
+<section id="result">
+  <h2 id="resultHeading"></h2>
+  <p id="scoreText"></p>
+  <p id="resultHindi"></p>
+  <button id="restartBtn">Try Again | फिर से प्रयास करें</button>
+</section>
+
+<p class="small">
+  Learn • Practise • Improve<br>
+  सीखें • अभ्यास करें • बेहतर बनें
+</p>
+
+</main>
+
+<script>
+const questions = [
+  {
+    q: "What is an adjective?",
+    hi: "विशेषण क्या होता है?",
+    options: [
+      "A word that names a person",
+      "A word that describes a noun",
+      "A word that shows an action",
+      "A word that joins sentences"
+    ],
+    answer: 1,
+    explain: "An adjective describes a noun by telling us more about it.",
+    explainHi: "विशेषण संज्ञा की विशेषता बताता है।"
+  },
+  {
+    q: "Identify the adjective in: 'The active boy plays hockey.'",
+    hi: "वाक्य में विशेषण पहचानें: 'The active boy plays hockey.'",
+    options: ["boy", "plays", "active", "hockey"],
+    answer: 2,
+    explain: "'Active' describes the boy, so it is the adjective.",
+    explainHi: "'Active' लड़के की विशेषता बताता है, इसलिए यह विशेषण है।"
+  },
+  {
+    q: "Choose the adjective in: 'Geeta is a graceful skater.'",
+    hi: "वाक्य में विशेषण चुनें: 'Geeta is a graceful skater.'",
+    options: ["Geeta", "graceful", "skater", "is"],
+    answer: 1,
+    explain: "'Graceful' describes the skater.",
+    explainHi: "'Graceful' स्केटर की विशेषता बताता है।"
+  },
+  {
+    q: "Choose the adjective that correctly describes a sky.",
+    hi: "आकाश की विशेषता बताने वाला सही शब्द चुनें।",
+    options: ["Blue", "Run", "Quickly", "Sing"],
+    answer: 0,
+    explain: "'Blue sky' uses the adjective 'blue' to describe the sky.",
+    explainHi: "'Blue sky' में blue आकाश का रंग बताता है।"
+  },
+  {
+    q: "Which adjective best describes a child who is happy and positive?",
+    hi: "खुश और सकारात्मक बच्चे के लिए कौन-सा विशेषण सही है?",
+    options: ["Rocky", "Cheerful", "Pebbled", "Swiftly"],
+    answer: 1,
+    explain: "'Cheerful' means happy and positive.",
+    explainHi: "'Cheerful' का अर्थ खुशमिज़ाज होता है।"
+  },
+  {
+    q: "Choose a suitable adjective: 'The _____ vegetables help us stay healthy.'",
+    hi: "उचित विशेषण चुनें: 'The _____ vegetables help us stay healthy.'",
+    options: ["healthy", "jump", "quickly", "sing"],
+    answer: 0,
+    explain: "'Healthy vegetables' is a suitable describing phrase.",
+    explainHi: "'Healthy vegetables' का अर्थ है स्वास्थ्यवर्धक सब्ज़ियाँ।"
+  },
+  {
+    q: "Which word describes how fast someone moves?",
+    hi: "कौन-सा शब्द बताता है कि कोई कितनी तेज़ी से चलता है?",
+    options: ["Proudly", "Swift", "Mistakes", "Rhythm"],
+    answer: 1,
+    explain: "'Swift' is an adjective meaning fast or quick.",
+    explainHi: "'Swift' एक विशेषण है जिसका अर्थ तेज़ होता है।"
+  },
+  {
+    q: "Choose the best adjective: 'A _____ nation works towards progress.'",
+    hi: "सबसे उपयुक्त विशेषण चुनें: 'A _____ nation works towards progress.'",
+    options: ["strong", "sing", "slowly", "dance"],
+    answer: 0,
+    explain: "'Strong nation' is a meaningful phrase; 'strong' describes the nation.",
+    explainHi: "'Strong nation' का अर्थ है मज़बूत राष्ट्र।"
+  },
+  {
+    q: "Which word is the adjective in 'The cheerful children play together'?",
+    hi: "वाक्य में विशेषण पहचानें: 'The cheerful children play together.'",
+    options: ["children", "play", "together", "cheerful"],
+    answer: 3,
+    explain: "'Cheerful' describes the children.",
+    explainHi: "'Cheerful' बच्चों की विशेषता बताता है।"
+  },
+  {
+    q: "Choose the correct describing word: 'The _____ winner smiled proudly.'",
+    hi: "सही विशेषण चुनें: 'The _____ winner smiled proudly.'",
+    options: ["happy", "happily", "win", "smile"],
+    answer: 0,
+    explain: "'Happy winner' is correct because 'happy' describes the winner.",
+    explainHi: "'Happy winner' सही है क्योंकि happy विजेता की विशेषता बताता है।"
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+const questionEl = document.getElementById("question");
+const questionHindiEl = document.getElementById("questionHindi");
+const optionsEl = document.getElementById("options");
+const feedbackEl = document.getElementById("feedback");
+const nextBtn = document.getElementById("nextBtn");
+
+function showQuestion() {
+  answered = false;
+  const item = questions[current];
+
+  document.getElementById("questionCount").textContent =
+    `Question ${current + 1} of ${questions.length} | प्रश्न ${current + 1} / ${questions.length}`;
+
+  document.getElementById("progressBar").style.width =
+    `${(current / questions.length) * 100}%`;
+
+  questionEl.textContent = `${current + 1}. ${item.q}`;
+  questionHindiEl.textContent = item.hi;
+  optionsEl.innerHTML = "";
+  feedbackEl.style.display = "none";
+  feedbackEl.textContent = "";
+  nextBtn.disabled = true;
+
+  item.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.className = "option";
+    button.type = "button";
+    button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+    button.addEventListener("click", () => chooseAnswer(index, button));
+    optionsEl.appendChild(button);
+  });
+}
+
+function chooseAnswer(index, selectedButton) {
+  if (answered) return;
+  answered = true;
+
+  const item = questions[current];
+  const allOptions = optionsEl.querySelectorAll(".option");
+  allOptions.forEach(button => button.disabled = true);
+
+  if (index === item.answer) {
+    score++;
+    selectedButton.classList.add("correct");
+    feedbackEl.style.background = "#e1f7e8";
+    feedbackEl.style.color = "#155b2c";
+    feedbackEl.textContent =
+      "Correct Answer! Well done! | सही उत्तर! बहुत अच्छा! " +
+      item.explain + " " + item.explainHi;
+  } else {
+    selectedButton.classList.add("wrong");
+    allOptions[item.answer].classList.add("correct");
+    feedbackEl.style.background = "#ffe8e8";
+    feedbackEl.style.color = "#8a2222";
+    feedbackEl.textContent =
+      "Not quite. Read the correct answer and keep learning. | " +
+      "सही उत्तर पढ़ें और सीखते रहें। Correct answer: " +
+      item.options[item.answer] + ". " +
+      item.explain + " " + item.explainHi;
+  }
+
+  feedbackEl.style.display = "block";
+  nextBtn.disabled = false;
+  nextBtn.textContent = current === questions.length - 1
+    ? "View Result | परिणाम देखें"
+    : "Next Question | अगला प्रश्न";
+}
+
+function showResult() {
+  document.getElementById("quizArea").style.display = "none";
+  document.getElementById("result").style.display = "block";
+  document.getElementById("progressBar").style.width = "100%";
+
+  const percent = Math.round((score / questions.length) * 100);
+  let heading, hindi;
+
+  if (percent === 100) {
+    heading = "Excellent Work!";
+    hindi = "शानदार! आपने सभी प्रश्नों के सही उत्तर दिए।";
+  } else if (percent >= 80) {
+    heading = "Very Good Job!";
+    hindi = "बहुत अच्छा! आपका प्रदर्शन बेहतरीन है।";
+  } else if (percent >= 50) {
+    heading = "Good Effort! Keep Practising.";
+    hindi = "अच्छा प्रयास! अभ्यास जारी रखें।";
+  } else {
+    heading = "Keep Learning and Try Again.";
+    hindi = "सीखते रहें और फिर से प्रयास करें।";
+  }
+
+  document.getElementById("resultHeading").textContent = heading;
+  document.getElementById("scoreText").textContent =
+    `Your score: ${score} / ${questions.length} (${percent}%)`;
+  document.getElementById("resultHindi").textContent = hindi;
+}
+
+nextBtn.addEventListener("click", () => {
+  if (!answered) return;
+
+  if (current < questions.length - 1) {
+    current++;
+    showQuestion();
+  } else {
+    showResult();
+  }
+});
+
+document.getElementById("restartBtn").addEventListener("click", () => {
+  current = 0;
+  score = 0;
+  document.getElementById("quizArea").style.display = "block";
+  document.getElementById("result").style.display = "none";
+  nextBtn.textContent = "Next Question | अगला प्रश्न";
+  showQuestion();
+});
+
+showQuestion();
+</script>
+</body>
+</html>
