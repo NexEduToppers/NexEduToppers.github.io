@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 7 Quiz 6 | RawaRajpootNexEduToppers</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 20px 12px;
+  font-family: Arial, sans-serif;
+  background: #eef6ff;
+  color: #243247;
+}
+
+.quiz-container {
+  max-width: 680px;
+  margin: auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(30,64,100,.12);
+}
+
+.brand {
+  text-align: center;
+  color: #174ea6;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.subtitle {
+  text-align: center;
+  color: #526579;
+  line-height: 1.6;
+  margin: 8px 0 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #173f7a;
+  font-size: 25px;
+}
+
+.topic {
+  text-align: center;
+  background: #e7f0ff;
+  padding: 12px;
+  border-radius: 10px;
+  line-height: 1.7;
+  margin: 16px 0;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+  margin: 18px 0 8px;
+}
+
+.progress-track {
+  height: 9px;
+  background: #dce6f2;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background: #2878d0;
+  transition: width .2s;
+}
+
+.question {
+  margin-top: 24px;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.hindi-question {
+  margin: 8px 0 16px;
+  color: #58677b;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.option {
+  width: 100%;
+  padding: 13px 15px;
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.6;
+  background: #f8fbff;
+  border: 2px solid #d5e1ef;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.option:hover:not(:disabled) {
+  background: #eaf3ff;
+  border-color: #4388d5;
+}
+
+.option:disabled {
+  cursor: default;
+  opacity: 1;
+  color: #243247;
+}
+
+.option.correct {
+  background: #e3f7e8;
+  border-color: #259447;
+}
+
+.option.wrong {
+  background: #ffebeb;
+  border-color: #d43d3d;
+}
+
+.feedback {
+  display: none;
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 10px;
+  line-height: 1.7;
+}
+
+.feedback.correct-feedback {
+  display: block;
+  background: #e8f8ed;
+  color: #17652e;
+}
+
+.feedback.wrong-feedback {
+  display: block;
+  background: #fff0f0;
+  color: #9c2525;
+}
+
+.feedback div + div { margin-top: 7px; }
+
+.controls { margin-top: 20px; }
+
+.action {
+  border: 0;
+  border-radius: 9px;
+  padding: 13px 18px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#nextBtn {
+  width: 100%;
+  background: #1769c2;
+  color: white;
+}
+
+#nextBtn:disabled {
+  background: #9aacc0;
+  cursor: not-allowed;
+}
+
+.result {
+  display: none;
+  text-align: center;
+  padding: 20px 5px;
+}
+
+.result h2 { color: #174ea6; }
+
+.result-score {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 16px 0;
+}
+
+.result-message {
+  line-height: 1.8;
+  font-size: 17px;
+}
+
+#restartBtn {
+  width: 100%;
+  margin-top: 18px;
+  background: #16804a;
+  color: white;
+}
+
+.small-note {
+  text-align: center;
+  color: #65758a;
+  font-size: 13px;
+  line-height: 1.6;
+  margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+  .quiz-container { padding: 17px; }
+  .brand { font-size: 18px; }
+  h1 { font-size: 22px; }
+  .question { font-size: 18px; }
+  .option { font-size: 15px; }
+}
+</style>
+</head>
+
+<body>
+<div class="quiz-container">
+
+  <div class="brand">
+    RawaRajpootNexEduToppers<br>
+    Learning Academy
+  </div>
+
+  <div class="subtitle">
+    Class 4 English | Santoor<br>
+    कक्षा 4 अंग्रेज़ी
+  </div>
+
+  <h1>Chapter 7: Quiz 6</h1>
+
+  <div class="topic">
+    <strong>Rhyming Words</strong><br>
+    तुकबंदी वाले शब्द
+  </div>
+
+  <div id="quizArea">
+    <div class="progress-info">
+      <span id="questionCount">Question 1 of 10</span>
+      <span id="scoreCount">Score: 0</span>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="question" id="questionText"></div>
+    <div class="hindi-question" id="hindiQuestion"></div>
+    <div class="options" id="optionsArea"></div>
+    <div class="feedback" id="feedback" aria-live="polite"></div>
+
+    <div class="controls">
+      <button class="action" id="nextBtn" disabled>
+        Next Question / अगला प्रश्न
+      </button>
+    </div>
+  </div>
+
+  <div class="result" id="resultArea" aria-live="polite">
+    <h2>Quiz Completed! / प्रश्नोत्तरी पूरी हुई!</h2>
+    <div class="result-score" id="finalScore"></div>
+    <div class="result-message" id="resultMessage"></div>
+    <button class="action" id="restartBtn">
+      Try Again / फिर से प्रयास करें
+    </button>
+  </div>
+
+  <div class="small-note">
+    Read each question carefully before answering.<br>
+    उत्तर देने से पहले हर प्रश्न ध्यान से पढ़ें।
+  </div>
+</div>
+
+<script>
+const questions = [
+  {
+    en: "Which word rhymes with “hockey”?",
+    hi: "“Hockey” के साथ तुकबंदी करने वाला शब्द कौन-सा है?",
+    options: ["Rocky", "Table", "Happy", "Garden"],
+    hindiOptions: ["Rocky", "मेज़", "खुश", "बगीचा"],
+    answer: 0,
+    explanation: "Hockey and Rocky have a similar ending sound.",
+    hindiExplanation: "Hockey और Rocky के अंत की ध्वनि मिलती-जुलती है।"
+  },
+  {
+    en: "Which word rhymes with “skates”?",
+    hi: "“Skates” के साथ तुकबंदी करने वाला शब्द कौन-सा है?",
+    options: ["Sports", "Mistakes", "Music", "Children"],
+    hindiOptions: ["खेल", "गलतियाँ", "संगीत", "बच्चे"],
+    answer: 1,
+    explanation: "Skates and mistakes rhyme.",
+    hindiExplanation: "Skates और mistakes की अंतिम ध्वनि मिलती है।"
+  },
+  {
+    en: "Which word rhymes with “guitar”?",
+    hi: "“Guitar” के साथ तुकबंदी करने वाला शब्द कौन-सा है?",
+    options: ["Sitar", "Drum", "Flute", "Bell"],
+    hindiOptions: ["सितार", "ढोल", "बाँसुरी", "घंटी"],
+    answer: 0,
+    explanation: "Guitar and sitar rhyme.",
+    hindiExplanation: "Guitar और sitar की अंतिम ध्वनि मिलती है।"
+  },
+  {
+    en: "Which word rhymes with “race”?",
+    hi: "“Race” के साथ तुकबंदी करने वाला शब्द कौन-सा है?",
+    options: ["Road", "Pace", "Run", "Cycle"],
+    hindiOptions: ["सड़क", "गति", "दौड़ना", "साइकिल"],
+    answer: 1,
+    explanation: "Race and pace rhyme.",
+    hindiExplanation: "Race और pace की अंतिम ध्वनि मिलती है।"
+  },
+  {
+    en: "Which word rhymes with “joy”?",
+    hi: "“Joy” के साथ तुकबंदी करने वाला शब्द कौन-सा है?",
+    options: ["Play", "Boy", "Girl", "Song"],
+    hindiOptions: ["खेलना", "लड़का", "लड़की", "गीत"],
+    answer: 1,
+    explanation: "Joy and boy rhyme.",
+    hindiExplanation: "Joy और boy की अंतिम ध्वनि मिलती है।"
+  },
+  {
+    en: "Choose the rhyming pair.",
+    hi: "तुकबंदी करने वाली शब्द-जोड़ी चुनिए।",
+    options: [
+      "Book — Pen",
+      "Sky — High",
+      "Dog — Sun",
+      "Ball — Tree"
+    ],
+    hindiOptions: [
+      "Book — Pen",
+      "Sky — High",
+      "Dog — Sun",
+      "Ball — Tree"
+    ],
+    answer: 1,
+    explanation: "Sky and high share the same ending sound.",
+    hindiExplanation: "Sky और high की अंतिम ध्वनि एक जैसी है।"
+  },
+  {
+    en: "Which word rhymes with “light”?",
+    hi: "“Light” के साथ तुकबंदी करने वाला शब्द कौन-सा है?",
+    options: ["Late", "Night", "Lot", "Let"],
+    hindiOptions: ["देर से", "रात", "बहुत", "रखना"],
+    answer: 1,
+    explanation: "Light and night rhyme.",
+    hindiExplanation: "Light और night की अंतिम ध्वनि मिलती है।"
+  },
+  {
+    en: "Which word rhymes with “play”?",
+    hi: "“Play” के साथ तुकबंदी करने वाला शब्द कौन-सा है?",
+    options: ["Stay", "Stop", "Sport", "Smile"],
+    hindiOptions: ["ठहरना", "रुकना", "खेल", "मुस्कान"],
+    answer: 0,
+    explanation: "Play and stay rhyme.",
+    hindiExplanation: "Play और stay की अंतिम ध्वनि मिलती है।"
+  },
+  {
+    en: "Which word rhymes with “green”?",
+    hi: "“Green” के साथ तुकबंदी करने वाला शब्द कौन-सा है?",
+    options: ["Grass", "Clean", "Grow", "Great"],
+    hindiOptions: ["घास", "साफ़", "उगना", "महान"],
+    answer: 1,
+    explanation: "Green and clean rhyme.",
+    hindiExplanation: "Green और clean की अंतिम ध्वनि मिलती है।"
+  },
+  {
+    en: "Complete the pair: “A cheerful boy enjoys his _____.”",
+    hi: "जोड़ी पूरी कीजिए: “A cheerful boy enjoys his _____.”",
+    options: ["Toy", "Book", "Chair", "Food"],
+    hindiOptions: ["खिलौना", "किताब", "कुर्सी", "भोजन"],
+    answer: 0,
+    explanation: "Boy and toy rhyme.",
+    hindiExplanation: "Boy और toy की अंतिम ध्वनि मिलती है।"
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+const questionText = document.getElementById("questionText");
+const hindiQuestion = document.getElementById("hindiQuestion");
+const optionsArea = document.getElementById("optionsArea");
+const feedback = document.getElementById("feedback");
+const nextBtn = document.getElementById("nextBtn");
+const questionCount = document.getElementById("questionCount");
+const scoreCount = document.getElementById("scoreCount");
+const progressBar = document.getElementById("progressBar");
+const quizArea = document.getElementById("quizArea");
+const resultArea = document.getElementById("resultArea");
+
+function loadQuestion() {
+  answered = false;
+  const q = questions[currentQuestion];
+
+  questionCount.textContent =
+    `Question ${currentQuestion + 1} of ${questions.length}`;
+  scoreCount.textContent = `Score: ${score}`;
+  progressBar.style.width =
+    `${(currentQuestion / questions.length) * 100}%`;
+
+  questionText.textContent = q.en;
+  hindiQuestion.textContent = q.hi;
+  optionsArea.innerHTML = "";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+  nextBtn.disabled = true;
+
+  q.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option";
+
+    button.innerHTML =
+      `<strong>${String.fromCharCode(65 + index)}.</strong> ${option}<br>` +
+      `<span lang="hi">${q.hindiOptions[index]}</span>`;
+
+    button.addEventListener("click", () => selectAnswer(index));
+    optionsArea.appendChild(button);
+  });
+}
+
+function selectAnswer(selectedIndex) {
+  if (answered) return;
+  answered = true;
+
+  const q = questions[currentQuestion];
+  const buttons = optionsArea.querySelectorAll(".option");
+  const isCorrect = selectedIndex === q.answer;
+
+  buttons.forEach((button, index) => {
+    button.disabled = true;
+    if (index === q.answer) button.classList.add("correct");
+    if (index === selectedIndex && !isCorrect) {
+      button.classList.add("wrong");
+    }
+  });
+
+  if (isCorrect) {
+    score++;
+    feedback.className = "feedback correct-feedback";
+    feedback.innerHTML =
+      `<div><strong>Correct!</strong> ${q.explanation}</div>` +
+      `<div lang="hi"><strong>सही उत्तर!</strong> ${q.hindiExplanation}</div>`;
+  } else {
+    feedback.className = "feedback wrong-feedback";
+    feedback.innerHTML =
+      `<div><strong>Not quite.</strong> Correct answer: ` +
+      `${q.options[q.answer]}. ${q.explanation}</div>` +
+      `<div lang="hi"><strong>सही उत्तर:</strong> ` +
+      `${q.hindiOptions[q.answer]}। ${q.hindiExplanation}</div>`;
+  }
+
+  scoreCount.textContent = `Score: ${score}`;
+  progressBar.style.width =
+    `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+  nextBtn.disabled = false;
+
+  if (currentQuestion === questions.length - 1) {
+    nextBtn.textContent = "See Result / परिणाम देखें";
+  }
+}
+
+function showResult() {
+  quizArea.style.display = "none";
+  resultArea.style.display = "block";
+  progressBar.style.width = "100%";
+
+  document.getElementById("finalScore").textContent =
+    `${score} / ${questions.length}`;
+
+  const percentage = score / questions.length * 100;
+  let messageEn;
+  let messageHi;
+
+  if (percentage === 100) {
+    messageEn = "Excellent job! You answered every question correctly.";
+    messageHi = "शानदार! आपने सभी प्रश्नों के सही उत्तर दिए।";
+  } else if (percentage >= 80) {
+    messageEn = "Very good work! Keep practising.";
+    messageHi = "बहुत अच्छा! अभ्यास जारी रखें।";
+  } else if (percentage >= 50) {
+    messageEn = "Good effort! Review the answers and try again.";
+    messageHi = "अच्छा प्रयास! उत्तर दोबारा पढ़ें और फिर प्रयास करें।";
+  } else {
+    messageEn = "Keep learning! Practise rhyming words and try again.";
+    messageHi = "सीखते रहें! तुकबंदी वाले शब्दों का अभ्यास करें।";
+  }
+
+  document.getElementById("resultMessage").innerHTML =
+    `<div>${messageEn}</div><div lang="hi">${messageHi}</div>`;
+}
+
+nextBtn.addEventListener("click", () => {
+  if (!answered) return;
+
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    nextBtn.textContent = "Next Question / अगला प्रश्न";
+    loadQuestion();
+  } else {
+    showResult();
+  }
+});
+
+document.getElementById("restartBtn").addEventListener("click", () => {
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+
+  quizArea.style.display = "block";
+  resultArea.style.display = "none";
+  nextBtn.textContent = "Next Question / अगला प्रश्न";
+  loadQuestion();
+});
+
+loadQuestion();
+</script>
+</body>
+</html>
