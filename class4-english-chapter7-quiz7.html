@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 7 Quiz 7 | Vocabulary</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 18px;
+    font-family: Arial, sans-serif;
+    background: #eef5ff;
+    color: #243047;
+}
+
+.container {
+    max-width: 650px;
+    margin: 20px auto;
+    padding: 24px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.10);
+}
+
+header {
+    text-align: center;
+    border-bottom: 2px solid #e5edfa;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+}
+
+.brand {
+    color: #155eab;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+h1 {
+    color: #174b8c;
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #5b6578;
+    line-height: 1.6;
+}
+
+.progress-area {
+    margin: 18px 0;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+.progress-track {
+    height: 9px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#progressBar {
+    height: 100%;
+    width: 0;
+    background: #16834a;
+    transition: width 0.25s;
+}
+
+.question-number {
+    color: #1762a8;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.question {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.hindi-question {
+    color: #586477;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 13px 14px;
+    margin: 10px 0;
+    border: 2px solid #dbe5f2;
+    border-radius: 10px;
+    background: #fff;
+    color: #243047;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.option:hover:not(:disabled) {
+    background: #f0f7ff;
+    border-color: #4387d3;
+}
+
+.option:disabled {
+    cursor: default;
+    opacity: 1;
+}
+
+.option.correct {
+    background: #e2f8e9;
+    border-color: #24934b;
+}
+
+.option.wrong {
+    background: #fff0f0;
+    border-color: #d63a3a;
+}
+
+#feedback {
+    display: none;
+    margin-top: 18px;
+    padding: 14px;
+    border-radius: 10px;
+    line-height: 1.6;
+}
+
+#feedback.good {
+    display: block;
+    background: #e7f8ec;
+    color: #155d2d;
+}
+
+#feedback.bad {
+    display: block;
+    background: #fff0f0;
+    color: #9e2525;
+}
+
+#nextBtn, #restartBtn {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    margin-top: 18px;
+    background: #1762a8;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#nextBtn:disabled {
+    background: #9aa9bc;
+    cursor: not-allowed;
+}
+
+#result {
+    display: none;
+    text-align: center;
+    line-height: 1.7;
+}
+
+#result h2 {
+    color: #1762a8;
+}
+
+.score {
+    font-size: 28px;
+    font-weight: bold;
+    color: #16834a;
+}
+
+.small-note {
+    font-size: 14px;
+    color: #657086;
+    text-align: center;
+    margin-top: 18px;
+}
+
+@media (max-width: 480px) {
+    body { padding: 10px; }
+    .container { padding: 17px; margin: 8px auto; }
+    h1 { font-size: 22px; }
+    .question { font-size: 18px; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+    <div class="brand">RawaRajpootNexEduToppers Learning Academy</div>
+    <h1>Class 4 English — Chapter 7</h1>
+    <div class="subtitle">
+        Fit Body, Fit Mind, Fit Nation<br>
+        <strong>Quiz 7: Vocabulary and Word Meanings</strong><br>
+        शब्दों के अर्थ और शब्दावली
+    </div>
+</header>
+
+<div id="quizArea">
+    <div class="progress-area">
+        <div class="progress-label">
+            <span id="progressText">Question 1 of 10</span>
+            <span id="scoreText">Score: 0</span>
+        </div>
+        <div class="progress-track">
+            <div id="progressBar"></div>
+        </div>
+    </div>
+
+    <div class="question-number" id="questionNumber">Question 1</div>
+    <div class="question" id="questionText"></div>
+    <div class="hindi-question" id="hindiQuestion"></div>
+
+    <div id="options"></div>
+    <div id="feedback" aria-live="polite"></div>
+
+    <button id="nextBtn" disabled>Next Question / अगला प्रश्न</button>
+</div>
+
+<div id="result">
+    <h2>Quiz Completed! / प्रश्नोत्तरी पूरी हुई!</h2>
+    <p>Your score / आपका स्कोर</p>
+    <div class="score" id="finalScore"></div>
+    <p id="resultMessage"></p>
+    <button id="restartBtn">Try Again / फिर से प्रयास करें</button>
+</div>
+
+<div class="small-note">
+    Read carefully, choose the correct answer, and learn from the feedback.
+    <br>
+    ध्यान से पढ़ें, सही उत्तर चुनें और प्रतिक्रिया से सीखें।
+</div>
+
+</div>
+
+<script>
+const questions = [
+    {
+        q: "What does the word “brave” mean?",
+        hi: "“Brave” शब्द का क्या अर्थ है?",
+        options: ["Afraid", "Courageous", "Lazy", "Sleepy"],
+        answer: 1,
+        exp: "Brave means courageous and willing to face danger.",
+        hindiExp: "Brave का अर्थ बहादुर होता है, जो खतरे का सामना करने का साहस रखता है।"
+    },
+    {
+        q: "What does “rocky” mean in the poem?",
+        hi: "कविता में “Rocky” का क्या अर्थ है?",
+        options: ["Covered with flowers", "Full of water", "Uneven or covered with rocks", "Very soft"],
+        answer: 2,
+        exp: "Rocky describes a place that has rocks or an uneven surface.",
+        hindiExp: "Rocky ऐसी जगह को बताता है जहाँ पत्थर हों या जमीन ऊबड़-खाबड़ हो।"
+    },
+    {
+        q: "Choose the correct meaning of “mistakes”.",
+        hi: "“Mistakes” का सही अर्थ चुनिए।",
+        options: ["Errors", "Rewards", "Games", "Songs"],
+        answer: 0,
+        exp: "Mistakes are errors or things done incorrectly.",
+        hindiExp: "Mistakes का अर्थ गलतियाँ होता है।"
+    },
+    {
+        q: "What does “proudly” mean?",
+        hi: "“Proudly” का क्या अर्थ है?",
+        options: ["Sadly", "Angrily", "With pride", "Quietly"],
+        answer: 2,
+        exp: "Proudly means doing or showing something with pride.",
+        hindiExp: "Proudly का अर्थ गर्व के साथ होता है।"
+    },
+    {
+        q: "What is the meaning of “delightful”?",
+        hi: "“Delightful” का अर्थ क्या है?",
+        options: ["Very pleasing or enjoyable", "Very frightening", "Very noisy", "Very difficult"],
+        answer: 0,
+        exp: "Delightful means very pleasing, enjoyable, or lovely.",
+        hindiExp: "Delightful का अर्थ बहुत आनंददायक या मनभावन होता है।"
+    },
+    {
+        q: "Which word means “moving or acting very quickly”?",
+        hi: "कौन-सा शब्द बहुत तेजी से चलने या काम करने का अर्थ देता है?",
+        options: ["Cheerful", "Swift", "Rocky", "Proudly"],
+        answer: 1,
+        exp: "Swift means fast or quick.",
+        hindiExp: "Swift का अर्थ तेज या शीघ्र होता है।"
+    },
+    {
+        q: "In the poem, what does “pace” refer to?",
+        hi: "कविता में “Pace” का क्या अर्थ है?",
+        options: ["A type of food", "A musical instrument", "The speed at which someone moves", "A kind of shoe"],
+        answer: 2,
+        exp: "Pace can mean the speed at which someone walks, runs, or moves.",
+        hindiExp: "Pace का अर्थ चलने या दौड़ने की गति हो सकता है।"
+    },
+    {
+        q: "What does “cheerful” mean?",
+        hi: "“Cheerful” का क्या अर्थ है?",
+        options: ["Happy and positive", "Tired and weak", "Angry and rude", "Slow and sleepy"],
+        answer: 0,
+        exp: "Cheerful means happy and in good spirits.",
+        hindiExp: "Cheerful का अर्थ खुशमिजाज और प्रसन्न होता है।"
+    },
+    {
+        q: "Which word means “the pattern or regular flow of music”?",
+        hi: "कौन-सा शब्द संगीत की नियमित लय को दर्शाता है?",
+        options: ["Rhythm", "Mistake", "Nation", "Rocky"],
+        answer: 0,
+        exp: "Rhythm is the regular pattern of sounds or beats in music.",
+        hindiExp: "Rhythm का अर्थ संगीत में ध्वनियों या ताल का नियमित क्रम होता है।"
+    },
+    {
+        q: "Which pair contains two musical instruments mentioned in the poem?",
+        hi: "किस जोड़ी में कविता में बताए गए दो वाद्य यंत्र हैं?",
+        options: ["Guitar and sitar", "Hockey and skates", "Cycle and race", "Sky and road"],
+        answer: 0,
+        exp: "The poem mentions a guitar and a sitar.",
+        hindiExp: "कविता में गिटार और सितार का उल्लेख है।"
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+const questionNumber = document.getElementById("questionNumber");
+const questionText = document.getElementById("questionText");
+const hindiQuestion = document.getElementById("hindiQuestion");
+const optionsDiv = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const nextBtn = document.getElementById("nextBtn");
+
+function showQuestion() {
+    answered = false;
+    const item = questions[currentQuestion];
+
+    questionNumber.textContent = "Question " + (currentQuestion + 1);
+    questionText.textContent = item.q;
+    hindiQuestion.textContent = item.hi;
+    document.getElementById("progressText").textContent =
+        "Question " + (currentQuestion + 1) + " of " + questions.length;
+    document.getElementById("scoreText").textContent = "Score: " + score;
+    document.getElementById("progressBar").style.width =
+        (currentQuestion / questions.length * 100) + "%";
+
+    optionsDiv.innerHTML = "";
+    feedback.className = "";
+    feedback.style.display = "none";
+    feedback.textContent = "";
+    nextBtn.disabled = true;
+    nextBtn.textContent = currentQuestion === questions.length - 1
+        ? "See Result / परिणाम देखें"
+        : "Next Question / अगला प्रश्न";
+
+    item.options.forEach(function(option, index) {
+        const button = document.createElement("button");
+        button.className = "option";
+        button.textContent = String.fromCharCode(65 + index) + ". " + option;
+        button.type = "button";
+        button.addEventListener("click", function() {
+            checkAnswer(index);
+        });
+        optionsDiv.appendChild(button);
+    });
+}
+
+function checkAnswer(selected) {
+    if (answered) return;
+    answered = true;
+
+    const item = questions[currentQuestion];
+    const buttons = optionsDiv.querySelectorAll(".option");
+
+    buttons.forEach(function(button, index) {
+        button.disabled = true;
+        if (index === item.answer) {
+            button.classList.add("correct");
+        }
+    });
+
+    if (selected === item.answer) {
+        score++;
+        feedback.className = "good";
+        feedback.textContent =
+            "Correct! / सही उत्तर!\n" + item.exp + "\n" + item.hindiExp;
+    } else {
+        buttons[selected].classList.add("wrong");
+        feedback.className = "bad";
+        feedback.textContent =
+            "Wrong answer. / गलत उत्तर।\nCorrect answer: " +
+            item.options[item.answer] + "\n" +
+            item.exp + "\n" + item.hindiExp;
+    }
+
+    feedback.style.display = "block";
+    document.getElementById("scoreText").textContent = "Score: " + score;
+    nextBtn.disabled = false;
+}
+
+function showResult() {
+    document.getElementById("quizArea").style.display = "none";
+    document.getElementById("result").style.display = "block";
+    document.getElementById("progressBar").style.width = "100%";
+    document.getElementById("finalScore").textContent =
+        score + " / " + questions.length;
+
+    let message;
+    if (score === 10) {
+        message = "Excellent work! You know these words very well. / शानदार! आपको इन शब्दों के अर्थ अच्छी तरह आते हैं।";
+    } else if (score >= 7) {
+        message = "Good job! Revise the words you missed. / बहुत अच्छा! जिन शब्दों में गलती हुई, उन्हें दोहराएँ।";
+    } else if (score >= 4) {
+        message = "Keep practising. You are improving. / अभ्यास करते रहें। आप बेहतर हो रहे हैं।";
+    } else {
+        message = "Read the word meanings again and try once more. / शब्दों के अर्थ फिर से पढ़ें और दोबारा प्रयास करें।";
+    }
+
+    document.getElementById("resultMessage").textContent = message;
+}
+
+nextBtn.addEventListener("click", function() {
+    if (!answered) return;
+
+    if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        showQuestion();
+    } else {
+        showResult();
+    }
+});
+
+document.getElementById("restartBtn").addEventListener("click", function() {
+    currentQuestion = 0;
+    score = 0;
+    document.getElementById("quizArea").style.display = "block";
+    document.getElementById("result").style.display = "none";
+    showQuestion();
+});
+
+showQuestion();
+</script>
+</body>
+</html>
