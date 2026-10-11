@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 8 Quiz 6 | RawaRajpootNexEduToppers</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:20px;font-family:Arial,sans-serif;background:#eef5ff;color:#243247;line-height:1.6}
+.container{max-width:700px;margin:0 auto}
+.header{background:#164e86;color:white;text-align:center;padding:22px 15px;border-radius:14px 14px 0 0}
+.header h1{margin:0;font-size:25px}
+.header p{margin:6px 0 0}
+.quiz-card{background:white;padding:24px;border-radius:0 0 14px 14px;box-shadow:0 4px 15px rgba(0,0,0,.08)}
+.quiz-title{text-align:center;color:#164e86;margin-top:0}
+.hindi{color:#4d5c70}
+.instructions{background:#f1f7ff;border-left:4px solid #164e86;padding:12px;border-radius:6px;margin-bottom:20px}
+.progress-info{display:flex;justify-content:space-between;gap:10px;font-size:14px;margin-bottom:7px}
+.progress-track{height:10px;background:#dce5f0;border-radius:10px;overflow:hidden;margin-bottom:22px}
+.progress-fill{width:0;height:100%;background:#16804a;transition:width .25s ease}
+.question{font-size:20px;font-weight:bold;margin-bottom:8px}
+.option{display:block;width:100%;padding:13px;margin:10px 0;text-align:left;font-size:16px;border:2px solid #d6dfeb;border-radius:9px;background:white;color:#243247;cursor:pointer}
+.option:hover:not(:disabled){background:#f1f7ff;border-color:#164e86}
+.option:focus-visible,button:focus-visible{outline:3px solid #f4b942;outline-offset:3px}
+.option:disabled{cursor:default;opacity:1}
+.option.correct{background:#e4f7eb;border-color:#16804a}
+.option.wrong{background:#ffebeb;border-color:#c62828}
+.feedback{display:none;margin-top:18px;padding:14px;border-radius:9px;background:#f1f7ff}
+.feedback.show{display:block}
+.feedback.correct-feedback{border-left:5px solid #16804a}
+.feedback.wrong-feedback{border-left:5px solid #c62828}
+.action-button{display:inline-block;border:none;border-radius:8px;padding:12px 22px;margin-top:18px;background:#164e86;color:white;font-size:16px;font-weight:bold;cursor:pointer}
+.action-button:hover{background:#103b67}
+#nextBtn{display:none}
+#result{display:none;text-align:center}
+.score{font-size:28px;font-weight:bold;color:#164e86}
+.site-disclaimer{margin-top:22px;padding:18px;background:white;border-radius:12px;border:1px solid #d6dfeb;font-size:14px;overflow-wrap:anywhere}
+.site-disclaimer h2{color:#164e86;font-size:20px;margin-top:0}
+.site-disclaimer a{color:#164e86}
+@media(max-width:480px){body{padding:10px}.quiz-card{padding:16px}.header h1{font-size:21px}.question{font-size:18px}}
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="header">
+    <h1>RawaRajpootNexEduToppers</h1>
+    <p>Learning Academy | लर्निंग अकादमी</p>
+  </header>
+
+  <main class="quiz-card">
+    <h2 class="quiz-title">
+      Class 4 English – Chapter 8<br>
+      कक्षा 4 अंग्रेज़ी – अध्याय 8
+    </h2>
+    <h3 style="text-align:center">Quiz 6: Teamwork and Good Values</h3>
+    <p class="hindi" style="text-align:center">क्विज़ 6: टीमवर्क और अच्छे मूल्य</p>
+
+    <div class="instructions">
+      <strong>Instructions:</strong> Read each question carefully and choose the best answer.
+      <br>
+      <span class="hindi">निर्देश: प्रत्येक प्रश्न ध्यान से पढ़ें और सबसे सही उत्तर चुनें।</span>
+    </div>
+
+    <div id="quiz">
+      <div class="progress-info">
+        <span id="questionCounter">Question 1 of 10</span>
+        <span id="scoreCounter">Score: 0</span>
+      </div>
+      <div class="progress-track" id="progressTrack" role="progressbar"
+           aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div id="questionText" class="question"></div>
+      <p id="questionHindi" class="hindi"></p>
+      <div id="options"></div>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+      <button id="nextBtn" class="action-button" type="button">Next Question | अगला प्रश्न</button>
+    </div>
+
+    <section id="result" aria-live="polite">
+      <h2>Quiz Completed! | क्विज़ पूरा हुआ!</h2>
+      <p class="score" id="finalScore"></p>
+      <p id="resultMessage"></p>
+      <p id="resultHindi" class="hindi"></p>
+      <button id="restartBtn" class="action-button" type="button">Try Again | फिर से प्रयास करें</button>
+      <p><a href="class4-english-chapter8.html">Back to Chapter 8 | अध्याय 8 पर वापस जाएँ</a></p>
+    </section>
+
+    <footer class="site-disclaimer">
+      <h2>Disclaimer | अस्वीकरण</h2>
+      <p>
+        RawaRajpootNexEduToppers Learning Academy is an independent
+        educational platform and is not affiliated with, endorsed by,
+        or associated with NCERT. NCERT textbook names, chapters, and
+        curriculum topics belong exclusively to NCERT. All explanations,
+        examples, and practice material provided here are educational aids.
+        For official textbooks, visit
+        <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">ncert.nic.in</a>.
+      </p>
+      <p>
+        RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+        इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+        पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+        यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
+        लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+        <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">ncert.nic.in</a> पर जाएँ।
+      </p>
+    </footer>
+  </main>
+</div>
+
+<script>
+const questions = [
+  {
+    question:"What does teamwork mean?",
+    hindi:"टीमवर्क का क्या अर्थ है?",
+    options:["Working together to reach a goal","Doing everything alone","Refusing to help others","Arguing with teammates"],
+    hindiOptions:["लक्ष्य पाने के लिए मिलकर काम करना","सब कुछ अकेले करना","दूसरों की मदद करने से मना करना","साथियों से बहस करना"],
+    answer:0,
+    explanation:"Teamwork means working together and helping one another.",
+    explanationHindi:"टीमवर्क का अर्थ है मिलकर काम करना और एक-दूसरे की मदद करना।"
+  },
+  {
+    question:"Why is it important to follow the rules of a game?",
+    hindi:"खेल के नियमों का पालन करना क्यों ज़रूरी है?",
+    options:["Rules help make the game fair and safe","Rules help one team cheat","Rules stop everyone from playing","Rules are useful only to the referee"],
+    hindiOptions:["नियम खेल को निष्पक्ष और सुरक्षित बनाने में मदद करते हैं","नियम एक टीम को धोखा देने में मदद करते हैं","नियम सभी को खेलने से रोकते हैं","नियम केवल रेफरी के काम आते हैं"],
+    answer:0,
+    explanation:"Rules help players compete fairly and understand how the game should be played.",
+    explanationHindi:"नियम खिलाड़ियों को निष्पक्ष रूप से खेलने और खेल को समझने में मदद करते हैं।"
+  },
+  {
+    question:"What did both teams do after the Lagori match?",
+    hindi:"लागोरी मैच के बाद दोनों टीमों ने क्या किया?",
+    options:["Shook hands and appreciated each other","Refused to speak to each other","Hid the stones","Started arguing with the referee"],
+    hindiOptions:["हाथ मिलाया और एक-दूसरे की सराहना की","एक-दूसरे से बात करने से मना कर दिया","पत्थर छिपा दिए","रेफरी से बहस करने लगे"],
+    answer:0,
+    explanation:"Both teams shook hands and appreciated each other after the match.",
+    explanationHindi:"मैच के बाद दोनों टीमों ने हाथ मिलाया और एक-दूसरे की सराहना की।"
+  },
+  {
+    question:"How should a player behave after losing a match?",
+    hindi:"मैच हारने के बाद खिलाड़ी को कैसा व्यवहार करना चाहिए?",
+    options:["Accept the result respectfully","Blame everyone else","Break the equipment","Insult the winning team"],
+    hindiOptions:["सम्मानपूर्वक परिणाम स्वीकार करना चाहिए","दूसरों को दोष देना चाहिए","खेल का सामान तोड़ देना चाहिए","जीतने वाली टीम का अपमान करना चाहिए"],
+    answer:0,
+    explanation:"A good sportsperson accepts the result and respects the other team.",
+    explanationHindi:"एक अच्छा खिलाड़ी परिणाम स्वीकार करता है और दूसरी टीम का सम्मान करता है।"
+  },
+  {
+    question:"Which action shows respect for an opponent?",
+    hindi:"कौन-सा काम विरोधी टीम के प्रति सम्मान दिखाता है?",
+    options:["Congratulating them after the game","Laughing at their mistakes","Refusing to shake hands","Calling them names"],
+    hindiOptions:["खेल के बाद उन्हें बधाई देना","उनकी गलतियों पर हँसना","हाथ मिलाने से मना करना","उन्हें बुरे नामों से बुलाना"],
+    answer:0,
+    explanation:"Congratulating opponents shows that you respect their effort.",
+    explanationHindi:"विरोधियों को बधाई देना दिखाता है कि आप उनके प्रयास का सम्मान करते हैं।"
+  },
+  {
+    question:"If a teammate is struggling, what should you do?",
+    hindi:"यदि टीम का कोई साथी कठिनाई में है, तो आपको क्या करना चाहिए?",
+    options:["Encourage and help them","Make fun of them","Leave them out of the team","Tell them to stop trying"],
+    hindiOptions:["उनका हौसला बढ़ाना और मदद करना","उनका मज़ाक उड़ाना","उन्हें टीम से बाहर रखना","उन्हें कोशिश बंद करने को कहना"],
+    answer:0,
+    explanation:"Supporting teammates helps the whole team work better together.",
+    explanationHindi:"टीम के साथियों का साथ देने से पूरी टीम बेहतर काम करती है।"
+  },
+  {
+    question:"Why did the Lagori match bring villagers together?",
+    hindi:"लागोरी मैच ने गाँव वालों को एक साथ क्यों जोड़ा?",
+    options:["People gathered to watch and cheer for the players","Everyone left the village","The teams refused to play","The referee cancelled the match"],
+    hindiOptions:["लोग खिलाड़ियों को देखने और उनका उत्साह बढ़ाने के लिए इकट्ठा हुए","सभी गाँव छोड़कर चले गए","टीमों ने खेलने से मना कर दिया","रेफरी ने मैच रद्द कर दिया"],
+    answer:0,
+    explanation:"The villagers cheered for the players, and the match became a shared community event.",
+    explanationHindi:"गाँव वालों ने खिलाड़ियों का उत्साह बढ़ाया और मैच समुदाय का साझा आयोजन बन गया।"
+  },
+  {
+    question:"Which quality helps players trust one another?",
+    hindi:"कौन-सा गुण खिलाड़ियों को एक-दूसरे पर भरोसा करने में मदद करता है?",
+    options:["Honesty","Dishonesty","Selfishness","Rudeness"],
+    hindiOptions:["ईमानदारी","बेईमानी","स्वार्थ","असभ्यता"],
+    answer:0,
+    explanation:"Honesty helps teammates trust each other and play fairly.",
+    explanationHindi:"ईमानदारी साथियों को एक-दूसरे पर भरोसा करने और निष्पक्ष खेलने में मदद करती है।"
+  },
+  {
+    question:"What is the best way to respond when a referee makes a decision?",
+    hindi:"रेफरी के निर्णय पर प्रतिक्रिया देने का सबसे अच्छा तरीका क्या है?",
+    options:["Listen and respond respectfully","Shout angrily every time","Ignore all the rules","Push the referee"],
+    hindiOptions:["ध्यान से सुनना और सम्मानपूर्वक प्रतिक्रिया देना","हर बार गुस्से में चिल्लाना","सभी नियमों को अनदेखा करना","रेफरी को धक्का देना"],
+    answer:0,
+    explanation:"Players should listen to the referee and express concerns calmly and respectfully.",
+    explanationHindi:"खिलाड़ियों को रेफरी की बात सुननी चाहिए और अपनी चिंता शांतिपूर्वक व सम्मान से बतानी चाहिए।"
+  },
+  {
+    question:"Which statement best expresses the message of The Lagori Champions?",
+    hindi:"'द लागोरी चैंपियंस' का संदेश कौन-सा वाक्य सबसे अच्छी तरह बताता है?",
+    options:["Teamwork, fair play and respect matter","Winning is the only thing that matters","Opponents should never be respected","Rules should be ignored to win"],
+    hindiOptions:["टीमवर्क, निष्पक्ष खेल और सम्मान महत्वपूर्ण हैं","केवल जीत ही महत्वपूर्ण है","विरोधियों का कभी सम्मान नहीं करना चाहिए","जीतने के लिए नियमों को अनदेखा करना चाहिए"],
+    answer:0,
+    explanation:"The story shows teamwork, fair play and mutual respect through the match and its ending.",
+    explanationHindi:"कहानी मैच और उसके अंत के माध्यम से टीमवर्क, निष्पक्ष खेल और आपसी सम्मान दिखाती है।"
+  }
+];
+
+let currentQuestion=0;
+let score=0;
+let answered=false;
+
+const questionText=document.getElementById("questionText");
+const questionHindi=document.getElementById("questionHindi");
+const optionsContainer=document.getElementById("options");
+const feedback=document.getElementById("feedback");
+const nextBtn=document.getElementById("nextBtn");
+const progressFill=document.getElementById("progressFill");
+const progressTrack=document.getElementById("progressTrack");
+const questionCounter=document.getElementById("questionCounter");
+const scoreCounter=document.getElementById("scoreCounter");
+
+function showQuestion(){
+  answered=false;
+  const q=questions[currentQuestion];
+  questionCounter.textContent=`Question ${currentQuestion+1} of ${questions.length}`;
+  scoreCounter.textContent=`Score: ${score}`;
+  progressFill.style.width=`${(currentQuestion/questions.length)*100}%`;
+  progressTrack.setAttribute("aria-valuenow",currentQuestion);
+  questionText.textContent=`${currentQuestion+1}. ${q.question}`;
+  questionHindi.textContent=q.hindi;
+  optionsContainer.innerHTML="";
+  feedback.className="feedback";
+  feedback.innerHTML="";
+  nextBtn.style.display="none";
+
+  q.options.forEach((option,index)=>{
+    const button=document.createElement("button");
+    button.type="button";
+    button.className="option";
+    button.innerHTML=`<strong>${String.fromCharCode(65+index)}.</strong> ${option}<br><span class="hindi">${q.hindiOptions[index]}</span>`;
+    button.addEventListener("click",()=>selectAnswer(index,button));
+    optionsContainer.appendChild(button);
+  });
+}
+
+function selectAnswer(selectedIndex,selectedButton){
+  if(answered)return;
+  answered=true;
+  const q=questions[currentQuestion];
+  const buttons=optionsContainer.querySelectorAll(".option");
+  buttons.forEach(button=>button.disabled=true);
+
+  if(selectedIndex===q.answer){
+    score++;
+    selectedButton.classList.add("correct");
+    feedback.className="feedback show correct-feedback";
+    feedback.innerHTML=`<strong>Correct Answer! | सही उत्तर!</strong><br>${q.explanation}<br><span class="hindi">${q.explanationHindi}</span>`;
+  }else{
+    selectedButton.classList.add("wrong");
+    buttons[q.answer].classList.add("correct");
+    feedback.className="feedback show wrong-feedback";
+    feedback.innerHTML=`<strong>Wrong Answer | गलत उत्तर</strong><br>Correct answer: ${q.options[q.answer]}<br><span class="hindi">सही उत्तर: ${q.hindiOptions[q.answer]}</span><br>${q.explanation}<br><span class="hindi">${q.explanationHindi}</span>`;
+  }
+
+  scoreCounter.textContent=`Score: ${score}`;
+  progressFill.style.width=`${((currentQuestion+1)/questions.length)*100}%`;
+  progressTrack.setAttribute("aria-valuenow",currentQuestion+1);
+  nextBtn.textContent=currentQuestion===questions.length-1
+    ?"View Result | परिणाम देखें"
+    :"Next Question | अगला प्रश्न";
+  nextBtn.style.display="inline-block";
+}
+
+function showResult(){
+  document.getElementById("quiz").style.display="none";
+  document.getElementById("result").style.display="block";
+  document.getElementById("finalScore").textContent=`${score} / ${questions.length}`;
+
+  let message,messageHindi;
+  if(score===questions.length){
+    message="Excellent job! You understand teamwork and fair play very well.";
+    messageHindi="शानदार! आप टीमवर्क और निष्पक्ष खेल को बहुत अच्छी तरह समझते हैं।";
+  }else if(score>=7){
+    message="Good job! Review the answers and keep practising.";
+    messageHindi="बहुत अच्छा! उत्तरों को दोहराएँ और अभ्यास जारी रखें।";
+  }else if(score>=4){
+    message="Keep practising. You can improve with another attempt.";
+    messageHindi="अभ्यास जारी रखें। एक और प्रयास से आप बेहतर कर सकते हैं।";
+  }else{
+    message="Read the chapter again and try once more. You can improve!";
+    messageHindi="अध्याय फिर से पढ़ें और दोबारा प्रयास करें। आप बेहतर कर सकते हैं!";
+  }
+  document.getElementById("resultMessage").textContent=message;
+  document.getElementById("resultHindi").textContent=messageHindi;
+}
+
+nextBtn.addEventListener("click",()=>{
+  if(!answered)return;
+  if(currentQuestion<questions.length-1){
+    currentQuestion++;
+    showQuestion();
+  }else{
+    showResult();
+  }
+});
+
+document.getElementById("restartBtn").addEventListener("click",()=>{
+  currentQuestion=0;
+  score=0;
+  answered=false;
+  document.getElementById("result").style.display="none";
+  document.getElementById("quiz").style.display="block";
+  showQuestion();
+});
+
+showQuestion();
+</script>
+</body>
+</html>
