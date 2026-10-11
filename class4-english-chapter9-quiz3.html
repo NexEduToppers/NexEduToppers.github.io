@@ -1,0 +1,668 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Class 4 English Chapter 9 Hekko Quiz 3: Vocabulary practice in English and Hindi.">
+  <title>Class 4 English Chapter 9 Quiz 3 - Vocabulary | RawaRajpootNexEduToppers</title>
+
+  <style>
+    :root {
+      --primary: #174ea6;
+      --secondary: #087f8c;
+      --light: #eef6ff;
+      --text: #243247;
+      --white: #ffffff;
+      --border: #dce6f2;
+      --green: #e8f7ed;
+      --green-text: #176534;
+      --red: #fdecec;
+      --red-text: #a32121;
+      --muted: #5d6b7c;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #eef4fb;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #174ea6, #087f8c);
+      color: white;
+      text-align: center;
+      padding: 28px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(23px, 5vw, 34px);
+    }
+
+    header p { margin: 5px 0; }
+
+    .container {
+      width: min(100% - 24px, 800px);
+      margin: 22px auto;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 14px rgba(26, 53, 87, 0.06);
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-top: 0;
+      font-size: 23px;
+    }
+
+    .hindi {
+      color: #45566b;
+      margin-top: 5px;
+    }
+
+    .quiz-info {
+      background: var(--light);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 18px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 12px;
+      background: #dbe5f1;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: var(--secondary);
+      transition: width 0.25s ease;
+    }
+
+    .question-number {
+      color: var(--secondary);
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .question-text {
+      font-size: 19px;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .option-button {
+      width: 100%;
+      text-align: left;
+      font-size: 16px;
+      font-family: inherit;
+      color: var(--text);
+      background: #f8fbff;
+      border: 2px solid #d7e2f0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      line-height: 1.5;
+    }
+
+    .option-button:hover:not(:disabled) {
+      background: #eaf3ff;
+      border-color: #8eb4e8;
+    }
+
+    .option-button:focus-visible,
+    .action-button:focus-visible,
+    .back-link:focus-visible {
+      outline: 3px solid #f0ad4e;
+      outline-offset: 3px;
+    }
+
+    .option-button:disabled {
+      cursor: default;
+      opacity: 1;
+    }
+
+    .option-button.correct {
+      background: var(--green);
+      border-color: #42a66b;
+      color: var(--green-text);
+    }
+
+    .option-button.wrong {
+      background: var(--red);
+      border-color: #d9534f;
+      color: var(--red-text);
+    }
+
+    .feedback {
+      display: none;
+      border-radius: 10px;
+      padding: 14px;
+      margin-top: 18px;
+    }
+
+    .feedback.correct-feedback {
+      display: block;
+      background: var(--green);
+      color: var(--green-text);
+    }
+
+    .feedback.wrong-feedback {
+      display: block;
+      background: var(--red);
+      color: var(--red-text);
+    }
+
+    .feedback h3 {
+      margin: 0 0 5px;
+      font-size: 18px;
+    }
+
+    .action-button {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 9px;
+      padding: 12px 18px;
+      margin-top: 16px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .action-button:hover { background: #103d84; }
+
+    #nextButton { display: none; }
+
+    #resultPanel {
+      display: none;
+      text-align: center;
+    }
+
+    .score-number {
+      color: var(--primary);
+      font-size: 34px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .result-message {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .back-link {
+      display: inline-block;
+      background: var(--light);
+      color: var(--primary);
+      text-decoration: none;
+      border: 1px solid #c9dcf5;
+      border-radius: 9px;
+      padding: 11px 16px;
+      margin: 8px 5px 0;
+      font-weight: bold;
+    }
+
+    .back-link:hover { background: #dcecff; }
+
+    .site-disclaimer {
+      background: #e9eef5;
+      border-top: 1px solid #cbd5e1;
+      padding: 24px 16px;
+      color: #344256;
+      font-size: 14px;
+    }
+
+    .site-disclaimer h2 { font-size: 19px; }
+
+    .site-disclaimer a {
+      color: #174ea6;
+      overflow-wrap: anywhere;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin: 15px 0 0;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 23px 12px; }
+      .card { padding: 17px; }
+      h2 { font-size: 21px; }
+      .question-text { font-size: 18px; }
+      .option-button { padding: 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+    <p>Class 4 English | Chapter 9</p>
+    <h2 style="color:white; margin:10px 0;">HEKKO</h2>
+    <p>Quiz 3 — Vocabulary</p>
+    <p lang="hi">प्रश्नोत्तरी 3 — शब्दावली</p>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Vocabulary Practice | शब्दावली का अभ्यास</h2>
+      <p>
+        Answer these 10 questions about vocabulary from the Hekko chapter.
+        Read each question carefully and select one answer.
+      </p>
+      <p class="hindi" lang="hi">
+        हेक्को अध्याय की शब्दावली पर आधारित 10 प्रश्न हल करें।
+        प्रत्येक प्रश्न ध्यान से पढ़ें और एक उत्तर चुनें।
+      </p>
+
+      <div class="quiz-info">
+        <strong>Questions:</strong> 10
+        <span lang="hi"> | प्रश्न: 10</span>
+        <br>
+        <strong>Score:</strong>
+        <span id="scoreDisplay" aria-live="polite">0 / 10</span>
+        <br>
+        <strong>Progress:</strong>
+        <span id="progressText">0 / 10</span>
+        <div
+          class="progress-track"
+          id="progressBar"
+          role="progressbar"
+          aria-label="Quiz progress"
+          aria-valuemin="0"
+          aria-valuemax="10"
+          aria-valuenow="0">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="quizPanel">
+      <div class="question-number" id="questionNumber">Question 1 of 10</div>
+      <div class="question-text" id="questionText"></div>
+      <p class="hindi" lang="hi" id="questionHindi"></p>
+
+      <div class="options" id="optionsContainer"></div>
+
+      <div class="feedback" id="feedbackBox" aria-live="polite">
+        <h3 id="feedbackTitle"></h3>
+        <p id="feedbackEnglish"></p>
+        <p class="hindi" lang="hi" id="feedbackHindi"></p>
+      </div>
+
+      <button class="action-button" id="nextButton" type="button">
+        Next Question | अगला प्रश्न
+      </button>
+    </section>
+
+    <section class="card" id="resultPanel" aria-live="polite">
+      <h2>Quiz Completed! | प्रश्नोत्तरी पूरी हुई!</h2>
+      <p>Your final score is:</p>
+      <p class="score-number" id="finalScore">0 / 10</p>
+      <p class="hindi" lang="hi" id="finalScoreHindi"></p>
+      <p class="result-message" id="resultMessage"></p>
+      <p class="hindi" lang="hi" id="resultMessageHindi"></p>
+
+      <button class="action-button" id="restartButton" type="button">
+        Try Again | फिर से प्रयास करें
+      </button>
+
+      <div>
+        <a class="back-link" href="class4-english-chapter9.html">
+          Back to Chapter 9 | अध्याय 9 पर वापस जाएँ
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="site-disclaimer">
+      <h2>Disclaimer | अस्वीकरण</h2>
+      <p>
+        RawaRajpootNexEduToppers Learning Academy is an independent
+        educational platform and is not affiliated with, endorsed by,
+        or associated with NCERT. NCERT textbook names, chapters, and
+        curriculum topics belong exclusively to NCERT. All explanations,
+        examples, and practice material provided here are educational aids.
+        For official textbooks, visit
+        <a href="https://ncert.nic.in/" target="_blank"
+           rel="noopener noreferrer">ncert.nic.in</a>.
+      </p>
+      <p lang="hi">
+        RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+        इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+        पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+        यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
+        लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+        <a href="https://ncert.nic.in/" target="_blank"
+           rel="noopener noreferrer">ncert.nic.in</a> पर जाएँ।
+      </p>
+      <p class="footer-note">
+        Independent learning resource | स्वतंत्र शैक्षिक संसाधन
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    "use strict";
+
+    const questions = [
+      {
+        question: "What does “declared” mean?",
+        hindi: "“Declared” का क्या अर्थ है?",
+        options: [
+          "Hidden from everyone",
+          "Announced or officially stated",
+          "Forgotten completely",
+          "Carried to another place"
+        ],
+        answer: 1,
+        explanation: "Declared means announced or officially stated.",
+        explanationHindi: "Declared का अर्थ घोषित करना या आधिकारिक रूप से बताना है।"
+      },
+      {
+        question: "Which word means being better or stronger than someone else?",
+        hindi: "कौन-सा शब्द किसी से बेहतर या अधिक शक्तिशाली होने की स्थिति बताता है?",
+        options: [
+          "Disagreement",
+          "Benefit",
+          "Superiority",
+          "Challenge"
+        ],
+        answer: 2,
+        explanation: "Superiority means the state of being better or stronger.",
+        explanationHindi: "Superiority का अर्थ श्रेष्ठता, यानी बेहतर या अधिक शक्तिशाली होने की स्थिति है।"
+      },
+      {
+        question: "What is a disagreement?",
+        hindi: "Disagreement क्या होता है?",
+        options: [
+          "A difference of opinion",
+          "A helpful result",
+          "An official announcement",
+          "A physical exercise"
+        ],
+        answer: 0,
+        explanation: "A disagreement is a difference of opinion.",
+        explanationHindi: "Disagreement का अर्थ असहमति, यानी विचारों का अलग होना है।"
+      },
+      {
+        question: "What does “surrender” mean?",
+        hindi: "“Surrender” का क्या अर्थ है?",
+        options: [
+          "To celebrate a victory",
+          "To challenge another player",
+          "To announce a result",
+          "To stop resisting or give up"
+        ],
+        answer: 3,
+        explanation: "Surrender means to stop resisting or give up.",
+        explanationHindi: "Surrender का अर्थ विरोध करना छोड़ देना या आत्मसमर्पण करना है।"
+      },
+      {
+        question: "Which word describes an activity that tests someone's ability?",
+        hindi: "कौन-सा शब्द ऐसी गतिविधि बताता है जो किसी की क्षमता की परीक्षा लेती है?",
+        options: [
+          "Benefit",
+          "Challenge",
+          "Opponent",
+          "Tradition"
+        ],
+        answer: 1,
+        explanation: "A challenge is an activity or task that tests ability.",
+        explanationHindi: "Challenge का अर्थ चुनौती है, यानी ऐसा काम जो क्षमता की परीक्षा ले।"
+      },
+      {
+        question: "What does “traditional” mean?",
+        hindi: "“Traditional” का क्या अर्थ है?",
+        options: [
+          "Connected with customs passed down over time",
+          "Created only yesterday",
+          "Unrelated to any custom",
+          "Impossible to understand"
+        ],
+        answer: 0,
+        explanation: "Traditional means connected with customs passed down over time.",
+        explanationHindi: "Traditional का अर्थ लंबे समय से चली आ रही परंपराओं से जुड़ा हुआ है।"
+      },
+      {
+        question: "Who is an opponent?",
+        hindi: "Opponent कौन होता है?",
+        options: [
+          "A person who announces the result",
+          "A person who watches from home",
+          "A person or team playing against another",
+          "A person who repairs the playground"
+        ],
+        answer: 2,
+        explanation: "An opponent is a person or team playing against another.",
+        explanationHindi: "Opponent का अर्थ प्रतिद्वंद्वी है, यानी दूसरी टीम के विरुद्ध खेलने वाला व्यक्ति या दल।"
+      },
+      {
+        question: "What is a benefit?",
+        hindi: "Benefit क्या होता है?",
+        options: [
+          "A difference of opinion",
+          "A helpful or good result",
+          "An act of surrender",
+          "A person in the opposing team"
+        ],
+        answer: 1,
+        explanation: "A benefit is a helpful or good result.",
+        explanationHindi: "Benefit का अर्थ लाभ है, यानी कोई उपयोगी या अच्छा परिणाम।"
+      },
+      {
+        question: "Choose the best word: “The referee _____ the result of the game.”",
+        hindi: "सही शब्द चुनें: “रेफरी ने खेल का परिणाम _____।”",
+        options: [
+          "surrendered",
+          "opposed",
+          "challenged",
+          "declared"
+        ],
+        answer: 3,
+        explanation: "Declared fits because a referee announces the result.",
+        explanationHindi: "Declared सही है क्योंकि रेफरी परिणाम घोषित करता है।"
+      },
+      {
+        question: "Choose the best word: “Players should respect their _____ during a match.”",
+        hindi: "सही शब्द चुनें: “खिलाड़ियों को मैच के दौरान अपने _____ का सम्मान करना चाहिए।”",
+        options: [
+          "opponents",
+          "benefits",
+          "disagreements",
+          "announcements"
+        ],
+        answer: 0,
+        explanation: "Opponents is the correct word for players on the other side.",
+        explanationHindi: "Opponents सही शब्द है, जिसका अर्थ दूसरी ओर की टीम के खिलाड़ी या प्रतिद्वंद्वी हैं।"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+
+    const questionNumber = document.getElementById("questionNumber");
+    const questionText = document.getElementById("questionText");
+    const questionHindi = document.getElementById("questionHindi");
+    const optionsContainer = document.getElementById("optionsContainer");
+    const feedbackBox = document.getElementById("feedbackBox");
+    const feedbackTitle = document.getElementById("feedbackTitle");
+    const feedbackEnglish = document.getElementById("feedbackEnglish");
+    const feedbackHindi = document.getElementById("feedbackHindi");
+    const nextButton = document.getElementById("nextButton");
+    const scoreDisplay = document.getElementById("scoreDisplay");
+    const progressText = document.getElementById("progressText");
+    const progressFill = document.getElementById("progressFill");
+    const progressBar = document.getElementById("progressBar");
+    const quizPanel = document.getElementById("quizPanel");
+    const resultPanel = document.getElementById("resultPanel");
+
+    function updateProgress() {
+      const completed = currentQuestion + (answered ? 1 : 0);
+      progressFill.style.width = (completed / questions.length * 100) + "%";
+      progressText.textContent = completed + " / " + questions.length;
+      progressBar.setAttribute("aria-valuenow", String(completed));
+      scoreDisplay.textContent = score + " / " + questions.length;
+    }
+
+    function renderQuestion() {
+      answered = false;
+      const q = questions[currentQuestion];
+
+      questionNumber.textContent =
+        "Question " + (currentQuestion + 1) + " of " + questions.length;
+      questionText.textContent = q.question;
+      questionHindi.textContent = q.hindi;
+      optionsContainer.replaceChildren();
+
+      feedbackBox.className = "feedback";
+      feedbackTitle.textContent = "";
+      feedbackEnglish.textContent = "";
+      feedbackHindi.textContent = "";
+      nextButton.style.display = "none";
+
+      q.options.forEach(function(option, index) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option-button";
+        button.textContent = String.fromCharCode(65 + index) + ". " + option;
+        button.addEventListener("click", function() {
+          checkAnswer(index);
+        });
+        optionsContainer.appendChild(button);
+      });
+
+      updateProgress();
+    }
+
+    function checkAnswer(selectedIndex) {
+      if (answered) return;
+      answered = true;
+
+      const q = questions[currentQuestion];
+      const buttons = optionsContainer.querySelectorAll(".option-button");
+      const isCorrect = selectedIndex === q.answer;
+
+      buttons.forEach(function(button, index) {
+        button.disabled = true;
+        if (index === q.answer) button.classList.add("correct");
+        if (index === selectedIndex && !isCorrect) {
+          button.classList.add("wrong");
+        }
+      });
+
+      if (isCorrect) {
+        score++;
+        feedbackBox.className = "feedback correct-feedback";
+        feedbackTitle.textContent = "Correct Answer! | सही उत्तर!";
+        feedbackHindi.textContent = "बहुत अच्छा! आपका उत्तर सही है।";
+      } else {
+        feedbackBox.className = "feedback wrong-feedback";
+        feedbackTitle.textContent = "Wrong Answer | गलत उत्तर";
+        feedbackHindi.textContent = "सही उत्तर हरे रंग में दिखाया गया है।";
+      }
+
+      feedbackEnglish.textContent = q.explanation;
+      updateProgress();
+
+      nextButton.style.display = "inline-block";
+      nextButton.textContent =
+        currentQuestion === questions.length - 1
+          ? "See Final Result | अंतिम परिणाम देखें"
+          : "Next Question | अगला प्रश्न";
+    }
+
+    function showResult() {
+      quizPanel.style.display = "none";
+      resultPanel.style.display = "block";
+
+      document.getElementById("finalScore").textContent =
+        score + " / " + questions.length;
+      document.getElementById("finalScoreHindi").textContent =
+        "आपका स्कोर " + questions.length + " में से " + score + " है।";
+
+      let message;
+      let messageHindi;
+
+      if (score === questions.length) {
+        message = "Excellent work! You answered every question correctly.";
+        messageHindi = "शानदार! आपने सभी प्रश्नों के सही उत्तर दिए।";
+      } else if (score >= 8) {
+        message = "Very good work! Review the questions you missed.";
+        messageHindi = "बहुत अच्छा! जिन प्रश्नों में गलती हुई, उन्हें दोहराएँ।";
+      } else if (score >= 5) {
+        message = "Good effort! Review the vocabulary and try again.";
+        messageHindi = "अच्छा प्रयास! शब्दावली दोहराएँ और फिर से कोशिश करें।";
+      } else {
+        message = "Keep practising. Revise the word meanings and try again.";
+        messageHindi = "अभ्यास जारी रखें। शब्दों के अर्थ दोहराएँ और फिर से प्रयास करें।";
+      }
+
+      document.getElementById("resultMessage").textContent = message;
+      document.getElementById("resultMessageHindi").textContent = messageHindi;
+
+      progressFill.style.width = "100%";
+      progressText.textContent = questions.length + " / " + questions.length;
+      progressBar.setAttribute("aria-valuenow", String(questions.length));
+      scoreDisplay.textContent = score + " / " + questions.length;
+    }
+
+    nextButton.addEventListener("click", function() {
+      if (!answered) return;
+
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    document.getElementById("restartButton").addEventListener("click", function() {
+      currentQuestion = 0;
+      score = 0;
+      answered = false;
+      quizPanel.style.display = "block";
+      resultPanel.style.display = "none";
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: "auto" });
+    });
+
+    renderQuestion();
+  </script>
+</body>
+</html>
+```
