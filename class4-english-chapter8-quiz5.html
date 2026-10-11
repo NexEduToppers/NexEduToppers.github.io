@@ -1,0 +1,566 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 8 Quiz 5 | RawaRajpootNexEduToppers</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background: #eef5ff;
+  color: #243247;
+  line-height: 1.6;
+}
+
+.container { max-width: 700px; margin: 0 auto; }
+
+.header {
+  background: #164e86;
+  color: white;
+  text-align: center;
+  padding: 22px 15px;
+  border-radius: 14px 14px 0 0;
+}
+
+.header h1 { margin: 0; font-size: 25px; }
+.header p { margin: 6px 0 0; }
+
+.quiz-card {
+  background: white;
+  padding: 24px;
+  border-radius: 0 0 14px 14px;
+  box-shadow: 0 4px 15px rgba(0,0,0,.08);
+}
+
+.quiz-title { text-align: center; color: #164e86; margin-top: 0; }
+.hindi { color: #4d5c70; }
+
+.instructions {
+  background: #f1f7ff;
+  border-left: 4px solid #164e86;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+  margin-bottom: 7px;
+}
+
+.progress-track {
+  height: 10px;
+  background: #dce5f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+
+.progress-fill {
+  width: 0;
+  height: 100%;
+  background: #16804a;
+  transition: width .25s ease;
+}
+
+.question { font-size: 20px; font-weight: bold; margin-bottom: 8px; }
+
+.option {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  margin: 10px 0;
+  text-align: left;
+  font-size: 16px;
+  border: 2px solid #d6dfeb;
+  border-radius: 9px;
+  background: white;
+  color: #243247;
+  cursor: pointer;
+}
+
+.option:hover:not(:disabled) {
+  background: #f1f7ff;
+  border-color: #164e86;
+}
+
+.option:focus-visible, button:focus-visible {
+  outline: 3px solid #f4b942;
+  outline-offset: 3px;
+}
+
+.option:disabled { cursor: default; opacity: 1; }
+.option.correct { background: #e4f7eb; border-color: #16804a; }
+.option.wrong { background: #ffebeb; border-color: #c62828; }
+
+.feedback {
+  display: none;
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 9px;
+  background: #f1f7ff;
+}
+
+.feedback.show { display: block; }
+.feedback.correct-feedback { border-left: 5px solid #16804a; }
+.feedback.wrong-feedback { border-left: 5px solid #c62828; }
+
+.action-button {
+  display: inline-block;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 22px;
+  margin-top: 18px;
+  background: #164e86;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.action-button:hover { background: #103b67; }
+#nextBtn { display: none; }
+#result { display: none; text-align: center; }
+.score { font-size: 28px; font-weight: bold; color: #164e86; }
+
+.site-disclaimer {
+  margin-top: 22px;
+  padding: 18px;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #d6dfeb;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.site-disclaimer h2 { color: #164e86; font-size: 20px; margin-top: 0; }
+.site-disclaimer a { color: #164e86; }
+
+@media (max-width: 480px) {
+  body { padding: 10px; }
+  .quiz-card { padding: 16px; }
+  .header h1 { font-size: 21px; }
+  .question { font-size: 18px; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <header class="header">
+    <h1>RawaRajpootNexEduToppers</h1>
+    <p>Learning Academy | लर्निंग अकादमी</p>
+  </header>
+
+  <main class="quiz-card">
+    <h2 class="quiz-title">
+      Class 4 English – Chapter 8<br>
+      कक्षा 4 अंग्रेज़ी – अध्याय 8
+    </h2>
+
+    <h3 style="text-align:center;">Quiz 5: Reading Comprehension</h3>
+    <p class="hindi" style="text-align:center;">
+      क्विज़ 5: कहानी पढ़कर समझना
+    </p>
+
+    <div class="instructions">
+      <strong>Instructions:</strong> Read each question carefully and choose the best answer.
+      <br>
+      <span class="hindi">
+        निर्देश: प्रत्येक प्रश्न ध्यान से पढ़ें और सबसे सही उत्तर चुनें।
+      </span>
+    </div>
+
+    <div id="quiz">
+      <div class="progress-info">
+        <span id="questionCounter">Question 1 of 10</span>
+        <span id="scoreCounter">Score: 0</span>
+      </div>
+
+      <div class="progress-track" id="progressTrack"
+           role="progressbar" aria-label="Quiz progress"
+           aria-valuemin="0" aria-valuemax="10" aria-valuenow="0">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+
+      <div id="questionText" class="question"></div>
+      <p id="questionHindi" class="hindi"></p>
+      <div id="options"></div>
+      <div id="feedback" class="feedback" aria-live="polite"></div>
+
+      <button id="nextBtn" class="action-button" type="button">
+        Next Question | अगला प्रश्न
+      </button>
+    </div>
+
+    <section id="result" aria-live="polite">
+      <h2>Quiz Completed! | क्विज़ पूरा हुआ!</h2>
+      <p class="score" id="finalScore"></p>
+      <p id="resultMessage"></p>
+      <p id="resultHindi" class="hindi"></p>
+
+      <button id="restartBtn" class="action-button" type="button">
+        Try Again | फिर से प्रयास करें
+      </button>
+
+      <p>
+        <a href="class4-english-chapter8.html">
+          Back to Chapter 8 | अध्याय 8 पर वापस जाएँ
+        </a>
+      </p>
+    </section>
+
+    <footer class="site-disclaimer">
+      <h2>Disclaimer | अस्वीकरण</h2>
+      <p>
+        RawaRajpootNexEduToppers Learning Academy is an independent
+        educational platform and is not affiliated with, endorsed by,
+        or associated with NCERT. NCERT textbook names, chapters, and
+        curriculum topics belong exclusively to NCERT. All explanations,
+        examples, and practice material provided here are educational aids.
+        For official textbooks, visit
+        <a href="https://ncert.nic.in/" target="_blank"
+           rel="noopener noreferrer">ncert.nic.in</a>.
+      </p>
+      <p>
+        RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+        इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+        पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+        यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
+        लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+        <a href="https://ncert.nic.in/" target="_blank"
+           rel="noopener noreferrer">ncert.nic.in</a> पर जाएँ।
+      </p>
+    </footer>
+  </main>
+</div>
+
+<script>
+const questions = [
+  {
+    question: "Why did Ravi take Prakash to the children's park?",
+    hindi: "रवि प्रकाश को बच्चों के पार्क में क्यों ले गया?",
+    options: [
+      "To introduce him to his friends",
+      "To buy a new school bag",
+      "To meet the head teacher",
+      "To visit a hospital"
+    ],
+    hindiOptions: [
+      "अपने दोस्तों से उसका परिचय कराने के लिए",
+      "नया स्कूल बैग खरीदने के लिए",
+      "प्रधानाध्यापक से मिलने के लिए",
+      "अस्पताल जाने के लिए"
+    ],
+    answer: 0,
+    explanation: "Ravi introduced his cousin Prakash to his friends at the park.",
+    explanationHindi: "रवि ने पार्क में अपने चचेरे भाई प्रकाश का अपने दोस्तों से परिचय कराया।"
+  },
+  {
+    question: "Why did Guneet suggest including Prakash in the team?",
+    hindi: "गुनीत ने प्रकाश को टीम में शामिल करने का सुझाव क्यों दिया?",
+    options: [
+      "Because he was a good runner",
+      "Because he owned the park",
+      "Because he was the referee",
+      "Because he had seven balls"
+    ],
+    hindiOptions: [
+      "क्योंकि वह अच्छा धावक था",
+      "क्योंकि पार्क उसका था",
+      "क्योंकि वह रेफरी था",
+      "क्योंकि उसके पास सात गेंदें थीं"
+    ],
+    answer: 0,
+    explanation: "Guneet thought Prakash should join because he was a good runner.",
+    explanationHindi: "गुनीत ने सोचा कि प्रकाश को शामिल करना चाहिए क्योंकि वह अच्छा धावक था।"
+  },
+  {
+    question: "What did Prakash call Lagori in Rajasthan?",
+    hindi: "राजस्थान में प्रकाश लागोरी को किस नाम से जानता था?",
+    options: ["Satoliya", "Kho-Kho", "Kabaddi", "Langdi"],
+    hindiOptions: ["सटोलिया", "खो-खो", "कबड्डी", "लंगड़ी"],
+    answer: 0,
+    explanation: "Prakash said that the game was called Satoliya in Rajasthan.",
+    explanationHindi: "प्रकाश ने बताया कि राजस्थान में इस खेल को सटोलिया कहा जाता है।"
+  },
+  {
+    question: "Which team did Deepa captain?",
+    hindi: "दीपा किस टीम की कप्तान थी?",
+    options: [
+      "Green Warriors",
+      "Sundarpur Tigers",
+      "Village Stars",
+      "Park Rangers"
+    ],
+    hindiOptions: [
+      "ग्रीन वॉरियर्स",
+      "सुंदरपुर टाइगर्स",
+      "विलेज स्टार्स",
+      "पार्क रेंजर्स"
+    ],
+    answer: 1,
+    explanation: "Deepa was the captain of the Sundarpur Tigers.",
+    explanationHindi: "दीपा सुंदरपुर टाइगर्स की कप्तान थी।"
+  },
+  {
+    question: "What happened when Deepa took the first shot?",
+    hindi: "जब दीपा ने पहला निशाना लगाया, तब क्या हुआ?",
+    options: [
+      "She knocked down the stones",
+      "She left the field",
+      "She gave the ball to the referee",
+      "She rebuilt the whole stack immediately"
+    ],
+    hindiOptions: [
+      "उसने पत्थरों को गिरा दिया",
+      "वह मैदान छोड़कर चली गई",
+      "उसने गेंद रेफरी को दे दी",
+      "उसने तुरंत पूरा ढेर फिर से बना दिया"
+    ],
+    answer: 0,
+    explanation: "Deepa's first shot knocked down the stack of stones.",
+    explanationHindi: "दीपा के पहले निशाने से पत्थरों का ढेर गिर गया।"
+  },
+  {
+    question: "What did the Green Warriors try to do during the rebuilding?",
+    hindi: "पत्थरों का ढेर फिर से बनाते समय ग्रीन वॉरियर्स ने क्या करने की कोशिश की?",
+    options: [
+      "Throw the ball at the rebuilding players",
+      "Help stack the stones",
+      "Leave the village",
+      "Cheer only for their opponents"
+    ],
+    hindiOptions: [
+      "पत्थर रखने वाले खिलाड़ियों की ओर गेंद फेंकना",
+      "पत्थरों को रखने में मदद करना",
+      "गाँव छोड़ देना",
+      "केवल विरोधी टीम के लिए जयकार करना"
+    ],
+    answer: 0,
+    explanation: "The Green Warriors tried to hit the players with the ball while they rebuilt the stack.",
+    explanationHindi: "ग्रीन वॉरियर्स ढेर बनाते समय खिलाड़ियों को गेंद से मारने की कोशिश कर रहे थे।"
+  },
+  {
+    question: "How did Ravi respond when the ball came towards him?",
+    hindi: "जब गेंद रवि की ओर आई, तो उसने क्या किया?",
+    options: [
+      "He ducked to avoid it",
+      "He caught the referee",
+      "He left the village",
+      "He hid all the stones"
+    ],
+    hindiOptions: [
+      "वह गेंद से बचने के लिए झुका",
+      "उसने रेफरी को पकड़ लिया",
+      "वह गाँव छोड़कर चला गया",
+      "उसने सारे पत्थर छिपा दिए"
+    ],
+    answer: 0,
+    explanation: "Ravi ducked to avoid the ball while helping rebuild the stack.",
+    explanationHindi: "ढेर बनाने में मदद करते समय रवि गेंद से बचने के लिए झुका।"
+  },
+  {
+    question: "What did Prakash do just before the final whistle?",
+    hindi: "अंतिम सीटी बजने से ठीक पहले प्रकाश ने क्या किया?",
+    options: [
+      "Placed the seventh stone",
+      "Started a new match",
+      "Changed the team captain",
+      "Took the ball home"
+    ],
+    hindiOptions: [
+      "सातवाँ पत्थर रखा",
+      "नया मैच शुरू किया",
+      "टीम का कप्तान बदल दिया",
+      "गेंद घर ले गया"
+    ],
+    answer: 0,
+    explanation: "Prakash placed the seventh stone just before the final whistle.",
+    explanationHindi: "अंतिम सीटी बजने से ठीक पहले प्रकाश ने सातवाँ पत्थर रखा।"
+  },
+  {
+    question: "How did the villagers react to the match?",
+    hindi: "मैच पर गाँव वालों की क्या प्रतिक्रिया थी?",
+    options: [
+      "They cheered for the players",
+      "They closed the park",
+      "They stopped watching immediately",
+      "They hid the referee's whistle"
+    ],
+    hindiOptions: [
+      "उन्होंने खिलाड़ियों के लिए जयकार की",
+      "उन्होंने पार्क बंद कर दिया",
+      "उन्होंने तुरंत देखना बंद कर दिया",
+      "उन्होंने रेफरी की सीटी छिपा दी"
+    ],
+    answer: 0,
+    explanation: "The villagers cheered as the match brought the community together.",
+    explanationHindi: "गाँव वालों ने जयकार की और मैच ने समुदाय को एक साथ जोड़ा।"
+  },
+  {
+    question: "What lesson does the ending of the story teach?",
+    hindi: "कहानी का अंत हमें क्या सीख देता है?",
+    options: [
+      "Respect and fair play are important",
+      "Only winners deserve respect",
+      "Teams should never cooperate",
+      "Rules do not matter in games"
+    ],
+    hindiOptions: [
+      "सम्मान और निष्पक्ष खेल महत्वपूर्ण हैं",
+      "केवल विजेता सम्मान के योग्य हैं",
+      "टीमों को कभी सहयोग नहीं करना चाहिए",
+      "खेल में नियम मायने नहीं रखते"
+    ],
+    answer: 0,
+    explanation: "Both teams shook hands and appreciated each other, showing respect and fair play.",
+    explanationHindi: "दोनों टीमों ने हाथ मिलाया और एक-दूसरे की सराहना की, जिससे सम्मान और निष्पक्ष खेल का पता चलता है।"
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+const questionText = document.getElementById("questionText");
+const questionHindi = document.getElementById("questionHindi");
+const optionsContainer = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const nextBtn = document.getElementById("nextBtn");
+const progressFill = document.getElementById("progressFill");
+const progressTrack = document.getElementById("progressTrack");
+const questionCounter = document.getElementById("questionCounter");
+const scoreCounter = document.getElementById("scoreCounter");
+
+function showQuestion() {
+  answered = false;
+  const q = questions[currentQuestion];
+
+  questionCounter.textContent =
+    `Question ${currentQuestion + 1} of ${questions.length}`;
+  scoreCounter.textContent = `Score: ${score}`;
+  progressFill.style.width =
+    `${(currentQuestion / questions.length) * 100}%`;
+  progressTrack.setAttribute("aria-valuenow", currentQuestion);
+
+  questionText.textContent = `${currentQuestion + 1}. ${q.question}`;
+  questionHindi.textContent = q.hindi;
+
+  optionsContainer.innerHTML = "";
+  feedback.className = "feedback";
+  feedback.innerHTML = "";
+  nextBtn.style.display = "none";
+
+  q.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option";
+    button.innerHTML =
+      `<strong>${String.fromCharCode(65 + index)}.</strong> ` +
+      `${option}<br><span class="hindi">${q.hindiOptions[index]}</span>`;
+    button.addEventListener("click", () => selectAnswer(index, button));
+    optionsContainer.appendChild(button);
+  });
+}
+
+function selectAnswer(selectedIndex, selectedButton) {
+  if (answered) return;
+  answered = true;
+
+  const q = questions[currentQuestion];
+  const optionButtons = optionsContainer.querySelectorAll(".option");
+  optionButtons.forEach(button => button.disabled = true);
+
+  if (selectedIndex === q.answer) {
+    score++;
+    selectedButton.classList.add("correct");
+    feedback.className = "feedback show correct-feedback";
+    feedback.innerHTML =
+      `<strong>Correct Answer! | सही उत्तर!</strong><br>` +
+      `${q.explanation}<br><span class="hindi">${q.explanationHindi}</span>`;
+  } else {
+    selectedButton.classList.add("wrong");
+    optionButtons[q.answer].classList.add("correct");
+    feedback.className = "feedback show wrong-feedback";
+    feedback.innerHTML =
+      `<strong>Wrong Answer | गलत उत्तर</strong><br>` +
+      `Correct answer: ${q.options[q.answer]}<br>` +
+      `<span class="hindi">सही उत्तर: ${q.hindiOptions[q.answer]}</span><br>` +
+      `${q.explanation}<br><span class="hindi">${q.explanationHindi}</span>`;
+  }
+
+  scoreCounter.textContent = `Score: ${score}`;
+  progressFill.style.width =
+    `${((currentQuestion + 1) / questions.length) * 100}%`;
+  progressTrack.setAttribute("aria-valuenow", currentQuestion + 1);
+
+  nextBtn.textContent =
+    currentQuestion === questions.length - 1
+      ? "View Result | परिणाम देखें"
+      : "Next Question | अगला प्रश्न";
+  nextBtn.style.display = "inline-block";
+}
+
+function showResult() {
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("result").style.display = "block";
+  document.getElementById("finalScore").textContent =
+    `${score} / ${questions.length}`;
+
+  let message;
+  let messageHindi;
+
+  if (score === questions.length) {
+    message = "Excellent job! You understood the story very well.";
+    messageHindi = "शानदार! आपने कहानी को बहुत अच्छी तरह समझा।";
+  } else if (score >= 7) {
+    message = "Good job! Revise a few details and try again.";
+    messageHindi = "बहुत अच्छा! कुछ विवरण दोहराएँ और फिर प्रयास करें।";
+  } else if (score >= 4) {
+    message = "Keep practising. Read the story again and try once more.";
+    messageHindi = "अभ्यास जारी रखें। कहानी दोबारा पढ़ें और फिर प्रयास करें।";
+  } else {
+    message = "Read the chapter again. You can improve with practice!";
+    messageHindi = "अध्याय फिर से पढ़ें। अभ्यास से आप बेहतर कर सकते हैं!";
+  }
+
+  document.getElementById("resultMessage").textContent = message;
+  document.getElementById("resultHindi").textContent = messageHindi;
+}
+
+nextBtn.addEventListener("click", () => {
+  if (!answered) return;
+
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    showQuestion();
+  } else {
+    showResult();
+  }
+});
+
+document.getElementById("restartBtn").addEventListener("click", () => {
+  currentQuestion = 0;
+  score = 0;
+  answered = false;
+
+  document.getElementById("result").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+  showQuestion();
+});
+
+showQuestion();
+</script>
+</body>
+</html>
