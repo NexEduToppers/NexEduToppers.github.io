@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 7 | Quiz 1</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 18px;
+  font-family: Arial, sans-serif;
+  background: #f0f7ff;
+  color: #243247;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  background: white;
+  padding: 24px;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px #00000012;
+}
+
+h1 {
+  text-align: center;
+  color: #1557a6;
+  font-size: 27px;
+}
+
+.subtitle {
+  text-align: center;
+  line-height: 1.6;
+}
+
+.progress {
+  background: #e5eaf1;
+  height: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 18px 0;
+}
+
+#progressBar {
+  width: 0%;
+  height: 100%;
+  background: #16834a;
+  transition: width .25s;
+}
+
+.question {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.hindi {
+  color: #526174;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.6;
+  margin: 8px 0 16px;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 13px 14px;
+  margin: 10px 0;
+  font-size: 17px;
+  border: 2px solid #d7e1ef;
+  border-radius: 10px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.option:hover:not(:disabled) {
+  background: #edf5ff;
+  border-color: #5591d8;
+}
+
+.option:disabled { cursor: default; }
+
+.correct {
+  background: #e1f7e8;
+  border-color: #258447;
+}
+
+.wrong {
+  background: #ffe8e8;
+  border-color: #c63737;
+}
+
+#feedback {
+  margin-top: 16px;
+  padding: 13px;
+  border-radius: 10px;
+  line-height: 1.6;
+  display: none;
+}
+
+#nextBtn, #restartBtn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #1557a6;
+  color: white;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#nextBtn:disabled { background: #9aa8ba; cursor: not-allowed; }
+
+#result {
+  display: none;
+  text-align: center;
+  line-height: 1.7;
+}
+
+#result h2 { color: #16834a; }
+
+.small {
+  font-size: 14px;
+  color: #637083;
+  text-align: center;
+  margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+  body { padding: 10px; }
+  .container { padding: 17px; }
+  h1 { font-size: 23px; }
+  .question { font-size: 18px; }
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+
+  <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+
+  <p class="subtitle">
+    <strong>Class 4 English — Chapter 7</strong><br>
+    Fit Body, Fit Mind, Fit Nation<br>
+    <strong>Quiz 1: Poem and Activities</strong><br>
+    कविता और गतिविधियाँ
+  </p>
+
+  <div id="quizArea">
+    <p id="questionCount"></p>
+    <div class="progress"><div id="progressBar"></div></div>
+
+    <div id="question" class="question"></div>
+    <div id="questionHindi" class="hindi"></div>
+    <div id="options"></div>
+
+    <div id="feedback" aria-live="polite"></div>
+    <button id="nextBtn" disabled>Next Question | अगला प्रश्न</button>
+  </div>
+
+  <section id="result">
+    <h2 id="resultHeading"></h2>
+    <p id="scoreText"></p>
+    <p id="resultHindi"></p>
+    <button id="restartBtn">Try Again | फिर से प्रयास करें</button>
+  </section>
+
+  <p class="small">
+    Learn • Practise • Improve<br>
+    सीखें • अभ्यास करें • बेहतर बनें
+  </p>
+
+</main>
+
+<script>
+const questions = [
+  {
+    q: "Which game does Anant play?",
+    hi: "अनंत कौन-सा खेल खेलता है?",
+    options: ["Football", "Hockey", "Cricket", "Tennis"],
+    answer: 1,
+    explain: "Anant plays hockey, even when the ground is rocky.",
+    explainHi: "अनंत हॉकी खेलता है, भले ही मैदान पथरीला हो।"
+  },
+  {
+    q: "What does Geeta practise?",
+    hi: "गीता किसका अभ्यास करती है?",
+    options: ["Swimming", "Cycling", "Skating", "Dancing"],
+    answer: 2,
+    explain: "Geeta practises on skates and learns from her mistakes.",
+    explainHi: "गीता स्केटिंग का अभ्यास करती है और अपनी गलतियों से सीखती है।"
+  },
+  {
+    q: "Which musical instrument does Lhamo play?",
+    hi: "ल्हामो कौन-सा वाद्य यंत्र बजाता है?",
+    options: ["Guitar", "Flute", "Drum", "Piano"],
+    answer: 0,
+    explain: "Lhamo proudly plays a guitar.",
+    explainHi: "ल्हामो गर्व से गिटार बजाता है।"
+  },
+  {
+    q: "Which instrument does Lhamo's friend play?",
+    hi: "ल्हामो का मित्र कौन-सा वाद्य यंत्र बजाता है?",
+    options: ["Tabla", "Sitar", "Flute", "Violin"],
+    answer: 1,
+    explain: "Lhamo's friend plays a sitar.",
+    explainHi: "ल्हामो का मित्र सितार बजाता है।"
+  },
+  {
+    q: "What does Shabana win?",
+    hi: "शबाना किस प्रतियोगिता में जीतती है?",
+    options: ["A singing contest", "A cycle race", "A hockey match", "A skating contest"],
+    answer: 1,
+    explain: "Shabana wins a cycle race.",
+    explainHi: "शबाना साइकिल दौड़ जीतती है।"
+  },
+  {
+    q: "Who sings in rhythm?",
+    hi: "लय में कौन गाती है?",
+    options: ["Geeta", "Shabana", "Meena", "Anant"],
+    answer: 2,
+    explain: "Meena sings in rhythm.",
+    explainHi: "मीना लय में गाती है।"
+  },
+  {
+    q: "Choose the word that means 'happy and positive'.",
+    hi: "वह शब्द चुनें जिसका अर्थ खुश और सकारात्मक है।",
+    options: ["Rocky", "Cheerful", "Swift", "Mistakes"],
+    answer: 1,
+    explain: "Cheerful means happy and positive.",
+    explainHi: "Cheerful का अर्थ खुशमिज़ाज होता है।"
+  },
+  {
+    q: "What does 'swift' mean?",
+    hi: "'Swift' का क्या अर्थ है?",
+    options: ["Slow", "Fast", "Quiet", "Tired"],
+    answer: 1,
+    explain: "Swift means fast or quick.",
+    explainHi: "Swift का अर्थ तेज़ होता है।"
+  },
+  {
+    q: "Which word rhymes with 'skates'?",
+    hi: "'Skates' के साथ तुकबंदी करने वाला शब्द कौन-सा है?",
+    options: ["Guitar", "Mistakes", "Hockey", "Rhythm"],
+    answer: 1,
+    explain: "'Skates' and 'mistakes' rhyme because their ending sounds match.",
+    explainHi: "'Skates' और 'mistakes' की अंतिम ध्वनियाँ मिलती हैं, इसलिए ये तुकबंदी करते हैं।"
+  },
+  {
+    q: "What message does the poem share?",
+    hi: "कविता हमें क्या संदेश देती है?",
+    options: [
+      "Only winning matters.",
+      "Children should never make mistakes.",
+      "Playing and learning activities bring joy.",
+      "Music is the only useful activity."
+    ],
+    answer: 2,
+    explain: "The poem shows that playing, music, practice and learning can bring joy.",
+    explainHi: "कविता बताती है कि खेलना, संगीत, अभ्यास और सीखना खुशी देते हैं।"
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+const questionEl = document.getElementById("question");
+const questionHindiEl = document.getElementById("questionHindi");
+const optionsEl = document.getElementById("options");
+const feedbackEl = document.getElementById("feedback");
+const nextBtn = document.getElementById("nextBtn");
+
+function showQuestion() {
+  answered = false;
+  const item = questions[current];
+
+  document.getElementById("questionCount").textContent =
+    `Question ${current + 1} of ${questions.length} | प्रश्न ${current + 1} / ${questions.length}`;
+
+  document.getElementById("progressBar").style.width =
+    `${(current / questions.length) * 100}%`;
+
+  questionEl.textContent = `${current + 1}. ${item.q}`;
+  questionHindiEl.textContent = item.hi;
+  optionsEl.innerHTML = "";
+  feedbackEl.style.display = "none";
+  feedbackEl.textContent = "";
+  nextBtn.disabled = true;
+
+  item.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.className = "option";
+    button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+    button.type = "button";
+    button.addEventListener("click", () => chooseAnswer(index, button));
+    optionsEl.appendChild(button);
+  });
+}
+
+function chooseAnswer(index, selectedButton) {
+  if (answered) return;
+  answered = true;
+
+  const item = questions[current];
+  const allOptions = optionsEl.querySelectorAll(".option");
+
+  allOptions.forEach(button => button.disabled = true);
+
+  if (index === item.answer) {
+    score++;
+    selectedButton.classList.add("correct");
+    feedbackEl.style.background = "#e1f7e8";
+    feedbackEl.style.color = "#155b2c";
+    feedbackEl.textContent =
+      "Correct Answer! Well done! | सही उत्तर! बहुत अच्छा! " +
+      item.explain + " " + item.explainHi;
+  } else {
+    selectedButton.classList.add("wrong");
+    allOptions[item.answer].classList.add("correct");
+    feedbackEl.style.background = "#ffe8e8";
+    feedbackEl.style.color = "#8a2222";
+    feedbackEl.textContent =
+      "Not quite. Read the correct answer and try the next question. | " +
+      "सही उत्तर को पढ़ें और अगले प्रश्न का प्रयास करें। " +
+      "Correct answer: " + item.options[item.answer] + ". " +
+      item.explain + " " + item.explainHi;
+  }
+
+  feedbackEl.style.display = "block";
+  nextBtn.disabled = false;
+  nextBtn.textContent = current === questions.length - 1
+    ? "View Result | परिणाम देखें"
+    : "Next Question | अगला प्रश्न";
+}
+
+function showResult() {
+  document.getElementById("quizArea").style.display = "none";
+  document.getElementById("result").style.display = "block";
+  document.getElementById("progressBar").style.width = "100%";
+
+  const percent = Math.round((score / questions.length) * 100);
+  let heading, hindi;
+
+  if (percent === 100) {
+    heading = "Excellent Work!";
+    hindi = "शानदार! आपने सभी प्रश्नों के सही उत्तर दिए।";
+  } else if (percent >= 80) {
+    heading = "Very Good Job!";
+    hindi = "बहुत अच्छा! आपका प्रदर्शन बेहतरीन है।";
+  } else if (percent >= 50) {
+    heading = "Good Effort! Keep Practising.";
+    hindi = "अच्छा प्रयास! अभ्यास जारी रखें।";
+  } else {
+    heading = "Keep Learning and Try Again.";
+    hindi = "सीखते रहें और फिर से प्रयास करें।";
+  }
+
+  document.getElementById("resultHeading").textContent = heading;
+  document.getElementById("scoreText").textContent =
+    `Your score: ${score} / ${questions.length} (${percent}%)`;
+  document.getElementById("resultHindi").textContent = hindi;
+}
+
+nextBtn.addEventListener("click", () => {
+  if (!answered) return;
+  if (current < questions.length - 1) {
+    current++;
+    showQuestion();
+  } else {
+    showResult();
+  }
+});
+
+document.getElementById("restartBtn").addEventListener("click", () => {
+  current = 0;
+  score = 0;
+  document.getElementById("quizArea").style.display = "block";
+  document.getElementById("result").style.display = "none";
+  nextBtn.textContent = "Next Question | अगला प्रश्न";
+  showQuestion();
+});
+
+showQuestion();
+</script>
+
+</body>
+</html>
