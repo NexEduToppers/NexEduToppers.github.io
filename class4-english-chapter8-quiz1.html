@@ -1,0 +1,774 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Class 4 English Chapter 8 Quiz 1 | RawaRajpootNexEduToppers</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, "Noto Sans Devanagari", sans-serif;
+  background: #eef5ff;
+  color: #243247;
+  line-height: 1.65;
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  padding: 22px 16px;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #174ea6, #3478d4);
+  color: white;
+  border-radius: 16px;
+}
+
+.header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(23px, 5vw, 32px);
+}
+
+.header p {
+  margin: 5px 0;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 18px rgba(27, 55, 90, 0.08);
+}
+
+.hindi {
+  display: block;
+  margin-top: 4px;
+  color: #4b5563;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.progress-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 9px;
+  font-weight: bold;
+}
+
+.progress-track {
+  width: 100%;
+  height: 10px;
+  background: #dbe5f2;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: #2375d8;
+  transition: width 0.25s ease;
+}
+
+.question-number {
+  color: #2464b4;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.question {
+  font-size: 1.15rem;
+  font-weight: bold;
+  margin: 0 0 20px;
+}
+
+.question .hindi {
+  font-weight: normal;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+.option-btn {
+  display: block;
+  width: 100%;
+  padding: 13px 15px;
+  border: 2px solid #d6e0ee;
+  border-radius: 10px;
+  background: #fff;
+  color: #243247;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.option-btn:hover:not(:disabled) {
+  background: #f0f6ff;
+  border-color: #397bd0;
+}
+
+.option-btn:focus-visible,
+.action-btn:focus-visible {
+  outline: 3px solid #f4b942;
+  outline-offset: 3px;
+}
+
+.option-btn:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.option-btn.correct {
+  background: #e4f7e9;
+  border-color: #238443;
+}
+
+.option-btn.wrong {
+  background: #fff0ef;
+  border-color: #c43b32;
+}
+
+.option-hindi {
+  display: block;
+  margin-top: 3px;
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+.feedback {
+  display: none;
+  margin-top: 18px;
+  padding: 15px;
+  border-radius: 10px;
+  line-height: 1.75;
+}
+
+.feedback.correct-feedback {
+  display: block;
+  background: #e8f7ec;
+  border: 1px solid #a8dcb6;
+  color: #185b2d;
+}
+
+.feedback.wrong-feedback {
+  display: block;
+  background: #fff0ee;
+  border: 1px solid #f0b8b2;
+  color: #8b241e;
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.action-btn {
+  border: none;
+  border-radius: 9px;
+  padding: 12px 18px;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.primary-btn {
+  background: #205db2;
+  color: white;
+}
+
+.secondary-btn {
+  background: #e6edf7;
+  color: #243247;
+}
+
+.action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.result {
+  display: none;
+  text-align: center;
+}
+
+.score {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #205db2;
+  margin: 12px 0;
+}
+
+.result-message {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.result-details {
+  margin: 16px 0;
+  padding: 14px;
+  border-radius: 10px;
+  background: #f3f7fc;
+}
+
+.site-disclaimer {
+  max-width: 1000px;
+  margin: 28px auto 10px;
+  padding: 18px;
+  background: #f3f4f6;
+  border-top: 2px solid #d1d5db;
+  border-radius: 8px;
+  color: #374151;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.site-disclaimer h2 {
+  margin-top: 0;
+  font-size: 1.25rem;
+}
+
+.site-disclaimer a {
+  color: #174ea6;
+  overflow-wrap: anywhere;
+}
+
+.footer-note {
+  text-align: center;
+  color: #596579;
+  font-size: 0.9rem;
+  padding: 12px 0;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 12px;
+  }
+
+  .card {
+    padding: 17px;
+  }
+
+  .action-btn {
+    flex: 1 1 100%;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header class="header">
+  <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+  <p>Class 4 English | कक्षा 4 अंग्रेज़ी</p>
+  <p><strong>Chapter 8: The Lagori Champions</strong></p>
+  <p class="hindi" style="color:white;">
+    अध्याय 8: द लगोरी चैंपियंस
+  </p>
+  <p>Quiz 1: Story and Characters</p>
+  <p class="hindi" style="color:white;">
+    क्विज़ 1: कहानी और पात्र
+  </p>
+</header>
+
+<main>
+  <section class="card" id="quiz-card">
+    <div class="progress-row">
+      <span id="progress-text">Question 1 of 10</span>
+      <span id="answered-text">Answered: 0</span>
+    </div>
+
+    <div
+      class="progress-track"
+      role="progressbar"
+      aria-label="Quiz progress"
+      aria-valuemin="0"
+      aria-valuemax="10"
+      aria-valuenow="0"
+      id="progress-track"
+    >
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+
+    <div class="question-number" id="question-number">
+      Question 1 | प्रश्न 1
+    </div>
+
+    <div class="question" id="question-text" aria-live="polite"></div>
+
+    <div class="options" id="options"></div>
+
+    <div class="feedback" id="feedback" aria-live="polite"></div>
+
+    <div class="action-row">
+      <button class="action-btn primary-btn" id="next-btn" disabled>
+        Next Question | अगला प्रश्न
+      </button>
+      <button class="action-btn secondary-btn" id="restart-btn">
+        Restart Quiz | क्विज़ दोबारा शुरू करें
+      </button>
+    </div>
+  </section>
+
+  <section class="card result" id="result-card" aria-live="polite">
+    <h2>Quiz Completed! | क्विज़ पूरा हुआ!</h2>
+
+    <p>Your final score is:</p>
+    <p class="hindi">आपका अंतिम स्कोर है:</p>
+
+    <div class="score" id="score-text">0 / 10</div>
+
+    <p id="result-message" class="result-message"></p>
+
+    <div class="result-details" id="result-details"></div>
+
+    <button class="action-btn primary-btn" id="result-restart-btn">
+      Try Again | फिर से प्रयास करें
+    </button>
+    <p style="margin-top:18px;">
+      Keep learning and keep practising!
+    </p>
+    <p class="hindi">
+      सीखते रहें और अभ्यास करते रहें!
+    </p>
+  </section>
+</main>
+
+<footer class="site-disclaimer">
+  <h2>Disclaimer | अस्वीकरण</h2>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy is an independent
+    educational platform and is not affiliated with, endorsed by,
+    or associated with NCERT. NCERT textbook names, chapters, and
+    curriculum topics belong exclusively to NCERT. All explanations,
+    examples, and practice material provided here are educational aids.
+    For official textbooks, visit
+    <a href="https://ncert.nic.in/" target="_blank"
+       rel="noopener noreferrer">ncert.nic.in</a>.
+  </p>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+    इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+    पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+    यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
+    लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+    <a href="https://ncert.nic.in/" target="_blank"
+       rel="noopener noreferrer">ncert.nic.in</a> पर जाएँ।
+  </p>
+</footer>
+
+<div class="footer-note">
+  RawaRajpootNexEduToppers Learning Academy
+</div>
+
+</div>
+
+<script>
+"use strict";
+
+const questions = [
+  {
+    question: "Who is Prakash?",
+    hindi: "प्रकाश कौन है?",
+    options: [
+      ["Ravi's cousin", "रवि का चचेरा भाई"],
+      ["Deepa's brother", "दीपा का भाई"],
+      ["The referee", "रेफरी"],
+      ["The captain of Green Warriors", "ग्रीन वॉरियर्स का कप्तान"]
+    ],
+    answer: 0,
+    explanation: "Prakash is Ravi's cousin.",
+    explanationHindi: "प्रकाश, रवि का चचेरा भाई है।"
+  },
+  {
+    question: "Where do Ravi and Prakash meet the children?",
+    hindi: "रवि और प्रकाश बच्चों से कहाँ मिलते हैं?",
+    options: [
+      ["At school", "स्कूल में"],
+      ["At the children's park", "बच्चों के पार्क में"],
+      ["At a railway station", "रेलवे स्टेशन पर"],
+      ["At a market", "बाज़ार में"]
+    ],
+    answer: 1,
+    explanation: "Ravi and Prakash go to the children's park on a sunny day.",
+    explanationHindi: "रवि और प्रकाश एक धूप वाले दिन बच्चों के पार्क में जाते हैं।"
+  },
+  {
+    question: "What is Lagori also called in Rajasthan?",
+    hindi: "राजस्थान में लागोरी को किस नाम से भी जाना जाता है?",
+    options: [
+      ["Cricket", "क्रिकेट"],
+      ["Satoliya", "सटोलिया"],
+      ["Hockey", "हॉकी"],
+      ["Kabaddi", "कबड्डी"]
+    ],
+    answer: 1,
+    explanation: "Prakash says that the game is called Satoliya in Rajasthan.",
+    explanationHindi: "प्रकाश बताता है कि राजस्थान में इस खेल को सटोलिया कहा जाता है।"
+  },
+  {
+    question: "Who explains that Lagori is a game of seven stones?",
+    hindi: "कौन समझाती है कि लागोरी सात पत्थरों का खेल है?",
+    options: [
+      ["Guneet", "गुनीत"],
+      ["Deepa", "दीपा"],
+      ["Nidhi", "निधि"],
+      ["Ravi", "रवि"]
+    ],
+    answer: 2,
+    explanation: "Nidhi explains that Lagori is a game of seven stones.",
+    explanationHindi: "निधि समझाती है कि लागोरी सात पत्थरों का खेल है।"
+  },
+  {
+    question: "How many flat stones are stacked in Lagori?",
+    hindi: "लागोरी में कितने चपटे पत्थरों को एक के ऊपर एक रखा जाता है?",
+    options: [
+      ["Five", "पाँच"],
+      ["Six", "छह"],
+      ["Seven", "सात"],
+      ["Ten", "दस"]
+    ],
+    answer: 2,
+    explanation: "Seven flat stones are stacked one above another.",
+    explanationHindi: "सात चपटे पत्थरों को एक के ऊपर एक रखा जाता है।"
+  },
+  {
+    question: "Who is the captain of the Sundarpur Tigers?",
+    hindi: "सुंदरपुर टाइगर्स की कप्तान कौन है?",
+    options: [
+      ["Nidhi", "निधि"],
+      ["Deepa", "दीपा"],
+      ["Guneet", "गुनीत"],
+      ["Prakash", "प्रकाश"]
+    ],
+    answer: 1,
+    explanation: "Deepa is the captain of the Sundarpur Tigers.",
+    explanationHindi: "दीपा सुंदरपुर टाइगर्स की कप्तान है।"
+  },
+  {
+    question: "Which team plays against the Sundarpur Tigers?",
+    hindi: "सुंदरपुर टाइगर्स के विरुद्ध कौन-सी टीम खेलती है?",
+    options: [
+      ["Blue Stars", "ब्लू स्टार्स"],
+      ["Red Lions", "रेड लायंस"],
+      ["Green Warriors", "ग्रीन वॉरियर्स"],
+      ["Golden Eagles", "गोल्डन ईगल्स"]
+    ],
+    answer: 2,
+    explanation: "The Green Warriors are the opposing team.",
+    explanationHindi: "ग्रीन वॉरियर्स विरोधी टीम है।"
+  },
+  {
+    question: "What does the team use to knock down the stack of stones?",
+    hindi: "पत्थरों के ढेर को गिराने के लिए टीम किसका उपयोग करती है?",
+    options: [
+      ["A bat", "बल्ला"],
+      ["A ball", "गेंद"],
+      ["A stick", "छड़ी"],
+      ["A rope", "रस्सी"]
+    ],
+    answer: 1,
+    explanation: "One team uses a ball to knock down the stack of stones.",
+    explanationHindi: "एक टीम गेंद से पत्थरों के ढेर को गिराती है।"
+  },
+  {
+    question: "Who places the seventh stone just before the final whistle?",
+    hindi: "अंतिम सीटी बजने से ठीक पहले सातवाँ पत्थर कौन रखता है?",
+    options: [
+      ["Ravi", "रवि"],
+      ["Nidhi", "निधि"],
+      ["Guneet", "गुनीत"],
+      ["Prakash", "प्रकाश"]
+    ],
+    answer: 3,
+    explanation: "Prakash places the seventh stone just before the final whistle.",
+    explanationHindi: "प्रकाश अंतिम सीटी बजने से ठीक पहले सातवाँ पत्थर रखता है।"
+  },
+  {
+    question: "What do both teams do after the match?",
+    hindi: "मैच के बाद दोनों टीमें क्या करती हैं?",
+    options: [
+      ["They argue with each other", "वे एक-दूसरे से बहस करती हैं"],
+      ["They shake hands and appreciate each other", "वे हाथ मिलाती हैं और एक-दूसरे की सराहना करती हैं"],
+      ["They leave without speaking", "वे बिना बात किए चली जाती हैं"],
+      ["They start another argument", "वे एक और बहस शुरू करती हैं"]
+    ],
+    answer: 1,
+    explanation: "Both teams shake hands and appreciate each other, showing respect and fair play.",
+    explanationHindi: "दोनों टीमें हाथ मिलाती हैं और एक-दूसरे की सराहना करती हैं। इससे सम्मान और निष्पक्ष खेल की भावना दिखाई देती है।"
+  }
+];
+
+let currentIndex = 0;
+let score = 0;
+let answeredCount = 0;
+let locked = false;
+
+const questionNumber = document.getElementById("question-number");
+const questionText = document.getElementById("question-text");
+const optionsContainer = document.getElementById("options");
+const feedbackBox = document.getElementById("feedback");
+const nextButton = document.getElementById("next-btn");
+const restartButton = document.getElementById("restart-btn");
+const progressText = document.getElementById("progress-text");
+const answeredText = document.getElementById("answered-text");
+const progressFill = document.getElementById("progress-fill");
+const progressTrack = document.getElementById("progress-track");
+const quizCard = document.getElementById("quiz-card");
+const resultCard = document.getElementById("result-card");
+
+function renderQuestion() {
+  locked = false;
+
+  const item = questions[currentIndex];
+
+  questionNumber.textContent =
+    `Question ${currentIndex + 1} | प्रश्न ${currentIndex + 1}`;
+
+  questionText.replaceChildren();
+
+  const englishQuestion = document.createElement("span");
+  englishQuestion.textContent = item.question;
+
+  const hindiQuestion = document.createElement("span");
+  hindiQuestion.className = "hindi";
+  hindiQuestion.textContent = item.hindi;
+
+  questionText.append(englishQuestion, hindiQuestion);
+
+  optionsContainer.replaceChildren();
+  feedbackBox.className = "feedback";
+  feedbackBox.replaceChildren();
+  nextButton.disabled = true;
+  nextButton.textContent =
+    currentIndex === questions.length - 1
+      ? "See Final Result | अंतिम परिणाम देखें"
+      : "Next Question | अगला प्रश्न";
+
+  item.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option-btn";
+
+    const english = document.createElement("span");
+    english.textContent = `${String.fromCharCode(65 + index)}. ${option[0]}`;
+
+    const hindi = document.createElement("span");
+    hindi.className = "option-hindi";
+    hindi.textContent = option[1];
+
+    button.append(english, hindi);
+    button.addEventListener("click", () => chooseAnswer(index));
+    optionsContainer.appendChild(button);
+  });
+
+  updateProgress();
+}
+
+function chooseAnswer(selectedIndex) {
+  if (locked) return;
+  locked = true;
+  answeredCount++;
+
+  const item = questions[currentIndex];
+  const buttons = optionsContainer.querySelectorAll(".option-btn");
+  const isCorrect = selectedIndex === item.answer;
+
+  buttons.forEach((button, index) => {
+    button.disabled = true;
+
+    if (index === item.answer) {
+      button.classList.add("correct");
+    }
+
+    if (index === selectedIndex && !isCorrect) {
+      button.classList.add("wrong");
+    }
+  });
+
+  if (isCorrect) {
+    score++;
+    feedbackBox.className = "feedback correct-feedback";
+
+    addFeedbackLine("Correct! Well done!", false);
+    addFeedbackLine("सही उत्तर! बहुत अच्छा!", true);
+  } else {
+    feedbackBox.className = "feedback wrong-feedback";
+
+    addFeedbackLine("Not quite. Review the correct answer below.", false);
+    addFeedbackLine("सही नहीं है। नीचे सही उत्तर देखें।", true);
+    addFeedbackLine(
+      `Correct answer: ${item.options[item.answer][0]}`,
+      false
+    );
+    addFeedbackLine(
+      `सही उत्तर: ${item.options[item.answer][1]}`,
+      true
+    );
+  }
+
+  addFeedbackLine(item.explanation, false);
+  addFeedbackLine(item.explanationHindi, true);
+
+  nextButton.disabled = false;
+  updateProgress();
+}
+
+function addFeedbackLine(text, isHindi) {
+  const line = document.createElement("p");
+  if (isHindi) line.className = "hindi";
+  line.textContent = text;
+  feedbackBox.appendChild(line);
+}
+
+function updateProgress() {
+  progressText.textContent =
+    `Question ${currentIndex + 1} of ${questions.length}`;
+
+  answeredText.textContent = `Answered: ${answeredCount}`;
+
+  const percentage = (answeredCount / questions.length) * 100;
+  progressFill.style.width = `${percentage}%`;
+
+  progressTrack.setAttribute("aria-valuenow", String(answeredCount));
+}
+
+function showResult() {
+  quizCard.style.display = "none";
+  resultCard.style.display = "block";
+
+  document.getElementById("score-text").textContent =
+    `${score} / ${questions.length}`;
+
+  let messageEnglish;
+  let messageHindi;
+
+  if (score === 10) {
+    messageEnglish = "Excellent! You know the story very well.";
+    messageHindi = "शानदार! आपको कहानी बहुत अच्छी तरह याद है।";
+  } else if (score >= 8) {
+    messageEnglish = "Very good! Keep practising.";
+    messageHindi = "बहुत अच्छा! अभ्यास जारी रखें।";
+  } else if (score >= 5) {
+    messageEnglish = "Good effort! Revise the chapter and try again.";
+    messageHindi = "अच्छा प्रयास! अध्याय दोहराएँ और फिर से प्रयास करें।";
+  } else {
+    messageEnglish = "Keep learning. Read the chapter again and retry.";
+    messageHindi = "सीखते रहें। अध्याय दोबारा पढ़ें और फिर से प्रयास करें।";
+  }
+
+  const message = document.getElementById("result-message");
+  message.replaceChildren();
+
+  const englishLine = document.createElement("p");
+  englishLine.textContent = messageEnglish;
+
+  const hindiLine = document.createElement("p");
+  hindiLine.className = "hindi";
+  hindiLine.textContent = messageHindi;
+
+  message.append(englishLine, hindiLine);
+
+  const details = document.getElementById("result-details");
+  details.replaceChildren();
+
+  const englishDetails = document.createElement("p");
+  englishDetails.textContent = `Correct answers: ${score}`;
+
+  const hindiDetails = document.createElement("p");
+  hindiDetails.className = "hindi";
+  hindiDetails.textContent = `सही उत्तर: ${score}`;
+
+  const englishTotal = document.createElement("p");
+  englishTotal.textContent = `Questions attempted: ${answeredCount} out of ${questions.length}`;
+
+  const hindiTotal = document.createElement("p");
+  hindiTotal.className = "hindi";
+  hindiTotal.textContent =
+    `कुल प्रश्न: ${questions.length} में से ${answeredCount} हल किए`;
+
+  details.append(
+    englishDetails,
+    hindiDetails,
+    englishTotal,
+    hindiTotal
+  );
+}
+
+function restartQuiz() {
+  currentIndex = 0;
+  score = 0;
+  answeredCount = 0;
+  locked = false;
+
+  resultCard.style.display = "none";
+  quizCard.style.display = "block";
+
+  renderQuestion();
+
+  window.scrollTo({ top: 0, behavior: "auto" });
+}
+
+nextButton.addEventListener("click", () => {
+  if (nextButton.disabled) return;
+
+  if (currentIndex < questions.length - 1) {
+    currentIndex++;
+    renderQuestion();
+  } else {
+    showResult();
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
+});
+
+restartButton.addEventListener("click", restartQuiz);
+document.getElementById("result-restart-btn")
+  .addEventListener("click", restartQuiz);
+
+renderQuestion();
+</script>
+  
+<footer class="site-disclaimer">
+  <h2>Disclaimer | अस्वीकरण</h2>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy is an independent
+    educational platform and is not affiliated with, endorsed by,
+    or associated with NCERT. NCERT textbook names, chapters, and
+    curriculum topics belong exclusively to NCERT. All explanations,
+    examples, and practice material provided here are educational aids.
+    For official textbooks, visit
+    <a href="https://ncert.nic.in/" target="_blank"
+       rel="noopener noreferrer">ncert.nic.in</a>.
+  </p>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+    इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+    पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+    यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
+    लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+    <a href="https://ncert.nic.in/" target="_blank"
+       rel="noopener noreferrer">ncert.nic.in</a> पर जाएँ।
+  </p>
+</footer>
+</body>
+</html>
