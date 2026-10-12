@@ -1,0 +1,467 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 10 Quiz 8 | RawaRajpootNexEduToppers</title>
+<style>
+:root {
+  --primary:#2457a7;
+  --dark:#183d78;
+  --bg:#f1f6ff;
+  --text:#202b3c;
+  --muted:#5d6b80;
+  --border:#d8e2f0;
+  --green:#167542;
+  --red:#b42318;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  padding:18px;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.6;
+}
+.container { max-width:760px; margin:0 auto; }
+header {
+  background:linear-gradient(135deg,var(--primary),var(--dark));
+  color:white;
+  padding:24px 18px;
+  text-align:center;
+  border-radius:16px;
+  margin-bottom:18px;
+}
+header h1 { margin:0 0 8px; font-size:clamp(1.4rem,5vw,2rem); }
+header p { margin:5px 0; }
+.card {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:20px;
+  margin-bottom:16px;
+  box-shadow:0 4px 12px rgba(31,60,100,.06);
+}
+.progress-row {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  color:var(--muted);
+  font-size:.95rem;
+  margin-bottom:10px;
+}
+.progress-track {
+  height:10px;
+  background:#e5ebf5;
+  border-radius:20px;
+  overflow:hidden;
+}
+#progressBar {
+  height:100%;
+  width:0;
+  background:#2b75d6;
+  transition:width .2s;
+}
+.question-number { color:var(--primary); font-weight:bold; margin:20px 0 8px; }
+.question { font-size:1.15rem; font-weight:bold; margin:0 0 6px; }
+.hindi-question { margin:0 0 16px; color:var(--muted); }
+.options { display:grid; gap:10px; }
+.option-btn {
+  width:100%;
+  padding:13px 14px;
+  border:2px solid var(--border);
+  border-radius:10px;
+  background:white;
+  text-align:left;
+  color:var(--text);
+  font-size:1rem;
+  cursor:pointer;
+}
+.option-btn:hover:not(:disabled) {
+  border-color:var(--primary);
+  background:#f4f8ff;
+}
+.option-btn:focus-visible,.action-btn:focus-visible {
+  outline:3px solid #f4b942;
+  outline-offset:2px;
+}
+.option-btn:disabled { cursor:default; }
+.option-btn.correct { border-color:var(--green); background:#e8f7ee; }
+.option-btn.wrong { border-color:var(--red); background:#fff0ef; }
+#feedback {
+  display:none;
+  padding:14px;
+  border-radius:10px;
+  margin-top:16px;
+}
+#feedback.correct-feedback {
+  display:block;
+  background:#e8f7ee;
+  border:1px solid #9dd9b5;
+  color:#155d35;
+}
+#feedback.wrong-feedback {
+  display:block;
+  background:#fff0ef;
+  border:1px solid #f0b3ae;
+  color:#8e2119;
+}
+.feedback-line { margin:5px 0; }
+.actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:18px; }
+.action-btn {
+  border:0;
+  border-radius:10px;
+  padding:12px 18px;
+  background:var(--primary);
+  color:white;
+  font-size:1rem;
+  font-weight:bold;
+  cursor:pointer;
+}
+.action-btn:hover { background:var(--dark); }
+.action-btn:disabled { opacity:.45; cursor:not-allowed; }
+#result { display:none; text-align:center; }
+#result h2 { color:var(--primary); }
+.chapter-link {
+  display:inline-block;
+  color:var(--primary);
+  font-weight:bold;
+  margin:4px 0 14px;
+  overflow-wrap:anywhere;
+}
+.site-disclaimer {
+  border-top:1px solid var(--border);
+  padding:20px 4px 4px;
+  margin-top:28px;
+  color:var(--muted);
+  font-size:.92rem;
+}
+.site-disclaimer h2 { color:var(--text); font-size:1.1rem; }
+.site-disclaimer a { color:var(--primary); }
+@media(max-width:480px) {
+  body { padding:10px; }
+  .card { padding:15px; }
+  header { padding:20px 12px; }
+  .option-btn { padding:12px; }
+}
+</style>
+</head>
+<body>
+<main class="container">
+
+<header>
+  <h1>Quiz 8: Creative Thinking</h1>
+  <p>Class 4 English | Chapter 10: Up High</p>
+  <p lang="hi">कक्षा 4 अंग्रेज़ी | अध्याय 10: Up High</p>
+  <p>Imagination, Nature and Swing Festivals</p>
+  <p lang="hi">कल्पना, प्रकृति और झूले के त्योहार</p>
+</header>
+
+<section class="card" id="quizCard">
+  <div class="progress-row">
+    <span id="questionCount">Question 1 of 10</span>
+    <span id="scoreCount">Score: 0</span>
+  </div>
+  <div class="progress-track" aria-label="Quiz progress">
+    <div id="progressBar"></div>
+  </div>
+
+  <p class="question-number" id="questionNumber">Question 1</p>
+  <p class="question" id="questionText"></p>
+  <p class="hindi-question" id="questionHindi" lang="hi"></p>
+  <div class="options" id="options"></div>
+  <div id="feedback" aria-live="polite"></div>
+
+  <div class="actions">
+    <button class="action-btn" id="nextBtn" disabled>Next Question / अगला प्रश्न</button>
+    <button class="action-btn" id="restartBtn" type="button">Restart / फिर से शुरू करें</button>
+  </div>
+</section>
+
+<section class="card" id="result">
+  <h2>Quiz Completed! / प्रश्नोत्तरी पूरी हुई!</h2>
+  <p id="finalScore"></p>
+  <div id="finalMessage"></div>
+  <button class="action-btn" id="playAgainBtn" type="button">Try Again / फिर से प्रयास करें</button>
+</section>
+
+<a class="chapter-link" href="class4-english-chapter10.html">
+  ← Back to Chapter 10 / अध्याय 10 पर वापस जाएँ
+</a>
+
+<footer class="site-disclaimer">
+  <h2>Disclaimer | अस्वीकरण</h2>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy is an independent
+    educational platform and is not affiliated with, endorsed by,
+    or associated with NCERT. NCERT textbook names, chapters, and
+    curriculum topics belong exclusively to NCERT. All explanations,
+    examples, and practice material provided here are educational aids.
+    For official textbooks, visit
+    <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">ncert.nic.in</a>.
+  </p>
+  <p lang="hi">
+    RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+    इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+    पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+    यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
+    लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+    <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">ncert.nic.in</a> पर जाएँ।
+  </p>
+</footer>
+
+</main>
+
+<script>
+const questions = [
+  {
+    q:"If you were on a magical swing, which sentence best describes an imaginative adventure?",
+    hi:"यदि आप जादुई झूले पर होते, तो कौन-सा वाक्य एक कल्पनात्मक रोमांच का सबसे अच्छा वर्णन करता?",
+    options:[
+      "The swing carried me above the clouds into a world of stars.",
+      "The swing is a swing.",
+      "I like things.",
+      "The morning is a morning."
+    ],
+    answer:0,
+    en:"This sentence creates a clear, imaginative picture of an adventure.",
+    hn:"यह वाक्य रोमांच का एक स्पष्ट और कल्पनात्मक दृश्य बनाता है."
+  },
+  {
+    q:"Which detail would make a description of a view from a swing more interesting?",
+    hi:"झूले से दिखाई देने वाले दृश्य का वर्णन किस जानकारी से अधिक रोचक बनेगा?",
+    options:[
+      "I saw green fields, tall trees and a winding river.",
+      "I saw something.",
+      "It was there.",
+      "I looked around."
+    ],
+    answer:0,
+    en:"Specific details help readers imagine what the writer sees.",
+    hn:"विशिष्ट जानकारी पाठकों को लेखक का देखा हुआ दृश्य कल्पना में देखने में मदद करती है."
+  },
+  {
+    q:"Which word best describes a pleasant day outside?",
+    hi:"बाहर के सुहावने दिन का वर्णन करने के लिए कौन-सा शब्द सबसे उपयुक्त है?",
+    options:["pleasant","repair","answer","garage"],
+    answer:0,
+    en:"“Pleasant” means enjoyable or pleasing.",
+    hn:"“Pleasant” का अर्थ सुखद या आनंददायक होता है."
+  },
+  {
+    q:"Which sentence uses the senses to describe nature?",
+    hi:"प्रकृति का वर्णन इंद्रियों के अनुभव से कौन-सा वाक्य करता है?",
+    options:[
+      "I heard birds singing and felt the cool breeze.",
+      "Nature is there.",
+      "The tree is a tree.",
+      "I went outside."
+    ],
+    answer:0,
+    en:"The sentence describes sounds and the feeling of the breeze.",
+    hn:"यह वाक्य पक्षियों की आवाज़ और हवा के एहसास का वर्णन करता है."
+  },
+  {
+    q:"Which question could you ask yourself while looking down from a swing?",
+    hi:"झूले से नीचे देखते समय आप अपने आप से कौन-सा प्रश्न पूछ सकते हैं?",
+    options:[
+      "What can I see from up here?",
+      "Why is a pencil made of wood?",
+      "How many pages are in my notebook?",
+      "Where did I put my shoes yesterday?"
+    ],
+    answer:0,
+    en:"It connects directly with observing the view from a height.",
+    hn:"यह प्रश्न ऊँचाई से दिखाई देने वाले दृश्य को देखने से सीधे जुड़ा है."
+  },
+  {
+    q:"Which sentence gives a clear ending to a short adventure story?",
+    hi:"छोटी रोमांचक कहानी को स्पष्ट अंत कौन-सा वाक्य देता है?",
+    options:[
+      "At sunset, I returned home safely and told my family about the journey.",
+      "Then the sky.",
+      "And the swing because.",
+      "Green trees very."
+    ],
+    answer:0,
+    en:"It tells the reader how the adventure ends.",
+    hn:"यह पाठक को बताता है कि रोमांचक यात्रा का अंत कैसे हुआ."
+  },
+  {
+    q:"In India, which festival is commonly associated with swings in some regions?",
+    hi:"भारत में कुछ क्षेत्रों में कौन-सा त्योहार झूलों से जुड़ा हुआ है?",
+    options:["Teej","Republic Day only","Children's Day only","Labour Day only"],
+    answer:0,
+    en:"Teej is associated with swings in some regions, though customs vary.",
+    hn:"कुछ क्षेत्रों में तीज के अवसर पर झूले लगाए जाते हैं, हालाँकि परंपराएँ अलग-अलग होती हैं."
+  },
+  {
+    q:"Which statement about swing traditions is most accurate?",
+    hi:"झूले की परंपराओं के बारे में कौन-सा कथन सबसे सही है?",
+    options:[
+      "Traditions can vary by region, community and season.",
+      "Every place celebrates in exactly the same way.",
+      "Swings are used only in one festival everywhere.",
+      "No community has any swing traditions."
+    ],
+    answer:0,
+    en:"Celebrations and customs differ across places and communities.",
+    hn:"अलग-अलग स्थानों और समुदायों में उत्सव तथा परंपराएँ भिन्न हो सकती हैं."
+  },
+  {
+    q:"If you write about a festival with swings, what should you include?",
+    hi:"यदि आप झूलों वाले त्योहार के बारे में लिखें, तो क्या शामिल करना चाहिए?",
+    options:[
+      "The setting, the activities and how people feel.",
+      "Only unrelated numbers.",
+      "Only the word “festival” repeated many times.",
+      "A list of random letters."
+    ],
+    answer:0,
+    en:"These details help readers understand the event and its atmosphere.",
+    hn:"ये जानकारियाँ पाठकों को त्योहार और उसके माहौल को समझने में मदद करती हैं."
+  },
+  {
+    q:"Which is the best way to describe your own view from a swing?",
+    hi:"झूले से अपना देखा हुआ दृश्य बताने का सबसे अच्छा तरीका कौन-सा है?",
+    options:[
+      "Use your own observations and add clear details about what you see, hear or feel.",
+      "Copy a friend's description without thinking.",
+      "Write only one unclear word.",
+      "List words that have no connection with the view."
+    ],
+    answer:0,
+    en:"Your own observations and details make the description clear and personal.",
+    hn:"आपके अपने अनुभव और विवरण वर्णन को स्पष्ट और व्यक्तिगत बनाते हैं."
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+const questionCount = document.getElementById("questionCount");
+const scoreCount = document.getElementById("scoreCount");
+const progressBar = document.getElementById("progressBar");
+const questionNumber = document.getElementById("questionNumber");
+const questionText = document.getElementById("questionText");
+const questionHindi = document.getElementById("questionHindi");
+const optionsBox = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const nextBtn = document.getElementById("nextBtn");
+const quizCard = document.getElementById("quizCard");
+const result = document.getElementById("result");
+
+function renderQuestion() {
+  answered = false;
+  const item = questions[current];
+
+  questionCount.textContent = `Question ${current + 1} of ${questions.length}`;
+  scoreCount.textContent = `Score: ${score}`;
+  questionNumber.textContent = `Question ${current + 1}`;
+  questionText.textContent = item.q;
+  questionHindi.textContent = item.hi;
+  progressBar.style.width = `${(current / questions.length) * 100}%`;
+
+  optionsBox.innerHTML = "";
+  feedback.className = "";
+  feedback.style.display = "none";
+  feedback.innerHTML = "";
+  nextBtn.disabled = true;
+  nextBtn.textContent = current === questions.length - 1
+    ? "See Result / परिणाम देखें"
+    : "Next Question / अगला प्रश्न";
+
+  item.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option-btn";
+    button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+    button.addEventListener("click", () => checkAnswer(index));
+    optionsBox.appendChild(button);
+  });
+}
+
+function checkAnswer(selected) {
+  if (answered) return;
+  answered = true;
+
+  const item = questions[current];
+  const buttons = [...optionsBox.querySelectorAll("button")];
+  buttons.forEach(button => button.disabled = true);
+
+  if (selected === item.answer) {
+    score++;
+    buttons[selected].classList.add("correct");
+    feedback.className = "correct-feedback";
+    feedback.innerHTML = `
+      <p class="feedback-line"><strong>Correct!</strong> ${item.en}</p>
+      <p class="feedback-line" lang="hi"><strong>सही!</strong> ${item.hn}</p>`;
+  } else {
+    buttons[selected].classList.add("wrong");
+    buttons[item.answer].classList.add("correct");
+    feedback.className = "wrong-feedback";
+    feedback.innerHTML = `
+      <p class="feedback-line"><strong>Not quite.</strong> Correct answer: ${item.options[item.answer]}.</p>
+      <p class="feedback-line">${item.en}</p>
+      <p class="feedback-line" lang="hi"><strong>सही उत्तर:</strong> ${item.options[item.answer]}.</p>
+      <p class="feedback-line" lang="hi">${item.hn}</p>`;
+  }
+
+  scoreCount.textContent = `Score: ${score}`;
+  nextBtn.disabled = false;
+}
+
+function showResult() {
+  quizCard.style.display = "none";
+  result.style.display = "block";
+  progressBar.style.width = "100%";
+
+  document.getElementById("finalScore").textContent =
+    `Your score: ${score} out of ${questions.length} | आपका स्कोर: ${questions.length} में से ${score}`;
+
+  let en, hi;
+  if (score === questions.length) {
+    en = "Excellent work! Your descriptions show clear thinking and imagination.";
+    hi = "बहुत अच्छा! आपके वर्णन में स्पष्ट सोच और कल्पनाशक्ति दिखाई देती है.";
+  } else if (score >= 7) {
+    en = "Good work! Review the explanations and practise describing what you observe.";
+    hi = "अच्छा प्रयास! व्याख्याएँ पढ़ें और अपने देखे हुए दृश्य का वर्णन करने का अभ्यास करें.";
+  } else {
+    en = "Keep practising. Use specific details to explain what you see, hear and feel.";
+    hi = "अभ्यास जारी रखें। आप क्या देखते, सुनते और महसूस करते हैं, इसे स्पष्ट विवरण के साथ लिखें.";
+  }
+
+  document.getElementById("finalMessage").innerHTML =
+    `<p>${en}</p><p lang="hi">${hi}</p>`;
+}
+
+nextBtn.addEventListener("click", () => {
+  if (!answered) return;
+  if (current < questions.length - 1) {
+    current++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
+});
+
+function restartQuiz() {
+  current = 0;
+  score = 0;
+  answered = false;
+  quizCard.style.display = "block";
+  result.style.display = "none";
+  renderQuestion();
+}
+
+document.getElementById("restartBtn").addEventListener("click", restartQuiz);
+document.getElementById("playAgainBtn").addEventListener("click", restartQuiz);
+
+renderQuestion();
+</script>
+</body>
+</html>
