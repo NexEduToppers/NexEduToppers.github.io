@@ -1,0 +1,495 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class 4 English Chapter 10 Quiz 1 | RawaRajpootNexEduToppers</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f0f7ff;
+      color: #183153;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #174a8b;
+      color: white;
+      text-align: center;
+      padding: 22px 14px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 25px;
+    }
+
+    header p { margin: 4px 0; }
+
+    .container {
+      width: 92%;
+      max-width: 760px;
+      margin: 24px auto;
+    }
+
+    .panel {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    }
+
+    .progress-track {
+      height: 10px;
+      background: #dbe7f5;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    #progressBar {
+      width: 0;
+      height: 100%;
+      background: #16834a;
+      transition: width 0.2s;
+    }
+
+    .question-number {
+      color: #174a8b;
+      font-weight: bold;
+    }
+
+    .option {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 12px 14px;
+      margin: 10px 0;
+      border: 2px solid #d3dfed;
+      border-radius: 9px;
+      background: #fff;
+      color: #183153;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .option:hover:not(:disabled) {
+      background: #edf5ff;
+      border-color: #174a8b;
+    }
+
+    .option:disabled { cursor: default; }
+
+    .option.correct {
+      background: #d9f5e4;
+      border-color: #16834a;
+    }
+
+    .option.wrong {
+      background: #ffe1e1;
+      border-color: #c62828;
+    }
+
+    #feedback {
+      display: none;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 14px;
+    }
+
+    #feedback.good {
+      display: block;
+      background: #e0f6e8;
+      color: #125c32;
+    }
+
+    #feedback.bad {
+      display: block;
+      background: #ffebeb;
+      color: #922020;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .main-button, .back-link {
+      display: inline-block;
+      border: 0;
+      border-radius: 8px;
+      padding: 11px 17px;
+      background: #174a8b;
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .main-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .back-link { background: #16834a; }
+
+    .result {
+      text-align: center;
+      display: none;
+    }
+
+    .result h2 { color: #174a8b; }
+
+    .site-disclaimer {
+      background: #e6edf6;
+      border-top: 3px solid #174a8b;
+      padding: 22px 5%;
+      margin-top: 30px;
+      font-size: 14px;
+    }
+
+    .site-disclaimer h2 {
+      margin-top: 0;
+      font-size: 19px;
+    }
+
+    a { overflow-wrap: anywhere; }
+
+    @media (max-width: 480px) {
+      header h1 { font-size: 21px; }
+      .panel { padding: 16px; }
+      .option { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+  <p>Class 4 English | कक्षा 4 अंग्रेज़ी</p>
+  <p>Chapter 10: The Swing | अध्याय 10: झूला</p>
+  <p>Quiz 1: Basic Understanding | क्विज़ 1: बुनियादी समझ</p>
+</header>
+
+<main class="container">
+  <section class="panel">
+    <h2>Welcome to Quiz 1! | क्विज़ 1 में आपका स्वागत है!</h2>
+    <p>Choose the best answer for each question.</p>
+    <p>हर प्रश्न के लिए सबसे सही उत्तर चुनें।</p>
+    <p>There are 10 questions. Your score will appear at the end.</p>
+    <p>इसमें 10 प्रश्न हैं। अंत में आपका स्कोर दिखाई देगा।</p>
+
+    <div class="progress-track" aria-label="Quiz progress">
+      <div id="progressBar"></div>
+    </div>
+    <p id="progressText">Question 1 of 10 | प्रश्न 1 / 10</p>
+    <p id="scoreText">Correct answers: 0 | सही उत्तर: 0</p>
+  </section>
+
+  <section class="panel" id="quizPanel">
+    <p class="question-number" id="questionNumber"></p>
+    <h2 id="questionEnglish"></h2>
+    <p id="questionHindi" lang="hi"></p>
+    <div id="options"></div>
+    <div id="feedback" role="status" aria-live="polite"></div>
+
+    <div class="button-row">
+      <button class="main-button" id="nextButton" disabled>
+        Next Question | अगला प्रश्न
+      </button>
+    </div>
+  </section>
+
+  <section class="panel result" id="resultPanel" aria-live="polite">
+    <h2>Quiz Completed! | क्विज़ पूरी हुई!</h2>
+    <p id="finalScore"></p>
+    <p id="finalMessage"></p>
+    <div class="button-row" style="justify-content:center">
+      <button class="main-button" id="restartButton">
+        Try Again | फिर से प्रयास करें
+      </button>
+      <a class="back-link" href="class4-english-chapter10.html">
+        Back to Chapter | अध्याय पर वापस जाएँ
+      </a>
+    </div>
+  </section>
+
+  <section class="panel">
+    <a class="back-link" href="class4-english-chapter10.html">
+      Back to Chapter 10 | अध्याय 10 पर वापस जाएँ
+    </a>
+  </section>
+</main>
+
+<footer class="site-disclaimer">
+  <h2>Disclaimer | अस्वीकरण</h2>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy is an independent
+    educational platform and is not affiliated with, endorsed by,
+    or associated with NCERT. NCERT textbook names, chapters, and
+    curriculum topics belong exclusively to NCERT. All explanations,
+    examples, and practice material provided here are educational aids.
+    For official textbooks, visit
+    <a href="https://ncert.nic.in/" target="_blank"
+       rel="noopener noreferrer">ncert.nic.in</a>.
+  </p>
+  <p lang="hi">
+    RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+    इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+    पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+    यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
+    लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+    <a href="https://ncert.nic.in/" target="_blank"
+       rel="noopener noreferrer">ncert.nic.in</a> पर जाएँ।
+  </p>
+</footer>
+
+<script>
+  const questions = [
+    {
+      en: "What is the title of the poem in this chapter?",
+      hi: "इस अध्याय में कविता का शीर्षक क्या है?",
+      options: ["The Swing", "The Garden", "The River", "The Cattle"],
+      answer: 0,
+      explainEn: "The poem is titled The Swing.",
+      explainHi: "कविता का शीर्षक The Swing (झूला) है।"
+    },
+    {
+      en: "Who wrote the poem The Swing?",
+      hi: "The Swing कविता किसने लिखी?",
+      options: [
+        "Robert Louis Stevenson",
+        "William Shakespeare",
+        "Ruskin Bond",
+        "Rabindranath Tagore"
+      ],
+      answer: 0,
+      explainEn: "The poem is credited to Robert Louis Stevenson.",
+      explainHi: "यह कविता Robert Louis Stevenson के नाम से दी गई है।"
+    },
+    {
+      en: "What does the poet enjoy doing?",
+      hi: "कवि को क्या करना अच्छा लगता है?",
+      options: [
+        "Riding a swing",
+        "Driving a bus",
+        "Climbing a tree",
+        "Swimming in a river"
+      ],
+      answer: 0,
+      explainEn: "The poem describes the joy of going up in a swing.",
+      explainHi: "कविता में झूले पर ऊपर जाने के आनंद का वर्णन है।"
+    },
+    {
+      en: "What can the poet see when he goes up in the swing?",
+      hi: "झूले पर ऊपर जाने पर कवि क्या देख सकता है?",
+      options: [
+        "Rivers and trees",
+        "Only classroom walls",
+        "A railway station",
+        "A crowded market"
+      ],
+      answer: 0,
+      explainEn: "The poem mentions rivers and trees among the things seen from the swing.",
+      explainHi: "कविता में झूले से दिखाई देने वाली चीज़ों में नदियों और पेड़ों का उल्लेख है।"
+    },
+    {
+      en: "Which animals are mentioned in the poem?",
+      hi: "कविता में किन जानवरों का उल्लेख है?",
+      options: ["Cattle", "Lions", "Penguins", "Camels"],
+      answer: 0,
+      explainEn: "The poem mentions cattle in the countryside.",
+      explainHi: "कविता में ग्रामीण इलाके में मवेशियों का उल्लेख है।"
+    },
+    {
+      en: "What colour is the garden described as?",
+      hi: "कविता में बगीचे का रंग कैसा बताया गया है?",
+      options: ["Green", "Purple", "Black", "Orange"],
+      answer: 0,
+      explainEn: "The poem describes the garden as green.",
+      explainHi: "कविता में बगीचे को हरा बताया गया है।"
+    },
+    {
+      en: "What does the poet say about the air?",
+      hi: "कवि हवा के बारे में क्या कहता है?",
+      options: [
+        "The air is blue.",
+        "The air is made of gold.",
+        "The air is always dark.",
+        "The air is full of stones."
+      ],
+      answer: 0,
+      explainEn: "The poem uses the expression 'air so blue'.",
+      explainHi: "कविता में 'air so blue' यानी 'नीला-सा आसमान/खुला नीला वातावरण' का वर्णन है।"
+    },
+    {
+      en: "Which word means farm animals such as cows and buffaloes?",
+      hi: "गाय और भैंस जैसे पालतू खेतों के जानवरों के लिए कौन-सा शब्द है?",
+      options: ["Cattle", "Countryside", "Pleasantest", "Swing"],
+      answer: 0,
+      explainEn: "Cattle means farm animals such as cows and buffaloes.",
+      explainHi: "Cattle का अर्थ गाय और भैंस जैसे मवेशी होता है।"
+    },
+    {
+      en: "Which word refers to land and areas outside towns and cities?",
+      hi: "शहरों और कस्बों से बाहर के ग्रामीण इलाके को कौन-सा शब्द कहते हैं?",
+      options: ["Countryside", "Cattle", "Swing", "Pleasantest"],
+      answer: 0,
+      explainEn: "Countryside refers to rural areas outside towns and cities.",
+      explainHi: "Countryside का अर्थ शहरों और कस्बों से बाहर का ग्रामीण क्षेत्र है।"
+    },
+    {
+      en: "Which quality can we learn from enjoying outdoor activities safely?",
+      hi: "बाहर की गतिविधियों का सुरक्षित आनंद लेने से हम कौन-सी अच्छी आदत सीख सकते हैं?",
+      options: [
+        "Enjoying nature responsibly",
+        "Ignoring every safety rule",
+        "Damaging plants and trees",
+        "Pushing others without care"
+      ],
+      answer: 0,
+      explainEn: "We can enjoy nature while also behaving safely and responsibly.",
+      explainHi: "हम प्रकृति का आनंद लेते हुए सुरक्षित और जिम्मेदार व्यवहार कर सकते हैं।"
+    }
+  ];
+
+  let current = 0;
+  let score = 0;
+  let answered = false;
+
+  const questionNumber = document.getElementById("questionNumber");
+  const questionEnglish = document.getElementById("questionEnglish");
+  const questionHindi = document.getElementById("questionHindi");
+  const optionsBox = document.getElementById("options");
+  const feedback = document.getElementById("feedback");
+  const nextButton = document.getElementById("nextButton");
+  const progressBar = document.getElementById("progressBar");
+  const progressText = document.getElementById("progressText");
+  const scoreText = document.getElementById("scoreText");
+  const quizPanel = document.getElementById("quizPanel");
+  const resultPanel = document.getElementById("resultPanel");
+
+  function showQuestion() {
+    answered = false;
+    const q = questions[current];
+
+    questionNumber.textContent =
+      `Question ${current + 1} | प्रश्न ${current + 1}`;
+    questionEnglish.textContent = q.en;
+    questionHindi.textContent = q.hi;
+    optionsBox.replaceChildren();
+
+    feedback.className = "";
+    feedback.textContent = "";
+    nextButton.disabled = true;
+    nextButton.textContent = current === questions.length - 1
+      ? "See Result | परिणाम देखें"
+      : "Next Question | अगला प्रश्न";
+
+    q.options.forEach((option, index) => {
+      const button = document.createElement("button");
+      button.className = "option";
+      button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+      button.addEventListener("click", () => checkAnswer(index));
+      optionsBox.appendChild(button);
+    });
+
+    progressText.textContent =
+      `Question ${current + 1} of ${questions.length} | प्रश्न ${current + 1} / ${questions.length}`;
+    progressBar.style.width = `${(current / questions.length) * 100}%`;
+    scoreText.textContent = `Correct answers: ${score} | सही उत्तर: ${score}`;
+  }
+
+  function checkAnswer(selected) {
+    if (answered) return;
+    answered = true;
+
+    const q = questions[current];
+    const buttons = optionsBox.querySelectorAll("button");
+
+    buttons.forEach((button, index) => {
+      button.disabled = true;
+      if (index === q.answer) button.classList.add("correct");
+      if (index === selected && selected !== q.answer) {
+        button.classList.add("wrong");
+      }
+    });
+
+    if (selected === q.answer) {
+      score++;
+      feedback.className = "good";
+      feedback.textContent =
+        `Correct Answer! | सही उत्तर! ${q.explainEn} ${q.explainHi}`;
+    } else {
+      feedback.className = "bad";
+      feedback.textContent =
+        `Wrong Answer. | गलत उत्तर। Correct answer: ${q.options[q.answer]}. सही उत्तर: ${q.options[q.answer]}. ${q.explainEn} ${q.explainHi}`;
+    }
+
+    scoreText.textContent = `Correct answers: ${score} | सही उत्तर: ${score}`;
+    progressBar.style.width = `${((current + 1) / questions.length) * 100}%`;
+    nextButton.disabled = false;
+  }
+
+  function showResult() {
+    quizPanel.style.display = "none";
+    resultPanel.style.display = "block";
+    progressBar.style.width = "100%";
+
+    document.getElementById("finalScore").textContent =
+      `Your score: ${score} / ${questions.length} | आपका स्कोर: ${score} / ${questions.length}`;
+
+    let messageEn;
+    let messageHi;
+
+    if (score === 10) {
+      messageEn = "Excellent work! You answered every question correctly.";
+      messageHi = "बहुत शानदार! आपने सभी प्रश्नों के सही उत्तर दिए।";
+    } else if (score >= 7) {
+      messageEn = "Good job! Review the questions you missed.";
+      messageHi = "बहुत अच्छा! जिन प्रश्नों में गलती हुई, उन्हें दोबारा पढ़ें।";
+    } else if (score >= 4) {
+      messageEn = "Keep practising. Read the chapter summary again.";
+      messageHi = "अभ्यास जारी रखें। अध्याय का सारांश फिर से पढ़ें।";
+    } else {
+      messageEn = "Read the chapter notes and try again.";
+      messageHi = "अध्याय के नोट्स पढ़ें और फिर से प्रयास करें।";
+    }
+
+    document.getElementById("finalMessage").textContent =
+      `${messageEn} ${messageHi}`;
+  }
+
+  nextButton.addEventListener("click", () => {
+    if (!answered) return;
+
+    if (current < questions.length - 1) {
+      current++;
+      showQuestion();
+    } else {
+      showResult();
+    }
+  });
+
+  document.getElementById("restartButton").addEventListener("click", () => {
+    current = 0;
+    score = 0;
+    answered = false;
+    resultPanel.style.display = "none";
+    quizPanel.style.display = "block";
+    showQuestion();
+  });
+
+  showQuestion();
+</script>
+
+</body>
+</html>
+```
