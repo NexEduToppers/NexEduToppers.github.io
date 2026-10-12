@@ -1,0 +1,518 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 10 Quiz 6 | RawaRajpootNexEduToppers</title>
+
+<style>
+:root {
+  --primary: #2457a7;
+  --primary-dark: #183d78;
+  --bg: #f1f6ff;
+  --card: #ffffff;
+  --text: #202b3c;
+  --muted: #5d6b80;
+  --border: #d8e2f0;
+  --correct: #167542;
+  --wrong: #b42318;
+}
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 18px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+header {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  padding: 24px 18px;
+  text-align: center;
+  border-radius: 16px;
+  margin-bottom: 18px;
+}
+
+header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.4rem, 5vw, 2rem);
+}
+
+header p { margin: 5px 0; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(31, 60, 100, 0.06);
+}
+
+.progress-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.progress-track {
+  height: 10px;
+  background: #e5ebf5;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: #2b75d6;
+  transition: width 0.2s ease;
+}
+
+.question-number {
+  color: var(--primary);
+  font-weight: bold;
+  margin: 0 0 8px;
+}
+
+.question {
+  font-size: 1.15rem;
+  font-weight: bold;
+  margin: 0 0 6px;
+}
+
+.hindi-question {
+  margin: 0 0 16px;
+  color: var(--muted);
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.option-btn {
+  width: 100%;
+  padding: 13px 14px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: white;
+  text-align: left;
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: #f4f8ff;
+}
+
+.option-btn:focus-visible,
+.action-btn:focus-visible {
+  outline: 3px solid #f4b942;
+  outline-offset: 2px;
+}
+
+.option-btn:disabled { cursor: default; }
+
+.option-btn.correct {
+  border-color: var(--correct);
+  background: #e8f7ee;
+}
+
+.option-btn.wrong {
+  border-color: var(--wrong);
+  background: #fff0ef;
+}
+
+#feedback {
+  display: none;
+  padding: 14px;
+  border-radius: 10px;
+  margin-top: 16px;
+}
+
+#feedback.correct-feedback {
+  display: block;
+  background: #e8f7ee;
+  border: 1px solid #9dd9b5;
+  color: #155d35;
+}
+
+#feedback.wrong-feedback {
+  display: block;
+  background: #fff0ef;
+  border: 1px solid #f0b3ae;
+  color: #8e2119;
+}
+
+.feedback-line { margin: 5px 0; }
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.action-btn {
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 18px;
+  background: var(--primary);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.action-btn:hover { background: var(--primary-dark); }
+
+.action-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+#result {
+  display: none;
+  text-align: center;
+}
+
+#result h2 { color: var(--primary); }
+
+.chapter-link {
+  display: inline-block;
+  color: var(--primary);
+  font-weight: bold;
+  margin: 4px 0 14px;
+  overflow-wrap: anywhere;
+}
+
+.site-disclaimer {
+  border-top: 1px solid var(--border);
+  padding: 20px 4px 4px;
+  margin-top: 28px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.site-disclaimer h2 {
+  color: var(--text);
+  font-size: 1.1rem;
+}
+
+.site-disclaimer a { color: var(--primary); }
+
+@media (max-width: 480px) {
+  body { padding: 10px; }
+  .card { padding: 15px; }
+  header { padding: 20px 12px; }
+  .option-btn { padding: 12px; }
+}
+</style>
+</head>
+
+<body>
+<main class="container">
+
+<header>
+  <h1>Quiz 6: Listening Skills</h1>
+  <p>Class 4 English | Chapter 10: Up High</p>
+  <p>कक्षा 4 अंग्रेज़ी | अध्याय 10: Up High</p>
+  <p>Topic: Nouns and Verbs</p>
+  <p>विषय: संज्ञा और क्रिया</p>
+</header>
+
+<section class="card" id="quizCard">
+  <div class="progress-row">
+    <span id="questionCount">Question 1 of 10</span>
+    <span id="scoreCount">Score: 0</span>
+  </div>
+
+  <div class="progress-track" aria-label="Quiz progress">
+    <div id="progressBar"></div>
+  </div>
+
+  <div style="margin-top:20px">
+    <p class="question-number" id="questionNumber">Question 1</p>
+    <p class="question" id="questionText"></p>
+    <p class="hindi-question" id="questionHindi" lang="hi"></p>
+    <div class="options" id="options"></div>
+    <div id="feedback" aria-live="polite"></div>
+  </div>
+
+  <div class="actions">
+    <button class="action-btn" id="nextBtn" disabled>Next Question / अगला प्रश्न</button>
+    <button class="action-btn" id="restartBtn" type="button">Restart / फिर से शुरू करें</button>
+  </div>
+</section>
+
+<section class="card" id="result">
+  <h2>Quiz Completed! / प्रश्नोत्तरी पूरी हुई!</h2>
+  <p id="finalScore"></p>
+  <p id="finalMessage"></p>
+  <button class="action-btn" id="playAgainBtn" type="button">
+    Try Again / फिर से प्रयास करें
+  </button>
+</section>
+
+<a class="chapter-link" href="class4-english-chapter10.html">
+  ← Back to Chapter 10 / अध्याय 10 पर वापस जाएँ
+</a>
+
+<footer class="site-disclaimer">
+  <h2>Disclaimer | अस्वीकरण</h2>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy is an independent
+    educational platform and is not affiliated with, endorsed by,
+    or associated with NCERT. NCERT textbook names, chapters, and
+    curriculum topics belong exclusively to NCERT. All explanations,
+    examples, and practice material provided here are educational aids.
+    For official textbooks, visit
+    <a href="https://ncert.nic.in/" target="_blank"
+       rel="noopener noreferrer">ncert.nic.in</a>.
+  </p>
+  <p lang="hi">
+    RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+    इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+    पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+    यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
+    लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+    <a href="https://ncert.nic.in/" target="_blank"
+       rel="noopener noreferrer">ncert.nic.in</a> पर जाएँ।
+  </p>
+</footer>
+
+</main>
+
+<script>
+const questions = [
+  {
+    q: "In the sentence “The children dance,” which word is the verb?",
+    hi: "“The children dance” वाक्य में क्रिया कौन-सा शब्द है?",
+    options: ["children", "the", "dance", "sentence"],
+    answer: 2,
+    en: "“Dance” tells us what the children do, so it is a verb.",
+    hn: "“Dance” बताता है कि बच्चे क्या करते हैं, इसलिए यह क्रिया है."
+  },
+  {
+    q: "In “We watched a dance,” which word is used as a noun?",
+    hi: "“We watched a dance” में कौन-सा शब्द संज्ञा के रूप में प्रयोग हुआ है?",
+    options: ["watched", "dance", "we", "a"],
+    answer: 1,
+    en: "Here, “dance” names an activity or performance, so it is a noun.",
+    hn: "यहाँ “dance” एक गतिविधि या प्रस्तुति का नाम बताता है, इसलिए यह संज्ञा है."
+  },
+  {
+    q: "In “I play football,” which word tells us the action?",
+    hi: "“I play football” में कौन-सा शब्द कार्य बताता है?",
+    options: ["I", "football", "play", "the"],
+    answer: 2,
+    en: "“Play” tells us what I do, so it is a verb.",
+    hn: "“Play” बताता है कि मैं क्या करता हूँ, इसलिए यह क्रिया है."
+  },
+  {
+    q: "In “The children watched a play,” what does “play” name?",
+    hi: "“The children watched a play” में “play” किसका नाम बताता है?",
+    options: ["An action of running", "A stage performance", "A colour", "A place"],
+    answer: 1,
+    en: "In this sentence, “play” means a stage performance and is a noun.",
+    hn: "इस वाक्य में “play” का अर्थ नाटक या मंच-प्रस्तुति है, इसलिए यह संज्ञा है."
+  },
+  {
+    q: "In “Please answer the question,” which word is the verb?",
+    hi: "“Please answer the question” में क्रिया कौन-सी है?",
+    options: ["please", "answer", "question", "the"],
+    answer: 1,
+    en: "“Answer” tells someone what to do, so it is a verb.",
+    hn: "“Answer” बताता है कि किसी को क्या करना है, इसलिए यह क्रिया है."
+  },
+  {
+    q: "In “I know the answer,” which word is a noun?",
+    hi: "“I know the answer” में संज्ञा कौन-सी है?",
+    options: ["know", "I", "the", "answer"],
+    answer: 3,
+    en: "“Answer” names the response to a question, so it is a noun here.",
+    hn: "यहाँ “answer” प्रश्न के उत्तर का नाम है, इसलिए यह संज्ञा है."
+  },
+  {
+    q: "In “Birds fly in the sky,” which word is the verb?",
+    hi: "“Birds fly in the sky” में क्रिया कौन-सी है?",
+    options: ["birds", "sky", "fly", "the"],
+    answer: 2,
+    en: "“Fly” tells us what birds do, so it is a verb.",
+    hn: "“Fly” बताता है कि पक्षी क्या करते हैं, इसलिए यह क्रिया है."
+  },
+  {
+    q: "In “A fly sat on the wall,” which word is a noun?",
+    hi: "“A fly sat on the wall” में कौन-सा शब्द संज्ञा है?",
+    options: ["sat", "fly", "on", "the"],
+    answer: 1,
+    en: "Here, “fly” names an insect, so it is a noun.",
+    hn: "यहाँ “fly” एक कीड़े का नाम है, इसलिए यह संज्ञा है."
+  },
+  {
+    q: "In “The waves move gently,” which word is the verb?",
+    hi: "“The waves move gently” में क्रिया कौन-सी है?",
+    options: ["waves", "the", "gently", "move"],
+    answer: 3,
+    en: "“Move” tells us what the waves do, so it is a verb.",
+    hn: "“Move” बताता है कि लहरें क्या करती हैं, इसलिए यह क्रिया है."
+  },
+  {
+    q: "In “The waves were high,” which word names the things we see on water?",
+    hi: "“The waves were high” में पानी पर दिखाई देने वाली लहरों का नाम कौन-सा शब्द बताता है?",
+    options: ["were", "high", "waves", "the"],
+    answer: 2,
+    en: "“Waves” names the moving parts of water, so it is a noun.",
+    hn: "“Waves” पानी की लहरों का नाम है, इसलिए यह संज्ञा है."
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+const questionCount = document.getElementById("questionCount");
+const scoreCount = document.getElementById("scoreCount");
+const progressBar = document.getElementById("progressBar");
+const questionNumber = document.getElementById("questionNumber");
+const questionText = document.getElementById("questionText");
+const questionHindi = document.getElementById("questionHindi");
+const optionsBox = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const nextBtn = document.getElementById("nextBtn");
+const quizCard = document.getElementById("quizCard");
+const result = document.getElementById("result");
+
+function renderQuestion() {
+  answered = false;
+  const item = questions[current];
+
+  questionCount.textContent = `Question ${current + 1} of ${questions.length}`;
+  scoreCount.textContent = `Score: ${score}`;
+  questionNumber.textContent = `Question ${current + 1}`;
+  questionText.textContent = item.q;
+  questionHindi.textContent = item.hi;
+  progressBar.style.width = `${(current / questions.length) * 100}%`;
+
+  optionsBox.innerHTML = "";
+  feedback.className = "";
+  feedback.style.display = "none";
+  feedback.innerHTML = "";
+  nextBtn.disabled = true;
+
+  item.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option-btn";
+    button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+    button.addEventListener("click", () => checkAnswer(index));
+    optionsBox.appendChild(button);
+  });
+}
+
+function checkAnswer(selected) {
+  if (answered) return;
+  answered = true;
+
+  const item = questions[current];
+  const buttons = [...optionsBox.querySelectorAll("button")];
+  buttons.forEach(button => button.disabled = true);
+
+  if (selected === item.answer) {
+    score++;
+    buttons[selected].classList.add("correct");
+    feedback.className = "correct-feedback";
+    feedback.innerHTML = `
+      <p class="feedback-line"><strong>Correct!</strong> ${item.en}</p>
+      <p class="feedback-line" lang="hi"><strong>सही!</strong> ${item.hn}</p>
+    `;
+  } else {
+    buttons[selected].classList.add("wrong");
+    buttons[item.answer].classList.add("correct");
+    feedback.className = "wrong-feedback";
+    feedback.innerHTML = `
+      <p class="feedback-line"><strong>Not quite.</strong> Correct answer: ${item.options[item.answer]}.</p>
+      <p class="feedback-line">${item.en}</p>
+      <p class="feedback-line" lang="hi"><strong>सही उत्तर:</strong> ${item.options[item.answer]}.</p>
+      <p class="feedback-line" lang="hi">${item.hn}</p>
+    `;
+  }
+
+  scoreCount.textContent = `Score: ${score}`;
+  nextBtn.disabled = false;
+  nextBtn.textContent = current === questions.length - 1
+    ? "See Result / परिणाम देखें"
+    : "Next Question / अगला प्रश्न";
+}
+
+function showResult() {
+  quizCard.style.display = "none";
+  result.style.display = "block";
+  progressBar.style.width = "100%";
+
+  document.getElementById("finalScore").textContent =
+    `Your score: ${score} out of ${questions.length} | आपका स्कोर: ${questions.length} में से ${score}`;
+
+  let messageEn;
+  let messageHi;
+
+  if (score === questions.length) {
+    messageEn = "Excellent work! You understand these noun and verb uses very well.";
+    messageHi = "बहुत अच्छा! आप संज्ञा और क्रिया के इन प्रयोगों को अच्छी तरह समझते हैं.";
+  } else if (score >= 7) {
+    messageEn = "Good work! Review the explanations for the questions you missed.";
+    messageHi = "अच्छा प्रयास! जिन प्रश्नों में गलती हुई, उनकी व्याख्या दोबारा पढ़ें.";
+  } else {
+    messageEn = "Keep practising. Read each sentence and ask whether the word names something or shows an action.";
+    messageHi = "अभ्यास जारी रखें। हर वाक्य पढ़ें और सोचें कि शब्द किसी चीज़ का नाम बताता है या कोई कार्य.";
+  }
+
+  document.getElementById("finalMessage").innerHTML =
+    `<p>${messageEn}</p><p lang="hi">${messageHi}</p>`;
+}
+
+nextBtn.addEventListener("click", () => {
+  if (!answered) return;
+
+  if (current < questions.length - 1) {
+    current++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
+});
+
+function restartQuiz() {
+  current = 0;
+  score = 0;
+  answered = false;
+  quizCard.style.display = "block";
+  result.style.display = "none";
+  nextBtn.textContent = "Next Question / अगला प्रश्न";
+  renderQuestion();
+}
+
+document.getElementById("restartBtn").addEventListener("click", restartQuiz);
+document.getElementById("playAgainBtn").addEventListener("click", restartQuiz);
+
+renderQuestion();
+</script>
+</body>
+</html>
