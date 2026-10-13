@@ -1,10 +1,17 @@
+## Complete HTML code
 
+**Filename:** `class4-english-chapter11-quiz7.html`
+
+Copy the entire code below and paste it into your new GitHub file.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiz 8: Revision Challenge | RawaRajpootNexEduToppers</title>
+
+<title>Quiz 7 - Nature and Animals | NexEduToppers</title>
 
 <style>
 * {
@@ -13,108 +20,86 @@
 
 body {
   margin: 0;
+  padding: 15px;
   font-family: Arial, sans-serif;
-  background: #f0f7ff;
-  color: #243247;
-  line-height: 1.6;
-}
-
-header {
-  background: linear-gradient(135deg, #173b70, #2476b9);
-  color: white;
-  text-align: center;
-  padding: 24px 14px;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 25px;
-}
-
-header p {
-  margin: 6px 0;
+  background: #eff8f0;
+  color: #263b2b;
 }
 
 .container {
-  max-width: 850px;
-  margin: 22px auto;
-  padding: 0 14px;
-}
-
-.card {
-  background: white;
+  max-width: 750px;
+  margin: auto;
   padding: 20px;
+  background: white;
   border-radius: 14px;
-  margin-bottom: 18px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 15px #00000012;
 }
 
-h2 {
-  color: #173b70;
-  margin-top: 0;
-}
-
-.info {
+h1 {
   text-align: center;
+  color: #176638;
+  font-size: 25px;
+}
+
+.subtitle {
+  text-align: center;
+  line-height: 1.8;
+}
+
+.progress-area {
+  margin: 22px 0;
+  font-weight: bold;
 }
 
 .progress-bg {
-  width: 100%;
-  height: 12px;
-  background: #dce6f2;
-  border-radius: 20px;
+  height: 10px;
+  margin-top: 8px;
+  background: #dcebdd;
+  border-radius: 10px;
   overflow: hidden;
-  margin: 12px 0;
 }
 
-#progress {
+#progressBar {
   height: 100%;
   width: 0%;
-  background: #16865c;
+  background: #218c4b;
   transition: width 0.3s;
 }
 
-.question-number {
-  color: #2476b9;
+.question-box {
+  border: 2px solid #dcebdd;
+  padding: 18px;
+  border-radius: 12px;
+}
+
+#questionNumber {
   font-weight: bold;
+  color: #176638;
+}
+
+#question {
+  font-size: 19px;
+  line-height: 1.7;
 }
 
 .option {
   display: block;
   width: 100%;
-  text-align: left;
   padding: 13px;
-  margin: 9px 0;
-  border: 2px solid #d7e2ef;
-  border-radius: 9px;
-  background: white;
-  color: #243247;
+  margin: 10px 0;
+  text-align: left;
   font-size: 16px;
   line-height: 1.5;
+  color: #263b2b;
+  background: #f8fbf8;
+  border: 2px solid #cbdccf;
+  border-radius: 9px;
   cursor: pointer;
-  white-space: pre-line;
 }
 
 .option:hover:not(:disabled) {
-  background: #eef6ff;
-  border-color: #2476b9;
-}
-
-.option.selected {
-  background: #e6f1ff;
-  border-color: #2476b9;
-}
-
-.option.correct {
-  background: #e2f7e9;
-  border-color: #198754;
-  color: #14532d;
-}
-
-.option.wrong {
-  background: #fff0f0;
-  border-color: #d93025;
-  color: #991b1b;
+  background: #e9f6eb;
+  border-color: #218c4b;
 }
 
 .option:disabled {
@@ -122,708 +107,607 @@ h2 {
   opacity: 1;
 }
 
+.option.correct {
+  background: #dcfce7;
+  border-color: #16a34a;
+}
+
+.option.wrong {
+  background: #fee2e2;
+  border-color: #dc2626;
+}
+
 #feedback {
+  margin-top: 15px;
+  line-height: 1.8;
   font-weight: bold;
-  margin-top: 14px;
-  white-space: pre-line;
-}
-
-#explanation {
-  font-weight: normal;
-  margin-top: 8px;
-}
-
-#hint {
-  display: none;
-  padding: 10px;
-  background: #fff8dd;
-  border-radius: 8px;
-  margin-top: 10px;
-  white-space: pre-line;
 }
 
 .action {
+  padding: 12px 18px;
+  margin: 10px 5px 0 0;
   border: none;
   border-radius: 8px;
-  padding: 12px 18px;
-  margin: 8px 5px 0 0;
-  font-size: 15px;
-  font-weight: bold;
-  cursor: pointer;
-  background: #1769aa;
+  background: #176638;
   color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .action:disabled {
-  background: #aab6c3;
+  background: #9ca3af;
   cursor: not-allowed;
 }
 
-.secondary {
-  background: #566577;
+#nextBtn {
+  display: none;
 }
 
 #result {
   display: none;
   text-align: center;
+  padding: 20px 5px;
 }
 
-.score {
-  font-size: 30px;
-  font-weight: bold;
-  color: #16865c;
+#result h2 {
+  color: #176638;
 }
 
-footer {
-  text-align: center;
-  padding: 20px 14px;
-  color: #526173;
+#disclaimer {
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid #cbd5e1;
+  color: #475569;
   font-size: 13px;
+  line-height: 1.8;
 }
 
-footer a {
-  color: #1769aa;
+.back-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: #176638;
+  font-weight: bold;
+  text-decoration: none;
 }
 
-@media (max-width: 500px) {
-  header h1 {
-    font-size: 21px;
+@media (max-width: 480px) {
+  body {
+    padding: 8px;
   }
 
-  .card {
-    padding: 15px;
+  .container {
+    padding: 14px;
   }
 
-  .option {
-    font-size: 15px;
+  h1 {
+    font-size: 22px;
   }
 
-  .action {
-    padding: 11px 13px;
+  #question {
+    font-size: 17px;
   }
 }
 </style>
 </head>
 
 <body>
+<div class="container">
 
-<header>
-  <h1>RawaRajpootNexEduToppers Learning Academy</h1>
-  <p>Class 4 English | कक्षा 4 अंग्रेज़ी</p>
-  <p>Chapter 11: A Journey to the Magical Mountains</p>
-  <p><strong>Quiz 8: Revision Challenge</strong></p>
-  <p>Review the whole chapter with mixed questions.</p>
-  <p>मिश्रित प्रश्नों से पूरे अध्याय की दोहराई करें।</p>
-</header>
+  <h1>Quiz 7: Nature and Animals</h1>
 
-<main class="container">
+  <div class="subtitle">
+    <strong>प्रकृति और जानवर</strong><br>
+    RawaRajpootNexEduToppers Learning Academy<br>
+    Class 4 English | Chapter 11<br>
+    <em>A Journey to the Magical Mountains</em><br><br>
+    Explore the wonderful world of nature and animals!<br>
+    प्रकृति और जानवरों की अद्भुत दुनिया को जानें!
+  </div>
 
-  <section class="card info">
-    <h2>Revision Challenge | दोहराई की चुनौती</h2>
-    <p>Answer all 20 questions. Some questions ask you to select more than one answer.</p>
-    <p>सभी 20 प्रश्नों के उत्तर दें। कुछ प्रश्नों में एक से अधिक उत्तर चुनने हैं।</p>
-
+  <div class="progress-area" id="progressArea">
+    <div id="progressText">Question 1 of 20 | प्रश्न 1 / 20</div>
     <div class="progress-bg">
-      <div id="progress"></div>
+      <div id="progressBar"></div>
     </div>
+  </div>
 
-    <p id="progressText">Question 1 of 20 | प्रश्न 1 / 20</p>
-    <p id="scoreText">Score: 0 | अंक: 0</p>
-  </section>
+  <div id="quizArea">
+    <div class="question-box">
+      <div id="questionNumber"></div>
+      <p id="question"></p>
+      <div id="options"></div>
+      <div id="feedback" aria-live="polite"></div>
 
-  <section class="card" id="quizCard">
-    <div class="question-number" id="qNumber"></div>
-    <h2 id="question"></h2>
-    <p id="questionHindi"></p>
-    <p id="instruction"></p>
+      <button class="action" id="nextBtn" onclick="nextQuestion()">
+        Next Question | अगला प्रश्न
+      </button>
+    </div>
+  </div>
 
-    <div id="options"></div>
+  <div id="result">
+    <h2>Quiz Completed! | प्रश्नोत्तरी पूरी हुई!</h2>
+    <p id="score"></p>
+    <h3 id="message"></h3>
+    <p id="messageHindi"></p>
 
-    <button class="action secondary" id="hintButton" type="button">
-      Show Hint | संकेत देखें
-    </button>
-
-    <div id="hint"></div>
-    <div id="feedback" aria-live="polite"></div>
-    <div id="explanation"></div>
-
-    <button class="action" id="checkButton" type="button">
-      Check Answer | उत्तर जाँचें
-    </button>
-
-    <button class="action" id="nextButton" type="button" disabled>
-      Next Question | अगला प्रश्न
-    </button>
-  </section>
-
-  <section class="card" id="result">
-    <h2>Quiz Completed! | क्विज़ पूरा हुआ!</h2>
-    <p class="score" id="finalScore"></p>
-    <h2 id="resultMessage"></h2>
-    <p id="resultHindi"></p>
-    <p id="resultDetail"></p>
-
-    <button class="action" type="button" onclick="restartQuiz()">
+    <button class="action" onclick="restartQuiz()">
       Try Again | फिर से प्रयास करें
     </button>
-  </section>
+  </div>
 
-  <section class="card">
-    <h2>Learning Tip | सीखने की सलाह</h2>
-    <p>Read every question carefully. Revise vocabulary, grammar, sentence formation, nature, animals, and environmental protection.</p>
-    <p>हर प्रश्न ध्यान से पढ़ें। शब्दावली, व्याकरण, वाक्य निर्माण, प्रकृति, जानवरों और पर्यावरण संरक्षण की दोहराई करें।</p>
+  <a class="back-link" href="class4-english-chapter11.html">
+    ← Back to Chapter 11 | अध्याय 11 पर वापस जाएँ
+  </a>
 
-    <button class="action secondary" type="button"
-      onclick="location.href='class4-english-chapter11.html'">
-      Back to Chapter | अध्याय पर वापस जाएँ
-    </button>
-  </section>
+  <div id="disclaimer">
+    <strong>Disclaimer:</strong>
+    RawaRajpootNexEduToppers Learning Academy is an independent
+    educational platform and is not affiliated with, endorsed by,
+    or associated with NCERT. NCERT textbook names, chapters, and
+    curriculum topics belong exclusively to NCERT. All solutions
+    and study notes provided here are original practice aids.
+    For official textbooks, please refer to NCERT's official resources.
 
-</main>
+    <br><br>
 
-<footer>
-  <p><strong>Disclaimer:</strong> RawaRajpootNexEduToppers Learning Academy is an independent educational platform and is not affiliated with, endorsed by, or associated with NCERT. NCERT textbook names, chapters, and curriculum topics belong exclusively to NCERT. All solutions and study notes provided here are original practice aids. For official textbooks, please refer to NCERT's official resources.</p>
+    <strong>अस्वीकरण:</strong>
+    RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक
+    मंच है और इसका NCERT से कोई आधिकारिक संबंध नहीं है।
+    NCERT की पाठ्यपुस्तकों के नाम, अध्याय और पाठ्यक्रम संबंधी विषय
+    NCERT के हैं। यहाँ दिए गए समाधान और अध्ययन नोट्स मौलिक अभ्यास
+    सामग्री हैं। आधिकारिक पाठ्यपुस्तकों के लिए NCERT के आधिकारिक
+    संसाधनों का उपयोग करें।
+  </div>
 
-  <p><strong>अस्वीकरण:</strong> RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है और इसका NCERT से कोई आधिकारिक संबंध नहीं है। NCERT की पाठ्यपुस्तकों के नाम, अध्याय और पाठ्यक्रम संबंधी विषय NCERT के हैं। यहाँ दिए गए समाधान और अध्ययन नोट्स मौलिक अभ्यास सामग्री हैं। आधिकारिक पाठ्यपुस्तकों के लिए NCERT के आधिकारिक संसाधनों का उपयोग करें।</p>
-</footer>
+</div>
 
 <script>
 const questions = [
   {
-    q: "What is a good way to prepare for a mountain journey?",
-    hi: "पहाड़ों की यात्रा की तैयारी करने का अच्छा तरीका क्या है?",
-    type: "single",
+    q: "1. Which part of a plant absorbs water from the soil? | पौधे का कौन-सा भाग मिट्टी से पानी सोखता है?",
     options: [
-      "Plan carefully",
-      "Ignore the weather",
-      "Leave all supplies behind",
-      "Travel without knowing the route"
+      "Roots | जड़ें",
+      "Flowers | फूल",
+      "Fruits | फल",
+      "Leaves | पत्तियाँ"
     ],
-    hindi: [
-      "ध्यान से योजना बनाना",
-      "मौसम को नज़रअंदाज़ करना",
-      "सारा सामान छोड़ देना",
-      "रास्ता जाने बिना यात्रा करना"
-    ],
-    correct: [0],
-    hint: "Think about safety, supplies, and the route.",
-    explanation: "Planning helps travellers prepare for the route, weather, and supplies."
+    answer: 0
   },
   {
-    q: "Which word is closest in meaning to “magical”?",
-    hi: "“Magical” शब्द का सबसे निकट अर्थ क्या है?",
-    type: "single",
-    options: ["Ordinary", "Enchanted", "Broken", "Noisy"],
-    hindi: ["साधारण", "जादुई", "टूटा हुआ", "शोर करने वाला"],
-    correct: [1],
-    hint: "Think of something wonderful that seems full of magic.",
-    explanation: "“Enchanted” describes something that seems touched by magic."
-  },
-  {
-    q: "Mountains can provide habitats for many kinds of plants and animals.",
-    hi: "पहाड़ कई प्रकार के पौधों और जानवरों को रहने का स्थान दे सकते हैं।",
-    type: "tf",
-    options: ["True | सही", "False | गलत"],
-    correct: [0],
-    hint: "Think about the variety of life found in natural environments.",
-    explanation: "Different mountain environments support many living things."
-  },
-  {
-    q: "Choose the correctly formed sentence.",
-    hi: "सही वाक्य चुनें।",
-    type: "single",
+    q: "2. Which of these animals is a herbivore? | इनमें से कौन-सा जानवर शाकाहारी है?",
     options: [
-      "The mountains is beautiful.",
-      "The mountains are beautiful.",
-      "The mountains am beautiful.",
-      "The mountains be beautiful."
+      "Tiger | बाघ",
+      "Cow | गाय",
+      "Wolf | भेड़िया",
+      "Eagle | चील"
     ],
-    hindi: [
-      "पहाड़ सुंदर है।",
-      "पहाड़ सुंदर हैं।",
-      "पहाड़ सुंदर हूँ।",
-      "पहाड़ सुंदर होना।"
-    ],
-    correct: [1],
-    hint: "Check the verb that agrees with the plural subject “mountains.”",
-    explanation: "“Mountains” is plural, so “are” is the correct verb."
+    answer: 1
   },
   {
-    q: "Which actions help protect mountain environments? Select all correct answers.",
-    hi: "पहाड़ी पर्यावरण की रक्षा करने वाले सभी सही कार्य चुनें।",
-    type: "multi",
+    q: "3. What do bees collect from flowers to help make honey? | शहद बनाने के लिए मधुमक्खियाँ फूलों से क्या इकट्ठा करती हैं?",
     options: [
-      "Put rubbish in proper bins",
-      "Disturb wild animals for fun",
-      "Stay on marked paths where required",
-      "Leave plastic waste on trails"
+      "Sand | रेत",
+      "Tree bark | पेड़ की छाल",
+      "Nectar | मकरंद",
+      "Small stones | छोटे पत्थर"
     ],
-    hindi: [
-      "कचरा सही डिब्बे में डालना",
-      "मनोरंजन के लिए जंगली जानवरों को परेशान करना",
-      "जहाँ आवश्यक हो, निर्धारित रास्तों पर चलना",
-      "रास्तों पर प्लास्टिक कचरा छोड़ना"
-    ],
-    correct: [0, 2],
-    hint: "Choose actions that reduce pollution and damage to nature.",
-    explanation: "Proper waste disposal and following marked paths help protect natural areas."
+    answer: 2
   },
   {
-    q: "Complete the sentence: “We wanted to climb the hill, ___ it began to rain.”",
-    hi: "वाक्य पूरा करें: “We wanted to climb the hill, ___ it began to rain.”",
-    type: "single",
-    options: ["but", "because", "or", "so that"],
-    hindi: ["लेकिन", "क्योंकि", "या", "ताकि"],
-    correct: [0],
-    hint: "The second part contrasts with the plan in the first part.",
-    explanation: "“But” joins two contrasting ideas."
-  },
-  {
-    q: "The word “carefully” tells us how an action is done.",
-    hi: "“Carefully” शब्द बताता है कि कोई काम किस प्रकार किया जाता है।",
-    type: "tf",
-    options: ["True | सही", "False | गलत"],
-    correct: [0],
-    hint: "Think about words that describe the manner of an action.",
-    explanation: "“Carefully” is an adverb that describes how an action is performed."
-  },
-  {
-    q: "Which sentence uses the past tense correctly?",
-    hi: "कौन-सा वाक्य भूतकाल का सही प्रयोग करता है?",
-    type: "single",
+    q: "4. Which animal is best adapted to living in a hot, dry desert? | गर्म और सूखे रेगिस्तान में रहने के लिए कौन-सा जानवर सबसे अधिक अनुकूल है?",
     options: [
-      "We see a waterfall yesterday.",
-      "We saw a waterfall yesterday.",
-      "We seeing a waterfall yesterday.",
-      "We sees a waterfall yesterday."
+      "Penguin | पेंगुइन",
+      "Dolphin | डॉल्फिन",
+      "Polar bear | ध्रुवीय भालू",
+      "Camel | ऊँट"
     ],
-    hindi: [
-      "हमने कल एक झरना देखा।",
-      "हमने कल एक झरना देखा।",
-      "हम कल झरना देख रहे कल।",
-      "हम कल झरना देखता।"
-    ],
-    correct: [1],
-    hint: "“Yesterday” tells you the action happened in the past.",
-    explanation: "“Saw” is the past tense of “see.”"
+    answer: 3
   },
   {
-    q: "Which natural feature is water falling from a height?",
-    hi: "ऊँचाई से गिरने वाले पानी को क्या कहते हैं?",
-    type: "single",
-    options: ["Valley", "Waterfall", "Plateau", "Glacier"],
-    hindi: ["घाटी", "झरना", "पठार", "हिमनद"],
-    correct: [1],
-    hint: "Picture water flowing over the edge of a rocky cliff.",
-    explanation: "A waterfall is water that falls over a steep edge or height."
-  },
-  {
-    q: "Which qualities help travellers on a challenging journey? Select all correct answers.",
-    hi: "कठिन यात्रा में यात्रियों की मदद करने वाले सभी गुण चुनें।",
-    type: "multi",
+    q: "5. What is the main role of green leaves in most plants? | अधिकांश पौधों में हरी पत्तियों का मुख्य काम क्या है?",
     options: [
-      "Patience",
-      "Carelessness",
-      "Cooperation",
-      "Giving up immediately"
+      "To make food using sunlight | सूर्य के प्रकाश से भोजन बनाना",
+      "To absorb all water from soil | मिट्टी से सारा पानी सोखना",
+      "To hold the plant firmly in soil | पौधे को मिट्टी में पकड़कर रखना",
+      "To take in minerals from deep soil | गहरी मिट्टी से खनिज लेना"
     ],
-    hindi: ["धैर्य", "लापरवाही", "सहयोग", "तुरंत हार मान लेना"],
-    correct: [0, 2],
-    hint: "Think about qualities that help people handle difficulties together.",
-    explanation: "Patience and cooperation help travellers manage challenges."
+    answer: 0
   },
   {
-    q: "Which animal is well adapted to living in a hot desert?",
-    hi: "गर्म रेगिस्तान में रहने के लिए कौन-सा जानवर अनुकूलित है?",
-    type: "single",
-    options: ["Camel", "Polar bear", "Penguin", "Frog"],
-    hindi: ["ऊँट", "ध्रुवीय भालू", "पेंगुइन", "मेंढक"],
-    correct: [0],
-    hint: "Think of an animal known for travelling across sandy deserts.",
-    explanation: "Camels have adaptations that help them live in hot, dry environments."
-  },
-  {
-    q: "Which of these are living things? Select all correct answers.",
-    hi: "इनमें से सभी सजीव वस्तुएँ चुनें।",
-    type: "multi",
-    options: ["A growing tree", "A wild bird", "A rock", "A flowing river"],
-    hindi: ["बढ़ता हुआ पेड़", "जंगली पक्षी", "पत्थर", "बहती नदी"],
-    correct: [0, 1],
-    hint: "Living things grow and carry out life processes.",
-    explanation: "Trees and birds are living organisms; rocks and rivers are not."
-  },
-  {
-    q: "Which word is a noun in the sentence “The brave climber reached the summit”?",
-    hi: "“The brave climber reached the summit” वाक्य में संज्ञा कौन-सा शब्द है?",
-    type: "single",
-    options: ["Brave", "Reached", "Climber", "The"],
-    hindi: ["बहादुर", "पहुँचा", "पर्वतारोही", "यह"],
-    correct: [2],
-    hint: "A noun can name a person, place, animal, or thing.",
-    explanation: "“Climber” names a person, so it is a noun."
-  },
-  {
-    q: "A food chain shows how energy passes between living things.",
-    hi: "खाद्य शृंखला बताती है कि जीवों के बीच ऊर्जा कैसे पहुँचती है।",
-    type: "tf",
-    options: ["True | सही", "False | गलत"],
-    correct: [0],
-    hint: "Think about how one organism may be food for another.",
-    explanation: "Food chains show feeding relationships and energy transfer."
-  },
-  {
-    q: "Choose the correct plural form of “leaf.”",
-    hi: "“Leaf” का सही बहुवचन चुनें।",
-    type: "single",
-    options: ["Leafs", "Leaves", "Leafes", "Leavs"],
-    hindi: ["Leafs", "Leaves", "Leafes", "Leavs"],
-    correct: [1],
-    hint: "Some nouns ending in f change their ending in the plural.",
-    explanation: "The standard plural form of “leaf” is “leaves.”"
-  },
-  {
-    q: "Which sentence is a polite way to ask for help?",
-    hi: "मदद माँगने का विनम्र तरीका कौन-सा है?",
-    type: "single",
+    q: "6. Which TWO actions help protect wild animals? Select both. | जंगली जानवरों की रक्षा करने वाले कौन-से दो काम हैं? दोनों चुनें।",
+    multiple: true,
     options: [
-      "Help me now!",
-      "You must help me!",
-      "Could you please help me?",
-      "Help, because I said so."
+      "Protecting forests | जंगलों की रक्षा करना",
+      "Dumping plastic into rivers | नदियों में प्लास्टिक फेंकना",
+      "Stopping illegal hunting | अवैध शिकार रोकना",
+      "Destroying animal nests | जानवरों के घोंसले नष्ट करना"
     ],
-    hindi: [
-      "अभी मेरी मदद करो!",
-      "तुम्हें मेरी मदद करनी ही होगी!",
-      "क्या आप कृपया मेरी मदद कर सकते हैं?",
-      "मेरी बात मानकर मदद करो।"
-    ],
-    correct: [2],
-    hint: "Look for a sentence using polite words to make a request.",
-    explanation: "“Could you please…” is a polite way to request help."
+    answer: [0, 2]
   },
   {
-    q: "Which animal is a herbivore?",
-    hi: "कौन-सा जानवर शाकाहारी है?",
-    type: "single",
-    options: ["Tiger", "Deer", "Eagle", "Crocodile"],
-    hindi: ["बाघ", "हिरण", "गरुड़", "मगरमच्छ"],
-    correct: [1],
-    hint: "A herbivore eats plants as its main food.",
-    explanation: "Deer mainly eat plants, including grasses and leaves."
-  },
-  {
-    q: "Choose the correct conjunction: “Take a jacket ___ the weather may become cold.”",
-    hi: "सही संयोजक चुनें: “Take a jacket ___ the weather may become cold.”",
-    type: "single",
-    options: ["because", "but", "or", "although"],
-    hindi: ["क्योंकि", "लेकिन", "या", "हालाँकि"],
-    correct: [0],
-    hint: "The second part gives a reason for taking a jacket.",
-    explanation: "“Because” introduces the reason for taking a jacket."
-  },
-  {
-    q: "Which actions show respect for wildlife? Select all correct answers.",
-    hi: "वन्यजीवों के प्रति सम्मान दिखाने वाले सभी सही कार्य चुनें।",
-    type: "multi",
+    q: "7. Which of these is a mammal that can fly? | इनमें से कौन-सा उड़ने वाला स्तनधारी है?",
     options: [
-      "Observe animals from a safe distance",
-      "Feed every wild animal by hand",
-      "Keep noise low near wildlife",
-      "Take wild animals home as pets"
+      "Butterfly | तितली",
+      "Bat | चमगादड़",
+      "Eagle | चील",
+      "Parrot | तोता"
     ],
-    hindi: [
-      "जानवरों को सुरक्षित दूरी से देखना",
-      "हर जंगली जानवर को हाथ से खाना खिलाना",
-      "वन्यजीवों के पास शोर कम रखना",
-      "जंगली जानवरों को घर ले जाकर पालतू बनाना"
-    ],
-    correct: [0, 2],
-    hint: "Think about keeping both people and animals safe.",
-    explanation: "Keeping a safe distance and reducing noise helps avoid disturbing wildlife."
+    answer: 1
   },
   {
-    q: "What should you do with litter on a trail if you can safely dispose of it?",
-    hi: "यदि रास्ते में मिले कचरे को सुरक्षित रूप से हटाया जा सके, तो क्या करना चाहिए?",
-    type: "single",
+    q: "8. Which natural resource do plants need for photosynthesis? | प्रकाश संश्लेषण के लिए पौधों को किस प्राकृतिक संसाधन की आवश्यकता होती है?",
     options: [
-      "Leave it for animals",
-      "Throw it into a stream",
-      "Dispose of it properly",
-      "Hide it under a plant"
+      "Plastic | प्लास्टिक",
+      "Petrol | पेट्रोल",
+      "Sunlight | सूर्य का प्रकाश",
+      "Glass | काँच"
     ],
-    hindi: [
-      "उसे जानवरों के लिए छोड़ देना",
-      "उसे पानी की धारा में फेंक देना",
-      "उसे सही तरीके से कूड़ेदान में डालना",
-      "उसे पौधे के नीचे छिपा देना"
+    answer: 2
+  },
+  {
+    q: "9. What is a natural home of an animal called? | जानवर के प्राकृतिक घर को क्या कहते हैं?",
+    options: [
+      "Habitat | आवास",
+      "Factory | कारखाना",
+      "Market | बाज़ार",
+      "Museum | संग्रहालय"
     ],
-    correct: [2],
-    hint: "Choose the action that keeps the environment clean.",
-    explanation: "Proper disposal reduces pollution and protects wildlife."
+    answer: 0
+  },
+  {
+    q: "10. Which animal is known for changing its colour to blend with its surroundings? | अपने आसपास के वातावरण में घुल-मिल जाने के लिए रंग बदलने वाला जानवर कौन-सा है?",
+    options: [
+      "Elephant | हाथी",
+      "Horse | घोड़ा",
+      "Camel | ऊँट",
+      "Chameleon | गिरगिट"
+    ],
+    answer: 3
+  },
+  {
+    q: "11. What is the young one of a frog called? | मेंढक के बच्चे को क्या कहते हैं?",
+    options: [
+      "Cub | शावक",
+      "Tadpole | टैडपोल",
+      "Calf | बछड़ा",
+      "Chick | चूज़ा"
+    ],
+    answer: 1
+  },
+  {
+    q: "12. Which TWO things do plants generally need to grow well? Select both. | पौधों को अच्छी तरह बढ़ने के लिए सामान्यतः किन दो चीज़ों की आवश्यकता होती है? दोनों चुनें।",
+    multiple: true,
+    options: [
+      "Clean water | स्वच्छ पानी",
+      "Plastic bags | प्लास्टिक की थैलियाँ",
+      "Sunlight | सूर्य का प्रकाश",
+      "Paint | पेंट"
+    ],
+    answer: [0, 2]
+  },
+  {
+    q: "13. Which animal is a carnivore? | इनमें से कौन-सा जानवर मांसाहारी है?",
+    options: [
+      "Deer | हिरण",
+      "Goat | बकरी",
+      "Lion | शेर",
+      "Rabbit | खरगोश"
+    ],
+    answer: 2
+  },
+  {
+    q: "14. What can happen when forests are cut down on a large scale? | बड़े पैमाने पर जंगल काटने से क्या हो सकता है?",
+    options: [
+      "Every animal gets a larger home | हर जानवर को बड़ा घर मिल जाता है",
+      "Wild animals can lose their habitats | जंगली जानवर अपना आवास खो सकते हैं",
+      "All rivers become clean | सभी नदियाँ साफ हो जाती हैं",
+      "All plants grow faster | सभी पौधे तेज़ी से बढ़ते हैं"
+    ],
+    answer: 1
+  },
+  {
+    q: "15. Which bird is well known for its colourful tail feathers? | कौन-सा पक्षी अपने रंग-बिरंगे पूँछ के पंखों के लिए प्रसिद्ध है?",
+    options: [
+      "Peacock | मोर",
+      "Crow | कौआ",
+      "Sparrow | गौरैया",
+      "Pigeon | कबूतर"
+    ],
+    answer: 0
+  },
+  {
+    q: "16. Which part of a tree usually supports its branches and leaves? | पेड़ का कौन-सा भाग सामान्यतः उसकी शाखाओं और पत्तियों को सहारा देता है?",
+    options: [
+      "Root hair | जड़ के सूक्ष्म बाल",
+      "Flower petal | फूल की पंखुड़ी",
+      "Seed coat | बीज का आवरण",
+      "Trunk | तना"
+    ],
+    answer: 3
+  },
+  {
+    q: "17. Which of these animals lives mainly in water and breathes through gills? | इनमें से कौन-सा जानवर मुख्यतः पानी में रहता है और गलफड़ों से साँस लेता है?",
+    options: [
+      "Dog | कुत्ता",
+      "Fish | मछली",
+      "Cat | बिल्ली",
+      "Cow | गाय"
+    ],
+    answer: 1
+  },
+  {
+    q: "18. What should we do with rubbish when visiting a forest or park? | जंगल या पार्क में जाते समय कूड़े के साथ हमें क्या करना चाहिए?",
+    options: [
+      "Leave it beside a tree | उसे पेड़ के पास छोड़ देना",
+      "Throw it into a river | उसे नदी में फेंक देना",
+      "Put it in a proper bin | उसे सही कूड़ेदान में डालना",
+      "Hide it under leaves | उसे पत्तों के नीचे छिपा देना"
+    ],
+    answer: 2
+  },
+  {
+    q: "19. Which TWO things can birds use to build many kinds of nests? Select both. | कई प्रकार के घोंसले बनाने के लिए पक्षी किन दो चीज़ों का उपयोग कर सकते हैं? दोनों चुनें।",
+    multiple: true,
+    options: [
+      "Twigs | छोटी टहनियाँ",
+      "Straw or dry grass | सूखा घास-फूस",
+      "Plastic toys | प्लास्टिक के खिलौने",
+      "Metal tools | धातु के औज़ार"
+    ],
+    answer: [0, 1]
+  },
+  {
+    q: "20. What does a food chain show? | खाद्य शृंखला क्या दर्शाती है?",
+    options: [
+      "The names of all forests | सभी जंगलों के नाम",
+      "The height of every mountain | हर पर्वत की ऊँचाई",
+      "The colours of flowers | फूलों के रंग",
+      "How energy passes between organisms through feeding | भोजन के माध्यम से जीवों के बीच ऊर्जा का स्थानांतरण"
+    ],
+    answer: 3
   }
 ];
 
-let current = 0;
+let currentQuestion = 0;
 let score = 0;
-let answered = false;
-let selected = [];
-
-const qNumber = document.getElementById("qNumber");
-const question = document.getElementById("question");
-const questionHindi = document.getElementById("questionHindi");
-const instruction = document.getElementById("instruction");
-const optionsBox = document.getElementById("options");
-const feedback = document.getElementById("feedback");
-const explanation = document.getElementById("explanation");
-const checkButton = document.getElementById("checkButton");
-const nextButton = document.getElementById("nextButton");
-const hintButton = document.getElementById("hintButton");
-const hintBox = document.getElementById("hint");
+let locked = false;
+let selectedAnswers = [];
 
 function renderQuestion() {
-  const q = questions[current];
+  locked = false;
+  selectedAnswers = [];
 
-  answered = false;
-  selected = [];
+  const q = questions[currentQuestion];
 
-  qNumber.textContent =
-    `Question ${current + 1} of ${questions.length} | प्रश्न ${current + 1} / ${questions.length}`;
+  document.getElementById("questionNumber").textContent =
+    "Question " + (currentQuestion + 1) +
+    " | प्रश्न " + (currentQuestion + 1);
 
-  question.textContent = q.q;
-  questionHindi.textContent = q.hi;
-
-  if (q.type === "multi") {
-    instruction.textContent =
-      "Select all correct answers. | सभी सही उत्तर चुनें।";
-  } else if (q.type === "tf") {
-    instruction.textContent =
-      "Choose True or False. | सही या गलत चुनें।";
-  } else {
-    instruction.textContent =
-      "Choose one answer. | एक उत्तर चुनें।";
-  }
-
-  optionsBox.innerHTML = "";
-  feedback.textContent = "";
-  explanation.textContent = "";
-  hintBox.style.display = "none";
-  hintBox.textContent = "";
-  hintButton.style.display = "inline-block";
-
-  checkButton.style.display = "inline-block";
-  checkButton.disabled = false;
-  nextButton.disabled = true;
-
-  q.options.forEach((opt, i) => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "option";
-
-    const hindiText = q.hindi
-      ? "\n" + q.hindi[i]
-      : "";
-
-    btn.textContent =
-      `${String.fromCharCode(65 + i)}. ${opt}${hindiText}`;
-
-    btn.setAttribute("aria-pressed", "false");
-
-    btn.addEventListener("click", () => selectOption(i));
-
-    optionsBox.appendChild(btn);
-  });
-
-  updateProgress();
-}
-
-function selectOption(index) {
-  if (answered) return;
-
-  const q = questions[current];
-
-  // Once the learner retries, clear the previous wrong-answer marks.
-  feedback.textContent = "";
-  explanation.textContent = "";
-
-  document.querySelectorAll(".option").forEach(btn => {
-    btn.classList.remove("wrong");
-  });
-
-  if (q.type === "multi") {
-    // Multiple-answer questions let the learner select or deselect options.
-    if (selected.includes(index)) {
-      selected = selected.filter(i => i !== index);
-    } else {
-      selected.push(index);
-    }
-  } else {
-    // Single-answer and True/False questions allow only one selection.
-    selected = [index];
-  }
-
-  document.querySelectorAll(".option").forEach((btn, i) => {
-    const isSelected = selected.includes(i);
-
-    btn.classList.toggle("selected", isSelected);
-    btn.setAttribute("aria-pressed", String(isSelected));
-  });
-}
-
-function checkAnswer() {
-  if (answered) return;
-
-  if (selected.length === 0) {
-    feedback.style.color = "#b45309";
-    feedback.textContent =
-      "Please select an answer first.\nकृपया पहले उत्तर चुनें।";
-    return;
-  }
-
-  const q = questions[current];
-  const correct = q.correct;
-
-  const isCorrect =
-    selected.length === correct.length &&
-    selected.every(index => correct.includes(index));
-
-  if (!isCorrect) {
-    // Only the learner's selected options turn red.
-    // Unselected options remain neutral and can still be chosen.
-    document.querySelectorAll(".option").forEach((btn, i) => {
-      btn.classList.remove("correct", "wrong");
-      btn.classList.toggle("wrong", selected.includes(i));
-      btn.classList.toggle("selected", selected.includes(i));
-    });
-
-    feedback.style.color = "#c62828";
-    feedback.textContent =
-      "Wrong answer! Read carefully and try again.\n" +
-      "गलत जवाब! ध्यान से पढ़ें और फिर से प्रयास करें।";
-
-    explanation.textContent = "";
-    return;
-  }
-
-  // Correct answer: award the point only once and lock the question.
-  answered = true;
-  score++;
-
-  document.querySelectorAll(".option").forEach((btn, i) => {
-    btn.disabled = true;
-    btn.classList.remove("selected", "wrong");
-    btn.classList.toggle("correct", correct.includes(i));
-  });
-
-  feedback.style.color = "#16865c";
-  feedback.textContent =
-    "Well done! Keep it up!\nबहुत अच्छा! ऐसे ही आगे बढ़ते रहें!";
-
-  explanation.textContent = q.explanation;
-
-  checkButton.disabled = true;
-  nextButton.disabled = false;
-  hintButton.style.display = "none";
-
-  document.getElementById("scoreText").textContent =
-    `Score: ${score} | अंक: ${score}`;
-
-  updateProgress();
-}
-
-function updateProgress() {
-  const completed = score;
-  document.getElementById("progress").style.width =
-    `${(completed / questions.length) * 100}%`;
+  document.getElementById("question").textContent = q.q;
 
   document.getElementById("progressText").textContent =
-    `Question ${current + 1} of ${questions.length} | प्रश्न ${current + 1} / ${questions.length}`;
+    "Question " + (currentQuestion + 1) +
+    " of " + questions.length +
+    " | प्रश्न " + (currentQuestion + 1) +
+    " / " + questions.length;
+
+  document.getElementById("progressBar").style.width =
+    (currentQuestion / questions.length * 100) + "%";
+
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("nextBtn").style.display = "none";
+
+  const optionsDiv = document.getElementById("options");
+  optionsDiv.innerHTML = "";
+
+  if (q.multiple) {
+    const note = document.createElement("p");
+    note.textContent =
+      "Select all correct answers, then check. | सभी सही उत्तर चुनें, फिर जाँचें।";
+    optionsDiv.appendChild(note);
+  }
+
+  q.options.forEach(function(option, index) {
+    const button = document.createElement("button");
+    button.className = "option";
+    button.textContent =
+      String.fromCharCode(65 + index) + ". " + option;
+
+    button.onclick = function() {
+      if (q.multiple) {
+        toggleMultiple(index, button);
+      } else {
+        checkSingle(index, button);
+      }
+    };
+
+    optionsDiv.appendChild(button);
+  });
+
+  if (q.multiple) {
+    const checkBtn = document.createElement("button");
+    checkBtn.className = "action";
+    checkBtn.id = "checkBtn";
+    checkBtn.textContent = "Check Answers | उत्तर जाँचें";
+    checkBtn.onclick = checkMultiple;
+    optionsDiv.appendChild(checkBtn);
+  }
 }
 
-function showHint() {
-  hintBox.style.display = "block";
-  hintBox.textContent =
-    questions[current].hint +
-    "\n\nसंकेत: प्रश्न को ध्यान से सोचें और विकल्पों की तुलना करें।";
+function toggleMultiple(index, button) {
+  if (locked) return;
 
-  hintButton.style.display = "none";
+  const position = selectedAnswers.indexOf(index);
+
+  if (position === -1) {
+    selectedAnswers.push(index);
+    button.style.borderColor = "#176638";
+    button.style.background = "#e1f4e5";
+  } else {
+    selectedAnswers.splice(position, 1);
+    button.style.borderColor = "#cbdccf";
+    button.style.background = "#f8fbf8";
+  }
+}
+
+function checkSingle(index, button) {
+  if (locked) return;
+
+  const q = questions[currentQuestion];
+  const buttons = document.querySelectorAll("#options .option");
+
+  if (index === q.answer) {
+    locked = true;
+    score++;
+
+    button.classList.add("correct");
+
+    buttons.forEach(function(b) {
+      b.disabled = true;
+    });
+
+    document.getElementById("feedback").textContent =
+      "Well done! Keep it up! | बहुत अच्छा! ऐसे ही आगे बढ़ते रहें!";
+
+    document.getElementById("nextBtn").style.display = "inline-block";
+  } else {
+    button.classList.add("wrong");
+    button.disabled = true;
+
+    document.getElementById("feedback").textContent =
+      "Wrong answer! Read carefully and try again. | गलत जवाब! ध्यान से पढ़ें और फिर से प्रयास करें।";
+  }
+}
+
+function checkMultiple() {
+  if (locked) return;
+
+  const q = questions[currentQuestion];
+  const correct = q.answer.slice().sort((a, b) => a - b);
+  const selected = selectedAnswers.slice().sort((a, b) => a - b);
+
+  const buttons = document.querySelectorAll("#options .option");
+  const checkBtn = document.getElementById("checkBtn");
+
+  if (
+    selected.length === correct.length &&
+    selected.every((value, i) => value === correct[i])
+  ) {
+    locked = true;
+    score++;
+
+    buttons.forEach(function(button) {
+      button.disabled = true;
+    });
+
+    checkBtn.disabled = true;
+
+    correct.forEach(function(index) {
+      buttons[index].classList.add("correct");
+    });
+
+    document.getElementById("feedback").textContent =
+      "Well done! Keep it up! | बहुत अच्छा! ऐसे ही आगे बढ़ते रहें!";
+
+    document.getElementById("nextBtn").style.display = "inline-block";
+  } else {
+    document.getElementById("feedback").textContent =
+      "Not quite right. Change your selections and try again. | उत्तर सही नहीं हैं। अपने चयन बदलें और फिर से प्रयास करें।";
+
+    selected.forEach(function(index) {
+      if (!correct.includes(index)) {
+        buttons[index].classList.add("wrong");
+        buttons[index].style.background = "#fee2e2";
+      }
+    });
+
+    correct.forEach(function(index) {
+      buttons[index].classList.remove("wrong", "correct");
+    });
+  }
 }
 
 function nextQuestion() {
-  if (!answered) return;
+  if (!locked) return;
 
-  current++;
+  currentQuestion++;
 
-  if (current >= questions.length) {
-    showResult();
-  } else {
+  if (currentQuestion < questions.length) {
     renderQuestion();
+  } else {
+    showResult();
   }
 }
 
 function showResult() {
-  document.getElementById("quizCard").style.display = "none";
+  document.getElementById("quizArea").style.display = "none";
+  document.getElementById("progressArea").style.display = "none";
   document.getElementById("result").style.display = "block";
+  document.getElementById("progressBar").style.width = "100%";
 
-  const percent = Math.round((score / questions.length) * 100);
+  const percentage = Math.round(score / questions.length * 100);
 
-  document.getElementById("finalScore").textContent =
-    `${score} / ${questions.length} (${percent}%)`;
+  document.getElementById("score").textContent =
+    "Your Score: " + score + " / " + questions.length +
+    " (" + percentage + "%) | आपका स्कोर: " +
+    score + " / " + questions.length + " (" + percentage + "%)";
 
   let message;
-  let hindi;
+  let messageHindi;
 
-  if (percent <= 20) {
+  if (percentage <= 20) {
     message = "Keep trying!";
-    hindi = "कोशिश करते रहें!";
-  } else if (percent <= 40) {
+    messageHindi = "कोशिश करते रहें!";
+  } else if (percentage <= 40) {
     message = "Good try!";
-    hindi = "अच्छा प्रयास!";
-  } else if (percent <= 60) {
+    messageHindi = "अच्छा प्रयास!";
+  } else if (percentage <= 60) {
     message = "Good job!";
-    hindi = "बहुत अच्छा प्रयास!";
-  } else if (percent <= 80) {
+    messageHindi = "बहुत अच्छा प्रयास!";
+  } else if (percentage <= 80) {
     message = "Very good!";
-    hindi = "बहुत बढ़िया!";
-  } else if (percent < 100) {
+    messageHindi = "बहुत बढ़िया!";
+  } else if (percentage < 100) {
     message = "Excellent!";
-    hindi = "शानदार!";
+    messageHindi = "शानदार!";
   } else {
     message = "Fantastic! Perfect score!";
-    hindi = "अद्भुत! पूरे अंक!";
+    messageHindi = "अद्भुत! पूरे अंक!";
   }
 
-  document.getElementById("resultMessage").textContent = message;
-  document.getElementById("resultHindi").textContent = hindi;
-
-  document.getElementById("resultDetail").textContent =
-    `You answered ${score} out of ${questions.length} questions correctly.\n` +
-    `आपने ${questions.length} में से ${score} प्रश्नों के सही उत्तर दिए।`;
-
-  document.getElementById("progress").style.width = "100%";
-  document.getElementById("progressText").textContent =
-    "Quiz completed | क्विज़ पूरा हुआ";
+  document.getElementById("message").textContent = message;
+  document.getElementById("messageHindi").textContent = messageHindi;
 }
 
 function restartQuiz() {
-  current = 0;
+  currentQuestion = 0;
   score = 0;
-  answered = false;
-  selected = [];
+  locked = false;
+  selectedAnswers = [];
 
-  document.getElementById("quizCard").style.display = "block";
+  document.getElementById("quizArea").style.display = "block";
+  document.getElementById("progressArea").style.display = "block";
   document.getElementById("result").style.display = "none";
-  document.getElementById("scoreText").textContent =
-    "Score: 0 | अंक: 0";
 
   renderQuestion();
 }
-
-checkButton.addEventListener("click", checkAnswer);
-nextButton.addEventListener("click", nextQuestion);
-hintButton.addEventListener("click", showHint);
 
 renderQuestion();
 </script>
 
 </body>
 </html>
+```
+
+## How to publish it on GitHub
+
+1. Open your repository: `NexEduToppers.github.io`.
+2. Click **Add file → Create new file**.
+3. Enter `class4-english-chapter11-quiz7.html` as the filename.
+4. Paste the complete code above.
+5. Click **Commit changes**.
+6. Open the page after GitHub Pages publishes it:
+
+[Open Quiz 7 — Nature and Animals](https://nexedutoppers.github.io/class4-english-chapter11-quiz7.html)
+
+**Important:** Add a link to `class4-english-chapter11-quiz7.html` on your Chapter 11 page so students can find Quiz 7 from the chapter menu.
