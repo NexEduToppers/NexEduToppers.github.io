@@ -1,0 +1,701 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz 2: Vocabulary | Class 4 English Chapter 11</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: Arial, sans-serif;
+      background: #f1f5fb;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 0 auto;
+      background: white;
+      padding: 22px;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.09);
+    }
+
+    h1 {
+      color: #183d7a;
+      text-align: center;
+      font-size: 25px;
+      margin-top: 0;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .info {
+      background: #edf4ff;
+      border-left: 4px solid #2455a4;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 18px;
+    }
+
+    .progress-area {
+      margin: 18px 0;
+    }
+
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      height: 10px;
+      background: #e0e0e0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: #2455a4;
+      transition: width 0.25s;
+    }
+
+    .question-card {
+      border: 1px solid #d6deeb;
+      border-radius: 12px;
+      padding: 18px;
+      margin-top: 18px;
+    }
+
+    .question-number {
+      color: #2455a4;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .question {
+      font-size: 19px;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+
+    .hindi {
+      color: #454545;
+      margin-top: 4px;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .option {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #fff;
+      min-width: 0;
+    }
+
+    .option:hover {
+      background: #f0f5ff;
+    }
+
+    .option input {
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    .option.correct {
+      border-color: #198754;
+      background: #e7f6ec;
+    }
+
+    .option.incorrect {
+      border-color: #c62828;
+      background: #fff0f0;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .feedback.correct {
+      display: block;
+      background: #e7f6ec;
+      color: #146c35;
+    }
+
+    .feedback.incorrect {
+      display: block;
+      background: #fff0f0;
+      color: #a51f1f;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      border: none;
+      border-radius: 7px;
+      padding: 12px 18px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      background: #2455a4;
+      color: white;
+    }
+
+    button:hover {
+      background: #173d7d;
+    }
+
+    button:disabled {
+      background: #aab5c5;
+      cursor: not-allowed;
+    }
+
+    .secondary {
+      background: #64748b;
+    }
+
+    .secondary:hover {
+      background: #475569;
+    }
+
+    .result {
+      display: none;
+      margin-top: 22px;
+      padding: 20px;
+      border: 2px solid #2455a4;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .result h2 {
+      color: #183d7a;
+    }
+
+    .score {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .disclaimer {
+      border-top: 2px solid #2455a4;
+      margin-top: 30px;
+      padding-top: 15px;
+      font-size: 13px;
+      color: #555;
+      overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 560px) {
+      body {
+        padding: 8px;
+      }
+
+      .container {
+        padding: 14px;
+      }
+
+      h1 {
+        font-size: 21px;
+      }
+
+      .options {
+        grid-template-columns: 1fr;
+      }
+
+      .question {
+        font-size: 17px;
+      }
+
+      button {
+        flex: 1 1 auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+
+    <h1>
+      Quiz 2: Vocabulary<br>
+      क्विज़ 2: शब्दावली
+    </h1>
+
+    <p class="subtitle">
+      Class 4 English | Chapter 11<br>
+      A Journey to the Magical Mountains<br>
+      कक्षा 4 अंग्रेज़ी | अध्याय 11
+    </p>
+
+    <div class="info">
+      <strong>Instructions:</strong> Choose the correct answer for each
+      vocabulary question. If your answer is wrong, read the message and
+      try again. You can change your answer until you select the correct one.
+      <br>
+      <strong>निर्देश:</strong> शब्दावली के प्रत्येक प्रश्न का सही उत्तर चुनें।
+      गलत उत्तर देने पर संदेश पढ़ें और फिर से प्रयास करें। सही उत्तर चुनने तक
+      आप अपना उत्तर बदल सकते हैं।
+    </div>
+
+    <div class="progress-area">
+      <div class="progress-text">
+        <span id="progressText">Question 1 of 20</span>
+        <span id="answeredText">Correct answers: 0</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+
+    <section id="quizArea">
+      <div class="question-card">
+        <div class="question-number" id="questionNumber"></div>
+        <div class="question" id="questionText"></div>
+        <div class="hindi" id="questionHindi"></div>
+
+        <div class="options" id="options"></div>
+
+        <div id="feedback" class="feedback" aria-live="polite"></div>
+
+        <div class="buttons">
+          <button type="button" id="previousBtn" class="secondary">
+            Previous | पिछला
+          </button>
+          <button type="button" id="nextBtn" disabled>
+            Next | अगला
+          </button>
+          <button type="button" id="submitBtn" style="display:none">
+            Submit Quiz | क्विज़ जमा करें
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="result" class="result" aria-live="polite">
+      <h2>Quiz Result | क्विज़ का परिणाम</h2>
+      <p class="score" id="scoreText"></p>
+      <p id="resultMessage"></p>
+      <p id="resultHindi"></p>
+
+      <div class="buttons" style="justify-content:center">
+        <button type="button" id="restartBtn">
+          Try Again | फिर से प्रयास करें
+        </button>
+        <button type="button" class="secondary"
+          onclick="window.location.href='class4-english-chapter11.html'">
+          Back to Chapter | अध्याय पर वापस जाएँ
+        </button>
+      </div>
+    </section>
+
+    <footer class="disclaimer">
+      <strong>Disclaimer | अस्वीकरण</strong>
+      <p>
+        RawaRajpootNexEduToppers Learning Academy is an independent
+        educational platform and is not affiliated with, endorsed by,
+        or associated with NCERT. NCERT textbook names, chapters, and
+        curriculum topics belong exclusively to NCERT. All solutions
+        and study notes provided here are original practice aids.
+        For official textbooks, please refer to NCERT's official resources.
+      </p>
+      <p>
+        RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है
+        और इसका NCERT से कोई आधिकारिक संबंध नहीं है। NCERT की पाठ्यपुस्तकों
+        के नाम, अध्याय और पाठ्यक्रम संबंधी विषय NCERT के हैं। यहाँ दिए गए
+        समाधान और अध्ययन नोट्स मौलिक अभ्यास सामग्री हैं। आधिकारिक
+        पाठ्यपुस्तकों के लिए NCERT के आधिकारिक संसाधनों का उपयोग करें।
+      </p>
+    </footer>
+
+  </main>
+
+  <script>
+    const questions = [
+      {
+        q: "What does the word “journey” mean?",
+        hi: "“Journey” शब्द का क्या अर्थ है?",
+        options: ["A trip from one place to another", "A type of food",
+          "A school subject", "A piece of clothing"],
+        hindi: ["एक स्थान से दूसरे स्थान तक की यात्रा", "एक प्रकार का भोजन",
+          "एक स्कूल का विषय", "पहनने का एक कपड़ा"],
+        answer: 0
+      },
+      {
+        q: "What does “magical” mean?",
+        hi: "“Magical” शब्द का क्या अर्थ है?",
+        options: ["Very ordinary", "Related to magic or wonderful things",
+          "Extremely noisy", "Completely empty"],
+        hindi: ["बहुत साधारण", "जादू या अद्भुत चीज़ों से संबंधित",
+          "बहुत शोरगुल वाला", "पूरी तरह खाली"],
+        answer: 1
+      },
+      {
+        q: "Choose the synonym of “beautiful”.",
+        hi: "“Beautiful” का समानार्थी शब्द चुनें।",
+        options: ["Ugly", "Dirty", "Lovely", "Angry"],
+        hindi: ["बदसूरत", "गंदा", "सुंदर", "गुस्से में"],
+        answer: 2
+      },
+      {
+        q: "Choose the opposite of “careful”.",
+        hi: "“Careful” का विलोम शब्द चुनें।",
+        options: ["Alert", "Cautious", "Attentive", "Careless"],
+        hindi: ["सतर्क", "सावधान", "ध्यान देने वाला", "लापरवाह"],
+        answer: 3
+      },
+      {
+        q: "What does “curious” mean?",
+        hi: "“Curious” शब्द का क्या अर्थ है?",
+        options: ["Eager to know or learn", "Afraid of everything",
+          "Unwilling to speak", "Ready to sleep"],
+        hindi: ["जानने या सीखने के लिए उत्सुक", "हर चीज़ से डरा हुआ",
+          "बोलने को तैयार नहीं", "सोने के लिए तैयार"],
+        answer: 0
+      },
+      {
+        q: "Choose the synonym of “cheerful”.",
+        hi: "“Cheerful” का समानार्थी शब्द चुनें।",
+        options: ["Sad", "Happy", "Tired", "Worried"],
+        hindi: ["उदास", "खुश", "थका हुआ", "चिंतित"],
+        answer: 1
+      },
+      {
+        q: "What does “protect” mean?",
+        hi: "“Protect” शब्द का क्या अर्थ है?",
+        options: ["To damage something", "To forget something",
+          "To keep safe from harm", "To throw something away"],
+        hindi: ["किसी चीज़ को नुकसान पहुँचाना", "किसी चीज़ को भूल जाना",
+          "नुकसान से सुरक्षित रखना", "किसी चीज़ को फेंक देना"],
+        answer: 2
+      },
+      {
+        q: "Choose the opposite of “ancient”.",
+        hi: "“Ancient” का विलोम शब्द चुनें।",
+        options: ["Old", "Historic", "Aged", "Modern"],
+        hindi: ["पुराना", "ऐतिहासिक", "वृद्ध", "आधुनिक"],
+        answer: 3
+      },
+      {
+        q: "What does “experienced” mean?",
+        hi: "“Experienced” शब्द का क्या अर्थ है?",
+        options: ["Having knowledge from doing something",
+          "Knowing absolutely nothing", "Being very young only",
+          "Being unable to learn"],
+        hindi: ["काम करने से ज्ञान या अनुभव प्राप्त होना",
+          "बिल्कुल कुछ न जानना", "केवल बहुत छोटा होना",
+          "सीखने में असमर्थ होना"],
+        answer: 0
+      },
+      {
+        q: "Choose the synonym of “large”.",
+        hi: "“Large” का समानार्थी शब्द चुनें।",
+        options: ["Tiny", "Big", "Narrow", "Short"],
+        hindi: ["बहुत छोटा", "बड़ा", "सँकरा", "छोटा"],
+        answer: 1
+      },
+      {
+        q: "What is a “village”?",
+        hi: "“Village” क्या होता है?",
+        options: ["A large ocean", "A high mountain peak",
+          "A small settlement", "A kind of animal"],
+        hindi: ["एक बड़ा महासागर", "पहाड़ की ऊँची चोटी",
+          "एक छोटी बस्ती", "एक प्रकार का जानवर"],
+        answer: 2
+      },
+      {
+        q: "Choose the opposite of “noisy”.",
+        hi: "“Noisy” का विलोम शब्द चुनें।",
+        options: ["Loud", "Busy", "Crowded", "Quiet"],
+        hindi: ["तेज़ आवाज़ वाला", "व्यस्त", "भीड़भाड़ वाला", "शांत"],
+        answer: 3
+      },
+      {
+        q: "What does “landscape” mean?",
+        hi: "“Landscape” शब्द का क्या अर्थ है?",
+        options: ["The visible features of an area of land",
+          "A type of shoe", "A school timetable", "A cooking method"],
+        hindi: ["किसी क्षेत्र की दिखाई देने वाली प्राकृतिक बनावट",
+          "एक प्रकार का जूता", "स्कूल की समय-सारणी", "खाना पकाने की विधि"],
+        answer: 0
+      },
+      {
+        q: "Choose the correct spelling.",
+        hi: "सही वर्तनी चुनें।",
+        options: ["Beautifull", "Beautiful", "Beutiful", "Beautifal"],
+        hindi: ["गलत वर्तनी", "सुंदर की सही वर्तनी", "गलत वर्तनी", "गलत वर्तनी"],
+        answer: 1
+      },
+      {
+        q: "Which word means “a person who travels on foot in the mountains”?",
+        hi: "कौन-सा शब्द “पहाड़ों में पैदल यात्रा करने वाले व्यक्ति” के लिए है?",
+        options: ["Pilot", "Sailor", "Hiker", "Farmer"],
+        hindi: ["विमान चालक", "नाविक", "पैदल पर्वत यात्री", "किसान"],
+        answer: 2
+      },
+      {
+        q: "Choose the synonym of “brave”.",
+        hi: "“Brave” का समानार्थी शब्द चुनें।",
+        options: ["Frightened", "Weak", "Timid", "Courageous"],
+        hindi: ["डरा हुआ", "कमज़ोर", "डरपोक", "साहसी"],
+        answer: 3
+      },
+      {
+        q: "What does “nature” refer to?",
+        hi: "“Nature” शब्द किससे संबंधित है?",
+        options: ["The natural world around us", "Only classroom furniture",
+          "Only machines", "Only buildings"],
+        hindi: ["हमारे आसपास की प्राकृतिक दुनिया", "केवल कक्षा का फर्नीचर",
+          "केवल मशीनें", "केवल इमारतें"],
+        answer: 0
+      },
+      {
+        q: "Choose the opposite of “safe”.",
+        hi: "“Safe” का विलोम शब्द चुनें।",
+        options: ["Secure", "Dangerous", "Protected", "Harmless"],
+        hindi: ["सुरक्षित", "खतरनाक", "संरक्षित", "हानिरहित"],
+        answer: 1
+      },
+      {
+        q: "Complete the sentence: “The mountain view was ____.”",
+        hi: "वाक्य पूरा करें: “The mountain view was ____.”",
+        options: ["Carefully", "Journey", "Beautiful", "Protect"],
+        hindi: ["सावधानी से", "यात्रा", "सुंदर", "सुरक्षा करना"],
+        answer: 2
+      },
+      {
+        q: "Choose the word closest in meaning to “wonderful”.",
+        hi: "“Wonderful” के सबसे निकट अर्थ वाला शब्द चुनें।",
+        options: ["Terrible", "Ordinary", "Boring", "Amazing"],
+        hindi: ["बहुत बुरा", "साधारण", "उबाऊ", "अद्भुत"],
+        answer: 3
+      }
+    ];
+
+    let current = 0;
+    let selected = Array(questions.length).fill(null);
+    let locked = Array(questions.length).fill(false);
+    let finished = false;
+
+    const questionNumber = document.getElementById("questionNumber");
+    const questionText = document.getElementById("questionText");
+    const questionHindi = document.getElementById("questionHindi");
+    const optionsBox = document.getElementById("options");
+    const feedback = document.getElementById("feedback");
+    const previousBtn = document.getElementById("previousBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const submitBtn = document.getElementById("submitBtn");
+    const progressText = document.getElementById("progressText");
+    const answeredText = document.getElementById("answeredText");
+    const progressBar = document.getElementById("progressBar");
+    const quizArea = document.getElementById("quizArea");
+    const result = document.getElementById("result");
+
+    function renderQuestion() {
+      const item = questions[current];
+
+      questionNumber.textContent =
+        `Question ${current + 1} of ${questions.length} | प्रश्न ${current + 1}`;
+      questionText.textContent = item.q;
+      questionHindi.textContent = item.hi;
+      optionsBox.innerHTML = "";
+      feedback.className = "feedback";
+      feedback.textContent = "";
+
+      item.options.forEach((option, index) => {
+        const label = document.createElement("label");
+        label.className = "option";
+
+        if (locked[current] && index === item.answer) {
+          label.classList.add("correct");
+        } else if (
+          selected[current] === index &&
+          index !== item.answer
+        ) {
+          label.classList.add("incorrect");
+        }
+
+        const radio = document.createElement("input");
+        radio.type = "radio";
+        radio.name = "answer";
+        radio.value = index;
+        radio.checked = selected[current] === index;
+        radio.disabled = locked[current];
+
+        const textBox = document.createElement("div");
+        textBox.innerHTML =
+          `<div>${escapeHTML(option)}</div>
+           <div class="hindi">${escapeHTML(item.hindi[index])}</div>`;
+
+        radio.addEventListener("change", () => {
+          if (locked[current]) return;
+
+          selected[current] = index;
+
+          if (index === item.answer) {
+            locked[current] = true;
+            feedback.className = "feedback correct";
+            feedback.innerHTML =
+              "Well done! Keep it up!<br>बहुत अच्छा! ऐसे ही आगे बढ़ते रहें!";
+          } else {
+            feedback.className = "feedback incorrect";
+            feedback.innerHTML =
+              "Wrong answer! Read carefully and try again.<br>" +
+              "गलत जवाब! ध्यान से पढ़ें और फिर से प्रयास करें।";
+          }
+
+          renderQuestion();
+        });
+
+        label.appendChild(radio);
+        label.appendChild(textBox);
+        optionsBox.appendChild(label);
+      });
+
+      if (locked[current]) {
+        feedback.className = "feedback correct";
+        feedback.innerHTML =
+          "Well done! Keep it up!<br>बहुत अच्छा! ऐसे ही आगे बढ़ते रहें!";
+      } else if (selected[current] !== null) {
+        feedback.className = "feedback incorrect";
+        feedback.innerHTML =
+          "Wrong answer! Read carefully and try again.<br>" +
+          "गलत जवाब! ध्यान से पढ़ें और फिर से प्रयास करें।";
+      }
+
+      previousBtn.disabled = current === 0;
+      nextBtn.disabled = !locked[current];
+      nextBtn.style.display =
+        current === questions.length - 1 ? "none" : "inline-block";
+      submitBtn.style.display =
+        current === questions.length - 1 ? "inline-block" : "none";
+      submitBtn.disabled = !locked[current];
+
+      progressText.textContent =
+        `Question ${current + 1} of ${questions.length} | प्रश्न ${current + 1}`;
+      const correctCount = locked.filter(Boolean).length;
+      answeredText.textContent =
+        `Correct answers: ${correctCount} | सही उत्तर: ${correctCount}`;
+      progressBar.style.width =
+        `${((current + 1) / questions.length) * 100}%`;
+    }
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[char]);
+    }
+
+    previousBtn.addEventListener("click", () => {
+      if (current > 0) {
+        current--;
+        renderQuestion();
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (current < questions.length - 1 && locked[current]) {
+        current++;
+        renderQuestion();
+      }
+    });
+
+    submitBtn.addEventListener("click", () => {
+      if (!locked[current] || finished) return;
+
+      finished = true;
+      const score = locked.filter(Boolean).length;
+      const percentage = Math.round((score / questions.length) * 100);
+
+      let message;
+      let hindiMessage;
+
+      if (percentage <= 20) {
+        message = "Keep trying!";
+        hindiMessage = "कोशिश करते रहें!";
+      } else if (percentage <= 40) {
+        message = "Good try!";
+        hindiMessage = "अच्छा प्रयास!";
+      } else if (percentage <= 60) {
+        message = "Good job!";
+        hindiMessage = "बहुत अच्छा प्रयास!";
+      } else if (percentage <= 80) {
+        message = "Very good!";
+        hindiMessage = "बहुत बढ़िया!";
+      } else if (percentage < 100) {
+        message = "Excellent!";
+        hindiMessage = "शानदार!";
+      } else {
+        message = "Fantastic! Perfect score!";
+        hindiMessage = "अद्भुत! पूरे अंक!";
+      }
+
+      quizArea.style.display = "none";
+      result.style.display = "block";
+      progressBar.style.width = "100%";
+      progressText.textContent = "Quiz completed | क्विज़ पूरा हुआ";
+      answeredText.textContent = `${score} / ${questions.length}`;
+
+      document.getElementById("scoreText").textContent =
+        `${score} / ${questions.length} (${percentage}%)`;
+      document.getElementById("resultMessage").textContent = message;
+      document.getElementById("resultHindi").textContent = hindiMessage;
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    document.getElementById("restartBtn").addEventListener("click", () => {
+      current = 0;
+      selected = Array(questions.length).fill(null);
+      locked = Array(questions.length).fill(false);
+      finished = false;
+
+      quizArea.style.display = "block";
+      result.style.display = "none";
+
+      renderQuestion();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    renderQuestion();
+  </script>
+</body>
+</html>
