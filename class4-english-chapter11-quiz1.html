@@ -1,624 +1,804 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiz 1: Story Basics | Class 4 English</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-* { box-sizing: border-box; }
+  <title>Class 4 English Chapter 11 Quiz 1</title>
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f0f5ff;
-  color: #172554;
-  line-height: 1.6;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-header {
-  background: #164e9a;
-  color: white;
-  text-align: center;
-  padding: 24px 14px;
-}
+    body {
+      margin: 0;
+      padding: 15px;
+      font-family: Arial, sans-serif;
+      background: #f0f7ff;
+      color: #222;
+    }
 
-header h1 { margin: 0 0 8px; font-size: 25px; }
-header p { margin: 5px 0; }
+    .container {
+      max-width: 700px;
+      margin: 10px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+    }
 
-.container {
-  width: 94%;
-  max-width: 850px;
-  margin: 22px auto;
-}
+    h1 {
+      text-align: center;
+      color: #174ea6;
+      font-size: 25px;
+      margin-top: 5px;
+    }
 
-.intro, .question, .result {
-  background: white;
-  border-radius: 12px;
-  padding: 18px;
-  margin-bottom: 16px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.07);
-}
+    .subtitle {
+      text-align: center;
+      line-height: 1.7;
+      color: #555;
+    }
 
-.intro {
-  text-align: center;
-  border-top: 5px solid #2563eb;
-}
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: bold;
+      margin-top: 20px;
+      font-size: 14px;
+    }
 
-.question { min-height: 280px; }
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: #ddd;
+      border-radius: 10px;
+      margin: 10px 0 22px;
+      overflow: hidden;
+    }
 
-.question h2 {
-  color: #164e9a;
-  font-size: 20px;
-  margin-top: 0;
-}
+    #progressBar {
+      height: 100%;
+      width: 0%;
+      background: #168746;
+      transition: width 0.3s;
+    }
 
-.hindi {
-  display: block;
-  color: #475569;
-  margin-top: 4px;
-}
+    .question {
+      font-size: 19px;
+      font-weight: bold;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
 
-.progress-area {
-  background: white;
-  padding: 14px;
-  border-radius: 10px;
-  margin-bottom: 16px;
-}
+    .option {
+      display: block;
+      padding: 13px;
+      margin: 10px 0;
+      border: 2px solid #d7e3f4;
+      border-radius: 9px;
+      background: #fff;
+      cursor: pointer;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
 
-.progress-track {
-  background: #dbeafe;
-  height: 10px;
-  border-radius: 20px;
-  overflow: hidden;
-  margin-top: 8px;
-}
+    .option:hover {
+      background: #f0f6ff;
+    }
 
-.progress-fill {
-  background: #2563eb;
-  height: 100%;
-  width: 5%;
-  transition: width 0.2s;
-}
+    .option input {
+      margin-right: 8px;
+      transform: scale(1.15);
+    }
 
-.option {
-  display: block;
-  background: #f8fafc;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  padding: 12px;
-  margin: 10px 0;
-  cursor: pointer;
-}
+    .option.correct {
+      border-color: #168746;
+      background: #e8f7ed;
+    }
 
-.option:hover { background: #eaf2ff; }
+    .option.incorrect {
+      border-color: #d93025;
+      background: #fff0ef;
+    }
 
-.option input {
-  margin-right: 9px;
-  transform: scale(1.15);
-}
+    #feedback {
+      display: none;
+      padding: 14px;
+      margin: 18px 0;
+      border-radius: 9px;
+      font-weight: bold;
+      line-height: 1.8;
+    }
 
-.option.correct {
-  background: #dcfce7;
-  border-color: #16a34a;
-}
+    #feedback.success {
+      display: block;
+      background: #e8f7ed;
+      color: #126b32;
+      border: 1px solid #168746;
+    }
 
-.option.incorrect {
-  background: #fee2e2;
-  border-color: #dc2626;
-}
+    #feedback.error {
+      display: block;
+      background: #fff0ef;
+      color: #b3261e;
+      border: 1px solid #d93025;
+    }
 
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  margin: 20px 0;
-}
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
 
-button, .back-btn {
-  border: none;
-  border-radius: 8px;
-  padding: 12px 18px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
-}
+    button {
+      flex: 1;
+      min-width: 110px;
+      padding: 12px 14px;
+      border: none;
+      border-radius: 8px;
+      background: #174ea6;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-button:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
+    button:hover {
+      opacity: 0.9;
+    }
 
-.previous-btn, .reset-btn {
-  background: #e2e8f0;
-  color: #172554;
-}
+    button:disabled {
+      background: #b9c1cc;
+      cursor: not-allowed;
+      opacity: 1;
+    }
 
-.next-btn {
-  background: #2563eb;
-  color: white;
-}
+    #previousBtn {
+      background: #626b75;
+    }
 
-.submit-btn {
-  background: #166534;
-  color: white;
-}
+    #submitBtn {
+      background: #168746;
+    }
 
-.back-btn {
-  display: inline-block;
-  background: #164e9a;
-  color: white;
-  margin: 5px;
-}
+    #resetBtn {
+      background: #e37400;
+    }
 
-.result {
-  display: none;
-  text-align: center;
-  border-top: 5px solid #16a34a;
-}
+    #result {
+      display: none;
+      margin-top: 20px;
+      padding: 18px;
+      border-radius: 10px;
+      background: #eaf4ff;
+      line-height: 1.8;
+    }
 
-.result h2 { color: #166534; }
+    #result h2 {
+      color: #174ea6;
+      text-align: center;
+    }
 
-.review {
-  text-align: left;
-  margin-top: 20px;
-}
+    .review-item {
+      background: white;
+      padding: 12px;
+      border-radius: 8px;
+      margin: 12px 0;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
 
-.review-item {
-  padding: 14px 0;
-  border-bottom: 1px solid #e2e8f0;
-}
+    .review-correct {
+      border-left: 5px solid #168746;
+    }
 
-footer {
-  text-align: center;
-  padding: 20px 14px;
-  background: #dbeafe;
-  color: #334155;
-  font-size: 13px;
-}
+    .review-wrong {
+      border-left: 5px solid #d93025;
+    }
 
-@media (max-width: 600px) {
-  header h1 { font-size: 21px; }
-  .container { width: 95%; }
-  .question, .intro, .result { padding: 14px; }
-  .question { min-height: 0; }
-  .buttons button { flex: 1 1 40%; }
-  .back-btn { display: block; margin: 8px 0; }
-}
-</style>
+    .disclaimer {
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 1px solid #ddd;
+      font-size: 12px;
+      line-height: 1.7;
+      color: #555;
+      overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 8px;
+      }
+
+      .container {
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 21px;
+      }
+
+      .question {
+        font-size: 17px;
+      }
+
+      button {
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
+<div class="container">
+
   <h1>RawaRajpootNexEduToppers Learning Academy</h1>
-  <p>Class 4 English | Chapter 11</p>
-  <p>अंग्रेज़ी | कक्षा 4 | अध्याय 11</p>
-  <h2>A Journey to the Magical Mountains</h2>
-  <h3>Quiz 1: Story Basics</h3>
-  <p>Practise the main characters and events.</p>
-  <p>मुख्य पात्रों और घटनाओं का अभ्यास करें।</p>
-</header>
 
-<main class="container">
+  <div class="subtitle">
+    <strong>Class 4 English | Chapter 11</strong><br>
+    कक्षा 4 अंग्रेज़ी | अध्याय 11
+    <br><br>
 
-  <section class="intro">
-    <h2>Instructions / निर्देश</h2>
-    <p>Choose one correct answer for each question.</p>
-    <p class="hindi">प्रत्येक प्रश्न के लिए एक सही उत्तर चुनें।</p>
-    <p><strong>Total Questions / कुल प्रश्न:</strong> 20</p>
-    <p><strong>Marks / अंक:</strong> 1 mark per question / प्रत्येक प्रश्न का 1 अंक</p>
-  </section>
+    <strong>A Journey to the Magical Mountains</strong><br>
+    जादुई पहाड़ों की यात्रा
+    <br><br>
 
-  <section class="progress-area">
-    <strong id="questionCounter">Question 1 of 20</strong>
-    <span class="hindi" id="questionCounterHindi">प्रश्न 1 / 20</span>
-    <div class="progress-track">
-      <div class="progress-fill" id="progressFill"></div>
+    <strong>Quiz 1: Chapter Practice</strong><br>
+    प्रश्नोत्तरी 1: अध्याय का अभ्यास
+  </div>
+
+  <div id="quizArea">
+
+    <div class="progress-info">
+      <span id="questionCounter">Question 1 of 20</span>
+      <span id="scoreCounter">Score: 0</span>
     </div>
-  </section>
 
-  <section class="question" id="questionCard">
-    <h2 id="questionText"></h2>
-    <div id="optionsContainer"></div>
-  </section>
+    <div
+      class="progress-track"
+      role="progressbar"
+      aria-label="Quiz progress"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+      id="progressTrack"
+    >
+      <div id="progressBar"></div>
+    </div>
 
-  <div class="buttons" id="navigationButtons">
-    <button type="button" class="previous-btn" id="previousBtn"
-      onclick="previousQuestion()">
-      ← Previous / पिछला
-    </button>
+    <div id="questionText" class="question"></div>
 
-    <button type="button" class="next-btn" id="nextBtn"
-      onclick="nextQuestion()">
-      Next Question / अगला प्रश्न →
-    </button>
+    <div id="optionsArea"></div>
 
-    <button type="button" class="submit-btn" id="submitBtn"
-      onclick="submitQuiz()" style="display:none;">
-      Submit Quiz / क्विज़ जमा करें
-    </button>
+    <div id="feedback" aria-live="polite"></div>
+
+    <div class="buttons">
+      <button id="previousBtn" type="button" onclick="previousQuestion()">
+        Previous / पिछला
+      </button>
+
+      <button id="nextBtn" type="button" onclick="nextQuestion()">
+        Next / अगला
+      </button>
+
+      <button
+        id="submitBtn"
+        type="button"
+        onclick="submitQuiz()"
+        style="display:none"
+      >
+        Submit / जमा करें
+      </button>
+    </div>
+
   </div>
 
-  <section class="result" id="result" aria-live="polite">
-    <h2>Your Result / आपका परिणाम</h2>
-    <p id="scoreText"></p>
-    <p id="percentageText"></p>
-    <h3 id="message"></h3>
-    <p class="hindi" id="messageHindi"></p>
+  <div id="result" aria-live="polite"></div>
 
-    <div class="review" id="review"></div>
+  <div class="disclaimer">
+    <strong>Disclaimer / अस्वीकरण:</strong><br>
 
-    <button type="button" class="reset-btn" onclick="resetQuiz()">
-      Try Again / दोबारा प्रयास करें
-    </button>
-  </section>
+    RawaRajpootNexEduToppers Learning Academy is an independent
+    educational platform and is not affiliated with, endorsed by,
+    or associated with NCERT. NCERT textbook names, chapters, and
+    curriculum topics belong exclusively to NCERT. All solutions
+    and study notes provided here are original practice aids.
+    For official textbooks, please refer to NCERT's official resources.
+    <br><br>
 
-  <div class="buttons">
-    <a class="back-btn" href="class4-english-chapter11.html">
-      Back to Chapter 11 / अध्याय पर वापस जाएँ
-    </a>
-    <a class="back-btn" href="index.html">Home / मुख्य पृष्ठ</a>
+    RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक
+    मंच है और इसका NCERT से कोई आधिकारिक संबंध नहीं है।
+    NCERT की पाठ्यपुस्तकों के नाम, अध्याय और पाठ्यक्रम संबंधी
+    विषय NCERT के हैं। यहाँ दिए गए समाधान और अध्ययन नोट्स
+    मौलिक अभ्यास सामग्री हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+    NCERT के आधिकारिक संसाधनों का उपयोग करें।
   </div>
 
-</main>
-
-<footer>
-  <p>
-    Disclaimer: RawaRajpootNexEduToppers Learning Academy is an
-    independent educational platform and is not affiliated with,
-    endorsed by, or associated with NCERT. NCERT textbook names,
-    chapters, and curriculum topics belong exclusively to NCERT.
-    All solutions and study notes provided here are original practice
-    aids. For official textbooks, please refer to NCERT's official resources.
-  </p>
-  <p>
-    अस्वीकरण: RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र
-    शैक्षिक मंच है और NCERT से संबद्ध नहीं है। यहाँ दी गई अध्ययन सामग्री
-    अभ्यास के लिए तैयार की गई है।
-  </p>
-</footer>
+</div>
 
 <script>
-const quizData = [
-  {
-    q: "Who is the main young character in the story?",
-    hi: "कहानी की मुख्य युवा पात्र कौन है?",
-    o: ["Minam", "A mountain climber", "A shopkeeper", "A teacher"],
-    oh: ["मिनाम", "एक पर्वतारोही", "एक दुकानदार", "एक शिक्षक"],
-    a: 0
-  },
-  {
-    q: "Where does Minam live?",
-    hi: "मिनाम कहाँ रहती है?",
-    o: ["In a large city", "In a small village", "Beside the sea", "In a desert"],
-    oh: ["एक बड़े शहर में", "एक छोटे गाँव में", "समुद्र के किनारे", "एक रेगिस्तान में"],
-    a: 1
-  },
-  {
-    q: "Which mountains are near Minam's village?",
-    hi: "मिनाम के गाँव के पास कौन-से पहाड़ हैं?",
-    o: ["The Aravalli Hills", "The Himalayas", "The Nilgiri Hills", "The Western Ghats"],
-    oh: ["अरावली पहाड़ियाँ", "हिमालय", "नीलगिरि पहाड़ियाँ", "पश्चिमी घाट"],
-    a: 1
-  },
-  {
-    q: "With whom does Minam go on her journey?",
-    hi: "मिनाम अपनी यात्रा पर किसके साथ जाती है?",
-    o: ["Her grandfather", "Her teacher", "Her neighbour", "Her brother"],
-    oh: ["अपने दादाजी के साथ", "अपने शिक्षक के साथ", "अपने पड़ोसी के साथ", "अपने भाई के साथ"],
-    a: 0
-  },
-  {
-    q: "What was Minam's grandfather in the past?",
-    hi: "मिनाम के दादाजी पहले क्या थे?",
-    o: ["A sailor", "A Sherpa", "A doctor", "A pilot"],
-    oh: ["एक नाविक", "एक शेरपा", "एक डॉक्टर", "एक पायलट"],
-    a: 1
-  },
-  {
-    q: "Which quality best describes Minam?",
-    hi: "कौन-सा गुण मिनाम का सबसे अच्छा वर्णन करता है?",
-    o: ["Curious", "Careless", "Unkind", "Lazy"],
-    oh: ["जिज्ञासु", "लापरवाह", "निर्दयी", "आलसी"],
-    a: 0
-  },
-  {
-    q: "What does Minam want to learn about?",
-    hi: "मिनाम किसके बारे में सीखना चाहती है?",
-    o: ["Machines only", "Nature", "City traffic", "Computer games"],
-    oh: ["केवल मशीनों के बारे में", "प्रकृति के बारे में", "शहर के यातायात के बारे में", "कंप्यूटर गेम के बारे में"],
-    a: 1
-  },
-  {
-    q: "Which animal is mentioned in the story?",
-    hi: "कहानी में किस जानवर का उल्लेख है?",
-    o: ["Yak", "Dolphin", "Camel", "Penguin"],
-    oh: ["याक", "डॉल्फिन", "ऊँट", "पेंगुइन"],
-    a: 0
-  },
-  {
-    q: "Which other mountain animal does Minam learn about?",
-    hi: "मिनाम पहाड़ के किस अन्य जानवर के बारे में सीखती है?",
-    o: ["Mountain goat", "Crocodile", "Kangaroo", "Octopus"],
-    oh: ["पहाड़ी बकरी", "मगरमच्छ", "कंगारू", "ऑक्टोपस"],
-    a: 0
-  },
-  {
-    q: "Who shares knowledge about the mountains with Minam?",
-    hi: "मिनाम को पहाड़ों के बारे में जानकारी कौन देता है?",
-    o: ["Her grandfather", "A shopkeeper", "A stranger in a city", "A bus driver"],
-    oh: ["उसके दादाजी", "एक दुकानदार", "शहर में एक अजनबी", "एक बस चालक"],
-    a: 0
-  },
-  {
-    q: "What is Minam's grandfather like?",
-    hi: "मिनाम के दादाजी कैसे हैं?",
-    o: ["Wise and caring", "Unhelpful and rude", "Careless and forgetful", "Angry all the time"],
-    oh: ["बुद्धिमान और देखभाल करने वाले", "असहयोगी और रूखे", "लापरवाह और भुलक्कड़", "हर समय गुस्से में रहने वाले"],
-    a: 0
-  },
-  {
-    q: "What does Minam discover during her journey?",
-    hi: "मिनाम अपनी यात्रा के दौरान क्या खोजती है?",
-    o: ["Mountain animals and beautiful landscapes", "A shopping mall", "A railway station", "A large factory"],
-    oh: ["पहाड़ी जानवर और सुंदर प्राकृतिक दृश्य", "एक शॉपिंग मॉल", "एक रेलवे स्टेशन", "एक बड़ा कारखाना"],
-    a: 0
-  },
-  {
-    q: "What does Minam promise to protect?",
-    hi: "मिनाम किसकी रक्षा करने का वादा करती है?",
-    o: ["The mountains", "A toy shop", "A city road", "A playground only"],
-    oh: ["पहाड़ों की", "एक खिलौनों की दुकान की", "शहर की सड़क की", "केवल खेल के मैदान की"],
-    a: 0
-  },
-  {
-    q: "What important idea does Minam learn from her grandfather?",
-    hi: "मिनाम अपने दादाजी से कौन-सी महत्वपूर्ण बात सीखती है?",
-    o: ["Nature should be protected", "Animals are unimportant", "Mountains should be ignored", "Learning is unnecessary"],
-    oh: ["प्रकृति की रक्षा करनी चाहिए", "जानवर महत्वपूर्ण नहीं हैं", "पहाड़ों की अनदेखी करनी चाहिए", "सीखना आवश्यक नहीं है"],
-    a: 0
-  },
-  {
-    q: "Which word best describes Minam's attitude towards learning?",
-    hi: "सीखने के प्रति मिनाम के रवैये का सबसे अच्छा वर्णन कौन-सा शब्द करता है?",
-    o: ["Eager", "Bored", "Uninterested", "Careless"],
-    oh: ["उत्सुक", "ऊबी हुई", "अरुचि रखने वाली", "लापरवाह"],
-    a: 0
-  },
-  {
-    q: "Why is Minam's grandfather a useful guide?",
-    hi: "मिनाम के दादाजी एक उपयोगी मार्गदर्शक क्यों हैं?",
-    o: ["He has experience in the mountains", "He dislikes nature", "He has never learned anything", "He avoids teaching"],
-    oh: ["उन्हें पहाड़ों का अनुभव है", "उन्हें प्रकृति पसंद नहीं है", "उन्होंने कभी कुछ नहीं सीखा", "वे सिखाने से बचते हैं"],
-    a: 0
-  },
-  {
-    q: "Which setting is most closely connected with the story?",
-    hi: "कहानी का संबंध मुख्य रूप से किस स्थान से है?",
-    o: ["The Himalayan region", "A tropical beach", "A desert island", "A crowded airport"],
-    oh: ["हिमालयी क्षेत्र", "एक उष्णकटिबंधीय समुद्र तट", "एक रेगिस्तानी द्वीप", "एक भीड़भाड़ वाला हवाई अड्डा"],
-    a: 0
-  },
-  {
-    q: "What does the story encourage readers to appreciate?",
-    hi: "यह कहानी पाठकों को किसकी सराहना करना सिखाती है?",
-    o: ["Nature and mountain life", "Waste and pollution", "Carelessness", "Unkind behaviour"],
-    oh: ["प्रकृति और पहाड़ी जीवन की", "कचरे और प्रदूषण की", "लापरवाही की", "निर्दयी व्यवहार की"],
-    a: 0
-  },
-  {
-    q: "Which action best follows the lesson of the story?",
-    hi: "कौन-सा काम कहानी की सीख के अनुसार है?",
-    o: ["Keeping natural places clean", "Throwing rubbish on mountain paths", "Disturbing wild animals", "Damaging plants"],
-    oh: ["प्राकृतिक स्थानों को साफ रखना", "पहाड़ी रास्तों पर कचरा फेंकना", "जंगली जानवरों को परेशान करना", "पौधों को नुकसान पहुँचाना"],
-    a: 0
-  },
-  {
-    q: "What is the main message of the story?",
-    hi: "कहानी का मुख्य संदेश क्या है?",
-    o: ["Learn about and protect nature", "Avoid learning new things", "Ignore animals and plants", "Only cities are worth exploring"],
-    oh: ["प्रकृति के बारे में सीखें और उसकी रक्षा करें", "नई बातें सीखने से बचें", "जानवरों और पौधों की अनदेखी करें", "केवल शहर ही घूमने योग्य हैं"],
-    a: 0
+  const questions = [
+    {
+      q: "Who is the main character in the chapter? / अध्याय का मुख्य पात्र कौन है?",
+      options: [
+        "Minam / मिनाम",
+        "A school teacher / एक स्कूल शिक्षक",
+        "A shopkeeper / एक दुकानदार",
+        "A farmer / एक किसान"
+      ],
+      answer: 0
+    },
+    {
+      q: "Where does Minam live? / मिनाम कहाँ रहती है?",
+      options: [
+        "In a village near the sea / समुद्र के पास एक गाँव में",
+        "In a village at the foot of the Himalayas / हिमालय की तलहटी में बसे गाँव में",
+        "In a large city / एक बड़े शहर में",
+        "In a desert village / रेगिस्तान के एक गाँव में"
+      ],
+      answer: 1
+    },
+    {
+      q: "Who travels with Minam? / मिनाम के साथ कौन यात्रा करता है?",
+      options: [
+        "Her teacher / उसकी शिक्षिका",
+        "Her neighbour / उसका पड़ोसी",
+        "Her grandfather / उसके दादाजी",
+        "Her shopkeeper / उसका दुकानदार"
+      ],
+      answer: 2
+    },
+    {
+      q: "What was Minam's grandfather's experience? / मिनाम के दादाजी को किसका अनुभव था?",
+      options: [
+        "He was a former Sherpa / वे पहले शेरपा थे",
+        "He was a pilot / वे पायलट थे",
+        "He was a sailor / वे नाविक थे",
+        "He was a city bus driver / वे शहर में बस चालक थे"
+      ],
+      answer: 0
+    },
+    {
+      q: "Which qualities describe Minam? / मिनाम के कौन-से गुण हैं?",
+      options: [
+        "Careless and rude / लापरवाह और असभ्य",
+        "Lazy and impatient / आलसी और अधीर",
+        "Angry and selfish / गुस्सैल और स्वार्थी",
+        "Curious and cheerful / जिज्ञासु और प्रसन्न"
+      ],
+      answer: 3
+    },
+    {
+      q: "What does Minam want to learn about? / मिनाम किसके बारे में सीखना चाहती है?",
+      options: [
+        "Only shopping / केवल खरीदारी",
+        "Nature and the mountains / प्रकृति और पहाड़ों के बारे में",
+        "Only city traffic / केवल शहर के यातायात के बारे में",
+        "Only television shows / केवल टेलीविज़न कार्यक्रमों के बारे में"
+      ],
+      answer: 1
+    },
+    {
+      q: "Which mountain range is mentioned in the chapter? / अध्याय में किस पर्वत शृंखला का उल्लेख है?",
+      options: [
+        "The Alps / आल्प्स",
+        "The Andes / एंडीज़",
+        "The Himalayas / हिमालय",
+        "The Rockies / रॉकी पर्वत"
+      ],
+      answer: 2
+    },
+    {
+      q: "Which animal is associated with the mountain setting? / पहाड़ी वातावरण से किस जानवर का संबंध है?",
+      options: [
+        "Yak / याक",
+        "Camel / ऊँट",
+        "Kangaroo / कंगारू",
+        "Penguin / पेंगुइन"
+      ],
+      answer: 0
+    },
+    {
+      q: "Which other mountain animal does Minam learn about? / मिनाम किस दूसरे पहाड़ी जानवर के बारे में सीखती है?",
+      options: [
+        "Dolphins / डॉल्फ़िन",
+        "Crocodiles / मगरमच्छ",
+        "Peacocks / मोर",
+        "Mountain goats / पहाड़ी बकरियाँ"
+      ],
+      answer: 3
+    },
+    {
+      q: "What does Minam's grandfather share with her? / मिनाम के दादाजी उसके साथ क्या साझा करते हैं?",
+      options: [
+        "Only shopping lists / केवल खरीदारी की सूचियाँ",
+        "Knowledge about mountains and nature / पहाड़ों और प्रकृति का ज्ञान",
+        "Only sports scores / केवल खेलों के अंक",
+        "Only city maps / केवल शहर के नक्शे"
+      ],
+      answer: 1
+    },
+    {
+      q: "What does the word 'curious' mean? / 'Curious' शब्द का क्या अर्थ है?",
+      options: [
+        "Wanting to know or learn / जानने या सीखने की इच्छा रखना",
+        "Refusing to learn / सीखने से मना करना",
+        "Feeling sleepy all the time / हर समय नींद आना",
+        "Being careless / लापरवाह होना"
+      ],
+      answer: 0
+    },
+    {
+      q: "What does 'protect nature' mean? / 'Protect nature' का क्या अर्थ है?",
+      options: [
+        "Damage plants / पौधों को नुकसान पहुँचाना",
+        "Waste water / पानी बर्बाद करना",
+        "Keep the natural world safe / प्राकृतिक संसार को सुरक्षित रखना",
+        "Disturb wild animals / जंगली जानवरों को परेशान करना"
+      ],
+      answer: 2
+    },
+    {
+      q: "Which action shows care for nature? / कौन-सा काम प्रकृति के प्रति देखभाल दिखाता है?",
+      options: [
+        "Throwing rubbish on a mountain / पहाड़ पर कचरा फेंकना",
+        "Keeping the surroundings clean / आसपास की जगह को साफ रखना",
+        "Damaging plants / पौधों को नुकसान पहुँचाना",
+        "Disturbing animals / जानवरों को परेशान करना"
+      ],
+      answer: 1
+    },
+    {
+      q: "What does 'landscape' mean? / 'Landscape' शब्द का क्या अर्थ है?",
+      options: [
+        "A type of food / एक प्रकार का भोजन",
+        "A school subject / एक स्कूल का विषय",
+        "A musical instrument / एक संगीत वाद्ययंत्र",
+        "The visible features of an area of land / किसी क्षेत्र की दिखाई देने वाली प्राकृतिक बनावट"
+      ],
+      answer: 3
+    },
+    {
+      q: "Which word means 'happy and positive'? / कौन-सा शब्द 'खुश और सकारात्मक' अर्थ देता है?",
+      options: [
+        "Cheerful / प्रसन्न",
+        "Careless / लापरवाह",
+        "Unkind / निर्दयी",
+        "Confused / उलझन में"
+      ],
+      answer: 0
+    },
+    {
+      q: "Choose the correct plural of 'mountain'. / 'Mountain' का सही बहुवचन चुनें।",
+      options: [
+        "Mountainses / माउंटेन्सेस",
+        "Mountainies / माउंटेनीज़",
+        "Mountains / माउंटेन्स",
+        "Mountain / माउंटेन"
+      ],
+      answer: 2
+    },
+    {
+      q: "Choose the correct sentence. / सही वाक्य चुनें।",
+      options: [
+        "Minam are curious. / मिनाम जिज्ञासु हैं।",
+        "Minam is curious. / मिनाम जिज्ञासु है।",
+        "Minam am curious. / मिनाम जिज्ञासु हूँ।",
+        "Minam be curious. / मिनाम जिज्ञासु होना।"
+      ],
+      answer: 1
+    },
+    {
+      q: "Choose the correct sentence about Minam and her grandfather. / मिनाम और उसके दादाजी के बारे में सही वाक्य चुनें।",
+      options: [
+        "Minam travel with her grandfather. / मिनाम अपने दादाजी के साथ यात्रा करना।",
+        "Minam travelling with her grandfather. / मिनाम अपने दादाजी के साथ यात्रा करते हुए।",
+        "Minam travels with her grandfather. / मिनाम अपने दादाजी के साथ यात्रा करती है।",
+        "Minam travels her grandfather with. / मिनाम यात्रा करती है अपने दादाजी के साथ।"
+      ],
+      answer: 2
+    },
+    {
+      q: "What does Minam promise to do? / मिनाम क्या करने का वादा करती है?",
+      options: [
+        "Protect the mountains / पहाड़ों की रक्षा करना",
+        "Throw rubbish outdoors / बाहर कचरा फेंकना",
+        "Disturb mountain animals / पहाड़ी जानवरों को परेशान करना",
+        "Damage the plants / पौधों को नुकसान पहुँचाना"
+      ],
+      answer: 0
+    },
+    {
+      q: "What is an important lesson of the chapter? / अध्याय की एक महत्वपूर्ण सीख क्या है?",
+      options: [
+        "Never ask questions / कभी प्रश्न न पूछना",
+        "Ignore nature / प्रकृति की अनदेखी करना",
+        "Avoid learning new things / नई चीज़ें सीखने से बचना",
+        "Learn about nature and help protect it / प्रकृति के बारे में सीखना और उसकी रक्षा करना"
+      ],
+      answer: 3
+    }
+  ];
+
+  let currentQuestion = 0;
+  let selectedAnswers = Array(questions.length).fill(null);
+  let answeredCorrectly = Array(questions.length).fill(false);
+  let quizFinished = false;
+
+  const questionText = document.getElementById("questionText");
+  const optionsArea = document.getElementById("optionsArea");
+  const feedback = document.getElementById("feedback");
+  const questionCounter = document.getElementById("questionCounter");
+  const scoreCounter = document.getElementById("scoreCounter");
+  const progressBar = document.getElementById("progressBar");
+  const progressTrack = document.getElementById("progressTrack");
+  const previousBtn = document.getElementById("previousBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const submitBtn = document.getElementById("submitBtn");
+  const result = document.getElementById("result");
+  const quizArea = document.getElementById("quizArea");
+
+  function getScore() {
+    return answeredCorrectly.filter(Boolean).length;
   }
-];
 
-let currentQuestion = 0;
-let answers = Array(quizData.length).fill(null);
-let submitted = false;
+  function renderQuestion() {
+    const q = questions[currentQuestion];
 
-function renderQuestion() {
-  const item = quizData[currentQuestion];
+    questionCounter.textContent =
+      `Question ${currentQuestion + 1} of ${questions.length} / ` +
+      `प्रश्न ${currentQuestion + 1} / ${questions.length}`;
 
-  document.getElementById("questionCounter").textContent =
-    "Question " + (currentQuestion + 1) + " of " + quizData.length;
+    scoreCounter.textContent =
+      `Score: ${getScore()} / ${questions.length} / अंक`;
 
-  document.getElementById("questionCounterHindi").textContent =
-    "प्रश्न " + (currentQuestion + 1) + " / " + quizData.length;
+    const progress = ((currentQuestion + 1) / questions.length) * 100;
+    progressBar.style.width = progress + "%";
+    progressTrack.setAttribute("aria-valuenow", Math.round(progress));
 
-  document.getElementById("progressFill").style.width =
-    ((currentQuestion + 1) / quizData.length * 100) + "%";
+    questionText.textContent = q.q;
+    optionsArea.innerHTML = "";
+    feedback.className = "";
+    feedback.style.display = "none";
+    feedback.textContent = "";
 
-  const heading = document.getElementById("questionText");
-  heading.textContent = (currentQuestion + 1) + ". " + item.q;
+    q.options.forEach((option, index) => {
+      const label = document.createElement("label");
+      label.className = "option";
 
-  const hindi = document.createElement("span");
-  hindi.className = "hindi";
-  hindi.textContent = item.hi;
-  heading.appendChild(hindi);
+      const radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = "answer";
+      radio.value = index;
 
-  const optionsContainer = document.getElementById("optionsContainer");
-  optionsContainer.innerHTML = "";
+      radio.checked = selectedAnswers[currentQuestion] === index;
+      radio.disabled = answeredCorrectly[currentQuestion];
 
-  item.o.forEach((option, index) => {
-    const label = document.createElement("label");
-    label.className = "option";
+      if (answeredCorrectly[currentQuestion] && index === q.answer) {
+        label.classList.add("correct");
+      }
 
-    const radio = document.createElement("input");
-    radio.type = "radio";
-    radio.name = "currentAnswer";
-    radio.value = index;
-    radio.checked = answers[currentQuestion] === index;
-    radio.addEventListener("change", function() {
-      answers[currentQuestion] = index;
+      radio.addEventListener("change", () => {
+        checkAnswer(index);
+      });
+
+      label.appendChild(radio);
+      label.appendChild(document.createTextNode(" " + option));
+      optionsArea.appendChild(label);
     });
 
-    const english = document.createElement("span");
-    english.textContent = option;
+    if (answeredCorrectly[currentQuestion]) {
+      showCorrectFeedback();
+    }
 
-    const hindiOption = document.createElement("span");
-    hindiOption.className = "hindi";
-    hindiOption.textContent = item.oh[index];
+    previousBtn.disabled = currentQuestion === 0;
 
-    label.appendChild(radio);
-    label.appendChild(english);
-    label.appendChild(hindiOption);
-    optionsContainer.appendChild(label);
-  });
+    const isLast = currentQuestion === questions.length - 1;
+    nextBtn.style.display = isLast ? "none" : "block";
+    submitBtn.style.display = isLast ? "block" : "none";
 
-  document.getElementById("previousBtn").disabled =
-    currentQuestion === 0;
+    nextBtn.disabled = !answeredCorrectly[currentQuestion];
+    submitBtn.disabled = !answeredCorrectly[currentQuestion];
 
-  document.getElementById("nextBtn").style.display =
-    currentQuestion === quizData.length - 1 ? "none" : "inline-block";
+    if (isLast && answeredCorrectly[currentQuestion]) {
+      submitBtn.disabled = false;
+    }
+  }
 
-  document.getElementById("submitBtn").style.display =
-    currentQuestion === quizData.length - 1 ? "inline-block" : "none";
-}
+  function checkAnswer(index) {
+    if (answeredCorrectly[currentQuestion] || quizFinished) {
+      return;
+    }
 
-function nextQuestion() {
-  if (currentQuestion < quizData.length - 1) {
+    const q = questions[currentQuestion];
+    selectedAnswers[currentQuestion] = index;
+
+    const labels = optionsArea.querySelectorAll(".option");
+    labels.forEach(label => {
+      label.classList.remove("incorrect", "correct");
+    });
+
+    if (index === q.answer) {
+      answeredCorrectly[currentQuestion] = true;
+      labels[index].classList.add("correct");
+      showCorrectFeedback();
+
+      optionsArea.querySelectorAll("input").forEach(input => {
+        input.disabled = true;
+      });
+
+      scoreCounter.textContent =
+        `Score: ${getScore()} / ${questions.length} / अंक`;
+
+      nextBtn.disabled = false;
+      submitBtn.disabled = false;
+
+    } else {
+      labels[index].classList.add("incorrect");
+
+      feedback.className = "error";
+      feedback.innerHTML =
+        "<strong>❌ Wrong answer!</strong><br>" +
+        "Read carefully and try again.<br>" +
+        "<strong>गलत जवाब!</strong> ध्यान से पढ़ें और फिर से प्रयास करें।";
+
+      feedback.style.display = "block";
+
+      // The child can choose another option and try again.
+      nextBtn.disabled = true;
+      submitBtn.disabled = true;
+    }
+  }
+
+  function showCorrectFeedback() {
+    feedback.className = "success";
+    feedback.innerHTML =
+      "<strong>✅ Well done! Keep it up!</strong><br>" +
+      "बहुत अच्छा! ऐसे ही आगे बढ़ते रहें!";
+
+    feedback.style.display = "block";
+  }
+
+  function nextQuestion() {
+    if (
+      !answeredCorrectly[currentQuestion] ||
+      currentQuestion >= questions.length - 1
+    ) {
+      return;
+    }
+
     currentQuestion++;
     renderQuestion();
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }
-}
 
-function previousQuestion() {
-  if (currentQuestion > 0) {
-    currentQuestion--;
+  function previousQuestion() {
+    if (currentQuestion > 0) {
+      currentQuestion--;
+      renderQuestion();
+    }
+  }
+
+  function submitQuiz() {
+    if (!answeredCorrectly[currentQuestion] || quizFinished) {
+      return;
+    }
+
+    quizFinished = true;
+
+    const score = getScore();
+    const percentage = Math.round((score / questions.length) * 100);
+
+    let message = "";
+    let hindiMessage = "";
+
+    if (percentage <= 20) {
+      message = "Keep trying!";
+      hindiMessage = "कोशिश करते रहें!";
+    } else if (percentage <= 40) {
+      message = "Good try!";
+      hindiMessage = "अच्छा प्रयास!";
+    } else if (percentage <= 60) {
+      message = "Good job!";
+      hindiMessage = "बहुत अच्छा प्रयास!";
+    } else if (percentage <= 80) {
+      message = "Very good!";
+      hindiMessage = "बहुत बढ़िया!";
+    } else if (percentage < 100) {
+      message = "Excellent!";
+      hindiMessage = "शानदार!";
+    } else {
+      message = "Fantastic! Perfect score!";
+      hindiMessage = "अद्भुत! पूरे अंक!";
+    }
+
+    quizArea.style.display = "none";
+    result.style.display = "block";
+
+    result.innerHTML = `
+      <h2>Quiz Result / प्रश्नोत्तरी का परिणाम</h2>
+
+      <p><strong>Score / अंक:</strong> ${score} / ${questions.length}</p>
+      <p><strong>Percentage / प्रतिशत:</strong> ${percentage}%</p>
+
+      <h3>${message}</h3>
+      <h3>${hindiMessage}</h3>
+
+      <h3>Answer Review / उत्तरों की समीक्षा</h3>
+      <div id="reviewArea"></div>
+
+      <div class="buttons">
+        <button id="resetBtn" type="button" onclick="restartQuiz()">
+          Try Again / दोबारा प्रयास करें
+        </button>
+      </div>
+    `;
+
+    const reviewArea = document.getElementById("reviewArea");
+
+    questions.forEach((q, index) => {
+      const isCorrect = answeredCorrectly[index];
+      const reviewItem = document.createElement("div");
+
+      reviewItem.className = "review-item " +
+        (isCorrect ? "review-correct" : "review-wrong");
+
+      const questionHeading = document.createElement("strong"); V
+    questionHeading.textContent = `${index + 1}. ${q.q}`;
+      reviewItem.appendChild(questionHeading);
+
+      const chosenAnswer = document.createElement("p");
+      chosenAnswer.textContent =
+        "Your answer / आपका जवाब: " +
+        (selectedAnswers[index] === null
+          ? "Not answered / जवाब नहीं दिया"
+          : q.options[selectedAnswers[index]]);
+
+      reviewItem.appendChild(chosenAnswer);
+
+      const correctAnswer = document.createElement("p");
+      correctAnswer.textContent =
+        "Correct answer / सही जवाब: " + q.options[q.answer];
+
+      reviewItem.appendChild(correctAnswer);
+
+      const status = document.createElement("strong");
+      status.textContent = isCorrect
+        ? "✅ Well done! / बहुत अच्छा!"
+        : "❌ Review this answer / इस जवाब को दोबारा पढ़ें";
+
+      reviewItem.appendChild(status);
+      reviewArea.appendChild(reviewItem);
+    });
+
+    result.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function restartQuiz() {
+    currentQuestion = 0;
+    selectedAnswers = Array(questions.length).fill(null);
+    answeredCorrectly = Array(questions.length).fill(false);
+    quizFinished = false;
+
+    result.style.display = "none";
+    result.innerHTML = "";
+    quizArea.style.display = "block";
+
     renderQuestion();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   }
-}
-
-function submitQuiz() {
-  if (submitted) return;
-
-  const unanswered = answers.filter(answer => answer === null).length;
-
-  if (unanswered > 0) {
-    alert(
-      "Please answer all 20 questions before submitting.\n" +
-      "जमा करने से पहले सभी 20 प्रश्नों के उत्तर दें।\n\n" +
-      "Questions unanswered: " + unanswered
-    );
-    return;
-  }
-
-  submitted = true;
-
-  let score = 0;
-  const review = document.getElementById("review");
-  review.innerHTML = "<h3>Answer Review / उत्तरों की जाँच</h3>";
-
-  quizData.forEach((item, index) => {
-    const correct = answers[index] === item.a;
-    if (correct) score++;
-
-    const reviewItem = document.createElement("div");
-    reviewItem.className = "review-item";
-
-    const status = document.createElement("strong");
-    status.textContent = correct
-      ? "✓ Correct / सही उत्तर"
-      : "✗ Incorrect / गलत उत्तर";
-    reviewItem.appendChild(status);
-
-    const question = document.createElement("p");
-    question.textContent = (index + 1) + ". " + item.q;
-    reviewItem.appendChild(question);
-
-    const questionHindi = document.createElement("p");
-    questionHindi.className = "hindi";
-    questionHindi.textContent = item.hi;
-    reviewItem.appendChild(questionHindi);
-
-    const yourAnswer = document.createElement("p");
-    yourAnswer.textContent =
-      "Your answer / आपका उत्तर: " +
-      item.o[answers[index]] + " — " +
-      item.oh[answers[index]];
-    reviewItem.appendChild(yourAnswer);
-
-    const correctAnswer = document.createElement("p");
-    correctAnswer.textContent =
-      "Correct answer / सही उत्तर: " +
-      item.o[item.a] + " — " + item.oh[item.a];
-    reviewItem.appendChild(correctAnswer);
-
-    review.appendChild(reviewItem);
-  });
-
-  const percentage = Math.round(score / quizData.length * 100);
-  let message, messageHindi;
-
-  if (percentage <= 20) {
-    message = "Keep trying!";
-    messageHindi = "प्रयास करते रहें!";
-  } else if (percentage <= 40) {
-    message = "Good try!";
-    messageHindi = "अच्छा प्रयास!";
-  } else if (percentage <= 60) {
-    message = "Good job!";
-    messageHindi = "अच्छा काम!";
-  } else if (percentage <= 80) {
-    message = "Very good!";
-    messageHindi = "बहुत अच्छा!";
-  } else if (percentage < 100) {
-    message = "Excellent!";
-    messageHindi = "शानदार!";
-  } else {
-    message = "Fantastic! Perfect score!";
-    messageHindi = "बहुत शानदार! पूरे अंक!";
-  }
-
-  document.getElementById("scoreText").textContent =
-    "Your Score: " + score + " / 20 | आपका स्कोर: " + score + " / 20";
-
-  document.getElementById("percentageText").textContent =
-    "Percentage: " + percentage + "% | प्रतिशत: " + percentage + "%";
-
-  document.getElementById("message").textContent = message;
-  document.getElementById("messageHindi").textContent = messageHindi;
-
-  document.getElementById("questionCard").style.display = "none";
-  document.querySelector(".progress-area").style.display = "none";
-  document.getElementById("navigationButtons").style.display = "none";
-
-  const result = document.getElementById("result");
-  result.style.display = "block";
-  result.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
-function resetQuiz() {
-  currentQuestion = 0;
-  answers = Array(quizData.length).fill(null);
-  submitted = false;
-
-  document.getElementById("result").style.display = "none";
-  document.getElementById("questionCard").style.display = "block";
-  document.querySelector(".progress-area").style.display = "block";
-  document.getElementById("navigationButtons").style.display = "flex";
 
   renderQuestion();
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-renderQuestion();
 </script>
 
 </body>
