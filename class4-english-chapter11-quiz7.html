@@ -1,0 +1,713 @@
+## Complete HTML code
+
+**Filename:** `class4-english-chapter11-quiz7.html`
+
+Copy the entire code below and paste it into your new GitHub file.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Quiz 7 - Nature and Animals | NexEduToppers</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 15px;
+  font-family: Arial, sans-serif;
+  background: #eff8f0;
+  color: #263b2b;
+}
+
+.container {
+  max-width: 750px;
+  margin: auto;
+  padding: 20px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 15px #00000012;
+}
+
+h1 {
+  text-align: center;
+  color: #176638;
+  font-size: 25px;
+}
+
+.subtitle {
+  text-align: center;
+  line-height: 1.8;
+}
+
+.progress-area {
+  margin: 22px 0;
+  font-weight: bold;
+}
+
+.progress-bg {
+  height: 10px;
+  margin-top: 8px;
+  background: #dcebdd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: #218c4b;
+  transition: width 0.3s;
+}
+
+.question-box {
+  border: 2px solid #dcebdd;
+  padding: 18px;
+  border-radius: 12px;
+}
+
+#questionNumber {
+  font-weight: bold;
+  color: #176638;
+}
+
+#question {
+  font-size: 19px;
+  line-height: 1.7;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  margin: 10px 0;
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #263b2b;
+  background: #f8fbf8;
+  border: 2px solid #cbdccf;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.option:hover:not(:disabled) {
+  background: #e9f6eb;
+  border-color: #218c4b;
+}
+
+.option:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.option.correct {
+  background: #dcfce7;
+  border-color: #16a34a;
+}
+
+.option.wrong {
+  background: #fee2e2;
+  border-color: #dc2626;
+}
+
+#feedback {
+  margin-top: 15px;
+  line-height: 1.8;
+  font-weight: bold;
+}
+
+.action {
+  padding: 12px 18px;
+  margin: 10px 5px 0 0;
+  border: none;
+  border-radius: 8px;
+  background: #176638;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.action:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+#nextBtn {
+  display: none;
+}
+
+#result {
+  display: none;
+  text-align: center;
+  padding: 20px 5px;
+}
+
+#result h2 {
+  color: #176638;
+}
+
+#disclaimer {
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid #cbd5e1;
+  color: #475569;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: #176638;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 8px;
+  }
+
+  .container {
+    padding: 14px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  #question {
+    font-size: 17px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <h1>Quiz 7: Nature and Animals</h1>
+
+  <div class="subtitle">
+    <strong>प्रकृति और जानवर</strong><br>
+    RawaRajpootNexEduToppers Learning Academy<br>
+    Class 4 English | Chapter 11<br>
+    <em>A Journey to the Magical Mountains</em><br><br>
+    Explore the wonderful world of nature and animals!<br>
+    प्रकृति और जानवरों की अद्भुत दुनिया को जानें!
+  </div>
+
+  <div class="progress-area" id="progressArea">
+    <div id="progressText">Question 1 of 20 | प्रश्न 1 / 20</div>
+    <div class="progress-bg">
+      <div id="progressBar"></div>
+    </div>
+  </div>
+
+  <div id="quizArea">
+    <div class="question-box">
+      <div id="questionNumber"></div>
+      <p id="question"></p>
+      <div id="options"></div>
+      <div id="feedback" aria-live="polite"></div>
+
+      <button class="action" id="nextBtn" onclick="nextQuestion()">
+        Next Question | अगला प्रश्न
+      </button>
+    </div>
+  </div>
+
+  <div id="result">
+    <h2>Quiz Completed! | प्रश्नोत्तरी पूरी हुई!</h2>
+    <p id="score"></p>
+    <h3 id="message"></h3>
+    <p id="messageHindi"></p>
+
+    <button class="action" onclick="restartQuiz()">
+      Try Again | फिर से प्रयास करें
+    </button>
+  </div>
+
+  <a class="back-link" href="class4-english-chapter11.html">
+    ← Back to Chapter 11 | अध्याय 11 पर वापस जाएँ
+  </a>
+
+  <div id="disclaimer">
+    <strong>Disclaimer:</strong>
+    RawaRajpootNexEduToppers Learning Academy is an independent
+    educational platform and is not affiliated with, endorsed by,
+    or associated with NCERT. NCERT textbook names, chapters, and
+    curriculum topics belong exclusively to NCERT. All solutions
+    and study notes provided here are original practice aids.
+    For official textbooks, please refer to NCERT's official resources.
+
+    <br><br>
+
+    <strong>अस्वीकरण:</strong>
+    RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक
+    मंच है और इसका NCERT से कोई आधिकारिक संबंध नहीं है।
+    NCERT की पाठ्यपुस्तकों के नाम, अध्याय और पाठ्यक्रम संबंधी विषय
+    NCERT के हैं। यहाँ दिए गए समाधान और अध्ययन नोट्स मौलिक अभ्यास
+    सामग्री हैं। आधिकारिक पाठ्यपुस्तकों के लिए NCERT के आधिकारिक
+    संसाधनों का उपयोग करें।
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    q: "1. Which part of a plant absorbs water from the soil? | पौधे का कौन-सा भाग मिट्टी से पानी सोखता है?",
+    options: [
+      "Roots | जड़ें",
+      "Flowers | फूल",
+      "Fruits | फल",
+      "Leaves | पत्तियाँ"
+    ],
+    answer: 0
+  },
+  {
+    q: "2. Which of these animals is a herbivore? | इनमें से कौन-सा जानवर शाकाहारी है?",
+    options: [
+      "Tiger | बाघ",
+      "Cow | गाय",
+      "Wolf | भेड़िया",
+      "Eagle | चील"
+    ],
+    answer: 1
+  },
+  {
+    q: "3. What do bees collect from flowers to help make honey? | शहद बनाने के लिए मधुमक्खियाँ फूलों से क्या इकट्ठा करती हैं?",
+    options: [
+      "Sand | रेत",
+      "Tree bark | पेड़ की छाल",
+      "Nectar | मकरंद",
+      "Small stones | छोटे पत्थर"
+    ],
+    answer: 2
+  },
+  {
+    q: "4. Which animal is best adapted to living in a hot, dry desert? | गर्म और सूखे रेगिस्तान में रहने के लिए कौन-सा जानवर सबसे अधिक अनुकूल है?",
+    options: [
+      "Penguin | पेंगुइन",
+      "Dolphin | डॉल्फिन",
+      "Polar bear | ध्रुवीय भालू",
+      "Camel | ऊँट"
+    ],
+    answer: 3
+  },
+  {
+    q: "5. What is the main role of green leaves in most plants? | अधिकांश पौधों में हरी पत्तियों का मुख्य काम क्या है?",
+    options: [
+      "To make food using sunlight | सूर्य के प्रकाश से भोजन बनाना",
+      "To absorb all water from soil | मिट्टी से सारा पानी सोखना",
+      "To hold the plant firmly in soil | पौधे को मिट्टी में पकड़कर रखना",
+      "To take in minerals from deep soil | गहरी मिट्टी से खनिज लेना"
+    ],
+    answer: 0
+  },
+  {
+    q: "6. Which TWO actions help protect wild animals? Select both. | जंगली जानवरों की रक्षा करने वाले कौन-से दो काम हैं? दोनों चुनें।",
+    multiple: true,
+    options: [
+      "Protecting forests | जंगलों की रक्षा करना",
+      "Dumping plastic into rivers | नदियों में प्लास्टिक फेंकना",
+      "Stopping illegal hunting | अवैध शिकार रोकना",
+      "Destroying animal nests | जानवरों के घोंसले नष्ट करना"
+    ],
+    answer: [0, 2]
+  },
+  {
+    q: "7. Which of these is a mammal that can fly? | इनमें से कौन-सा उड़ने वाला स्तनधारी है?",
+    options: [
+      "Butterfly | तितली",
+      "Bat | चमगादड़",
+      "Eagle | चील",
+      "Parrot | तोता"
+    ],
+    answer: 1
+  },
+  {
+    q: "8. Which natural resource do plants need for photosynthesis? | प्रकाश संश्लेषण के लिए पौधों को किस प्राकृतिक संसाधन की आवश्यकता होती है?",
+    options: [
+      "Plastic | प्लास्टिक",
+      "Petrol | पेट्रोल",
+      "Sunlight | सूर्य का प्रकाश",
+      "Glass | काँच"
+    ],
+    answer: 2
+  },
+  {
+    q: "9. What is a natural home of an animal called? | जानवर के प्राकृतिक घर को क्या कहते हैं?",
+    options: [
+      "Habitat | आवास",
+      "Factory | कारखाना",
+      "Market | बाज़ार",
+      "Museum | संग्रहालय"
+    ],
+    answer: 0
+  },
+  {
+    q: "10. Which animal is known for changing its colour to blend with its surroundings? | अपने आसपास के वातावरण में घुल-मिल जाने के लिए रंग बदलने वाला जानवर कौन-सा है?",
+    options: [
+      "Elephant | हाथी",
+      "Horse | घोड़ा",
+      "Camel | ऊँट",
+      "Chameleon | गिरगिट"
+    ],
+    answer: 3
+  },
+  {
+    q: "11. What is the young one of a frog called? | मेंढक के बच्चे को क्या कहते हैं?",
+    options: [
+      "Cub | शावक",
+      "Tadpole | टैडपोल",
+      "Calf | बछड़ा",
+      "Chick | चूज़ा"
+    ],
+    answer: 1
+  },
+  {
+    q: "12. Which TWO things do plants generally need to grow well? Select both. | पौधों को अच्छी तरह बढ़ने के लिए सामान्यतः किन दो चीज़ों की आवश्यकता होती है? दोनों चुनें।",
+    multiple: true,
+    options: [
+      "Clean water | स्वच्छ पानी",
+      "Plastic bags | प्लास्टिक की थैलियाँ",
+      "Sunlight | सूर्य का प्रकाश",
+      "Paint | पेंट"
+    ],
+    answer: [0, 2]
+  },
+  {
+    q: "13. Which animal is a carnivore? | इनमें से कौन-सा जानवर मांसाहारी है?",
+    options: [
+      "Deer | हिरण",
+      "Goat | बकरी",
+      "Lion | शेर",
+      "Rabbit | खरगोश"
+    ],
+    answer: 2
+  },
+  {
+    q: "14. What can happen when forests are cut down on a large scale? | बड़े पैमाने पर जंगल काटने से क्या हो सकता है?",
+    options: [
+      "Every animal gets a larger home | हर जानवर को बड़ा घर मिल जाता है",
+      "Wild animals can lose their habitats | जंगली जानवर अपना आवास खो सकते हैं",
+      "All rivers become clean | सभी नदियाँ साफ हो जाती हैं",
+      "All plants grow faster | सभी पौधे तेज़ी से बढ़ते हैं"
+    ],
+    answer: 1
+  },
+  {
+    q: "15. Which bird is well known for its colourful tail feathers? | कौन-सा पक्षी अपने रंग-बिरंगे पूँछ के पंखों के लिए प्रसिद्ध है?",
+    options: [
+      "Peacock | मोर",
+      "Crow | कौआ",
+      "Sparrow | गौरैया",
+      "Pigeon | कबूतर"
+    ],
+    answer: 0
+  },
+  {
+    q: "16. Which part of a tree usually supports its branches and leaves? | पेड़ का कौन-सा भाग सामान्यतः उसकी शाखाओं और पत्तियों को सहारा देता है?",
+    options: [
+      "Root hair | जड़ के सूक्ष्म बाल",
+      "Flower petal | फूल की पंखुड़ी",
+      "Seed coat | बीज का आवरण",
+      "Trunk | तना"
+    ],
+    answer: 3
+  },
+  {
+    q: "17. Which of these animals lives mainly in water and breathes through gills? | इनमें से कौन-सा जानवर मुख्यतः पानी में रहता है और गलफड़ों से साँस लेता है?",
+    options: [
+      "Dog | कुत्ता",
+      "Fish | मछली",
+      "Cat | बिल्ली",
+      "Cow | गाय"
+    ],
+    answer: 1
+  },
+  {
+    q: "18. What should we do with rubbish when visiting a forest or park? | जंगल या पार्क में जाते समय कूड़े के साथ हमें क्या करना चाहिए?",
+    options: [
+      "Leave it beside a tree | उसे पेड़ के पास छोड़ देना",
+      "Throw it into a river | उसे नदी में फेंक देना",
+      "Put it in a proper bin | उसे सही कूड़ेदान में डालना",
+      "Hide it under leaves | उसे पत्तों के नीचे छिपा देना"
+    ],
+    answer: 2
+  },
+  {
+    q: "19. Which TWO things can birds use to build many kinds of nests? Select both. | कई प्रकार के घोंसले बनाने के लिए पक्षी किन दो चीज़ों का उपयोग कर सकते हैं? दोनों चुनें।",
+    multiple: true,
+    options: [
+      "Twigs | छोटी टहनियाँ",
+      "Straw or dry grass | सूखा घास-फूस",
+      "Plastic toys | प्लास्टिक के खिलौने",
+      "Metal tools | धातु के औज़ार"
+    ],
+    answer: [0, 1]
+  },
+  {
+    q: "20. What does a food chain show? | खाद्य शृंखला क्या दर्शाती है?",
+    options: [
+      "The names of all forests | सभी जंगलों के नाम",
+      "The height of every mountain | हर पर्वत की ऊँचाई",
+      "The colours of flowers | फूलों के रंग",
+      "How energy passes between organisms through feeding | भोजन के माध्यम से जीवों के बीच ऊर्जा का स्थानांतरण"
+    ],
+    answer: 3
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let locked = false;
+let selectedAnswers = [];
+
+function renderQuestion() {
+  locked = false;
+  selectedAnswers = [];
+
+  const q = questions[currentQuestion];
+
+  document.getElementById("questionNumber").textContent =
+    "Question " + (currentQuestion + 1) +
+    " | प्रश्न " + (currentQuestion + 1);
+
+  document.getElementById("question").textContent = q.q;
+
+  document.getElementById("progressText").textContent =
+    "Question " + (currentQuestion + 1) +
+    " of " + questions.length +
+    " | प्रश्न " + (currentQuestion + 1) +
+    " / " + questions.length;
+
+  document.getElementById("progressBar").style.width =
+    (currentQuestion / questions.length * 100) + "%";
+
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("nextBtn").style.display = "none";
+
+  const optionsDiv = document.getElementById("options");
+  optionsDiv.innerHTML = "";
+
+  if (q.multiple) {
+    const note = document.createElement("p");
+    note.textContent =
+      "Select all correct answers, then check. | सभी सही उत्तर चुनें, फिर जाँचें।";
+    optionsDiv.appendChild(note);
+  }
+
+  q.options.forEach(function(option, index) {
+    const button = document.createElement("button");
+    button.className = "option";
+    button.textContent =
+      String.fromCharCode(65 + index) + ". " + option;
+
+    button.onclick = function() {
+      if (q.multiple) {
+        toggleMultiple(index, button);
+      } else {
+        checkSingle(index, button);
+      }
+    };
+
+    optionsDiv.appendChild(button);
+  });
+
+  if (q.multiple) {
+    const checkBtn = document.createElement("button");
+    checkBtn.className = "action";
+    checkBtn.id = "checkBtn";
+    checkBtn.textContent = "Check Answers | उत्तर जाँचें";
+    checkBtn.onclick = checkMultiple;
+    optionsDiv.appendChild(checkBtn);
+  }
+}
+
+function toggleMultiple(index, button) {
+  if (locked) return;
+
+  const position = selectedAnswers.indexOf(index);
+
+  if (position === -1) {
+    selectedAnswers.push(index);
+    button.style.borderColor = "#176638";
+    button.style.background = "#e1f4e5";
+  } else {
+    selectedAnswers.splice(position, 1);
+    button.style.borderColor = "#cbdccf";
+    button.style.background = "#f8fbf8";
+  }
+}
+
+function checkSingle(index, button) {
+  if (locked) return;
+
+  const q = questions[currentQuestion];
+  const buttons = document.querySelectorAll("#options .option");
+
+  if (index === q.answer) {
+    locked = true;
+    score++;
+
+    button.classList.add("correct");
+
+    buttons.forEach(function(b) {
+      b.disabled = true;
+    });
+
+    document.getElementById("feedback").textContent =
+      "Well done! Keep it up! | बहुत अच्छा! ऐसे ही आगे बढ़ते रहें!";
+
+    document.getElementById("nextBtn").style.display = "inline-block";
+  } else {
+    button.classList.add("wrong");
+    button.disabled = true;
+
+    document.getElementById("feedback").textContent =
+      "Wrong answer! Read carefully and try again. | गलत जवाब! ध्यान से पढ़ें और फिर से प्रयास करें।";
+  }
+}
+
+function checkMultiple() {
+  if (locked) return;
+
+  const q = questions[currentQuestion];
+  const correct = q.answer.slice().sort((a, b) => a - b);
+  const selected = selectedAnswers.slice().sort((a, b) => a - b);
+
+  const buttons = document.querySelectorAll("#options .option");
+  const checkBtn = document.getElementById("checkBtn");
+
+  if (
+    selected.length === correct.length &&
+    selected.every((value, i) => value === correct[i])
+  ) {
+    locked = true;
+    score++;
+
+    buttons.forEach(function(button) {
+      button.disabled = true;
+    });
+
+    checkBtn.disabled = true;
+
+    correct.forEach(function(index) {
+      buttons[index].classList.add("correct");
+    });
+
+    document.getElementById("feedback").textContent =
+      "Well done! Keep it up! | बहुत अच्छा! ऐसे ही आगे बढ़ते रहें!";
+
+    document.getElementById("nextBtn").style.display = "inline-block";
+  } else {
+    document.getElementById("feedback").textContent =
+      "Not quite right. Change your selections and try again. | उत्तर सही नहीं हैं। अपने चयन बदलें और फिर से प्रयास करें।";
+
+    selected.forEach(function(index) {
+      if (!correct.includes(index)) {
+        buttons[index].classList.add("wrong");
+        buttons[index].style.background = "#fee2e2";
+      }
+    });
+
+    correct.forEach(function(index) {
+      buttons[index].classList.remove("wrong", "correct");
+    });
+  }
+}
+
+function nextQuestion() {
+  if (!locked) return;
+
+  currentQuestion++;
+
+  if (currentQuestion < questions.length) {
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  document.getElementById("quizArea").style.display = "none";
+  document.getElementById("progressArea").style.display = "none";
+  document.getElementById("result").style.display = "block";
+  document.getElementById("progressBar").style.width = "100%";
+
+  const percentage = Math.round(score / questions.length * 100);
+
+  document.getElementById("score").textContent =
+    "Your Score: " + score + " / " + questions.length +
+    " (" + percentage + "%) | आपका स्कोर: " +
+    score + " / " + questions.length + " (" + percentage + "%)";
+
+  let message;
+  let messageHindi;
+
+  if (percentage <= 20) {
+    message = "Keep trying!";
+    messageHindi = "कोशिश करते रहें!";
+  } else if (percentage <= 40) {
+    message = "Good try!";
+    messageHindi = "अच्छा प्रयास!";
+  } else if (percentage <= 60) {
+    message = "Good job!";
+    messageHindi = "बहुत अच्छा प्रयास!";
+  } else if (percentage <= 80) {
+    message = "Very good!";
+    messageHindi = "बहुत बढ़िया!";
+  } else if (percentage < 100) {
+    message = "Excellent!";
+    messageHindi = "शानदार!";
+  } else {
+    message = "Fantastic! Perfect score!";
+    messageHindi = "अद्भुत! पूरे अंक!";
+  }
+
+  document.getElementById("message").textContent = message;
+  document.getElementById("messageHindi").textContent = messageHindi;
+}
+
+function restartQuiz() {
+  currentQuestion = 0;
+  score = 0;
+  locked = false;
+  selectedAnswers = [];
+
+  document.getElementById("quizArea").style.display = "block";
+  document.getElementById("progressArea").style.display = "block";
+  document.getElementById("result").style.display = "none";
+
+  renderQuestion();
+}
+
+renderQuestion();
+</script>
+
+</body>
+</html>
+```
+
+## How to publish it on GitHub
+
+1. Open your repository: `NexEduToppers.github.io`.
+2. Click **Add file → Create new file**.
+3. Enter `class4-english-chapter11-quiz7.html` as the filename.
+4. Paste the complete code above.
+5. Click **Commit changes**.
+6. Open the page after GitHub Pages publishes it:
+
+[Open Quiz 7 — Nature and Animals](https://nexedutoppers.github.io/class4-english-chapter11-quiz7.html)
+
+**Important:** Add a link to `class4-english-chapter11-quiz7.html` on your Chapter 11 page so students can find Quiz 7 from the chapter menu.
