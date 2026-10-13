@@ -1,0 +1,683 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz 5: Conjunctions | Class 4 English</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: Arial, sans-serif;
+      background: #f1f5fb;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      padding: 22px;
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    }
+
+    h1 {
+      text-align: center;
+      color: #183d7a;
+      font-size: 25px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #555;
+    }
+
+    .info {
+      background: #edf4ff;
+      border-left: 4px solid #2455a4;
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    .progress-area { margin: 20px 0; }
+
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      height: 10px;
+      background: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: #2455a4;
+      transition: width .25s;
+    }
+
+    .question-card {
+      border: 1px solid #d6deeb;
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .question-number {
+      font-weight: bold;
+      color: #2455a4;
+    }
+
+    .question {
+      font-size: 19px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .hindi {
+      color: #454545;
+      margin-top: 5px;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .option {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      cursor: pointer;
+      overflow-wrap: anywhere;
+    }
+
+    .option:hover { background: #f0f5ff; }
+    .option input { margin-top: 5px; }
+
+    .option.correct {
+      background: #e7f6ec;
+      border-color: #198754;
+    }
+
+    .option.incorrect {
+      background: #fff0f0;
+      border-color: #c62828;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .feedback.correct {
+      display: block;
+      background: #e7f6ec;
+      color: #146c35;
+    }
+
+    .feedback.incorrect {
+      display: block;
+      background: #fff0f0;
+      color: #a51f1f;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      border: none;
+      border-radius: 7px;
+      padding: 12px 18px;
+      font-size: 15px;
+      font-weight: bold;
+      background: #2455a4;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover { background: #173d7d; }
+
+    button:disabled {
+      background: #aab5c5;
+      cursor: not-allowed;
+    }
+
+    .secondary { background: #64748b; }
+
+    .result {
+      display: none;
+      margin-top: 22px;
+      padding: 20px;
+      border: 2px solid #2455a4;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .result h2 { color: #183d7a; }
+    .score { font-size: 25px; font-weight: bold; }
+
+    .disclaimer {
+      border-top: 2px solid #2455a4;
+      margin-top: 30px;
+      padding-top: 15px;
+      font-size: 13px;
+      color: #555;
+      overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 8px; }
+      .container { padding: 14px; }
+      h1 { font-size: 21px; }
+      .options { grid-template-columns: 1fr; }
+      .question { font-size: 17px; }
+      button { flex: 1 1 auto; }
+    }
+  </style>
+</head>
+
+<body>
+<main class="container">
+
+  <h1>
+    Quiz 5: Conjunctions<br>
+    क्विज़ 5: संयोजक शब्द
+  </h1>
+
+  <p class="subtitle">
+    Class 4 English | Chapter 11<br>
+    A Journey to the Magical Mountains<br>
+    कक्षा 4 अंग्रेज़ी | अध्याय 11
+  </p>
+
+  <div class="info">
+    <strong>Instructions:</strong> Choose the correct conjunction to
+    complete each sentence. Practise using and, or, but, and because.
+    <br>
+    <strong>निर्देश:</strong> प्रत्येक वाक्य को पूरा करने के लिए सही
+    संयोजक शब्द चुनें। and, or, but और because का अभ्यास करें।
+  </div>
+
+  <div class="progress-area">
+    <div class="progress-text">
+      <span id="progressText">Question 1 of 20</span>
+      <span id="answeredText">Correct answers: 0</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </div>
+
+  <section id="quizArea">
+    <div class="question-card">
+      <div class="question-number" id="questionNumber"></div>
+      <div class="question" id="questionText"></div>
+      <div class="hindi" id="questionHindi"></div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback" aria-live="polite"></div>
+
+      <div class="buttons">
+        <button type="button" id="previousBtn" class="secondary">
+          Previous | पिछला
+        </button>
+        <button type="button" id="nextBtn" disabled>
+          Next | अगला
+        </button>
+        <button type="button" id="submitBtn" style="display:none">
+          Submit Quiz | क्विज़ जमा करें
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="result" class="result" aria-live="polite">
+    <h2>Quiz Result | क्विज़ का परिणाम</h2>
+    <p class="score" id="scoreText"></p>
+    <p id="resultMessage"></p>
+    <p id="resultHindi"></p>
+
+    <div class="buttons" style="justify-content:center">
+      <button type="button" id="restartBtn">
+        Try Again | फिर से प्रयास करें
+      </button>
+      <button type="button" class="secondary"
+        onclick="window.location.href='class4-english-chapter11.html'">
+        Back to Chapter | अध्याय पर वापस जाएँ
+      </button>
+    </div>
+  </section>
+
+  <footer class="disclaimer">
+    <strong>Disclaimer | अस्वीकरण</strong>
+    <p>
+      RawaRajpootNexEduToppers Learning Academy is an independent
+      educational platform and is not affiliated with, endorsed by,
+      or associated with NCERT. NCERT textbook names, chapters, and
+      curriculum topics belong exclusively to NCERT. All solutions
+      and study notes provided here are original practice aids.
+      For official textbooks, please refer to NCERT's official resources.
+    </p>
+    <p>
+      RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है
+      और इसका NCERT से कोई आधिकारिक संबंध नहीं है। NCERT की पाठ्यपुस्तकों
+      के नाम, अध्याय और पाठ्यक्रम संबंधी विषय NCERT के हैं। यहाँ दिए गए
+      समाधान और अध्ययन नोट्स मौलिक अभ्यास सामग्री हैं। आधिकारिक
+      पाठ्यपुस्तकों के लिए NCERT के आधिकारिक संसाधनों का उपयोग करें।
+    </p>
+  </footer>
+
+</main>
+
+<script>
+const questions = [
+  {
+    q: "Minam and her grandfather went on a journey. Choose the correct conjunction.",
+    hi: "मिनाम और उसके दादाजी यात्रा पर गए। सही संयोजक चुनें।",
+    sentence: "Minam ___ her grandfather went on a journey.",
+    sentenceHi: "मिनाम ___ उसके दादाजी यात्रा पर गए।",
+    options: ["and", "or", "but", "because"],
+    hindi: ["और", "या", "लेकिन", "क्योंकि"],
+    answer: 0
+  },
+  {
+    q: "Complete the sentence with the correct conjunction.",
+    hi: "सही संयोजक शब्द से वाक्य पूरा करें।",
+    sentence: "Would you like to visit the mountains ___ the valley?",
+    sentenceHi: "क्या तुम पहाड़ों ___ घाटी में जाना चाहोगे?",
+    options: ["but", "or", "because", "and"],
+    hindi: ["लेकिन", "या", "क्योंकि", "और"],
+    answer: 1
+  },
+  {
+    q: "Choose the conjunction that shows contrast.",
+    hi: "विरोध या अंतर दिखाने वाला संयोजक चुनें।",
+    sentence: "The path was difficult, ___ Minam did not give up.",
+    sentenceHi: "रास्ता कठिन था, ___ मिनाम ने हार नहीं मानी।",
+    options: ["and", "because", "but", "or"],
+    hindi: ["और", "क्योंकि", "लेकिन", "या"],
+    answer: 2
+  },
+  {
+    q: "Choose the conjunction that gives a reason.",
+    hi: "कारण बताने वाला संयोजक चुनें।",
+    sentence: "Minam listened carefully ___ her grandfather had much experience.",
+    sentenceHi: "मिनाम ने ध्यान से सुना ___ उसके दादाजी को बहुत अनुभव था।",
+    options: ["or", "but", "and", "because"],
+    hindi: ["या", "लेकिन", "और", "क्योंकि"],
+    answer: 3
+  },
+  {
+    q: "Choose the correct conjunction.",
+    hi: "सही संयोजक चुनें।",
+    sentence: "The mountains were tall ___ beautiful.",
+    sentenceHi: "पहाड़ ऊँचे ___ सुंदर थे।",
+    options: ["and", "but", "or", "because"],
+    hindi: ["और", "लेकिन", "या", "क्योंकि"],
+    answer: 0
+  },
+  {
+    q: "Complete the sentence.",
+    hi: "वाक्य पूरा करें।",
+    sentence: "You can carry a water bottle ___ a small flask.",
+    sentenceHi: "तुम पानी की बोतल ___ एक छोटा फ्लास्क ले जा सकते हो।",
+    options: ["because", "or", "but", "and"],
+    hindi: ["क्योंकि", "या", "लेकिन", "और"],
+    answer: 1
+  },
+  {
+    q: "Which conjunction connects two contrasting ideas?",
+    hi: "कौन-सा संयोजक दो विपरीत विचारों को जोड़ता है?",
+    sentence: "The weather was cold, ___ we enjoyed the journey.",
+    sentenceHi: "मौसम ठंडा था, ___ हमने यात्रा का आनंद लिया।",
+    options: ["because", "and", "but", "or"],
+    hindi: ["क्योंकि", "और", "लेकिन", "या"],
+    answer: 2
+  },
+  {
+    q: "Choose the conjunction that explains why.",
+    hi: "कारण बताने वाला संयोजक चुनें।",
+    sentence: "We should protect forests ___ animals need safe habitats.",
+    sentenceHi: "हमें जंगलों की रक्षा करनी चाहिए ___ जानवरों को सुरक्षित आवास चाहिए।",
+    options: ["but", "or", "and", "because"],
+    hindi: ["लेकिन", "या", "और", "क्योंकि"],
+    answer: 3
+  },
+  {
+    q: "Choose the correct word to join the ideas.",
+    hi: "दोनों विचारों को जोड़ने के लिए सही शब्द चुनें।",
+    sentence: "Minam was curious ___ eager to learn.",
+    sentenceHi: "मिनाम जिज्ञासु ___ सीखने के लिए उत्सुक थी।",
+    options: ["and", "but", "because", "or"],
+    hindi: ["और", "लेकिन", "क्योंकि", "या"],
+    answer: 0
+  },
+  {
+    q: "Complete the sentence with a conjunction.",
+    hi: "संयोजक शब्द से वाक्य पूरा करें।",
+    sentence: "Do you prefer walking ___ riding a bicycle?",
+    sentenceHi: "क्या तुम्हें पैदल चलना ___ साइकिल चलाना पसंद है?",
+    options: ["and", "or", "because", "but"],
+    hindi: ["और", "या", "क्योंकि", "लेकिन"],
+    answer: 1
+  },
+  {
+    q: "Choose the best conjunction.",
+    hi: "सबसे उपयुक्त संयोजक चुनें।",
+    sentence: "The climb was tiring, ___ the view was wonderful.",
+    sentenceHi: "चढ़ाई थकाने वाली थी, ___ दृश्य बहुत सुंदर था।",
+    options: ["because", "and", "but", "or"],
+    hindi: ["क्योंकि", "और", "लेकिन", "या"],
+    answer: 2
+  },
+  {
+    q: "Choose the conjunction that gives a reason.",
+    hi: "कारण बताने वाला संयोजक चुनें।",
+    sentence: "We walked slowly ___ the path was steep.",
+    sentenceHi: "हम धीरे-धीरे चले ___ रास्ता खड़ा था।",
+    options: ["or", "and", "but", "because"],
+    hindi: ["या", "और", "लेकिन", "क्योंकि"],
+    answer: 3
+  },
+  {
+    q: "Complete the sentence.",
+    hi: "वाक्य पूरा करें।",
+    sentence: "The guide carried food ___ water.",
+    sentenceHi: "मार्गदर्शक भोजन ___ पानी लेकर चला।",
+    options: ["and", "but", "or", "because"],
+    hindi: ["और", "लेकिन", "या", "क्योंकि"],
+    answer: 0
+  },
+  {
+    q: "Choose the conjunction that shows a choice.",
+    hi: "विकल्प दिखाने वाला संयोजक चुनें।",
+    sentence: "Would you like tea ___ milk?",
+    sentenceHi: "क्या तुम्हें चाय ___ दूध चाहिए?",
+    options: ["but", "or", "because", "and"],
+    hindi: ["लेकिन", "या", "क्योंकि", "और"],
+    answer: 1
+  },
+  {
+    q: "Choose the best conjunction.",
+    hi: "सबसे सही संयोजक चुनें।",
+    sentence: "The yak looked large, ___ it was calm.",
+    sentenceHi: "याक बड़ा दिखता था, ___ वह शांत था।",
+    options: ["because", "or", "but", "and"],
+    hindi: ["क्योंकि", "या", "लेकिन", "और"],
+    answer: 2
+  },
+  {
+    q: "Complete the sentence with a reason.",
+    hi: "कारण बताने वाले शब्द से वाक्य पूरा करें।",
+    sentence: "We kept the trail clean ___ we care about nature.",
+    sentenceHi: "हमने रास्ते को साफ रखा ___ हम प्रकृति की परवाह करते हैं।",
+    options: ["but", "or", "and", "because"],
+    hindi: ["लेकिन", "या", "और", "क्योंकि"],
+    answer: 3
+  },
+  {
+    q: "Choose the correct conjunction.",
+    hi: "सही संयोजक चुनें।",
+    sentence: "Grandfather shared stories ___ taught Minam about nature.",
+    sentenceHi: "दादाजी ने कहानियाँ सुनाईं ___ मिनाम को प्रकृति के बारे में सिखाया।",
+    options: ["and", "but", "or", "because"],
+    hindi: ["और", "लेकिन", "या", "क्योंकि"],
+    answer: 0
+  },
+  {
+    q: "Complete the sentence.",
+    hi: "वाक्य पूरा करें।",
+    sentence: "You must walk carefully ___ you may slip.",
+    sentenceHi: "तुम्हें सावधानी से चलना चाहिए ___ तुम फिसल सकते हो।",
+    options: ["and", "or", "but", "because"],
+    hindi: ["और", "या", "लेकिन", "क्योंकि"],
+    answer: 1
+  },
+  {
+    q: "Choose the conjunction that shows contrast.",
+    hi: "विरोध दिखाने वाला संयोजक चुनें।",
+    sentence: "Minam felt tired, ___ she continued walking.",
+    sentenceHi: "मिनाम थक गई थी, ___ वह चलती रही।",
+    options: ["because", "and", "but", "or"],
+    hindi: ["क्योंकि", "और", "लेकिन", "या"],
+    answer: 2
+  },
+  {
+    q: "Choose the conjunction that gives a reason.",
+    hi: "कारण बताने वाला संयोजक चुनें।",
+    sentence: "We should not disturb wild animals ___ they need peace.",
+    sentenceHi: "हमें जंगली जानवरों को परेशान नहीं करना चाहिए ___ उन्हें शांति चाहिए।",
+    options: ["but", "or", "and", "because"],
+    hindi: ["लेकिन", "या", "और", "क्योंकि"],
+    answer: 3
+  }
+];
+
+let current = 0;
+let selected = Array(questions.length).fill(null);
+let locked = Array(questions.length).fill(false);
+let finished = false;
+
+const $ = id => document.getElementById(id);
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, ch => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[ch]);
+}
+
+function renderQuestion() {
+  const item = questions[current];
+
+  $("questionNumber").textContent =
+    `Question ${current + 1} of ${questions.length} | प्रश्न ${current + 1}`;
+
+  $("questionText").textContent = item.q;
+  $("questionHindi").textContent = item.hi;
+
+  const sentence = document.createElement("p");
+  sentence.style.fontWeight = "bold";
+  sentence.textContent = item.sentence;
+
+  const sentenceHindi = document.createElement("p");
+  sentenceHindi.className = "hindi";
+  sentenceHindi.textContent = item.sentenceHi;
+
+  $("options").innerHTML = "";
+  $("questionText").appendChild(sentence);
+  $("questionHindi").appendChild(sentenceHindi);
+
+  item.options.forEach((option, index) => {
+    const label = document.createElement("label");
+    label.className = "option";
+
+    if (locked[current] && index === item.answer) {
+      label.classList.add("correct");
+    } else if (selected[current] === index && index !== item.answer) {
+      label.classList.add("incorrect");
+    }
+
+    const radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = "answer";
+    radio.checked = selected[current] === index;
+    radio.disabled = locked[current];
+
+    const text = document.createElement("div");
+    text.innerHTML =
+      `<div>${escapeHTML(option)}</div>
+       <div class="hindi">${escapeHTML(item.hindi[index])}</div>`;
+
+    radio.addEventListener("change", () => {
+      if (locked[current]) return;
+
+      selected[current] = index;
+
+      if (index === item.answer) {
+        locked[current] = true;
+      }
+
+      renderQuestion();
+    });
+
+    label.appendChild(radio);
+    label.appendChild(text);
+    $("options").appendChild(label);
+  });
+
+  const feedback = $("feedback");
+
+  if (locked[current]) {
+    feedback.className = "feedback correct";
+    feedback.innerHTML =
+      "Well done! Keep it up!<br>" +
+      "बहुत अच्छा! ऐसे ही आगे बढ़ते रहें!";
+  } else if (selected[current] !== null) {
+    feedback.className = "feedback incorrect";
+    feedback.innerHTML =
+      "Wrong answer! Read carefully and try again.<br>" +
+      "गलत जवाब! ध्यान से पढ़ें और फिर से प्रयास करें।";
+  } else {
+    feedback.className = "feedback";
+    feedback.textContent = "";
+  }
+
+  $("previousBtn").disabled = current === 0;
+  $("nextBtn").disabled = !locked[current];
+
+  $("nextBtn").style.display =
+    current === questions.length - 1 ? "none" : "inline-block";
+
+  $("submitBtn").style.display =
+    current === questions.length - 1 ? "inline-block" : "none";
+
+  $("submitBtn").disabled = !locked[current];
+
+  const score = locked.filter(Boolean).length;
+
+  $("progressText").textContent =
+    `Question ${current + 1} of ${questions.length} | प्रश्न ${current + 1}`;
+
+  $("answeredText").textContent =
+    `Correct answers: ${score} | सही उत्तर: ${score}`;
+
+  $("progressBar").style.width =
+    `${((current + 1) / questions.length) * 100}%`;
+}
+
+function clearSentenceDisplay() {
+  $("questionText").textContent = "";
+  $("questionHindi").textContent = "";
+}
+
+const originalRenderQuestion = renderQuestion;
+
+renderQuestion = function() {
+  clearSentenceDisplay();
+  originalRenderQuestion();
+};
+
+$("previousBtn").addEventListener("click", () => {
+  if (current > 0) {
+    current--;
+    renderQuestion();
+  }
+});
+
+$("nextBtn").addEventListener("click", () => {
+  if (current < questions.length - 1 && locked[current]) {
+    current++;
+    renderQuestion();
+  }
+});
+
+$("submitBtn").addEventListener("click", () => {
+  if (!locked[current] || finished) return;
+
+  finished = true;
+
+  const score = locked.filter(Boolean).length;
+  const percentage = Math.round(score / questions.length * 100);
+
+  let message, hindiMessage;
+
+  if (percentage <= 20) {
+    message = "Keep trying!";
+    hindiMessage = "कोशिश करते रहें!";
+  } else if (percentage <= 40) {
+    message = "Good try!";
+    hindiMessage = "अच्छा प्रयास!";
+  } else if (percentage <= 60) {
+    message = "Good job!";
+    hindiMessage = "बहुत अच्छा प्रयास!";
+  } else if (percentage <= 80) {
+    message = "Very good!";
+    hindiMessage = "बहुत बढ़िया!";
+  } else if (percentage < 100) {
+    message = "Excellent!";
+    hindiMessage = "शानदार!";
+  } else {
+    message = "Fantastic! Perfect score!";
+    hindiMessage = "अद्भुत! पूरे अंक!";
+  }
+
+  $("quizArea").style.display = "none";
+  $("result").style.display = "block";
+  $("progressBar").style.width = "100%";
+  $("progressText").textContent = "Quiz completed | क्विज़ पूरा हुआ";
+  $("answeredText").textContent = `${score} / ${questions.length}`;
+
+  $("scoreText").textContent =
+    `${score} / ${questions.length} (${percentage}%)`;
+
+  $("resultMessage").textContent = message;
+  $("resultHindi").textContent = hindiMessage;
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+$("restartBtn").addEventListener("click", () => {
+  current = 0;
+  selected = Array(questions.length).fill(null);
+  locked = Array(questions.length).fill(false);
+  finished = false;
+
+  $("quizArea").style.display = "block";
+  $("result").style.display = "none";
+
+  renderQuestion();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+renderQuestion();
+</script>
+</body>
+</html>
