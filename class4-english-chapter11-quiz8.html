@@ -23,7 +23,7 @@ header {
   background: linear-gradient(135deg, #173b70, #2476b9);
   color: white;
   text-align: center;
-  padding: 25px 14px;
+  padding: 24px 14px;
 }
 
 header h1 {
@@ -32,7 +32,7 @@ header h1 {
 }
 
 header p {
-  margin: 7px 0 0;
+  margin: 6px 0;
 }
 
 .container {
@@ -87,10 +87,12 @@ h2 {
   margin: 9px 0;
   border: 2px solid #d7e2ef;
   border-radius: 9px;
-  background: #fff;
-  font-size: 16px;
-  cursor: pointer;
+  background: white;
   color: #243247;
+  font-size: 16px;
+  line-height: 1.5;
+  cursor: pointer;
+  white-space: pre-line;
 }
 
 .option:hover:not(:disabled) {
@@ -98,19 +100,26 @@ h2 {
   border-color: #2476b9;
 }
 
-.option:disabled {
-  cursor: default;
-  opacity: 1;
+.option.selected {
+  background: #e6f1ff;
+  border-color: #2476b9;
 }
 
 .option.correct {
   background: #e2f7e9;
   border-color: #198754;
+  color: #14532d;
 }
 
 .option.wrong {
   background: #fff0f0;
   border-color: #d93025;
+  color: #991b1b;
+}
+
+.option:disabled {
+  cursor: default;
+  opacity: 1;
 }
 
 #feedback {
@@ -119,15 +128,21 @@ h2 {
   white-space: pre-line;
 }
 
+#explanation {
+  font-weight: normal;
+  margin-top: 8px;
+}
+
 #hint {
   display: none;
   padding: 10px;
   background: #fff8dd;
   border-radius: 8px;
   margin-top: 10px;
+  white-space: pre-line;
 }
 
-button.action {
+.action {
   border: none;
   border-radius: 8px;
   padding: 12px 18px;
@@ -139,13 +154,13 @@ button.action {
   color: white;
 }
 
-button.action:disabled {
+.action:disabled {
   background: #aab6c3;
   cursor: not-allowed;
 }
 
 .secondary {
-  background: #566577 !important;
+  background: #566577;
 }
 
 #result {
@@ -182,6 +197,10 @@ footer a {
   .option {
     font-size: 15px;
   }
+
+  .action {
+    padding: 11px 13px;
+  }
 }
 </style>
 </head>
@@ -193,18 +212,21 @@ footer a {
   <p>Class 4 English | कक्षा 4 अंग्रेज़ी</p>
   <p>Chapter 11: A Journey to the Magical Mountains</p>
   <p><strong>Quiz 8: Revision Challenge</strong></p>
+  <p>Review the whole chapter with mixed questions.</p>
   <p>मिश्रित प्रश्नों से पूरे अध्याय की दोहराई करें।</p>
 </header>
 
 <main class="container">
 
   <section class="card info">
-    <h2>Ready for the Challenge? | चुनौती के लिए तैयार?</h2>
-    <p>Answer all 20 questions. Choose carefully and learn from your mistakes.</p>
-    <p>सभी 20 प्रश्नों के उत्तर दें। ध्यान से चुनें और अपनी गलतियों से सीखें।</p>
+    <h2>Revision Challenge | दोहराई की चुनौती</h2>
+    <p>Answer all 20 questions. Some questions ask you to select more than one answer.</p>
+    <p>सभी 20 प्रश्नों के उत्तर दें। कुछ प्रश्नों में एक से अधिक उत्तर चुनने हैं।</p>
+
     <div class="progress-bg">
       <div id="progress"></div>
     </div>
+
     <p id="progressText">Question 1 of 20 | प्रश्न 1 / 20</p>
     <p id="scoreText">Score: 0 | अंक: 0</p>
   </section>
@@ -214,14 +236,24 @@ footer a {
     <h2 id="question"></h2>
     <p id="questionHindi"></p>
     <p id="instruction"></p>
+
     <div id="options"></div>
+
     <button class="action secondary" id="hintButton" type="button">
       Show Hint | संकेत देखें
     </button>
+
     <div id="hint"></div>
     <div id="feedback" aria-live="polite"></div>
-    <button class="action" id="checkButton" type="button">Check Answer | उत्तर जाँचें</button>
-    <button class="action" id="nextButton" type="button" disabled>Next Question | अगला प्रश्न</button>
+    <div id="explanation"></div>
+
+    <button class="action" id="checkButton" type="button">
+      Check Answer | उत्तर जाँचें
+    </button>
+
+    <button class="action" id="nextButton" type="button" disabled>
+      Next Question | अगला प्रश्न
+    </button>
   </section>
 
   <section class="card" id="result">
@@ -230,13 +262,17 @@ footer a {
     <h2 id="resultMessage"></h2>
     <p id="resultHindi"></p>
     <p id="resultDetail"></p>
-    <button class="action" type="button" onclick="restartQuiz()">Try Again | फिर से प्रयास करें</button>
+
+    <button class="action" type="button" onclick="restartQuiz()">
+      Try Again | फिर से प्रयास करें
+    </button>
   </section>
 
   <section class="card">
     <h2>Learning Tip | सीखने की सलाह</h2>
-    <p>Read every question carefully. Review vocabulary, grammar, nature, animals, and sentence formation.</p>
-    <p>हर प्रश्न ध्यान से पढ़ें। शब्दावली, व्याकरण, प्रकृति, जानवरों और वाक्य निर्माण की दोहराई करें।</p>
+    <p>Read every question carefully. Revise vocabulary, grammar, sentence formation, nature, animals, and environmental protection.</p>
+    <p>हर प्रश्न ध्यान से पढ़ें। शब्दावली, व्याकरण, वाक्य निर्माण, प्रकृति, जानवरों और पर्यावरण संरक्षण की दोहराई करें।</p>
+
     <button class="action secondary" type="button"
       onclick="location.href='class4-english-chapter11.html'">
       Back to Chapter | अध्याय पर वापस जाएँ
@@ -247,208 +283,284 @@ footer a {
 
 <footer>
   <p><strong>Disclaimer:</strong> RawaRajpootNexEduToppers Learning Academy is an independent educational platform and is not affiliated with, endorsed by, or associated with NCERT. NCERT textbook names, chapters, and curriculum topics belong exclusively to NCERT. All solutions and study notes provided here are original practice aids. For official textbooks, please refer to NCERT's official resources.</p>
+
   <p><strong>अस्वीकरण:</strong> RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है और इसका NCERT से कोई आधिकारिक संबंध नहीं है। NCERT की पाठ्यपुस्तकों के नाम, अध्याय और पाठ्यक्रम संबंधी विषय NCERT के हैं। यहाँ दिए गए समाधान और अध्ययन नोट्स मौलिक अभ्यास सामग्री हैं। आधिकारिक पाठ्यपुस्तकों के लिए NCERT के आधिकारिक संसाधनों का उपयोग करें।</p>
 </footer>
 
 <script>
 const questions = [
-{
- q:"What is a good way to prepare for a mountain journey?",
- hi:"पहाड़ों की यात्रा की तैयारी करने का अच्छा तरीका क्या है?",
- type:"single",
- options:["Plan carefully","Ignore the weather","Leave all supplies behind","Travel without knowing the route"],
- hindiOptions:["ध्यान से योजना बनाना","मौसम को नज़रअंदाज़ करना","सारा सामान छोड़ देना","रास्ता जाने बिना यात्रा करना"],
- correct:[0],
- hint:"Think about safety, supplies, and the route.",
- explanation:"Planning helps travellers prepare for the route, weather, and supplies."
-},
-{
- q:"Which word is closest in meaning to “magical”?",
- hi:"“Magical” शब्द का सबसे निकट अर्थ क्या है?",
- type:"single",
- options:["Ordinary","Enchanted","Broken","Noisy"],
- hindiOptions:["साधारण","जादुई","टूटा हुआ","शोर करने वाला"],
- correct:[1],
- hint:"Think of something that seems wonderful or full of magic.",
- explanation:"Enchanted describes something that seems touched by magic."
-},
-{
- q:"Mountains can provide habitats for many kinds of plants and animals.",
- hi:"पहाड़ कई प्रकार के पौधों और जानवरों को रहने का स्थान दे सकते हैं।",
- type:"tf",
- options:["True | सही","False | गलत"],
- correct:[0],
- hint:"Think about the variety of life found in natural environments.",
- explanation:"Different mountain environments support many living things."
-},
-{
- q:"Choose the correctly formed sentence.",
- hi:"सही वाक्य चुनें।",
- type:"single",
- options:["The mountains is beautiful.","The mountains are beautiful.","The mountains am beautiful.","The mountains be beautiful."],
- hindiOptions:["पहाड़ सुंदर है।","पहाड़ सुंदर हैं।","पहाड़ सुंदर हूँ।","पहाड़ सुंदर होना।"],
- correct:[1],
- hint:"Check the verb that agrees with the plural subject “mountains.”",
- explanation:"“Mountains” is plural, so “are” is the correct verb."
-},
-{
- q:"Which actions help protect mountain environments? Select all correct answers.",
- hi:"पहाड़ी पर्यावरण की रक्षा करने वाले सभी सही कार्य चुनें।",
- type:"multi",
- options:["Put rubbish in proper bins","Disturb wild animals for fun","Stay on marked paths where required","Leave plastic waste on trails"],
- hindiOptions:["कचरा सही डिब्बे में डालना","मनोरंजन के लिए जंगली जानवरों को परेशान करना","जहाँ आवश्यक हो, निर्धारित रास्तों पर चलना","रास्तों पर प्लास्टिक कचरा छोड़ना"],
- correct:[0,2],
- hint:"Choose actions that reduce pollution and damage to nature.",
- explanation:"Proper waste disposal and following marked paths help protect natural areas."
-},
-{
- q:"Complete the sentence: “We wanted to climb the hill, ___ it began to rain.”",
- hi:"वाक्य पूरा करें: “We wanted to climb the hill, ___ it began to rain.”",
- type:"single",
- options:["but","because","or","so that"],
- hindiOptions:["लेकिन","क्योंकि","या","ताकि"],
- correct:[0],
- hint:"The second part contrasts with the plan in the first part.",
- explanation:"“But” joins two contrasting ideas."
-},
-{
- q:"The word “carefully” tells us how an action is done.",
- hi:"“Carefully” शब्द बताता है कि कोई काम किस प्रकार किया जाता है।",
- type:"tf",
- options:["True | सही","False | गलत"],
- correct:[0],
- hint:"Think about words that describe the manner of an action.",
- explanation:"“Carefully” is an adverb that describes how an action is performed."
-},
-{
- q:"Which sentence uses the past tense correctly?",
- hi:"कौन-सा वाक्य भूतकाल का सही प्रयोग करता है?",
- type:"single",
- options:["We see a waterfall yesterday.","We saw a waterfall yesterday.","We seeing a waterfall yesterday.","We sees a waterfall yesterday."],
- hindiOptions:["हम कल झरना देखते।","हमने कल एक झरना देखा।","हम कल झरना देख रहे कल।","हम कल झरना देखता।"],
- correct:[1],
- hint:"“Yesterday” tells you the action happened in the past.",
- explanation:"“Saw” is the past tense of “see.”"
-},
-{
- q:"Which natural feature is water falling from a height?",
- hi:"ऊँचाई से गिरने वाले पानी को क्या कहते हैं?",
- type:"single",
- options:["Valley","Waterfall","Plateau","Glacier"],
- hindiOptions:["घाटी","झरना","पठार","हिमनद"],
- correct:[1],
- hint:"Picture water flowing over the edge of a rocky cliff.",
- explanation:"A waterfall is water that falls over a steep edge or height."
-},
-{
- q:"Which qualities help travellers on a challenging journey? Select all correct answers.",
- hi:"कठिन यात्रा में यात्रियों की मदद करने वाले सभी गुण चुनें।",
- type:"multi",
- options:["Patience","Carelessness","Cooperation","Giving up immediately"],
- hindiOptions:["धैर्य","लापरवाही","सहयोग","तुरंत हार मान लेना"],
- correct:[0,2],
- hint:"Think about qualities that help people handle difficulties together.",
- explanation:"Patience and cooperation help travellers manage challenges."
-},
-{
- q:"Which animal is well adapted to living in a hot desert?",
- hi:"गर्म रेगिस्तान में रहने के लिए कौन-सा जानवर अनुकूलित है?",
- type:"single",
- options:["Camel","Polar bear","Penguin","Frog"],
- hindiOptions:["ऊँट","ध्रुवीय भालू","पेंगुइन","मेंढक"],
- correct:[0],
- hint:"Think of an animal known for travelling across sandy deserts.",
- explanation:"Camels have adaptations that help them live in hot, dry environments."
-},
-{
- q:"Which of these are living things? Select all correct answers.",
- hi:"इनमें से सभी सजीव वस्तुएँ चुनें।",
- type:"multi",
- options:["A growing tree","A wild bird","A rock","A flowing river"],
- hindiOptions:["बढ़ता हुआ पेड़","जंगली पक्षी","पत्थर","बहती नदी"],
- correct:[0,1],
- hint:"Living things grow and carry out life processes.",
- explanation:"Trees and birds are living organisms; rocks and rivers are not."
-},
-{
- q:"Which word is a noun in the sentence “The brave climber reached the summit”?",
- hi:"“The brave climber reached the summit” वाक्य में संज्ञा कौन-सा शब्द है?",
- type:"single",
- options:["Brave","Reached","Climber","The"],
- hindiOptions:["बहादुर","पहुँचा","पर्वतारोही","यह"],
- correct:[2],
- hint:"A noun can name a person, place, animal, or thing.",
- explanation:"“Climber” names a person, so it is a noun."
-},
-{
- q:"A food chain shows how energy passes between living things.",
- hi:"खाद्य शृंखला बताती है कि जीवों के बीच ऊर्जा कैसे पहुँचती है।",
- type:"tf",
- options:["True | सही","False | गलत"],
- correct:[0],
- hint:"Think about how one organism may be food for another.",
- explanation:"Food chains show feeding relationships and energy transfer."
-},
-{
- q:"Choose the correct plural form of “leaf.”",
- hi:"“Leaf” का सही बहुवचन चुनें।",
- type:"single",
- options:["Leafs","Leaves","Leafes","Leavs"],
- hindiOptions:["Leafs","Leaves","Leafes","Leavs"],
- correct:[1],
- hint:"Some nouns ending in f change their ending in the plural.",
- explanation:"The standard plural form of “leaf” is “leaves.”"
-},
-{
- q:"Which sentence is a polite way to ask for help?",
- hi:"मदद माँगने का विनम्र तरीका कौन-सा है?",
- type:"single",
- options:["Help me now!","You must help me!","Could you please help me?","Help, because I said so."],
- hindiOptions:["अभी मेरी मदद करो!","तुम्हें मेरी मदद करनी ही होगी!","क्या आप कृपया मेरी मदद कर सकते हैं?","मेरी बात मानकर मदद करो।"],
- correct:[2],
- hint:"Look for a sentence using polite words to make a request.",
- explanation:"“Could you please…” is a polite way to request help."
-},
-{
- q:"Which animal is a herbivore?",
- hi:"कौन-सा जानवर शाकाहारी है?",
- type:"single",
- options:["Tiger","Deer","Eagle","Crocodile"],
- hindiOptions:["बाघ","हिरण","गरुड़","मगरमच्छ"],
- correct:[1],
- hint:"A herbivore eats plants as its main food.",
- explanation:"Deer mainly eat plants, including grasses and leaves."
-},
-{
- q:"Choose the correct conjunction: “Take a jacket ___ the weather may become cold.”",
- hi:"सही संयोजक चुनें: “Take a jacket ___ the weather may become cold.”",
- type:"single",
- options:["because","but","or","although"],
- hindiOptions:["क्योंकि","लेकिन","या","हालाँकि"],
- correct:[0],
- hint:"The second part gives a reason for taking a jacket.",
- explanation:"“Because” introduces the reason for taking a jacket."
-},
-{
- q:"Which actions show respect for wildlife? Select all correct answers.",
- hi:"वन्यजीवों के प्रति सम्मान दिखाने वाले सभी सही कार्य चुनें।",
- type:"multi",
- options:["Observe animals from a safe distance","Feed every wild animal by hand","Keep noise low near wildlife","Take wild animals home as pets"],
- hindiOptions:["जानवरों को सुरक्षित दूरी से देखना","हर जंगली जानवर को हाथ से खाना खिलाना","वन्यजीवों के पास शोर कम रखना","जंगली जानवरों को घर ले जाकर पालतू बनाना"],
- correct:[0,2],
- hint:"Think about keeping both people and animals safe.",
- explanation:"Keeping a safe distance and reducing noise helps avoid disturbing wildlife."
-},
-{
- q:"What should you do if you find litter on a trail and can safely dispose of it?",
- hi:"यदि रास्ते में कचरा मिले और उसे सुरक्षित रूप से हटाया जा सके, तो क्या करना चाहिए?",
- type:"single",
- options:["Leave it for animals","Throw it into a stream","Dispose of it properly","Hide it under a plant"],
- hindiOptions:["उसे जानवरों के लिए छोड़ देना","उसे नाले में फेंक देना","उसे सही तरीके से कूड़ेदान में डालना","उसे पौधे के नीचे छिपा देना"],
- correct:[2],
- hint:"Choose the action that keeps the environment clean.",
- explanation:"Proper disposal reduces pollution and protects wildlife."
-}
+  {
+    q: "What is a good way to prepare for a mountain journey?",
+    hi: "पहाड़ों की यात्रा की तैयारी करने का अच्छा तरीका क्या है?",
+    type: "single",
+    options: [
+      "Plan carefully",
+      "Ignore the weather",
+      "Leave all supplies behind",
+      "Travel without knowing the route"
+    ],
+    hindi: [
+      "ध्यान से योजना बनाना",
+      "मौसम को नज़रअंदाज़ करना",
+      "सारा सामान छोड़ देना",
+      "रास्ता जाने बिना यात्रा करना"
+    ],
+    correct: [0],
+    hint: "Think about safety, supplies, and the route.",
+    explanation: "Planning helps travellers prepare for the route, weather, and supplies."
+  },
+  {
+    q: "Which word is closest in meaning to “magical”?",
+    hi: "“Magical” शब्द का सबसे निकट अर्थ क्या है?",
+    type: "single",
+    options: ["Ordinary", "Enchanted", "Broken", "Noisy"],
+    hindi: ["साधारण", "जादुई", "टूटा हुआ", "शोर करने वाला"],
+    correct: [1],
+    hint: "Think of something wonderful that seems full of magic.",
+    explanation: "“Enchanted” describes something that seems touched by magic."
+  },
+  {
+    q: "Mountains can provide habitats for many kinds of plants and animals.",
+    hi: "पहाड़ कई प्रकार के पौधों और जानवरों को रहने का स्थान दे सकते हैं।",
+    type: "tf",
+    options: ["True | सही", "False | गलत"],
+    correct: [0],
+    hint: "Think about the variety of life found in natural environments.",
+    explanation: "Different mountain environments support many living things."
+  },
+  {
+    q: "Choose the correctly formed sentence.",
+    hi: "सही वाक्य चुनें।",
+    type: "single",
+    options: [
+      "The mountains is beautiful.",
+      "The mountains are beautiful.",
+      "The mountains am beautiful.",
+      "The mountains be beautiful."
+    ],
+    hindi: [
+      "पहाड़ सुंदर है।",
+      "पहाड़ सुंदर हैं।",
+      "पहाड़ सुंदर हूँ।",
+      "पहाड़ सुंदर होना।"
+    ],
+    correct: [1],
+    hint: "Check the verb that agrees with the plural subject “mountains.”",
+    explanation: "“Mountains” is plural, so “are” is the correct verb."
+  },
+  {
+    q: "Which actions help protect mountain environments? Select all correct answers.",
+    hi: "पहाड़ी पर्यावरण की रक्षा करने वाले सभी सही कार्य चुनें।",
+    type: "multi",
+    options: [
+      "Put rubbish in proper bins",
+      "Disturb wild animals for fun",
+      "Stay on marked paths where required",
+      "Leave plastic waste on trails"
+    ],
+    hindi: [
+      "कचरा सही डिब्बे में डालना",
+      "मनोरंजन के लिए जंगली जानवरों को परेशान करना",
+      "जहाँ आवश्यक हो, निर्धारित रास्तों पर चलना",
+      "रास्तों पर प्लास्टिक कचरा छोड़ना"
+    ],
+    correct: [0, 2],
+    hint: "Choose actions that reduce pollution and damage to nature.",
+    explanation: "Proper waste disposal and following marked paths help protect natural areas."
+  },
+  {
+    q: "Complete the sentence: “We wanted to climb the hill, ___ it began to rain.”",
+    hi: "वाक्य पूरा करें: “We wanted to climb the hill, ___ it began to rain.”",
+    type: "single",
+    options: ["but", "because", "or", "so that"],
+    hindi: ["लेकिन", "क्योंकि", "या", "ताकि"],
+    correct: [0],
+    hint: "The second part contrasts with the plan in the first part.",
+    explanation: "“But” joins two contrasting ideas."
+  },
+  {
+    q: "The word “carefully” tells us how an action is done.",
+    hi: "“Carefully” शब्द बताता है कि कोई काम किस प्रकार किया जाता है।",
+    type: "tf",
+    options: ["True | सही", "False | गलत"],
+    correct: [0],
+    hint: "Think about words that describe the manner of an action.",
+    explanation: "“Carefully” is an adverb that describes how an action is performed."
+  },
+  {
+    q: "Which sentence uses the past tense correctly?",
+    hi: "कौन-सा वाक्य भूतकाल का सही प्रयोग करता है?",
+    type: "single",
+    options: [
+      "We see a waterfall yesterday.",
+      "We saw a waterfall yesterday.",
+      "We seeing a waterfall yesterday.",
+      "We sees a waterfall yesterday."
+    ],
+    hindi: [
+      "हमने कल एक झरना देखा।",
+      "हमने कल एक झरना देखा।",
+      "हम कल झरना देख रहे कल।",
+      "हम कल झरना देखता।"
+    ],
+    correct: [1],
+    hint: "“Yesterday” tells you the action happened in the past.",
+    explanation: "“Saw” is the past tense of “see.”"
+  },
+  {
+    q: "Which natural feature is water falling from a height?",
+    hi: "ऊँचाई से गिरने वाले पानी को क्या कहते हैं?",
+    type: "single",
+    options: ["Valley", "Waterfall", "Plateau", "Glacier"],
+    hindi: ["घाटी", "झरना", "पठार", "हिमनद"],
+    correct: [1],
+    hint: "Picture water flowing over the edge of a rocky cliff.",
+    explanation: "A waterfall is water that falls over a steep edge or height."
+  },
+  {
+    q: "Which qualities help travellers on a challenging journey? Select all correct answers.",
+    hi: "कठिन यात्रा में यात्रियों की मदद करने वाले सभी गुण चुनें।",
+    type: "multi",
+    options: [
+      "Patience",
+      "Carelessness",
+      "Cooperation",
+      "Giving up immediately"
+    ],
+    hindi: ["धैर्य", "लापरवाही", "सहयोग", "तुरंत हार मान लेना"],
+    correct: [0, 2],
+    hint: "Think about qualities that help people handle difficulties together.",
+    explanation: "Patience and cooperation help travellers manage challenges."
+  },
+  {
+    q: "Which animal is well adapted to living in a hot desert?",
+    hi: "गर्म रेगिस्तान में रहने के लिए कौन-सा जानवर अनुकूलित है?",
+    type: "single",
+    options: ["Camel", "Polar bear", "Penguin", "Frog"],
+    hindi: ["ऊँट", "ध्रुवीय भालू", "पेंगुइन", "मेंढक"],
+    correct: [0],
+    hint: "Think of an animal known for travelling across sandy deserts.",
+    explanation: "Camels have adaptations that help them live in hot, dry environments."
+  },
+  {
+    q: "Which of these are living things? Select all correct answers.",
+    hi: "इनमें से सभी सजीव वस्तुएँ चुनें।",
+    type: "multi",
+    options: ["A growing tree", "A wild bird", "A rock", "A flowing river"],
+    hindi: ["बढ़ता हुआ पेड़", "जंगली पक्षी", "पत्थर", "बहती नदी"],
+    correct: [0, 1],
+    hint: "Living things grow and carry out life processes.",
+    explanation: "Trees and birds are living organisms; rocks and rivers are not."
+  },
+  {
+    q: "Which word is a noun in the sentence “The brave climber reached the summit”?",
+    hi: "“The brave climber reached the summit” वाक्य में संज्ञा कौन-सा शब्द है?",
+    type: "single",
+    options: ["Brave", "Reached", "Climber", "The"],
+    hindi: ["बहादुर", "पहुँचा", "पर्वतारोही", "यह"],
+    correct: [2],
+    hint: "A noun can name a person, place, animal, or thing.",
+    explanation: "“Climber” names a person, so it is a noun."
+  },
+  {
+    q: "A food chain shows how energy passes between living things.",
+    hi: "खाद्य शृंखला बताती है कि जीवों के बीच ऊर्जा कैसे पहुँचती है।",
+    type: "tf",
+    options: ["True | सही", "False | गलत"],
+    correct: [0],
+    hint: "Think about how one organism may be food for another.",
+    explanation: "Food chains show feeding relationships and energy transfer."
+  },
+  {
+    q: "Choose the correct plural form of “leaf.”",
+    hi: "“Leaf” का सही बहुवचन चुनें।",
+    type: "single",
+    options: ["Leafs", "Leaves", "Leafes", "Leavs"],
+    hindi: ["Leafs", "Leaves", "Leafes", "Leavs"],
+    correct: [1],
+    hint: "Some nouns ending in f change their ending in the plural.",
+    explanation: "The standard plural form of “leaf” is “leaves.”"
+  },
+  {
+    q: "Which sentence is a polite way to ask for help?",
+    hi: "मदद माँगने का विनम्र तरीका कौन-सा है?",
+    type: "single",
+    options: [
+      "Help me now!",
+      "You must help me!",
+      "Could you please help me?",
+      "Help, because I said so."
+    ],
+    hindi: [
+      "अभी मेरी मदद करो!",
+      "तुम्हें मेरी मदद करनी ही होगी!",
+      "क्या आप कृपया मेरी मदद कर सकते हैं?",
+      "मेरी बात मानकर मदद करो।"
+    ],
+    correct: [2],
+    hint: "Look for a sentence using polite words to make a request.",
+    explanation: "“Could you please…” is a polite way to request help."
+  },
+  {
+    q: "Which animal is a herbivore?",
+    hi: "कौन-सा जानवर शाकाहारी है?",
+    type: "single",
+    options: ["Tiger", "Deer", "Eagle", "Crocodile"],
+    hindi: ["बाघ", "हिरण", "गरुड़", "मगरमच्छ"],
+    correct: [1],
+    hint: "A herbivore eats plants as its main food.",
+    explanation: "Deer mainly eat plants, including grasses and leaves."
+  },
+  {
+    q: "Choose the correct conjunction: “Take a jacket ___ the weather may become cold.”",
+    hi: "सही संयोजक चुनें: “Take a jacket ___ the weather may become cold.”",
+    type: "single",
+    options: ["because", "but", "or", "although"],
+    hindi: ["क्योंकि", "लेकिन", "या", "हालाँकि"],
+    correct: [0],
+    hint: "The second part gives a reason for taking a jacket.",
+    explanation: "“Because” introduces the reason for taking a jacket."
+  },
+  {
+    q: "Which actions show respect for wildlife? Select all correct answers.",
+    hi: "वन्यजीवों के प्रति सम्मान दिखाने वाले सभी सही कार्य चुनें।",
+    type: "multi",
+    options: [
+      "Observe animals from a safe distance",
+      "Feed every wild animal by hand",
+      "Keep noise low near wildlife",
+      "Take wild animals home as pets"
+    ],
+    hindi: [
+      "जानवरों को सुरक्षित दूरी से देखना",
+      "हर जंगली जानवर को हाथ से खाना खिलाना",
+      "वन्यजीवों के पास शोर कम रखना",
+      "जंगली जानवरों को घर ले जाकर पालतू बनाना"
+    ],
+    correct: [0, 2],
+    hint: "Think about keeping both people and animals safe.",
+    explanation: "Keeping a safe distance and reducing noise helps avoid disturbing wildlife."
+  },
+  {
+    q: "What should you do with litter on a trail if you can safely dispose of it?",
+    hi: "यदि रास्ते में मिले कचरे को सुरक्षित रूप से हटाया जा सके, तो क्या करना चाहिए?",
+    type: "single",
+    options: [
+      "Leave it for animals",
+      "Throw it into a stream",
+      "Dispose of it properly",
+      "Hide it under a plant"
+    ],
+    hindi: [
+      "उसे जानवरों के लिए छोड़ देना",
+      "उसे पानी की धारा में फेंक देना",
+      "उसे सही तरीके से कूड़ेदान में डालना",
+      "उसे पौधे के नीचे छिपा देना"
+    ],
+    correct: [2],
+    hint: "Choose the action that keeps the environment clean.",
+    explanation: "Proper disposal reduces pollution and protects wildlife."
+  }
 ];
 
 let current = 0;
@@ -462,6 +574,7 @@ const questionHindi = document.getElementById("questionHindi");
 const instruction = document.getElementById("instruction");
 const optionsBox = document.getElementById("options");
 const feedback = document.getElementById("feedback");
+const explanation = document.getElementById("explanation");
 const checkButton = document.getElementById("checkButton");
 const nextButton = document.getElementById("nextButton");
 const hintButton = document.getElementById("hintButton");
@@ -469,23 +582,34 @@ const hintBox = document.getElementById("hint");
 
 function renderQuestion() {
   const q = questions[current];
+
   answered = false;
   selected = [];
 
-  qNumber.textContent = `Question ${current + 1} of ${questions.length}`;
+  qNumber.textContent =
+    `Question ${current + 1} of ${questions.length} | प्रश्न ${current + 1} / ${questions.length}`;
+
   question.textContent = q.q;
   questionHindi.textContent = q.hi;
-  instruction.textContent = q.type === "multi"
-    ? "Select all correct answers. | सभी सही उत्तर चुनें।"
-    : q.type === "tf"
-    ? "Choose True or False. | सही या गलत चुनें।"
-    : "Choose one answer. | एक उत्तर चुनें।";
+
+  if (q.type === "multi") {
+    instruction.textContent =
+      "Select all correct answers. | सभी सही उत्तर चुनें।";
+  } else if (q.type === "tf") {
+    instruction.textContent =
+      "Choose True or False. | सही या गलत चुनें।";
+  } else {
+    instruction.textContent =
+      "Choose one answer. | एक उत्तर चुनें।";
+  }
 
   optionsBox.innerHTML = "";
   feedback.textContent = "";
+  explanation.textContent = "";
   hintBox.style.display = "none";
   hintBox.textContent = "";
   hintButton.style.display = "inline-block";
+
   checkButton.style.display = "inline-block";
   checkButton.disabled = false;
   nextButton.disabled = true;
@@ -494,38 +618,55 @@ function renderQuestion() {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "option";
-    const hindi = q.hindiOptions ? `\n${q.hindiOptions[i]}` : "";
-    btn.textContent = `${String.fromCharCode(65 + i)}. ${opt}${hindi}`;
-    btn.style.whiteSpace = "pre-line";
-    btn.addEventListener("click", () => selectOption(i, btn));
+
+    const hindiText = q.hindi
+      ? "\n" + q.hindi[i]
+      : "";
+
+    btn.textContent =
+      `${String.fromCharCode(65 + i)}. ${opt}${hindiText}`;
+
+    btn.setAttribute("aria-pressed", "false");
+
+    btn.addEventListener("click", () => selectOption(i));
+
     optionsBox.appendChild(btn);
   });
 
   updateProgress();
 }
 
-function selectOption(index, btn) {
+function selectOption(index) {
   if (answered) return;
 
   const q = questions[current];
 
+  // Once the learner retries, clear the previous wrong-answer marks.
+  feedback.textContent = "";
+  explanation.textContent = "";
+
+  document.querySelectorAll(".option").forEach(btn => {
+    btn.classList.remove("wrong");
+  });
+
   if (q.type === "multi") {
+    // Multiple-answer questions let the learner select or deselect options.
     if (selected.includes(index)) {
       selected = selected.filter(i => i !== index);
-      btn.classList.remove("correct", "wrong");
     } else {
       selected.push(index);
-      btn.classList.add("wrong");
     }
   } else {
+    // Single-answer and True/False questions allow only one selection.
     selected = [index];
-    document.querySelectorAll(".option").forEach(b => {
-      b.classList.remove("correct", "wrong");
-    });
-    btn.classList.add("wrong");
   }
 
-  feedback.textContent = "";
+  document.querySelectorAll(".option").forEach((btn, i) => {
+    const isSelected = selected.includes(i);
+
+    btn.classList.toggle("selected", isSelected);
+    btn.setAttribute("aria-pressed", String(isSelected));
+  });
 }
 
 function checkAnswer() {
@@ -533,67 +674,83 @@ function checkAnswer() {
 
   if (selected.length === 0) {
     feedback.style.color = "#b45309";
-    feedback.textContent = "Please select an answer first.\nकृपया पहले उत्तर चुनें।";
+    feedback.textContent =
+      "Please select an answer first.\nकृपया पहले उत्तर चुनें।";
     return;
   }
 
   const q = questions[current];
   const correct = q.correct;
-  const isCorrect = selected.length === correct.length &&
-    selected.every(i => correct.includes(i));
+
+  const isCorrect =
+    selected.length === correct.length &&
+    selected.every(index => correct.includes(index));
 
   if (!isCorrect) {
+    // Only the learner's selected options turn red.
+    // Unselected options remain neutral and can still be chosen.
+    document.querySelectorAll(".option").forEach((btn, i) => {
+      btn.classList.remove("correct", "wrong");
+      btn.classList.toggle("wrong", selected.includes(i));
+      btn.classList.toggle("selected", selected.includes(i));
+    });
+
     feedback.style.color = "#c62828";
     feedback.textContent =
-      "Wrong answer! Read carefully and try again.\nगलत जवाब! ध्यान से पढ़ें और फिर से प्रयास करें।";
+      "Wrong answer! Read carefully and try again.\n" +
+      "गलत जवाब! ध्यान से पढ़ें और फिर से प्रयास करें।";
 
-    document.querySelectorAll(".option").forEach((btn, i) => {
-      if (selected.includes(i)) {
-        btn.classList.add("wrong");
-      }
-    });
+    explanation.textContent = "";
     return;
   }
 
+  // Correct answer: award the point only once and lock the question.
   answered = true;
   score++;
 
   document.querySelectorAll(".option").forEach((btn, i) => {
     btn.disabled = true;
-    btn.classList.remove("wrong");
-    if (correct.includes(i)) btn.classList.add("correct");
+    btn.classList.remove("selected", "wrong");
+    btn.classList.toggle("correct", correct.includes(i));
   });
 
   feedback.style.color = "#16865c";
   feedback.textContent =
-    "Well done! Keep it up!\nबहुत अच्छा! ऐसे ही आगे बढ़ते रहें!\n\n" +
-    q.explanation;
+    "Well done! Keep it up!\nबहुत अच्छा! ऐसे ही आगे बढ़ते रहें!";
+
+  explanation.textContent = q.explanation;
 
   checkButton.disabled = true;
   nextButton.disabled = false;
   hintButton.style.display = "none";
-  updateProgress();
+
   document.getElementById("scoreText").textContent =
     `Score: ${score} | अंक: ${score}`;
+
+  updateProgress();
 }
 
 function updateProgress() {
-  const done = answered ? current + 1 : current;
+  const completed = score;
   document.getElementById("progress").style.width =
-    `${(done / questions.length) * 100}%`;
+    `${(completed / questions.length) * 100}%`;
+
   document.getElementById("progressText").textContent =
     `Question ${current + 1} of ${questions.length} | प्रश्न ${current + 1} / ${questions.length}`;
 }
 
 function showHint() {
   hintBox.style.display = "block";
-  hintBox.textContent = questions[current].hint +
-    "\nसंकेत: प्रश्न को ध्यान से सोचें और विकल्पों की तुलना करें।";
+  hintBox.textContent =
+    questions[current].hint +
+    "\n\nसंकेत: प्रश्न को ध्यान से सोचें और विकल्पों की तुलना करें।";
+
   hintButton.style.display = "none";
 }
 
 function nextQuestion() {
   if (!answered) return;
+
   current++;
 
   if (current >= questions.length) {
@@ -608,10 +765,12 @@ function showResult() {
   document.getElementById("result").style.display = "block";
 
   const percent = Math.round((score / questions.length) * 100);
+
   document.getElementById("finalScore").textContent =
     `${score} / ${questions.length} (${percent}%)`;
 
-  let message, hindi;
+  let message;
+  let hindi;
 
   if (percent <= 20) {
     message = "Keep trying!";
@@ -635,10 +794,14 @@ function showResult() {
 
   document.getElementById("resultMessage").textContent = message;
   document.getElementById("resultHindi").textContent = hindi;
+
   document.getElementById("resultDetail").textContent =
-    `You answered ${score} questions correctly out of ${questions.length}.\nआपने ${questions.length} में से ${score} प्रश्नों के सही उत्तर दिए।`;
+    `You answered ${score} out of ${questions.length} questions correctly.\n` +
+    `आपने ${questions.length} में से ${score} प्रश्नों के सही उत्तर दिए।`;
+
   document.getElementById("progress").style.width = "100%";
-  document.getElementById("progressText").textContent = "Quiz completed | क्विज़ पूरा हुआ";
+  document.getElementById("progressText").textContent =
+    "Quiz completed | क्विज़ पूरा हुआ";
 }
 
 function restartQuiz() {
@@ -646,9 +809,12 @@ function restartQuiz() {
   score = 0;
   answered = false;
   selected = [];
+
   document.getElementById("quizCard").style.display = "block";
   document.getElementById("result").style.display = "none";
-  document.getElementById("scoreText").textContent = "Score: 0 | अंक: 0";
+  document.getElementById("scoreText").textContent =
+    "Score: 0 | अंक: 0";
+
   renderQuestion();
 }
 
