@@ -1,0 +1,816 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz 4: Mountain Geography | Class 4 English</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: Arial, sans-serif;
+      background: #f1f5fb;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+      padding: 22px;
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0,0,0,.08);
+    }
+
+    h1 {
+      text-align: center;
+      color: #183d7a;
+      font-size: 25px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #555;
+    }
+
+    .info {
+      background: #edf4ff;
+      border-left: 4px solid #2455a4;
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    .progress-area { margin: 20px 0; }
+
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      height: 10px;
+      background: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: #2455a4;
+      transition: width .25s;
+    }
+
+    .question-card {
+      border: 1px solid #d6deeb;
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .question-number {
+      font-weight: bold;
+      color: #2455a4;
+    }
+
+    .question {
+      font-size: 19px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .hindi {
+      color: #454545;
+      margin-top: 5px;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .option {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      cursor: pointer;
+      overflow-wrap: anywhere;
+    }
+
+    .option:hover { background: #f0f5ff; }
+    .option input { margin-top: 5px; }
+
+    .option.correct {
+      background: #e7f6ec;
+      border-color: #198754;
+    }
+
+    .option.incorrect {
+      background: #fff0f0;
+      border-color: #c62828;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .feedback.correct {
+      display: block;
+      background: #e7f6ec;
+      color: #146c35;
+    }
+
+    .feedback.incorrect {
+      display: block;
+      background: #fff0f0;
+      color: #a51f1f;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      border: none;
+      border-radius: 7px;
+      padding: 12px 18px;
+      font-size: 15px;
+      font-weight: bold;
+      background: #2455a4;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover { background: #173d7d; }
+
+    button:disabled {
+      background: #aab5c5;
+      cursor: not-allowed;
+    }
+
+    .secondary { background: #64748b; }
+
+    .result {
+      display: none;
+      margin-top: 22px;
+      padding: 20px;
+      border: 2px solid #2455a4;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .result h2 { color: #183d7a; }
+    .score { font-size: 25px; font-weight: bold; }
+
+    .disclaimer {
+      border-top: 2px solid #2455a4;
+      margin-top: 30px;
+      padding-top: 15px;
+      font-size: 13px;
+      color: #555;
+      overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 560px) {
+      body { padding: 8px; }
+      .container { padding: 14px; }
+      h1 { font-size: 21px; }
+      .options { grid-template-columns: 1fr; }
+      .question { font-size: 17px; }
+      button { flex: 1 1 auto; }
+    }
+  </style>
+</head>
+
+<body>
+<main class="container">
+
+  <h1>
+    Quiz 4: Mountain Geography<br>
+    क्विज़ 4: पर्वतीय भूगोल
+  </h1>
+
+  <p class="subtitle">
+    Class 4 English | Chapter 11<br>
+    A Journey to the Magical Mountains<br>
+    कक्षा 4 अंग्रेज़ी | अध्याय 11
+  </p>
+
+  <div class="info">
+    <strong>Instructions:</strong> Choose the correct answer about
+    mountains, landforms, and geographical features. Read carefully
+    and try again if your answer is incorrect.
+    <br>
+    <strong>निर्देश:</strong> पहाड़ों, स्थलरूपों और भौगोलिक विशेषताओं
+    से संबंधित सही उत्तर चुनें। ध्यान से पढ़ें और गलत उत्तर होने पर
+    फिर से प्रयास करें।
+  </div>
+
+  <div class="progress-area">
+    <div class="progress-text">
+      <span id="progressText">Question 1 of 20</span>
+      <span id="answeredText">Correct answers: 0</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </div>
+
+  <section id="quizArea">
+    <div class="question-card">
+      <div class="question-number" id="questionNumber"></div>
+      <div class="question" id="questionText"></div>
+      <div class="hindi" id="questionHindi"></div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback" aria-live="polite"></div>
+
+      <div class="buttons">
+        <button type="button" id="previousBtn" class="secondary">
+          Previous | पिछला
+        </button>
+        <button type="button" id="nextBtn" disabled>
+          Next | अगला
+        </button>
+        <button type="button" id="submitBtn" style="display:none">
+          Submit Quiz | क्विज़ जमा करें
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="result" class="result" aria-live="polite">
+    <h2>Quiz Result | क्विज़ का परिणाम</h2>
+    <p class="score" id="scoreText"></p>
+    <p id="resultMessage"></p>
+    <p id="resultHindi"></p>
+
+    <div class="buttons" style="justify-content:center">
+      <button type="button" id="restartBtn">
+        Try Again | फिर से प्रयास करें
+      </button>
+      <button type="button" class="secondary"
+        onclick="window.location.href='class4-english-chapter11.html'">
+        Back to Chapter | अध्याय पर वापस जाएँ
+      </button>
+    </div>
+  </section>
+
+  <footer class="disclaimer">
+    <strong>Disclaimer | अस्वीकरण</strong>
+    <p>
+      RawaRajpootNexEduToppers Learning Academy is an independent
+      educational platform and is not affiliated with, endorsed by,
+      or associated with NCERT. NCERT textbook names, chapters, and
+      curriculum topics belong exclusively to NCERT. All solutions
+      and study notes provided here are original practice aids.
+      For official textbooks, please refer to NCERT's official resources.
+    </p>
+    <p>
+      RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है
+      और इसका NCERT से कोई आधिकारिक संबंध नहीं है। NCERT की पाठ्यपुस्तकों
+      के नाम, अध्याय और पाठ्यक्रम संबंधी विषय NCERT के हैं। यहाँ दिए गए
+      समाधान और अध्ययन नोट्स मौलिक अभ्यास सामग्री हैं। आधिकारिक
+      पाठ्यपुस्तकों के लिए NCERT के आधिकारिक संसाधनों का उपयोग करें।
+    </p>
+  </footer>
+
+</main>
+
+<script>
+const questions = [
+  {
+    q: "What is a mountain?",
+    hi: "पहाड़ क्या होता है?",
+    options: [
+      "A high natural rise of land",
+      "A flat area of water",
+      "A deep part of the ocean",
+      "A road built through a city"
+    ],
+    hindi: [
+      "भूमि का एक ऊँचा प्राकृतिक भाग",
+      "पानी का एक समतल क्षेत्र",
+      "महासागर का एक गहरा भाग",
+      "शहर में बनी एक सड़क"
+    ],
+    answer: 0
+  },
+  {
+    q: "What is the highest point of a mountain called?",
+    hi: "पहाड़ के सबसे ऊँचे बिंदु को क्या कहते हैं?",
+    options: [
+      "Valley",
+      "Peak",
+      "Plain",
+      "Coast"
+    ],
+    hindi: [
+      "घाटी",
+      "चोटी",
+      "मैदान",
+      "समुद्र तट"
+    ],
+    answer: 1
+  },
+  {
+    q: "What is a valley?",
+    hi: "घाटी क्या होती है?",
+    options: [
+      "The top of a mountain",
+      "A large area of ocean",
+      "Low land between hills or mountains",
+      "A tall building"
+    ],
+    hindi: [
+      "पहाड़ की चोटी",
+      "महासागर का बड़ा क्षेत्र",
+      "पहाड़ियों या पहाड़ों के बीच की नीची भूमि",
+      "एक ऊँची इमारत"
+    ],
+    answer: 2
+  },
+  {
+    q: "What is a mountain range?",
+    hi: "पर्वत शृंखला क्या होती है?",
+    options: [
+      "A single small pond",
+      "A group of buildings",
+      "A stretch of flat farmland",
+      "A series of connected or related mountains"
+    ],
+    hindi: [
+      "एक छोटा तालाब",
+      "इमारतों का समूह",
+      "समतल खेतों का क्षेत्र",
+      "आपस में जुड़े या संबंधित पहाड़ों की शृंखला"
+    ],
+    answer: 3
+  },
+  {
+    q: "What is a slope?",
+    hi: "ढलान क्या होती है?",
+    options: [
+      "A surface that rises or falls at an angle",
+      "A completely flat water surface",
+      "The deepest part of a lake",
+      "A type of forest animal"
+    ],
+    hindi: [
+      "एक ऐसी सतह जो कोण पर ऊपर या नीचे जाती है",
+      "पानी की पूरी तरह समतल सतह",
+      "झील का सबसे गहरा भाग",
+      "एक प्रकार का वन्य जीव"
+    ],
+    answer: 0
+  },
+  {
+    q: "Which mountain range contains Mount Everest?",
+    hi: "माउंट एवरेस्ट किस पर्वत शृंखला में स्थित है?",
+    options: [
+      "The Alps",
+      "The Himalayas",
+      "The Andes",
+      "The Aravalli Range"
+    ],
+    hindi: [
+      "आल्प्स",
+      "हिमालय",
+      "एंडीज़",
+      "अरावली पर्वत शृंखला"
+    ],
+    answer: 1
+  },
+  {
+    q: "What are foothills?",
+    hi: "पर्वत की तलहटी क्या होती है?",
+    options: [
+      "The deepest parts of oceans",
+      "The tops of the tallest peaks",
+      "Lower hills near the base of mountains",
+      "Flat land in the middle of a sea"
+    ],
+    hindi: [
+      "महासागर के सबसे गहरे भाग",
+      "सबसे ऊँची चोटियों के शीर्ष",
+      "पहाड़ों के आधार के पास की नीची पहाड़ियाँ",
+      "समुद्र के बीच की समतल भूमि"
+    ],
+    answer: 2
+  },
+  {
+    q: "What is a plain?",
+    hi: "मैदान क्या होता है?",
+    options: [
+      "A sharp mountain peak",
+      "A narrow mountain path",
+      "A deep valley filled with water",
+      "A large area of mostly flat land"
+    ],
+    hindi: [
+      "एक नुकीली पर्वत चोटी",
+      "पहाड़ का सँकरा रास्ता",
+      "पानी से भरी गहरी घाटी",
+      "मुख्यतः समतल भूमि का बड़ा क्षेत्र"
+    ],
+    answer: 3
+  },
+  {
+    q: "What is a glacier?",
+    hi: "हिमनद क्या होता है?",
+    options: [
+      "A large mass of ice that moves slowly",
+      "A hot desert wind",
+      "A field of green grass",
+      "A river made only of sand"
+    ],
+    hindi: [
+      "बर्फ का एक बड़ा भाग जो धीरे-धीरे आगे बढ़ता है",
+      "रेगिस्तान की गर्म हवा",
+      "हरी घास का मैदान",
+      "केवल रेत से बनी नदी"
+    ],
+    answer: 0
+  },
+  {
+    q: "Why are some high mountain peaks covered with snow?",
+    hi: "कुछ ऊँची पर्वत चोटियाँ बर्फ से ढकी क्यों रहती हैं?",
+    options: [
+      "They are always near the ocean",
+      "Temperatures are often very low at high altitudes",
+      "They receive no sunlight at any time",
+      "All mountains are made of ice"
+    ],
+    hindi: [
+      "वे हमेशा महासागर के पास होती हैं",
+      "अधिक ऊँचाई पर तापमान अक्सर बहुत कम होता है",
+      "वहाँ कभी सूर्य का प्रकाश नहीं पहुँचता",
+      "सभी पहाड़ बर्फ से बने होते हैं"
+    ],
+    answer: 1
+  },
+  {
+    q: "What does altitude mean?",
+    hi: "ऊँचाई या 'Altitude' का क्या अर्थ है?",
+    options: [
+      "The colour of a mountain",
+      "The age of a tree",
+      "Height above sea level",
+      "The length of a river only"
+    ],
+    hindi: [
+      "पहाड़ का रंग",
+      "पेड़ की आयु",
+      "समुद्र तल से ऊँचाई",
+      "केवल नदी की लंबाई"
+    ],
+    answer: 2
+  },
+  {
+    q: "Which feature is commonly found between mountain slopes?",
+    hi: "पहाड़ी ढलानों के बीच सामान्यतः कौन-सी भौगोलिक विशेषता मिलती है?",
+    options: [
+      "An ocean trench",
+      "A coral reef",
+      "A seaport",
+      "A valley"
+    ],
+    hindi: [
+      "महासागर की गहरी खाई",
+      "मूंगा चट्टान",
+      "समुद्री बंदरगाह",
+      "घाटी"
+    ],
+    answer: 3
+  },
+  {
+    q: "What is a plateau?",
+    hi: "पठार क्या होता है?",
+    options: [
+      "An area of high land with a relatively flat top",
+      "A deep part of the ocean",
+      "A narrow river",
+      "A very low beach"
+    ],
+    hindi: [
+      "ऊँची भूमि का अपेक्षाकृत समतल ऊपरी क्षेत्र",
+      "महासागर का गहरा भाग",
+      "एक सँकरी नदी",
+      "एक बहुत नीचा समुद्र तट"
+    ],
+    answer: 0
+  },
+  {
+    q: "Which natural process can wear away mountain rocks over time?",
+    hi: "कौन-सी प्राकृतिक प्रक्रिया समय के साथ पहाड़ों की चट्टानों को घिस सकती है?",
+    options: [
+      "Photosynthesis",
+      "Erosion",
+      "Pollination",
+      "Germination"
+    ],
+    hindi: [
+      "प्रकाश संश्लेषण",
+      "अपरदन",
+      "परागण",
+      "अंकुरण"
+    ],
+    answer: 1
+  },
+  {
+    q: "Which animal is well adapted to cold mountain environments?",
+    hi: "कौन-सा जानवर ठंडे पर्वतीय वातावरण के अनुकूल होता है?",
+    options: [
+      "Camel",
+      "Dolphin",
+      "Yak",
+      "Crocodile"
+    ],
+    hindi: [
+      "ऊँट",
+      "डॉल्फ़िन",
+      "याक",
+      "मगरमच्छ"
+    ],
+    answer: 2
+  },
+  {
+    q: "What is a mountain pass?",
+    hi: "पर्वतीय दर्रा क्या होता है?",
+    options: [
+      "A deep ocean floor",
+      "A kind of mountain flower",
+      "A waterfall in a forest",
+      "A route through mountains"
+    ],
+    hindi: [
+      "महासागर का गहरा तल",
+      "एक प्रकार का पहाड़ी फूल",
+      "जंगल में एक झरना",
+      "पहाड़ों के बीच से गुजरने वाला रास्ता"
+    ],
+    answer: 3
+  },
+  {
+    q: "Which is a responsible way to enjoy a mountain landscape?",
+    hi: "पहाड़ी प्राकृतिक दृश्य का आनंद लेने का जिम्मेदार तरीका कौन-सा है?",
+    options: [
+      "Taking rubbish away and respecting wildlife",
+      "Leaving plastic on the trail",
+      "Damaging plants for fun",
+      "Disturbing wild animals"
+    ],
+    hindi: [
+      "कचरा अपने साथ वापस ले जाना और वन्यजीवों का सम्मान करना",
+      "रास्ते पर प्लास्टिक छोड़ना",
+      "मनोरंजन के लिए पौधों को नुकसान पहुँचाना",
+      "जंगली जानवरों को परेशान करना"
+    ],
+    answer: 0
+  },
+  {
+    q: "Which statement about mountain weather is generally true?",
+    hi: "पहाड़ों के मौसम के बारे में सामान्यतः कौन-सा कथन सही है?",
+    options: [
+      "It is identical at every altitude",
+      "It can change with altitude and location",
+      "It never becomes cold",
+      "Snow falls on every mountain every day"
+    ],
+    hindi: [
+      "हर ऊँचाई पर मौसम एक जैसा होता है",
+      "यह ऊँचाई और स्थान के अनुसार बदल सकता है",
+      "वहाँ कभी ठंड नहीं होती",
+      "हर पहाड़ पर हर दिन बर्फ गिरती है"
+    ],
+    answer: 1
+  },
+  {
+    q: "What is a river source?",
+    hi: "नदी का स्रोत क्या होता है?",
+    options: [
+      "The place where a river meets the sea",
+      "A bridge built across a river",
+      "The place where a river begins",
+      "The deepest part of a lake"
+    ],
+    hindi: [
+      "वह स्थान जहाँ नदी समुद्र से मिलती है",
+      "नदी पर बना पुल",
+      "वह स्थान जहाँ से नदी शुरू होती है",
+      "झील का सबसे गहरा भाग"
+    ],
+    answer: 2
+  },
+  {
+    q: "Why should people protect mountain environments?",
+    hi: "लोगों को पर्वतीय पर्यावरण की रक्षा क्यों करनी चाहिए?",
+    options: [
+      "To remove all plants and trees",
+      "To encourage littering",
+      "To disturb wildlife",
+      "To conserve habitats, plants, animals, and natural beauty"
+    ],
+    hindi: [
+      "सभी पौधों और पेड़ों को हटाने के लिए",
+      "कचरा फैलाने को बढ़ावा देने के लिए",
+      "वन्यजीवों को परेशान करने के लिए",
+      "प्राकृतिक आवासों, पौधों, जानवरों और प्राकृतिक सुंदरता को बचाने के लिए"
+    ],
+    answer: 3
+  }
+];
+
+let current = 0;
+let selected = Array(questions.length).fill(null);
+let locked = Array(questions.length).fill(false);
+let finished = false;
+
+const $ = id => document.getElementById(id);
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, ch => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[ch]);
+}
+
+function renderQuestion() {
+  const item = questions[current];
+
+  $("questionNumber").textContent =
+    `Question ${current + 1} of ${questions.length} | प्रश्न ${current + 1}`;
+  $("questionText").textContent = item.q;
+  $("questionHindi").textContent = item.hi;
+  $("options").innerHTML = "";
+
+  item.options.forEach((option, index) => {
+    const label = document.createElement("label");
+    label.className = "option";
+
+    if (locked[current] && index === item.answer) {
+      label.classList.add("correct");
+    } else if (selected[current] === index && index !== item.answer) {
+      label.classList.add("incorrect");
+    }
+
+    const radio = document.createElement("input");
+    radio.type = "radio";
+    radio.name = "answer";
+    radio.checked = selected[current] === index;
+    radio.disabled = locked[current];
+
+    const text = document.createElement("div");
+    text.innerHTML =
+      `<div>${escapeHTML(option)}</div>
+       <div class="hindi">${escapeHTML(item.hindi[index])}</div>`;
+
+    radio.addEventListener("change", () => {
+      if (locked[current]) return;
+
+      selected[current] = index;
+
+      if (index === item.answer) {
+        locked[current] = true;
+      }
+
+      renderQuestion();
+    });
+
+    label.appendChild(radio);
+    label.appendChild(text);
+    $("options").appendChild(label);
+  });
+
+  const feedback = $("feedback");
+
+  if (locked[current]) {
+    feedback.className = "feedback correct";
+    feedback.innerHTML =
+      "Well done! Keep it up!<br>" +
+      "बहुत अच्छा! ऐसे ही आगे बढ़ते रहें!";
+  } else if (selected[current] !== null) {
+    feedback.className = "feedback incorrect";
+    feedback.innerHTML =
+      "Wrong answer! Read carefully and try again.<br>" +
+      "गलत जवाब! ध्यान से पढ़ें और फिर से प्रयास करें।";
+  } else {
+    feedback.className = "feedback";
+    feedback.textContent = "";
+  }
+
+  $("previousBtn").disabled = current === 0;
+  $("nextBtn").disabled = !locked[current];
+
+  $("nextBtn").style.display =
+    current === questions.length - 1 ? "none" : "inline-block";
+  $("submitBtn").style.display =
+    current === questions.length - 1 ? "inline-block" : "none";
+  $("submitBtn").disabled = !locked[current];
+
+  const score = locked.filter(Boolean).length;
+
+  $("progressText").textContent =
+    `Question ${current + 1} of ${questions.length} | प्रश्न ${current + 1}`;
+  $("answeredText").textContent =
+    `Correct answers: ${score} | सही उत्तर: ${score}`;
+  $("progressBar").style.width =
+    `${((current + 1) / questions.length) * 100}%`;
+}
+
+$("previousBtn").addEventListener("click", () => {
+  if (current > 0) {
+    current--;
+    renderQuestion();
+  }
+});
+
+$("nextBtn").addEventListener("click", () => {
+  if (current < questions.length - 1 && locked[current]) {
+    current++;
+    renderQuestion();
+  }
+});
+
+$("submitBtn").addEventListener("click", () => {
+  if (!locked[current] || finished) return;
+
+  finished = true;
+
+  const score = locked.filter(Boolean).length;
+  const percentage = Math.round(score / questions.length * 100);
+
+  let message, hindiMessage;
+
+  if (percentage <= 20) {
+    message = "Keep trying!";
+    hindiMessage = "कोशिश करते रहें!";
+  } else if (percentage <= 40) {
+    message = "Good try!";
+    hindiMessage = "अच्छा प्रयास!";
+  } else if (percentage <= 60) {
+    message = "Good job!";
+    hindiMessage = "बहुत अच्छा प्रयास!";
+  } else if (percentage <= 80) {
+    message = "Very good!";
+    hindiMessage = "बहुत बढ़िया!";
+  } else if (percentage < 100) {
+    message = "Excellent!";
+    hindiMessage = "शानदार!";
+  } else {
+    message = "Fantastic! Perfect score!";
+    hindiMessage = "अद्भुत! पूरे अंक!";
+  }
+
+  $("quizArea").style.display = "none";
+  $("result").style.display = "block";
+  $("progressBar").style.width = "100%";
+  $("progressText").textContent = "Quiz completed | क्विज़ पूरा हुआ";
+  $("answeredText").textContent = `${score} / ${questions.length}`;
+
+  $("scoreText").textContent =
+    `${score} / ${questions.length} (${percentage}%)`;
+  $("resultMessage").textContent = message;
+  $("resultHindi").textContent = hindiMessage;
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+$("restartBtn").addEventListener("click", () => {
+  current = 0;
+  selected = Array(questions.length).fill(null);
+  locked = Array(questions.length).fill(false);
+  finished = false;
+
+  $("quizArea").style.display = "block";
+  $("result").style.display = "none";
+
+  renderQuestion();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+renderQuestion();
+</script>
+</body>
+</html>
