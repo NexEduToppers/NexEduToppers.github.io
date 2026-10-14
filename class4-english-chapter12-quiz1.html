@@ -1,0 +1,711 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz 1: Story Basics | Maheshwar</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 15px;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  color: #1e293b;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+header {
+  background: linear-gradient(135deg, #164e63, #0f766e);
+  color: white;
+  padding: 25px 16px;
+  text-align: center;
+  border-radius: 16px;
+  margin-bottom: 16px;
+}
+
+header h1 {
+  margin: 0 0 8px;
+  font-size: 26px;
+}
+
+header p {
+  margin: 5px 0;
+}
+
+.chapter-label {
+  display: inline-block;
+  background: white;
+  color: #115e59;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.navigation {
+  text-align: center;
+  margin: 16px 0;
+}
+
+.nav-button {
+  display: inline-block;
+  padding: 10px 16px;
+  margin: 4px;
+  border-radius: 9px;
+  background: #e0f2fe;
+  color: #075985;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.instructions, .quiz-card, .result, .disclaimer {
+  background: white;
+  padding: 18px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.07);
+}
+
+.progress-area {
+  margin-bottom: 14px;
+}
+
+.progress-text {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+.progress-track {
+  width: 100%;
+  height: 9px;
+  background: #e2e8f0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+#progressBar {
+  width: 0%;
+  height: 100%;
+  background: #0d9488;
+  transition: width 0.25s;
+}
+
+.question-number {
+  color: #0f766e;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.question {
+  font-size: 19px;
+  font-weight: bold;
+  margin: 8px 0 16px;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 2px solid #cbd5e1;
+  background: #fff;
+  color: #1e293b;
+  border-radius: 10px;
+  padding: 12px;
+  margin: 9px 0;
+  font-size: 16px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.option:hover:not(:disabled) {
+  background: #f0fdfa;
+  border-color: #0d9488;
+}
+
+.option:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.option.correct {
+  background: #dcfce7;
+  border-color: #16a34a;
+}
+
+.option.wrong {
+  background: #fee2e2;
+  border-color: #dc2626;
+}
+
+.feedback {
+  display: none;
+  padding: 12px;
+  border-radius: 9px;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+.feedback.show {
+  display: block;
+}
+
+.feedback.good {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.feedback.bad {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.hint-button {
+  border: none;
+  background: #fef3c7;
+  color: #92400e;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.hint {
+  display: none;
+  background: #fffbeb;
+  border-left: 4px solid #f59e0b;
+  padding: 10px;
+  margin-top: 9px;
+  border-radius: 6px;
+}
+
+.hint.show {
+  display: block;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.action-button {
+  border: none;
+  padding: 12px 18px;
+  border-radius: 9px;
+  background: #0f766e;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.action-button:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+.secondary-button {
+  background: #475569;
+}
+
+.result {
+  display: none;
+  text-align: center;
+}
+
+.result h2 {
+  color: #0f766e;
+}
+
+.score-number {
+  font-size: 36px;
+  font-weight: bold;
+  color: #0f766e;
+}
+
+.result-message {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.disclaimer {
+  font-size: 13px;
+  color: #475569;
+}
+
+.disclaimer h3 {
+  color: #1e293b;
+}
+
+footer {
+  text-align: center;
+  padding: 12px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 9px;
+  }
+
+  header h1 {
+    font-size: 22px;
+  }
+
+  .question {
+    font-size: 17px;
+  }
+
+  .instructions, .quiz-card, .result, .disclaimer {
+    padding: 14px;
+  }
+
+  .action-button {
+    padding: 11px 13px;
+    font-size: 15px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+  <div class="chapter-label">Class 4 English | कक्षा 4 अंग्रेज़ी</div>
+  <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+  <p><strong>Chapter 12: MAHESHWAR</strong></p>
+  <p>Quiz 1: Story Basics | कहानी की मूल बातें</p>
+  <p>Practise the main characters and events of Maheshwar.</p>
+  <p>महेश्वर के मुख्य पात्रों और घटनाओं का अभ्यास करें।</p>
+</header>
+
+<div class="navigation">
+  <a class="nav-button" href="class4-english-chapter12.html">
+    ← Back to Chapter 12 | अध्याय पर वापस जाएँ
+  </a>
+</div>
+
+<section class="instructions">
+  <h2>How to Play | कैसे खेलें</h2>
+  <p>1. Read each question carefully and choose one answer.</p>
+  <p>हर प्रश्न ध्यान से पढ़ें और एक उत्तर चुनें।</p>
+  <p>2. If your answer is wrong, read the feedback and try again.</p>
+  <p>यदि उत्तर गलत है, तो प्रतिक्रिया पढ़ें और दोबारा प्रयास करें।</p>
+  <p>3. After a correct answer, click Next Question.</p>
+  <p>सही उत्तर देने के बाद अगला प्रश्न दबाएँ।</p>
+  <p>4. Complete all 10 questions to see your result.</p>
+  <p>अपना परिणाम देखने के लिए सभी 10 प्रश्न पूरे करें।</p>
+</section>
+
+<section class="quiz-card" id="quizCard">
+  <div class="progress-area">
+    <div class="progress-text">
+      <span id="questionCounter">Question 1 of 10</span>
+      <span id="scoreCounter">Score: 0</span>
+    </div>
+    <div class="progress-track">
+      <div id="progressBar"></div>
+    </div>
+  </div>
+
+  <div class="question-number" id="questionNumber"></div>
+  <div class="question" id="questionText"></div>
+
+  <div id="options"></div>
+
+  <button class="hint-button" id="hintButton" type="button">
+    Show Hint | संकेत देखें
+  </button>
+  <div class="hint" id="hintText"></div>
+
+  <div class="feedback" id="feedback" aria-live="polite"></div>
+
+  <div class="controls">
+    <button class="action-button secondary-button" id="restartButton" type="button">
+      Restart | फिर से शुरू करें
+    </button>
+    <button class="action-button" id="nextButton" type="button" disabled>
+      Next Question | अगला प्रश्न →
+    </button>
+  </div>
+</section>
+
+<section class="result" id="resultSection" aria-live="polite">
+  <h2>Quiz Completed! | प्रश्नोत्तरी पूरी हुई!</h2>
+  <div class="score-number" id="finalScore"></div>
+  <p id="percentageText"></p>
+  <p class="result-message" id="resultMessage"></p>
+  <p id="resultHindi"></p>
+
+  <button class="action-button" id="playAgainButton" type="button">
+    Try Again | फिर से प्रयास करें
+  </button>
+
+  <div class="navigation">
+    <a class="nav-button" href="class4-english-chapter12.html">
+      Back to Chapter | अध्याय पर वापस जाएँ
+    </a>
+  </div>
+</section>
+
+<section class="disclaimer">
+  <h3>Disclaimer | अस्वीकरण</h3>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy is an independent educational
+    platform and is not affiliated with, endorsed by, or associated with NCERT.
+    NCERT textbook names, chapters, and curriculum topics belong exclusively
+    to NCERT. All explanations, examples, and practice material provided here
+    are educational aids. For official textbooks, visit
+    <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">ncert.nic.in</a>.
+  </p>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+    इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की पाठ्यपुस्तकों,
+    अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं। यहाँ दी गई व्याख्याएँ,
+    उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के लिए हैं। आधिकारिक पाठ्यपुस्तकों
+    के लिए <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">ncert.nic.in</a> पर जाएँ।
+  </p>
+</section>
+
+<footer>
+  RawaRajpootNexEduToppers Learning Academy<br>
+  Learn • Practise • Improve | सीखें • अभ्यास करें • आगे बढ़ें
+</footer>
+
+</div>
+
+<script>
+"use strict";
+
+const questions = [
+  {
+    q: "1. Which two children are mentioned in the Maheshwar chapter? | महेश्वर अध्याय में किन दो बच्चों का उल्लेख है?",
+    options: [
+      "Aarav and Ananya | आरव और अनन्या",
+      "Rohan and Riya | रोहन और रिया",
+      "Aman and Meena | अमन और मीना",
+      "Kabir and Tara | कबीर और तारा"
+    ],
+    answer: 0,
+    hint: "Recall the two children's names from the beginning of the story. | कहानी की शुरुआत में दोनों बच्चों के नाम याद करें।",
+    explanation: "Aarav and Ananya are the two children mentioned in the chapter. | अध्याय में आरव और अनन्या दो बच्चों के नाम हैं।"
+  },
+  {
+    q: "2. Which family member accompanies the children in the story details you shared? | आपके साझा किए गए कहानी के विवरण में बच्चों के साथ कौन-सा पारिवारिक सदस्य है?",
+    options: [
+      "Their teacher | उनके शिक्षक",
+      "Their Chachi | उनकी चाची",
+      "Their neighbour | उनके पड़ोसी",
+      "Their doctor | उनके डॉक्टर"
+    ],
+    answer: 1,
+    hint: "Think of the family relationship named in the story. | कहानी में बताए गए पारिवारिक रिश्ते को याद करें।",
+    explanation: "Chachi is the family member mentioned with Aarav and Ananya. | आरव और अनन्या के साथ उनकी चाची का उल्लेख है।"
+  },
+  {
+    q: "3. Which place is the main focus of this chapter? | इस अध्याय का मुख्य केंद्र कौन-सा स्थान है?",
+    options: [
+      "Jaipur | जयपुर",
+      "Agra | आगरा",
+      "Maheshwar | महेश्वर",
+      "Shimla | शिमला"
+    ],
+    answer: 2,
+    hint: "Look at the chapter title. | अध्याय के शीर्षक को देखें।",
+    explanation: "The chapter is titled MAHESHWAR, so Maheshwar is its main focus. | अध्याय का शीर्षक MAHESHWAR है, इसलिए इसका मुख्य केंद्र महेश्वर है।"
+  },
+  {
+    q: "4. Which historical queen is mentioned in the chapter? | अध्याय में किस ऐतिहासिक रानी का उल्लेख है?",
+    options: [
+      "Rani Lakshmibai | रानी लक्ष्मीबाई",
+      "Queen Ahilya Bai | रानी अहिल्या बाई",
+      "Rani Durgavati | रानी दुर्गावती",
+      "Queen Victoria | रानी विक्टोरिया"
+    ],
+    answer: 1,
+    hint: "Her name is connected with Maheshwar Fort. | उनका नाम महेश्वर किले से जुड़ा है।",
+    explanation: "Queen Ahilya Bai is the historical queen mentioned in the chapter. | अध्याय में ऐतिहासिक रानी अहिल्या बाई का उल्लेख है।"
+  },
+  {
+    q: "5. Which fort is associated with Queen Ahilya Bai in the chapter? | अध्याय में रानी अहिल्या बाई से कौन-सा किला जुड़ा है?",
+    options: [
+      "Red Fort | लाल किला",
+      "Amber Fort | आमेर किला",
+      "Gwalior Fort | ग्वालियर किला",
+      "Maheshwar Fort, also called Ahilya Fort | महेश्वर किला, जिसे अहिल्या किला भी कहते हैं"
+    ],
+    answer: 3,
+    hint: "The fort shares its name with the place in the chapter. | किले का नाम अध्याय में बताए गए स्थान से जुड़ा है।",
+    explanation: "The chapter connects Queen Ahilya Bai with Maheshwar Fort, also known as Ahilya Fort. | अध्याय में रानी अहिल्या बाई का संबंध महेश्वर किले से बताया गया है, जिसे अहिल्या किला भी कहते हैं।"
+  },
+  {
+    q: "6. Which river is mentioned in connection with Maheshwar? | महेश्वर के संदर्भ में किस नदी का उल्लेख है?",
+    options: [
+      "Yamuna River | यमुना नदी",
+      "Ganga River | गंगा नदी",
+      "Narmada River | नर्मदा नदी",
+      "Godavari River | गोदावरी नदी"
+    ],
+    answer: 2,
+    hint: "Recall the river named in the chapter details. | अध्याय के विवरण में बताई गई नदी याद करें।",
+    explanation: "The Narmada River is mentioned in connection with Maheshwar. | महेश्वर के संदर्भ में नर्मदा नदी का उल्लेख है।"
+  },
+  {
+    q: "7. What traditional item is associated with Maheshwar in the chapter? | अध्याय में महेश्वर से कौन-सी पारंपरिक वस्तु जुड़ी है?",
+    options: [
+      "Maheshwari sarees | महेश्वरी साड़ियाँ",
+      "Kashmiri carpets | कश्मीरी कालीन",
+      "Punjabi juttis | पंजाबी जूतियाँ",
+      "Assamese tea | असम की चाय"
+    ],
+    answer: 0,
+    hint: "Think of the traditional handwoven clothing named in the chapter. | अध्याय में बताई गई पारंपरिक बुनी हुई पोशाक के बारे में सोचें।",
+    explanation: "Maheshwari sarees and their weaving tradition are associated with Maheshwar. | महेश्वरी साड़ियाँ और उनकी बुनाई की परंपरा महेश्वर से जुड़ी हैं।"
+  },
+  {
+    q: "8. Which subject would best help you learn about Queen Ahilya Bai and the fort's past? | रानी अहिल्या बाई और किले के अतीत के बारे में जानने के लिए कौन-सा विषय सबसे उपयोगी होगा?",
+    options: [
+      "Geometry | ज्यामिति",
+      "History | इतिहास",
+      "Music | संगीत",
+      "Physical education | शारीरिक शिक्षा"
+    ],
+    answer: 1,
+    hint: "Choose the subject that studies people and events from the past. | उस विषय को चुनें जिसमें अतीत के लोगों और घटनाओं का अध्ययन होता है।",
+    explanation: "History studies people, places, and events from the past. | इतिहास में अतीत के लोगों, स्थानों और घटनाओं का अध्ययन किया जाता है।"
+  },
+  {
+    q: "9. Which statement correctly connects the chapter's main place and river? | कौन-सा कथन अध्याय के मुख्य स्थान और नदी को सही ढंग से जोड़ता है?",
+    options: [
+      "Maheshwar is associated with the Narmada River. | महेश्वर का संबंध नर्मदा नदी से है।",
+      "Maheshwar is associated with the Yamuna River. | महेश्वर का संबंध यमुना नदी से है।",
+      "Maheshwar is associated with the Brahmaputra River. | महेश्वर का संबंध ब्रह्मपुत्र नदी से है।",
+      "Maheshwar is associated with the Sutlej River. | महेश्वर का संबंध सतलुज नदी से है।"
+    ],
+    answer: 0,
+    hint: "Recall the river specifically named in the chapter. | अध्याय में विशेष रूप से बताई गई नदी याद करें।",
+    explanation: "The Narmada River is the river associated with Maheshwar in the chapter. | अध्याय में महेश्वर से जुड़ी नदी नर्मदा है।"
+  },
+  {
+    q: "10. Which combination best represents the topics introduced in the Maheshwar chapter? | महेश्वर अध्याय में प्रस्तुत विषयों को कौन-सा समूह सबसे अच्छी तरह दर्शाता है?",
+    options: [
+      "Space travel, planets and rockets | अंतरिक्ष यात्रा, ग्रह और रॉकेट",
+      "Cooking, farming and fishing | खाना बनाना, खेती और मछली पकड़ना",
+      "Maheshwar, its fort, its history and its weaving tradition | महेश्वर, उसका किला, उसका इतिहास और बुनाई की परंपरा",
+      "Deserts, snowstorms and volcanoes | रेगिस्तान, बर्फीले तूफान और ज्वालामुखी"
+    ],
+    answer: 2,
+    hint: "Think about the place, its heritage and its traditional craft. | स्थान, उसकी विरासत और पारंपरिक शिल्प के बारे में सोचें।",
+    explanation: "The chapter details include Maheshwar, its fort, Queen Ahilya Bai, the Narmada River and Maheshwari sarees. | अध्याय के विवरण में महेश्वर, उसका किला, रानी अहिल्या बाई, नर्मदा नदी और महेश्वरी साड़ियाँ शामिल हैं।"
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answeredCorrectly = false;
+let hintShown = false;
+
+const questionCounter = document.getElementById("questionCounter");
+const scoreCounter = document.getElementById("scoreCounter");
+const progressBar = document.getElementById("progressBar");
+const questionNumber = document.getElementById("questionNumber");
+const questionText = document.getElementById("questionText");
+const optionsContainer = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const hintButton = document.getElementById("hintButton");
+const hintText = document.getElementById("hintText");
+const nextButton = document.getElementById("nextButton");
+const quizCard = document.getElementById("quizCard");
+const resultSection = document.getElementById("resultSection");
+
+function loadQuestion() {
+  const q = questions[currentQuestion];
+
+  answeredCorrectly = false;
+  hintShown = false;
+
+  questionCounter.textContent =
+    "Question " + (currentQuestion + 1) + " of " + questions.length +
+    " | प्रश्न " + (currentQuestion + 1) + " / " + questions.length;
+
+  scoreCounter.textContent = "Score: " + score + " | अंक: " + score;
+
+  progressBar.style.width =
+    (currentQuestion / questions.length * 100) + "%";
+
+  questionNumber.textContent =
+    "Question " + (currentQuestion + 1) +
+    " | प्रश्न " + (currentQuestion + 1);
+
+  questionText.textContent = q.q;
+  optionsContainer.innerHTML = "";
+
+  q.options.forEach(function(option, index) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option";
+    button.textContent = option;
+
+    button.addEventListener("click", function() {
+      checkAnswer(index, button);
+    });
+
+    optionsContainer.appendChild(button);
+  });
+
+  feedback.className = "feedback";
+  feedback.textContent = "";
+
+  hintText.textContent = q.hint;
+  hintText.className = "hint";
+  hintButton.disabled = false;
+  hintButton.textContent = "Show Hint | संकेत देखें";
+
+  nextButton.disabled = true;
+  nextButton.textContent =
+    currentQuestion === questions.length - 1
+      ? "See Result | परिणाम देखें"
+      : "Next Question | अगला प्रश्न →";
+}
+
+function checkAnswer(selectedIndex, selectedButton) {
+  if (answeredCorrectly) return;
+
+  const q = questions[currentQuestion];
+  const optionButtons = optionsContainer.querySelectorAll(".option");
+
+  if (selectedIndex === q.answer) {
+    answeredCorrectly = true;
+    score++;
+
+    selectedButton.classList.add("correct");
+    optionButtons.forEach(function(button) {
+      button.disabled = true;
+    });
+
+    feedback.className = "feedback show good";
+    feedback.textContent =
+      "Well done! Keep it up! | बहुत अच्छा! ऐसे ही आगे बढ़ते रहें! " +
+      q.explanation;
+
+    nextButton.disabled = false;
+    hintButton.disabled = true;
+    scoreCounter.textContent = "Score: " + score + " | अंक: " + score;
+  } else {
+    selectedButton.classList.add("wrong");
+
+    feedback.className = "feedback show bad";
+    feedback.textContent =
+      "Wrong answer! Read carefully and try again. | " +
+      "गलत जवाब! ध्यान से पढ़ें और फिर से प्रयास करें।";
+
+    selectedButton.disabled = true;
+  }
+}
+
+hintButton.addEventListener("click", function() {
+  if (!hintShown) {
+    hintText.classList.add("show");
+    hintButton.textContent = "Hide Hint | संकेत छिपाएँ";
+    hintShown = true;
+  } else {
+    hintText.classList.remove("show");
+    hintButton.textContent = "Show Hint | संकेत देखें";
+    hintShown = false;
+  }
+});
+
+nextButton.addEventListener("click", function() {
+  if (!answeredCorrectly) return;
+
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    loadQuestion();
+  } else {
+    showResult();
+  }
+});
+
+function showResult() {
+  quizCard.style.display = "none";
+  resultSection.style.display = "block";
+
+  const percentage = Math.round((score / questions.length) * 100);
+
+  document.getElementById("finalScore").textContent =
+    score + " / " + questions.length;
+
+  document.getElementById("percentageText").textContent =
+    percentage + "% | प्रतिशत";
+
+  let message;
+  let hindi;
+
+  if (percentage <= 20) {
+    message = "Keep trying!";
+    hindi = "कोशिश करते रहें!";
+  } else if (percentage <= 40) {
+    message = "Good try!";
+    hindi = "अच्छा प्रयास!";
+  } else if (percentage <= 60) {
+    message = "Good job!";
+    hindi = "बहुत अच्छा प्रयास!";
+  } else if (percentage <= 80) {
+    message = "Very good!";
+    hindi = "बहुत बढ़िया!";
+  } else if (percentage < 100) {
+    message = "Excellent!";
+    hindi = "शानदार!";
+  } else {
+    message = "Fantastic! Perfect score!";
+    hindi = "अद्भुत! पूरे अंक!";
+  }
+
+  document.getElementById("resultMessage").textContent = message;
+  document.getElementById("resultHindi").textContent = hindi;
+
+  progressBar.style.width = "100%";
+  resultSection.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function restartQuiz() {
+  currentQuestion = 0;
+  score = 0;
+  answeredCorrectly = false;
+  hintShown = false;
+
+  quizCard.style.display = "block";
+  resultSection.style.display = "none";
+
+  loadQuestion();
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.getElementById("restartButton").addEventListener("click", restartQuiz);
+document.getElementById("playAgainButton").addEventListener("click", restartQuiz);
+
+loadQuestion();
+</script>
+
+</body>
+</html>
