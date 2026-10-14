@@ -1,0 +1,655 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 12 - Quiz 8 | RawaRajpootNexEduToppers</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    padding: 15px;
+    font-family: Arial, sans-serif;
+    background: #f3f0ff;
+    color: #25223a;
+    line-height: 1.6;
+}
+
+.container { max-width: 760px; margin: auto; }
+
+.header {
+    background: linear-gradient(135deg, #5634a5, #8965db);
+    color: white;
+    padding: 22px 16px;
+    border-radius: 16px;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.header h1 { font-size: 25px; margin: 0 0 8px; }
+.header p { margin: 5px 0; }
+
+.card {
+    background: white;
+    padding: 18px;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    box-shadow: 0 3px 12px rgba(40,25,90,0.08);
+}
+
+.passage {
+    background: #f8f5ff;
+    border-left: 4px solid #7650c9;
+    padding: 14px;
+    border-radius: 8px;
+    margin: 12px 0;
+}
+
+.passage h3 { margin-top: 0; color: #5634a5; }
+
+.hindi {
+    display: block;
+    color: #625b76;
+    font-size: 15px;
+    font-weight: normal;
+    margin-top: 5px;
+}
+
+.progress-text {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.progress-track {
+    height: 10px;
+    background: #e7e0fa;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: #7650c9;
+    transition: width 0.25s;
+}
+
+.question {
+    font-size: 19px;
+    font-weight: bold;
+    margin: 14px 0;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.option {
+    padding: 12px;
+    border: 2px solid #ddd5f4;
+    border-radius: 10px;
+    background: white;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    overflow-wrap: anywhere;
+}
+
+.option:hover:not(:disabled) {
+    background: #f3edff;
+    border-color: #8965db;
+}
+
+.option:disabled { cursor: default; opacity: 1; }
+
+.option.correct {
+    background: #e2f8e8;
+    border-color: #29934b;
+}
+
+.option.wrong {
+    background: #ffebeb;
+    border-color: #d94444;
+}
+
+.feedback {
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 10px;
+    display: none;
+}
+
+.feedback.good {
+    display: block;
+    background: #e2f8e8;
+    color: #175c2c;
+}
+
+.feedback.bad {
+    display: block;
+    background: #ffebeb;
+    color: #922626;
+}
+
+.hint-box {
+    display: none;
+    background: #fff8dc;
+    border-left: 4px solid #e6b52d;
+    padding: 10px;
+    margin-top: 12px;
+    border-radius: 6px;
+}
+
+button.action {
+    border: none;
+    background: #6843b5;
+    color: white;
+    padding: 11px 17px;
+    border-radius: 9px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 8px 5px 0 0;
+}
+
+button.action:hover { background: #4c2c91; }
+
+button.action:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.secondary {
+    background: #e9e2fa !important;
+    color: #3e286e !important;
+}
+
+#nextBtn { display: none; }
+
+.result { display: none; text-align: center; }
+.result h2 { color: #5634a5; }
+
+.score-number {
+    font-size: 34px;
+    font-weight: bold;
+    color: #5634a5;
+}
+
+.nav-link {
+    display: inline-block;
+    text-decoration: none;
+    background: white;
+    color: #5634a5;
+    border: 2px solid #7650c9;
+    padding: 10px 14px;
+    border-radius: 9px;
+    font-weight: bold;
+    margin: 5px 0 14px;
+}
+
+.disclaimer {
+    font-size: 13px;
+    color: #514b61;
+    overflow-wrap: anywhere;
+}
+
+footer {
+    text-align: center;
+    font-size: 13px;
+    color: #625b76;
+    padding: 12px 4px;
+}
+
+@media (max-width: 520px) {
+    body { padding: 10px; }
+    .header h1 { font-size: 21px; }
+    .card { padding: 14px; }
+    .options { grid-template-columns: 1fr; }
+    .question { font-size: 18px; }
+    button.action { padding: 10px 12px; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header class="header">
+    <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+    <p><strong>Class 4 English | Chapter 12: MAHESHWAR</strong></p>
+    <p>Quiz 8: Reading Comprehension</p>
+    <p lang="hi">कक्षा 4 अंग्रेज़ी | गद्यांश की समझ</p>
+</header>
+
+<a class="nav-link" href="class4-english-chapter12.html">
+    ← Back to Chapter 12 / अध्याय 12 पर वापस जाएँ
+</a>
+
+<section class="card">
+    <h2>Read the Passage / गद्यांश पढ़ें</h2>
+
+    <div class="passage">
+        <h3>A Visit to Maheshwar / महेश्वर की यात्रा</h3>
+
+        <p>
+            Meera visited Maheshwar with her family during the holidays.
+            She saw an old fort near the Narmada River. The fort reminded
+            her of the people who had lived there long ago. In the local
+            market, Meera noticed beautiful handwoven sarees. A craftsperson
+            explained that making cloth by hand requires patience and skill.
+            Meera enjoyed learning about the town's history and traditions.
+            Before leaving, she promised to respect historical places and
+            keep them clean.
+        </p>
+
+        <p lang="hi">
+            मीरा छुट्टियों में अपने परिवार के साथ महेश्वर गई। उसने नर्मदा
+            नदी के पास एक पुराना किला देखा। उस किले को देखकर उसे उन लोगों
+            की याद आई जो बहुत पहले वहाँ रहते थे। स्थानीय बाज़ार में मीरा
+            ने सुंदर हाथ से बुनी हुई साड़ियाँ देखीं। एक कारीगर ने समझाया
+            कि हाथ से कपड़ा बनाने के लिए धैर्य और कौशल की आवश्यकता होती है।
+            मीरा ने शहर के इतिहास और परंपराओं के बारे में जानकर आनंद लिया।
+            वहाँ से जाने से पहले उसने ऐतिहासिक स्थानों का सम्मान करने और
+            उन्हें साफ़ रखने का वादा किया।
+        </p>
+    </div>
+
+    <p>
+        Answer the questions based on the passage.
+        <span class="hindi" lang="hi">गद्यांश के आधार पर प्रश्नों के उत्तर दें।</span>
+    </p>
+
+    <div class="progress-text">
+        <span id="progressText">Question 1 of 10</span>
+        <span id="scoreText">Score: 0</span>
+    </div>
+
+    <div class="progress-track" id="progressTrack"
+         role="progressbar" aria-label="Quiz progress"
+         aria-valuemin="0" aria-valuemax="10" aria-valuenow="0">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+</section>
+
+<main class="card" id="quizCard">
+    <div class="question" id="questionText"></div>
+    <div class="options" id="options"></div>
+    <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+
+    <button class="action secondary" id="hintBtn" type="button">
+        Show Hint / संकेत देखें
+    </button>
+
+    <div class="hint-box" id="hintBox"></div>
+
+    <button class="action" id="nextBtn" type="button">
+        Next Question / अगला प्रश्न
+    </button>
+</main>
+
+<section class="card result" id="resultCard" aria-live="polite">
+    <h2>Quiz Completed! / क्विज़ पूरा हुआ!</h2>
+    <div class="score-number" id="finalScore"></div>
+    <h3 id="resultMessage"></h3>
+    <p id="resultHindi"></p>
+    <p id="resultDetail"></p>
+
+    <button class="action" id="restartBtn" type="button">
+        Try Again / फिर से प्रयास करें
+    </button>
+</section>
+
+<section class="card disclaimer">
+    <h3>Disclaimer / अस्वीकरण</h3>
+
+    <p>
+        RawaRajpootNexEduToppers Learning Academy is an independent
+        educational platform and is not affiliated with, endorsed by,
+        or associated with NCERT. NCERT textbook names, chapters, and
+        curriculum topics belong exclusively to NCERT. All explanations,
+        examples, and practice material provided here are educational aids.
+        For official textbooks, visit
+        <a href="https://ncert.nic.in/" target="_blank"
+           rel="noopener noreferrer">ncert.nic.in</a>.
+    </p>
+
+    <p lang="hi">
+        RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+        इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+        पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+        यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
+        लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए ncert.nic.in पर जाएँ।
+    </p>
+</section>
+
+<footer>
+    Learn • Practise • Improve
+    <span lang="hi"> | सीखें • अभ्यास करें • आगे बढ़ें</span>
+</footer>
+
+</div>
+
+<script>
+"use strict";
+
+const questions = [
+    {
+        q: "Where did Meera visit with her family?",
+        hi: "मीरा अपने परिवार के साथ कहाँ गई?",
+        options: ["Delhi", "Maheshwar", "Mumbai", "Jaipur"],
+        answer: 1,
+        hint: "Look at the title of the passage and its opening sentence.",
+        hintHi: "गद्यांश के शीर्षक और पहले वाक्य पर ध्यान दें।",
+        explanation: "The opening sentence says that Meera visited Maheshwar.",
+        explanationHi: "पहले वाक्य में बताया गया है कि मीरा महेश्वर गई थी।"
+    },
+    {
+        q: "Which river was near the old fort?",
+        hi: "पुराने किले के पास कौन-सी नदी थी?",
+        options: ["Ganga", "Yamuna", "Narmada", "Godavari"],
+        answer: 2,
+        hint: "Find the name of the river in the second sentence.",
+        hintHi: "दूसरे वाक्य में नदी का नाम देखें।",
+        explanation: "The passage says the old fort was near the Narmada River.",
+        explanationHi: "गद्यांश के अनुसार पुराना किला नर्मदा नदी के पास था।"
+    },
+    {
+        q: "What did Meera see in the local market?",
+        hi: "मीरा ने स्थानीय बाज़ार में क्या देखा?",
+        options: [
+            "Handwoven sarees",
+            "Wooden boats",
+            "School uniforms",
+            "Stone statues"
+        ],
+        answer: 0,
+        hint: "Look for the item described as beautiful and handwoven.",
+        hintHi: "उस वस्तु को खोजें जिसे सुंदर और हाथ से बुना हुआ बताया गया है।",
+        explanation: "Meera noticed beautiful handwoven sarees in the market.",
+        explanationHi: "मीरा ने बाज़ार में सुंदर हाथ से बुनी हुई साड़ियाँ देखीं।"
+    },
+    {
+        q: "According to the craftsperson, what is needed to make cloth by hand?",
+        hi: "कारीगर के अनुसार हाथ से कपड़ा बनाने के लिए क्या आवश्यक है?",
+        options: [
+            "Speed and strength",
+            "Patience and skill",
+            "Luck and money",
+            "Paint and paper"
+        ],
+        answer: 1,
+        hint: "The craftsperson mentions two qualities needed for the work.",
+        hintHi: "कारीगर ने इस काम के लिए आवश्यक दो गुण बताए हैं।",
+        explanation: "The craftsperson explains that handweaving requires patience and skill.",
+        explanationHi: "कारीगर के अनुसार हाथ से बुनाई के लिए धैर्य और कौशल चाहिए।"
+    },
+    {
+        q: "Why did the fort make Meera think about people from long ago?",
+        hi: "किले को देखकर मीरा को बहुत पहले के लोगों की याद क्यों आई?",
+        options: [
+            "It was a historical place.",
+            "It was a new shopping centre.",
+            "It was her school.",
+            "It was a modern factory."
+        ],
+        answer: 0,
+        hint: "Think about what an old fort can tell us about the past.",
+        hintHi: "सोचें कि पुराना किला हमें अतीत के बारे में क्या बता सकता है।",
+        explanation: "The old fort reminded Meera of people who had lived there in the past.",
+        explanationHi: "पुराने किले ने मीरा को अतीत में वहाँ रहने वाले लोगों की याद दिलाई।"
+    },
+    {
+        q: "Which word best describes Meera's attitude towards learning?",
+        hi: "सीखने के प्रति मीरा के रवैये को कौन-सा शब्द सबसे अच्छी तरह बताता है?",
+        options: ["Curious", "Careless", "Angry", "Bored"],
+        answer: 0,
+        hint: "She enjoyed learning about the town's history and traditions.",
+        hintHi: "उसे शहर के इतिहास और परंपराओं के बारे में जानना अच्छा लगा।",
+        explanation: "Meera was curious because she enjoyed learning new things about the town.",
+        explanationHi: "मीरा जिज्ञासु थी क्योंकि उसे शहर के बारे में नई बातें जानना अच्छा लगा।"
+    },
+    {
+        q: "What does “craftsperson” mean in the passage?",
+        hi: "गद्यांश में “craftsperson” का क्या अर्थ है?",
+        options: [
+            "A person who makes things skilfully",
+            "A person who sells train tickets",
+            "A person who studies at school",
+            "A person who repairs roads"
+        ],
+        answer: 0,
+        hint: "Look at the person's work with handwoven cloth.",
+        hintHi: "हाथ से बुने कपड़े से जुड़े उस व्यक्ति के काम पर ध्यान दें।",
+        explanation: "A craftsperson is someone who makes things using skill, often by hand.",
+        explanationHi: "कारीगर वह व्यक्ति है जो कौशल से, अक्सर हाथों से, वस्तुएँ बनाता है।"
+    },
+    {
+        q: "What did Meera promise before leaving?",
+        hi: "जाने से पहले मीरा ने क्या वादा किया?",
+        options: [
+            "To build a new fort",
+            "To buy every saree",
+            "To respect historical places and keep them clean",
+            "To live in the market"
+        ],
+        answer: 2,
+        hint: "Read the final sentence of the passage.",
+        hintHi: "गद्यांश का अंतिम वाक्य पढ़ें।",
+        explanation: "Meera promised to respect historical places and keep them clean.",
+        explanationHi: "मीरा ने ऐतिहासिक स्थानों का सम्मान करने और उन्हें साफ़ रखने का वादा किया।"
+    },
+    {
+        q: "Which is a fact stated in the passage?",
+        hi: "गद्यांश में कौन-सी बात तथ्य के रूप में बताई गई है?",
+        options: [
+            "Maheshwar is the most beautiful town.",
+            "Meera visited Maheshwar with her family.",
+            "Every visitor loves old forts.",
+            "Handwoven sarees are the best clothes."
+        ],
+        answer: 1,
+        hint: "A fact is information that the passage directly states, rather than a personal opinion.",
+        hintHi: "तथ्य वह जानकारी है जो गद्यांश में सीधे दी गई हो, न कि व्यक्तिगत राय।",
+        explanation: "The passage directly states that Meera visited Maheshwar with her family.",
+        explanationHi: "गद्यांश में स्पष्ट रूप से लिखा है कि मीरा अपने परिवार के साथ महेश्वर गई।"
+    },
+    {
+        q: "What is the main message of the passage?",
+        hi: "गद्यांश का मुख्य संदेश क्या है?",
+        options: [
+            "Historical places should be respected and protected.",
+            "Markets should always be crowded.",
+            "Children should avoid learning history.",
+            "Handmade items are easy to make."
+        ],
+        answer: 0,
+        hint: "Think about Meera's promise and what she learned during the visit.",
+        hintHi: "मीरा के वादे और यात्रा के दौरान सीखी गई बातों पर विचार करें।",
+        explanation: "The passage highlights learning about heritage and treating historical places with care.",
+        explanationHi: "गद्यांश विरासत के बारे में सीखने और ऐतिहासिक स्थानों की देखभाल करने का संदेश देता है।"
+    }
+];
+
+let current = 0;
+let score = 0;
+let answeredCorrectly = false;
+
+const questionText = document.getElementById("questionText");
+const optionsBox = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const hintBtn = document.getElementById("hintBtn");
+const hintBox = document.getElementById("hintBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const scoreText = document.getElementById("scoreText");
+const progressBar = document.getElementById("progressBar");
+const progressTrack = document.getElementById("progressTrack");
+const quizCard = document.getElementById("quizCard");
+const resultCard = document.getElementById("resultCard");
+
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[character]);
+}
+
+function loadQuestion() {
+    answeredCorrectly = false;
+    const item = questions[current];
+
+    progressText.textContent =
+        `Question ${current + 1} of ${questions.length} / प्रश्न ${current + 1} / ${questions.length}`;
+
+    scoreText.textContent = `Score: ${score} / अंक: ${score}`;
+    progressBar.style.width = `${(current / questions.length) * 100}%`;
+    progressTrack.setAttribute("aria-valuenow", current);
+
+    questionText.innerHTML =
+        `${escapeHTML(item.q)}<span class="hindi" lang="hi">${escapeHTML(item.hi)}</span>`;
+
+    optionsBox.innerHTML = "";
+    feedback.className = "feedback";
+    feedback.textContent = "";
+    hintBox.style.display = "none";
+    hintBox.innerHTML = "";
+    hintBtn.style.display = "inline-block";
+    hintBtn.disabled = false;
+    nextBtn.style.display = "none";
+
+    nextBtn.innerHTML = current === questions.length - 1
+        ? "See Results / परिणाम देखें"
+        : "Next Question / अगला प्रश्न";
+
+    item.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option";
+        button.innerHTML =
+            `${String.fromCharCode(65 + index)}. ${escapeHTML(option)}`;
+
+        button.addEventListener("click", () => checkAnswer(index, button));
+        optionsBox.appendChild(button);
+    });
+}
+
+function checkAnswer(selected, selectedButton) {
+    if (answeredCorrectly) return;
+
+    const item = questions[current];
+    const allButtons = optionsBox.querySelectorAll("button");
+
+    if (selected === item.answer) {
+        answeredCorrectly = true;
+        score++;
+        selectedButton.classList.add("correct");
+
+        allButtons.forEach(button => button.disabled = true);
+
+        feedback.className = "feedback good";
+        feedback.innerHTML =
+            `<strong>Well done! Keep it up!</strong>
+            <span class="hindi" lang="hi">बहुत अच्छा! ऐसे ही आगे बढ़ते रहें!</span>
+            <p>${escapeHTML(item.explanation)}</p>
+            <p lang="hi">${escapeHTML(item.explanationHi)}</p>`;
+
+        scoreText.textContent = `Score: ${score} / अंक: ${score}`;
+        hintBtn.disabled = true;
+        nextBtn.style.display = "inline-block";
+    } else {
+        selectedButton.classList.add("wrong");
+        selectedButton.disabled = true;
+
+        feedback.className = "feedback bad";
+        feedback.innerHTML =
+            `<strong>Wrong answer! Read carefully and try again.</strong>
+            <span class="hindi" lang="hi">गलत जवाब! ध्यान से पढ़ें और फिर से प्रयास करें।</span>`;
+    }
+}
+
+hintBtn.addEventListener("click", () => {
+    const item = questions[current];
+
+    hintBox.innerHTML =
+        `${escapeHTML(item.hint)}
+        <span class="hindi" lang="hi">${escapeHTML(item.hintHi)}</span>`;
+
+    hintBox.style.display = "block";
+    hintBtn.disabled = true;
+});
+
+nextBtn.addEventListener("click", () => {
+    if (!answeredCorrectly) return;
+
+    if (current < questions.length - 1) {
+        current++;
+        loadQuestion();
+    } else {
+        showResults();
+    }
+});
+
+function showResults() {
+    quizCard.style.display = "none";
+    resultCard.style.display = "block";
+    progressBar.style.width = "100%";
+    progressTrack.setAttribute("aria-valuenow", questions.length);
+
+    const percentage = Math.round((score / questions.length) * 100);
+
+    document.getElementById("finalScore").textContent =
+        `${score} / ${questions.length} (${percentage}%)`;
+
+    let message;
+    let hindi;
+
+    if (percentage <= 20) {
+        message = "Keep trying!";
+        hindi = "कोशिश करते रहें!";
+    } else if (percentage <= 40) {
+        message = "Good try!";
+        hindi = "अच्छा प्रयास!";
+    } else if (percentage <= 60) {
+        message = "Good job!";
+        hindi = "बहुत अच्छा प्रयास!";
+    } else if (percentage <= 80) {
+        message = "Very good!";
+        hindi = "बहुत बढ़िया!";
+    } else if (percentage < 100) {
+        message = "Excellent!";
+        hindi = "शानदार!";
+    } else {
+        message = "Fantastic! Perfect score!";
+        hindi = "अद्भुत! पूरे अंक!";
+    }
+
+    document.getElementById("resultMessage").textContent = message;
+    document.getElementById("resultHindi").textContent = hindi;
+    document.getElementById("resultDetail").textContent =
+        `You answered ${score} out of ${questions.length} questions correctly. / आपने ${questions.length} में से ${score} प्रश्नों के सही उत्तर दिए।`;
+}
+
+document.getElementById("restartBtn").addEventListener("click", () => {
+    current = 0;
+    score = 0;
+    resultCard.style.display = "none";
+    quizCard.style.display = "block";
+    loadQuestion();
+});
+
+loadQuestion();
+</script>
+</body>
+</html>
