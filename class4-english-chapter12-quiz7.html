@@ -2,591 +2,743 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Class 4 English Chapter 12 - Quiz 7 | RawaRajpootNexEduToppers</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz 7: Weaving & Heritage | RawaRajpootNexEduToppers</title>
 
-<style>
-* { box-sizing: border-box; }
+  <style>
+    * { box-sizing: border-box; }
 
-body {
-    margin: 0;
-    padding: 15px;
-    font-family: Arial, sans-serif;
-    background: #f3f0ff;
-    color: #25223a;
-    line-height: 1.6;
-}
+    body {
+      margin: 0;
+      padding: 16px;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #29213b;
+      background: linear-gradient(135deg, #ede9fe, #fff7ed);
+    }
 
-.container { max-width: 760px; margin: auto; }
+    .container {
+      max-width: 850px;
+      margin: auto;
+    }
 
-.header {
-    background: linear-gradient(135deg, #5634a5, #8965db);
-    color: white;
-    padding: 22px 16px;
-    border-radius: 16px;
-    text-align: center;
-    margin-bottom: 18px;
-}
+    header {
+      padding: 24px 16px;
+      text-align: center;
+      color: white;
+      background: linear-gradient(135deg, #6d28d9, #9333ea);
+      border-radius: 18px;
+      box-shadow: 0 5px 16px #00000018;
+    }
 
-.header h1 { font-size: 25px; margin: 0 0 8px; }
-.header p { margin: 5px 0; }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(23px, 5vw, 32px);
+    }
 
-.card {
-    background: white;
-    padding: 18px;
-    border-radius: 14px;
-    margin-bottom: 16px;
-    box-shadow: 0 3px 12px rgba(40,25,90,0.08);
-}
+    header h2 { margin-bottom: 8px; }
 
-.progress-text {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    font-weight: bold;
-    font-size: 14px;
-}
+    header p { margin: 6px 0; }
 
-.progress-track {
-    height: 10px;
-    background: #e7e0fa;
-    border-radius: 20px;
-    overflow: hidden;
-    margin-top: 8px;
-}
+    .hindi {
+      display: block;
+      margin-top: 4px;
+      font-weight: normal;
+      color: #625970;
+    }
 
-.progress-bar {
-    height: 100%;
-    width: 0;
-    background: #7650c9;
-    transition: width 0.25s;
-}
+    header .hindi { color: white; }
 
-.question {
-    font-size: 19px;
-    font-weight: bold;
-    margin: 14px 0;
-}
+    .notice, .question-card, .results, footer {
+      background: white;
+      border-radius: 14px;
+      padding: 18px;
+      margin: 16px 0;
+      box-shadow: 0 3px 12px #0000000d;
+    }
 
-.hindi {
-    display: block;
-    color: #625b76;
-    font-size: 15px;
-    font-weight: normal;
-    margin-top: 4px;
-}
+    .notice { border-left: 5px solid #8b5cf6; }
 
-.options {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 16px 0 8px;
+    }
 
-.option {
-    padding: 12px;
-    border: 2px solid #ddd5f4;
-    border-radius: 10px;
-    background: white;
-    text-align: left;
-    font-size: 16px;
-    cursor: pointer;
-    overflow-wrap: anywhere;
-}
+    .stat {
+      background: white;
+      border-radius: 12px;
+      padding: 12px 5px;
+      text-align: center;
+    }
 
-.option:hover:not(:disabled) {
-    background: #f3edff;
-    border-color: #8965db;
-}
+    .stat strong {
+      display: block;
+      color: #6d28d9;
+      font-size: 20px;
+    }
 
-.option:disabled { cursor: default; opacity: 1; }
+    .progress-track {
+      height: 10px;
+      background: #ddd6fe;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 12px 0 20px;
+    }
 
-.option.correct {
-    background: #e2f8e8;
-    border-color: #29934b;
-}
+    #progressBar {
+      width: 0;
+      height: 100%;
+      background: #7c3aed;
+      transition: width .25s ease;
+    }
 
-.option.wrong {
-    background: #ffebeb;
-    border-color: #d94444;
-}
+    .question-card {
+      border: 1px solid #e9d5ff;
+    }
 
-.feedback {
-    margin-top: 14px;
-    padding: 12px;
-    border-radius: 10px;
-    display: none;
-}
+    .question-number {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: #ede9fe;
+      color: #5b21b6;
+      font-weight: bold;
+    }
 
-.feedback.good {
-    display: block;
-    background: #e2f8e8;
-    color: #175c2c;
-}
+    .question-card h3 {
+      font-size: 18px;
+      margin: 12px 0 16px;
+    }
 
-.feedback.bad {
-    display: block;
-    background: #ffebeb;
-    color: #922626;
-}
+    .option {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 9px 0;
+      border: 2px solid #e9d5ff;
+      border-radius: 10px;
+      background: #faf5ff;
+      color: #29213b;
+      font-size: 15px;
+      text-align: left;
+      cursor: pointer;
+    }
 
-.hint-box {
-    display: none;
-    background: #fff8dc;
-    border-left: 4px solid #e6b52d;
-    padding: 10px;
-    margin-top: 12px;
-    border-radius: 6px;
-}
+    .option:hover:not(:disabled) {
+      background: #f3e8ff;
+      border-color: #a78bfa;
+    }
 
-button.action {
-    border: none;
-    background: #6843b5;
-    color: white;
-    padding: 11px 17px;
-    border-radius: 9px;
-    font-size: 15px;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 8px 5px 0 0;
-}
+    .option:disabled {
+      cursor: default;
+      opacity: 1;
+    }
 
-button.action:hover { background: #4c2c91; }
+    .option.correct {
+      background: #dcfce7;
+      border-color: #16a34a;
+    }
 
-button.action:disabled {
-    opacity: 0.45;
-    cursor: not-allowed;
-}
+    .option.wrong {
+      background: #fee2e2;
+      border-color: #dc2626;
+    }
 
-.secondary {
-    background: #e9e2fa !important;
-    color: #3e286e !important;
-}
+    .feedback {
+      display: none;
+      padding: 12px;
+      margin-top: 12px;
+      border-radius: 10px;
+      font-weight: bold;
+    }
 
-#nextBtn { display: none; }
+    .feedback.show { display: block; }
 
-.result { display: none; text-align: center; }
-.result h2 { color: #5634a5; }
+    .feedback.good {
+      color: #166534;
+      background: #dcfce7;
+    }
 
-.score-number {
-    font-size: 34px;
-    font-weight: bold;
-    color: #5634a5;
-}
+    .feedback.bad {
+      color: #991b1b;
+      background: #fee2e2;
+    }
 
-.nav-link {
-    display: inline-block;
-    text-decoration: none;
-    background: white;
-    color: #5634a5;
-    border: 2px solid #7650c9;
-    padding: 10px 14px;
-    border-radius: 9px;
-    font-weight: bold;
-    margin: 5px 0 14px;
-}
+    .hint-button {
+      margin-top: 6px;
+      padding: 8px 12px;
+      border: 1px solid #fcd34d;
+      border-radius: 8px;
+      background: #fef3c7;
+      color: #78350f;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-.disclaimer {
-    font-size: 13px;
-    color: #514b61;
-    overflow-wrap: anywhere;
-}
+    .hint {
+      display: none;
+      padding: 10px;
+      margin-top: 10px;
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      border-radius: 6px;
+    }
 
-footer {
-    text-align: center;
-    font-size: 13px;
-    color: #625b76;
-    padding: 12px 4px;
-}
+    .hint.show { display: block; }
 
-@media (max-width: 520px) {
-    body { padding: 10px; }
-    .header h1 { font-size: 21px; }
-    .card { padding: 14px; }
-    .options { grid-template-columns: 1fr; }
-    .question { font-size: 18px; }
-    button.action { padding: 10px 12px; }
-}
-</style>
+    .main-button {
+      padding: 12px 20px;
+      margin: 10px 6px 6px 0;
+      border: none;
+      border-radius: 10px;
+      background: #6d28d9;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .main-button:hover { background: #5b21b6; }
+
+    .results {
+      display: none;
+      text-align: center;
+      border: 2px solid #c4b5fd;
+    }
+
+    .results.show { display: block; }
+
+    .results h2, .result-score { color: #6d28d9; }
+
+    .result-score {
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    .navigation {
+      text-align: center;
+      margin: 24px 0;
+    }
+
+    .navigation a {
+      display: inline-block;
+      padding: 10px 15px;
+      border: 2px solid #c4b5fd;
+      border-radius: 10px;
+      background: white;
+      color: #6d28d9;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    footer {
+      font-size: 13px;
+      color: #514b60;
+      overflow-wrap: anywhere;
+    }
+
+    footer a { color: #6d28d9; }
+
+    button:focus-visible, a:focus-visible {
+      outline: 3px solid #f59e0b;
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 10px; }
+      .question-card, .notice, footer { padding: 14px; }
+      .question-card h3 { font-size: 17px; }
+      .option { font-size: 14px; }
+      .stat { font-size: 13px; }
+    }
+  </style>
 </head>
 
 <body>
 <div class="container">
 
-<header class="header">
+  <header>
     <h1>RawaRajpootNexEduToppers Learning Academy</h1>
     <p><strong>Class 4 English | Chapter 12: MAHESHWAR</strong></p>
-    <p>Quiz 7: Prepositions, Pronouns & Sentences</p>
-    <p lang="hi">कक्षा 4 अंग्रेज़ी | संबंधबोधक शब्द, सर्वनाम और वाक्य</p>
-</header>
+    <p class="hindi">कक्षा 4 अंग्रेज़ी | अध्याय 12: महेश्वर</p>
+    <hr style="border-color:#ffffff70; margin:16px 0;">
+    <h2>Quiz 7: Weaving &amp; Heritage</h2>
+    <p>Learn about Maheshwari sarees and handloom tradition.</p>
+    <p>महेश्वरी साड़ियों और हथकरघा परंपरा के बारे में सीखें।</p>
+  </header>
 
-<a class="nav-link" href="class4-english-chapter12.html">
-    ← Back to Chapter 12 / अध्याय 12 पर वापस जाएँ
-</a>
-
-<section class="card">
-    <h2>Instructions / निर्देश</h2>
+  <div class="notice">
+    <strong>Instructions / निर्देश:</strong>
     <p>
-        Choose the correct answer. If your answer is wrong, try again.
-        You can move to the next question after answering correctly.
-        <span class="hindi" lang="hi">
-            सही उत्तर चुनें। गलत उत्तर देने पर दोबारा प्रयास करें।
-            सही उत्तर देने के बाद ही अगले प्रश्न पर जा सकते हैं।
-        </span>
+      Choose the best answer for each question. Read the feedback and try
+      again if your answer is incorrect. Use hints when needed.
     </p>
+    <p>
+      प्रत्येक प्रश्न का सही उत्तर चुनें। उत्तर गलत होने पर प्रतिक्रिया पढ़ें
+      और दोबारा प्रयास करें। आवश्यकता होने पर संकेत देखें।
+    </p>
+  </div>
 
-    <div class="progress-text">
-        <span id="progressText">Question 1 of 10</span>
-        <span id="scoreText">Score: 0</span>
+  <div class="stats">
+    <div class="stat">
+      <strong id="questionCount">0/10</strong>
+      Questions
+      <span class="hindi">प्रश्न</span>
     </div>
-
-    <div class="progress-track" id="progressTrack"
-         role="progressbar" aria-label="Quiz progress"
-         aria-valuemin="0" aria-valuemax="10" aria-valuenow="0">
-        <div class="progress-bar" id="progressBar"></div>
+    <div class="stat">
+      <strong id="scoreCount">0</strong>
+      Correct
+      <span class="hindi">सही उत्तर</span>
     </div>
-</section>
+    <div class="stat">
+      <strong id="percentCount">0%</strong>
+      Progress
+      <span class="hindi">प्रगति</span>
+    </div>
+  </div>
 
-<main class="card" id="quizCard">
-    <div class="question" id="questionText"></div>
-    <div class="options" id="options"></div>
-    <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+  <div class="progress-track" aria-label="Quiz progress">
+    <div id="progressBar"></div>
+  </div>
 
-    <button class="action secondary" id="hintBtn" type="button">
-        Show Hint / संकेत देखें
-    </button>
+  <main id="quiz"></main>
 
-    <div class="hint-box" id="hintBox"></div>
-
-    <button class="action" id="nextBtn" type="button">
-        Next Question / अगला प्रश्न
-    </button>
-</main>
-
-<section class="card result" id="resultCard" aria-live="polite">
+  <section class="results" id="results" aria-live="polite">
     <h2>Quiz Completed! / क्विज़ पूरा हुआ!</h2>
-    <div class="score-number" id="finalScore"></div>
+    <p class="result-score" id="finalScore"></p>
     <h3 id="resultMessage"></h3>
     <p id="resultHindi"></p>
     <p id="resultDetail"></p>
-
-    <button class="action" id="restartBtn" type="button">
-        Try Again / फिर से प्रयास करें
+    <button class="main-button" onclick="restartQuiz()">
+      Try Again / फिर से प्रयास करें
     </button>
-</section>
+  </section>
 
-<section class="card disclaimer">
-    <h3>Disclaimer / अस्वीकरण</h3>
+  <div class="navigation">
+    <a href="class4-english-chapter12.html">
+      ← Back to Chapter 12 / अध्याय 12 पर वापस जाएँ
+    </a>
+  </div>
+
+  <footer>
+    <strong>Disclaimer / अस्वीकरण</strong>
     <p>
-        RawaRajpootNexEduToppers Learning Academy is an independent
-        educational platform and is not affiliated with, endorsed by,
-        or associated with NCERT. NCERT textbook names, chapters, and
-        curriculum topics belong exclusively to NCERT. All explanations,
-        examples, and practice material provided here are educational aids.
-        For official textbooks, visit
-        <a href="https://ncert.nic.in/" target="_blank"
-           rel="noopener noreferrer">ncert.nic.in</a>.
+      RawaRajpootNexEduToppers Learning Academy is an independent educational
+      platform and is not affiliated with, endorsed by, or associated with
+      NCERT. NCERT textbook names, chapters, and curriculum topics belong
+      exclusively to NCERT. All explanations, examples, and practice material
+      provided here are educational aids. For official textbooks, visit
+      <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">ncert.nic.in</a>.
     </p>
-    <p lang="hi">
-        RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
-        इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
-        पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
-        यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
-        लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए ncert.nic.in पर जाएँ।
+    <p>
+      RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+      इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+      पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+      यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के लिए
+      हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+      <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">ncert.nic.in</a>
+      पर जाएँ।
     </p>
-</section>
-
-<footer>
-    Learn • Practise • Improve
-    <span lang="hi"> | सीखें • अभ्यास करें • आगे बढ़ें</span>
-</footer>
+  </footer>
 
 </div>
 
 <script>
-"use strict";
-
 const questions = [
-    {
-        q: "Complete the sentence: The book is ___ the table.",
-        hi: "वाक्य पूरा करें: The book is ___ the table. (किताब मेज़ पर है।)",
-        options: ["under", "on", "between", "behind"],
-        answer: 1,
-        hint: "Imagine the book resting on the top surface of the table.",
-        hintHi: "कल्पना करें कि किताब मेज़ की ऊपरी सतह पर रखी है।",
-        explanation: "“On” is used when something rests on a surface.",
-        explanationHi: "किसी वस्तु के सतह पर रखे होने पर “on” का प्रयोग होता है।"
-    },
-    {
-        q: "Choose the correct pronoun: Riya is my friend. ___ is kind.",
-        hi: "सही सर्वनाम चुनें: Riya is my friend. ___ is kind. (रिया मेरी मित्र है। वह दयालु है।)",
-        options: ["He", "They", "She", "It"],
-        answer: 2,
-        hint: "Choose the pronoun normally used for a girl or woman.",
-        hintHi: "लड़की या महिला के लिए सामान्यतः प्रयोग होने वाला सर्वनाम चुनें।",
-        explanation: "“She” is the appropriate pronoun for Riya in this sentence.",
-        explanationHi: "इस वाक्य में रिया के लिए “She” सही सर्वनाम है।"
-    },
-    {
-        q: "Complete the sentence: The cat is hiding ___ the bed.",
-        hi: "वाक्य पूरा करें: The cat is hiding ___ the bed. (बिल्ली बिस्तर के नीचे छिपी है।)",
-        options: ["over", "under", "during", "among"],
-        answer: 1,
-        hint: "Think about a place directly below the bed.",
-        hintHi: "बिस्तर के ठीक नीचे वाली जगह के बारे में सोचें।",
-        explanation: "“Under” means below something.",
-        explanationHi: "“Under” का अर्थ किसी वस्तु के नीचे होता है।"
-    },
-    {
-        q: "Choose the correct pronoun: Aman and Ravi are friends. ___ play together.",
-        hi: "सही सर्वनाम चुनें: Aman and Ravi are friends. ___ play together. (अमन और रवि मित्र हैं। वे साथ खेलते हैं।)",
-        options: ["He", "She", "It", "They"],
-        answer: 3,
-        hint: "The sentence refers to two people together.",
-        hintHi: "यह वाक्य दो व्यक्तियों के बारे में है।",
-        explanation: "“They” refers to Aman and Ravi together.",
-        explanationHi: "अमन और रवि दोनों के लिए “They” का प्रयोग होता है।"
-    },
-    {
-        q: "Complete the sentence: We go to school ___ Monday.",
-        hi: "वाक्य पूरा करें: We go to school ___ Monday. (हम सोमवार को स्कूल जाते हैं।)",
-        options: ["at", "on", "in", "from"],
-        answer: 1,
-        hint: "English uses a particular preposition with days of the week.",
-        hintHi: "अंग्रेज़ी में सप्ताह के दिनों के साथ एक विशेष preposition का प्रयोग होता है।",
-        explanation: "Use “on” with days of the week, such as Monday.",
-        explanationHi: "Monday जैसे सप्ताह के दिनों के साथ “on” का प्रयोग होता है।"
-    },
-    {
-        q: "Choose the correct sentence.",
-        hi: "सही वाक्य चुनें।",
-        options: [
-            "He are my brother.",
-            "He am my brother.",
-            "He is my brother.",
-            "He be my brother."
-        ],
-        answer: 2,
-        hint: "The subject is “He”. Choose the matching form of “be”.",
-        hintHi: "कर्ता “He” है। इसके साथ “be” का सही रूप चुनें।",
-        explanation: "“He is my brother” uses the correct subject and verb form.",
-        explanationHi: "“He is my brother” में कर्ता और क्रिया का सही मेल है।"
-    },
-    {
-        q: "Complete the sentence: The school is ___ the bank and the park.",
-        hi: "वाक्य पूरा करें: The school is ___ the bank and the park. (स्कूल बैंक और पार्क के बीच है।)",
-        options: ["between", "inside", "above", "through"],
-        answer: 0,
-        hint: "Use the word that describes a position in the middle of two places.",
-        hintHi: "दो स्थानों के बीच की स्थिति बताने वाला शब्द चुनें।",
-        explanation: "“Between” describes a position in the middle of two places.",
-        explanationHi: "“Between” दो स्थानों के बीच की स्थिति बताता है।"
-    },
-    {
-        q: "Choose the correct pronoun: This pencil belongs to me. It is ___.",
-        hi: "सही शब्द चुनें: This pencil belongs to me. It is ___. (यह पेंसिल मेरी है।)",
-        options: ["my", "mine", "me", "I"],
-        answer: 1,
-        hint: "Choose the possessive word that can stand alone after “is”.",
-        hintHi: "ऐसा अधिकार बताने वाला शब्द चुनें जो “is” के बाद अकेले आ सके।",
-        explanation: "“Mine” shows ownership and can stand alone. “My” usually comes before a noun.",
-        explanationHi: "“Mine” स्वामित्व बताता है और अकेले आ सकता है। “My” सामान्यतः संज्ञा से पहले आता है।"
-    },
-    {
-        q: "Complete the sentence: The birds are flying ___ the sky.",
-        hi: "वाक्य पूरा करें: The birds are flying ___ the sky. (पक्षी आकाश में उड़ रहे हैं।)",
-        options: ["in", "at", "between", "under"],
-        answer: 0,
-        hint: "Choose the preposition used for something within a space or area.",
-        hintHi: "किसी स्थान या क्षेत्र के अंदर होने की स्थिति बताने वाला preposition चुनें।",
-        explanation: "“In the sky” is the natural expression for birds flying in the sky.",
-        explanationHi: "आकाश में उड़ते पक्षियों के लिए “in the sky” सही प्रयोग है।"
-    },
-    {
-        q: "Choose the correctly ordered sentence.",
-        hi: "सही क्रम वाला वाक्य चुनें।",
-        options: [
-            "Every day reads she a book.",
-            "She every a book reads day.",
-            "A book she every day reads.",
-            "She reads a book every day."
-        ],
-        answer: 3,
-        hint: "Start with the person, then the action, then what is read, and finally when.",
-        hintHi: "पहले व्यक्ति, फिर क्रिया, उसके बाद पढ़ी जाने वाली चीज़ और अंत में समय रखें।",
-        explanation: "“She reads a book every day” follows a natural English sentence order.",
-        explanationHi: "“She reads a book every day” अंग्रेज़ी वाक्य का सही क्रम है।"
-    }
+  {
+    question: "Maheshwari sarees are traditionally associated with which place?",
+    hindi: "महेश्वरी साड़ियाँ पारंपरिक रूप से किस स्थान से जुड़ी हैं?",
+    options: ["Maheshwar", "Jaipur", "Shimla", "Chennai"],
+    hindiOptions: ["महेश्वर", "जयपुर", "शिमला", "चेन्नई"],
+    answer: 0,
+    explanation: "Maheshwari sarees are traditionally associated with Maheshwar in Madhya Pradesh.",
+    explanationHindi: "महेश्वरी साड़ियाँ पारंपरिक रूप से मध्य प्रदेश के महेश्वर से जुड़ी हैं।",
+    hint: "Look for the place named in the saree's name.",
+    hintHindi: "साड़ी के नाम में दिए गए स्थान पर ध्यान दें।"
+  },
+  {
+    question: "What is a handloom?",
+    hindi: "हथकरघा क्या होता है?",
+    options: [
+      "A machine used only to print books",
+      "A device used to weave fabric",
+      "A tool used to grow crops",
+      "A machine used to make paper"
+    ],
+    hindiOptions: [
+      "केवल किताबें छापने की मशीन",
+      "कपड़ा बुनने के लिए इस्तेमाल किया जाने वाला उपकरण",
+      "फसल उगाने का औज़ार",
+      "कागज़ बनाने की मशीन"
+    ],
+    answer: 1,
+    explanation: "A handloom is a device used to weave threads into fabric.",
+    explanationHindi: "हथकरघा एक उपकरण है जिससे धागों को बुनकर कपड़ा बनाया जाता है।",
+    hint: "Think about the tool used to turn threads into cloth.",
+    hintHindi: "उस उपकरण के बारे में सोचें जिससे धागों से कपड़ा बनाया जाता है।"
+  },
+  {
+    question: "Who is a weaver?",
+    hindi: "बुनकर कौन होता है?",
+    options: [
+      "A person who repairs roads",
+      "A person who sells vegetables only",
+      "A person who weaves cloth",
+      "A person who paints buildings"
+    ],
+    hindiOptions: [
+      "सड़क की मरम्मत करने वाला व्यक्ति",
+      "केवल सब्ज़ियाँ बेचने वाला व्यक्ति",
+      "कपड़ा बुनने वाला व्यक्ति",
+      "इमारतों पर रंग करने वाला व्यक्ति"
+    ],
+    answer: 2,
+    explanation: "A weaver makes fabric by interlacing threads.",
+    explanationHindi: "बुनकर धागों को आपस में बुनकर कपड़ा बनाता है।",
+    hint: "Connect the word with the activity of weaving.",
+    hintHindi: "इस शब्द को कपड़ा बुनने के काम से जोड़कर सोचें।"
+  },
+  {
+    question: "Which materials are directly used in weaving fabric?",
+    hindi: "कपड़ा बुनने में किन चीज़ों का सीधे उपयोग होता है?",
+    options: [
+      "Threads or yarn",
+      "Bricks and cement",
+      "Sand and stones",
+      "Leaves and soil"
+    ],
+    hindiOptions: [
+      "धागे",
+      "ईंटें और सीमेंट",
+      "रेत और पत्थर",
+      "पत्तियाँ और मिट्टी"
+    ],
+    answer: 0,
+    explanation: "Threads or yarn are interlaced to make woven fabric.",
+    explanationHindi: "बुना हुआ कपड़ा बनाने के लिए धागों को आपस में बुना जाता है।",
+    hint: "Think about the basic material from which cloth is made.",
+    hintHindi: "सोचें कि कपड़ा बनाने का मूल पदार्थ क्या है।"
+  },
+  {
+    question: "What does the word “craftsmanship” mean?",
+    hindi: "“Craftsmanship” का क्या अर्थ है?",
+    options: [
+      "The skill of making things well by hand",
+      "The habit of wasting materials",
+      "The act of travelling long distances",
+      "The practice of growing crops"
+    ],
+    hindiOptions: [
+      "हाथ से कुशलतापूर्वक चीज़ें बनाने की कला",
+      "सामग्री बर्बाद करने की आदत",
+      "लंबी दूरी की यात्रा करना",
+      "फसल उगाने का काम"
+    ],
+    answer: 0,
+    explanation: "Craftsmanship means skill and care in making or creating something.",
+    explanationHindi: "Craftsmanship का अर्थ किसी वस्तु को कुशलता और सावधानी से बनाने की कला है।",
+    hint: "Think of the skill a person uses to create a beautiful handmade object.",
+    hintHindi: "उस कौशल के बारे में सोचें जिससे कोई व्यक्ति सुंदर हस्तनिर्मित वस्तु बनाता है।"
+  },
+  {
+    question: "Which word is closest in meaning to “tradition”?",
+    hindi: "“Tradition” का सबसे निकट अर्थ कौन-सा है?",
+    options: ["Custom", "Accident", "Machine", "Journey"],
+    hindiOptions: ["परंपरा या रीति-रिवाज़", "दुर्घटना", "मशीन", "यात्रा"],
+    answer: 0,
+    explanation: "A tradition is a custom or practice passed down through generations.",
+    explanationHindi: "Tradition ऐसी परंपरा या रीति है जो पीढ़ियों से आगे बढ़ती है।",
+    hint: "Think about customs that families or communities continue over time.",
+    hintHindi: "उन रीति-रिवाज़ों के बारे में सोचें जिन्हें परिवार या समुदाय समय के साथ जारी रखते हैं।"
+  },
+  {
+    question: "Why is traditional weaving important to cultural heritage?",
+    hindi: "सांस्कृतिक विरासत के लिए पारंपरिक बुनाई क्यों महत्वपूर्ण है?",
+    options: [
+      "It makes every culture exactly the same",
+      "It helps preserve traditional skills and designs",
+      "It means old skills should be forgotten",
+      "It prevents people from learning new things"
+    ],
+    hindiOptions: [
+      "यह सभी संस्कृतियों को बिल्कुल एक जैसा बना देती है",
+      "यह पारंपरिक कौशल और डिज़ाइनों को सुरक्षित रखने में मदद करती है",
+      "इसका अर्थ है पुराने कौशलों को भुला देना",
+      "यह लोगों को नई चीज़ें सीखने से रोकती है"
+    ],
+    answer: 1,
+    explanation: "Traditional weaving can preserve the skills, designs and practices passed between generations.",
+    explanationHindi: "पारंपरिक बुनाई पीढ़ियों से चले आ रहे कौशल, डिज़ाइन और तरीकों को सुरक्षित रखने में मदद कर सकती है।",
+    hint: "Think about what a community can pass on to future generations.",
+    hintHindi: "सोचें कि कोई समुदाय आने वाली पीढ़ियों को क्या सौंप सकता है।"
+  },
+  {
+    question: "Choose the antonym of “delicate” when it means easily damaged.",
+    hindi: "जब “Delicate” का अर्थ आसानी से क्षतिग्रस्त होने वाला हो, तो उसका विलोम चुनें।",
+    options: ["Fragile", "Fine", "Sturdy", "Soft"],
+    hindiOptions: ["नाज़ुक", "बारीक", "मज़बूत", "मुलायम"],
+    answer: 2,
+    explanation: "Sturdy means strong and not easily damaged, which contrasts with delicate in this sense.",
+    explanationHindi: "Sturdy का अर्थ मज़बूत और आसानी से न टूटने वाला है, जो इस अर्थ में Delicate का विलोम है।",
+    hint: "Choose a word that describes something strong and durable.",
+    hintHindi: "ऐसा शब्द चुनें जो किसी मज़बूत और टिकाऊ चीज़ का वर्णन करे।"
+  },
+  {
+    question: "A craftsperson spends time carefully weaving a saree. What does this show?",
+    hindi: "एक कारीगर साड़ी को सावधानी से बुनने में समय लगाता है। यह क्या दर्शाता है?",
+    options: [
+      "Care and patience",
+      "Carelessness and haste",
+      "Disinterest in the work",
+      "A refusal to learn"
+    ],
+    hindiOptions: [
+      "ध्यान और धैर्य",
+      "लापरवाही और जल्दबाज़ी",
+      "काम में रुचि न होना",
+      "सीखने से इनकार करना"
+    ],
+    answer: 0,
+    explanation: "Careful work that takes time shows patience and attention to detail.",
+    explanationHindi: "समय लेकर सावधानी से किया गया काम धैर्य और बारीकियों पर ध्यान देना दर्शाता है।",
+    hint: "Think about the qualities needed for careful handmade work.",
+    hintHindi: "सावधानी से हस्तनिर्मित वस्तु बनाने के लिए आवश्यक गुणों के बारे में सोचें।"
+  },
+  {
+    question: "Which action best helps preserve a traditional weaving heritage?",
+    hindi: "पारंपरिक बुनाई की विरासत को सुरक्षित रखने में कौन-सा कार्य सबसे अधिक मदद करता है?",
+    options: [
+      "Ignoring the people who practise it",
+      "Damaging handmade products",
+      "Learning about the craft and respecting its makers",
+      "Calling every traditional skill useless"
+    ],
+    hindiOptions: [
+      "इसे करने वाले लोगों की अनदेखी करना",
+      "हस्तनिर्मित वस्तुओं को नुकसान पहुँचाना",
+      "कारीगरी के बारे में सीखना और कारीगरों का सम्मान करना",
+      "हर पारंपरिक कौशल को बेकार कहना"
+    ],
+    answer: 2,
+    explanation: "Learning about traditional crafts and respecting their makers helps keep knowledge and skills valued.",
+    explanationHindi: "पारंपरिक कारीगरी के बारे में सीखना और कारीगरों का सम्मान करना इन कौशलों और ज्ञान को महत्व देने में मदद करता है।",
+    hint: "Think about how learners and communities can support traditional crafts.",
+    hintHindi: "सोचें कि विद्यार्थी और समुदाय पारंपरिक कारीगरी को कैसे प्रोत्साहित कर सकते हैं।"
+  }
 ];
 
-let current = 0;
+let currentQuestion = 0;
 let score = 0;
-let answeredCorrectly = false;
+let answeredQuestions = 0;
 
-const questionText = document.getElementById("questionText");
-const optionsBox = document.getElementById("options");
-const feedback = document.getElementById("feedback");
-const hintBtn = document.getElementById("hintBtn");
-const hintBox = document.getElementById("hintBox");
-const nextBtn = document.getElementById("nextBtn");
-const progressText = document.getElementById("progressText");
-const scoreText = document.getElementById("scoreText");
-const progressBar = document.getElementById("progressBar");
-const progressTrack = document.getElementById("progressTrack");
-const quizCard = document.getElementById("quizCard");
-const resultCard = document.getElementById("resultCard");
+const quiz = document.getElementById("quiz");
 
-function escapeHTML(value) {
-    return String(value).replace(/[&<>"']/g, character => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;"
-    })[character]);
-}
+function renderQuiz() {
+  quiz.innerHTML = "";
 
-function loadQuestion() {
-    answeredCorrectly = false;
-    const item = questions[current];
+  questions.forEach((q, index) => {
+    const card = document.createElement("section");
+    card.className = "question-card";
+    card.id = "question-" + index;
+    card.style.display = index === 0 ? "block" : "none";
 
-    progressText.textContent =
-        `Question ${current + 1} of ${questions.length} / प्रश्न ${current + 1} / ${questions.length}`;
+    const number = document.createElement("span");
+    number.className = "question-number";
+    number.textContent =
+      "Question " + (index + 1) + " of " + questions.length +
+      " / प्रश्न " + (index + 1);
+    card.appendChild(number);
 
-    scoreText.textContent = `Score: ${score} / अंक: ${score}`;
-    progressBar.style.width = `${(current / questions.length) * 100}%`;
-    progressTrack.setAttribute("aria-valuenow", current);
+    const title = document.createElement("h3");
+    title.textContent = q.question;
 
-    questionText.innerHTML =
-        `${escapeHTML(item.q)}<span class="hindi" lang="hi">${escapeHTML(item.hi)}</span>`;
+    const translatedQuestion = document.createElement("span");
+    translatedQuestion.className = "hindi";
+    translatedQuestion.textContent = q.hindi;
+    title.appendChild(translatedQuestion);
+    card.appendChild(title);
 
-    optionsBox.innerHTML = "";
-    feedback.className = "feedback";
-    feedback.textContent = "";
-    hintBox.style.display = "none";
-    hintBox.innerHTML = "";
-    hintBtn.style.display = "inline-block";
-    hintBtn.disabled = false;
-    nextBtn.style.display = "none";
-    nextBtn.innerHTML = current === questions.length - 1
-        ? "See Results / परिणाम देखें"
-        : "Next Question / अगला प्रश्न";
+    const optionsBox = document.createElement("div");
 
-    item.options.forEach((option, index) => {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "option";
-        button.innerHTML =
-            `${String.fromCharCode(65 + index)}. ${escapeHTML(option)}`;
-        button.addEventListener("click", () => checkAnswer(index, button));
-        optionsBox.appendChild(button);
+    q.options.forEach((option, optionIndex) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "option";
+
+      const english = document.createElement("span");
+      english.textContent =
+        String.fromCharCode(65 + optionIndex) + ". " + option;
+      button.appendChild(english);
+
+      const hindi = document.createElement("span");
+      hindi.className = "hindi";
+      hindi.textContent = q.hindiOptions[optionIndex];
+      button.appendChild(hindi);
+
+      button.addEventListener("click", () => {
+        checkAnswer(index, optionIndex);
+      });
+
+      optionsBox.appendChild(button);
     });
+
+    card.appendChild(optionsBox);
+
+    const hintButton = document.createElement("button");
+    hintButton.type = "button";
+    hintButton.className = "hint-button";
+    hintButton.textContent = "Show Hint / संकेत देखें";
+
+    const hint = document.createElement("div");
+    hint.className = "hint";
+    hint.textContent = q.hint + " / " + q.hintHindi;
+
+    hintButton.addEventListener("click", () => {
+      hint.classList.toggle("show");
+      hintButton.textContent = hint.classList.contains("show")
+        ? "Hide Hint / संकेत छिपाएँ"
+        : "Show Hint / संकेत देखें";
+    });
+
+    card.appendChild(hintButton);
+    card.appendChild(hint);
+
+    const feedback = document.createElement("div");
+    feedback.className = "feedback";
+    feedback.id = "feedback-" + index;
+    feedback.setAttribute("aria-live", "polite");
+    card.appendChild(feedback);
+
+    const nextButton = document.createElement("button");
+    nextButton.type = "button";
+    nextButton.className = "main-button";
+    nextButton.id = "next-" + index;
+    nextButton.style.display = "none";
+    nextButton.textContent = index === questions.length - 1
+      ? "Finish Quiz / क्विज़ समाप्त करें"
+      : "Next Question / अगला प्रश्न";
+
+    nextButton.addEventListener("click", () => goToNext(index));
+    card.appendChild(nextButton);
+
+    quiz.appendChild(card);
+  });
+
+  updateStats();
 }
 
-function checkAnswer(selected, selectedButton) {
-    if (answeredCorrectly) return;
+function checkAnswer(questionIndex, selectedIndex) {
+  if (questionIndex !== currentQuestion) return;
 
-    const item = questions[current];
-    const allButtons = optionsBox.querySelectorAll("button");
+  const q = questions[questionIndex];
+  const card = document.getElementById("question-" + questionIndex);
+  const buttons = card.querySelectorAll(".option");
+  const feedback = document.getElementById("feedback-" + questionIndex);
+  const nextButton = document.getElementById("next-" + questionIndex);
 
-    if (selected === item.answer) {
-        answeredCorrectly = true;
-        score++;
-        selectedButton.classList.add("correct");
+  if (buttons[q.answer].disabled) return;
 
-        allButtons.forEach(button => button.disabled = true);
+  if (selectedIndex === q.answer) {
+    score++;
+    answeredQuestions++;
 
-        feedback.className = "feedback good";
-        feedback.innerHTML =
-            `<strong>Well done! Keep it up!</strong>
-            <span class="hindi" lang="hi">बहुत अच्छा! ऐसे ही आगे बढ़ते रहें!</span>
-            <p>${escapeHTML(item.explanation)}</p>
-            <p lang="hi">${escapeHTML(item.explanationHi)}</p>`;
+    buttons[selectedIndex].classList.add("correct");
+    buttons.forEach(button => button.disabled = true);
 
-        scoreText.textContent = `Score: ${score} / अंक: ${score}`;
-        hintBtn.disabled = true;
-        nextBtn.style.display = "inline-block";
-    } else {
-        selectedButton.classList.add("wrong");
-        selectedButton.disabled = true;
+    feedback.className = "feedback show good";
+    feedback.textContent =
+      "Well done! Keep it up! / बहुत अच्छा! ऐसे ही आगे बढ़ते रहें! " +
+      q.explanation + " / " + q.explanationHindi;
 
-        feedback.className = "feedback bad";
-        feedback.innerHTML =
-            `<strong>Wrong answer! Read carefully and try again.</strong>
-            <span class="hindi" lang="hi">गलत जवाब! ध्यान से पढ़ें और फिर से प्रयास करें।</span>`;
-    }
+    nextButton.style.display = "inline-block";
+    updateStats();
+  } else {
+    buttons[selectedIndex].classList.add("wrong");
+
+    feedback.className = "feedback show bad";
+    feedback.textContent =
+      "Wrong answer! Read carefully and try again. / गलत जवाब! ध्यान से पढ़ें और फिर से प्रयास करें।";
+  }
 }
 
-hintBtn.addEventListener("click", () => {
-    const item = questions[current];
+function goToNext(index) {
+  if (index !== currentQuestion) return;
 
-    hintBox.innerHTML =
-        `${escapeHTML(item.hint)}
-        <span class="hindi" lang="hi">${escapeHTML(item.hintHi)}</span>`;
+  document.getElementById("question-" + index).style.display = "none";
+  currentQuestion++;
 
-    hintBox.style.display = "block";
-    hintBtn.disabled = true;
-});
+  if (currentQuestion < questions.length) {
+    document.getElementById("question-" + currentQuestion).style.display = "block";
+    updateStats();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
+    showResults();
+  }
+}
 
-nextBtn.addEventListener("click", () => {
-    if (!answeredCorrectly) return;
+function updateStats() {
+  document.getElementById("questionCount").textContent =
+    answeredQuestions + "/" + questions.length;
 
-    if (current < questions.length - 1) {
-        current++;
-        loadQuestion();
-    } else {
-        showResults();
-    }
-});
+  document.getElementById("scoreCount").textContent = score;
+
+  const percent = Math.round((answeredQuestions / questions.length) * 100);
+  document.getElementById("percentCount").textContent = percent + "%";
+  document.getElementById("progressBar").style.width = percent + "%";
+}
 
 function showResults() {
-    quizCard.style.display = "none";
-    resultCard.style.display = "block";
-    progressBar.style.width = "100%";
-    progressTrack.setAttribute("aria-valuenow", questions.length);
+  quiz.style.display = "none";
+  document.getElementById("results").classList.add("show");
 
-    const percentage = Math.round((score / questions.length) * 100);
-    document.getElementById("finalScore").textContent =
-        `${score} / ${questions.length} (${percentage}%)`;
+  const percent = Math.round((score / questions.length) * 100);
+  document.getElementById("finalScore").textContent =
+    score + " / " + questions.length + " (" + percent + "%)";
 
-    let message;
-    let hindi;
+  let message, hindi;
 
-    if (percentage <= 20) {
-        message = "Keep trying!";
-        hindi = "कोशिश करते रहें!";
-    } else if (percentage <= 40) {
-        message = "Good try!";
-        hindi = "अच्छा प्रयास!";
-    } else if (percentage <= 60) {
-        message = "Good job!";
-        hindi = "बहुत अच्छा प्रयास!";
-    } else if (percentage <= 80) {
-        message = "Very good!";
-        hindi = "बहुत बढ़िया!";
-    } else if (percentage < 100) {
-        message = "Excellent!";
-        hindi = "शानदार!";
-    } else {
-        message = "Fantastic! Perfect score!";
-        hindi = "अद्भुत! पूरे अंक!";
-    }
+  if (percent <= 20) {
+    message = "Keep trying!";
+    hindi = "कोशिश करते रहें!";
+  } else if (percent <= 40) {
+    message = "Good try!";
+    hindi = "अच्छा प्रयास!";
+  } else if (percent <= 60) {
+    message = "Good job!";
+    hindi = "बहुत अच्छा प्रयास!";
+  } else if (percent <= 80) {
+    message = "Very good!";
+    hindi = "बहुत बढ़िया!";
+  } else if (percent < 100) {
+    message = "Excellent!";
+    hindi = "शानदार!";
+  } else {
+    message = "Fantastic! Perfect score!";
+    hindi = "अद्भुत! पूरे अंक!";
+  }
 
-    document.getElementById("resultMessage").textContent = message;
-    document.getElementById("resultHindi").textContent = hindi;
-    document.getElementById("resultDetail").textContent =
-        `You answered ${score} out of ${questions.length} questions correctly. / आपने ${questions.length} में से ${score} प्रश्नों के सही उत्तर दिए।`;
+  document.getElementById("resultMessage").textContent = message;
+  document.getElementById("resultHindi").textContent = hindi;
+  document.getElementById("resultDetail").textContent =
+    "You completed all 10 questions. / आपने सभी 10 प्रश्न पूरे कर लिए हैं।";
 }
 
-document.getElementById("restartBtn").addEventListener("click", () => {
-    current = 0;
-    score = 0;
-    resultCard.style.display = "none";
-    quizCard.style.display = "block";
-    loadQuestion();
-});
+function restartQuiz() {
+  currentQuestion = 0;
+  score = 0;
+  answeredQuestions = 0;
 
-loadQuestion();
+  document.getElementById("results").classList.remove("show");
+  quiz.style.display = "block";
+
+  renderQuiz();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+renderQuiz();
 </script>
 </body>
 </html>
