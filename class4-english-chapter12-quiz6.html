@@ -1,0 +1,668 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 12 - Quiz 6 | RawaRajpootNexEduToppers</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 15px;
+    font-family: Arial, sans-serif;
+    background: #f3f0ff;
+    color: #25223a;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 760px;
+    margin: 0 auto;
+}
+
+.header {
+    background: linear-gradient(135deg, #5634a5, #8965db);
+    color: white;
+    padding: 22px 16px;
+    border-radius: 16px;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.header h1 {
+    font-size: 25px;
+    margin: 0 0 8px;
+}
+
+.header p {
+    margin: 5px 0;
+}
+
+.card {
+    background: white;
+    padding: 18px;
+    border-radius: 14px;
+    margin-bottom: 16px;
+    box-shadow: 0 3px 12px rgba(40, 25, 90, 0.08);
+}
+
+.progress-text {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.progress-track {
+    height: 10px;
+    background: #e7e0fa;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #7650c9;
+    transition: width 0.25s;
+}
+
+.question {
+    font-size: 19px;
+    font-weight: bold;
+    margin: 14px 0;
+}
+
+.hindi {
+    display: block;
+    color: #625b76;
+    font-size: 15px;
+    font-weight: normal;
+    margin-top: 4px;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.option {
+    padding: 12px;
+    border: 2px solid #ddd5f4;
+    border-radius: 10px;
+    background: #fff;
+    text-align: left;
+    font-size: 16px;
+    cursor: pointer;
+    overflow-wrap: anywhere;
+}
+
+.option:hover:not(:disabled) {
+    background: #f3edff;
+    border-color: #8965db;
+}
+
+.option:disabled {
+    cursor: default;
+    opacity: 1;
+}
+
+.option.correct {
+    background: #e2f8e8;
+    border-color: #29934b;
+}
+
+.option.wrong {
+    background: #ffebeb;
+    border-color: #d94444;
+}
+
+.feedback {
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 10px;
+    display: none;
+}
+
+.feedback.good {
+    display: block;
+    background: #e2f8e8;
+    color: #175c2c;
+}
+
+.feedback.bad {
+    display: block;
+    background: #ffebeb;
+    color: #922626;
+}
+
+.hint-box {
+    display: none;
+    background: #fff8dc;
+    border-left: 4px solid #e6b52d;
+    padding: 10px;
+    margin-top: 12px;
+    border-radius: 6px;
+}
+
+button.action {
+    border: none;
+    background: #6843b5;
+    color: white;
+    padding: 11px 17px;
+    border-radius: 9px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 8px 5px 0 0;
+}
+
+button.action:hover {
+    background: #4c2c91;
+}
+
+button.action:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.secondary {
+    background: #e9e2fa !important;
+    color: #3e286e !important;
+}
+
+#nextBtn {
+    display: none;
+}
+
+.result {
+    display: none;
+    text-align: center;
+}
+
+.result h2 {
+    color: #5634a5;
+}
+
+.score-number {
+    font-size: 34px;
+    font-weight: bold;
+    color: #5634a5;
+}
+
+.nav-link {
+    display: inline-block;
+    text-decoration: none;
+    background: white;
+    color: #5634a5;
+    border: 2px solid #7650c9;
+    padding: 10px 14px;
+    border-radius: 9px;
+    font-weight: bold;
+    margin: 5px 0 14px;
+}
+
+.disclaimer {
+    font-size: 13px;
+    color: #514b61;
+    overflow-wrap: anywhere;
+}
+
+footer {
+    text-align: center;
+    font-size: 13px;
+    color: #625b76;
+    padding: 12px 4px;
+}
+
+@media (max-width: 520px) {
+    body {
+        padding: 10px;
+    }
+
+    .header h1 {
+        font-size: 21px;
+    }
+
+    .card {
+        padding: 14px;
+    }
+
+    .options {
+        grid-template-columns: 1fr;
+    }
+
+    .question {
+        font-size: 18px;
+    }
+
+    button.action {
+        padding: 10px 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+    <header class="header">
+        <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+        <p><strong>Class 4 English | Chapter 12: MAHESHWAR</strong></p>
+        <p>Quiz 6: Silent Letters & Grammar</p>
+        <p lang="hi">कक्षा 4 अंग्रेज़ी | मूक अक्षर और व्याकरण</p>
+    </header>
+
+    <a class="nav-link" href="class4-english-chapter12.html">
+        ← Back to Chapter 12 / अध्याय 12 पर वापस जाएँ
+    </a>
+
+    <section class="card">
+        <h2>Instructions / निर्देश</h2>
+        <p>
+            Choose the correct answer. If your answer is wrong, try again.
+            You can move to the next question after answering correctly.
+            <span class="hindi">
+                सही उत्तर चुनें। यदि उत्तर गलत है, तो दोबारा प्रयास करें।
+                सही उत्तर देने के बाद ही अगले प्रश्न पर जा सकते हैं।
+            </span>
+        </p>
+
+        <div class="progress-text">
+            <span id="progressText">Question 1 of 10</span>
+            <span id="scoreText">Score: 0</span>
+        </div>
+
+        <div
+            class="progress-track"
+            role="progressbar"
+            aria-label="Quiz progress"
+            aria-valuemin="0"
+            aria-valuemax="10"
+            aria-valuenow="0"
+            id="progressTrack"
+        >
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+    </section>
+
+    <main class="card" id="quizCard">
+        <div class="question" id="questionText"></div>
+
+        <div class="options" id="options"></div>
+
+        <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+
+        <button class="action secondary" id="hintBtn" type="button">
+            Show Hint / संकेत देखें
+        </button>
+
+        <div class="hint-box" id="hintBox"></div>
+
+        <button class="action" id="nextBtn" type="button">
+            Next Question / अगला प्रश्न
+        </button>
+    </main>
+
+    <section class="card result" id="resultCard" aria-live="polite">
+        <h2>Quiz Completed! / क्विज़ पूरा हुआ!</h2>
+        <div class="score-number" id="finalScore"></div>
+        <h3 id="resultMessage"></h3>
+        <p id="resultHindi"></p>
+        <p id="resultDetail"></p>
+
+        <button class="action" id="restartBtn" type="button">
+            Try Again / फिर से प्रयास करें
+        </button>
+    </section>
+
+    <section class="card disclaimer">
+        <h3>Disclaimer / अस्वीकरण</h3>
+        <p>
+            RawaRajpootNexEduToppers Learning Academy is an independent
+            educational platform and is not affiliated with, endorsed by,
+            or associated with NCERT. NCERT textbook names, chapters, and
+            curriculum topics belong exclusively to NCERT. All explanations,
+            examples, and practice material provided here are educational aids.
+            For official textbooks, visit
+            <a href="https://ncert.nic.in/" target="_blank"
+               rel="noopener noreferrer">ncert.nic.in</a>.
+        </p>
+        <p lang="hi">
+            RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक
+            मंच है। इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है।
+            NCERT की पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम
+            NCERT के हैं। यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री
+            शैक्षिक सहायता के लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+            ncert.nic.in पर जाएँ।
+        </p>
+    </section>
+
+    <footer>
+        Learn • Practise • Improve
+        <span lang="hi"> | सीखें • अभ्यास करें • आगे बढ़ें</span>
+    </footer>
+
+</div>
+
+<script>
+"use strict";
+
+const questions = [
+    {
+        q: "Which letter is silent in the word “knock”?",
+        hi: "“Knock” शब्द में कौन-सा अक्षर मूक है?",
+        options: ["K", "N", "O", "C"],
+        answer: 0,
+        hint: "Look at the first two letters of the word.",
+        hintHi: "शब्द के पहले दो अक्षरों पर ध्यान दें।",
+        explanation: "The K is silent. We pronounce “knock” like “nock”.",
+        explanationHi: "K मूक है। “Knock” का उच्चारण “नॉक” की तरह होता है।"
+    },
+    {
+        q: "Which letter is silent in the word “write”?",
+        hi: "“Write” शब्द में कौन-सा अक्षर मूक है?",
+        options: ["W", "R", "I", "T"],
+        answer: 0,
+        hint: "The word begins with two consonants.",
+        hintHi: "यह शब्द दो व्यंजनों से शुरू होता है।",
+        explanation: "The W is silent in “write”. The word sounds like “rite”.",
+        explanationHi: "“Write” में W मूक है। इसका उच्चारण “राइट” होता है।"
+    },
+    {
+        q: "Which letter is silent in the word “lamb”?",
+        hi: "“Lamb” शब्द में कौन-सा अक्षर मूक है?",
+        options: ["L", "A", "M", "B"],
+        answer: 3,
+        hint: "Check the final letter.",
+        hintHi: "शब्द के आखिरी अक्षर को देखें।",
+        explanation: "The B is silent in “lamb”. The word sounds like “lam”.",
+        explanationHi: "“Lamb” में B मूक है। इसका उच्चारण “लैम” होता है।"
+    },
+    {
+        q: "Which letter is silent in the word “sign”?",
+        hi: "“Sign” शब्द में कौन-सा अक्षर मूक है?",
+        options: ["S", "I", "G", "N"],
+        answer: 2,
+        hint: "Focus on the letter before N.",
+        hintHi: "N से ठीक पहले वाले अक्षर पर ध्यान दें।",
+        explanation: "The G is silent in “sign”. It sounds like “sाइन” (sine).",
+        explanationHi: "“Sign” में G मूक है। इसका उच्चारण “साइन” होता है।"
+    },
+    {
+        q: "Choose the correct article: “I saw ___ elephant.”",
+        hi: "सही article चुनें: “I saw ___ elephant.”",
+        options: ["a", "an", "the", "no article"],
+        answer: 1,
+        hint: "Think about the vowel sound at the beginning of “elephant”.",
+        hintHi: "“Elephant” की शुरुआत में आने वाली स्वर ध्वनि पर ध्यान दें।",
+        explanation: "Use “an” before the vowel sound at the beginning of “elephant”.",
+        explanationHi: "“Elephant” की शुरुआत में स्वर ध्वनि है, इसलिए “an” का प्रयोग होता है।"
+    },
+    {
+        q: "Choose the correct sentence.",
+        hi: "सही वाक्य चुनें।",
+        options: [
+            "She go to school every day.",
+            "She goes to school every day.",
+            "She going to school every day.",
+            "She gone to school every day."
+        ],
+        answer: 1,
+        hint: "The subject is “She”. Check the verb in the simple present tense.",
+        hintHi: "कर्ता “She” है। Simple Present Tense में verb पर ध्यान दें।",
+        explanation: "With “she” in the simple present, the verb is “goes”.",
+        explanationHi: "Simple Present Tense में “She” के साथ verb “goes” होता है।"
+    },
+    {
+        q: "Choose the correct article: “He is ___ honest boy.”",
+        hi: "सही article चुनें: “He is ___ honest boy.”",
+        options: ["a", "an", "the", "no article"],
+        answer: 1,
+        hint: "The H in “honest” is silent. Listen to the first sound.",
+        hintHi: "“Honest” में H मूक है। पहले उच्चरित होने वाली ध्वनि पर ध्यान दें।",
+        explanation: "“Honest” begins with a vowel sound because H is silent, so use “an”.",
+        explanationHi: "“Honest” में H मूक है और शुरुआत स्वर ध्वनि से होती है, इसलिए “an” का प्रयोग करें।"
+    },
+    {
+        q: "Choose the correct plural form of “story”.",
+        hi: "“Story” का सही बहुवचन चुनें।",
+        options: ["Storys", "Storyes", "Stories", "Storie"],
+        answer: 2,
+        hint: "When a consonant comes before y, change y to i and add -es.",
+        hintHi: "जब y से पहले व्यंजन हो, तो y को i में बदलकर -es जोड़ते हैं।",
+        explanation: "The plural of “story” is “stories”.",
+        explanationHi: "“Story” का बहुवचन “stories” होता है।"
+    },
+    {
+        q: "Choose the correctly punctuated sentence.",
+        hi: "सही विराम-चिह्न वाला वाक्य चुनें।",
+        options: [
+            "where is the fort.",
+            "Where is the fort.",
+            "Where is the fort?",
+            "where is the fort?"
+        ],
+        answer: 2,
+        hint: "A direct question needs a capital letter and a question mark.",
+        hintHi: "प्रश्नवाचक वाक्य में बड़े अक्षर और प्रश्नवाचक चिह्न का प्रयोग होता है।",
+        explanation: "A question begins with a capital letter and ends with a question mark.",
+        explanationHi: "प्रश्न बड़े अक्षर से शुरू होता है और अंत में प्रश्नवाचक चिह्न (?) आता है।"
+    },
+    {
+        q: "Choose the correct word to complete the sentence: “The children ___ happy.”",
+        hi: "वाक्य पूरा करने के लिए सही शब्द चुनें: “The children ___ happy.”",
+        options: ["is", "am", "are", "was"],
+        answer: 2,
+        hint: "“Children” refers to more than one child.",
+        hintHi: "“Children” एक से अधिक बच्चों के लिए प्रयोग होता है।",
+        explanation: "“Children” is plural, so “are” is the correct verb.",
+        explanationHi: "“Children” बहुवचन है, इसलिए सही verb “are” है।"
+    }
+];
+
+let current = 0;
+let score = 0;
+let answeredCorrectly = false;
+let wrongAttempts = 0;
+
+const questionText = document.getElementById("questionText");
+const optionsBox = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const hintBtn = document.getElementById("hintBtn");
+const hintBox = document.getElementById("hintBox");
+const nextBtn = document.getElementById("nextBtn");
+const progressText = document.getElementById("progressText");
+const scoreText = document.getElementById("scoreText");
+const progressBar = document.getElementById("progressBar");
+const progressTrack = document.getElementById("progressTrack");
+const quizCard = document.getElementById("quizCard");
+const resultCard = document.getElementById("resultCard");
+
+function loadQuestion() {
+    answeredCorrectly = false;
+    wrongAttempts = 0;
+
+    const item = questions[current];
+
+    progressText.textContent =
+        `Question ${current + 1} of ${questions.length} / प्रश्न ${current + 1} / ${questions.length}`;
+
+    scoreText.textContent = `Score: ${score} / अंक: ${score}`;
+
+    progressBar.style.width =
+        `${(current / questions.length) * 100}%`;
+
+    progressTrack.setAttribute("aria-valuenow", current);
+
+    questionText.innerHTML =
+        `${item.q}<span class="hindi" lang="hi">${item.hi}</span>`;
+
+    optionsBox.innerHTML = "";
+
+    feedback.className = "feedback";
+    feedback.textContent = "";
+
+    hintBox.style.display = "none";
+    hintBox.innerHTML = "";
+
+    hintBtn.style.display = "inline-block";
+    hintBtn.disabled = false;
+
+    nextBtn.style.display = "none";
+    nextBtn.disabled = false;
+
+    item.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option";
+        button.innerHTML =
+            `${String.fromCharCode(65 + index)}. ${escapeHTML(option)}`;
+
+        button.addEventListener("click", () => checkAnswer(index, button));
+        optionsBox.appendChild(button);
+    });
+}
+
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    })[character]);
+}
+
+function checkAnswer(selected, selectedButton) {
+    if (answeredCorrectly) return;
+
+    const item = questions[current];
+    const allButtons = optionsBox.querySelectorAll("button");
+
+    if (selected === item.answer) {
+        answeredCorrectly = true;
+        score++;
+
+        selectedButton.classList.add("correct");
+
+        allButtons.forEach(button => {
+            button.disabled = true;
+        });
+
+        feedback.className = "feedback good";
+        feedback.innerHTML =
+            `<strong>Well done! Keep it up!</strong>
+            <span class="hindi" lang="hi">बहुत अच्छा! ऐसे ही आगे बढ़ते रहें!</span>
+            <p>${escapeHTML(item.explanation)}</p>
+            <p lang="hi">${escapeHTML(item.explanationHi)}</p>`;
+
+        scoreText.textContent = `Score: ${score} / अंक: ${score}`;
+
+        hintBtn.disabled = true;
+        nextBtn.style.display = "inline-block";
+
+        if (current === questions.length - 1) {
+            nextBtn.innerHTML = "See Results / परिणाम देखें";
+        } else {
+            nextBtn.innerHTML = "Next Question / अगला प्रश्न";
+        }
+    } else {
+        wrongAttempts++;
+        selectedButton.classList.add("wrong");
+
+        feedback.className = "feedback bad";
+        feedback.innerHTML =
+            `<strong>Wrong answer! Read carefully and try again.</strong>
+            <span class="hindi" lang="hi">गलत जवाब! ध्यान से पढ़ें और फिर से प्रयास करें।</span>`;
+
+        selectedButton.disabled = true;
+    }
+}
+
+hintBtn.addEventListener("click", () => {
+    const item = questions[current];
+
+    hintBox.innerHTML =
+        `${escapeHTML(item.hint)}
+        <span class="hindi" lang="hi">${escapeHTML(item.hintHi)}</span>`;
+
+    hintBox.style.display = "block";
+    hintBtn.disabled = true;
+});
+
+nextBtn.addEventListener("click", () => {
+    if (!answeredCorrectly) return;
+
+    if (current < questions.length - 1) {
+        current++;
+        loadQuestion();
+    } else {
+        showResults();
+    }
+});
+
+function showResults() {
+    quizCard.style.display = "none";
+    resultCard.style.display = "block";
+
+    progressBar.style.width = "100%";
+    progressTrack.setAttribute("aria-valuenow", questions.length);
+
+    const percentage = Math.round((score / questions.length) * 100);
+
+    document.getElementById("finalScore").textContent =
+        `${score} / ${questions.length} (${percentage}%)`;
+
+    let message;
+    let hindi;
+
+    if (percentage <= 20) {
+        message = "Keep trying!";
+        hindi = "कोशिश करते रहें!";
+    } else if (percentage <= 40) {
+        message = "Good try!";
+        hindi = "अच्छा प्रयास!";
+    } else if (percentage <= 60) {
+        message = "Good job!";
+        hindi = "बहुत अच्छा प्रयास!";
+    } else if (percentage <= 80) {
+        message = "Very good!";
+        hindi = "बहुत बढ़िया!";
+    } else if (percentage < 100) {
+        message = "Excellent!";
+        hindi = "शानदार!";
+    } else {
+        message = "Fantastic! Perfect score!";
+        hindi = "अद्भुत! पूरे अंक!";
+    }
+
+    document.getElementById("resultMessage").textContent = message;
+    document.getElementById("resultHindi").textContent = hindi;
+
+    document.getElementById("resultDetail").textContent =
+        `You answered ${score} out of ${questions.length} questions correctly. / आपने ${questions.length} में से ${score} प्रश्नों के सही उत्तर दिए।`;
+}
+
+document.getElementById("restartBtn").addEventListener("click", () => {
+    current = 0;
+    score = 0;
+
+    resultCard.style.display = "none";
+    quizCard.style.display = "block";
+
+    loadQuestion();
+});
+
+loadQuestion();
+</script>
+</body>
+</html>
