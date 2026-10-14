@@ -84,6 +84,16 @@
       font-weight: bold;
       margin: 16px 0;
     }
+    .english-question {
+  margin-bottom: 8px;
+  color: #0755b5;
+}
+
+.hindi-question {
+  font-size: 19px;
+  font-weight: normal;
+  color: #333;
+}
 
     .difficulty {
       display: inline-block;
@@ -348,8 +358,7 @@
 
     {
       level: "Easy / आसान",
-      question: "What is 25 + 14? 
-        25 + 14 कितना है?",
+      question: "What is 25 + 14? / 25 + 14 कितना है?",
       options: ["29", "39", "41", "49"],
       answer: 1,
       explanation: "25 + 14 = 39. / 25 + 14 = 39।"
@@ -527,7 +536,17 @@
       questions.length + " / प्रश्न " +
       (currentQuestion + 1) + " में से " + questions.length;
 
-    questionText.textContent = q.question;
+    const questionParts = q.question.split(" / ");
+
+questionText.innerHTML =
+  '<div class="english-question"></div>' +
+  '<div class="hindi-question"></div>';
+
+questionText.querySelector(".english-question").textContent =
+  questionParts[0] || "";
+
+questionText.querySelector(".hindi-question").textContent =
+  questionParts[1] || "";
     progressText.textContent =
       "Question " + (currentQuestion + 1) + " of " +
       questions.length + " / प्रश्न " +
