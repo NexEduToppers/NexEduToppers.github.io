@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 English Chapter 12 Quiz 4 | RawaRajpootNexEduToppers</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:15px;font-family:Arial,sans-serif;background:#f3f0ff;color:#29243a;line-height:1.6}
+.container{max-width:760px;margin:auto;background:#fff;padding:22px;border-radius:16px;box-shadow:0 4px 16px #00000012}
+header{text-align:center;padding:18px 10px;color:#fff;background:linear-gradient(135deg,#673ab7,#9575cd);border-radius:12px}
+header h1{margin:0;font-size:24px}
+header p{margin:7px 0 0}
+.notice{background:#f3edff;padding:12px;border-radius:10px;margin:18px 0}
+.hindi{display:block;color:#555;font-size:15px;font-weight:normal;margin-top:4px}
+.progress-wrap{height:10px;background:#e6e0f3;border-radius:10px;overflow:hidden;margin:12px 0}
+#progress{height:100%;width:0;background:#673ab7;transition:width .3s}
+.question{font-size:19px;font-weight:bold;margin:20px 0 12px}
+.option{display:block;width:100%;text-align:left;padding:12px;margin:9px 0;border:2px solid #ded6ef;border-radius:10px;background:#fff;font-size:16px;cursor:pointer}
+.option:hover:not(:disabled){background:#f5f0ff;border-color:#9575cd}
+.option:disabled{cursor:default;opacity:1}
+.option.correct{background:#e3f7e8;border-color:#269448}
+.option.wrong{background:#ffebee;border-color:#d84343}
+.action{padding:11px 18px;margin:8px 5px 8px 0;border:0;border-radius:9px;background:#673ab7;color:white;font-size:16px;cursor:pointer}
+.action:disabled{background:#bdb4ce;cursor:not-allowed}
+#feedback{font-weight:bold;margin:14px 0;min-height:28px}
+#hintBox{background:#fff8df;padding:10px;border-radius:8px;margin:10px 0}
+#result{display:none;text-align:center;padding:20px 8px}
+.score{font-size:28px;font-weight:bold;color:#673ab7}
+.disclaimer{font-size:13px;color:#555;border-top:1px solid #ddd;padding-top:14px;margin-top:24px;overflow-wrap:anywhere}
+a{color:#512da8}
+@media(max-width:480px){body{padding:8px}.container{padding:14px}header h1{font-size:21px}.question{font-size:17px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+<h1>RawaRajpootNexEduToppers</h1>
+<p>Learning Academy | Learning Today, Leading Tomorrow</p>
+<p><strong>Class 4 English | Chapter 12: Maheshwar</strong></p>
+<p>Quiz 4: Reading Comprehension</p>
+<p>पठन कौशल और अध्याय की समझ</p>
+</header>
+
+<div class="notice">
+<strong>Instructions / निर्देश</strong>
+<p>Read each question carefully and choose the best answer.
+<span class="hindi">हर प्रश्न ध्यान से पढ़ें और सबसे सही उत्तर चुनें।</span></p>
+<p>If your answer is wrong, read the feedback and try again.
+<span class="hindi">यदि उत्तर गलत हो, तो प्रतिक्रिया पढ़ें और फिर से प्रयास करें।</span></p>
+</div>
+
+<div id="quiz">
+<div>
+<strong id="counter">Question 1 of 10</strong>
+<span style="float:right" id="scoreLive">Score: 0</span>
+</div>
+<div class="progress-wrap"><div id="progress"></div></div>
+<div class="question" id="question"></div>
+<div id="options"></div>
+<button class="action" id="hintBtn" type="button" onclick="toggleHint()">Show Hint / संकेत देखें</button>
+<div id="hintBox" hidden></div>
+<div id="feedback" aria-live="polite"></div>
+<button class="action" id="nextBtn" type="button" onclick="nextQuestion()" disabled>Next / अगला</button>
+</div>
+
+<div id="result">
+<h2>Quiz Completed! / क्विज़ पूरा हुआ!</h2>
+<div class="score" id="finalScore"></div>
+<h3 id="resultMessage"></h3>
+<p id="resultHindi"></p>
+<p id="resultDetail"></p>
+<button class="action" type="button" onclick="restartQuiz()">Try Again / फिर से प्रयास करें</button>
+</div>
+
+<p style="text-align:center">
+<a href="class4-english-chapter12.html">← Back to Chapter 12 / अध्याय 12 पर वापस जाएँ</a>
+</p>
+
+<div class="disclaimer">
+<strong>Disclaimer:</strong> RawaRajpootNexEduToppers Learning Academy is an independent educational platform and is not affiliated with, endorsed by, or associated with NCERT. NCERT textbook names, chapters, and curriculum topics belong exclusively to NCERT. All explanations, examples, and practice material provided here are educational aids. For official textbooks, visit <a href="https://ncert.nic.in/" target="_blank" rel="noopener">ncert.nic.in</a>.
+<p><strong>अस्वीकरण:</strong> RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है। इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं। यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए <a href="https://ncert.nic.in/" target="_blank" rel="noopener">ncert.nic.in</a> पर जाएँ।</p>
+</div>
+</div>
+
+<script>
+const questions = [
+{
+q:"According to the chapter information, which river is associated with Maheshwar?",
+hi:"अध्याय की जानकारी के अनुसार, महेश्वर से कौन-सी नदी जुड़ी है?",
+options:["Yamuna","Narmada","Ganga","Godavari"],
+answer:1,
+hint:"Think of the river mentioned alongside Maheshwar in the chapter.",
+ex:"The Narmada River is associated with Maheshwar. / महेश्वर से नर्मदा नदी जुड़ी है।"
+},
+{
+q:"Who is the historical queen associated with Maheshwar in the chapter?",
+hi:"अध्याय में महेश्वर से जुड़ी ऐतिहासिक रानी कौन हैं?",
+options:["Queen Ahilya Bai","Queen Rani Lakshmibai","Queen Razia Sultan","Queen Durgavati"],
+answer:0,
+hint:"Recall the queen whose name is linked with the fort in the chapter.",
+ex:"Queen Ahilya Bai is the historical figure associated with Maheshwar in the chapter. / अध्याय में महेश्वर से जुड़ी ऐतिहासिक हस्ती रानी अहिल्याबाई हैं।"
+},
+{
+q:"Which traditional item is Maheshwar especially known for?",
+hi:"महेश्वर किस पारंपरिक वस्तु के लिए विशेष रूप से जाना जाता है?",
+options:["Wooden toys","Maheshwari sarees","Woollen carpets","Leather shoes"],
+answer:1,
+hint:"Think of a traditional textile made by skilled craftspeople.",
+ex:"Maheshwar is known for its Maheshwari sarees. / महेश्वर अपनी महेश्वरी साड़ियों के लिए प्रसिद्ध है।"
+},
+{
+q:"What is a fort mainly built to do?",
+hi:"किले का निर्माण मुख्य रूप से किस उद्देश्य से किया जाता है?",
+options:["Protect a place","Grow crops","Teach songs","Store rainwater only"],
+answer:0,
+hint:"A fort is a defensive structure often used in the past.",
+ex:"A fort is mainly built for protection and defence. / किला मुख्य रूप से सुरक्षा और रक्षा के लिए बनाया जाता है।"
+},
+{
+q:"Aarav and Ananya are names of which kind of people in the chapter?",
+hi:"अध्याय में आरव और अनन्या किस प्रकार के पात्र हैं?",
+options:["Children","Kings from ancient times","Shopkeepers","River boatmen"],
+answer:0,
+hint:"They are the young characters who explore and learn.",
+ex:"Aarav and Ananya are the children in the chapter. / आरव और अनन्या अध्याय के बाल पात्र हैं।"
+},
+{
+q:"What does the word 'heritage' usually mean?",
+hi:"‘Heritage’ शब्द का सामान्य अर्थ क्या है?",
+options:["Things passed down from the past","A daily timetable","A new school uniform","A kind of weather"],
+answer:0,
+hint:"Heritage can include historical places, traditions, and cultural practices.",
+ex:"Heritage means things of historical or cultural value passed down from the past. / Heritage का अर्थ अतीत से मिली ऐतिहासिक या सांस्कृतिक धरोहर है।"
+},
+{
+q:"Why are traditional crafts important to a community?",
+hi:"किसी समुदाय के लिए पारंपरिक हस्तकलाएँ क्यों महत्वपूर्ण हैं?",
+options:["They preserve skills and traditions","They remove the need to learn","They make history disappear","They stop people from working"],
+answer:0,
+hint:"Think about how crafts connect people with culture and earlier generations.",
+ex:"Traditional crafts help preserve skills, culture, and traditions. / पारंपरिक हस्तकलाएँ कौशल, संस्कृति और परंपराओं को सुरक्षित रखने में मदद करती हैं।"
+},
+{
+q:"What is the best way to behave when visiting a historical place?",
+hi:"ऐतिहासिक स्थान पर जाते समय कैसा व्यवहार करना चाहिए?",
+options:["Damage old walls","Leave rubbish everywhere","Respect the place and keep it clean","Write names on monuments"],
+answer:2,
+hint:"Think about how visitors can help protect important places.",
+ex:"Visitors should respect historical places and keep them clean. / आगंतुकों को ऐतिहासिक स्थानों का सम्मान करना और उन्हें साफ रखना चाहिए।"
+},
+{
+q:"Which sentence is an opinion rather than a verifiable fact?",
+hi:"कौन-सा वाक्य सत्यापित तथ्य के बजाय एक राय है?",
+options:[
+"Maheshwar is the most beautiful place in the world.",
+"Maheshwar is associated with the Narmada River.",
+"Maheshwari sarees are a traditional textile.",
+"A fort is a type of defensive structure."
+],
+answer:0,
+hint:"An opinion expresses a personal judgement that people may disagree about.",
+ex:"Calling a place 'the most beautiful' is a personal judgement, so it is an opinion. / किसी स्थान को 'सबसे सुंदर' कहना व्यक्तिगत राय है।"
+},
+{
+q:"Which is the best reason to learn about a historical place such as Maheshwar?",
+hi:"महेश्वर जैसे ऐतिहासिक स्थान के बारे में जानने का सबसे अच्छा कारण क्या है?",
+options:[
+"To understand history and culture",
+"To change all old buildings",
+"To forget local traditions",
+"To avoid learning about the past"
+],
+answer:0,
+hint:"Think about what historical places can teach us about earlier times and culture.",
+ex:"Learning about historical places helps us understand history and cultural traditions. / ऐतिहासिक स्थानों से हमें इतिहास और सांस्कृतिक परंपराओं को समझने में मदद मिलती है।"
+}
+];
+
+let current=0, score=0, answered=false, hintOpen=false;
+
+function renderQuestion(){
+answered=false;
+hintOpen=false;
+const q=questions[current];
+document.getElementById("counter").textContent=`Question ${current+1} of ${questions.length}`;
+document.getElementById("scoreLive").textContent=`Score: ${score}`;
+document.getElementById("progress").style.width=`${current/questions.length*100}%`;
+document.getElementById("question").innerHTML=`${q.q}<span class="hindi">${q.hi}</span>`;
+const area=document.getElementById("options");
+area.innerHTML="";
+q.options.forEach((text,index)=>{
+const b=document.createElement("button");
+b.type="button";
+b.className="option";
+b.textContent=`${String.fromCharCode(65+index)}. ${text}`;
+b.onclick=()=>checkAnswer(index,b);
+area.appendChild(b);
+});
+document.getElementById("feedback").textContent="";
+document.getElementById("hintBox").hidden=true;
+document.getElementById("hintBox").textContent="";
+document.getElementById("hintBtn").disabled=false;
+document.getElementById("hintBtn").textContent="Show Hint / संकेत देखें";
+document.getElementById("nextBtn").disabled=true;
+document.getElementById("nextBtn").textContent=current===questions.length-1?"See Result / परिणाम देखें":"Next / अगला";
+}
+
+function checkAnswer(index,button){
+if(answered)return;
+const q=questions[current];
+if(index===q.answer){
+answered=true;
+score++;
+button.classList.add("correct");
+document.querySelectorAll(".option").forEach(b=>b.disabled=true);
+document.getElementById("feedback").textContent="Well done! Keep it up! / बहुत अच्छा! ऐसे ही आगे बढ़ते रहें! "+q.ex;
+document.getElementById("nextBtn").disabled=false;
+document.getElementById("hintBtn").disabled=true;
+document.getElementById("scoreLive").textContent=`Score: ${score}`;
+}else{
+button.classList.add("wrong");
+button.disabled=true;
+document.getElementById("feedback").textContent="Wrong answer! Read carefully and try again. / गलत जवाब! ध्यान से पढ़ें और फिर से प्रयास करें।";
+}
+}
+
+function toggleHint(){
+hintOpen=!hintOpen;
+const box=document.getElementById("hintBox");
+box.hidden=!hintOpen;
+box.textContent=hintOpen?questions[current].hint:"";
+document.getElementById("hintBtn").textContent=hintOpen?"Hide Hint / संकेत छिपाएँ":"Show Hint / संकेत देखें";
+}
+
+function nextQuestion(){
+if(!answered)return;
+current++;
+if(current<questions.length){renderQuestion();return;}
+showResult();
+}
+
+function showResult(){
+document.getElementById("quiz").style.display="none";
+document.getElementById("result").style.display="block";
+document.getElementById("progress").style.width="100%";
+const percent=Math.round(score/questions.length*100);
+document.getElementById("finalScore").textContent=`${score} / ${questions.length} (${percent}%)`;
+let message,hindi;
+if(percent<=20){message="Keep trying!";hindi="कोशिश करते रहें!";}
+else if(percent<=40){message="Good try!";hindi="अच्छा प्रयास!";}
+else if(percent<=60){message="Good job!";hindi="बहुत अच्छा प्रयास!";}
+else if(percent<=80){message="Very good!";hindi="बहुत बढ़िया!";}
+else if(percent<100){message="Excellent!";hindi="शानदार!";}
+else{message="Fantastic! Perfect score!";hindi="अद्भुत! पूरे अंक!";}
+document.getElementById("resultMessage").textContent=message;
+document.getElementById("resultHindi").textContent=hindi;
+document.getElementById("resultDetail").textContent=`You answered ${score} out of ${questions.length} questions correctly. / आपने ${questions.length} में से ${score} प्रश्नों के सही उत्तर दिए।`;
+}
+
+function restartQuiz(){
+current=0;score=0;
+document.getElementById("result").style.display="none";
+document.getElementById("quiz").style.display="block";
+renderQuestion();
+}
+
+renderQuestion();
+</script>
+</body>
+</html>
