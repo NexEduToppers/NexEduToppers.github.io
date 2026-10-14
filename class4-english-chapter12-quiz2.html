@@ -1,0 +1,598 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz 2: Vocabulary | Maheshwar</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 15px;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  color: #1e293b;
+  line-height: 1.6;
+}
+
+.container { max-width: 760px; margin: auto; }
+
+header {
+  background: linear-gradient(135deg, #4338ca, #7c3aed);
+  color: white;
+  padding: 24px 16px;
+  text-align: center;
+  border-radius: 16px;
+  margin-bottom: 16px;
+}
+
+header h1 { font-size: 25px; margin: 8px 0; }
+header p { margin: 5px 0; }
+
+.chapter-label {
+  display: inline-block;
+  background: white;
+  color: #4338ca;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.navigation { text-align: center; margin: 16px 0; }
+
+.nav-button {
+  display: inline-block;
+  background: #ede9fe;
+  color: #5b21b6;
+  padding: 10px 14px;
+  margin: 4px;
+  border-radius: 9px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.instructions, .quiz-card, .result, .disclaimer {
+  background: white;
+  padding: 18px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.07);
+}
+
+.progress-text {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+.progress-track {
+  height: 9px;
+  background: #e2e8f0;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: #7c3aed;
+  transition: width 0.25s;
+}
+
+.question-number {
+  color: #6d28d9;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.question {
+  font-size: 19px;
+  font-weight: bold;
+  margin: 8px 0 16px;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: 2px solid #cbd5e1;
+  background: white;
+  color: #1e293b;
+  border-radius: 10px;
+  padding: 12px;
+  margin: 9px 0;
+  font-size: 16px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.option:hover:not(:disabled) {
+  background: #f5f3ff;
+  border-color: #7c3aed;
+}
+
+.option:disabled { cursor: default; opacity: 1; }
+.option.correct { background: #dcfce7; border-color: #16a34a; }
+.option.wrong { background: #fee2e2; border-color: #dc2626; }
+
+.feedback {
+  display: none;
+  padding: 12px;
+  border-radius: 9px;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+.feedback.show { display: block; }
+.feedback.good { background: #dcfce7; color: #166534; }
+.feedback.bad { background: #fee2e2; color: #991b1b; }
+
+.hint-button {
+  border: none;
+  background: #fef3c7;
+  color: #92400e;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.hint {
+  display: none;
+  background: #fffbeb;
+  border-left: 4px solid #f59e0b;
+  padding: 10px;
+  margin-top: 9px;
+  border-radius: 6px;
+}
+
+.hint.show { display: block; }
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.action-button {
+  border: none;
+  padding: 12px 16px;
+  border-radius: 9px;
+  background: #6d28d9;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.action-button:disabled { background: #94a3b8; cursor: not-allowed; }
+.secondary-button { background: #475569; }
+
+.result { display: none; text-align: center; }
+.result h2 { color: #6d28d9; }
+.score-number { font-size: 36px; font-weight: bold; color: #6d28d9; }
+.result-message { font-size: 20px; font-weight: bold; }
+
+.disclaimer { font-size: 13px; color: #475569; }
+.disclaimer h3 { color: #1e293b; }
+footer { text-align: center; padding: 12px; color: #64748b; font-size: 13px; }
+
+@media (max-width: 480px) {
+  body { padding: 9px; }
+  header h1 { font-size: 22px; }
+  .question { font-size: 17px; }
+  .instructions, .quiz-card, .result, .disclaimer { padding: 14px; }
+  .action-button { padding: 11px 12px; }
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<header>
+  <div class="chapter-label">Class 4 English | कक्षा 4 अंग्रेज़ी</div>
+  <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+  <p><strong>Chapter 12: MAHESHWAR</strong></p>
+  <p>Quiz 2: Vocabulary | शब्दावली</p>
+  <p>Learn word meanings, synonyms and correct word usage.</p>
+  <p>शब्दार्थ, समानार्थी शब्द और सही शब्द-प्रयोग सीखें।</p>
+</header>
+
+<div class="navigation">
+  <a class="nav-button" href="class4-english-chapter12.html">
+    ← Back to Chapter 12 | अध्याय पर वापस जाएँ
+  </a>
+</div>
+
+<section class="instructions">
+  <h2>How to Play | कैसे खेलें</h2>
+  <p>1. Read each question and select one answer.</p>
+  <p>हर प्रश्न पढ़ें और एक उत्तर चुनें।</p>
+  <p>2. If your answer is incorrect, read the feedback and try again.</p>
+  <p>यदि उत्तर गलत है, तो प्रतिक्रिया पढ़ें और दोबारा प्रयास करें।</p>
+  <p>3. A correct answer unlocks the next question.</p>
+  <p>सही उत्तर देने पर अगला प्रश्न खुलेगा।</p>
+  <p>4. Complete all 10 questions to see your score.</p>
+  <p>अपना स्कोर देखने के लिए सभी 10 प्रश्न पूरे करें।</p>
+</section>
+
+<section class="quiz-card" id="quizCard">
+  <div class="progress-text">
+    <span id="questionCounter"></span>
+    <span id="scoreCounter">Score: 0</span>
+  </div>
+  <div class="progress-track">
+    <div id="progressBar"></div>
+  </div>
+
+  <div class="question-number" id="questionNumber"></div>
+  <div class="question" id="questionText"></div>
+  <div id="options"></div>
+
+  <button class="hint-button" id="hintButton" type="button">
+    Show Hint | संकेत देखें
+  </button>
+  <div class="hint" id="hintText"></div>
+
+  <div class="feedback" id="feedback" aria-live="polite"></div>
+
+  <div class="controls">
+    <button class="action-button secondary-button" id="restartButton" type="button">
+      Restart | फिर से शुरू करें
+    </button>
+    <button class="action-button" id="nextButton" type="button" disabled>
+      Next Question | अगला प्रश्न →
+    </button>
+  </div>
+</section>
+
+<section class="result" id="resultSection" aria-live="polite">
+  <h2>Quiz Completed! | प्रश्नोत्तरी पूरी हुई!</h2>
+  <div class="score-number" id="finalScore"></div>
+  <p id="percentageText"></p>
+  <p class="result-message" id="resultMessage"></p>
+  <p id="resultHindi"></p>
+  <button class="action-button" id="playAgainButton" type="button">
+    Try Again | फिर से प्रयास करें
+  </button>
+  <div class="navigation">
+    <a class="nav-button" href="class4-english-chapter12.html">
+      Back to Chapter | अध्याय पर वापस जाएँ
+    </a>
+  </div>
+</section>
+
+<section class="disclaimer">
+  <h3>Disclaimer | अस्वीकरण</h3>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy is an independent educational
+    platform and is not affiliated with, endorsed by, or associated with NCERT.
+    NCERT textbook names, chapters, and curriculum topics belong exclusively
+    to NCERT. All explanations, examples, and practice material provided here
+    are educational aids. For official textbooks, visit
+    <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">ncert.nic.in</a>.
+  </p>
+  <p>
+    RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+    इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की पाठ्यपुस्तकों,
+    अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं। यहाँ दी गई व्याख्याएँ,
+    उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के लिए हैं। आधिकारिक पाठ्यपुस्तकों
+    के लिए <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">ncert.nic.in</a> पर जाएँ।
+  </p>
+</section>
+
+<footer>
+  RawaRajpootNexEduToppers Learning Academy<br>
+  Learn • Practise • Improve | सीखें • अभ्यास करें • आगे बढ़ें
+</footer>
+</div>
+
+<script>
+"use strict";
+
+const questions = [
+  {
+    q: "1. What does the word “heritage” usually mean? | “Heritage” शब्द का सामान्य अर्थ क्या है?",
+    options: [
+      "Things and traditions passed down from the past | अतीत से मिली वस्तुएँ और परंपराएँ",
+      "A plan for tomorrow's weather | कल के मौसम की योजना",
+      "A type of school examination | एक प्रकार की स्कूल परीक्षा",
+      "A tool used for measuring length | लंबाई मापने का एक उपकरण"
+    ],
+    answer: 0,
+    hint: "Think about old buildings, customs and traditions that people preserve. | पुरानी इमारतों, रीति-रिवाजों और सुरक्षित रखी जाने वाली परंपराओं के बारे में सोचें।",
+    explanation: "Heritage includes traditions, places and things passed from earlier generations. | विरासत में पिछली पीढ़ियों से मिली परंपराएँ, स्थान और वस्तुएँ शामिल होती हैं।"
+  },
+  {
+    q: "2. Which word is closest in meaning to “ancient”? | “Ancient” शब्द का सबसे निकट अर्थ कौन-सा है?",
+    options: [
+      "Modern | आधुनिक",
+      "Very old | बहुत पुराना",
+      "Noisy | शोरगुल वाला",
+      "Comfortable | आरामदायक"
+    ],
+    answer: 1,
+    hint: "The word often describes something from a very distant past. | यह शब्द अक्सर बहुत पुराने समय की किसी चीज़ के लिए प्रयोग होता है।",
+    explanation: "Ancient means very old or belonging to a distant past. | Ancient का अर्थ बहुत पुराना या दूर के अतीत से संबंधित है।"
+  },
+  {
+    q: "3. Which word is a synonym of “beautiful”? | “Beautiful” का समानार्थी शब्द कौन-सा है?",
+    options: [
+      "Ugly | बदसूरत",
+      "Weak | कमजोर",
+      "Lovely | सुंदर",
+      "Empty | खाली"
+    ],
+    answer: 2,
+    hint: "Choose a word that gives a similar positive description. | ऐसा शब्द चुनें जो समान सकारात्मक वर्णन करता हो।",
+    explanation: "Lovely can mean beautiful or pleasing to look at. | Lovely का अर्थ सुंदर या देखने में मनभावन हो सकता है।"
+  },
+  {
+    q: "4. Which word is closest in meaning to “brave”? | “Brave” शब्द का निकट अर्थ कौन-सा है?",
+    options: [
+      "Courageous | साहसी",
+      "Careless | लापरवाह",
+      "Sleepy | नींद में",
+      "Silent | शांत"
+    ],
+    answer: 0,
+    hint: "Think of someone who faces difficulty without giving in to fear. | ऐसे व्यक्ति के बारे में सोचें जो डर के बावजूद कठिनाई का सामना करता है।",
+    explanation: "Brave means showing courage; courageous has a similar meaning. | Brave का अर्थ साहसी होता है; Courageous का अर्थ भी लगभग यही है।"
+  },
+  {
+    q: "5. What does “tradition” mean? | “Tradition” का क्या अर्थ है?",
+    options: [
+      "A sudden accident | अचानक हुई दुर्घटना",
+      "A habit or custom passed down through generations | पीढ़ियों से चली आ रही प्रथा या रीति",
+      "A new toy bought every day | हर दिन खरीदा जाने वाला नया खिलौना",
+      "A question with no answer | ऐसा प्रश्न जिसका कोई उत्तर न हो"
+    ],
+    answer: 1,
+    hint: "Think of customs families or communities continue over many years. | उन रीति-रिवाजों के बारे में सोचें जिन्हें परिवार या समुदाय कई वर्षों तक निभाते हैं।",
+    explanation: "A tradition is a custom or practice handed down over time. | Tradition वह रीति या प्रथा है जो समय के साथ आगे की पीढ़ियों तक पहुँचती है।"
+  },
+  {
+    q: "6. Which word is an antonym of “peaceful”? | “Peaceful” का विलोम शब्द कौन-सा है?",
+    options: [
+      "Calm | शांत",
+      "Quiet | खामोश",
+      "Serene | शांतिपूर्ण",
+      "Noisy | शोरगुल वाला"
+    ],
+    answer: 3,
+    hint: "Choose the word that describes a place without quiet or calm. | ऐसा शब्द चुनें जो शांत वातावरण के विपरीत हो।",
+    explanation: "Noisy describes a place full of sound, unlike peaceful. | Noisy का अर्थ शोरगुल वाला है, जो Peaceful के विपरीत है।"
+  },
+  {
+    q: "7. Choose the correct word: “The children looked at the ______ fort.” | सही शब्द चुनें: “बच्चों ने ______ किले को देखा।”",
+    options: [
+      "historic | ऐतिहासिक",
+      "hungrily | भूख से",
+      "quickly | जल्दी से",
+      "softly | धीरे से"
+    ],
+    answer: 0,
+    hint: "The blank describes the fort, so look for a describing word. | खाली स्थान किले का वर्णन करता है, इसलिए वर्णन करने वाला शब्द चुनें।",
+    explanation: "Historic is an adjective that can describe a place important in history. | Historic एक विशेषण है, जो इतिहास में महत्त्वपूर्ण स्थान का वर्णन कर सकता है।"
+  },
+  {
+    q: "8. Which word means “a person who makes things by hand using a skill”? | “कौशल से हाथों द्वारा वस्तुएँ बनाने वाले व्यक्ति” को क्या कहते हैं?",
+    options: [
+      "Passenger | यात्री",
+      "Craftsperson | शिल्पकार",
+      "Spectator | दर्शक",
+      "Messenger | संदेशवाहक"
+    ],
+    answer: 1,
+    hint: "Think of a person who creates handmade items or traditional crafts. | हाथ से बनी वस्तुएँ या पारंपरिक शिल्प बनाने वाले व्यक्ति के बारे में सोचें।",
+    explanation: "A craftsperson uses practical skill to make things, often by hand. | शिल्पकार अपने कौशल से वस्तुएँ बनाता है, अक्सर हाथों से।"
+  },
+  {
+    q: "9. Which word best completes the sentence? “The saree was woven with great ______.” | वाक्य पूरा करने के लिए सही शब्द चुनें: “साड़ी बहुत ______ से बुनी गई थी।”",
+    options: [
+      "care | सावधानी",
+      "careless | लापरवाह",
+      "carelessly | लापरवाही से",
+      "carelessness | लापरवाही"
+    ],
+    answer: 0,
+    hint: "The sentence needs a noun after “with great”. | “With great” के बाद संज्ञा की आवश्यकता है।",
+    explanation: "Care is a noun that fits the phrase “with great care,” meaning carefully. | Care एक संज्ञा है और “with great care” का अर्थ है बहुत सावधानी से।"
+  },
+  {
+    q: "10. Which word is closest in meaning to “preserve”? | “Preserve” शब्द का निकट अर्थ कौन-सा है?",
+    options: [
+      "Destroy | नष्ट करना",
+      "Forget | भूल जाना",
+      "Protect and keep safe | सुरक्षित रखना",
+      "Throw away | फेंक देना"
+    ],
+    answer: 2,
+    hint: "Think of protecting something valuable so it remains for the future. | किसी मूल्यवान चीज़ को भविष्य के लिए सुरक्षित रखने के बारे में सोचें।",
+    explanation: "Preserve means to protect or maintain something so it remains in good condition. | Preserve का अर्थ किसी चीज़ को सुरक्षित रखना या अच्छी स्थिति में बनाए रखना है।"
+  }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answeredCorrectly = false;
+let hintShown = false;
+
+const questionCounter = document.getElementById("questionCounter");
+const scoreCounter = document.getElementById("scoreCounter");
+const progressBar = document.getElementById("progressBar");
+const questionNumber = document.getElementById("questionNumber");
+const questionText = document.getElementById("questionText");
+const optionsContainer = document.getElementById("options");
+const feedback = document.getElementById("feedback");
+const hintButton = document.getElementById("hintButton");
+const hintText = document.getElementById("hintText");
+const nextButton = document.getElementById("nextButton");
+const quizCard = document.getElementById("quizCard");
+const resultSection = document.getElementById("resultSection");
+
+function loadQuestion() {
+  const q = questions[currentQuestion];
+  answeredCorrectly = false;
+  hintShown = false;
+
+  questionCounter.textContent =
+    "Question " + (currentQuestion + 1) + " of " + questions.length +
+    " | प्रश्न " + (currentQuestion + 1) + " / " + questions.length;
+
+  scoreCounter.textContent = "Score: " + score + " | अंक: " + score;
+  progressBar.style.width = (currentQuestion / questions.length * 100) + "%";
+  questionNumber.textContent = "Question " + (currentQuestion + 1);
+  questionText.textContent = q.q;
+  optionsContainer.innerHTML = "";
+
+  q.options.forEach(function(option, index) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "option";
+    button.textContent = option;
+    button.addEventListener("click", function() {
+      checkAnswer(index, button);
+    });
+    optionsContainer.appendChild(button);
+  });
+
+  feedback.className = "feedback";
+  feedback.textContent = "";
+  hintText.textContent = q.hint;
+  hintText.className = "hint";
+  hintButton.disabled = false;
+  hintButton.textContent = "Show Hint | संकेत देखें";
+  nextButton.disabled = true;
+  nextButton.textContent =
+    currentQuestion === questions.length - 1
+      ? "See Result | परिणाम देखें"
+      : "Next Question | अगला प्रश्न →";
+}
+
+function checkAnswer(selectedIndex, selectedButton) {
+  if (answeredCorrectly) return;
+
+  const q = questions[currentQuestion];
+  const buttons = optionsContainer.querySelectorAll(".option");
+
+  if (selectedIndex === q.answer) {
+    answeredCorrectly = true;
+    score++;
+    selectedButton.classList.add("correct");
+
+    buttons.forEach(function(button) {
+      button.disabled = true;
+    });
+
+    feedback.className = "feedback show good";
+    feedback.textContent =
+      "Well done! Keep it up! | बहुत अच्छा! ऐसे ही आगे बढ़ते रहें! " +
+      q.explanation;
+
+    nextButton.disabled = false;
+    hintButton.disabled = true;
+    scoreCounter.textContent = "Score: " + score + " | अंक: " + score;
+  } else {
+    selectedButton.classList.add("wrong");
+    selectedButton.disabled = true;
+
+    feedback.className = "feedback show bad";
+    feedback.textContent =
+      "Wrong answer! Read carefully and try again. | " +
+      "गलत जवाब! ध्यान से पढ़ें और फिर से प्रयास करें।";
+  }
+}
+
+hintButton.addEventListener("click", function() {
+  if (!hintShown) {
+    hintText.classList.add("show");
+    hintButton.textContent = "Hide Hint | संकेत छिपाएँ";
+    hintShown = true;
+  } else {
+    hintText.classList.remove("show");
+    hintButton.textContent = "Show Hint | संकेत देखें";
+    hintShown = false;
+  }
+});
+
+nextButton.addEventListener("click", function() {
+  if (!answeredCorrectly) return;
+
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    loadQuestion();
+  } else {
+    showResult();
+  }
+});
+
+function showResult() {
+  quizCard.style.display = "none";
+  resultSection.style.display = "block";
+
+  const percentage = Math.round(score / questions.length * 100);
+
+  document.getElementById("finalScore").textContent =
+    score + " / " + questions.length;
+
+  document.getElementById("percentageText").textContent =
+    percentage + "% | प्रतिशत";
+
+  let message;
+  let hindi;
+
+  if (percentage <= 20) {
+    message = "Keep trying!";
+    hindi = "कोशिश करते रहें!";
+  } else if (percentage <= 40) {
+    message = "Good try!";
+    hindi = "अच्छा प्रयास!";
+  } else if (percentage <= 60) {
+    message = "Good job!";
+    hindi = "बहुत अच्छा प्रयास!";
+  } else if (percentage <= 80) {
+    message = "Very good!";
+    hindi = "बहुत बढ़िया!";
+  } else if (percentage < 100) {
+    message = "Excellent!";
+    hindi = "शानदार!";
+  } else {
+    message = "Fantastic! Perfect score!";
+    hindi = "अद्भुत! पूरे अंक!";
+  }
+
+  document.getElementById("resultMessage").textContent = message;
+  document.getElementById("resultHindi").textContent = hindi;
+  progressBar.style.width = "100%";
+  resultSection.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function restartQuiz() {
+  currentQuestion = 0;
+  score = 0;
+  answeredCorrectly = false;
+  hintShown = false;
+  quizCard.style.display = "block";
+  resultSection.style.display = "none";
+  loadQuestion();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.getElementById("restartButton").addEventListener("click", restartQuiz);
+document.getElementById("playAgainButton").addEventListener("click", restartQuiz);
+
+loadQuestion();
+</script>
+</body>
+</html>
