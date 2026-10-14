@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class 4 | October Day 1 Exercise</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 15px;
+      font-family: Arial, sans-serif;
+      background: #f2f7ff;
+      color: #222;
+    }
+
+    header {
+      background: linear-gradient(135deg, #0755b5, #1688e8);
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      margin: 0 0 10px;
+      font-size: 27px;
+    }
+
+    header p {
+      margin: 6px 0;
+      font-size: 16px;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: auto;
+    }
+
+    .instruction {
+      background: white;
+      padding: 18px;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 20px;
+      line-height: 1.7;
+      box-shadow: 0 3px 10px #0000000d;
+    }
+
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .subject-card {
+      background: white;
+      border-radius: 14px;
+      padding: 22px 12px;
+      text-align: center;
+      box-shadow: 0 3px 10px #00000012;
+      border: 1px solid #dce8f8;
+    }
+
+    .subject-icon {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .subject-card h2 {
+      font-size: 19px;
+      margin: 5px 0 8px;
+      color: #0755b5;
+    }
+
+    .subject-card p {
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 40px;
+    }
+
+    .subject-card a {
+      display: block;
+      text-decoration: none;
+      background: #0755b5;
+      color: white;
+      padding: 12px 8px;
+      border-radius: 9px;
+      font-weight: bold;
+      margin-top: 12px;
+    }
+
+    .subject-card a:hover {
+      background: #003d87;
+    }
+
+    .back-button {
+      display: block;
+      max-width: 280px;
+      margin: 25px auto;
+      padding: 13px;
+      text-align: center;
+      background: #e1edff;
+      color: #0755b5;
+      border-radius: 9px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .disclaimer {
+      max-width: 850px;
+      margin: 25px auto 0;
+      padding: 15px;
+      background: #fff;
+      border-radius: 10px;
+      color: #555;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    footer {
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+      margin: 20px 0 10px;
+    }
+
+    @media (max-width: 420px) {
+      header h1 {
+        font-size: 23px;
+      }
+
+      .subject-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .subject-card {
+        padding: 18px 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+    <p>Class 4 Daily Exercise & Revision</p>
+    <p>कक्षा 4 दैनिक अभ्यास एवं रिवीजन</p>
+    <p><strong>October — Day 1 | अक्टूबर — दिन 1</strong></p>
+  </header>
+
+  <main class="container">
+
+    <section class="instruction">
+      <h2>Choose a Subject</h2>
+      <h2>विषय चुनें</h2>
+      <p>
+        Select any subject to begin your daily practice.
+        Each exercise will contain 20 questions.
+      </p>
+      <p>
+        अपना दैनिक अभ्यास शुरू करने के लिए कोई भी विषय चुनें।
+        प्रत्येक अभ्यास में 20 प्रश्न होंगे।
+      </p>
+    </section>
+
+    <section class="subject-grid">
+
+      <div class="subject-card">
+        <div class="subject-icon">➗</div>
+        <h2>Mathematics</h2>
+        <p>Maths Practice<br>गणित का अभ्यास</p>
+        <a href="class4-daily-exercise-revision-october-day-1-maths.html">
+          Start Maths / गणित शुरू करें
+        </a>
+      </div>
+
+      <div class="subject-card">
+        <div class="subject-icon">📘</div>
+        <h2>English</h2>
+        <p>Grammar and Language<br>व्याकरण एवं भाषा</p>
+        <a href="class4-daily-exercise-revision-october-day-1-english.html">
+          Start English / अंग्रेज़ी शुरू करें
+        </a>
+      </div>
+
+      <div class="subject-card">
+        <div class="subject-icon">📚</div>
+        <h2>Hindi</h2>
+        <p>हिंदी भाषा एवं व्याकरण<br>Hindi Language and Grammar</p>
+        <a href="class4-daily-exercise-revision-october-day-1-hindi.html">
+          हिंदी शुरू करें / Start Hindi
+        </a>
+      </div>
+
+      <div class="subject-card">
+        <div class="subject-icon">🌿</div>
+        <h2>EVS</h2>
+        <p>Environmental Studies<br>पर्यावरण अध्ययन</p>
+        <a href="class4-daily-exercise-revision-october-day-1-evs.html">
+          Start EVS / EVS शुरू करें
+        </a>
+      </div>
+
+      <div class="subject-card">
+        <div class="subject-icon">🧠</div>
+        <h2>GK & Reasoning</h2>
+        <p>General Knowledge and Logical Thinking<br>सामान्य ज्ञान एवं तार्किक क्षमता</p>
+        <a href="class4-daily-exercise-revision-october-day-1-gk-reasoning.html">
+          Start Practice / अभ्यास शुरू करें
+        </a>
+      </div>
+
+    </section>
+
+    <a class="back-button" href="class4-daily-exercise-revision-october.html">
+      ← Back to October / अक्टूबर पर वापस जाएँ
+    </a>
+
+  </main>
+
+  <section class="disclaimer">
+    <strong>Disclaimer:</strong>
+    RawaRajpootNexEduToppers Learning Academy is an independent
+    educational platform and is not affiliated with, endorsed by,
+    or associated with NCERT. NCERT textbook names, chapters, and
+    curriculum topics belong exclusively to NCERT. All explanations,
+    examples, and practice material provided here are educational aids.
+    For official textbooks, visit
+    <a href="https://ncert.nic.in/" target="_blank" rel="noopener">
+      ncert.nic.in
+    </a>.
+
+    <hr>
+
+    <strong>अस्वीकरण:</strong>
+    RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+    इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+    पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+    यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
+    लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+    <a href="https://ncert.nic.in/" target="_blank" rel="noopener">
+      ncert.nic.in
+    </a> पर जाएँ।
+  </section>
+
+  <footer>
+    © RawaRajpootNexEduToppers Learning Academy
+  </footer>
+
+</body>
+</html>
