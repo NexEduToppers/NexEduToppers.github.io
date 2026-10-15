@@ -2,304 +2,485 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Class 4 Daily Exercise | RawaRajpootNexEduToppers Learning Academy</title>
+  <title>Class 4 Daily Exercise | RawaRajpootNexEduToppers Learning Academy</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+  <meta name="description"
+        content="Class 4 daily practice exercises for Mathematics, English Grammar, English Reading, Hindi, GK, SST, EVS, Arts and Physical Education.">
 
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f2f7ff;
-            color: #243247;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        header {
-            background: linear-gradient(135deg, #0755b5, #1688e8);
-            color: white;
-            text-align: center;
-            padding: 30px 15px;
-        }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f3f6fb;
+      color: #243247;
+      line-height: 1.6;
+    }
 
-        header h1 {
-            margin: 0 0 10px;
-            font-size: 27px;
-        }
+    header {
+      background: linear-gradient(135deg, #174a8b, #2878c8);
+      color: white;
+      text-align: center;
+      padding: 30px 16px;
+    }
 
-        header p {
-            margin: 6px 0;
-            font-size: 15px;
-            line-height: 1.6;
-        }
+    header h1 {
+      margin: 0 auto 12px;
+      max-width: 900px;
+      font-size: clamp(25px, 4vw, 36px);
+      line-height: 1.3;
+    }
 
-        .container {
-            max-width: 900px;
-            margin: 25px auto;
-            padding: 0 16px;
-        }
+    header p {
+      margin: 6px 0;
+      font-size: 17px;
+    }
 
-        .intro {
-            text-align: center;
-            margin-bottom: 25px;
-        }
+    .container {
+      width: min(1100px, 94%);
+      margin: 25px auto;
+    }
 
-        .intro h2 {
-            color: #0755b5;
-            margin-bottom: 8px;
-        }
+    .intro {
+      background: white;
+      padding: 22px;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+      margin-bottom: 25px;
+      text-align: center;
+    }
 
-        .intro p {
-            line-height: 1.7;
-        }
+    .intro h2 {
+      color: #174a8b;
+      margin-top: 0;
+    }
 
-        .exercise-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 18px;
-        }
+    .hindi {
+      display: block;
+      color: #4d596b;
+      margin-top: 4px;
+    }
 
-        .exercise-card {
-            background: white;
-            border-radius: 14px;
-            padding: 24px 18px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 50, 100, 0.09);
-            border: 1px solid #e1eafa;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
+    .section-title {
+      color: #174a8b;
+      margin: 28px 0 15px;
+      font-size: 24px;
+    }
 
-        .exercise-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 7px 18px rgba(0, 50, 100, 0.14);
-        }
+    .subject-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
 
-        .exercise-icon {
-            font-size: 42px;
-            margin-bottom: 12px;
-        }
+    .subject-card {
+      background: white;
+      border: 1px solid #d9e3f0;
+      border-radius: 14px;
+      padding: 21px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
 
-        .exercise-card h3 {
-            color: #0755b5;
-            margin: 5px 0 10px;
-            font-size: 19px;
-            line-height: 1.4;
-        }
+    .subject-card h3 {
+      color: #174a8b;
+      margin: 0 0 10px;
+      font-size: 21px;
+    }
 
-        .exercise-card p {
-            font-size: 14px;
-            line-height: 1.7;
-            min-height: 72px;
-        }
+    .subject-card p {
+      margin: 5px 0;
+    }
 
-        .open-button {
-            display: inline-block;
-            background: #087bdb;
-            color: white;
-            text-decoration: none;
-            padding: 11px 18px;
-            border-radius: 8px;
-            font-weight: bold;
-            margin-top: 8px;
-        }
+    .subject-card .action {
+      display: inline-block;
+      margin-top: auto;
+      padding: 11px 14px;
+      background: #1769aa;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 9px;
+      text-align: center;
+    }
 
-        .open-button:hover {
-            background: #0559a8;
-        }
+    .subject-card .action:hover {
+      background: #104c80;
+    }
 
-        .note {
-            background: white;
-            border-left: 4px solid #1688e8;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 25px;
-            font-size: 14px;
-            line-height: 1.8;
-        }
+    .subject-card .action:focus-visible {
+      outline: 3px solid #f0b429;
+      outline-offset: 3px;
+    }
 
-        .back-link {
-            display: inline-block;
-            margin-top: 22px;
-            color: #0755b5;
-            font-weight: bold;
-            text-decoration: none;
-        }
+    .assessment-card {
+      border-top: 5px solid #e3a008;
+    }
 
-        .back-link:hover {
-            text-decoration: underline;
-        }
+    .practice-card {
+      border-top: 5px solid #25875a;
+    }
 
-        footer {
-            text-align: center;
-            background: #073d7a;
-            color: white;
-            padding: 20px 12px;
-            margin-top: 35px;
-            font-size: 14px;
-            line-height: 1.7;
-        }
+    .tag {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 4px 9px;
+      margin: 4px 0 10px;
+      border-radius: 6px;
+      background: #e8f1ff;
+      color: #174a8b;
+      font-size: 13px;
+      font-weight: bold;
+    }
 
-        .site-disclaimer {
-            margin-top: 0;
-            padding: 20px;
-            background: #f0f5fb;
-            color: #35465a;
-            border-top: 2px solid #cbdced;
-            font-size: 13px;
-            line-height: 1.7;
-        }
+    .direct-tag {
+      background: #e5f6eb;
+      color: #17663b;
+    }
 
-        .site-disclaimer h3 {
-            margin-top: 0;
-            color: #175b9a;
-        }
+    .site-disclaimer {
+      margin-top: 35px;
+      padding: 23px 18px;
+      background: #e9eef5;
+      border-top: 1px solid #cbd5e1;
+      color: #344256;
+      font-size: 14px;
+    }
 
-        .site-disclaimer a {
-            color: #175b9a;
-        }
+    .site-disclaimer h2 {
+      margin-top: 0;
+      font-size: 19px;
+    }
 
-        @media (max-width: 480px) {
-            header h1 {
-                font-size: 22px;
-            }
+    .site-disclaimer a {
+      color: #174ea6;
+      overflow-wrap: anywhere;
+    }
 
-            .exercise-options {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    footer {
+      padding: 18px 12px;
+      background: #173b68;
+      color: white;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 24px 12px;
+      }
+
+      .container {
+        width: 92%;
+      }
+
+      .subject-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .subject-card {
+        padding: 18px;
+      }
+
+      .section-title {
+        font-size: 22px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-    <h1>RawaRajpootNexEduToppers</h1>
-    <p>Learning Academy</p>
-    <p>Class 4 — Daily Exercise / कक्षा 4 — दैनिक अभ्यास</p>
-    <p>Learn • Practise • Improve</p>
-    <p>सीखें • अभ्यास करें • बेहतर बनें</p>
-</header>
+  <header>
+    <h1>RawaRajpootNexEduToppers Learning Academy</h1>
 
-<main class="container">
+    <p>Class 4 Daily Exercise</p>
+    <p lang="hi">कक्षा 4 दैनिक अभ्यास</p>
+
+    <p>Learn • Practise • Improve</p>
+    <p lang="hi">सीखें • अभ्यास करें • सुधार करें</p>
+  </header>
+
+  <main class="container">
 
     <section class="intro">
-        <h2>Choose Your Practice Type</h2>
-        <p>अपने अभ्यास का प्रकार चुनें।</p>
+      <h2>Choose a Subject | विषय चुनें</h2>
+
+      <p>
+        Select a subject to begin your daily practice.
+        <span class="hindi" lang="hi">
+          अपना दैनिक अभ्यास शुरू करने के लिए कोई विषय चुनें।
+        </span>
+      </p>
+
+      <p>
+        Level assessments are available only for Mathematics and English Grammar.
+        <span class="hindi" lang="hi">
+          स्तर की जाँच केवल गणित और अंग्रेज़ी व्याकरण के लिए होगी।
+        </span>
+      </p>
+
+      <p>
+        All other subjects offer direct practice exercises.
+        <span class="hindi" lang="hi">
+          बाकी सभी विषयों में सीधे अभ्यास प्रश्न उपलब्ध होंगे।
+        </span>
+      </p>
+    </section>
+
+    <h2 class="section-title">
+      Subjects with Level Assessment
+      <span class="hindi" lang="hi">स्तर की जाँच वाले विषय</span>
+    </h2>
+
+    <section class="subject-grid">
+
+      <!-- MATHEMATICS -->
+      <article class="subject-card assessment-card">
+        <h3>Mathematics | गणित</h3>
+
+        <span class="tag">Level Assessment Available</span>
+
         <p>
-            Practise regularly, revise what you have learned,
-            and strengthen your skills step by step.
-            <br>
-            नियमित अभ्यास करें, सीखी हुई चीज़ों को दोहराएँ
-            और धीरे-धीरे अपने कौशल बेहतर बनाएँ।
+          Check your Mathematics level and choose a suitable practice level.
+          <span class="hindi" lang="hi">
+            गणित का स्तर जाँचें और अपने लिए उपयुक्त अभ्यास स्तर चुनें।
+          </span>
         </p>
-    </section>
 
-    <section class="exercise-options">
+        <p>
+          Foundation • Developing • Advanced
+          <span class="hindi" lang="hi">
+            आधार स्तर • विकास स्तर • उन्नत स्तर
+          </span>
+        </p>
 
-        <div class="exercise-card">
-            <div class="exercise-icon">🔄</div>
-            <h3>Previous Class Revision</h3>
-            <p>
-                Revise important concepts and skills learned
-                in earlier classes.
-                <br><br>
-                पिछली कक्षाओं में सीखे गए महत्वपूर्ण विषयों
-                और कौशलों की दोहराई करें।
-            </p>
-            <a class="open-button"
-               href="class4-daily-exercise-revision.html">
-                Start Revision
-            </a>
-        </div>
+        <a class="action" href="class4-daily-exercise-maths.html">
+          Open Mathematics Practice
+          <span class="hindi" lang="hi">गणित अभ्यास खोलें</span>
+        </a>
+      </article>
 
-        <div class="exercise-card">
-            <div class="exercise-icon">📘</div>
-            <h3>Current Class Practice</h3>
-            <p>
-                Practise topics and skills appropriate
-                for Class 4.
-                <br><br>
-                कक्षा 4 के स्तर के विषयों और कौशलों
-                का अभ्यास करें।
-            </p>
-            <a class="open-button"
-               href="class4-daily-exercise-current.html">
-                Start Practice
-            </a>
-        </div>
+      <!-- ENGLISH GRAMMAR -->
+      <article class="subject-card assessment-card">
+        <h3>English Grammar | अंग्रेज़ी व्याकरण</h3>
 
-        <div class="exercise-card">
-            <div class="exercise-icon">🧩</div>
-            <h3>Mixed Practice</h3>
-            <p>
-                Test your understanding with a mixture
-                of revision and current-class questions.
-                <br><br>
-                पुराने और वर्तमान विषयों के मिले-जुले
-                प्रश्न हल करें।
-            </p>
-            <a class="open-button"
-               href="class4-daily-exercise-mixed.html">
-                Start Mixed Practice
-            </a>
-        </div>
+        <span class="tag">Level Assessment Available</span>
+
+        <p>
+          Check your Grammar level and practise grammar topics step by step.
+          <span class="hindi" lang="hi">
+            व्याकरण का स्तर जाँचें और विषयों का चरणबद्ध अभ्यास करें।
+          </span>
+        </p>
+
+        <p>
+          Foundation • Developing • Advanced
+          <span class="hindi" lang="hi">
+            आधार स्तर • विकास स्तर • उन्नत स्तर
+          </span>
+        </p>
+
+        <a class="action" href="class4-daily-exercise-english-grammar.html">
+          Open English Grammar
+          <span class="hindi" lang="hi">अंग्रेज़ी व्याकरण खोलें</span>
+        </a>
+      </article>
 
     </section>
 
-    <div class="note">
-        <strong>Practice Tip / अभ्यास का सुझाव</strong>
-        <br>
-        Try to practise a little every day. Read each question
-        carefully and learn from your mistakes.
-        <br>
-        हर दिन थोड़ा अभ्यास करें। प्रत्येक प्रश्न ध्यान से पढ़ें
-        और अपनी गलतियों से सीखें।
-    </div>
+    <h2 class="section-title">
+      Direct Practice Subjects
+      <span class="hindi" lang="hi">सीधे अभ्यास वाले विषय</span>
+    </h2>
 
-    <a class="back-link" href="class4.html">
-        ← Back to Class 4 / कक्षा 4 पर वापस जाएँ
-    </a>
+    <section class="subject-grid">
 
-</main>
+      <!-- ENGLISH READING -->
+      <article class="subject-card practice-card">
+        <h3>English Reading & Chapter Practice</h3>
+        <span class="hindi" lang="hi">अंग्रेज़ी पठन और अध्याय अभ्यास</span>
 
-<footer>
-    <strong>RawaRajpootNexEduToppers Learning Academy</strong>
-    <br>
-    Class 4 Daily Exercise / कक्षा 4 दैनिक अभ्यास
-    <br>
-    Learn something new every day!
-    <br>
-    हर दिन कुछ नया सीखें!
-</footer>
+        <span class="tag direct-tag">Direct Practice</span>
 
-<section class="site-disclaimer">
-    <h3>Disclaimer / अस्वीकरण</h3>
-    <p>
-        RawaRajpootNexEduToppers Learning Academy is an independent
-        educational platform and is not affiliated with, endorsed by,
-        or associated with NCERT. NCERT textbook names, chapters, and
-        curriculum topics belong exclusively to NCERT. All explanations,
-        examples, and practice material provided here are educational aids.
-        For official textbooks, visit
-        <a href="https://ncert.nic.in/" target="_blank"
-           rel="noopener noreferrer">ncert.nic.in</a>.
-    </p>
-    <p>
+        <p>
+          Practise word reading, sentences, vocabulary, reading comprehension
+          and textbook chapters.
+          <span class="hindi" lang="hi">
+            शब्द पढ़ने, वाक्य, शब्दार्थ, पढ़कर समझने और पाठ्यपुस्तक के अध्यायों
+            का अभ्यास करें।
+          </span>
+        </p>
+
+        <a class="action" href="class4-daily-exercise-english.html">
+          Start English Practice
+          <span class="hindi" lang="hi">अंग्रेज़ी अभ्यास शुरू करें</span>
+        </a>
+      </article>
+
+      <!-- HINDI -->
+      <article class="subject-card practice-card">
+        <h3>Hindi | हिंदी</h3>
+
+        <span class="tag direct-tag">Direct Practice</span>
+
+        <p>
+          Practise Hindi reading, vocabulary, grammar and sentences.
+          <span class="hindi" lang="hi">
+            हिंदी पठन, शब्दावली, व्याकरण और वाक्यों का अभ्यास करें।
+          </span>
+        </p>
+
+        <a class="action" href="class4-daily-exercise-hindi.html">
+          Start Hindi Practice
+          <span class="hindi" lang="hi">हिंदी अभ्यास शुरू करें</span>
+        </a>
+      </article>
+
+      <!-- GK -->
+      <article class="subject-card practice-card">
+        <h3>General Knowledge (GK) | सामान्य ज्ञान</h3>
+
+        <span class="tag direct-tag">Direct Practice</span>
+
+        <p>
+          Improve general knowledge through regular practice questions.
+          <span class="hindi" lang="hi">
+            नियमित अभ्यास प्रश्नों से सामान्य ज्ञान बढ़ाएँ।
+          </span>
+        </p>
+
+        <a class="action" href="class4-daily-exercise-gk.html">
+          Start GK Practice
+          <span class="hindi" lang="hi">सामान्य ज्ञान अभ्यास शुरू करें</span>
+        </a>
+      </article>
+
+      <!-- SST -->
+      <article class="subject-card practice-card">
+        <h3>Social Studies (SST) | सामाजिक विज्ञान</h3>
+
+        <span class="tag direct-tag">Direct Practice</span>
+
+        <p>
+          Practise topics related to people, places, society and history.
+          <span class="hindi" lang="hi">
+            लोगों, स्थानों, समाज और इतिहास से जुड़े विषयों का अभ्यास करें।
+          </span>
+        </p>
+
+        <a class="action" href="class4-daily-exercise-sst.html">
+          Start SST Practice
+          <span class="hindi" lang="hi">सामाजिक विज्ञान अभ्यास शुरू करें</span>
+        </a>
+      </article>
+
+      <!-- EVS -->
+      <article class="subject-card practice-card">
+        <h3>EVS / Our World | पर्यावरण अध्ययन</h3>
+
+        <span class="tag direct-tag">Direct Practice</span>
+
+        <p>
+          Learn about nature, the environment, living things and our surroundings.
+          <span class="hindi" lang="hi">
+            प्रकृति, पर्यावरण, जीव-जंतुओं और अपने आसपास की दुनिया के बारे में सीखें।
+          </span>
+        </p>
+
+        <a class="action" href="class4-daily-exercise-evs.html">
+          Start EVS Practice
+          <span class="hindi" lang="hi">पर्यावरण अध्ययन अभ्यास शुरू करें</span>
+        </a>
+      </article>
+
+      <!-- ARTS -->
+      <article class="subject-card practice-card">
+        <h3>Arts Education | कला शिक्षा</h3>
+
+        <span class="tag direct-tag">Direct Practice</span>
+
+        <p>
+          Explore creative activities and art-related exercises.
+          <span class="hindi" lang="hi">
+            रचनात्मक गतिविधियों और कला से जुड़े अभ्यास करें।
+          </span>
+        </p>
+
+        <a class="action" href="class4-daily-exercise-arts.html">
+          Start Arts Practice
+          <span class="hindi" lang="hi">कला अभ्यास शुरू करें</span>
+        </a>
+      </article>
+
+      <!-- PHYSICAL EDUCATION -->
+      <article class="subject-card practice-card">
+        <h3>Physical Education | शारीरिक शिक्षा</h3>
+
+        <span class="tag direct-tag">Direct Practice</span>
+
+        <p>
+          Practise learning activities related to health, movement and sports.
+          <span class="hindi" lang="hi">
+            स्वास्थ्य, शारीरिक गतिविधियों और खेलों से जुड़े अभ्यास करें।
+          </span>
+        </p>
+
+        <a class="action" href="class4-daily-exercise-physical.html">
+          Start Physical Education
+          <span class="hindi" lang="hi">शारीरिक शिक्षा अभ्यास शुरू करें</span>
+        </a>
+      </article>
+
+    </section>
+
+  </main>
+
+  <section class="site-disclaimer">
+    <div class="container">
+
+      <h2>Disclaimer | अस्वीकरण</h2>
+
+      <p>
+        RawaRajpootNexEduToppers Learning Academy is an independent educational
+        platform and is not affiliated with, endorsed by, or associated with
+        NCERT. NCERT textbook names, chapters, and curriculum topics belong
+        exclusively to NCERT. All solutions and study notes provided here are
+        original practice aids. For official textbooks, visit
+        <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">
+          ncert.nic.in
+        </a>.
+      </p>
+
+      <p lang="hi">
         RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
-        इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
-        पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
-        यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के लिए हैं।
+        इसका NCERT से कोई आधिकारिक संबंध, समर्थन या संबद्धता नहीं है।
+        NCERT की पाठ्यपुस्तकों के नाम, अध्याय और पाठ्यक्रम विषय NCERT के हैं।
+        यहाँ दिए गए सभी समाधान और अध्ययन नोट्स मौलिक अभ्यास सामग्री हैं।
         आधिकारिक पाठ्यपुस्तकों के लिए
-        <a href="https://ncert.nic.in/" target="_blank"
-           rel="noopener noreferrer">ncert.nic.in</a>
+        <a href="https://ncert.nic.in/" target="_blank" rel="noopener noreferrer">
+          ncert.nic.in
+        </a>
         पर जाएँ।
+      </p>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      RawaRajpootNexEduToppers Learning Academy
     </p>
-</section>
+    <p lang="hi">सीखें, अभ्यास करें और आगे बढ़ें।</p>
+  </footer>
 
 </body>
 </html>
-
