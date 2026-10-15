@@ -2,699 +2,444 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 Maths | October Day 1</title>
 
-  <title>Class 4 Maths | October Day 1</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      padding: 15px;
-      font-family: Arial, sans-serif;
-      background: #f2f7ff;
-      color: #222;
-      line-height: 1.6;
-    }
-
-    header {
-      background: linear-gradient(135deg, #0755b5, #1688e8);
-      color: white;
-      padding: 24px 15px;
-      text-align: center;
-      border-radius: 16px;
-      margin-bottom: 20px;
-    }
-
-    header h1 {
-      margin: 0 0 8px;
-      font-size: 26px;
-    }
-
-    header p {
-      margin: 5px 0;
-    }
-
-    .container {
-      max-width: 750px;
-      margin: auto;
-    }
-
-    .info-card,
-    .quiz-card,
-    .result-card {
-      background: white;
-      border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 18px;
-      box-shadow: 0 3px 12px #0000000d;
-    }
-
-    .info-card {
-      text-align: center;
-    }
-
-    .progress-track {
-      width: 100%;
-      height: 10px;
-      background: #e1e9f5;
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 12px 0;
-    }
-
-    #progressBar {
-      width: 0;
-      height: 100%;
-      background: #1688e8;
-      transition: width 0.2s;
-    }
-
-    #questionNumber {
-      color: #0755b5;
-      font-weight: bold;
-    }
-
-    #questionText {
-      font-size: 21px;
-      font-weight: bold;
-      margin: 16px 0;
-    }
-    .english-question {
-  margin-bottom: 8px;
-  color: #0755b5;
-}
-
-.hindi-question {
-  font-size: 19px;
-  font-weight: normal;
-  color: #333;
-}
-
-    .difficulty {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 20px;
-      background: #e7f0ff;
-      color: #0755b5;
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    .options {
-      display: grid;
-      gap: 10px;
-      margin: 18px 0;
-    }
-
-    .option-button {
-      width: 100%;
-      padding: 13px;
-      border: 2px solid #d6e3f5;
-      border-radius: 10px;
-      background: #fff;
-      text-align: left;
-      font-size: 16px;
-      cursor: pointer;
-      color: #222;
-    }
-
-    .option-button:hover:not(:disabled) {
-      background: #eef5ff;
-      border-color: #1688e8;
-    }
-
-    .option-button:disabled {
-      cursor: not-allowed;
-      opacity: 0.85;
-    }
-
-    .option-button.correct {
-      border-color: #218838;
-      background: #e5f7e9;
-      color: #176329;
-    }
-
-    .option-button.wrong {
-      border-color: #c62828;
-      background: #ffebee;
-      color: #a51c1c;
-    }
-
-    #feedback {
-      padding: 12px;
-      border-radius: 9px;
-      margin: 12px 0;
-      font-weight: bold;
-      display: none;
-    }
-
-    #feedback.success {
-      display: block;
-      background: #e5f7e9;
-      color: #176329;
-    }
-
-    #feedback.error {
-      display: block;
-      background: #fff0e0;
-      color: #874600;
-    }
-
-    .main-button,
-    .back-button {
-      display: block;
-      width: 100%;
-      border: none;
-      border-radius: 10px;
-      padding: 13px;
-      font-size: 16px;
-      font-weight: bold;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .main-button {
-      background: #0755b5;
-      color: white;
-    }
-
-    .main-button:hover {
-      background: #003d87;
-    }
-
-    .main-button:disabled {
-      background: #a9b8cb;
-      cursor: not-allowed;
-    }
-
-    .back-button {
-      max-width: 300px;
-      margin: 20px auto;
-      background: #e1edff;
-      color: #0755b5;
-    }
-
-    .result-card {
-      text-align: center;
-    }
-
-    .result-score {
-      font-size: 34px;
-      color: #0755b5;
-      font-weight: bold;
-    }
-
-    .result-card h2 {
-      color: #0755b5;
-    }
-
-    .disclaimer {
-      max-width: 750px;
-      margin: 25px auto 0;
-      padding: 15px;
-      background: white;
-      border-radius: 10px;
-      color: #555;
-      font-size: 12px;
-      line-height: 1.7;
-    }
-
-    footer {
-      text-align: center;
-      color: #666;
-      font-size: 13px;
-      margin: 20px 0 10px;
-    }
-
-    [hidden] {
-      display: none !important;
-    }
-
-    @media (max-width: 480px) {
-      header h1 {
-        font-size: 22px;
-      }
-
-      .quiz-card,
-      .info-card,
-      .result-card {
-        padding: 15px;
-      }
-
-      #questionText {
-        font-size: 19px;
-      }
-
-      .option-button {
-        font-size: 15px;
-      }
-    }
-  </style>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:15px;font-family:Arial,sans-serif;background:#f2f7ff;color:#222;line-height:1.6}
+header{background:linear-gradient(135deg,#0755b5,#1688e8);color:white;padding:24px 15px;text-align:center;border-radius:16px;margin-bottom:20px}
+header h1{margin:0 0 8px;font-size:26px}
+header p{margin:5px 0}
+.container{max-width:780px;margin:auto}
+.card{background:white;border-radius:14px;padding:20px;margin-bottom:18px;box-shadow:0 3px 12px #0000000d}
+.center{text-align:center}
+button{border:0;border-radius:9px;padding:11px 15px;margin:5px;background:#0755b5;color:white;font-size:15px;cursor:pointer}
+button:hover{background:#06428c}
+button:disabled{opacity:.45;cursor:not-allowed}
+.level-buttons,.quiz-buttons{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.level-buttons button{flex:1;min-width:120px}
+.quiz-buttons button{min-width:44px}
+button.selected{background:#1688e8;outline:3px solid #b7d9ff}
+.question{font-size:21px;font-weight:bold;margin:12px 0}
+.hindi{font-size:18px;color:#444;font-weight:normal;margin-top:8px}
+#answerInput{width:100%;padding:13px;border:2px solid #b8cce8;border-radius:9px;font-size:18px;margin:10px 0}
+#answerInput:focus{outline:2px solid #1688e8}
+.progress-track{width:100%;height:10px;background:#e1e9f5;border-radius:10px;overflow:hidden;margin:12px 0}
+#progressBar{width:0;height:100%;background:#1688e8;transition:width .2s}
+#feedback{font-weight:bold;min-height:28px}
+.good{color:#147a36}
+.bad{color:#b42318}
+.small{font-size:14px;color:#555}
+footer{font-size:13px;color:#555;text-align:center;padding:15px}
+a{color:#0755b5}
+@media(max-width:480px){body{padding:9px}header h1{font-size:22px}.card{padding:15px}.question{font-size:19px}}
+</style>
 </head>
 
 <body>
-
 <header>
   <h1>RawaRajpootNexEduToppers Learning Academy</h1>
-  <p>Class 4 Mathematics Practice</p>
-  <p>कक्षा 4 गणित अभ्यास</p>
-  <p><strong>October — Day 1 | अक्टूबर — दिन 1</strong></p>
+  <p>Class 4 Maths Daily Exercise | कक्षा 4 गणित दैनिक अभ्यास</p>
+  <p>October • Day 1 | अक्टूबर • दिन 1</p>
 </header>
 
 <main class="container">
+  <section class="card center">
+    <h2>Choose Your Level | अपना स्तर चुनें</h2>
+    <p>Start with Easy and continue whenever you are ready.</p>
+    <p class="hindi">आसान स्तर से शुरू करें और तैयार होने पर आगे बढ़ें।</p>
+    <div class="level-buttons">
+      <button id="easyBtn" onclick="chooseLevel('easy')">Easy / आसान</button>
+      <button id="moderateBtn" onclick="chooseLevel('moderate')">Moderate / मध्यम</button>
+      <button id="hardBtn" onclick="chooseLevel('hard')">Challenging / चुनौतीपूर्ण</button>
+    </div>
+  </section>
 
-  <section class="info-card">
-    <h2>Daily Maths Exercise / दैनिक गणित अभ्यास</h2>
-    <p>20 questions: 5 Easy, 10 Moderate and 5 Challenging.</p>
-    <p>20 प्रश्न: 5 आसान, 10 मध्यम और 5 चुनौतीपूर्ण।</p>
-    <p>
-      You can try a question again until you answer correctly.
-      Your score is based on your first attempt at each question.
-    </p>
-    <p>
-      सही उत्तर देने तक आप प्रश्न दोबारा हल कर सकते हैं।
-      आपका स्कोर प्रत्येक प्रश्न के पहले प्रयास पर आधारित होगा।
-    </p>
+  <section class="card center" id="quizSelector" hidden>
+    <h2 id="levelHeading">Choose a Quiz | क्विज़ चुनें</h2>
+    <p id="levelDescription"></p>
+    <div class="quiz-buttons" id="quizButtons"></div>
+    <p class="small" id="quizCount"></p>
+  </section>
 
-    <div class="progress-track">
-      <div id="progressBar"></div>
+  <section class="card" id="quizCard" hidden>
+    <div class="center">
+      <h2 id="quizTitle">Quiz 1 | क्विज़ 1</h2>
+      <p id="questionNumber"></p>
+      <div class="progress-track"><div id="progressBar"></div></div>
+      <p id="scoreText">First-attempt score: 0</p>
     </div>
 
-    <p id="progressText">Question 1 of 20 / प्रश्न 1 में से 20</p>
+    <hr>
+    <div id="questionText" class="question"></div>
+    <input id="answerInput" type="number" inputmode="numeric"
+      placeholder="Enter your answer / अपना उत्तर लिखें" autocomplete="off">
+    <button id="checkBtn" onclick="checkAnswer()">Check Answer / उत्तर जाँचें</button>
+    <p id="feedback" aria-live="polite"></p>
+    <p class="small">You can try again until your answer is correct.</p>
+    <p class="hindi small">आप सही उत्तर मिलने तक दोबारा कोशिश कर सकते हैं।</p>
   </section>
 
-  <section class="quiz-card" id="quizCard">
-    <span class="difficulty" id="difficulty"></span>
-    <p id="questionNumber"></p>
-    <div id="questionText"></div>
-
-    <div class="options" id="options"></div>
-
-    <div id="feedback" role="status" aria-live="polite"></div>
-
-    <button class="main-button" id="nextButton" disabled>
-      Next Question / अगला प्रश्न
-    </button>
+  <section class="card center" id="resultCard" hidden>
+    <h2>Quiz Complete! | क्विज़ पूरी हुई!</h2>
+    <p id="resultMessage"></p>
+    <h3 id="resultScore"></h3>
+    <p id="resultAdvice"></p>
+    <button id="retryBtn" onclick="retryQuiz()">Try Again / फिर से करें</button>
+    <button id="nextBtn" onclick="nextQuiz()">Next Quiz / अगली क्विज़</button>
+    <button onclick="showQuizSelector()">Choose Another Quiz / दूसरी क्विज़ चुनें</button>
   </section>
 
-  <section class="result-card" id="resultCard" hidden>
-    <h2>Exercise Completed! / अभ्यास पूरा हुआ!</h2>
-    <div class="result-score" id="finalScore"></div>
-    <p id="percentage"></p>
-    <h2 id="resultMessage"></h2>
-    <p id="resultHindi"></p>
-    <p id="resultDetails"></p>
-
-    <button class="main-button" onclick="restartQuiz()">
-      Try Again / दोबारा अभ्यास करें
-    </button>
+  <section class="card">
+    <h3>How to Practise | अभ्यास कैसे करें</h3>
+    <ul>
+      <li>Choose any level and any quiz. — कोई भी स्तर और क्विज़ चुनें।</li>
+      <li>Each Easy quiz has 10 questions. — हर आसान क्विज़ में 10 प्रश्न हैं।</li>
+      <li>Each Moderate quiz has 10 questions. — हर मध्यम क्विज़ में 10 प्रश्न हैं।</li>
+      <li>Each Challenging quiz has 5 questions. — हर चुनौतीपूर्ण क्विज़ में 5 प्रश्न हैं।</li>
+      <li>Your score counts whether you answered correctly on your first attempt. — अंक पहली कोशिश में सही उत्तर देने के आधार पर मिलते हैं।</li>
+      <li>You may stop after any quiz. — आप किसी भी क्विज़ के बाद रुक सकते हैं।</li>
+    </ul>
   </section>
-
-  <a class="back-button"
-     href="class4-daily-exercise-revision-october-day-1.html">
-    ← Back to Subjects / विषयों पर वापस जाएँ
-  </a>
-
 </main>
 
-<section class="disclaimer">
-  <strong>Disclaimer:</strong>
-  RawaRajpootNexEduToppers Learning Academy is an independent
-  educational platform and is not affiliated with, endorsed by,
-  or associated with NCERT. NCERT textbook names, chapters, and
-  curriculum topics belong exclusively to NCERT. All explanations,
-  examples, and practice material provided here are educational aids.
-  For official textbooks, visit
-  <a href="https://ncert.nic.in/" target="_blank" rel="noopener">
-    ncert.nic.in
-  </a>.
-
-  <hr>
-
-  <strong>अस्वीकरण:</strong>
-  RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
-  इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
-  पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
-  यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
-  लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
-  <a href="https://ncert.nic.in/" target="_blank" rel="noopener">
-    ncert.nic.in
-  </a> पर जाएँ।
-</section>
-
 <footer>
-  © RawaRajpootNexEduToppers Learning Academy
+  <p><strong>Disclaimer:</strong> RawaRajpootNexEduToppers Learning Academy is an independent educational platform and is not affiliated with, endorsed by, or associated with NCERT. NCERT textbook names, chapters, and curriculum topics belong exclusively to NCERT. All explanations, examples, and practice material provided here are educational aids. For official textbooks, visit <a href="https://ncert.nic.in/" target="_blank" rel="noopener">ncert.nic.in</a>.</p>
+  <p><strong>अस्वीकरण:</strong> RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है। इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं। यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए <a href="https://ncert.nic.in/" target="_blank" rel="noopener">ncert.nic.in</a> पर जाएँ।</p>
 </footer>
 
 <script>
-  const questions = [
-    // EASY: 1–5
+const LEVELS = {
+  easy: {
+    name: "Easy / आसान",
+    size: 10,
+    total: 5,
+    description: "5 quizzes × 10 questions = 50 questions | 5 क्विज़ × 10 प्रश्न = 50 प्रश्न"
+  },
+  moderate: {
+    name: "Moderate / मध्यम",
+    size: 10,
+    total: 5,
+    description: "5 quizzes × 10 questions = 50 questions | 5 क्विज़ × 10 प्रश्न = 50 प्रश्न"
+  },
+  hard: {
+    name: "Challenging / चुनौतीपूर्ण",
+    size: 5,
+    total: 5,
+    description: "5 quizzes × 5 questions = 25 questions | 5 क्विज़ × 5 प्रश्न = 25 प्रश्न"
+  }
+};
 
-    {
-      level: "Easy / आसान",
-      question: "What is 25 + 14? / 25 + 14 कितना है?",
-      options: ["29", "39", "41", "49"],
-      answer: 1,
-      explanation: "25 + 14 = 39. / 25 + 14 = 39।"
-    },
-    {
-      level: "Easy / आसान",
-      question: "What is 70 - 28? / 70 - 28 कितना है?",
-      options: ["42", "48", "52", "38"],
-      answer: 0,
-      explanation: "70 - 28 = 42. / 70 - 28 = 42।"
-    },
-    {
-      level: "Easy / आसान",
-      question: "What is 6 × 7? / 6 × 7 कितना है?",
-      options: ["36", "40", "42", "48"],
-      answer: 2,
-      explanation: "6 × 7 = 42. / 6 × 7 = 42।"
-    },
-    {
-      level: "Easy / आसान",
-      question: "What is 48 ÷ 6? / 48 ÷ 6 कितना है?",
-      options: ["6", "7", "8", "9"],
-      answer: 2,
-      explanation: "48 ÷ 6 = 8. / 48 ÷ 6 = 8।"
-    },
-    {
-      level: "Easy / आसान",
-      question: "Which number is the greatest? / सबसे बड़ी संख्या कौन-सी है?",
-      options: ["398", "389", "308", "3980"],
-      answer: 3,
-      explanation: "3980 is greater than all the other numbers. / 3980 बाकी सभी संख्याओं से बड़ी है।"
-    },
+let currentLevel = "easy";
+let currentQuiz = 0;
+let questions = [];
+let questionIndex = 0;
+let firstTryScore = 0;
+let answeredFirstTry = false;
+let questionFinished = false;
+let attempted = false;
 
-    // MODERATE: 6–15
+const completedQuizzes = {easy: [], moderate: [], hard: []};
 
-    {
-      level: "Moderate / मध्यम",
-      question: "What is 236 + 157? / 236 + 157 कितना है?",
-      options: ["383", "393", "403", "413"],
-      answer: 1,
-      explanation: "236 + 157 = 393. / 236 + 157 = 393।"
-    },
-    {
-      level: "Moderate / मध्यम",
-      question: "What is 500 - 267? / 500 - 267 कितना है?",
-      options: ["223", "233", "243", "267"],
-      answer: 1,
-      explanation: "500 - 267 = 233. / 500 - 267 = 233।"
-    },
-    {
-      level: "Moderate / मध्यम",
-      question: "What is 24 × 3? / 24 × 3 कितना है?",
-      options: ["62", "68", "72", "82"],
-      answer: 2,
-      explanation: "24 × 3 = 72. / 24 × 3 = 72।"
-    },
-    {
-      level: "Moderate / मध्यम",
-      question: "What is 96 ÷ 8? / 96 ÷ 8 कितना है?",
-      options: ["10", "11", "12", "14"],
-      answer: 2,
-      explanation: "96 ÷ 8 = 12. / 96 ÷ 8 = 12।"
-    },
-    {
-      level: "Moderate / मध्यम",
-      question: "What is the place value of 6 in 4,672? / 4,672 में 6 का स्थानीय मान क्या है?",
-      options: ["6", "60", "600", "6,000"],
-      answer: 2,
-      explanation: "The digit 6 is in the hundreds place, so its place value is 600. / 6 सैकड़े के स्थान पर है, इसलिए इसका स्थानीय मान 600 है।"
-    },
-    {
-      level: "Moderate / मध्यम",
-      question: "What is half of 86? / 86 का आधा कितना है?",
-      options: ["23", "43", "46", "48"],
-      answer: 1,
-      explanation: "86 ÷ 2 = 43. / 86 ÷ 2 = 43।"
-    },
-    {
-      level: "Moderate / मध्यम",
-      question: "How many minutes are there in 2 hours? / 2 घंटे में कितने मिनट होते हैं?",
-      options: ["60", "100", "120", "200"],
-      answer: 2,
-      explanation: "2 × 60 = 120 minutes. / 2 × 60 = 120 मिनट।"
-    },
-    {
-      level: "Moderate / मध्यम",
-      question: "A rectangle is 8 cm long and 3 cm wide. What is its perimeter? / एक आयत की लंबाई 8 सेमी और चौड़ाई 3 सेमी है। उसका परिमाप कितना है?",
-      options: ["11 cm", "16 cm", "22 cm", "24 cm"],
-      answer: 2,
-      explanation: "Perimeter = 2 × (8 + 3) = 22 cm. / परिमाप = 2 × (8 + 3) = 22 सेमी।"
-    },
-    {
-      level: "Moderate / मध्यम",
-      question: "What is 1/2 of 18? / 18 का 1/2 कितना है?",
-      options: ["6", "8", "9", "12"],
-      answer: 2,
-      explanation: "18 ÷ 2 = 9. / 18 ÷ 2 = 9।"
-    },
-    {
-      level: "Moderate / मध्यम",
-      question: "Riya has ₹50 and spends ₹18. How much money is left? / रिया के पास ₹50 हैं। वह ₹18 खर्च करती है। कितने रुपये बचेंगे?",
-      options: ["₹22", "₹28", "₹32", "₹38"],
-      answer: 2,
-      explanation: "₹50 - ₹18 = ₹32. / ₹50 - ₹18 = ₹32।"
-    },
+function makeQuestion(en, hi, answer) {
+  return {en, hi, answer};
+}
 
-    // CHALLENGING: 16–20
+/* EASY: 50 different questions across 5 quizzes */
+function easyQuestion(i) {
+  const a = 12 + i * 3;
+  const b = 7 + i * 2;
+  switch (i % 5) {
+    case 0:
+      return makeQuestion(
+        `Calculate: ${a} + ${b}`,
+        `हल कीजिए: ${a} + ${b}`,
+        a + b
+      );
+    case 1:
+      return makeQuestion(
+        `Calculate: ${a + 25} - ${b}`,
+        `हल कीजिए: ${a + 25} - ${b}`,
+        a + 25 - b
+      );
+    case 2:
+      return makeQuestion(
+        `Multiply: ${i + 3} × ${i + 4}`,
+        `गुणा कीजिए: ${i + 3} × ${i + 4}`,
+        (i + 3) * (i + 4)
+      );
+    case 3:
+      return makeQuestion(
+        `Divide ${((i + 5) * 4)} by 4.`,
+        `${(i + 5) * 4} को 4 से भाग दीजिए।`,
+        i + 5
+      );
+    default:
+      return makeQuestion(
+        `What is ${a} + 10?`,
+        `${a} + 10 कितना होगा?`,
+        a + 10
+      );
+  }
+}
 
-    {
-      level: "Challenging / चुनौतीपूर्ण",
-      question: "A shop has 125 pencils. It receives 4 boxes with 25 pencils in each box. How many pencils are there now? / एक दुकान में 125 पेंसिल हैं। उसे 4 डिब्बे मिलते हैं, जिनमें प्रत्येक में 25 पेंसिल हैं। अब कुल कितनी पेंसिल हैं?",
-      options: ["200", "225", "250", "275"],
-      answer: 1,
-      explanation: "4 × 25 = 100; 125 + 100 = 225 pencils. / 4 × 25 = 100; 125 + 100 = 225 पेंसिल।"
-    },
-    {
-      level: "Challenging / चुनौतीपूर्ण",
-      question: "What number comes next: 7, 14, 21, 28, __? / अगली संख्या क्या होगी: 7, 14, 21, 28, __?",
-      options: ["30", "32", "35", "42"],
-      answer: 2,
-      explanation: "The pattern adds 7 each time. 28 + 7 = 35. / हर बार 7 जोड़ा गया है। 28 + 7 = 35।"
-    },
-    {
-      level: "Challenging / चुनौतीपूर्ण",
-      question: "A book costs ₹35. What is the cost of 6 books? / एक किताब की कीमत ₹35 है। 6 किताबों की कीमत कितनी होगी?",
-      options: ["₹180", "₹200", "₹210", "₹240"],
-      answer: 2,
-      explanation: "₹35 × 6 = ₹210. / ₹35 × 6 = ₹210।"
-    },
-    {
-      level: "Challenging / चुनौतीपूर्ण",
-      question: "A ribbon is 2 metres long. If 75 cm is cut off, how much ribbon remains? / एक फीता 2 मीटर लंबा है। उसमें से 75 सेमी काट दिया जाए, तो कितना फीता बचेगा?",
-      options: ["75 cm", "100 cm", "125 cm", "150 cm"],
-      answer: 2,
-      explanation: "2 metres = 200 cm. 200 - 75 = 125 cm. / 2 मीटर = 200 सेमी। 200 - 75 = 125 सेमी।"
-    },
-    {
-      level: "Challenging / चुनौतीपूर्ण",
-      question: "There are 36 students. They form teams of 4 students each. How many teams are formed? / 36 विद्यार्थी हैं। वे 4-4 विद्यार्थियों की टीमें बनाते हैं। कितनी टीमें बनेंगी?",
-      options: ["6", "8", "9", "12"],
-      answer: 2,
-      explanation: "36 ÷ 4 = 9 teams. / 36 ÷ 4 = 9 टीमें।"
-    }
-  ];
+/* MODERATE: 50 different questions across 5 quizzes */
+function moderateQuestion(i) {
+  const a = 24 + i * 4;
+  const b = 13 + i * 3;
+  switch (i % 5) {
+    case 0:
+      return makeQuestion(
+        `A shop has ${a} pencils and receives ${b} more. How many pencils are there now?`,
+        `एक दुकान में ${a} पेंसिल हैं और ${b} और आ जाती हैं। अब कुल कितनी पेंसिल हैं?`,
+        a + b
+      );
+    case 1:
+      return makeQuestion(
+        `Calculate: ${a + b + 20} - ${a}`,
+        `हल कीजिए: ${a + b + 20} - ${a}`,
+        b + 20
+      );
+    case 2:
+      return makeQuestion(
+        `Calculate: ${i + 12} × 6`,
+        `हल कीजिए: ${i + 12} × 6`,
+        (i + 12) * 6
+      );
+    case 3:
+      return makeQuestion(
+        `There are ${i + 6} boxes with 8 books in each. How many books are there?`,
+        `${i + 6} डिब्बों में प्रत्येक में 8 किताबें हैं। कुल कितनी किताबें हैं?`,
+        (i + 6) * 8
+      );
+    default:
+      return makeQuestion(
+        `A ribbon of ${a + 30} cm is cut into two pieces. One piece is ${a} cm long. How long is the other piece?`,
+        `${a + 30} सेमी लंबी रिबन के दो टुकड़े किए गए। एक टुकड़ा ${a} सेमी है। दूसरा टुकड़ा कितने सेमी है?`,
+        30
+      );
+  }
+}
 
-  let currentQuestion = 0;
-  let score = 0;
-  let firstAttempt = true;
-  let answeredCorrectly = false;
-  let completed = false;
+/* CHALLENGING: 25 different questions across 5 quizzes */
+function hardQuestion(i) {
+  const a = 125 + i * 11;
+  const b = 38 + i * 4;
+  switch (i % 5) {
+    case 0:
+      return makeQuestion(
+        `A library has ${a} storybooks. It buys ${b} more and then lends out 27. How many remain?`,
+        `एक पुस्तकालय में ${a} कहानी की किताबें हैं। वह ${b} और खरीदता है और फिर 27 किताबें उधार देता है। कितनी किताबें बचती हैं?`,
+        a + b - 27
+      );
+    case 1:
+      return makeQuestion(
+        `A school buys ${i + 12} packs with 24 notebooks in each pack. How many notebooks are bought?`,
+        `एक स्कूल ${i + 12} पैकेट खरीदता है। प्रत्येक पैकेट में 24 कॉपियाँ हैं। कुल कितनी कॉपियाँ खरीदी गईं?`,
+        (i + 12) * 24
+      );
+    case 2:
+      return makeQuestion(
+        `A farmer packs ${((i + 6) * 9)} oranges equally into 9 baskets. How many oranges go in each basket?`,
+        `एक किसान ${((i + 6) * 9)} संतरे 9 टोकरियों में बराबर बाँटता है। प्रत्येक टोकरी में कितने संतरे होंगे?`,
+        i + 6
+      );
+    case 3:
+      return makeQuestion(
+        `A shop had ${a + 100} balloons. It sold ${a - 20} balloons. How many balloons are left?`,
+        `एक दुकान में ${a + 100} गुब्बारे थे। उसने ${a - 20} गुब्बारे बेच दिए। कितने गुब्बारे बचे?`,
+        120
+      );
+    default:
+      return makeQuestion(
+        `A bus travels ${i + 18} km each day for 5 days. How many kilometres does it travel in all?`,
+        `एक बस 5 दिनों तक प्रतिदिन ${i + 18} किमी चलती है। वह कुल कितने किलोमीटर चलती है?`,
+        (i + 18) * 5
+      );
+  }
+}
 
-  const difficulty = document.getElementById("difficulty");
-  const questionNumber = document.getElementById("questionNumber");
-  const questionText = document.getElementById("questionText");
-  const optionsContainer = document.getElementById("options");
-  const feedback = document.getElementById("feedback");
-  const nextButton = document.getElementById("nextButton");
-  const progressText = document.getElementById("progressText");
-  const progressBar = document.getElementById("progressBar");
+function getQuestions(level, quizNumber) {
+  const size = LEVELS[level].size;
+  const start = quizNumber * size;
+  const generator = level === "easy" ? easyQuestion :
+                    level === "moderate" ? moderateQuestion : hardQuestion;
+  return Array.from({length: size}, (_, k) => generator(start + k));
+}
 
-  function showQuestion() {
-    if (currentQuestion >= questions.length) {
-      showResult();
-      return;
-    }
+function chooseLevel(level) {
+  currentLevel = level;
+  currentQuiz = 0;
 
-    const q = questions[currentQuestion];
+  document.querySelectorAll(".level-buttons button").forEach(b => b.classList.remove("selected"));
+  document.getElementById(level + "Btn").classList.add("selected");
 
-    firstAttempt = true;
-    answeredCorrectly = false;
+  document.getElementById("quizSelector").hidden = false;
+  document.getElementById("quizCard").hidden = true;
+  document.getElementById("resultCard").hidden = true;
+  document.getElementById("levelHeading").textContent = LEVELS[level].name + " — Choose a Quiz / क्विज़ चुनें";
+  document.getElementById("levelDescription").textContent = LEVELS[level].description;
 
-    difficulty.textContent = q.level;
-    questionNumber.textContent =
-      "Question " + (currentQuestion + 1) + " of " +
-      questions.length + " / प्रश्न " +
-      (currentQuestion + 1) + " में से " + questions.length;
+  const holder = document.getElementById("quizButtons");
+  holder.innerHTML = "";
 
-    const questionParts = q.question.split(" / ");
-
-questionText.innerHTML =
-  '<div class="english-question"></div>' +
-  '<div class="hindi-question"></div>';
-
-questionText.querySelector(".english-question").textContent =
-  questionParts[0] || "";
-
-questionText.querySelector(".hindi-question").textContent =
-  questionParts[1] || "";
-    progressText.textContent =
-      "Question " + (currentQuestion + 1) + " of " +
-      questions.length + " / प्रश्न " +
-      (currentQuestion + 1) + " में से " + questions.length;
-
-    progressBar.style.width =
-      (currentQuestion / questions.length * 100) + "%";
-
-    optionsContainer.innerHTML = "";
-    feedback.textContent = "";
-    feedback.className = "";
-    feedback.style.display = "none";
-
-    nextButton.disabled = true;
-    nextButton.textContent =
-      currentQuestion === questions.length - 1
-        ? "See Results / परिणाम देखें"
-        : "Next Question / अगला प्रश्न";
-
-    q.options.forEach(function(option, index) {
-      const button = document.createElement("button");
-
-      button.type = "button";
-      button.className = "option-button";
-      button.textContent =
-        String.fromCharCode(65 + index) + ". " + option;
-
-      button.addEventListener("click", function() {
-        checkAnswer(index, button);
-      });
-
-      optionsContainer.appendChild(button);
-    });
+  for (let i = 0; i < LEVELS[level].total; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = "Quiz " + (i + 1);
+    btn.onclick = () => startQuiz(i);
+    if (completedQuizzes[level].includes(i)) btn.textContent += " ✓";
+    holder.appendChild(btn);
   }
 
-  function checkAnswer(selectedIndex, selectedButton) {
-    if (answeredCorrectly) return;
+  const done = completedQuizzes[level].length;
+  document.getElementById("quizCount").textContent =
+    `Completed: ${done} of 5 quizzes | पूरी हुईं: ${done} / 5 क्विज़`;
+}
 
-    const q = questions[currentQuestion];
-    const allButtons = optionsContainer.querySelectorAll("button");
+function showQuizSelector() {
+  document.getElementById("quizSelector").hidden = false;
+  document.getElementById("quizCard").hidden = true;
+  document.getElementById("resultCard").hidden = true;
+  chooseLevel(currentLevel);
+}
 
-    if (selectedIndex === q.answer) {
-      selectedButton.classList.add("correct");
+function startQuiz(number) {
+  currentQuiz = number;
+  questions = getQuestions(currentLevel, currentQuiz);
+  questionIndex = 0;
+  firstTryScore = 0;
+  answeredFirstTry = false;
+  questionFinished = false;
+  attempted = false;
 
-      if (firstAttempt) {
-        score++;
-      }
-
-      answeredCorrectly = true;
-
-      feedback.textContent =
-        "Correct! / सही उत्तर! " + q.explanation;
-      feedback.className = "success";
-      feedback.style.display = "block";
-
-      allButtons.forEach(function(button) {
-        button.disabled = true;
-      });
-
-      nextButton.disabled = false;
-    } else {
-      selectedButton.classList.add("wrong");
-      selectedButton.disabled = true;
-
-      firstAttempt = false;
-
-      feedback.textContent =
-        "Not quite! Try another option. / सही नहीं है! दूसरा विकल्प चुनकर फिर कोशिश करें।";
-      feedback.className = "error";
-      feedback.style.display = "block";
-    }
-  }
-
-  nextButton.addEventListener("click", function() {
-    if (!answeredCorrectly) return;
-
-    currentQuestion++;
-    showQuestion();
-  });
-
-  function showResult() {
-    completed = true;
-
-    document.getElementById("quizCard").hidden = true;
-    document.getElementById("resultCard").hidden = false;
-
-    progressBar.style.width = "100%";
-    progressText.textContent =
-      "Exercise completed / अभ्यास पूरा हुआ";
-
-    const percentageValue = Math.round(
-      (score / questions.length) * 100
-    );
-
-    document.getElementById("finalScore").textContent =
-      score + " / " + questions.length;
-
-    document.getElementById("percentage").textContent =
-      percentageValue + "%";
-
-    let message;
-    let hindi;
-
-    if (percentageValue <= 20) {
-      message = "Keep trying!";
-      hindi = "कोशिश करते रहें!";
-    } else if (percentageValue <= 40) {
-      message = "Good try!";
-      hindi = "अच्छा प्रयास!";
-    } else if (percentageValue <= 60) {
-      message = "Good job!";
-      hindi = "बहुत अच्छा प्रयास!";
-    } else if (percentageValue <= 80) {
-      message = "Very good!";
-      hindi = "बहुत बढ़िया!";
-    } else if (percentageValue < 100) {
-      message = "Excellent!";
-      hindi = "शानदार!";
-    } else {
-      message = "Fantastic! Perfect score!";
-      hindi = "अद्भुत! पूरे अंक!";
-    }
-
-    document.getElementById("resultMessage").textContent = message;
-    document.getElementById("resultHindi").textContent = hindi;
-
-    document.getElementById("resultDetails").textContent =
-      "First-attempt correct answers: " + score +
-      " out of " + questions.length +
-      ". / पहले प्रयास में सही उत्तर: " + score +
-      " में से " + questions.length + "।";
-  }
-
-  function restartQuiz() {
-    currentQuestion = 0;
-    score = 0;
-    firstAttempt = true;
-    answeredCorrectly = false;
-    completed = false;
-
-    document.getElementById("resultCard").hidden = true;
-    document.getElementById("quizCard").hidden = false;
-
-    showQuestion();
-  }
+  document.getElementById("quizSelector").hidden = true;
+  document.getElementById("resultCard").hidden = true;
+  document.getElementById("quizCard").hidden = false;
+  document.getElementById("quizTitle").textContent =
+    LEVELS[currentLevel].name + " | Quiz " + (number + 1);
 
   showQuestion();
-</script>
+}
 
+function showQuestion() {
+  const q = questions[questionIndex];
+  questionFinished = false;
+  attempted = false;
+
+  document.getElementById("questionNumber").textContent =
+    `Question ${questionIndex + 1} of ${questions.length} | प्रश्न ${questionIndex + 1} / ${questions.length}`;
+  document.getElementById("progressBar").style.width =
+    (questionIndex / questions.length * 100) + "%";
+  document.getElementById("scoreText").textContent =
+    `First-attempt score: ${firstTryScore} / ${questions.length} | पहली कोशिश के अंक: ${firstTryScore} / ${questions.length}`;
+
+  document.getElementById("questionText").innerHTML =
+    `<div>${q.en}</div><div class="hindi">${q.hi}</div>`;
+  document.getElementById("answerInput").value = "";
+  document.getElementById("answerInput").disabled = false;
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("feedback").className = "";
+  document.getElementById("checkBtn").textContent = "Check Answer / उत्तर जाँचें";
+  document.getElementById("checkBtn").disabled = false;
+  document.getElementById("answerInput").focus();
+}
+
+function checkAnswer() {
+  if (questionFinished) {
+    questionIndex++;
+    if (questionIndex >= questions.length) {
+      finishQuiz();
+    } else {
+      showQuestion();
+    }
+    return;
+  }
+
+  const input = document.getElementById("answerInput");
+  if (input.value.trim() === "") {
+    document.getElementById("feedback").textContent =
+      "Please enter an answer. / कृपया उत्तर लिखें।";
+    document.getElementById("feedback").className = "bad";
+    return;
+  }
+
+  const answer = Number(input.value);
+  const correct = questions[questionIndex].answer;
+  const feedback = document.getElementById("feedback");
+
+  if (!attempted) {
+    attempted = true;
+    if (answer === correct) firstTryScore++;
+  }
+
+  if (answer === correct) {
+    feedback.textContent = "Correct! Well done! / सही उत्तर! बहुत अच्छा!";
+    feedback.className = "good";
+    questionFinished = true;
+    input.disabled = true;
+    document.getElementById("checkBtn").textContent =
+      questionIndex === questions.length - 1
+      ? "Finish Quiz / क्विज़ पूरी करें"
+      : "Next Question / अगला प्रश्न";
+    document.getElementById("progressBar").style.width =
+      ((questionIndex + 1) / questions.length * 100) + "%";
+    document.getElementById("scoreText").textContent =
+      `First-attempt score: ${firstTryScore} / ${questions.length} | पहली कोशिश के अंक: ${firstTryScore} / ${questions.length}`;
+  } else {
+    feedback.textContent = "Not quite. Try again! / उत्तर सही नहीं है। फिर से कोशिश करें!";
+    feedback.className = "bad";
+    input.select();
+  }
+}
+
+document.getElementById("answerInput").addEventListener("keydown", function(event) {
+  if (event.key === "Enter") checkAnswer();
+});
+
+function finishQuiz() {
+  completedQuizzes[currentLevel] = [
+    ...new Set([...completedQuizzes[currentLevel], currentQuiz])
+  ];
+
+  document.getElementById("quizCard").hidden = true;
+  document.getElementById("resultCard").hidden = false;
+  document.getElementById("progressBar").style.width = "100%";
+
+  const total = questions.length;
+  const percent = Math.round(firstTryScore / total * 100);
+  let message;
+
+  if (percent <= 20) message = "Keep trying! / कोशिश करते रहें!";
+  else if (percent <= 40) message = "Good try! / अच्छा प्रयास!";
+  else if (percent <= 60) message = "Good job! / अच्छा काम!";
+  else if (percent <= 80) message = "Very good! / बहुत अच्छा!";
+  else if (percent < 100) message = "Excellent! / शानदार!";
+  else message = "Fantastic! Perfect score! / शानदार! पूरे अंक!";
+
+  document.getElementById("resultMessage").textContent = message;
+  document.getElementById("resultScore").textContent =
+    `First-attempt score: ${firstTryScore} / ${total} (${percent}%)`;
+  document.getElementById("resultAdvice").textContent =
+    `You have completed Quiz ${currentQuiz + 1} of 5. | आपने 5 में से क्विज़ ${currentQuiz + 1} पूरी कर ली है।`;
+
+  document.getElementById("retryBtn").hidden = false;
+  document.getElementById("nextBtn").hidden = currentQuiz >= 4;
+}
+
+function retryQuiz() {
+  startQuiz(currentQuiz);
+}
+
+function nextQuiz() {
+  if (currentQuiz < LEVELS[currentLevel].total - 1) {
+    startQuiz(currentQuiz + 1);
+  }
+}
+
+/* Open Easy level when the page first loads */
+chooseLevel("easy");
+</script>
 </body>
 </html>
