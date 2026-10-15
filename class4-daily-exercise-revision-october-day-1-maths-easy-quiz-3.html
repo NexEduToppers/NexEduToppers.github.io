@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class 4 Maths | October Day 1</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:15px;font-family:Arial,sans-serif;background:#f2f7ff;color:#222;line-height:1.6}
+header{background:linear-gradient(135deg,#0755b5,#1688e8);color:white;padding:24px 15px;text-align:center;border-radius:16px;margin-bottom:20px}
+header h1{margin:0 0 8px;font-size:26px}
+header p{margin:5px 0}
+.container{max-width:780px;margin:auto}
+.card{background:white;border-radius:14px;padding:20px;margin-bottom:18px;box-shadow:0 3px 12px #0000000d}
+.center{text-align:center}
+button{border:0;border-radius:9px;padding:11px 15px;margin:5px;background:#0755b5;color:white;font-size:15px;cursor:pointer}
+button:hover{background:#06428c}
+button:disabled{opacity:.45;cursor:not-allowed}
+.level-buttons,.quiz-buttons{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.level-buttons button{flex:1;min-width:120px}
+.quiz-buttons button{min-width:44px}
+button.selected{background:#1688e8;outline:3px solid #b7d9ff}
+.question{font-size:21px;font-weight:bold;margin:12px 0}
+.hindi{font-size:18px;color:#444;font-weight:normal;margin-top:8px}
+.progress-track{width:100%;height:10px;background:#e1e9f5;border-radius:10px;overflow:hidden;margin:12px 0}
+#progressBar{width:0;height:100%;background:#1688e8;transition:width .2s}
+#feedback{font-weight:bold;min-height:28px}
+#solution{background:#f0f9f2;border:1px solid #9bd4a8;border-radius:10px;padding:12px 14px;margin:12px 0;color:#174b27}
+#solution h3{margin:0 0 6px;font-size:18px}
+#solution p{margin:5px 0}
+.solution-hi{color:#285c35}
+.good{color:#147a36}
+.bad{color:#b42318}
+.small{font-size:14px;color:#555}
+footer{font-size:13px;color:#555;text-align:center;padding:15px}
+a{color:#0755b5}
+@media(max-width:480px){body{padding:9px}header h1{font-size:22px}.card{padding:15px}.question{font-size:19px}}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.option-btn {
+  background: white;
+  color: #0755b5;
+  border: 2px solid #1688e8;
+  border-radius: 10px;
+  padding: 16px 10px;
+  font-size: 19px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.option-btn:hover:not(:disabled) {
+  background: #eaf4ff;
+}
+
+.option-btn:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.option-btn.correct {
+  background: #d8f5df;
+  border-color: #16803a;
+  color: #12652d;
+}
+
+.option-btn.wrong {
+  background: #ffe1e1;
+  border-color: #c62828;
+  color: #a31515;
+}
+
+</style>
+</head>
+
+<body>
+<header>
+  <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+  <p>Class 4 Maths Daily Exercise | कक्षा 4 गणित दैनिक अभ्यास</p>
+  <p>October • Day 1 | अक्टूबर • दिन 1</p>
+</header>
+
+<main class="container">
+  <section class="card center">
+    <h2>Choose Your Level | अपना स्तर चुनें</h2>
+    <p>Start with Easy and continue whenever you are ready.</p>
+    <p class="hindi">आसान स्तर से शुरू करें और तैयार होने पर आगे बढ़ें।</p>
+    <div class="level-buttons">
+      <button id="easyBtn" onclick="chooseLevel('easy')">Easy / आसान</button>
+      <button id="moderateBtn" onclick="chooseLevel('moderate')">Moderate / मध्यम</button>
+      <button id="hardBtn" onclick="chooseLevel('hard')">Challenging / चुनौतीपूर्ण</button>
+    </div>
+  </section>
+
+  <section class="card center" id="quizSelector" hidden>
+    <h2 id="levelHeading">Choose a Quiz | क्विज़ चुनें</h2>
+    <p id="levelDescription"></p>
+    <div class="quiz-buttons" id="quizButtons"></div>
+    <p class="small" id="quizCount"></p>
+  </section>
+
+  <section class="card" id="quizCard" hidden>
+    <div class="center">
+      <h2 id="quizTitle">Quiz 1 | क्विज़ 1</h2>
+      <p id="questionNumber"></p>
+      <div class="progress-track"><div id="progressBar"></div></div>
+      <p id="scoreText">First-attempt score: 0</p>
+    </div>
+
+    <hr>
+    <div id="questionText" class="question"></div>
+    <div id="options" class="options-grid"></div>
+<p id="feedback" aria-live="polite"></p>
+<div id="solution" hidden></div>
+<button id="nextQuestionBtn" onclick="nextQuestion()" hidden>
+  Next Question / अगला प्रश्न
+</button>
+
+    <p class="small">If an answer is wrong, the correct answer and solution will be shown.</p>
+    <p class="hindi small">उत्तर गलत होने पर सही उत्तर और उसका हल दिखाया जाएगा।</p>
+  </section>
+
+  <section class="card center" id="resultCard" hidden>
+    <h2>Quiz Complete! | क्विज़ पूरी हुई!</h2>
+    <p id="resultMessage"></p>
+    <h3 id="resultScore"></h3>
+    <p id="resultAdvice"></p>
+    <button id="retryBtn" onclick="retryQuiz()">Try Again / फिर से करें</button>
+    <button id="nextBtn" onclick="nextQuiz()">Next Quiz / अगली क्विज़</button>
+    <button onclick="showQuizSelector()">Choose Another Quiz / दूसरी क्विज़ चुनें</button>
+  </section>
+
+  <section class="card">
+    <h3>How to Practise | अभ्यास कैसे करें</h3>
+    <ul>
+      <li>Choose any level and any quiz. — कोई भी स्तर और क्विज़ चुनें।</li>
+      <li>Each Easy quiz has 10 questions. — हर आसान क्विज़ में 10 प्रश्न हैं।</li>
+      <li>Each Moderate quiz has 10 questions. — हर मध्यम क्विज़ में 10 प्रश्न हैं।</li>
+      <li>Each Challenging quiz has 5 questions. — हर चुनौतीपूर्ण क्विज़ में 5 प्रश्न हैं।</li>
+      <li>Your score counts whether you answered correctly on your first attempt. — अंक पहली कोशिश में सही उत्तर देने के आधार पर मिलते हैं।</li>
+      <li>You may stop after any quiz. — आप किसी भी क्विज़ के बाद रुक सकते हैं।</li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <p><strong>Disclaimer:</strong> RawaRajpootNexEduToppers Learning Academy is an independent educational platform and is not affiliated with, endorsed by, or associated with NCERT. NCERT textbook names, chapters, and curriculum topics belong exclusively to NCERT. All explanations, examples, and practice material provided here are educational aids. For official textbooks, visit <a href="https://ncert.nic.in/" target="_blank" rel="noopener">ncert.nic.in</a>.</p>
+  <p><strong>अस्वीकरण:</strong> RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है। इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं। यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए <a href="https://ncert.nic.in/" target="_blank" rel="noopener">ncert.nic.in</a> पर जाएँ।</p>
+</footer>
+
+<script>
+const LEVELS = {
+  easy: {
+    name: "Easy / आसान",
+    size: 10,
+    total: 5,
+    description: "5 quizzes × 10 questions = 50 questions | 5 क्विज़ × 10 प्रश्न = 50 प्रश्न"
+  },
+  moderate: {
+    name: "Moderate / मध्यम",
+    size: 10,
+    total: 5,
+    description: "5 quizzes × 10 questions = 50 questions | 5 क्विज़ × 10 प्रश्न = 50 प्रश्न"
+  },
+  hard: {
+    name: "Challenging / चुनौतीपूर्ण",
+    size: 5,
+    total: 5,
+    description: "5 quizzes × 5 questions = 25 questions | 5 क्विज़ × 5 प्रश्न = 25 प्रश्न"
+  }
+};
+
+let currentLevel = "easy";
+let currentQuiz = 0;
+let questions = [];
+let questionIndex = 0;
+let firstTryScore = 0;
+let questionFinished = false;
+let attempted = false;
+
+const completedQuizzes = {easy: [], moderate: [], hard: []};
+
+function makeQuestion(en, hi, answer) {
+  return {en, hi, answer, solution: buildSolution(en, answer)};
+}
+
+// Create a simple step-by-step explanation for each generated Maths question.
+function buildSolution(en, answer) {
+  let m;
+  if ((m = en.match(/^Calculate: (\d+) \+ (\d+)$/))) {
+    return {en: `${m[1]} + ${m[2]} = ${answer}. Add the two numbers to get ${answer}.`, hi: `${m[1]} + ${m[2]} = ${answer}। दोनों संख्याओं को जोड़ने पर ${answer} मिलता है।`};
+  }
+  if ((m = en.match(/^Calculate: (\d+) - (\d+)$/))) {
+    return {en: `${m[1]} - ${m[2]} = ${answer}. Subtract ${m[2]} from ${m[1]}.`, hi: `${m[1]} - ${m[2]} = ${answer}। ${m[1]} में से ${m[2]} घटाइए।`};
+  }
+  if ((m = en.match(/^Multiply: (\d+) × (\d+)$/))) {
+    return {en: `${m[1]} × ${m[2]} = ${answer}. Multiply ${m[1]} by ${m[2]}.`, hi: `${m[1]} × ${m[2]} = ${answer}। ${m[1]} को ${m[2]} से गुणा कीजिए।`};
+  }
+  if ((m = en.match(/^Divide (\d+) by (\d+)\.$/))) {
+    return {en: `${m[1]} ÷ ${m[2]} = ${answer}. Share ${m[1]} equally into ${m[2]} groups.`, hi: `${m[1]} ÷ ${m[2]} = ${answer}। ${m[1]} को ${m[2]} बराबर समूहों में बाँटिए।`};
+  }
+  if ((m = en.match(/^What is (\d+) \+ 10\?$/))) {
+    return {en: `${m[1]} + 10 = ${answer}. Add one ten to ${m[1]}.`, hi: `${m[1]} + 10 = ${answer}। ${m[1]} में 10 जोड़िए।`};
+  }
+  if ((m = en.match(/^A shop has (\d+) pencils and receives (\d+) more\./))) {
+    return {en: `${m[1]} + ${m[2]} = ${answer}. Start with ${m[1]} pencils and add ${m[2]} more.`, hi: `${m[1]} + ${m[2]} = ${answer}। पहले ${m[1]} पेंसिल थीं; ${m[2]} और जोड़ें।`};
+  }
+  if ((m = en.match(/^Calculate: (\d+) - (\d+)$/))) {
+    return {en: `${m[1]} - ${m[2]} = ${answer}.`, hi: `${m[1]} - ${m[2]} = ${answer}।`};
+  }
+  if ((m = en.match(/^Calculate: (\d+) × 6$/))) {
+    return {en: `${m[1]} × 6 = ${answer}. Add ${m[1]} six times, or multiply by 6.`, hi: `${m[1]} × 6 = ${answer}। ${m[1]} को 6 से गुणा कीजिए।`};
+  }
+  if ((m = en.match(/^There are (\d+) boxes with 8 books in each\./))) {
+    return {en: `${m[1]} × 8 = ${answer}. Multiply the number of boxes by 8 books in each box.`, hi: `${m[1]} × 8 = ${answer}। डिब्बों की संख्या को प्रत्येक डिब्बे की 8 किताबों से गुणा करें।`};
+  }
+  if ((m = en.match(/^A ribbon of (\d+) cm is cut into two pieces\. One piece is (\d+) cm long\./))) {
+    return {en: `${m[1]} - ${m[2]} = ${answer} cm. Subtract the known piece from the total length.`, hi: `${m[1]} - ${m[2]} = ${answer} सेमी। कुल लंबाई में से दिए गए टुकड़े की लंबाई घटाएँ।`};
+  }
+  if ((m = en.match(/^A library has (\d+) storybooks\. It buys (\d+) more and then lends out (\d+)\./))) {
+    return {en: `${m[1]} + ${m[2]} = ${Number(m[1])+Number(m[2])}; then ${Number(m[1])+Number(m[2])} - ${m[3]} = ${answer}.`, hi: `पहले ${m[1]} + ${m[2]} = ${Number(m[1])+Number(m[2])}; फिर ${Number(m[1])+Number(m[2])} - ${m[3]} = ${answer}।`};
+  }
+  if ((m = en.match(/^A school buys (\d+) packs with (\d+) notebooks in each pack\./))) {
+    return {en: `${m[1]} × ${m[2]} = ${answer}. Multiply the number of packs by the notebooks in each pack.`, hi: `${m[1]} × ${m[2]} = ${answer}। पैकेटों की संख्या को प्रत्येक पैकेट की कॉपियों से गुणा करें।`};
+  }
+  if ((m = en.match(/^A farmer packs (\d+) oranges equally into (\d+) baskets\./))) {
+    return {en: `${m[1]} ÷ ${m[2]} = ${answer}. Divide the oranges equally among the baskets.`, hi: `${m[1]} ÷ ${m[2]} = ${answer}। संतरों को टोकरियों में बराबर बाँटें।`};
+  }
+  if ((m = en.match(/^A shop had (\d+) balloons\. It sold (\d+) balloons\./))) {
+    return {en: `${m[1]} - ${m[2]} = ${answer}. Subtract the balloons sold from the starting number.`, hi: `${m[1]} - ${m[2]} = ${answer}। शुरू में जितने गुब्बारे थे, उनमें से बेचे गए गुब्बारे घटाएँ।`};
+  }
+  if ((m = en.match(/^A bus travels (\d+) km each day for (\d+) days\./))) {
+    return {en: `${m[1]} × ${m[2]} = ${answer} km. Multiply the distance travelled each day by the number of days.`, hi: `${m[1]} × ${m[2]} = ${answer} किमी। रोज़ की दूरी को दिनों की संख्या से गुणा करें।`};
+  }
+  // Safe fallback: still show the answer and a bilingual learning prompt.
+  return {en: `The correct answer is ${answer}. Read the numbers in the question and use the operation asked for.`, hi: `सही उत्तर ${answer} है। प्रश्न में दी गई संख्याओं को देखकर पूछी गई गणितीय क्रिया का प्रयोग करें।`};
+}
+
+/* EASY: 50 different questions across 5 quizzes */
+function easyQuestion(i) {
+  const a = 12 + i * 3;
+  const b = 7 + i * 2;
+  switch (i % 5) {
+    case 0:
+      return makeQuestion(
+        `Calculate: ${a} + ${b}`,
+        `हल कीजिए: ${a} + ${b}`,
+        a + b
+      );
+    case 1:
+      return makeQuestion(
+        `Calculate: ${a + 25} - ${b}`,
+        `हल कीजिए: ${a + 25} - ${b}`,
+        a + 25 - b
+      );
+    case 2:
+      return makeQuestion(
+        `Multiply: ${i + 3} × ${i + 4}`,
+        `गुणा कीजिए: ${i + 3} × ${i + 4}`,
+        (i + 3) * (i + 4)
+      );
+    case 3:
+      return makeQuestion(
+        `Divide ${((i + 5) * 4)} by 4.`,
+        `${(i + 5) * 4} को 4 से भाग दीजिए।`,
+        i + 5
+      );
+    default:
+      return makeQuestion(
+        `What is ${a} + 10?`,
+        `${a} + 10 कितना होगा?`,
+        a + 10
+      );
+  }
+}
+
+/* MODERATE: 50 different questions across 5 quizzes */
+function moderateQuestion(i) {
+  const a = 24 + i * 4;
+  const b = 13 + i * 3;
+  switch (i % 5) {
+    case 0:
+      return makeQuestion(
+        `A shop has ${a} pencils and receives ${b} more. How many pencils are there now?`,
+        `एक दुकान में ${a} पेंसिल हैं और ${b} और आ जाती हैं। अब कुल कितनी पेंसिल हैं?`,
+        a + b
+      );
+    case 1:
+      return makeQuestion(
+        `Calculate: ${a + b + 20} - ${a}`,
+        `हल कीजिए: ${a + b + 20} - ${a}`,
+        b + 20
+      );
+    case 2:
+      return makeQuestion(
+        `Calculate: ${i + 12} × 6`,
+        `हल कीजिए: ${i + 12} × 6`,
+        (i + 12) * 6
+      );
+    case 3:
+      return makeQuestion(
+        `There are ${i + 6} boxes with 8 books in each. How many books are there?`,
+        `${i + 6} डिब्बों में प्रत्येक में 8 किताबें हैं। कुल कितनी किताबें हैं?`,
+        (i + 6) * 8
+      );
+    default:
+      return makeQuestion(
+        `A ribbon of ${a + 30} cm is cut into two pieces. One piece is ${a} cm long. How long is the other piece?`,
+        `${a + 30} सेमी लंबी रिबन के दो टुकड़े किए गए। एक टुकड़ा ${a} सेमी है। दूसरा टुकड़ा कितने सेमी है?`,
+        30
+      );
+  }
+}
+
+/* CHALLENGING: 25 different questions across 5 quizzes */
+function hardQuestion(i) {
+  const a = 125 + i * 11;
+  const b = 38 + i * 4;
+  switch (i % 5) {
+    case 0:
+      return makeQuestion(
+        `A library has ${a} storybooks. It buys ${b} more and then lends out 27. How many remain?`,
+        `एक पुस्तकालय में ${a} कहानी की किताबें हैं। वह ${b} और खरीदता है और फिर 27 किताबें उधार देता है। कितनी किताबें बचती हैं?`,
+        a + b - 27
+      );
+    case 1:
+      return makeQuestion(
+        `A school buys ${i + 12} packs with 24 notebooks in each pack. How many notebooks are bought?`,
+        `एक स्कूल ${i + 12} पैकेट खरीदता है। प्रत्येक पैकेट में 24 कॉपियाँ हैं। कुल कितनी कॉपियाँ खरीदी गईं?`,
+        (i + 12) * 24
+      );
+    case 2:
+      return makeQuestion(
+        `A farmer packs ${((i + 6) * 9)} oranges equally into 9 baskets. How many oranges go in each basket?`,
+        `एक किसान ${((i + 6) * 9)} संतरे 9 टोकरियों में बराबर बाँटता है। प्रत्येक टोकरी में कितने संतरे होंगे?`,
+        i + 6
+      );
+    case 3:
+      return makeQuestion(
+        `A shop had ${a + 100} balloons. It sold ${a - 20} balloons. How many balloons are left?`,
+        `एक दुकान में ${a + 100} गुब्बारे थे। उसने ${a - 20} गुब्बारे बेच दिए। कितने गुब्बारे बचे?`,
+        120
+      );
+    default:
+      return makeQuestion(
+        `A bus travels ${i + 18} km each day for 5 days. How many kilometres does it travel in all?`,
+        `एक बस 5 दिनों तक प्रतिदिन ${i + 18} किमी चलती है। वह कुल कितने किलोमीटर चलती है?`,
+        (i + 18) * 5
+      );
+  }
+}
+
+function getQuestions(level, quizNumber) {
+  const size = LEVELS[level].size;
+  const start = quizNumber * size;
+  const generator = level === "easy" ? easyQuestion :
+                    level === "moderate" ? moderateQuestion : hardQuestion;
+  return Array.from({length: size}, (_, k) => generator(start + k));
+}
+
+function chooseLevel(level) {
+  currentLevel = level;
+  currentQuiz = 0;
+
+  document.querySelectorAll(".level-buttons button").forEach(b => b.classList.remove("selected"));
+  document.getElementById(level + "Btn").classList.add("selected");
+
+  document.getElementById("quizSelector").hidden = false;
+  document.getElementById("quizCard").hidden = true;
+  document.getElementById("resultCard").hidden = true;
+  document.getElementById("levelHeading").textContent = LEVELS[level].name + " — Choose a Quiz / क्विज़ चुनें";
+  document.getElementById("levelDescription").textContent = LEVELS[level].description;
+
+  const holder = document.getElementById("quizButtons");
+  holder.innerHTML = "";
+
+  for (let i = 0; i < LEVELS[level].total; i++) {
+    const btn = document.createElement("button");
+    btn.textContent = "Quiz " + (i + 1);
+    btn.onclick = () => startQuiz(i);
+    if (completedQuizzes[level].includes(i)) btn.textContent += " ✓";
+    holder.appendChild(btn);
+  }
+
+  const done = completedQuizzes[level].length;
+  document.getElementById("quizCount").textContent =
+    `Completed: ${done} of 5 quizzes | पूरी हुईं: ${done} / 5 क्विज़`;
+}
+
+function showQuizSelector() {
+  document.getElementById("quizSelector").hidden = false;
+  document.getElementById("quizCard").hidden = true;
+  document.getElementById("resultCard").hidden = true;
+  chooseLevel(currentLevel);
+}
+
+function startQuiz(number) {
+  currentQuiz = number;
+  questions = getQuestions(currentLevel, currentQuiz);
+  questionIndex = 0;
+  firstTryScore = 0;
+  questionFinished = false;
+  attempted = false;
+
+  document.getElementById("quizSelector").hidden = true;
+  document.getElementById("resultCard").hidden = true;
+  document.getElementById("quizCard").hidden = false;
+  document.getElementById("quizTitle").textContent =
+    LEVELS[currentLevel].name + " | Quiz " + (number + 1);
+
+  
+showQuestion();
+}
+
+function showQuestion() {
+  const q = questions[questionIndex];
+
+  questionFinished = false;
+  attempted = false;
+
+  document.getElementById("questionNumber").textContent =
+    `Question ${questionIndex + 1} of ${questions.length} | प्रश्न ${questionIndex + 1} / ${questions.length}`;
+
+  document.getElementById("progressBar").style.width =
+    (questionIndex / questions.length * 100) + "%";
+
+  document.getElementById("scoreText").textContent =
+    `First-attempt score: ${firstTryScore} / ${questions.length} | पहली कोशिश के अंक: ${firstTryScore} / ${questions.length}`;
+
+  document.getElementById("questionText").innerHTML =
+    `<div>${q.en}</div><div class="hindi">${q.hi}</div>`;
+
+  document.getElementById("feedback").textContent = "";
+  document.getElementById("feedback").className = "";
+
+  document.getElementById("nextQuestionBtn").hidden = true;
+  document.getElementById("solution").hidden = true;
+  document.getElementById("solution").innerHTML = "";
+
+  // Create four answer options, including the correct answer.
+  const correct = q.answer;
+  const optionSet = new Set([correct]);
+
+  while (optionSet.size < 4) {
+    const offset = Math.floor(Math.random() * 11) - 5;
+
+    if (offset !== 0) {
+      optionSet.add(correct + offset);
+    }
+  }
+
+  // Shuffle the options.
+  const options = [...optionSet];
+
+  for (let i = options.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [options[i], options[j]] = [options[j], options[i]];
+  }
+
+  const optionsContainer = document.getElementById("options");
+  optionsContainer.innerHTML = "";
+
+  options.forEach((value, index) => {
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "option-btn";
+    button.dataset.answer = String(value);
+    button.textContent =
+      `${String.fromCharCode(65 + index)}. ${value}`;
+
+    button.addEventListener("click", function () {
+      checkAnswer(value, button);
+    });
+
+    optionsContainer.appendChild(button);
+  });
+}
+
+function checkAnswer(selectedAnswer, selectedButton) {
+  if (questionFinished) return;
+
+  const q = questions[questionIndex];
+  const correctAnswer = q.answer;
+  const feedback = document.getElementById("feedback");
+  const optionButtons = document.querySelectorAll(".option-btn");
+
+  if (!attempted) {
+    attempted = true;
+    if (selectedAnswer === correctAnswer) firstTryScore++;
+  }
+
+  // Lock all options after the first selection and highlight the correct one.
+  optionButtons.forEach(button => {
+    button.disabled = true;
+    if (Number(button.dataset.answer) === correctAnswer) {
+      button.classList.add("correct");
+    }
+  });
+
+  if (selectedAnswer === correctAnswer) {
+    feedback.textContent = "Correct! Well done! / सही उत्तर! बहुत अच्छा!";
+    feedback.className = "good";
+  } else {
+    selectedButton.classList.add("wrong");
+    feedback.textContent = `Incorrect. The correct answer is ${correctAnswer}. / उत्तर गलत है। सही उत्तर ${correctAnswer} है।`;
+    feedback.className = "bad";
+  }
+
+  const solution = q.solution || buildSolution(q.en, correctAnswer);
+  document.getElementById("solution").innerHTML =
+    `<h3>Solution / हल</h3><p>${solution.en}</p><p class="solution-hi">${solution.hi}</p>`;
+  document.getElementById("solution").hidden = false;
+
+  questionFinished = true;
+  document.getElementById("progressBar").style.width =
+    ((questionIndex + 1) / questions.length * 100) + "%";
+  document.getElementById("scoreText").textContent =
+    `First-attempt score: ${firstTryScore} / ${questions.length} | पहली कोशिश के अंक: ${firstTryScore} / ${questions.length}`;
+  document.getElementById("nextQuestionBtn").textContent =
+    questionIndex === questions.length - 1
+      ? "Finish Quiz / क्विज़ पूरी करें"
+      : "Next Question / अगला प्रश्न";
+  document.getElementById("nextQuestionBtn").hidden = false;
+}
+
+function nextQuestion() {
+  if (!questionFinished) return;
+
+  questionIndex++;
+
+  if (questionIndex >= questions.length) {
+    finishQuiz();
+  } else {
+    showQuestion();
+  }
+}
+
+function finishQuiz() {
+
+  completedQuizzes[currentLevel] = [
+    ...new Set([...completedQuizzes[currentLevel], currentQuiz])
+  ];
+
+  document.getElementById("quizCard").hidden = true;
+  document.getElementById("resultCard").hidden = false;
+  document.getElementById("progressBar").style.width = "100%";
+
+  const total = questions.length;
+  const percent = Math.round(firstTryScore / total * 100);
+  let message;
+
+  if (percent <= 20) message = "Keep trying! / कोशिश करते रहें!";
+  else if (percent <= 40) message = "Good try! / अच्छा प्रयास!";
+  else if (percent <= 60) message = "Good job! / अच्छा काम!";
+  else if (percent <= 80) message = "Very good! / बहुत अच्छा!";
+  else if (percent < 100) message = "Excellent! / शानदार!";
+  else message = "Fantastic! Perfect score! / शानदार! पूरे अंक!";
+
+  document.getElementById("resultMessage").textContent = message;
+  document.getElementById("resultScore").textContent =
+    `First-attempt score: ${firstTryScore} / ${total} (${percent}%)`;
+  document.getElementById("resultAdvice").textContent =
+    `You have completed Quiz ${currentQuiz + 1} of 5. | आपने 5 में से क्विज़ ${currentQuiz + 1} पूरी कर ली है।`;
+
+  document.getElementById("retryBtn").hidden = false;
+  document.getElementById("nextBtn").hidden = currentQuiz >= 4;
+}
+
+function retryQuiz() {
+  startQuiz(currentQuiz);
+}
+
+function nextQuiz() {
+  if (currentQuiz < LEVELS[currentLevel].total - 1) {
+    startQuiz(currentQuiz + 1);
+  }
+}
+
+/* Open Easy Quiz 3 when the page first loads */
+chooseLevel("easy");
+startQuiz(2);
+</script>
+</body>
+</html>
