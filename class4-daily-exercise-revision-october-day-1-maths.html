@@ -362,85 +362,142 @@ function startQuiz(number) {
   document.getElementById("quizTitle").textContent =
     LEVELS[currentLevel].name + " | Quiz " + (number + 1);
 
-  showQuestion();
+  
+showQuestion();
 }
 
 function showQuestion() {
   const q = questions[questionIndex];
+
   questionFinished = false;
   attempted = false;
 
   document.getElementById("questionNumber").textContent =
     `Question ${questionIndex + 1} of ${questions.length} | प्रश्न ${questionIndex + 1} / ${questions.length}`;
+
   document.getElementById("progressBar").style.width =
     (questionIndex / questions.length * 100) + "%";
+
   document.getElementById("scoreText").textContent =
     `First-attempt score: ${firstTryScore} / ${questions.length} | पहली कोशिश के अंक: ${firstTryScore} / ${questions.length}`;
 
   document.getElementById("questionText").innerHTML =
     `<div>${q.en}</div><div class="hindi">${q.hi}</div>`;
-  document.getElementById("answerInput").value = "";
-  document.getElementById("answerInput").disabled = false;
+
   document.getElementById("feedback").textContent = "";
   document.getElementById("feedback").className = "";
-  document.getElementById("checkBtn").textContent = "Check Answer / उत्तर जाँचें";
-  document.getElementById("checkBtn").disabled = false;
-  document.getElementById("answerInput").focus();
+
+  document.getElementById("nextQuestionBtn").hidden = true;
+
+  // Create four answer options, including the correct answer.
+  const correct = q.answer;
+  const optionSet = new Set([correct]);
+
+  while (optionSet.size < 4) {
+    const offset = Math.floor(Math.random() * 11) - 5;
+
+    if (offset !== 0) {
+      optionSet.add(correct + offset);
+    }
+  }
+
+  // Shuffle the options.
+  const options = [...optionSet];
+
+  for (let i = options.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [options[i], options[j]] = [options[j], options[i]];
+  }
+
+  const optionsContainer = document.getElementById("options");
+  optionsContainer.innerHTML = "";
+
+  options.forEach((value, index) => {
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.className = "option-btn";
+    button.textContent =
+      `${String.fromCharCode(65 + index)}. ${value}`;
+
+    button.addEventListener("click", function () {
+      checkAnswer(value, button);
+    });
+
+    optionsContainer.appendChild(button);
+  });
 }
 
-function checkAnswer() {
-  if (questionFinished) {
-    questionIndex++;
-    if (questionIndex >= questions.length) {
-      finishQuiz();
-    } else {
-      showQuestion();
-    }
-    return;
-  }
+function checkAnswer(selectedAnswer, selectedButton) {
+  if (questionFinished) return;
 
-  const input = document.getElementById("answerInput");
-  if (input.value.trim() === "") {
-    document.getElementById("feedback").textContent =
-      "Please enter an answer. / कृपया उत्तर लिखें।";
-    document.getElementById("feedback").className = "bad";
-    return;
-  }
-
-  const answer = Number(input.value);
-  const correct = questions[questionIndex].answer;
+  const correctAnswer = questions[questionIndex].answer;
   const feedback = document.getElementById("feedback");
+  const optionButtons = document.querySelectorAll(".option-btn");
 
   if (!attempted) {
     attempted = true;
-    if (answer === correct) firstTryScore++;
+
+    if (selectedAnswer === correctAnswer) {
+      firstTryScore++;
+    }
   }
 
-  if (answer === correct) {
-    feedback.textContent = "Correct! Well done! / सही उत्तर! बहुत अच्छा!";
+  if (selectedAnswer === correctAnswer) {
+    feedback.textContent =
+      "Correct! Well done! / सही उत्तर! बहुत अच्छा!";
     feedback.className = "good";
+
     questionFinished = true;
-    input.disabled = true;
-    document.getElementById("checkBtn").textContent =
-      questionIndex === questions.length - 1
-      ? "Finish Quiz / क्विज़ पूरी करें"
-      : "Next Question / अगला प्रश्न";
+
+    optionButtons.forEach(button => {
+      button.disabled = true;
+
+      const valueText = button.textContent.split(". ")[1];
+
+      if (Number(valueText) === correctAnswer) {
+        button.classList.add("correct");
+      }
+    });
+
     document.getElementById("progressBar").style.width =
       ((questionIndex + 1) / questions.length * 100) + "%";
+
     document.getElementById("scoreText").textContent =
       `First-attempt score: ${firstTryScore} / ${questions.length} | पहली कोशिश के अंक: ${firstTryScore} / ${questions.length}`;
+
+    document.getElementById("nextQuestionBtn").textContent =
+      questionIndex === questions.length - 1
+        ? "Finish Quiz / क्विज़ पूरी करें"
+        : "Next Question / अगला प्रश्न";
+
+    document.getElementById("nextQuestionBtn").hidden = false;
+
   } else {
-    feedback.textContent = "Not quite. Try again! / उत्तर सही नहीं है। फिर से कोशिश करें!";
+    feedback.textContent =
+      "Incorrect. Try again! / उत्तर गलत है। फिर से कोशिश करें!";
+
     feedback.className = "bad";
-    input.select();
+
+    selectedButton.classList.add("wrong");
+    selectedButton.disabled = true;
   }
 }
 
-document.getElementById("answerInput").addEventListener("keydown", function(event) {
-  if (event.key === "Enter") checkAnswer();
-});
+function nextQuestion() {
+  if (!questionFinished) return;
+
+  questionIndex++;
+
+  if (questionIndex >= questions.length) {
+    finishQuiz();
+  } else {
+    showQuestion();
+  }
+}
 
 function finishQuiz() {
+
   completedQuizzes[currentLevel] = [
     ...new Set([...completedQuizzes[currentLevel], currentQuiz])
   ];
