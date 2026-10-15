@@ -27,6 +27,10 @@ button.selected{background:#1688e8;outline:3px solid #b7d9ff}
 .progress-track{width:100%;height:10px;background:#e1e9f5;border-radius:10px;overflow:hidden;margin:12px 0}
 #progressBar{width:0;height:100%;background:#1688e8;transition:width .2s}
 #feedback{font-weight:bold;min-height:28px}
+#solution{background:#f0f9f2;border:1px solid #9bd4a8;border-radius:10px;padding:12px 14px;margin:12px 0;color:#174b27}
+#solution h3{margin:0 0 6px;font-size:18px}
+#solution p{margin:5px 0}
+.solution-hi{color:#285c35}
 .good{color:#147a36}
 .bad{color:#b42318}
 .small{font-size:14px;color:#555}
@@ -114,12 +118,13 @@ a{color:#0755b5}
     <div id="questionText" class="question"></div>
     <div id="options" class="options-grid"></div>
 <p id="feedback" aria-live="polite"></p>
+<div id="solution" hidden></div>
 <button id="nextQuestionBtn" onclick="nextQuestion()" hidden>
   Next Question / अगला प्रश्न
 </button>
 
-    <p class="small">You can try again until your answer is correct.</p>
-    <p class="hindi small">आप सही उत्तर मिलने तक दोबारा कोशिश कर सकते हैं।</p>
+    <p class="small">If an answer is wrong, the correct answer and solution will be shown.</p>
+    <p class="hindi small">उत्तर गलत होने पर सही उत्तर और उसका हल दिखाया जाएगा।</p>
   </section>
 
   <section class="card center" id="resultCard" hidden>
@@ -183,7 +188,59 @@ let attempted = false;
 const completedQuizzes = {easy: [], moderate: [], hard: []};
 
 function makeQuestion(en, hi, answer) {
-  return {en, hi, answer};
+  return {en, hi, answer, solution: buildSolution(en, answer)};
+}
+
+// Create a simple step-by-step explanation for each generated Maths question.
+function buildSolution(en, answer) {
+  let m;
+  if ((m = en.match(/^Calculate: (\d+) \+ (\d+)$/))) {
+    return {en: `${m[1]} + ${m[2]} = ${answer}. Add the two numbers to get ${answer}.`, hi: `${m[1]} + ${m[2]} = ${answer}। दोनों संख्याओं को जोड़ने पर ${answer} मिलता है।`};
+  }
+  if ((m = en.match(/^Calculate: (\d+) - (\d+)$/))) {
+    return {en: `${m[1]} - ${m[2]} = ${answer}. Subtract ${m[2]} from ${m[1]}.`, hi: `${m[1]} - ${m[2]} = ${answer}। ${m[1]} में से ${m[2]} घटाइए।`};
+  }
+  if ((m = en.match(/^Multiply: (\d+) × (\d+)$/))) {
+    return {en: `${m[1]} × ${m[2]} = ${answer}. Multiply ${m[1]} by ${m[2]}.`, hi: `${m[1]} × ${m[2]} = ${answer}। ${m[1]} को ${m[2]} से गुणा कीजिए।`};
+  }
+  if ((m = en.match(/^Divide (\d+) by (\d+)\.$/))) {
+    return {en: `${m[1]} ÷ ${m[2]} = ${answer}. Share ${m[1]} equally into ${m[2]} groups.`, hi: `${m[1]} ÷ ${m[2]} = ${answer}। ${m[1]} को ${m[2]} बराबर समूहों में बाँटिए।`};
+  }
+  if ((m = en.match(/^What is (\d+) \+ 10\?$/))) {
+    return {en: `${m[1]} + 10 = ${answer}. Add one ten to ${m[1]}.`, hi: `${m[1]} + 10 = ${answer}। ${m[1]} में 10 जोड़िए।`};
+  }
+  if ((m = en.match(/^A shop has (\d+) pencils and receives (\d+) more\./))) {
+    return {en: `${m[1]} + ${m[2]} = ${answer}. Start with ${m[1]} pencils and add ${m[2]} more.`, hi: `${m[1]} + ${m[2]} = ${answer}। पहले ${m[1]} पेंसिल थीं; ${m[2]} और जोड़ें।`};
+  }
+  if ((m = en.match(/^Calculate: (\d+) - (\d+)$/))) {
+    return {en: `${m[1]} - ${m[2]} = ${answer}.`, hi: `${m[1]} - ${m[2]} = ${answer}।`};
+  }
+  if ((m = en.match(/^Calculate: (\d+) × 6$/))) {
+    return {en: `${m[1]} × 6 = ${answer}. Add ${m[1]} six times, or multiply by 6.`, hi: `${m[1]} × 6 = ${answer}। ${m[1]} को 6 से गुणा कीजिए।`};
+  }
+  if ((m = en.match(/^There are (\d+) boxes with 8 books in each\./))) {
+    return {en: `${m[1]} × 8 = ${answer}. Multiply the number of boxes by 8 books in each box.`, hi: `${m[1]} × 8 = ${answer}। डिब्बों की संख्या को प्रत्येक डिब्बे की 8 किताबों से गुणा करें।`};
+  }
+  if ((m = en.match(/^A ribbon of (\d+) cm is cut into two pieces\. One piece is (\d+) cm long\./))) {
+    return {en: `${m[1]} - ${m[2]} = ${answer} cm. Subtract the known piece from the total length.`, hi: `${m[1]} - ${m[2]} = ${answer} सेमी। कुल लंबाई में से दिए गए टुकड़े की लंबाई घटाएँ।`};
+  }
+  if ((m = en.match(/^A library has (\d+) storybooks\. It buys (\d+) more and then lends out (\d+)\./))) {
+    return {en: `${m[1]} + ${m[2]} = ${Number(m[1])+Number(m[2])}; then ${Number(m[1])+Number(m[2])} - ${m[3]} = ${answer}.`, hi: `पहले ${m[1]} + ${m[2]} = ${Number(m[1])+Number(m[2])}; फिर ${Number(m[1])+Number(m[2])} - ${m[3]} = ${answer}।`};
+  }
+  if ((m = en.match(/^A school buys (\d+) packs with (\d+) notebooks in each pack\./))) {
+    return {en: `${m[1]} × ${m[2]} = ${answer}. Multiply the number of packs by the notebooks in each pack.`, hi: `${m[1]} × ${m[2]} = ${answer}। पैकेटों की संख्या को प्रत्येक पैकेट की कॉपियों से गुणा करें।`};
+  }
+  if ((m = en.match(/^A farmer packs (\d+) oranges equally into (\d+) baskets\./))) {
+    return {en: `${m[1]} ÷ ${m[2]} = ${answer}. Divide the oranges equally among the baskets.`, hi: `${m[1]} ÷ ${m[2]} = ${answer}। संतरों को टोकरियों में बराबर बाँटें।`};
+  }
+  if ((m = en.match(/^A shop had (\d+) balloons\. It sold (\d+) balloons\./))) {
+    return {en: `${m[1]} - ${m[2]} = ${answer}. Subtract the balloons sold from the starting number.`, hi: `${m[1]} - ${m[2]} = ${answer}। शुरू में जितने गुब्बारे थे, उनमें से बेचे गए गुब्बारे घटाएँ।`};
+  }
+  if ((m = en.match(/^A bus travels (\d+) km each day for (\d+) days\./))) {
+    return {en: `${m[1]} × ${m[2]} = ${answer} km. Multiply the distance travelled each day by the number of days.`, hi: `${m[1]} × ${m[2]} = ${answer} किमी। रोज़ की दूरी को दिनों की संख्या से गुणा करें।`};
+  }
+  // Safe fallback: still show the answer and a bilingual learning prompt.
+  return {en: `The correct answer is ${answer}. Read the numbers in the question and use the operation asked for.`, hi: `सही उत्तर ${answer} है। प्रश्न में दी गई संख्याओं को देखकर पूछी गई गणितीय क्रिया का प्रयोग करें।`};
 }
 
 /* EASY: 50 different questions across 5 quizzes */
@@ -384,6 +441,8 @@ function showQuestion() {
   document.getElementById("feedback").className = "";
 
   document.getElementById("nextQuestionBtn").hidden = true;
+  document.getElementById("solution").hidden = true;
+  document.getElementById("solution").innerHTML = "";
 
   // Create four answer options, including the correct answer.
   const correct = q.answer;
@@ -428,55 +487,48 @@ function showQuestion() {
 function checkAnswer(selectedAnswer, selectedButton) {
   if (questionFinished) return;
 
-  const correctAnswer = questions[questionIndex].answer;
+  const q = questions[questionIndex];
+  const correctAnswer = q.answer;
   const feedback = document.getElementById("feedback");
   const optionButtons = document.querySelectorAll(".option-btn");
 
   if (!attempted) {
     attempted = true;
-
-    if (selectedAnswer === correctAnswer) {
-      firstTryScore++;
-    }
+    if (selectedAnswer === correctAnswer) firstTryScore++;
   }
+
+  // Lock all options after the first selection and highlight the correct one.
+  optionButtons.forEach(button => {
+    button.disabled = true;
+    if (Number(button.dataset.answer) === correctAnswer) {
+      button.classList.add("correct");
+    }
+  });
 
   if (selectedAnswer === correctAnswer) {
-    feedback.textContent =
-      "Correct! Well done! / सही उत्तर! बहुत अच्छा!";
+    feedback.textContent = "Correct! Well done! / सही उत्तर! बहुत अच्छा!";
     feedback.className = "good";
-
-    questionFinished = true;
-
-    optionButtons.forEach(button => {
-      button.disabled = true;
-
-      if (Number(button.dataset.answer) === correctAnswer) {
-        button.classList.add("correct");
-      }
-    });
-
-    document.getElementById("progressBar").style.width =
-      ((questionIndex + 1) / questions.length * 100) + "%";
-
-    document.getElementById("scoreText").textContent =
-      `First-attempt score: ${firstTryScore} / ${questions.length} | पहली कोशिश के अंक: ${firstTryScore} / ${questions.length}`;
-
-    document.getElementById("nextQuestionBtn").textContent =
-      questionIndex === questions.length - 1
-        ? "Finish Quiz / क्विज़ पूरी करें"
-        : "Next Question / अगला प्रश्न";
-
-    document.getElementById("nextQuestionBtn").hidden = false;
-
   } else {
-    feedback.textContent =
-      "Incorrect. Try again! / उत्तर गलत है। फिर से कोशिश करें!";
-
-    feedback.className = "bad";
-
     selectedButton.classList.add("wrong");
-    selectedButton.disabled = true;
+    feedback.textContent = `Incorrect. The correct answer is ${correctAnswer}. / उत्तर गलत है। सही उत्तर ${correctAnswer} है।`;
+    feedback.className = "bad";
   }
+
+  const solution = q.solution || buildSolution(q.en, correctAnswer);
+  document.getElementById("solution").innerHTML =
+    `<h3>Solution / हल</h3><p>${solution.en}</p><p class="solution-hi">${solution.hi}</p>`;
+  document.getElementById("solution").hidden = false;
+
+  questionFinished = true;
+  document.getElementById("progressBar").style.width =
+    ((questionIndex + 1) / questions.length * 100) + "%";
+  document.getElementById("scoreText").textContent =
+    `First-attempt score: ${firstTryScore} / ${questions.length} | पहली कोशिश के अंक: ${firstTryScore} / ${questions.length}`;
+  document.getElementById("nextQuestionBtn").textContent =
+    questionIndex === questions.length - 1
+      ? "Finish Quiz / क्विज़ पूरी करें"
+      : "Next Question / अगला प्रश्न";
+  document.getElementById("nextQuestionBtn").hidden = false;
 }
 
 function nextQuestion() {
@@ -532,8 +584,9 @@ function nextQuiz() {
   }
 }
 
-/* Open Easy level when the page first loads */
+/* Open Easy Quiz 2 when the page first loads */
 chooseLevel("easy");
+startQuiz(1);
 </script>
 </body>
 </html>
