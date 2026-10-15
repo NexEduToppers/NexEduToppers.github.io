@@ -24,8 +24,6 @@ button:disabled{opacity:.45;cursor:not-allowed}
 button.selected{background:#1688e8;outline:3px solid #b7d9ff}
 .question{font-size:21px;font-weight:bold;margin:12px 0}
 .hindi{font-size:18px;color:#444;font-weight:normal;margin-top:8px}
-#answerInput{width:100%;padding:13px;border:2px solid #b8cce8;border-radius:9px;font-size:18px;margin:10px 0}
-#answerInput:focus{outline:2px solid #1688e8}
 .progress-track{width:100%;height:10px;background:#e1e9f5;border-radius:10px;overflow:hidden;margin:12px 0}
 #progressBar{width:0;height:100%;background:#1688e8;transition:width .2s}
 #feedback{font-weight:bold;min-height:28px}
@@ -113,8 +111,8 @@ a{color:#0755b5}
     </div>
 
     <hr>
-    
-<div id="options" class="options-grid"></div>
+    <div id="questionText" class="question"></div>
+    <div id="options" class="options-grid"></div>
 <p id="feedback" aria-live="polite"></p>
 <button id="nextQuestionBtn" onclick="nextQuestion()" hidden>
   Next Question / अगला प्रश्न
@@ -179,7 +177,6 @@ let currentQuiz = 0;
 let questions = [];
 let questionIndex = 0;
 let firstTryScore = 0;
-let answeredFirstTry = false;
 let questionFinished = false;
 let attempted = false;
 
@@ -352,7 +349,6 @@ function startQuiz(number) {
   questions = getQuestions(currentLevel, currentQuiz);
   questionIndex = 0;
   firstTryScore = 0;
-  answeredFirstTry = false;
   questionFinished = false;
   attempted = false;
 
@@ -417,6 +413,7 @@ function showQuestion() {
 
     button.type = "button";
     button.className = "option-btn";
+    button.dataset.answer = String(value);
     button.textContent =
       `${String.fromCharCode(65 + index)}. ${value}`;
 
@@ -453,9 +450,7 @@ function checkAnswer(selectedAnswer, selectedButton) {
     optionButtons.forEach(button => {
       button.disabled = true;
 
-      const valueText = button.textContent.split(". ")[1];
-
-      if (Number(valueText) === correctAnswer) {
+      if (Number(button.dataset.answer) === correctAnswer) {
         button.classList.add("correct");
       }
     });
