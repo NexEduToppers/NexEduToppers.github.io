@@ -35,6 +35,46 @@ button.selected{background:#1688e8;outline:3px solid #b7d9ff}
 footer{font-size:13px;color:#555;text-align:center;padding:15px}
 a{color:#0755b5}
 @media(max-width:480px){body{padding:9px}header h1{font-size:22px}.card{padding:15px}.question{font-size:19px}}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.option-btn {
+  background: white;
+  color: #0755b5;
+  border: 2px solid #1688e8;
+  border-radius: 10px;
+  padding: 16px 10px;
+  font-size: 19px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.option-btn:hover:not(:disabled) {
+  background: #eaf4ff;
+}
+
+.option-btn:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.option-btn.correct {
+  background: #d8f5df;
+  border-color: #16803a;
+  color: #12652d;
+}
+
+.option-btn.wrong {
+  background: #ffe1e1;
+  border-color: #c62828;
+  color: #a31515;
+}
+
 </style>
 </head>
 
@@ -73,11 +113,13 @@ a{color:#0755b5}
     </div>
 
     <hr>
-    <div id="questionText" class="question"></div>
-    <input id="answerInput" type="number" inputmode="numeric"
-      placeholder="Enter your answer / अपना उत्तर लिखें" autocomplete="off">
-    <button id="checkBtn" onclick="checkAnswer()">Check Answer / उत्तर जाँचें</button>
-    <p id="feedback" aria-live="polite"></p>
+    
+<div id="options" class="options-grid"></div>
+<p id="feedback" aria-live="polite"></p>
+<button id="nextQuestionBtn" onclick="nextQuestion()" hidden>
+  Next Question / अगला प्रश्न
+</button>
+
     <p class="small">You can try again until your answer is correct.</p>
     <p class="hindi small">आप सही उत्तर मिलने तक दोबारा कोशिश कर सकते हैं।</p>
   </section>
