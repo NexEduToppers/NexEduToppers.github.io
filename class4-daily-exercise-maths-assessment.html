@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Class 4 Mathematics Assessment Quiz: Chapter Basics. Bilingual English and Hindi practice quiz.">
+
+  <title>Class 4 Mathematics Assessment Quiz - RawaRajpootNexEduToppers</title>
+
+  <style>
+    :root {
+      --primary: #174ea6;
+      --secondary: #087f8c;
+      --light: #eef6ff;
+      --text: #243247;
+      --muted: #5d6b7c;
+      --white: #ffffff;
+      --border: #dce6f2;
+      --green: #e8f7ed;
+      --green-text: #176534;
+      --red: #fdecec;
+      --red-text: #a32121;
+    }
+
+     * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #eef4fb;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #174ea6, #087f8c);
+      color: white;
+      text-align: center;
+      padding: 28px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(23px, 5vw, 34px);
+    }
+
+    header p {
+      margin: 5px 0;
+    }
+
+    .container {
+      width: min(100% - 24px, 800px);
+      margin: 22px auto;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 14px rgba(26, 53, 87, 0.06);
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-top: 0;
+      font-size: 23px;
+    }
+
+    .hindi {
+      color: #45566b;
+      margin-top: 5px;
+    }
+
+    .quiz-info {
+      background: var(--light);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 18px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 12px;
+      background: #dbe5f1;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: #087f8c;
+      transition: width 0.25s ease;
+    }
+
+    .question-number {
+      color: var(--secondary);
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .question-text {
+      font-size: 19px;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .option-button {
+      width: 100%;
+      text-align: left;
+      font-size: 16px;
+      font-family: inherit;
+      color: var(--text);
+      background: #f8fbff;
+      border: 2px solid #d7e2f0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      line-height: 1.5;
+    }
+
+    .option-button:hover:not(:disabled) {
+      background: #eaf3ff;
+      border-color: #8eb4e8;
+    }
+
+    .option-button:focus-visible,
+    .action-button:focus-visible,
+    .back-link:focus-visible {
+      outline: 3px solid #f0ad4e;
+      outline-offset: 3px;
+    }
+
+    .option-button:disabled {
+      cursor: default;
+      opacity: 1;
+    }
+
+    .option-button.correct {
+      background: var(--green);
+      border-color: #42a66b;
+      color: var(--green-text);
+    }
+
+    .option-button.wrong {
+      background: var(--red);
+      border-color: #d9534f;
+      color: var(--red-text);
+    }
+
+    .feedback {
+      display: none;
+      border-radius: 10px;
+      padding: 14px;
+      margin-top: 18px;
+    }
+
+    .feedback.correct-feedback {
+      display: block;
+      background: var(--green);
+      color: var(--green-text);
+    }
+
+    .feedback.wrong-feedback {
+      display: block;
+      background: var(--red);
+      color: var(--red-text);
+    }
+
+    .feedback h3 {
+      margin: 0 0 5px;
+      font-size: 18px;
+    }
+
+    .action-button {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 9px;
+      padding: 12px 18px;
+      margin-top: 16px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .action-button:hover {
+      background: #103d84;
+    }
+
+    .action-button:disabled {
+      background: #8a9bb3;
+      cursor: not-allowed;
+    }
+
+    #nextButton {
+      display: none;
+    }
+
+    #resultPanel {
+      display: none;
+      text-align: center;
+    }
+
+    .score-number {
+      color: var(--primary);
+      font-size: 34px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .result-message {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .back-link {
+      display: inline-block;
+      background: var(--light);
+      color: var(--primary);
+      text-decoration: none;
+      border: 1px solid #c9dcf5;
+      border-radius: 9px;
+      padding: 11px 16px;
+      margin: 8px 5px 0;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      background: #dcecff;
+    }
+
+    .site-disclaimer {
+      background: #e9eef5;
+      border-top: 1px solid #cbd5e1;
+      padding: 24px 16px;
+      color: #344256;
+      font-size: 14px;
+    }
+
+    .site-disclaimer h2 {
+      font-size: 19px;
+    }
+
+    .site-disclaimer a {
+      color: #174ea6;
+      overflow-wrap: anywhere;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin: 15px 0 0;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 23px 12px;
+      }
+
+      .card {
+        padding: 17px;
+      }
+
+      h2 {
+        font-size: 21px;
+      }
+
+      .question-text {
+        font-size: 18px;
+      }
+
+      .option-button {
+        padding: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+    <p>Class 4 Mathematics | Assessment (Q1–Q40)</p>
+    <h2 style="color:white; margin:10px 0;">MATHEMATICS BASICS</h2>
+    <p>Quiz 1 — Place Value, Numbers & Operations</p>
+    <p lang="hi">प्रश्नोत्तरी 1 — स्थानीय मान, संख्याएँ और संक्रियाएँ</p>
+  </header>
+
+  <main class="container">
+
+    <section class="card">
+      <h2>Welcome to Quiz 1 | प्रश्नोत्तरी में आपका स्वागत है</h2>
+
+      <p>
+        Answer 40 multiple-choice questions based on Class 4 Mathematics.
+        Choose one answer for each question. You will receive feedback
+        after every answer.
+      </p>
+
+      <p class="hindi" lang="hi">
+        कक्षा 4 की गणित पर आधारित 40 बहुविकल्पीय प्रश्नों के उत्तर दें।
+        प्रत्येक प्रश्न के लिए एक विकल्प चुनें। हर उत्तर के बाद आपको
+        प्रतिक्रिया और सही उत्तर की जानकारी मिलेगी।
+      </p>
+
+      <div class="quiz-info">
+        <strong>Questions:</strong> 40
+        <span lang="hi"> | प्रश्न: 40</span>
+        <br>
+        <strong>Score:</strong>
+        <span id="scoreDisplay" aria-live="polite">0 / 40</span>
+        <br>
+        <strong>Progress:</strong>
+        <span id="progressText">0 / 40</span>
+        <div
+          class="progress-track"
+          role="progressbar"
+          aria-label="Quiz progress"
+          aria-valuemin="0"
+          aria-valuemax="40"
+          aria-valuenow="0"
+          id="progressBar"
+        >
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="quizPanel">
+      <div class="question-number" id="questionNumber">
+        Question 1 of 40
+      </div>
+
+      <div class="question-text" id="questionText"></div>
+      <p class="hindi" lang="hi" id="questionHindi"></p>
+
+      <div class="options" id="optionsContainer"></div>
+
+      <div class="feedback" id="feedbackBox" aria-live="polite">
+        <h3 id="feedbackTitle"></h3>
+        <p id="feedbackEnglish"></p>
+        <p class="hindi" lang="hi" id="feedbackHindi"></p>
+      </div>
+
+      <button class="action-button" id="nextButton" type="button">
+        Next Question | अगला प्रश्न
+      </button>
+    </section>
+
+    <section class="card" id="resultPanel" aria-live="polite">
+      <h2>Quiz Completed! | प्रश्नोत्तरी पूरी हुई!</h2>
+      <p>Your final score is:</p>
+      <p class="score-number" id="finalScore">0 / 40</p>
+      <p class="hindi" lang="hi" id="finalScoreHindi"></p>
+      <p class="result-message" id="resultMessage"></p>
+      <p class="hindi" lang="hi" id="resultMessageHindi"></p>
+
+      <button class="action-button" id="restartButton" type="button">
+        Try Again | फिर से प्रयास करें
+      </button>
+
+      <div>
+        <a class="back-link" href="class4-math-assessment.html">
+          Back to Assessment | मूल्यांकन पर वापस जाएँ
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="site-disclaimer">
+      <h2>Disclaimer | अस्वीकरण</h2>
+
+      <p>
+        RawaRajpootNexEduToppers Learning Academy is an independent
+        educational platform and is not affiliated with, endorsed by,
+        or associated with NCERT. NCERT textbook names, chapters, and
+        curriculum topics belong exclusively to NCERT. All explanations,
+        examples, and practice material provided here are educational aids.
+        For official textbooks, visit
+        <a href="https://ncert.nic.in/" target="_blank"
+           rel="noopener noreferrer">ncert.nic.in</a>.
+      </p>
+
+      <p lang="hi">
+        RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+        इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+        पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+        यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
+        लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+        <a href="https://ncert.nic.in/" target="_blank"
+           rel="noopener noreferrer">ncert.nic.in</a> पर जाएँ।
+      </p>
+
+      <p class="footer-note">
+        Independent learning resource | स्वतंत्र शैक्षिक संसाधन
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    "use strict";
+
+    const questions = [
+      {
+    question: "What is the place value of 7 in 4,735?",
+    hindi: "4,735 में 7 का स्थानीय मान क्या है?",
+    options: ["7", "70", "700", "7,000"],
+    answer: 2,
+    explanation: "The digit 7 is in the hundreds place, so its place value is 700.",
+    explanationHindi: "अंक 7 सैकड़े के स्थान पर है, इसलिए उसका स्थानीय मान 700 है।"
+  },
+  {
+    question: "What is the smallest 4-digit number?",
+    hindi: "सबसे छोटी 4 अंकों की संख्या कौन-सी है?",
+    options: ["999", "1,000", "1,001", "1,111"],
+    answer: 1,
+    explanation: "The smallest 4-digit number is 1,000 because 999 has only three digits.",
+    explanationHindi: "सबसे छोटी 4 अंकों की संख्या 1,000 है, क्योंकि 999 में केवल तीन अंक हैं।"
+  },
+  {
+    question: "What is 3,458 + 2,321?",
+    hindi: "3,458 + 2,321 कितना होगा?",
+    options: ["5,679", "5,779", "5,789", "5,879"],
+    answer: 1,
+    explanation: "Adding 3,458 and 2,321 gives 5,779.",
+    explanationHindi: "3,458 और 2,321 को जोड़ने पर 5,779 प्राप्त होता है।"
+  },
+  {
+    question: "What is 8,000 − 3,475?",
+    hindi: "8,000 − 3,475 कितना होगा?",
+    options: ["4,425", "4,525", "4,625", "5,525"],
+    answer: 1,
+    explanation: "Subtracting 3,475 from 8,000 gives 4,525.",
+    explanationHindi: "8,000 में से 3,475 घटाने पर 4,525 प्राप्त होता है।"
+  },
+  {
+    question: "Which number is the greatest?",
+    hindi: "इनमें से सबसे बड़ी संख्या कौन-सी है?",
+    options: ["6,709", "6,790", "6,079", "6,907"],
+    answer: 3,
+    explanation: "6,907 is the greatest because its hundreds digit is 9, which is greater than the hundreds digits of the other numbers.",
+    explanationHindi: "6,907 सबसे बड़ी संख्या है, क्योंकि इसमें सैकड़े का अंक 9 है, जो बाकी संख्याओं के सैकड़े के अंकों से बड़ा है।"
+  },
+  {
+    question: "What is the number just before 5,000?",
+    hindi: "5,000 से ठीक पहले कौन-सी संख्या आती है?",
+    options: ["4,998", "4,999", "5,001", "4,990"],
+    answer: 1,
+    explanation: "The number just before 5,000 is 4,999.",
+    explanationHindi: "5,000 से ठीक पहले आने वाली संख्या 4,999 है।"
+  },
+  {
+    question: "What is 36 × 7?",
+    hindi: "36 × 7 कितना होगा?",
+    options: ["242", "252", "262", "272"],
+    answer: 1,
+    explanation: "36 × 7 = 30 × 7 + 6 × 7 = 210 + 42 = 252.",
+    explanationHindi: "36 × 7 = 30 × 7 + 6 × 7 = 210 + 42 = 252।"
+  },
+  {
+    question: "What is 864 ÷ 8?",
+    hindi: "864 ÷ 8 कितना होगा?",
+    options: ["98", "108", "118", "128"],
+    answer: 1,
+    explanation: "864 ÷ 8 = 108 because 108 × 8 = 864.",
+    explanationHindi: "864 ÷ 8 = 108, क्योंकि 108 × 8 = 864।"
+  },
+  {
+    question: "A box contains 24 pencils. How many pencils are there in 6 boxes?",
+    hindi: "एक डिब्बे में 24 पेंसिल हैं। ऐसे 6 डिब्बों में कुल कितनी पेंसिल होंगी?",
+    options: ["124", "134", "144", "154"],
+    answer: 2,
+    explanation: "Each box has 24 pencils, so 24 × 6 = 144 pencils.",
+    explanationHindi: "प्रत्येक डिब्बे में 24 पेंसिल हैं, इसलिए 24 × 6 = 144 पेंसिल होंगी।"
+  },
+  {
+    question: "What is 735 ÷ 5?",
+    hindi: "735 ÷ 5 कितना होगा?",
+    options: ["137", "147", "157", "167"],
+    answer: 1,
+    explanation: "735 ÷ 5 = 147 because 147 × 5 = 735.",
+    explanationHindi: "735 ÷ 5 = 147, क्योंकि 147 × 5 = 735।"
+  },
+  {
+    question: "There are 156 sweets shared equally among 12 children. How many sweets does each child get?",
+    hindi: "156 मिठाइयाँ 12 बच्चों में बराबर बाँटी जाती हैं। प्रत्येक बच्चे को कितनी मिठाइयाँ मिलेंगी?",
+    options: ["11", "12", "13", "14"],
+    answer: 2,
+    explanation: "156 ÷ 12 = 13, so each child gets 13 sweets.",
+    explanationHindi: "156 ÷ 12 = 13, इसलिए प्रत्येक बच्चे को 13 मिठाइयाँ मिलेंगी।"
+  },
+  {
+    question: "Which fraction represents half?",
+    hindi: "कौन-सी भिन्न आधे को दर्शाती है?",
+    options: ["1/3", "1/4", "1/2", "2/3"],
+    answer: 2,
+    explanation: "The fraction 1/2 represents one of two equal parts of a whole.",
+    explanationHindi: "भिन्न 1/2 किसी पूरी वस्तु के दो बराबर भागों में से एक भाग को दर्शाती है।"
+  },
+  {
+    question: "Which fraction is greater?",
+    hindi: "इनमें से कौन-सी भिन्न बड़ी है?",
+    options: ["1/4", "3/4", "1/8", "1/6"],
+    answer: 1,
+    explanation: "3/4 is greater than the other fractions because it represents three-fourths of a whole.",
+    explanationHindi: "3/4 बाकी भिन्नों से बड़ी है, क्योंकि यह पूरी वस्तु के चार बराबर भागों में से तीन भाग दर्शाती है।"
+  },
+  {
+    question: "What comes next in the pattern: 125, 150, 175, ___?",
+    hindi: "क्रम में आगे क्या आएगा: 125, 150, 175, ___?",
+    options: ["180", "190", "200", "225"],
+    answer: 2,
+    explanation: "The pattern increases by 25 each time: 125, 150, 175, 200.",
+    explanationHindi: "इस क्रम में हर बार 25 जोड़े जाते हैं: 125, 150, 175, 200।"
+  },
+  {
+    question: "What is the Roman numeral for 10?",
+    hindi: "10 का रोमन अंक कौन-सा है?",
+    options: ["V", "X", "L", "C"],
+    answer: 1,
+    explanation: "The Roman numeral X represents 10.",
+    explanationHindi: "रोमन अंक X, संख्या 10 को दर्शाता है।"
+  },
+  {
+    question: "Which number is divisible by 5?",
+    hindi: "इनमें से कौन-सी संख्या 5 से पूरी तरह विभाजित होती है?",
+    options: ["123", "246", "357", "480"],
+    answer: 3,
+    explanation: "480 is divisible by 5 because numbers ending in 0 or 5 are divisible by 5.",
+    explanationHindi: "480, 5 से विभाजित होती है, क्योंकि जिन संख्याओं के अंत में 0 या 5 होता है, वे 5 से विभाजित होती हैं।"
+  },
+  {
+    question: "How many centimetres are there in 3 metres?",
+    hindi: "3 मीटर में कितने सेंटीमीटर होते हैं?",
+    options: ["30 cm", "300 cm", "3,000 cm", "3 cm"],
+    answer: 1,
+    explanation: "1 metre = 100 centimetres, so 3 metres = 3 × 100 = 300 centimetres.",
+    explanationHindi: "1 मीटर = 100 सेंटीमीटर, इसलिए 3 मीटर = 3 × 100 = 300 सेंटीमीटर।"
+  },
+  {
+    question: "What time will it be 45 minutes after 2:30 p.m.?",
+    hindi: "दोपहर 2:30 बजे के 45 मिनट बाद क्या समय होगा?",
+    options: ["3:00 p.m.", "3:15 p.m.", "3:25 p.m.", "3:30 p.m."],
+    answer: 1,
+    explanation: "Adding 30 minutes to 2:30 p.m. gives 3:00 p.m.; adding the remaining 15 minutes gives 3:15 p.m.",
+    explanationHindi: "2:30 बजे में 30 मिनट जोड़ने पर 3:00 बजे होते हैं। फिर 15 मिनट जोड़ने पर 3:15 बजे होते हैं।"
+  },
+  {
+    question: "A notebook costs ₹35. What is the cost of 4 notebooks?",
+    hindi: "एक कॉपी की कीमत ₹35 है। 4 कॉपियों की कुल कीमत कितनी होगी?",
+    options: ["₹120", "₹130", "₹140", "₹150"],
+    answer: 2,
+    explanation: "The total cost is ₹35 × 4 = ₹140.",
+    explanationHindi: "कुल कीमत ₹35 × 4 = ₹140 होगी।"
+  },
+  {
+    question: "How many sides does a hexagon have?",
+    hindi: "षट्भुज की कितनी भुजाएँ होती हैं?",
+    options: ["5", "6", "7", "8"],
+    answer: 1,
+    explanation: "A hexagon is a polygon with six sides.",
+    explanationHindi: "षट्भुज एक ऐसी बहुभुज आकृति है जिसकी छह भुजाएँ होती हैं।"
+  },
+  {
+    question: "Which unit is most suitable for measuring the weight of a school bag?",
+    hindi: "स्कूल बैग का वजन मापने के लिए कौन-सी इकाई सबसे उपयुक्त है?",
+    options: ["Kilometre / किलोमीटर", "Litre / लीटर", "Kilogram / किलोग्राम", "Centimetre / सेंटीमीटर"],
+    answer: 2,
+    explanation: "A school bag's weight is usually measured in kilograms.",
+    explanationHindi: "स्कूल बैग का वजन आमतौर पर किलोग्राम में मापा जाता है।"
+  },
+  {
+    question: "What is 99 + 101?",
+    hindi: "99 + 101 कितना होगा?",
+    options: ["190", "199", "200", "210"],
+    answer: 2,
+    explanation: "99 + 101 = 200 because 99 is one less than 100 and 101 is one more than 100.",
+    explanationHindi: "99 + 101 = 200, क्योंकि 99, 100 से एक कम है और 101, 100 से एक अधिक है।"
+  },
+  {
+    question: "What is 25 × 4?",
+    hindi: "25 × 4 कितना होगा?",
+    options: ["75", "90", "100", "125"],
+    answer: 2,
+    explanation: "25 × 4 = 100.",
+    explanationHindi: "25 × 4 = 100।"
+  },
+  {
+    question: "What is half of 350?",
+    hindi: "350 का आधा कितना होगा?",
+    options: ["125", "150", "175", "200"],
+    answer: 2,
+    explanation: "Half of 350 is 350 ÷ 2 = 175.",
+    explanationHindi: "350 का आधा 350 ÷ 2 = 175 है।"
+  },
+  {
+    question: "What is 1,000 − 1?",
+    hindi: "1,000 − 1 कितना होगा?",
+    options: ["999", "990", "1,001", "900"],
+    answer: 0,
+    explanation: "Subtracting 1 from 1,000 gives 999.",
+    explanationHindi: "1,000 में से 1 घटाने पर 999 प्राप्त होता है।"
+  },
+  {
+    question: "What is 12 × 12?",
+    hindi: "12 × 12 कितना होगा?",
+    options: ["124", "134", "144", "154"],
+    answer: 2,
+    explanation: "12 × 12 = 144.",
+    explanationHindi: "12 × 12 = 144।"
+  },
+  {
+    question: "What is 450 ÷ 10?",
+    hindi: "450 ÷ 10 कितना होगा?",
+    options: ["4.5", "45", "54", "450"],
+    answer: 1,
+    explanation: "450 ÷ 10 = 45 because dividing by 10 moves the decimal point one place to the left.",
+    explanationHindi: "450 ÷ 10 = 45। 10 से भाग देने पर दशमलव बिंदु एक स्थान बाईं ओर खिसकता है।"
+  },
+  {
+    question: "Find the missing number: 8, 16, 24, 32, ___?",
+    hindi: "खाली स्थान में कौन-सी संख्या आएगी: 8, 16, 24, 32, ___?",
+    options: ["36", "40", "42", "48"],
+    answer: 1,
+    explanation: "The sequence increases by 8 each time, so the next number is 32 + 8 = 40.",
+    explanationHindi: "इस क्रम में हर बार 8 जोड़े जाते हैं, इसलिए अगली संख्या 32 + 8 = 40 है।"
+  },
+  {
+    question: "Which number does not belong to the group?",
+    hindi: "कौन-सी संख्या इस समूह में अलग है?",
+    options: ["12", "18", "24", "31"],
+    answer: 3,
+    explanation: "31 is the odd one out because 12, 18, and 24 are even numbers, while 31 is odd.",
+    explanationHindi: "31 अलग है, क्योंकि 12, 18 और 24 सम संख्याएँ हैं, जबकि 31 विषम संख्या है।"
+  },
+  {
+    question: "A number is greater than 40 and less than 50. It is divisible by 7. What is the number?",
+    hindi: "एक संख्या 40 से बड़ी और 50 से छोटी है। वह 7 से पूरी तरह विभाजित होती है। वह संख्या कौन-सी है?",
+    options: ["42", "44", "46", "48"],
+    answer: 0,
+    explanation: "42 is between 40 and 50, and 42 ÷ 7 = 6.",
+    explanationHindi: "42, 40 और 50 के बीच है तथा 42 ÷ 7 = 6।"
+  },
+  {
+    question: "If today is Monday, what day will it be after 10 days?",
+    hindi: "यदि आज सोमवार है, तो 10 दिन बाद कौन-सा दिन होगा?",
+    options: ["Wednesday / बुधवार", "Thursday / गुरुवार", "Friday / शुक्रवार", "Saturday / शनिवार"],
+    answer: 1,
+    explanation: "Seven days after Monday is Monday again. Three more days make it Thursday.",
+    explanationHindi: "सोमवार के 7 दिन बाद फिर सोमवार होगा। उसके 3 दिन बाद गुरुवार होगा।"
+  },
+  {
+    question: "A shape has 4 equal sides and 4 right angles. Which shape is it?",
+    hindi: "एक आकृति की चारों भुजाएँ बराबर हैं और चारों कोण समकोण हैं। वह कौन-सी आकृति है?",
+    options: ["Rectangle / आयत", "Triangle / त्रिभुज", "Square / वर्ग", "Circle / वृत्त"],
+    answer: 2,
+    explanation: "A square has four equal sides and four right angles.",
+    explanationHindi: "वर्ग की चारों भुजाएँ बराबर होती हैं और उसके चारों कोण समकोण होते हैं।"
+  },
+  {
+    question: "Which is the closest to 1,000?",
+    hindi: "इनमें से कौन-सी संख्या 1,000 के सबसे करीब है?",
+    options: ["891", "1,098", "1,201", "799"],
+    answer: 1,
+    explanation: "1,098 is 98 away from 1,000, which is less than the differences for the other options.",
+    explanationHindi: "1,098 और 1,000 के बीच अंतर 98 है, जो बाकी विकल्पों के अंतरों से कम है।"
+  },
+  {
+    question: "If 3 identical pencils cost ₹18, what is the cost of 5 pencils?",
+    hindi: "यदि 3 एक जैसी पेंसिलों की कीमत ₹18 है, तो 5 पेंसिलों की कीमत कितनी होगी?",
+    options: ["₹25", "₹30", "₹35", "₹40"],
+    answer: 1,
+    explanation: "One pencil costs ₹18 ÷ 3 = ₹6. Therefore, 5 pencils cost ₹6 × 5 = ₹30.",
+    explanationHindi: "एक पेंसिल की कीमत ₹18 ÷ 3 = ₹6 है। इसलिए 5 पेंसिलों की कीमत ₹6 × 5 = ₹30 होगी।"
+  },
+  {
+    question: "A library has 245 storybooks and buys 178 more. How many storybooks does it have now?",
+    hindi: "एक पुस्तकालय में 245 कहानी की किताबें हैं। वह 178 और किताबें खरीदता है। अब कुल कितनी किताबें हैं?",
+    options: ["413", "423", "433", "443"],
+    answer: 1,
+    explanation: "The total is 245 + 178 = 423 storybooks.",
+    explanationHindi: "कुल किताबें 245 + 178 = 423 होंगी।"
+  },
+  {
+    question: "A shopkeeper has 500 apples. He sells 185 apples in the morning and 127 in the evening. How many apples are left?",
+    hindi: "एक दुकानदार के पास 500 सेब हैं। वह सुबह 185 और शाम को 127 सेब बेचता है। कितने सेब बचे?",
+    options: ["178", "188", "198", "208"],
+    answer: 1,
+    explanation: "He sells 185 + 127 = 312 apples. The remaining apples are 500 − 312 = 188.",
+    explanationHindi: "वह 185 + 127 = 312 सेब बेचता है। बचे हुए सेब 500 − 312 = 188 हैं।"
+  },
+  {
+    question: "A bus travels 125 km each day for 4 days. How far does it travel in total?",
+    hindi: "एक बस 4 दिनों तक प्रतिदिन 125 किलोमीटर चलती है। वह कुल कितनी दूरी तय करती है?",
+    options: ["400 km", "450 km", "500 km", "550 km"],
+    answer: 2,
+    explanation: "The total distance is 125 × 4 = 500 km.",
+    explanationHindi: "कुल दूरी 125 × 4 = 500 किलोमीटर है।"
+  },
+  {
+    question: "A farmer packs 288 oranges equally into 8 boxes. If he sells 5 full boxes, how many oranges does he sell?",
+    hindi: "एक किसान 288 संतरे 8 डिब्बों में बराबर बाँटता है। यदि वह 5 पूरे डिब्बे बेच देता है, तो वह कितने संतरे बेचता है?",
+    options: ["160", "170", "180", "190"],
+    answer: 2,
+    explanation: "Each box contains 288 ÷ 8 = 36 oranges. Five boxes contain 36 × 5 = 180 oranges.",
+    explanationHindi: "प्रत्येक डिब्बे में 288 ÷ 8 = 36 संतरे हैं। पाँच डिब्बों में 36 × 5 = 180 संतरे होंगे।"
+  },
+  {
+    question: "Riya has ₹250. She buys a book for ₹85 and a pen for ₹25. How much money is left?",
+    hindi: "रिया के पास ₹250 हैं। वह ₹85 की किताब और ₹25 का पेन खरीदती है। उसके पास कितने रुपये बचेंगे?",
+    options: ["₹130", "₹140", "₹150", "₹160"],
+    answer: 1,
+    explanation: "The total cost is ₹85 + ₹25 = ₹110. The remaining money is ₹250 − ₹110 = ₹140.",
+    explanationHindi: "कुल खर्च ₹85 + ₹25 = ₹110 है। बचे हुए पैसे ₹250 − ₹110 = ₹140 हैं।"
+  },
+  {
+    question: "A school has 6 classes. Each class has 35 students. If 18 students are absent, how many students are present?",
+    hindi: "एक स्कूल में 6 कक्षाएँ हैं। प्रत्येक कक्षा में 35 विद्यार्थी हैं। यदि 18 विद्यार्थी अनुपस्थित हैं, तो कितने विद्यार्थी उपस्थित हैं?",
+    options: ["182", "192", "202", "212"],
+    answer: 1,
+    explanation: "The total number of students is 6 × 35 = 210. Subtracting 18 absent students gives 210 − 18 = 192 students present.",
+    explanationHindi: "कुल विद्यार्थी 6 × 35 = 210 हैं। 18 अनुपस्थित विद्यार्थियों को घटाने पर 210 − 18 = 192 विद्यार्थी उपस्थित हैं।"
+  }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+
+    const questionNumber = document.getElementById("questionNumber");
+    const questionText = document.getElementById("questionText");
+    const questionHindi = document.getElementById("questionHindi");
+    const optionsContainer = document.getElementById("optionsContainer");
+    const feedbackBox = document.getElementById("feedbackBox");
+    const feedbackTitle = document.getElementById("feedbackTitle");
+    const feedbackEnglish = document.getElementById("feedbackEnglish");
+    const feedbackHindi = document.getElementById("feedbackHindi");
+    const nextButton = document.getElementById("nextButton");
+    const scoreDisplay = document.getElementById("scoreDisplay");
+    const progressText = document.getElementById("progressText");
+    const progressFill = document.getElementById("progressFill");
+    const progressBar = document.getElementById("progressBar");
+    const quizPanel = document.getElementById("quizPanel");
+    const resultPanel = document.getElementById("resultPanel");
+    const restartButton = document.getElementById("restartButton");
+
+    function updateProgress() {
+      const completed = currentQuestion + (answered ? 1 : 0);
+      const percentage = (completed / questions.length) * 100;
+
+      progressFill.style.width = percentage + "%";
+      progressText.textContent = completed + " / " + questions.length;
+      progressBar.setAttribute("aria-valuenow", String(completed));
+      scoreDisplay.textContent = score + " / " + questions.length;
+    }
+
+    function renderQuestion() {
+      answered = false;
+
+      const q = questions[currentQuestion];
+
+      questionNumber.textContent =
+        "Question " + (currentQuestion + 1) + " of " + questions.length;
+
+      questionText.textContent = q.question;
+      questionHindi.textContent = q.hindi;
+
+      optionsContainer.replaceChildren();
+      feedbackBox.className = "feedback";
+      feedbackTitle.textContent = "";
+      feedbackEnglish.textContent = "";
+      feedbackHindi.textContent = "";
+      nextButton.style.display = "none";
+
+      q.options.forEach(function(option, index) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option-button";
+        button.textContent =
+          String.fromCharCode(65 + index) + ". " + option;
+        button.addEventListener("click", function() {
+          checkAnswer(index);
+        });
+        optionsContainer.appendChild(button);
+      });
+
+      updateProgress();
+    }
+
+    function checkAnswer(selectedIndex) {
+      if (answered) return;
+
+      answered = true;
+
+      const q = questions[currentQuestion];
+      const buttons = optionsContainer.querySelectorAll(".option-button");
+      const isCorrect = selectedIndex === q.answer;
+
+      buttons.forEach(function(button, index) {
+        button.disabled = true;
+
+        if (index === q.answer) {
+          button.classList.add("correct");
+        }
+
+        if (index === selectedIndex && !isCorrect) {
+          button.classList.add("wrong");
+        }
+      });
+
+      if (isCorrect) {
+        score++;
+        feedbackBox.className = "feedback correct-feedback";
+        feedbackTitle.textContent = "Correct Answer! | सही उत्तर!";
+        feedbackHindi.textContent = "बहुत अच्छा! आपका उत्तर सही है।";
+      } else {
+        feedbackBox.className = "feedback wrong-feedback";
+        feedbackTitle.textContent = "Wrong Answer | गलत उत्तर";
+        feedbackHindi.textContent =
+          "सही उत्तर हरे रंग में दिखाया गया है।";
+      }
+
+      feedbackEnglish.textContent = q.explanation;
+      feedbackHindi.textContent += " " + q.explanationHindi;
+
+      updateProgress();
+      nextButton.style.display = "inline-block";
+
+      if (currentQuestion === questions.length - 1) {
+        nextButton.textContent = "See Final Result | अंतिम परिणाम देखें";
+      } else {
+        nextButton.textContent = "Next Question | अगला प्रश्न";
+      }
+    }
+
+    function showResult() {
+      quizPanel.style.display = "none";
+      resultPanel.style.display = "block";
+
+      document.getElementById("finalScore").textContent =
+        score + " / " + questions.length;
+
+      document.getElementById("finalScoreHindi").textContent =
+        "आपका स्कोर " + questions.length + " में से " + score + " है।";
+
+      let message;
+      let messageHindi;
+
+      if (score === 40) {
+        message = "Excellent work! You answered every question correctly.";
+        messageHindi = "शानदार! आपने सभी प्रश्नों के सही उत्तर दिए।";
+      } else if (score >= 30) {
+        message = "Very good work! Review the questions you missed.";
+        messageHindi = "बहुत अच्छा! जिन प्रश्नों में गलती हुई, उन्हें दोहराएँ।";
+      } else {
+        message = "Keep practising. Revise your math concepts and try again.";
+        messageHindi = "अभ्यास जारी रखें। गणित की अवधारणाओं को दोहराकर फिर से प्रयास करें।";
+      }
+
+      document.getElementById("resultMessage").textContent = message;
+      document.getElementById("resultMessageHindi").textContent = messageHindi;
+
+      progressFill.style.width = "100%";
+      progressText.textContent = questions.length + " / " + questions.length;
+      progressBar.setAttribute("aria-valuenow", String(questions.length));
+      scoreDisplay.textContent = score + " / " + questions.length;
+    }
+
+    nextButton.addEventListener("click", function() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    restartButton.addEventListener("click", function() {
+      currentQuestion = 0;
+      score = 0;
+      answered = false;
+      resultPanel.style.display = "none";
+      quizPanel.style.display = "block";
+      renderQuestion();
+    });
+
+    // Initial render call
+    renderQuestion();
+  </script>
+
+</body>
+</html>
