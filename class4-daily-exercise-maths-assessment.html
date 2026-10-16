@@ -870,21 +870,42 @@
 
       let message;
       let messageHindi;
-
-      if (score === 40) {
-        message = "Excellent work! You answered every question correctly.";
-        messageHindi = "शानदार! आपने सभी प्रश्नों के सही उत्तर दिए।";
-      } else if (score >= 30) {
-        message = "Very good work! Review the questions you missed.";
-        messageHindi = "बहुत अच्छा! जिन प्रश्नों में गलती हुई, उन्हें दोहराएँ।";
+      let recommendation;
+      let recommendationHindi;
+      // Determine level recommendation based on score out of 40
+       if (score >= 35) {
+        message = "Excellent work! You answered almost every question correctly.";
+        messageHindi = "शानदार! आपने लगभग सभी प्रश्नों के सही उत्तर दिए।";
+        recommendation = "Recommended Practice: You can continue with **Advanced Level** practice.";
+        recommendationHindi = "अनुशंसित अभ्यास: आप **उन्नत स्तर (Advanced Level)** के साथ आगे बढ़ सकते हैं।";
+      } else if (score >= 25) {
+        message = "Very good work! Review the questions you missed to strengthen your concepts.";
+        messageHindi = "बहुत अच्छा! अपनी अवधारणाओं को मजबूत करने के लिए छूटे हुए प्रश्नों को दोहराएँ।";
+        recommendation = "Recommended Practice: You can start from **Developing Level** practice.";
+        recommendationHindi = "अनुशंसित अभ्यास: आप **विकासशील स्तर (Developing Level)** के अभ्यास से शुरुआत कर सकते हैं।";
       } else {
-        message = "Keep practising. Revise your math concepts and try again.";
-        messageHindi = "अभ्यास जारी रखें। गणित की अवधारणाओं को दोहराकर फिर से प्रयास करें।";
+        message = "Keep practising! Revise your math basics and try again.";
+        messageHindi = "अभ्यास जारी रखें! गणित की मूल बातों को दोहराएँ और फिर से प्रयास करें।";
+        recommendation = "Recommended Practice: You can start from **Foundation Level** practice.";
+        recommendationHindi = "अनुशंसित अभ्यास: आप **फाउंडेशन स्तर (Foundation Level)** से शुरुआत कर सकते हैं।";
       }
 
       document.getElementById("resultMessage").textContent = message;
       document.getElementById("resultMessageHindi").textContent = messageHindi;
-
+      // If you want to show the recommendation inside the result panel, 
+      // you can append or update a designated paragraph. Let's update resultMessage or create/target a recommendation element:
+      let recElement = document.getElementById("recommendationBox");
+      if (!recElement) {
+        recElement = document.createElement("div");
+        recElement.id = "recommendationBox";
+        recElement.style.margin = "15px 0";
+        recElement.style.padding = "14px";
+        recElement.style.background = "var(--light)";
+        recElement.style.borderRadius = "10px";
+        recElement.style.fontWeight = "bold";
+        resultPanel.insertBefore(recElement, restartButton);
+      }
+      recElement.innerHTML = `<p style="margin:0 0 5px; color:var(--primary);">${recommendation}</p><p class="hindi" lang="hi" style="margin:0; color:var(--muted);">${recommendationHindi}</p>`;
       progressFill.style.width = "100%";
       progressText.textContent = questions.length + " / " + questions.length;
       progressBar.setAttribute("aria-valuenow", String(questions.length));
