@@ -1,65 +1,150 @@
-<div class="card" style="border-top: 4px solid var(--secondary);">
+<style>
+/* Foundation Section Style */
+.foundation-days-card {
+  background: #effbf4;
+  border: 1px solid #a8e9c5;
+  border-top: 5px solid #07965a;
+  border-radius: 16px;
+  padding: 22px 24px;
+  margin: 20px 5px;
+  box-shadow: 0 5px 18px rgba(19, 66, 112, 0.08);
+}
+
+.foundation-days-card h2 {
+  color: #07804b;
+  margin-top: 0;
+  margin-bottom: 6px;
+  font-size: 1.5rem;
+}
+
+.foundation-days-card p {
+  margin: 4px 0;
+  color: #244968;
+}
+
+.foundation-days-card .hindi-desc {
+  color: #43735c;
+  font-size: 0.95rem;
+  margin-bottom: 18px;
+}
+
+/* Days Grid Layout */
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+/* Day Button Design - Matching Foundation Theme */
+.day-exercise-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #ffffff;
+  color: #07804b;
+  border: 2px solid #a8e9c5;
+  border-radius: 12px;
+  padding: 12px 10px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  box-shadow: 0 3px 8px rgba(7, 128, 75, 0.08);
+  transition: all 0.25s ease;
+}
+
+.day-exercise-btn .hindi-text {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #2e7d58;
+  margin-top: 3px;
+  transition: color 0.25s ease;
+}
+
+/* Hover Effect */
+.day-exercise-btn:hover {
+  background: #07965a;
+  color: #ffffff;
+  border-color: #07965a;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(7, 150, 90, 0.25);
+}
+
+.day-exercise-btn:hover .hindi-text {
+  color: #e4f9ed;
+}
+
+@media(max-width: 480px) {
+  .days-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+  }
+  .day-exercise-btn {
+    font-size: 0.95rem;
+    padding: 10px 8px;
+  }
+}
+</style> <!-- Corrected closing style tag -->
+
+<div class="foundation-days-card">
   <h2>Foundation Level Practice Days | आधार स्तर अभ्यास के दिन</h2>
   <p>Select a day to start your daily practice:</p>
-  <p class="hindi" lang="hi">अपने दैनिक अभ्यास को शुरू करने के लिए एक दिन चुनें:</p>
+  <p class="hindi-desc" lang="hi">अपने दैनिक अभ्यास को शुरू करने के लिए एक दिन चुनें:</p>
 
-  <!-- Days Grid Container -->
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 18px;">
+  <!-- Days Grid Container (Day 1 to Day 10) -->
+  <div class="days-grid">
     
-    <!-- Day 1 to Day 10 Buttons with Enhanced Colors & Hover -->
-    <a href="foundation-day1.html" class="day-button" style="display: block; text-align: center; background: #eef6ff; color: var(--primary); border: 2px solid #bce0fd; border-radius: 10px; padding: 12px; text-decoration: none; font-weight: bold; transition: all 0.25s ease;">
-      Day 1<br><span class="hindi" style="font-size: 13px; font-weight: normal; color: var(--muted);" lang="hi">दिन 1</span>
+    <a href="foundation-day1.html" class="day-exercise-btn">
+      Day 1 Exercise
+      <span class="hindi-text" lang="hi">दिन 1 अभ्यास</span>
     </a>
 
-    <a href="foundation-day2.html" class="day-button" style="display: block; text-align: center; background: #eef6ff; color: var(--primary); border: 2px solid #bce0fd; border-radius: 10px; padding: 12px; text-decoration: none; font-weight: bold; transition: all 0.25s ease;">
-      Day 2<br><span class="hindi" style="font-size: 13px; font-weight: normal; color: var(--muted);" lang="hi">दिन 2</span>
+    <a href="foundation-day2.html" class="day-exercise-btn">
+      Day 2 Exercise
+      <span class="hindi-text" lang="hi">दिन 2 अभ्यास</span>
     </a>
 
-    <a href="foundation-day3.html" class="day-button" style="display: block; text-align: center; background: #eef6ff; color: var(--primary); border: 2px solid #bce0fd; border-radius: 10px; padding: 12px; text-decoration: none; font-weight: bold; transition: all 0.25s ease;">
-      Day 3<br><span class="hindi" style="font-size: 13px; font-weight: normal; color: var(--muted);" lang="hi">दिन 3</span>
+    <a href="foundation-day3.html" class="day-exercise-btn">
+      Day 3 Exercise
+      <span class="hindi-text" lang="hi">दिन 3 अभ्यास</span>
     </a>
 
-    <a href="foundation-day4.html" class="day-button" style="display: block; text-align: center; background: #eef6ff; color: var(--primary); border: 2px solid #bce0fd; border-radius: 10px; padding: 12px; text-decoration: none; font-weight: bold; transition: all 0.25s ease;">
-      Day 4<br><span class="hindi" style="font-size: 13px; font-weight: normal; color: var(--muted);" lang="hi">दिन 4</span>
+    <a href="foundation-day4.html" class="day-exercise-btn">
+      Day 4 Exercise
+      <span class="hindi-text" lang="hi">दिन 4 अभ्यास</span>
     </a>
 
-    <a href="foundation-day5.html" class="day-button" style="display: block; text-align: center; background: #eef6ff; color: var(--primary); border: 2px solid #bce0fd; border-radius: 10px; padding: 12px; text-decoration: none; font-weight: bold; transition: all 0.25s ease;">
-      Day 5<br><span class="hindi" style="font-size: 13px; font-weight: normal; color: var(--muted);" lang="hi">दिन 5</span>
+    <a href="foundation-day5.html" class="day-exercise-btn">
+      Day 5 Exercise
+      <span class="hindi-text" lang="hi">दिन 5 अभ्यास</span>
     </a>
 
-    <a href="foundation-day6.html" class="day-button" style="display: block; text-align: center; background: #eef6ff; color: var(--primary); border: 2px solid #bce0fd; border-radius: 10px; padding: 12px; text-decoration: none; font-weight: bold; transition: all 0.25s ease;">
-      Day 6<br><span class="hindi" style="font-size: 13px; font-weight: normal; color: var(--muted);" lang="hi">दिन 6</span>
+    <a href="foundation-day6.html" class="day-exercise-btn">
+      Day 6 Exercise
+      <span class="hindi-text" lang="hi">दिन 6 अभ्यास</span>
     </a>
 
-    <a href="foundation-day7.html" class="day-button" style="display: block; text-align: center; background: #eef6ff; color: var(--primary); border: 2px solid #bce0fd; border-radius: 10px; padding: 12px; text-decoration: none; font-weight: bold; transition: all 0.25s ease;">
-      Day 7<br><span class="hindi" style="font-size: 13px; font-weight: normal; color: var(--muted);" lang="hi">दिन 7</span>
+    <a href="foundation-day7.html" class="day-exercise-btn">
+      Day 7 Exercise
+      <span class="hindi-text" lang="hi">दिन 7 अभ्यास</span>
     </a>
 
-    <a href="foundation-day8.html" class="day-button" style="display: block; text-align: center; background: #eef6ff; color: var(--primary); border: 2px solid #bce0fd; border-radius: 10px; padding: 12px; text-decoration: none; font-weight: bold; transition: all 0.25s ease;">
-      Day 8<br><span class="hindi" style="font-size: 13px; font-weight: normal; color: var(--muted);" lang="hi">दिन 8</span>
+    <a href="foundation-day8.html" class="day-exercise-btn">
+      Day 8 Exercise
+      <span class="hindi-text" lang="hi">दिन 8 अभ्यास</span>
     </a>
 
-    <a href="foundation-day9.html" class="day-button" style="display: block; text-align: center; background: #eef6ff; color: var(--primary); border: 2px solid #bce0fd; border-radius: 10px; padding: 12px; text-decoration: none; font-weight: bold; transition: all 0.25s ease;">
-      Day 9<br><span class="hindi" style="font-size: 13px; font-weight: normal; color: var(--muted);" lang="hi">दिन 9</span>
+    <a href="foundation-day9.html" class="day-exercise-btn">
+      Day 9 Exercise
+      <span class="hindi-text" lang="hi">दिन 9 अभ्यास</span>
     </a>
 
-    <a href="foundation-day10.html" class="day-button" style="display: block; text-align: center; background: #eef6ff; color: var(--primary); border: 2px solid #bce0fd; border-radius: 10px; padding: 12px; text-decoration: none; font-weight: bold; transition: all 0.25s ease;">
-      Day 10<br><span class="hindi" style="font-size: 13px; font-weight: normal; color: var(--muted);" lang="hi">दिन 10</span>
+    <a href="foundation-day10.html" class="day-exercise-btn">
+      Day 10 Exercise
+      <span class="hindi-text" lang="hi">दिन 10 अभ्यास</span>
     </a>
 
   </div>
 </div>
-
-<!-- Add this small style rule in your <style> section to give them a colorful hover effect -->
-<style>
-  .day-button:hover {
-    background: var(--primary) !important;
-    color: white !important;
-    border-color: var(--primary) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(23, 78, 166, 0.2);
-  }
-  .day-button:hover .hindi {
-    color: #eef6ff !important;
-  }
-</style>
