@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Day 7 Exercise: Fractions and Measurement. Bilingual English and Hindi practice quiz.">
+
+  <title>Day 7 Exercise - RawaRajpootNexEduToppers</title>
+
+  <style>
+    :root {
+      --primary: #174ea6;
+      --secondary: #087f8c;
+      --light: #eef6ff;
+      --text: #243247;
+      --muted: #5d6b7c;
+      --white: #ffffff;
+      --border: #dce6f2;
+      --green: #e8f7ed;
+      --green-text: #176534;
+      --red: #fdecec;
+      --red-text: #a32121;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #eef4fb;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #174ea6, #087f8c);
+      color: white;
+      text-align: center;
+      padding: 28px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(23px, 5vw, 34px);
+    }
+
+    header p {
+      margin: 5px 0;
+    }
+
+    .container {
+      width: min(100% - 24px, 800px);
+      margin: 22px auto;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 14px rgba(26, 53, 87, 0.06);
+    }
+
+    h2 {
+      color: var(--primary);
+      margin-top: 0;
+      font-size: 23px;
+    }
+
+    .hindi {
+      color: #45566b;
+      margin-top: 5px;
+    }
+
+    .quiz-info {
+      background: var(--light);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 18px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 12px;
+      background: #dbe5f1;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: #087f8c;
+      transition: width 0.25s ease;
+    }
+
+    .question-number {
+      color: var(--secondary);
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .question-text {
+      font-size: 19px;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .option-button {
+      width: 100%;
+      text-align: left;
+      font-size: 16px;
+      font-family: inherit;
+      color: var(--text);
+      background: #f8fbff;
+      border: 2px solid #d7e2f0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      line-height: 1.5;
+    }
+
+    .option-button:hover:not(:disabled) {
+      background: #eaf3ff;
+      border-color: #8eb4e8;
+    }
+
+    .option-button:focus-visible,
+    .action-button:focus-visible,
+    .back-link:focus-visible {
+      outline: 3px solid #f0ad4e;
+      outline-offset: 3px;
+    }
+
+    .option-button:disabled {
+      cursor: default;
+      opacity: 1;
+    }
+
+    .option-button.correct {
+      background: var(--green);
+      border-color: #42a66b;
+      color: var(--green-text);
+    }
+
+    .option-button.wrong {
+      background: var(--red);
+      border-color: #d9534f;
+      color: var(--red-text);
+    }
+
+    .feedback {
+      display: none;
+      border-radius: 10px;
+      padding: 14px;
+      margin-top: 18px;
+    }
+
+    .feedback.correct-feedback {
+      display: block;
+      background: var(--green);
+      color: var(--green-text);
+    }
+
+    .feedback.wrong-feedback {
+      display: block;
+      background: var(--red);
+      color: var(--red-text);
+    }
+
+    .feedback h3 {
+      margin: 0 0 5px;
+      font-size: 18px;
+    }
+
+    .action-button {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 9px;
+      padding: 12px 18px;
+      margin-top: 16px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .action-button:hover {
+      background: #103d84;
+    }
+
+    .action-button:disabled {
+      background: #8a9bb3;
+      cursor: not-allowed;
+    }
+
+    #nextButton {
+      display: none;
+    }
+
+    #resultPanel {
+      display: none;
+      text-align: center;
+    }
+
+    .score-number {
+      color: var(--primary);
+      font-size: 34px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .result-message {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .back-link {
+      display: inline-block;
+      background: var(--light);
+      color: var(--primary);
+      text-decoration: none;
+      border: 1px solid #c9dcf5;
+      border-radius: 9px;
+      padding: 11px 16px;
+      margin: 8px 5px 0;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      background: #dcecff;
+    }
+
+    .site-disclaimer {
+      background: #e9eef5;
+      border-top: 1px solid #cbd5e1;
+      padding: 24px 16px;
+      color: #344256;
+      font-size: 14px;
+    }
+
+    .site-disclaimer h2 {
+      font-size: 19px;
+    }
+
+    .site-disclaimer a {
+      color: #174ea6;
+      overflow-wrap: anywhere;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin: 15px 0 0;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 23px 12px;
+      }
+
+      .card {
+        padding: 17px;
+      }
+
+      h2 {
+        font-size: 21px;
+      }
+
+      .question-text {
+        font-size: 18px;
+      }
+
+      .option-button {
+        padding: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+    <p>Day 7 | Exercise (Q1–Q40)</p>
+    <h2 style="color:white; margin:10px 0;">FRACTIONS & MEASUREMENT</h2>
+    <p>Parts of a Whole, Units of Length, Weight & Capacity</p>
+    <p lang="hi">भिन्न और मापन (लंबाई, वजन और क्षमता)</p>
+  </header>
+
+  <main class="container">
+
+    <section class="card">
+      <h2>Welcome to Day 7 Quick Learning & Rules | त्वरित सीख और नियम</h2>
+
+      <p>बच्चों, आज हम भिन्न (Fractions) और मापन (Measurement) के महत्वपूर्ण नियमों को सीखेंगे।</p>
+
+      <h3>📌 Part 1: Fractions (भिन्न की जादुई बातें)</h3>
+      <p><b>Numerator & Denominator:</b> भिन्न में ऊपर वाली संख्या को <b>अंश (Numerator)</b> और नीचे वाली संख्या को <b>हर (Denominator)</b> कहते हैं। (जैसे 3/4 में 3 अंश है और 4 हर है)।</p>
+      <p><b>Comparing Fractions:</b> जब हर (Denominator) एक जैसे हों, तो जिस भिन्न का अंश बड़ा होता है, वह भिन्न बड़ी होती है (जैसे 3/8 और 5/8 में, 5/8 बड़ा है)</p>
+
+      <h3>📌 Part 2: Measurement Conversions (मापन के जरूरी सूत्र)</h3>
+      <p>• 1 Metre (मीटर) = 100 Centimetres (सेंटीमीटर)</p>
+      <p>• 1 Kilogram (किलोग्राम) = 1,000 Grams (ग्राम)</p>
+      <p>• 1 Litre (लीटर) = 1,000 Millilitres (मिलीलीटर)</p>
+      <p>📌<b>Perimeter of Square (वर्ग का परिमाप):</b> 4 × Side (4 को भुजा से गुणा करें)</p>
+      <p><i>Example:</i> यदि वर्ग की भुजा 5 सेमी है, तो परिमाप = 4 × 5 = <b>20 सेमी</b></p>
+      <p>📌<b>Perimeter of Rectangle (आयत का परिमाप):</b> 2 × (Length + Breadth) (लंबाई और चौड़ाई को जोड़कर 2 से गुणा करें)</p>
+      <p><i>Example:</i> यदि आयत की लंबाई 6 सेमी और चौड़ाई 4 सेमी है, तो परिमाप = 2 × (6 + 4) = 2 × 10 = <b>20 सेमी</b></p>
+      <p>📌<b>Perimeter of Triangle (त्रिभुज का परिमाप):</b> Sum of all 3 sides (तीनों भुजाओं को जोड़ें)</p>
+      <p><i>Example:</i> यदि त्रिभुज की भुजाएँ 4 सेमी, 5 सेमी और 6 सेमी हैं, तो परिमाप = 4 + 5 + 6 = <b>15 सेमी</b></p>
+      <p>📌<b>Perimeter of Pentagon (पंचभुज का परिमाप):</b> 5 × Side (यदि सभी भुजाएँ बराबर हों)</p>
+      <p><i>Example:</i> यदि नियमित पंचभुज (जिसकी सभी भुजायें समान होती हैं) की प्रत्येक भुजा 3 सेमी है, तो परिमाप = 5 × 3 = <b>15 सेमी</b></p>
+
+      <div class="quiz-info" style="margin-top: 20px;">
+        <strong>Questions:</strong> 40
+        <span lang="hi"> | प्रश्न: 40</span>
+        <br>
+        <strong>Score:</strong>
+        <span id="scoreDisplay" aria-live="polite">0 / 40</span>
+        <br>
+        <strong>Progress:</strong>
+        <span id="progressText">0 / 40</span>
+        <div
+          class="progress-track"
+          role="progressbar"
+          aria-label="Quiz progress"
+          aria-valuemin="0"
+          aria-valuemax="40"
+          aria-valuenow="0"
+          id="progressBar"
+        >
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="quizPanel">
+      <div class="question-number" id="questionNumber">
+        Question 1 of 40
+      </div>
+
+      <div class="question-text" id="questionText"></div>
+      <p class="hindi" lang="hi" id="questionHindi"></p>
+
+      <div class="options" id="optionsContainer"></div>
+
+      <div class="feedback" id="feedbackBox" aria-live="polite">
+        <h3 id="feedbackTitle"></h3>
+        <p id="feedbackEnglish"></p>
+        <p class="hindi" lang="hi" id="feedbackHindi"></p>
+      </div>
+
+      <button class="action-button" id="nextButton" type="button">
+        Next Question | अगला प्रश्न
+      </button>
+    </section>
+
+    <section class="card" id="resultPanel" aria-live="polite">
+      <h2>Quiz Completed! | प्रश्नोत्तरी पूरी हुई!</h2>
+      <p>Your final score is:</p>
+      <p class="score-number" id="finalScore">0 / 40</p>
+      <p class="hindi" lang="hi" id="finalScoreHindi"></p>
+      <p class="result-message" id="resultMessage"></p>
+      <p class="hindi" lang="hi" id="resultMessageHindi"></p>
+
+      <!-- Button Action Container -->
+      <div id="resultActions" style="margin-top: 20px; display: flex; flex-direction: column; gap: 12px;">
+        <button class="action-button" id="restartButton" type="button" style="margin-top: 0; width: 100%;">
+          Try Again | फिर से प्रयास करें
+        </button>
+        
+        <a class="back-link" href="class4-daily-exercise-maths-foundation.html" style="text-align: center; margin: 0; display: block;">
+          Back to Foundation Level Practice Days | फाउंडेशन लेवल अभ्यास दिवसों पर वापस जाएँ
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="site-disclaimer">
+      <h2>Disclaimer | अस्वीकरण</h2>
+
+      <p>
+        RawaRajpootNexEduToppers Learning Academy is an independent
+        educational platform and is not affiliated with, endorsed by,
+        or associated with NCERT. NCERT textbook names, chapters, and
+        curriculum topics belong exclusively to NCERT. All explanations,
+        examples, and practice material provided here are educational aids.
+        For official textbooks, visit
+        <a href="https://ncert.nic.in/" target="_blank"
+           rel="noopener noreferrer">ncert.nic.in</a>.
+      </p>
+
+      <p lang="hi">
+        RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+        इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+        पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+        यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
+        लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+        <a href="https://ncert.nic.in/" target="_blank"
+           rel="noopener noreferrer">ncert.nic.in</a> पर जाएँ।
+      </p>
+
+      <p class="footer-note">
+        Independent learning resource | स्वतंत्र शैक्षिक संसाधन
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    "use strict";
+
+    const questions = [
+      // FRACTIONS (Q1 to Q20)
+      {
+        question: "What is the numerator in the fraction 3/4?",
+        hindi: "भिन्न 3/4 में अंश (Numerator) क्या है?",
+        options: ["1", "3", "4", "7"],
+        answer: 1,
+        explanation: "In 3/4, the top number 3 is the numerator.",
+        explanationHindi: "3/4 में ऊपर की संख्या 3 अंश (Numerator) है।"
+      },
+      {
+        question: "What is the denominator in the fraction 5/7?",
+        hindi: "भिन्न 5/7 में हर (Denominator) क्या है?",
+        options: ["2", "5", "7", "12"],
+        answer: 2,
+        explanation: "In 5/7, the bottom number 7 is the denominator.",
+        explanationHindi: "5/7 में नीचे की संख्या 7 हर (Denominator) है।"
+      },
+      {
+        question: "Which fraction means one-half?",
+        hindi: "कौन-सी भिन्न आधा (One-half) दर्शाती है?",
+        options: ["1/3", "1/4", "1/2", "3/4"],
+        answer: 2,
+        explanation: "1/2 represents one-half.",
+        explanationHindi: "1/2 आधा भाग दर्शाता है।"
+      },
+      {
+        question: "Which fraction is greater: 1/2 or 1/4?",
+        hindi: "कौन-सी भिन्न बड़ी है: 1/2 या 1/4?",
+        options: ["1/2", "1/4", "Both are equal / दोनों बराबर हैं", "Cannot compare / तुलना नहीं कर सकते"],
+        answer: 0,
+        explanation: "One-half is greater than one-quarter.",
+        explanationHindi: "आधा (1/2), एक-चौथाई (1/4) से बड़ा होता है।"
+      },
+      {
+        question: "A pizza is cut into 4 equal slices. You eat 1. What fraction is left?",
+        hindi: "एक पिज्जा के 4 बराबर टुकड़े किए गए। आपने 1 खा लिया। कितना भाग बचा?",
+        options: ["1/4", "2/4", "3/4", "4/4"],
+        answer: 2,
+        explanation: "4 - 1 = 3 slices remain, so 3/4 is left.",
+        explanationHindi: "4 - 1 = 3 टुकड़े बचे, इसलिए 3/4 भाग बचा है।"
+      },
+      {
+        question: "Which fraction is smaller: 3/8 or 5/8?",
+        hindi: "3/8 और 5/8 में कौन-सी भिन्न छोटी है?",
+        options: ["3/8", "5/8", "Both are equal / दोनों बराबर हैं", "Cannot tell / नहीं बता सकते"],
+        answer: 0,
+        explanation: "Since denominators are equal, 3/8 is smaller than 5/8.",
+        explanationHindi: "चूँकि हर समान हैं, इसलिए 3/8, 5/8 से छोटी है।"
+      },
+      {
+        question: "How many quarters make one whole?",
+        hindi: "एक पूरा बनाने के लिए कितने एक-चौथाई (quarters) चाहिए?",
+        options: ["2", "3", "4", "5"],
+        answer: 2,
+        explanation: "Four quarters make a whole (4/4 = 1).",
+        explanationHindi: "चार एक-चौथाई मिलकर एक पूरा बनाते हैं (4/4 = 1)।"
+      },
+      {
+        question: "What is 1/2 of 20?",
+        hindi: "20 का आधा (1/2) कितना होता है?",
+        options: ["5", "10", "15", "20"],
+        answer: 1,
+        explanation: "20 ÷ 2 = 10.",
+        explanationHindi: "20 को 2 से भाग देने पर 10 आता है।"
+      },
+      {
+        question: "What is 1/4 of 12?",
+        hindi: "12 का एक-चौथाई (1/4) कितना होता है?",
+        options: ["2", "3", "4", "6"],
+        answer: 1,
+        explanation: "12 ÷ 4 = 3.",
+        explanationHindi: "12 को 4 से भाग देने पर 3 आता है।"
+      },
+      {
+        question: "Which fraction is equivalent to 2/4?",
+        hindi: "2/4 के बराबर (Equivalent) कौन-सी भिन्न है?",
+        options: ["1/2", "1/3", "3/4", "2/3"],
+        answer: 0,
+        explanation: "Dividing numerator and denominator by 2 gives 1/2.",
+        explanationHindi: "अंश और हर को 2 से भाग देने पर 1/2 प्राप्त होता है।"
+      },
+      {
+        question: "What is 3/4 of 12?",
+        hindi: "12 का 3/4 कितना है?",
+        options: ["6", "8", "9", "10"],
+        answer: 2,
+        explanation: "1/4 of 12 is 3, so 3/4 is 3 × 3 = 9.",
+        explanationHindi: "12 का एक-चौथाई 3 है, इसलिए तीन-चौथाई 3 × 3 = 9 है।"
+      },
+      {
+        question: "Which of the following represents three-quarters?",
+        hindi: "इनमें से कौन तीन-चौथाई (Three-quarters) को दर्शाता है?",
+        options: ["1/2", "1/4", "3/4", "2/3"],
+        answer: 2,
+        explanation: "Three-quarters is written as 3/4.",
+        explanationHindi: "तीन-चौथाई को 3/4 लिखा जाता है।"
+      },
+      {
+        question: "A rope is divided into 5 equal parts. Each part is called:",
+        hindi: "एक रस्सी को 5 बराबर भागों में बाँटा गया। प्रत्येक भाग क्या कहलाता है?",
+        options: ["1/2", "1/3", "1/4", "1/5"],
+        answer: 3,
+        explanation: "Each equal part out of 5 is 1/5 (one-fifth).",
+        explanationHindi: "5 में से प्रत्येक बराबर भाग 1/5 (पाँचवाँ हिस्सा) कहलाता है।"
+      },
+      {
+        question: "What is 1/3 of 15?",
+        hindi: "15 का एक-तिहाई (1/3) कितना है?",
+        options: ["3", "5", "6", "10"],
+        answer: 1,
+        explanation: "15 ÷ 3 = 5.",
+        explanationHindi: "15 को 3 से भाग देने पर 5 आता है।"
+      },
+      {
+        question: "If you eat 2 slices out of 6 equal slices of cake, what fraction is eaten?",
+        hindi: "यदि आप केक के 6 बराबर टुकड़ों में से 2 टुकड़े खा लेते हैं, तो कितना भाग खाया गया?",
+        options: ["2/6", "4/6", "1/6", "5/6"],
+        answer: 0,
+        explanation: "2 parts eaten out of 6 is 2/6.",
+        explanationHindi: "6 में से 2 भाग खाए गए, यानी 2/6।"
+      },
+      {
+        question: "Which is greater: 2/5 or 4/5?",
+        hindi: "कौन-सी भिन्न बड़ी है: 2/5 या 4/5?",
+        options: ["2/5", "4/5", "Both are equal / दोनों बराबर हैं", "Cannot compare / तुलना नहीं कर सकते"],
+        answer: 1,
+        explanation: "With same denominators, 4/5 is greater than 2/5.",
+        explanationHindi: "समान हर होने पर 4/5, 2/5 से बड़ा होता है।"
+      },
+      {
+        question: "What does the denominator of a fraction tell us?",
+        hindi: "किसी भिन्न का हर (Denominator) हमें क्या बताता है?",
+        options: ["Total equal parts / कुल बराबर भाग", "Parts taken / लिए गए भाग", "Remainder / शेषफल", "None / कोई नहीं"],
+        answer: 0,
+        explanation: "Denominator shows total equal parts the whole is divided into.",
+        explanationHindi: "हर हमें कुल बराबर भागों की संख्या बताता है।"
+      },
+      {
+        question: "What does the numerator of a fraction tell us?",
+        hindi: "किसी भिन्न का अंश (Numerator) हमें क्या बताता है?",
+        options: ["Total equal parts / कुल बराबर भाग", "Selected or shaded parts / चुने गए या रंगे हुए भाग", "Total weight / कुल वजन", "None / कोई नहीं"],
+        answer: 1,
+        explanation: "Numerator shows how many parts are taken or shaded.",
+        explanationHindi: "अंश हमें चुने गए या उपयोग किए गए भागों की संख्या बताता है।"
+      },
+      {
+        question: "What is 1/2 of 50?",
+        hindi: "50 का आधा (1/2) कितना है?",
+        options: ["20", "25", "30", "15"],
+        answer: 1,
+        explanation: "50 ÷ 2 = 25.",
+        explanationHindi: "50 को 2 से भाग देने पर 25 आता है।"
+      },
+      {
+        question: "Which fraction is equal to a whole (1)?",
+        hindi: "कौन-सी भिन्न एक पूरे (1) के बराबर है?",
+        options: ["3/4", "4/4", "1/4", "2/4"],
+        answer: 1,
+        explanation: "When numerator and denominator are equal, the fraction equals 1 (4/4 = 1).",
+        explanationHindi: "जब अंश और हर बराबर हों, तो भिन्न 1 के बराबर होती है (4/4 = 1)।"
+      },
+
+      // MEASUREMENT (Q21 to Q40)
+      {
+        question: "How many centimetres are in 1 metre?",
+        hindi: "1 मीटर में कितने सेंटीमीटर होते हैं?",
+        options: ["10", "50", "100", "1000"],
+        answer: 2,
+        explanation: "1 metre = 100 centimetres.",
+        explanationHindi: "1 मीटर = 100 सेंटीमीटर।"
+      },
+      {
+        question: "How many grams are in 1 kilogram?",
+        hindi: "1 किलोग्राम में कितने ग्राम होते हैं?",
+        options: ["100", "500", "1000", "10000"],
+        answer: 2,
+        explanation: "1 kilogram = 1,000 grams.",
+        explanationHindi: "1 किलोग्राम = 1,000 ग्राम।"
+      },
+      {
+        question: "How many millilitres are in 1 litre?",
+        hindi: "1 लीटर में कितने मिलीलीटर होते हैं?",
+        options: ["10", "100", "1000", "10000"],
+        answer: 2,
+        explanation: "1 litre = 1,000 millilitres.",
+        explanationHindi: "1 लीटर = 1,000 मिलीलीटर।"
+      },
+      {
+        question: "What is the perimeter of a square with a side of 5 cm?",
+        hindi: "5 सेमी भुजा वाले वर्ग का परिमाप कितना है?",
+        options: ["10 cm", "15 cm", "20 cm", "25 cm"],
+        answer: 2,
+        explanation: "Perimeter of square = 4 × side = 4 × 5 = 20 cm.",
+        explanationHindi: "वर्ग का परिमाप = 4 × भुजा = 4 × 5 = 20 सेमी।"
+      },
+      {
+        question: "A rectangle has a length of 6 cm and width of 4 cm. What is its perimeter?",
+        hindi: "एक आयत की लंबाई 6 सेमी और चौड़ाई 4 सेमी है। उसका परिमाप कितना है?",
+        options: ["10 cm", "20 cm", "24 cm", "12 cm"],
+        answer: 1,
+        explanation: "Perimeter of Rectangle = 2 × (Length + Width) = 2 × (6 + 4) = 20 cm.",
+        explanationHindi: "आयात का परिमाप = 2 × (लंबाई + चौड़ाई) = 2 × (6 + 4) = 20 सेमी।"
+      },
+      {
+        question: "Which unit is best to measure the weight of an apple?",
+        hindi: "सेब का वजन मापने के लिए कौन-सी इकाई सबसे उपयुक्त है?",
+        options: ["Metres / मीटर", "Grams / ग्राम", "Kilograms / किलोग्राम", "Litres / लीटर"],
+        answer: 1,
+        explanation: "Grams are best for measuring light objects like an apple.",
+        explanationHindi: "सेब जैसी हल्की चीज़ों के लिए ग्राम (Grams) उपयुक्त है।"
+      },
+      {
+        question: "Which unit is best to measure the distance between two cities?",
+        hindi: "दो शहरों के बीच की दूरी मापने के लिए कौन-सी इकाई उपयुक्त है?",
+        options: ["Centimetres / सेंटीमीटर", "Metres / मीटर", "Kilometres / किलोमीटर", "Millimetres / मिलीमीटर"],
+        answer: 2,
+        explanation: "Kilometres are used for measuring long distances.",
+        explanationHindi: "लंबी दूरियों को मापने के लिए किलोमीटर (Kilometres) का उपयोग होता है।"
+      },
+      {
+        question: "How many metres are in 3 kilometres?",
+        hindi: "3 किलोमीटर में कितने मीटर होते हैं?",
+        options: ["30 m", "300 m", "3000 m", "30000 m"],
+        answer: 2,
+        explanation: "1 km = 1,000 m, so 3 km = 3,000 m.",
+        explanationHindi: "1 किमी = 1,000 मीटर, इसलिए 3 किमी = 3,000 मीटर।"
+      },
+      {
+        question: "How many kilograms are in 5,000 grams?",
+        hindi: "5,000 ग्राम में कितने किलोग्राम होते हैं?",
+        options: ["5 kg", "50 kg", "500 kg", "0.5 kg"],
+        answer: 0,
+        explanation: "5,000 g ÷ 1,000 = 5 kg.",
+        explanationHindi: "5,000 ग्राम ÷ 1,000 = 5 किलोग्राम।"
+      },
+      {
+        question: "What is 2 metres expressed in centimetres?",
+        hindi: "2 मीटर को सेंटीमीटर में बदलने पर कितना होगा?",
+        options: ["20 cm", "200 cm", "2000 cm", "2 cm"],
+        answer: 1,
+        explanation: "2 × 100 = 200 cm.",
+        explanationHindi: "2 × 100 = 200 सेंटीमीटर।"
+      },
+      {
+        question: "Which container holds more water: 500 mL or 2 Litres?",
+        hindi: "किस बर्तन में अधिक पानी आएगा: 500 मिलीलीटर या 2 लीटर?",
+        options: ["500 mL", "2 Litres / 2 लीटर", "Both are equal / दोनों बराबर हैं", "Cannot say / कह नहीं सकते"],
+        answer: 1,
+        explanation: "2 Litres = 2,000 mL, which is greater than 500 mL.",
+        explanationHindi: "2 लीटर = 2,000 मिलीलीटर, जो 500 मिलीलीटर से अधिक है।"
+      },
+      {
+        question: "What is the perimeter of a regular pentagon with each side 3 cm?",
+        hindi: "एक नियमित पंचभुज (Pentagon) जिसकी प्रत्येक भुजा 3 सेमी है, उसका परिमाप क्या होगा?",
+        options: ["12 cm", "15 cm", "18 cm", "10 cm"],
+        answer: 1,
+        explanation: "A pentagon has 5 sides, so 5 × 3 = 15 cm.",
+        explanationHindi: "पंचभुज की 5 भुजाएँ होती हैं, इसलिए 5 × 3 = 15 सेमी।"
+      },
+      {
+        question: "How many half-litre bottles can be filled from 4 litres of milk?",
+        hindi: "4 लीटर दूध से आधे-आधे लीटर की कितनी बोतलें भरी जा सकती हैं?",
+        options: ["2", "4", "6", "8"],
+        answer: 3,
+        explanation: "Each litre has two half-litres, so 4 × 2 = 8 bottles.",
+        explanationHindi: "1 लीटर में दो आधे-लीटर होते हैं, इसलिए 4 × 2 = 8 बोतलें।"
+      },
+      {
+        question: "If a book is 25 cm long, how many millimetres long is it?",
+        hindi: "यदि एक किताब 25 सेमी लंबी है, तो उसकी लंबाई मिलीमीटर में कितनी होगी?",
+        options: ["2.5 mm", "25 mm", "250 mm", "2500 mm"],
+        answer: 2,
+        explanation: "1 cm = 10 mm, so 25 × 10 = 250 mm.",
+        explanationHindi: "1 सेमी = 10 मिमी, इसलिए 25 × 10 = 250 मिलीमीटर।"
+      },
+      {
+        question: "A water tank contains 3 L 500 mL of water. How much is that in total millilitres?",
+        hindi: "एक पानी की टंकी में 3 लीटर 500 मिलीलीटर पानी है। कुल कितने मिलीलीटर पानी है?",
+        options: ["350 mL", "3050 mL", "3500 mL", "3005 mL"],
+        answer: 2,
+        explanation: "3 L = 3,000 mL + 500 mL = 3,500 mL.",
+        explanationHindi: "3 लीटर = 3,000 मिलीलीटर + 500 मिलीलीटर = 3,500 मिलीलीटर।"
+      },
+      {
+        question: "What is the perimeter of a triangle with sides 4 cm, 5 cm, and 6 cm?",
+        hindi: "4 सेमी, 5 सेमी और 6 सेमी भुजाओं वाले त्रिभुज का परिमाप कितना है?",
+        options: ["12 cm", "14 cm", "15 cm", "16 cm"],
+        answer: 2,
+        explanation: "Perimeter = Sum of all sides = 4 + 5 + 6 = 15 cm.",
+        explanationHindi: "परिमाप = सभी भुजाओं का योग = 4 + 5 + 6 = 15 सेमी।"
+      },
+      {
+        question: "Which is heavier: 1 kg of cotton or 1 kg of iron?",
+        hindi: "कौन भारी है: 1 किलो रुई या 1 किलो लोहा?",
+        options: ["Cotton / रुई", "Iron / लोहा", "Both weigh the same / दोनों का वजन बराबर है", "Cannot be compared / तुलना नहीं हो सकती"],
+        answer: 2,
+        explanation: "Both are exactly 1 kilogram.",
+        explanationHindi: "दोनों का वजन ठीक 1 किलोग्राम ही है।"
+      },
+      {
+        question: "How many 250g packets make 1 kg?",
+        hindi: "250 ग्राम के कितने पैकेट मिलकर 1 किलोग्राम बनाएंगे?",
+        options: ["2", "3", "4", "5"],
+        answer: 2,
+        explanation: "1 kg = 1,000 g, and 1,000 ÷ 250 = 4 packets.",
+        explanationHindi: "1 किलो = 1,000 ग्राम, और 1,000 ÷ 250 = 4 पैकेट।"
+      },
+      {
+        question: "If 1 metre of cloth costs ₹80, what is the cost of 5 metres?",
+        hindi: "यदि 1 मीटर कपड़े की कीमत ₹80 है, तो 5 मीटर की कीमत क्या होगी?",
+        options: ["₹320", "₹400", "₹450", "₹350"],
+        answer: 1,
+        explanation: "5 × 80 = ₹400.",
+        explanationHindi: "5 × 80 = ₹400।"
+      },
+      {
+        question: "What is half of 1 kilogram in grams?",
+        hindi: "1 किलोग्राम का आधा कितने ग्राम होता है?",
+        options: ["100 g", "250 g", "500 g", "750 g"],
+        answer: 2,
+        explanation: "Half of 1,000 grams is 500 grams.",
+        explanationHindi: "1,000 ग्राम का आधा 500 ग्राम होता है।"
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+
+    const questionNumber = document.getElementById("questionNumber");
+    const questionText = document.getElementById("questionText");
+    const questionHindi = document.getElementById("questionHindi");
+    const optionsContainer = document.getElementById("optionsContainer");
+    const feedbackBox = document.getElementById("feedbackBox");
+    const feedbackTitle = document.getElementById("feedbackTitle");
+    const feedbackEnglish = document.getElementById("feedbackEnglish");
+    const feedbackHindi = document.getElementById("feedbackHindi");
+    const nextButton = document.getElementById("nextButton");
+    const scoreDisplay = document.getElementById("scoreDisplay");
+    const progressText = document.getElementById("progressText");
+    const progressFill = document.getElementById("progressFill");
+    const progressBar = document.getElementById("progressBar");
+    const quizPanel = document.getElementById("quizPanel");
+    const resultPanel = document.getElementById("resultPanel");
+    const restartButton = document.getElementById("restartButton");
+
+    function updateProgress() {
+      const completed = currentQuestion + (answered ? 1 : 0);
+      const percentage = (completed / questions.length) * 100;
+
+      progressFill.style.width = percentage + "%";
+      progressText.textContent = completed + " / " + questions.length;
+      progressBar.setAttribute("aria-valuenow", String(completed));
+      scoreDisplay.textContent = score + " / " + questions.length;
+    }
+
+    function renderQuestion() {
+      answered = false;
+
+      const q = questions[currentQuestion];
+
+      questionNumber.textContent =
+        "Question " + (currentQuestion + 1) + " of " + questions.length;
+
+      questionText.textContent = q.question;
+      questionHindi.textContent = q.hindi;
+
+      optionsContainer.replaceChildren();
+      feedbackBox.className = "feedback";
+      feedbackTitle.textContent = "";
+      feedbackEnglish.textContent = "";
+      feedbackHindi.textContent = "";
+      nextButton.style.display = "none";
+
+      q.options.forEach(function(option, index) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option-button";
+        button.textContent =
+          String.fromCharCode(65 + index) + ". " + option;
+        button.addEventListener("click", function() {
+          checkAnswer(index);
+        });
+        optionsContainer.appendChild(button);
+      });
+
+      updateProgress();
+    }
+
+    function checkAnswer(selectedIndex) {
+      if (answered) return;
+
+      answered = true;
+
+      const q = questions[currentQuestion];
+      const buttons = optionsContainer.querySelectorAll(".option-button");
+      const isCorrect = selectedIndex === q.answer;
+
+      buttons.forEach(function(button, index) {
+        button.disabled = true;
+
+        if (index === q.answer) {
+          button.classList.add("correct");
+        }
+
+        if (index === selectedIndex && !isCorrect) {
+          button.classList.add("wrong");
+        }
+      });
+
+      if (isCorrect) {
+        score++;
+        feedbackBox.className = "feedback correct-feedback";
+        feedbackTitle.textContent = "Correct Answer! | सही उत्तर!";
+        feedbackHindi.textContent = "बहुत अच्छा! आपका उत्तर सही है।";
+      } else {
+        feedbackBox.className = "feedback wrong-feedback";
+        feedbackTitle.textContent = "Wrong Answer | गलत उत्तर";
+        feedbackHindi.textContent =
+          "सही उत्तर हरे रंग में दिखाया गया है।";
+      }
+
+      feedbackEnglish.textContent = q.explanation;
+      feedbackHindi.textContent += " " + q.explanationHindi;
+
+      updateProgress();
+      nextButton.style.display = "inline-block";
+
+      if (currentQuestion === questions.length - 1) {
+        nextButton.textContent = "See Final Result | अंतिम परिणाम देखें";
+      } else {
+        nextButton.textContent = "Next Question | अगला प्रश्न";
+      }
+    }
+
+    function showResult() {
+      quizPanel.style.display = "none";
+      resultPanel.style.display = "block";
+
+      document.getElementById("finalScore").textContent =
+        score + " / " + questions.length;
+
+      document.getElementById("finalScoreHindi").textContent =
+        "आपका स्कोर " + questions.length + " में से " + score + " है।";
+
+      let message;
+      let messageHindi;
+
+      if (score >= 15) {
+        message = "Very good work! Review the questions you missed to strengthen your concepts.";
+        messageHindi = "बहुत अच्छा! अपनी अवधारणाओं को मजबूत करने के लिए छूटे हुए प्रश्नों को दोहराएँ।";
+      } else {
+        message = "Keep practising! Revise your math basics and try again.";
+        messageHindi = "अभ्यास जारी रखें! गणित की मूल बातों को दोहराएँ और फिर से प्रयास करें।";
+      }
+
+      document.getElementById("resultMessage").textContent = message;
+      document.getElementById("resultMessageHindi").textContent = messageHindi;
+
+      progressFill.style.width = "100%";
+      progressText.textContent = questions.length + " / " + questions.length;
+      progressBar.setAttribute("aria-valuenow", String(questions.length));
+      scoreDisplay.textContent = score + " / " + questions.length;
+    }
+
+    nextButton.addEventListener("click", function() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    restartButton.addEventListener("click", function() {
+      currentQuestion = 0;
+      score = 0;
+      answered = false;
+      resultPanel.style.display = "none";
+      quizPanel.style.display = "block";
+      renderQuestion();
+    });
+
+    // Initial render call
+    renderQuestion();
+  </script>
+
+</body>
+</html>
