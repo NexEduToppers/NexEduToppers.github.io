@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Day 2 Exercise: Fast Subtraction. Bilingual English and Hindi practice quiz.">
+
+  <title>Day 2 Exercise - RawaRajpootNexEduToppers</title>
+
+  <style>
+    :root {
+      --primary: #174ea6;
+      --secondary: #087f8c;
+      --light: #eef6ff;
+      --text: #243247;
+      --muted: #5d6b7c;
+      --white: #ffffff;
+      --border: #dce6f2;
+      --green: #e8f7ed;
+      --green-text: #176534;
+      --red: #fdecec;
+      --red-text: #a32121;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #eef4fb;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #174ea6, #087f8c);
+      color: white;
+      text-align: center;
+      padding: 28px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(23px, 5vw, 34px);
+    }
+
+    header p {
+      margin: 5px 0;
+    }
+
+    .container {
+      width: min(100% - 24px, 800px);
+      margin: 22px auto;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 14px rgba(26, 53, 87, 0.06);
+    }
+
+    h3 {
+      color: var(--primary);
+      margin-top: 0;
+      font-size: 23px;
+    }
+
+    .hindi {
+      color: #45566b;
+      margin-top: 5px;
+    }
+
+    .quiz-info {
+      background: var(--light);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 18px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 12px;
+      background: #dbe5f1;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: #087f8c;
+      transition: width 0.25s ease;
+    }
+
+    .question-number {
+      color: var(--secondary);
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .question-text {
+      font-size: 19px;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .option-button {
+      width: 100%;
+      text-align: left;
+      font-size: 16px;
+      font-family: inherit;
+      color: var(--text);
+      background: #f8fbff;
+      border: 2px solid #d7e2f0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      line-height: 1.5;
+    }
+
+    .option-button:hover:not(:disabled) {
+      background: #eaf3ff;
+      border-color: #8eb4e8;
+    }
+
+    .option-button:focus-visible,
+    .action-button:focus-visible,
+    .back-link:focus-visible {
+      outline: 3px solid #f0ad4e;
+      outline-offset: 3px;
+    }
+
+    .option-button:disabled {
+      cursor: default;
+      opacity: 1;
+    }
+
+    .option-button.correct {
+      background: var(--green);
+      border-color: #42a66b;
+      color: var(--green-text);
+    }
+
+    .option-button.wrong {
+      background: var(--red);
+      border-color: #d9534f;
+      color: var(--red-text);
+    }
+
+    .feedback {
+      display: none;
+      border-radius: 10px;
+      padding: 14px;
+      margin-top: 18px;
+    }
+
+    .feedback.correct-feedback {
+      display: block;
+      background: var(--green);
+      color: var(--green-text);
+    }
+
+    .feedback.wrong-feedback {
+      display: block;
+      background: var(--red);
+      color: var(--red-text);
+    }
+
+    .feedback h3 {
+      margin: 0 0 5px;
+      font-size: 18px;
+    }
+
+    .action-button {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 9px;
+      padding: 12px 18px;
+      margin-top: 16px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .action-button:hover {
+      background: #103d84;
+    }
+
+    .action-button:disabled {
+      background: #8a9bb3;
+      cursor: not-allowed;
+    }
+
+    #nextButton {
+      display: none;
+    }
+
+    #resultPanel {
+      display: none;
+      text-align: center;
+    }
+
+    .score-number {
+      color: var(--primary);
+      font-size: 34px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .result-message {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .back-link {
+      display: inline-block;
+      background: var(--light);
+      color: var(--primary);
+      text-decoration: none;
+      border: 1px solid #c9dcf5;
+      border-radius: 9px;
+      padding: 11px 16px;
+      margin: 8px 5px 0;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      background: #dcecff;
+    }
+
+    .site-disclaimer {
+      background: #e9eef5;
+      border-top: 1px solid #cbd5e1;
+      padding: 24px 16px;
+      color: #344256;
+      font-size: 14px;
+    }
+
+    .site-disclaimer h3 {
+      font-size: 19px;
+    }
+
+    .site-disclaimer a {
+      color: #174ea6;
+      overflow-wrap: anywhere;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin: 15px 0 0;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 23px 12px;
+      }
+
+      .card {
+        padding: 17px;
+      }
+
+      h3 {
+        font-size: 21px;
+      }
+
+      .question-text {
+        font-size: 18px;
+      }
+
+      .option-button {
+        padding: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+    <p>Day 2 | Exercise (Q1–Q40)</p>
+    <p>Learn Fast Subtraction and Practice Quiz</p>
+    <p lang="hi">तेजी से घटाना सीखें और प्रश्नोत्तरी से अभ्यास करें</p>
+  </header>
+
+  <main class="container">
+
+    <section class="card">
+      <h2>बच्चों, नीचे दिये गये तरीकों को ध्यान से पढ़ें, इन तरीकों से आप बिना कॉपी और पेंसिल के ही सिर्फ अपने दिमाग मे बड़ी से बड़ी संख्याओं को तेजी से घटाकर बता सकेंगे</h2>
+      
+      <h2>Rule 1: Break Numbers Apart (संख्याओं को तोड़कर घटाना)</h2>
+      
+      <h2>Example 1: 58 - 24 = ?</h2>
+      <p>First of all Break the Second Number: 20+4</p>
+      <p>Now Subtract Tens: 58 - 20 = 38</p>
+      <p>Now Subtract Ones: 38 - 4 = 34</p>
+      <p>Answer = 34</p>
+
+      <h2>Example 2: 345 - 123 = ?</h2>
+      <p>First of all Break the Second Number: 100+20+3</p>
+      <p>Now Subtract Hundreds: 345 - 100 = 245</p>
+      <p>Now Subtract Tens: 245 - 20 = 225</p>
+      <p>Now Subtract Ones: 225 - 3 = 222</p>
+      <p>Answer = 222</p>
+
+      <h2>Example 3: 3,452 - 1,231 = ?</h2>
+      <p>First of all Break the Second Number: 1000+200+30+1</p>
+      <p>Now Subtract Thousands: 3452 - 1000 = 2452</p>
+      <p>Now Subtract Hundreds: 2452 - 200 = 2252</p>
+      <p>Now Subtract Tens: 2252 - 30 = 2222</p>
+      <p>Now Subtract Ones: 2222 - 1 = 2221</p>
+      <p>Answer = 2221</p>
+
+      <h2>Rule 2: Compensation Method (समायोजन की विधि)</h2>
+      <p>इस तरीके मे आप किसी संख्या को पास की आसान संख्या बनाइए, फिर घटाइए और फिर पास की संख्या बनाने के लिए जितना अतिरिक्त घटाया था उसे वापस जोड़ दीजिए।</p>
+
+      <h2>Example 1: 53 - 19 = ?</h2>
+      <p>Make 19 into 20 by adding 1</p>
+      <p>Now Subtract 20: 53 - 20 = 33</p>
+      <p>Now Add back the extra 1: 33 + 1, Answer = 34</p>
+
+      <h2>Example 2: 452 - 198 = ?</h2>
+      <p>Make 198 into 200 by adding 2</p>
+      <p>Now Subtract 200: 452 - 200 = 252</p>
+      <p>Now Add back the extra 2: 252 + 2, Answer = 254</p>
+
+      <h2>Example 3: 4675 - 1998 = ?</h2>
+      <p>Make 1998 into 2000 by adding 2</p>
+      <p>Now Subtract 2000: 4675 - 2000 = 2675</p>
+      <p>Now Add back the extra 2: 2675 + 2, Answer = 2677</p>
+
+      <h3>अब नीचे दी गई प्रश्नोत्तरी से संख्याओं को तेजी से घटाने का अभ्यास करें</h3>
+
+      <div class="quiz-info">
+        <strong>Questions:</strong> 40
+        <span lang="hi"> | प्रश्न: 40</span>
+        <br>
+        <strong>Score:</strong>
+        <span id="scoreDisplay" aria-live="polite">0 / 40</span>
+        <br>
+        <strong>Progress:</strong>
+        <span id="progressText">0 / 40</span>
+        <div
+          class="progress-track"
+          role="progressbar"
+          aria-label="Quiz progress"
+          aria-valuemin="0"
+          aria-valuemax="40"
+          aria-valuenow="0"
+          id="progressBar"
+        >
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="quizPanel">
+      <div class="question-number" id="questionNumber">
+        Question 1 of 40
+      </div>
+
+      <div class="question-text" id="questionText"></div>
+      <p class="hindi" lang="hi" id="questionHindi"></p>
+
+      <div class="options" id="optionsContainer"></div>
+
+      <div class="feedback" id="feedbackBox" aria-live="polite">
+        <h3 id="feedbackTitle"></h3>
+        <p id="feedbackEnglish"></p>
+        <p class="hindi" lang="hi" id="feedbackHindi"></p>
+      </div>
+
+      <button class="action-button" id="nextButton" type="button">
+        Next Question | अगला प्रश्न
+      </button>
+    </section>
+
+    <section class="card" id="resultPanel" aria-live="polite">
+      <h3>Quiz Completed! | प्रश्नोत्तरी पूरी हुई!</h3>
+      <p>Your final score is:</p>
+      <p class="score-number" id="finalScore">0 / 40</p>
+      <p class="hindi" lang="hi" id="finalScoreHindi"></p>
+      <p class="result-message" id="resultMessage"></p>
+      <p class="hindi" lang="hi" id="resultMessageHindi"></p>
+
+      <!-- Button Action Container -->
+      <div id="resultActions" style="margin-top: 20px; display: flex; flex-direction: column; gap: 12px;">
+        <button class="action-button" id="restartButton" type="button" style="margin-top: 0; width: 100%;">
+          Try Again | फिर से प्रयास करें
+        </button>
+        
+        <a class="back-link" href="class4-daily-exercise-maths-foundation.html" style="text-align: center; margin: 0; display: block;">
+          Back to Foundation Level Practice Days | फाउंडेशन लेवल अभ्यास दिवसों पर वापस जाएँ
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="site-disclaimer">
+      <h3>Disclaimer | अस्वीकरण</h3>
+
+      <p>
+        RawaRajpootNexEduToppers Learning Academy is an independent
+        educational platform and is not affiliated with, endorsed by,
+        or associated with NCERT. NCERT textbook names, chapters, and
+        curriculum topics belong exclusively to NCERT. All explanations,
+        examples, and practice material provided here are educational aids.
+        For official textbooks, visit
+        <a href="https://ncert.nic.in/" target="_blank"
+           rel="noopener noreferrer">ncert.nic.in</a>.
+      </p>
+
+      <p lang="hi">
+        RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+        इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+        पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+        यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
+        लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+        <a href="https://ncert.nic.in/" target="_blank"
+           rel="noopener noreferrer">ncert.nic.in</a> पर जाएँ।
+      </p>
+
+      <p class="footer-note">
+        Independent learning resource | स्वतंत्र शैक्षिक संसाधन
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    "use strict";
+
+const questions = [
+  // -------------------------------------------------------------
+  // 2-DIGIT SUBTRACTION QUESTIONS (1 to 15)
+  // -------------------------------------------------------------
+  {
+    question: "What is 58 - 24?",
+    hindi: "58 - 24 कितना है?",
+    options: ["32", "34", "36", "38"],
+    answer: 1,
+    explanation: "First subtract 58-20=38, then subtract 38-4=34",
+    explanationHindi: "पहले घटाएँ 58-20=38, फिर घटाएँ 38-4=34"
+  },
+  {
+    question: "What is 53 - 19?",
+    hindi: "53 - 19 कितना है?",
+    options: ["32", "34", "33", "35"],
+    answer: 1,
+    explanation: "First subtract 53-20=33, then add back extra 1, Now 33+1=34",
+    explanationHindi: "पहले घटाएँ 53-20=33, फिर अतिरिक्त 1 जोड़ें, अब 33+1=34"
+  },
+  {
+    question: "What is 67 - 25?",
+    hindi: "67 - 25 कितना है?",
+    options: ["41", "42", "43", "44"],
+    answer: 1,
+    explanation: "First subtract 67-20=47, then subtract 47-5=42",
+    explanationHindi: "पहले घटाएँ 67-20=47, फिर घटाएँ 47-5=42"
+  },
+  {
+    question: "What is 84 - 39?",
+    hindi: "84 - 39 कितना है?",
+    options: ["44", "45", "46", "43"],
+    answer: 1,
+    explanation: "First subtract 84-40=44, then add back extra 1, Now 44+1=45",
+    explanationHindi: "पहले घटाएँ 84-40=44, फिर अतिरिक्त 1 जोड़ें, अब 44+1=45"
+  },
+  {
+    question: "What is 76 - 32?",
+    hindi: "76 - 32 कितना है?",
+    options: ["42", "44", "46", "48"],
+    answer: 1,
+    explanation: "First subtract 76-30=46, then subtract 46-2=44",
+    explanationHindi: "पहले घटाएँ 76-30=46, फिर घटाएँ 46-2=44"
+  },
+  {
+    question: "What is 91 - 48?",
+    hindi: "91 - 48 कितना है?",
+    options: ["42", "43", "44", "41"],
+    answer: 1,
+    explanation: "First subtract 91-50=41, then add back extra 2, Now 41+2=43",
+    explanationHindi: "पहले घटाएँ 91-50=41, फिर अतिरिक्त 2 जोड़ें, अब 41+2=43"
+  },
+  {
+    question: "What is 65 - 23?",
+    hindi: "65 - 23 कितना है?",
+    options: ["41", "42", "43", "40"],
+    answer: 1,
+    explanation: "First subtract 65-20=45, then subtract 45-3=42",
+    explanationHindi: "पहले घटाएँ 65-20=45, फिर घटाएँ 45-3=42"
+  },
+  {
+    question: "What is 72 - 29?",
+    hindi: "72 - 29 कितना है?",
+    options: ["42", "43", "44", "41"],
+    answer: 1,
+    explanation: "First subtract 72-30=42, then add back extra 1, Now 42+1=43",
+    explanationHindi: "पहले घटाएँ 72-30=42, फिर अतिरिक्त 1 जोड़ें, अब 42+1=43"
+  },
+  {
+    question: "What is 88 - 45?",
+    hindi: "88 - 45 कितना है?",
+    options: ["42", "43", "44", "45"],
+    answer: 1,
+    explanation: "First subtract 88-40=48, then subtract 48-5=43",
+    explanationHindi: "पहले घटाएँ 88-40=48, फिर घटाएँ 48-5=43"
+  },
+  {
+    question: "What is 62 - 18?",
+    hindi: "62 - 18 कितना है?",
+    options: ["43", "44", "45", "42"],
+    answer: 1,
+    explanation: "First subtract 62-20=42, then add back extra 2, Now 42+2=44",
+    explanationHindi: "पहले घटाएँ 62-20=42, फिर अतिरिक्त 2 जोड़ें, अब 42+2=44"
+  },
+  {
+    question: "What is 95 - 34?",
+    hindi: "95 - 34 कितना है?",
+    options: ["60", "61", "62", "63"],
+    answer: 1,
+    explanation: "First subtract 95-30=65, then subtract 65-4=61",
+    explanationHindi: "पहले घटाएँ 95-30=65, फिर घटाएँ 65-4=61"
+  },
+  {
+    question: "What is 43 - 19?",
+    hindi: "43 - 19 कितना है?",
+    options: ["23", "24", "25", "22"],
+    answer: 1,
+    explanation: "First subtract 43-20=23, then add back extra 1, Now 23+1=24",
+    explanationHindi: "पहले घटाएँ 43-20=23, फिर अतिरिक्त 1 जोड़ें, अब 23+1=24"
+  },
+  {
+    question: "What is 79 - 26?",
+    hindi: "79 - 26 कितना है?",
+    options: ["52", "53", "54", "51"],
+    answer: 1,
+    explanation: "First subtract 79-20=59, then subtract 59-6=53",
+    explanationHindi: "पहले घटाएँ 79-20=59, फिर घटाएँ 59-6=53"
+  },
+  {
+    question: "What is 85 - 38?",
+    hindi: "85 - 38 कितना है?",
+    options: ["46", "47", "48", "45"],
+    answer: 1,
+    explanation: "First subtract 85-40=45, then add back extra 2, Now 45+2=47",
+    explanationHindi: "पहले घटाएँ 85-40=45, फिर अतिरिक्त 2 जोड़ें, अब 45+2=47"
+  },
+  {
+    question: "What is 56 - 21?",
+    hindi: "56 - 21 कितना है?",
+    options: ["34", "35", "36", "37"],
+    answer: 1,
+    explanation: "First subtract 56-20=36, then subtract 36-1=35",
+    explanationHindi: "पहले घटाएँ 56-20=36, फिर घटाएँ 36-1=35"
+  },
+
+  // -------------------------------------------------------------
+  // 3-DIGIT SUBTRACTION QUESTIONS (16 to 30)
+  // -------------------------------------------------------------
+  {
+    question: "What is 345 - 123?",
+    hindi: "345 - 123 कितना है?",
+    options: ["221", "222", "223", "224"],
+    answer: 1,
+    explanation: "First subtract 345-100=245, then subtract 245-20=225, then subtract 225-3=222",
+    explanationHindi: "पहले घटाएँ 345-100=245, फिर घटाएँ 245-20=225, फिर घटाएँ 225-3=222"
+  },
+  {
+    question: "What is 452 - 198?",
+    hindi: "452 - 198 कितना है?",
+    options: ["253", "254", "255", "252"],
+    answer: 1,
+    explanation: "First subtract 452-200=252, then add back extra 2, Now 252+2=254",
+    explanationHindi: "पहले घटाएँ 452-200=252, फिर अतिरिक्त 2 जोड़ें, अब 252+2=254"
+  },
+  {
+    question: "What is 567 - 234?",
+    hindi: "567 - 234 कितना है?",
+    options: ["332", "333", "334", "335"],
+    answer: 1,
+    explanation: "First subtract 567-200=367, then subtract 367-30=337, then subtract 337-4=333",
+    explanationHindi: "पहले घटाएँ 567-200=367, फिर घटाएँ 367-30=337, फिर घटाएँ 337-4=333"
+  },
+  {
+    question: "What is 640 - 299?",
+    hindi: "640 - 299 कितना है?",
+    options: ["340", "341", "342", "339"],
+    answer: 1,
+    explanation: "First subtract 640-300=340, then add back extra 1, Now 340+1=341",
+    explanationHindi: "पहले घटाएँ 640-300=340, फिर अतिरिक्त 1 जोड़ें, अब 340+1=341"
+  },
+  {
+    question: "What is 789 - 345?",
+    hindi: "789 - 345 कितना है?",
+    options: ["443", "444", "445", "446"],
+    answer: 1,
+    explanation: "First subtract 789-300=489, then subtract 489-40=449, then subtract 449-5=444",
+    explanationHindi: "पहले घटाएँ 789-300=489, फिर घटाएँ 489-40=449, फिर घटाएँ 449-5=444"
+  },
+  {
+    question: "What is 512 - 195?",
+    hindi: "512 - 195 कितना है?",
+    options: ["316", "317", "318", "315"],
+    answer: 1,
+    explanation: "First subtract 512-200=312, then add back extra 5, Now 312+5=317",
+    explanationHindi: "पहले घटाएँ 512-200=312, फिर अतिरिक्त 5 जोड़ें, अब 312+5=317"
+  },
+  {
+    question: "What is 856 - 421?",
+    hindi: "856 - 421 कितना है?",
+    options: ["434", "435", "436", "437"],
+    answer: 1,
+    explanation: "First subtract 856-400=456, then subtract 456-20=436, then subtract 436-1=435",
+    explanationHindi: "पहले घटाएँ 856-400=456, फिर घटाएँ 456-20=436, फिर घटाएँ 436-1=435"
+  },
+  {
+    question: "What is 730 - 390?",
+    hindi: "730 - 390 कितना है?",
+    options: ["339", "340", "341", "350"],
+    answer: 1,
+    explanation: "First subtract 730-400=330, then add back extra 10, Now 330+10=340",
+    explanationHindi: "पहले घटाएँ 730-400=330, फिर अतिरिक्त 10 जोड़ें, अब 330+10=340"
+  },
+  {
+    question: "What is 964 - 532?",
+    hindi: "964 - 532 कितना है?",
+    options: ["431", "432", "433", "434"],
+    answer: 1,
+    explanation: "First subtract 964-500=464, then subtract 464-30=434, then subtract 434-2=432",
+    explanationHindi: "पहले घटाएँ 964-500=464, फिर घटाएँ 464-30=434, फिर घटाएँ 434-2=432"
+  },
+  {
+    question: "What is 625 - 297?",
+    hindi: "625 - 297 कितना है?",
+    options: ["327", "328", "329", "326"],
+    answer: 1,
+    explanation: "First subtract 625-300=325, then add back extra 3, Now 325+3=328",
+    explanationHindi: "पहले घटाएँ 625-300=325, फिर अतिरिक्त 3 जोड़ें, अब 325+3=328"
+  },
+  {
+    question: "What is 478 - 215?",
+    hindi: "478 - 215 कितना है?",
+    options: ["262", "263", "264", "265"],
+    answer: 1,
+    explanation: "First subtract 478-200=278, then subtract 278-10=268, then subtract 268-5=263",
+    explanationHindi: "पहले घटाएँ 478-200=278, फिर घटाएँ 278-10=268, फिर घटाएँ 268-5=263"
+  },
+  {
+    question: "What is 810 - 495?",
+    hindi: "810 - 495 कितना है?",
+    options: ["314", "315", "316", "317"],
+    answer: 1,
+    explanation: "First subtract 810-500=310, then add back extra 5, Now 310+5=315",
+    explanationHindi: "पहले घटाएँ 810-500=310, फिर अतिरिक्त 5 जोड़ें, अब 310+5=315"
+  },
+  {
+    question: "What is 693 - 351?",
+    hindi: "693 - 351 कितना है?",
+    options: ["341", "342", "343", "344"],
+    answer: 1,
+    explanation: "First subtract 693-300=393, then subtract 393-50=343, then subtract 343-1=342",
+    explanationHindi: "पहले घटाएँ 693-300=393, फिर घटाएँ 393-50=343, फिर घटाएँ 343-1=342"
+  },
+  {
+    question: "What is 540 - 199?",
+    hindi: "540 - 199 कितना है?",
+    options: ["340", "341", "342", "339"],
+    answer: 1,
+    explanation: "First subtract 540-200=340, then add back extra 1, Now 340+1=341",
+    explanationHindi: "पहले घटाएँ 540-200=340, फिर अतिरिक्त 1 जोड़ें, अब 340+1=341"
+  },
+  {
+    question: "What is 755 - 230?",
+    hindi: "755 - 230 कितना है?",
+    options: ["524", "525", "526", "527"],
+    answer: 1,
+    explanation: "First subtract 755-200=555, then subtract 555-30=525",
+    explanationHindi: "पहले घटाएँ 755-200=555, फिर घटाएँ 555-30=525"
+  },
+
+  // -------------------------------------------------------------
+  // 4-DIGIT SUBTRACTION QUESTIONS (31 to 35)
+  // -------------------------------------------------------------
+  {
+    question: "What is 3,452 - 1,231?",
+    hindi: "3,452 - 1,231 कितना है?",
+    options: ["2,220", "2,221", "2,222", "2,223"],
+    answer: 1,
+    explanation: "First subtract 3452-1000=2452, then subtract 2452-200=2252, then subtract 2252-30=2222, then subtract 2222-1=2221",
+    explanationHindi: "पहले घटाएँ 3452-1000=2452, फिर घटाएँ 2452-200=2252, फिर घटाएँ 2252-30=2222, फिर घटाएँ 2222-1=2221"
+  },
+  {
+    question: "What is 4,675 - 1,998?",
+    hindi: "4,675 - 1,998 कितना है?",
+    options: ["2,676", "2,677", "2,678", "2,675"],
+    answer: 1,
+    explanation: "First subtract 4675-2000=2675, then add back extra 2, Now 2675+2=2677",
+    explanationHindi: "पहले घटाएँ 4675-2000=2675, फिर अतिरिक्त 2 जोड़ें, अब 2675+2=2677"
+  },
+  {
+    question: "What is 5,894 - 2,341?",
+    hindi: "5,894 - 2,341 कितना है?",
+    options: ["3,552", "3,553", "3,554", "3,555"],
+    answer: 1,
+    explanation: "First subtract 5894-2000=3894, then subtract 3894-300=3594, then subtract 3594-40=3554, then subtract 3554-1=3553",
+    explanationHindi: "पहले घटाएँ 5894-2000=3894, फिर घटाएँ 3894-300=3594, फिर घटाएँ 3594-40=3554, फिर घटाएँ 3554-1=3553"
+  },
+  {
+    question: "What is 6,500 - 2,995?",
+    hindi: "6,500 - 2,995 कितना है?",
+    options: ["3,504", "3,505", "3,506", "3,500"],
+    answer: 1,
+    explanation: "First subtract 6500-3000=3500, then add back extra 5, Now 3500+5=3505",
+    explanationHindi: "पहले घटाएँ 6500-3000=3500, फिर अतिरिक्त 5 जोड़ें, अब 3500+5=3505"
+  },
+  {
+    question: "What is 7,832 - 3,410?",
+    hindi: "7,832 - 3,410 कितना है?",
+    options: ["4,421", "4,422", "4,423", "4,420"],
+    answer: 1,
+    explanation: "First subtract 7832-3000=4832, then subtract 4832-400=4432, then subtract 4432-10=4422",
+    explanationHindi: "पहले घटाएँ 7832-3000=4832, फिर घटाएँ 4832-400=4432, फिर घटाएँ 4432-10=4422"
+  },
+
+  // -------------------------------------------------------------
+  // 5-DIGIT SUBTRACTION QUESTIONS (36 to 40)
+  // -------------------------------------------------------------
+  {
+    question: "What is 26,800 - 14,500?",
+    hindi: "26,800 - 14,500 कितना है?",
+    options: ["12,200", "12,300", "12,400", "12,100"],
+    answer: 1,
+    explanation: "First subtract 26800-14000=12800, then subtract 12800-500=12300",
+    explanationHindi: "पहले घटाएँ 26800-14000=12800, फिर घटाएँ 12800-500=12300"
+  },
+  {
+    question: "What is 45,000 - 19,990?",
+    hindi: "45,000 - 19,990 कितना है?",
+    options: ["25,000", "25,010", "25,020", "24,990"],
+    answer: 1,
+    explanation: "First subtract 45000-20000=25000, then add back extra 10, Now 25000+10=25010",
+    explanationHindi: "पहले घटाएँ 45000-20000=25000, फिर अतिरिक्त 10 जोड़ें, अब 25000+10=25010"
+  },
+  {
+    question: "What is 58,950 - 23,410?",
+    hindi: "58,950 - 23,410 कितना है?",
+    options: ["35,530", "35,540", "35,550", "35,520"],
+    answer: 1,
+    explanation: "First subtract 58950-23000=35950, then subtract 35950-400=35550, then subtract 35550-10=35540",
+    explanationHindi: "पहले घटाएँ 58950-23000=35950, फिर घटाएँ 35950-400=35550, फिर घटाएँ 35550-10=35540"
+  },
+  {
+    question: "What is 30,200 - 19,995?",
+    hindi: "30,200 - 19,995 कितना है?",
+    options: ["10,204", "10,205", "10,206", "10,200"],
+    answer: 1,
+    explanation: "First subtract 30200-20000=10200, then add back extra 5, Now 10200+5=10205",
+    explanationHindi: "पहले घटाएँ 30200-20000=10200, फिर अतिरिक्त 5 जोड़ें, अब 10200+5=10205"
+  },
+  {
+    question: "What is 50,900 - 20,400?",
+    hindi: "50,900 - 20,400 कितना है?",
+    options: ["30,400", "30,500", "30,600", "30,300"],
+    answer: 1,
+    explanation: "First subtract 50900-20000=30900, then subtract 30900-400=30500",
+    explanationHindi: "पहले घटाएँ 50900-20000=30900, फिर घटाएँ 30900-400=30500"
+  }
+];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+
+    const questionNumber = document.getElementById("questionNumber");
+    const questionText = document.getElementById("questionText");
+    const questionHindi = document.getElementById("questionHindi");
+    const optionsContainer = document.getElementById("optionsContainer");
+    const feedbackBox = document.getElementById("feedbackBox");
+    const feedbackTitle = document.getElementById("feedbackTitle");
+    const feedbackEnglish = document.getElementById("feedbackEnglish");
+    const feedbackHindi = document.getElementById("feedbackHindi");
+    const nextButton = document.getElementById("nextButton");
+    const scoreDisplay = document.getElementById("scoreDisplay");
+    const progressText = document.getElementById("progressText");
+    const progressFill = document.getElementById("progressFill");
+    const progressBar = document.getElementById("progressBar");
+    const quizPanel = document.getElementById("quizPanel");
+    const resultPanel = document.getElementById("resultPanel");
+    const restartButton = document.getElementById("restartButton");
+
+    function updateProgress() {
+      const completed = currentQuestion + (answered ? 1 : 0);
+      const percentage = (completed / questions.length) * 100;
+
+      progressFill.style.width = percentage + "%";
+      progressText.textContent = completed + " / " + questions.length;
+      progressBar.setAttribute("aria-valuenow", String(completed));
+      scoreDisplay.textContent = score + " / " + questions.length;
+    }
+
+    function renderQuestion() {
+      answered = false;
+
+      const q = questions[currentQuestion];
+
+      questionNumber.textContent =
+        "Question " + (currentQuestion + 1) + " of " + questions.length;
+
+      questionText.textContent = q.question;
+      questionHindi.textContent = q.hindi;
+
+      optionsContainer.replaceChildren();
+      feedbackBox.className = "feedback";
+      feedbackTitle.textContent = "";
+      feedbackEnglish.textContent = "";
+      feedbackHindi.textContent = "";
+      nextButton.style.display = "none";
+
+      q.options.forEach(function(option, index) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option-button";
+        button.textContent =
+          String.fromCharCode(65 + index) + ". " + option;
+        button.addEventListener("click", function() {
+          checkAnswer(index);
+        });
+        optionsContainer.appendChild(button);
+      });
+
+      updateProgress();
+    }
+
+    function checkAnswer(selectedIndex) {
+      if (answered) return;
+
+      answered = true;
+
+      const q = questions[currentQuestion];
+      const buttons = optionsContainer.querySelectorAll(".option-button");
+      const isCorrect = selectedIndex === q.answer;
+
+      buttons.forEach(function(button, index) {
+        button.disabled = true;
+
+        if (index === q.answer) {
+          button.classList.add("correct");
+        }
+
+        if (index === selectedIndex && !isCorrect) {
+          button.classList.add("wrong");
+        }
+      });
+
+      if (isCorrect) {
+        score++;
+        feedbackBox.className = "feedback correct-feedback";
+        feedbackTitle.textContent = "Correct Answer! | सही उत्तर!";
+        feedbackHindi.textContent = "बहुत अच्छा! आपका उत्तर सही है।";
+      } else {
+        feedbackBox.className = "feedback wrong-feedback";
+        feedbackTitle.textContent = "Wrong Answer | गलत उत्तर";
+        feedbackHindi.textContent =
+          "सही उत्तर हरे रंग में दिखाया गया है।";
+      }
+
+      feedbackEnglish.textContent = q.explanation;
+      feedbackHindi.textContent = q.explanationHindi;
+
+      updateProgress();
+      nextButton.style.display = "inline-block";
+
+      if (currentQuestion === questions.length - 1) {
+        nextButton.textContent = "See Final Result | अंतिम परिणाम देखें";
+      } else {
+        nextButton.textContent = "Next Question | अगला प्रश्न";
+      }
+    }
+
+    function showResult() {
+      quizPanel.style.display = "none";
+      resultPanel.style.display = "block";
+
+      document.getElementById("finalScore").textContent =
+        score + " / " + questions.length;
+
+      document.getElementById("finalScoreHindi").textContent =
+        "आपका स्कोर " + questions.length + " में से " + score + " है।";
+
+      let message;
+      let messageHindi;
+
+      if (score >= 15) {
+        message = "Very good work! Review the questions you missed to strengthen your concepts.";
+        messageHindi = "बहुत अच्छा! अपनी अवधारणाओं को मजबूत करने के लिए छूटे हुए प्रश्नों को दोहराएँ।";
+      } else {
+        message = "Keep practising! Revise your math basics and try again.";
+        messageHindi = "अभ्यास जारी रखें! गणित की मूल बातों को दोहराएँ और फिर से प्रयास करें।";
+      }
+
+      document.getElementById("resultMessage").textContent = message;
+      document.getElementById("resultMessageHindi").textContent = messageHindi;
+
+      progressFill.style.width = "100%";
+      progressText.textContent = questions.length + " / " + questions.length;
+      progressBar.setAttribute("aria-valuenow", String(questions.length));
+      scoreDisplay.textContent = score + " / " + questions.length;
+    }
+
+    nextButton.addEventListener("click", function() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    restartButton.addEventListener("click", function() {
+      currentQuestion = 0;
+      score = 0;
+      answered = false;
+      resultPanel.style.display = "none";
+      quizPanel.style.display = "block";
+      renderQuestion();
+    });
+
+    // Initial render call
+    renderQuestion();
+  </script>
+
+</body>
+</html>
