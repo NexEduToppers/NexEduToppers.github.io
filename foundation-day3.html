@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Day 3 Exercise: Fast Multiplication Rules and Mental Math Practice Quiz.">
+
+  <title>Day 3 Exercise - RawaRajpootNexEduToppers</title>
+
+  <style>
+    :root {
+      --primary: #174ea6;
+      --secondary: #087f8c;
+      --light: #eef6ff;
+      --text: #243247;
+      --muted: #5d6b7c;
+      --white: #ffffff;
+      --border: #dce6f2;
+      --green: #e8f7ed;
+      --green-text: #176534;
+      --red: #fdecec;
+      --red-text: #a32121;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #eef4fb;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #174ea6, #087f8c);
+      color: white;
+      text-align: center;
+      padding: 28px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(23px, 5vw, 34px);
+    }
+
+    header p {
+      margin: 5px 0;
+    }
+
+    .container {
+      width: min(100% - 24px, 800px);
+      margin: 22px auto;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 14px rgba(26, 53, 87, 0.06);
+    }
+
+    h3 {
+      color: var(--primary);
+      margin-top: 0;
+      font-size: 23px;
+    }
+
+    .hindi {
+      color: #45566b;
+      margin-top: 5px;
+    }
+
+    .quiz-info {
+      background: var(--light);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 18px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 12px;
+      background: #dbe5f1;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 12px 0;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      background: #087f8c;
+      transition: width 0.25s ease;
+    }
+
+    .question-number {
+      color: var(--secondary);
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .question-text {
+      font-size: 19px;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .option-button {
+      width: 100%;
+      text-align: left;
+      font-size: 16px;
+      font-family: inherit;
+      color: var(--text);
+      background: #f8fbff;
+      border: 2px solid #d7e2f0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      line-height: 1.5;
+    }
+
+    .option-button:hover:not(:disabled) {
+      background: #eaf3ff;
+      border-color: #8eb4e8;
+    }
+
+    .option-button:focus-visible,
+    .action-button:focus-visible,
+    .back-link:focus-visible {
+      outline: 3px solid #f0ad4e;
+      outline-offset: 3px;
+    }
+
+    .option-button:disabled {
+      cursor: default;
+      opacity: 1;
+    }
+
+    .option-button.correct {
+      background: var(--green);
+      border-color: #42a66b;
+      color: var(--green-text);
+    }
+
+    .option-button.wrong {
+      background: var(--red);
+      border-color: #d9534f;
+      color: var(--red-text);
+    }
+
+    .feedback {
+      display: none;
+      border-radius: 10px;
+      padding: 14px;
+      margin-top: 18px;
+    }
+
+    .feedback.correct-feedback {
+      display: block;
+      background: var(--green);
+      color: var(--green-text);
+    }
+
+    .feedback.wrong-feedback {
+      display: block;
+      background: var(--red);
+      color: var(--red-text);
+    }
+
+    .feedback h3 {
+      margin: 0 0 5px;
+      font-size: 18px;
+    }
+
+    .action-button {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 9px;
+      padding: 12px 18px;
+      margin-top: 16px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .action-button:hover {
+      background: #103d84;
+    }
+
+    .action-button:disabled {
+      background: #8a9bb3;
+      cursor: not-allowed;
+    }
+
+    #nextButton {
+      display: none;
+    }
+
+    #resultPanel {
+      display: none;
+      text-align: center;
+    }
+
+    .score-number {
+      color: var(--primary);
+      font-size: 34px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .result-message {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .back-link {
+      display: inline-block;
+      background: var(--light);
+      color: var(--primary);
+      text-decoration: none;
+      border: 1px solid #c9dcf5;
+      border-radius: 9px;
+      padding: 11px 16px;
+      margin: 8px 5px 0;
+      font-weight: bold;
+    }
+
+    .back-link:hover {
+      background: #dcecff;
+    }
+
+    .site-disclaimer {
+      background: #e9eef5;
+      border-top: 1px solid #cbd5e1;
+      padding: 24px 16px;
+      color: #344256;
+      font-size: 14px;
+    }
+
+    .site-disclaimer h3 {
+      font-size: 19px;
+    }
+
+    .site-disclaimer a {
+      color: #174ea6;
+      overflow-wrap: anywhere;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin: 15px 0 0;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 23px 12px;
+      }
+
+      .card {
+        padding: 17px;
+      }
+
+      h3 {
+        font-size: 21px;
+      }
+
+      .question-text {
+        font-size: 18px;
+      }
+
+      .option-button {
+        padding: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+    <p>Day 3 | Exercise (Q1–Q40)</p>
+    <p>Learn Fast Multiplication and Practice Quiz</p>
+    <p lang="hi">तेजी से गुणा करना सीखें और प्रश्नोत्तरी से अभ्यास करें</p>
+  </header>
+
+  <main class="container">
+
+    <section class="card">
+      <h2>बच्चों, नीचे दिये गये गुणा (Multiplication) के जादुई नियमों को ध्यान से पढ़ें। इन तरीकों से आप बिना कॉपी और पेंसिल के ही सिर्फ अपने दिमाग में बड़ी से बड़ी संख्याओं का गुणा करके उत्तर बता सकेंगे।</h2>
+      
+      <h2>Rule 1: Break Numbers Apart (संख्याओं को तोड़कर गुणा करना)</h2>
+      <p>बड़ी संख्या को Tens (दहाई) और Ones (इकाई) में तोड़ लें, फिर अलग-अलग गुणा करके जोड़ दें।</p>
+      <h2>Example: 24 × 6 = ?</h2>
+      <p>Break 24 into 20+4</p>
+      <p>Now Multiply Tens: 20 × 6 = 120</p>
+      <p>Now Multiply Ones: 4 × 6 = 24</p>
+      <p>Now Add Both Results: 120 + 24, Answer = 144</p>
+
+      <h2>Rule 2: Multiplying by 5, 25, 50 (आसान ट्रिक्स)</h2>
+      <p><b>5 से गुणा:</b> संख्या का आधा करें और आगे एक 0 लगा दें। (e.g., 48 × 5 → 48 का आधा 24 → 240)</p>
+      <p><b>25 से गुणा:</b> संख्या को 4 से भाग दें और आगे दो 0 लगा दें। (e.g., 36 × 25 → 36÷4=9 → 900)</p>
+
+      <h2>Rule 3: Compensation Method (समायोजन की विधि - 9, 19, 99 से गुणा)</h2>
+      <h2>Example: 32 × 9 = ?</h2>
+      <p>Make 9 into 10: 32 × 10 = 320</p>
+      <p>Now Subtract 32 once: 320 - 32, Answer = 288</p>
+
+      <h2>Rule 4: Multiplying by 11 (11 से गुणा की जादुई ट्रिक)</h2>
+      <h2>Example: 43 × 11 = ?</h2>
+      <p>43 के दोनों अंकों को अलग लिखें: 4 _ 3</p>
+      <p>दोनों को जोड़कर बीच में लिखें (4+3=7): Answer = 473</p>
+
+      <h2>Rule 5: Zeros Trick (10, 100, 1000 से गुणा)</h2>
+      <p>संख्या के आगे 1 के बाद जितने 0 हों, उतने 0 लगा दें। (e.g., 45 × 10 = 450, 34 × 100 = 3400)</p>
+
+      <h2>Rule 6: Repeating Trick (101, 1001, 10001 से गुणा)</h2>
+      <p>जब किसी संख्या को 101, 1001 या 10001 से गुणा करते हैं, तो वह संख्या 2 बार repeat हो जाती है!</p>
+      <p>2-Digit: 45 × 101 = 4545</p>
+      <p>3-Digit: 324 × 1001 = 324324</p>
+      <p>4-Digit: 4582 × 10001 = 45824582</p>
+
+      <h2>Rule 7: Base 100 Trick (100 के पास की संख्याओं का गुणा)</h2>
+      <h2>Example: 97 × 98 = ?</h2>
+      <p>97 (100 से 3 कम) & 98 (100 से 2 कम)</p>
+      <p>97 - 2 = 95 (पहला भाग)</p>
+      <p>3 × 2 = 06 (दूसरा भाग)</p>
+      <p>Answer = 9506</p>
+
+      <h2>Rule 8: Same Tens & Ending in 5 (अंत में 5 वाली समान दहाई संख्या)</h2>
+      <h2>Example: 45 × 45 = ?</h2>
+      <p>4 को अगली संख्या 5 से गुणा करें: 4 × 5 = 20</p>
+      <p>अंत में हमेशा 25 लगा दें: Answer = 2025</p>
+
+      <h3>अब नीचे दी गई प्रश्नोत्तरी से गुणा करने का अभ्यास करें</h3>
+
+      <div class="quiz-info">
+        <strong>Questions:</strong> 40
+        <span lang="hi"> | प्रश्न: 40</span>
+        <br>
+        <strong>Score:</strong>
+        <span id="scoreDisplay" aria-live="polite">0 / 40</span>
+        <br>
+        <strong>Progress:</strong>
+        <span id="progressText">0 / 40</span>
+        <div
+          class="progress-track"
+          role="progressbar"
+          aria-label="Quiz progress"
+          aria-valuemin="0"
+          aria-valuemax="40"
+          aria-valuenow="0"
+          id="progressBar"
+        >
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card" id="quizPanel">
+      <div class="question-number" id="questionNumber">
+        Question 1 of 40
+      </div>
+
+      <div class="question-text" id="questionText"></div>
+      <p class="hindi" lang="hi" id="questionHindi"></p>
+
+      <div class="options" id="optionsContainer"></div>
+
+      <div class="feedback" id="feedbackBox" aria-live="polite">
+        <h3 id="feedbackTitle"></h3>
+        <p id="feedbackEnglish"></p>
+        <p class="hindi" lang="hi" id="feedbackHindi"></p>
+      </div>
+
+      <button class="action-button" id="nextButton" type="button">
+        Next Question | अगला प्रश्न
+      </button>
+    </section>
+
+    <section class="card" id="resultPanel" aria-live="polite">
+      <h3>Quiz Completed! | प्रश्नोत्तरी पूरी हुई!</h3>
+      <p>Your final score is:</p>
+      <p class="score-number" id="finalScore">0 / 40</p>
+      <p class="hindi" lang="hi" id="finalScoreHindi"></p>
+      <p class="result-message" id="resultMessage"></p>
+      <p class="hindi" lang="hi" id="resultMessageHindi"></p>
+
+      <!-- Button Action Container -->
+      <div id="resultActions" style="margin-top: 20px; display: flex; flex-direction: column; gap: 12px;">
+        <button class="action-button" id="restartButton" type="button" style="margin-top: 0; width: 100%;">
+          Try Again | फिर से प्रयास करें
+        </button>
+        
+        <a class="back-link" href="class4-daily-exercise-maths-foundation.html" style="text-align: center; margin: 0; display: block;">
+          Back to Foundation Level Practice Days | फाउंडेशन लेवल अभ्यास दिवसों पर वापस जाएँ
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="site-disclaimer">
+      <h3>Disclaimer | अस्वीकरण</h3>
+
+      <p>
+        RawaRajpootNexEduToppers Learning Academy is an independent
+        educational platform and is not affiliated with, endorsed by,
+        or associated with NCERT. NCERT textbook names, chapters, and
+        curriculum topics belong exclusively to NCERT. All explanations,
+        examples, and practice material provided here are educational aids.
+        For official textbooks, visit
+        <a href="https://ncert.nic.in/" target="_blank"
+           rel="noopener noreferrer">ncert.nic.in</a>.
+      </p>
+
+      <p lang="hi">
+        RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है।
+        इसका NCERT से कोई आधिकारिक संबंध या समर्थन नहीं है। NCERT की
+        पाठ्यपुस्तकों, अध्यायों और पाठ्यक्रम से संबंधित नाम NCERT के हैं।
+        यहाँ दी गई व्याख्याएँ, उदाहरण और अभ्यास सामग्री शैक्षिक सहायता के
+        लिए हैं। आधिकारिक पाठ्यपुस्तकों के लिए
+        <a href="https://ncert.nic.in/" target="_blank"
+           rel="noopener noreferrer">ncert.nic.in</a> पर जाएँ।
+      </p>
+
+      <p class="footer-note">
+        Independent learning resource | स्वतंत्र शैक्षिक संसाधन
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    "use strict";
+
+const questions = [
+  // -------------------------------------------------------------
+  // 2-DIGIT MULTIPLICATION QUESTIONS (1 to 15)
+  // -------------------------------------------------------------
+  {
+    question: "What is 24 × 6?",
+    hindi: "24 × 6 कितना है?",
+    options: ["134", "144", "154", "124"],
+    answer: 1,
+    explanation: "First multiply 20×6=120, then multiply 4×6=24, Now add 120+24=144",
+    explanationHindi: "पहले गुणा करें 20×6=120, फिर गुणा करें 4×6=24, अब जोड़ें 120+24=144"
+  },
+  {
+    question: "What is 43 × 11?",
+    hindi: "43 × 11 कितना है?",
+    options: ["463", "473", "483", "453"],
+    answer: 1,
+    explanation: "Write 4 and 3 apart, add 4+3=7 in middle, Result = 473",
+    explanationHindi: "4 और 3 को अलग लिखें, बीच में 4+3=7 लिखें, उत्तर = 473"
+  },
+  {
+    question: "What is 32 × 9?",
+    hindi: "32 × 9 कितना है?",
+    options: ["278", "288", "298", "268"],
+    answer: 1,
+    explanation: "First multiply 32×10=320, then subtract 32, Now 320-32=288",
+    explanationHindi: "पहले गुणा करें 32×10=320, फिर 32 घटाएँ, अब 320-32=288"
+  },
+  {
+    question: "What is 48 × 5?",
+    hindi: "48 × 5 कितना है?",
+    options: ["230", "240", "250", "260"],
+    answer: 1,
+    explanation: "Half of 48 is 24, put 0 after it, Result = 240",
+    explanationHindi: "48 का आधा 24 होता है, आगे 0 लगाएँ, उत्तर = 240"
+  },
+  {
+    question: "What is 35 × 11?",
+    hindi: "35 × 11 कितना है?",
+    options: ["375", "385", "395", "365"],
+    answer: 1,
+    explanation: "Write 3 and 5 apart, add 3+5=8 in middle, Result = 385",
+    explanationHindi: "3 और 5 को अलग लिखें, बीच में 3+5=8 लिखें, उत्तर = 385"
+  },
+  {
+    question: "What is 25 × 25?",
+    hindi: "25 × 25 कितना है?",
+    options: ["615", "625", "635", "645"],
+    answer: 1,
+    explanation: "Multiply 2 by next number 3 (2×3=6), add 25 at end, Result = 625",
+    explanationHindi: "2 को अगली संख्या 3 से गुणा करें (2×3=6), अंत में 25 लगाएँ = 625"
+  },
+  {
+    question: "What is 45 × 45?",
+    hindi: "45 × 45 कितना है?",
+    options: ["2015", "2025", "2035", "2005"],
+    answer: 1,
+    explanation: "Multiply 4 by next number 5 (4×5=20), add 25 at end, Result = 2025",
+    explanationHindi: "4 को अगली संख्या 5 से गुणा करें (4×5=20), अंत में 25 लगाएँ = 2025"
+  },
+  {
+    question: "What is 15 × 6?",
+    hindi: "15 × 6 कितना है?",
+    options: ["80", "90", "100", "85"],
+    answer: 1,
+    explanation: "First multiply 10×6=60, then multiply 5×6=30, Now add 60+30=90",
+    explanationHindi: "पहले गुणा करें 10×6=60, फिर गुणा करें 5×6=30, अब जोड़ें 60+30=90"
+  },
+  {
+    question: "What is 45 × 101?",
+    hindi: "45 × 101 कितना है?",
+    options: ["4505", "4545", "4555", "4445"],
+    answer: 1,
+    explanation: "2-digit number multiplied by 101 repeats twice, Result = 4545",
+    explanationHindi: "2-अंक की संख्या 101 से गुणा करने पर 2 बार दोहराती है = 4545"
+  },
+  {
+    question: "What is 36 × 25?",
+    hindi: "36 × 25 कितना है?",
+    options: ["800", "900", "950", "850"],
+    answer: 1,
+    explanation: "Divide 36 by 4 (36÷4=9), put two 0s after it, Result = 900",
+    explanationHindi: "36 को 4 से भाग दें (36÷4=9), आगे दो 0 लगाएँ = 900"
+  },
+  {
+    question: "What is 52 × 11?",
+    hindi: "52 × 11 कितना है?",
+    options: ["562", "572", "582", "552"],
+    answer: 1,
+    explanation: "Write 5 and 2 apart, add 5+2=7 in middle, Result = 572",
+    explanationHindi: "5 और 2 को अलग लिखें, बीच में 5+2=7 लिखें, उत्तर = 572"
+  },
+  {
+    question: "What is 18 × 9?",
+    hindi: "18 × 9 कितना है?",
+    options: ["152", "162", "172", "160"],
+    answer: 1,
+    explanation: "First multiply 18×10=180, then subtract 18, Now 180-18=162",
+    explanationHindi: "पहले गुणा करें 18×10=180, फिर 18 घटाएँ, अब 180-18=162"
+  },
+  {
+    question: "What is 64 × 5?",
+    hindi: "64 × 5 कितना है?",
+    options: ["310", "320", "330", "300"],
+    answer: 1,
+    explanation: "Half of 64 is 32, put 0 after it, Result = 320",
+    explanationHindi: "64 का आधा 32 होता है, आगे 0 लगाएँ, उत्तर = 320"
+  },
+  {
+    question: "What is 65 × 65?",
+    hindi: "65 × 65 कितना है?",
+    options: ["4215", "4225", "4235", "4125"],
+    answer: 1,
+    explanation: "Multiply 6 by next number 7 (6×7=42), add 25 at end, Result = 4225",
+    explanationHindi: "6 को अगली संख्या 7 से गुणा करें (6×7=42), अंत में 25 लगाएँ = 4225"
+  },
+  {
+    question: "What is 72 × 101?",
+    hindi: "72 × 101 कितना है?",
+    options: ["7202", "7272", "7227", "7172"],
+    answer: 1,
+    explanation: "2-digit number multiplied by 101 repeats twice, Result = 7272",
+    explanationHindi: "2-अंक की संख्या 101 से गुणा करने पर 2 बार दोहराती है = 7272"
+  },
+
+  // -------------------------------------------------------------
+  // 3-DIGIT MULTIPLICATION QUESTIONS (16 to 30)
+  // -------------------------------------------------------------
+  {
+    question: "What is 123 × 3?",
+    hindi: "123 × 3 कितना है?",
+    options: ["368", "369", "379", "359"],
+    answer: 1,
+    explanation: "Multiply 100×3=300, 20×3=60, 3×3=9, Now add 300+60+9=369",
+    explanationHindi: "गुणा करें 100×3=300, 20×3=60, 3×3=9, अब जोड़ें 300+60+9=369"
+  },
+  {
+    question: "What is 324 × 1001?",
+    hindi: "324 × 1001 कितना है?",
+    options: ["324001", "324324", "324100", "323324"],
+    answer: 1,
+    explanation: "3-digit number multiplied by 1001 repeats twice, Result = 324324",
+    explanationHindi: "3-अंक की संख्या 1001 से गुणा करने पर 2 बार दोहराती है = 324324"
+  },
+  {
+    question: "What is 140 × 5?",
+    hindi: "140 × 5 कितना है?",
+    options: ["600", "700", "800", "650"],
+    answer: 1,
+    explanation: "Half of 140 is 70, put 0 after it, Result = 700",
+    explanationHindi: "140 का आधा 70 होता है, आगे 0 लगाएँ, उत्तर = 700"
+  },
+  {
+    question: "What is 97 × 98?",
+    hindi: "97 × 98 कितना है?",
+    options: ["9505", "9506", "9507", "9406"],
+    answer: 1,
+    explanation: "97 is -3 and 98 is -2 from 100. 97-2=95, (-3)×(-2)=06, Result = 9506",
+    explanationHindi: "97 (100-3) और 98 (100-2)। 97-2=95, 3×2=06, उत्तर = 9506"
+  },
+  {
+    question: "What is 250 × 4?",
+    hindi: "250 × 4 कितना है?",
+    options: ["900", "1000", "1100", "1050"],
+    answer: 1,
+    explanation: "Double of 250 is 500, double of 500 is 1000, Result = 1000",
+    explanationHindi: "250 का दोगुना 500, 500 का दोगुना 1000 = 1000"
+  },
+  {
+    question: "What is 512 × 10?",
+    hindi: "512 × 10 कितना है?",
+    options: ["5125", "5120", "5102", "5210"],
+    answer: 1,
+    explanation: "Put one 0 after 512, Result = 5120",
+    explanationHindi: "512 के आगे एक 0 लगाएँ, उत्तर = 5120"
+  },
+  {
+    question: "What is 615 × 1001?",
+    hindi: "615 × 1001 कितना है?",
+    options: ["615015", "615615", "615100", "616615"],
+    answer: 1,
+    explanation: "3-digit number multiplied by 1001 repeats twice, Result = 615615",
+    explanationHindi: "3-अंक की संख्या 1001 से गुणा करने पर 2 बार दोहराती है = 615615"
+  },
+  {
+    question: "What is 105 × 105?",
+    hindi: "105 × 105 कितना है?",
+    options: ["11015", "11025", "11035", "10025"],
+    answer: 1,
+    explanation: "10×11=110, add 25 at end, Result = 11025",
+    explanationHindi: "10 को अगली संख्या 11 से गुणा करें (10×11=110), अंत में 25 लगाएँ = 11025"
+  },
+  {
+    question: "What is 210 × 5?",
+    hindi: "210 × 5 कितना है?",
+    options: ["1040", "1050", "1060", "1030"],
+    answer: 1,
+    explanation: "Half of 210 is 105, put 0 after it, Result = 1050",
+    explanationHindi: "210 का आधा 105 होता है, आगे 0 लगाएँ, उत्तर = 1050"
+  },
+  {
+    question: "What is 95 × 96?",
+    hindi: "95 × 96 कितना है?",
+    options: ["9115", "9120", "9125", "9020"],
+    answer: 1,
+    explanation: "95 (-5) & 96 (-4). 95-4=91, (-5)×(-4)=20, Result = 9120",
+    explanationHindi: "95 (100-5) और 96 (100-4)। 95-4=91, 5×4=20, उत्तर = 9120"
+  },
+  {
+    question: "What is 300 × 15?",
+    hindi: "300 × 15 कितना है?",
+    options: ["4400", "4500", "4600", "4300"],
+    answer: 1,
+    explanation: "Multiply 3×15=45, put two 0s after it, Result = 4500",
+    explanationHindi: "3×15=45 गुणा करें, आगे दो 0 लगाएँ = 4500"
+  },
+  {
+    question: "What is 812 × 100?",
+    hindi: "812 × 100 कितना है?",
+    options: ["8120", "81200", "812000", "81020"],
+    answer: 1,
+    explanation: "Put two 0s after 812, Result = 81200",
+    explanationHindi: "812 के आगे दो 0 लगाएँ, उत्तर = 81200"
+  },
+  {
+    question: "What is 115 × 101?",
+    hindi: "115 × 101 कितना है?",
+    options: ["11605", "11615", "11515", "11505"],
+    answer: 1,
+    explanation: "115×(100+1) = 11500+115 = 11615",
+    explanationHindi: "115×(100+1) = 11500+115 = 11615"
+  },
+  {
+    question: "What is 440 × 5?",
+    hindi: "440 × 5 कितना है?",
+    options: ["2100", "2200", "2300", "2000"],
+    answer: 1,
+    explanation: "Half of 440 is 220, put 0 after it, Result = 2200",
+    explanationHindi: "440 का आधा 220 होता है, आगे 0 लगाएँ, उत्तर = 2200"
+  },
+  {
+    question: "What is 99 × 99?",
+    hindi: "99 × 99 कितना है?",
+    options: ["9800", "9801", "9802", "9701"],
+    answer: 1,
+    explanation: "99 is -1 from 100. 99-1=98, (-1)×(-1)=01, Result = 9801",
+    explanationHindi: "99 (100-1)। 99-1=98, 1×1=01, उत्तर = 9801"
+  },
+
+  // -------------------------------------------------------------
+  // 4-DIGIT MULTIPLICATION QUESTIONS (31 to 35)
+  // -------------------------------------------------------------
+  {
+    question: "What is 4,582 × 10,001?",
+    hindi: "4,582 × 10,001 कितना है?",
+    options: ["45820001", "45824582", "45821001", "45820000"],
+    answer: 1,
+    explanation: "4-digit number multiplied by 10001 repeats twice, Result = 45824582",
+    explanationHindi: "4-अंक की संख्या 10001 से गुणा करने पर 2 बार दोहराती है = 45824582"
+  },
+  {
+    question: "What is 1,200 × 5?",
+    hindi: "1,200 × 5 कितना है?",
+    options: ["5,000", "6,000", "7,000", "6,500"],
+    answer: 1,
+    explanation: "Half of 1200 is 600, put 0 after it, Result = 6000",
+    explanationHindi: "1200 का आधा 600 होता है, आगे 0 लगाएँ, उत्तर = 6000"
+  },
+  {
+    question: "What is 2,345 × 10?",
+    hindi: "2,345 × 10 कितना है?",
+    options: ["23,405", "23,450", "23,540", "23,455"],
+    answer: 1,
+    explanation: "Put one 0 after 2345, Result = 23450",
+    explanationHindi: "2345 के आगे एक 0 लगाएँ, उत्तर = 23450"
+  },
+  {
+    question: "What is 7,812 × 1000?",
+    hindi: "7,812 × 1000 कितना है?",
+    options: ["7,812,00", "7,812,000", "7,812,0000", "7,810,000"],
+    answer: 1,
+    explanation: "Put three 0s after 7812, Result = 7812000",
+    explanationHindi: "7812 के आगे तीन 0 लगाएँ, उत्तर = 7812000"
+  },
+  {
+    question: "What is 1,234 × 10,001?",
+    hindi: "1,234 × 10,001 कितना है?",
+    options: ["12340001", "12341234", "12344321", "12341000"],
+    answer: 1,
+    explanation: "4-digit number multiplied by 10001 repeats twice, Result = 12341234",
+    explanationHindi: "4-अंक की संख्या 10001 से गुणा करने पर 2 बार दोहराती है = 12341234"
+  },
+
+  // -------------------------------------------------------------
+  // 5-DIGIT MULTIPLICATION QUESTIONS (36 to 40)
+  // -------------------------------------------------------------
+  {
+    question: "What is 12,000 × 10?",
+    hindi: "12,000 × 10 कितना है?",
+    options: ["120,000", "120,000", "1,200,000", "12,0000"],
+    answer: 0,
+    explanation: "Put one 0 after 12000, Result = 120000",
+    explanationHindi: "12000 के आगे एक 0 लगाएँ, उत्तर = 120000"
+  },
+  {
+    question: "What is 24,000 × 5?",
+    hindi: "24,000 × 5 कितना है?",
+    options: ["110,000", "120,000", "130,000", "100,000"],
+    answer: 1,
+    explanation: "Half of 24000 is 12000, put 0 after it, Result = 120000",
+    explanationHindi: "24000 का आधा 12000 होता है, आगे 0 लगाएँ, उत्तर = 120000"
+  },
+  {
+    question: "What is 15,000 × 100?",
+    hindi: "15,000 × 100 कितना है?",
+    options: ["1,400,000", "1,500,000", "1,600,000", "150,000"],
+    answer: 1,
+    explanation: "Put two 0s after 15000, Result = 1500000",
+    explanationHindi: "15000 के आगे दो 0 लगाएँ, उत्तर = 1500000"
+  },
+  {
+    question: "What is 50,000 × 20?",
+    hindi: "50,000 × 20 कितना है?",
+    options: ["900,000", "1,000,000", "1,100,000", "100,000"],
+    answer: 1,
+    explanation: "Multiply 5×2=10, then add all 5 zeros, Result = 1000000",
+    explanationHindi: "5×2=10 गुणा करें, फिर कुल 5 शून्य लगाएँ, उत्तर = 1000000"
+  },
+  {
+    question: "What is 30,000 × 30?",
+    hindi: "30,000 × 30 कितना है?",
+    options: ["800,000", "900,000", "1,000,000", "90,000"],
+    answer: 1,
+    explanation: "Multiply 3×3=9, then add all 5 zeros, Result = 900000",
+    explanationHindi: "3×3=9 गुणा करें, फिर कुल 5 शून्य लगाएँ, उत्तर = 900000"
+  }
+];
+
+    let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+
+    const questionNumber = document.getElementById("questionNumber");
+    const questionText = document.getElementById("questionText");
+    const questionHindi = document.getElementById("questionHindi");
+    const optionsContainer = document.getElementById("optionsContainer");
+    const feedbackBox = document.getElementById("feedbackBox");
+    const feedbackTitle = document.getElementById("feedbackTitle");
+    const feedbackEnglish = document.getElementById("feedbackEnglish");
+    const feedbackHindi = document.getElementById("feedbackHindi");
+    const nextButton = document.getElementById("nextButton");
+    const scoreDisplay = document.getElementById("scoreDisplay");
+    const progressText = document.getElementById("progressText");
+    const progressFill = document.getElementById("progressFill");
+    const progressBar = document.getElementById("progressBar");
+    const quizPanel = document.getElementById("quizPanel");
+    const resultPanel = document.getElementById("resultPanel");
+    const restartButton = document.getElementById("restartButton");
+
+    function updateProgress() {
+      const completed = currentQuestion + (answered ? 1 : 0);
+      const percentage = (completed / questions.length) * 100;
+
+      progressFill.style.width = percentage + "%";
+      progressText.textContent = completed + " / " + questions.length;
+      progressBar.setAttribute("aria-valuenow", String(completed));
+      scoreDisplay.textContent = score + " / " + questions.length;
+    }
+
+    function renderQuestion() {
+      answered = false;
+
+      const q = questions[currentQuestion];
+
+      questionNumber.textContent =
+        "Question " + (currentQuestion + 1) + " of " + questions.length;
+
+      questionText.textContent = q.question;
+      questionHindi.textContent = q.hindi;
+
+      optionsContainer.replaceChildren();
+      feedbackBox.className = "feedback";
+      feedbackTitle.textContent = "";
+      feedbackEnglish.textContent = "";
+      feedbackHindi.textContent = "";
+      nextButton.style.display = "none";
+
+      q.options.forEach(function(option, index) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option-button";
+        button.textContent =
+          String.fromCharCode(65 + index) + ". " + option;
+        button.addEventListener("click", function() {
+          checkAnswer(index);
+        });
+        optionsContainer.appendChild(button);
+      });
+
+      updateProgress();
+    }
+
+    function checkAnswer(selectedIndex) {
+      if (answered) return;
+
+      answered = true;
+
+      const q = questions[currentQuestion];
+      const buttons = optionsContainer.querySelectorAll(".option-button");
+      const isCorrect = selectedIndex === q.answer;
+
+      buttons.forEach(function(button, index) {
+        button.disabled = true;
+
+        if (index === q.answer) {
+          button.classList.add("correct");
+        }
+
+        if (index === selectedIndex && !isCorrect) {
+          button.classList.add("wrong");
+        }
+      });
+
+      if (isCorrect) {
+        score++;
+        feedbackBox.className = "feedback correct-feedback";
+        feedbackTitle.textContent = "Correct Answer! | सही उत्तर!";
+        feedbackHindi.textContent = "बहुत अच्छा! आपका उत्तर सही है।";
+      } else {
+        feedbackBox.className = "feedback wrong-feedback";
+        feedbackTitle.textContent = "Wrong Answer | गलत उत्तर";
+        feedbackHindi.textContent =
+          "सही उत्तर हरे रंग में दिखाया गया है।";
+      }
+
+      feedbackEnglish.textContent = q.explanation;
+      feedbackHindi.textContent = q.explanationHindi;
+
+      updateProgress();
+      nextButton.style.display = "inline-block";
+
+      if (currentQuestion === questions.length - 1) {
+        nextButton.textContent = "See Final Result | अंतिम परिणाम देखें";
+      } else {
+        nextButton.textContent = "Next Question | अगला प्रश्न";
+      }
+    }
+
+    function showResult() {
+      quizPanel.style.display = "none";
+      resultPanel.style.display = "block";
+
+      document.getElementById("finalScore").textContent =
+        score + " / " + questions.length;
+
+      document.getElementById("finalScoreHindi").textContent =
+        "आपका स्कोर " + questions.length + " में से " + score + " है।";
+
+      let message;
+      let messageHindi;
+
+      if (score >= 15) {
+        message = "Very good work! Review the questions you missed to strengthen your concepts.";
+        messageHindi = "बहुत अच्छा! अपनी अवधारणाओं को मजबूत करने के लिए छूटे हुए प्रश्नों को दोहराएँ।";
+      } else {
+        message = "Keep practising! Revise your math basics and try again.";
+        messageHindi = "अभ्यास जारी रखें! गणित की मूल बातों को दोहराएँ और फिर से प्रयास करें।";
+      }
+
+      document.getElementById("resultMessage").textContent = message;
+      document.getElementById("resultMessageHindi").textContent = messageHindi;
+
+      progressFill.style.width = "100%";
+      progressText.textContent = questions.length + " / " + questions.length;
+      progressBar.setAttribute("aria-valuenow", String(questions.length));
+      scoreDisplay.textContent = score + " / " + questions.length;
+    }
+
+    nextButton.addEventListener("click", function() {
+      currentQuestion++;
+      if (currentQuestion < questions.length) {
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    restartButton.addEventListener("click", function() {
+      currentQuestion = 0;
+      score = 0;
+      answered = false;
+      resultPanel.style.display = "none";
+      quizPanel.style.display = "block";
+      renderQuestion();
+    });
+
+    // Initial render call
+    renderQuestion();
+  </script>
+
+</body>
+</html>
