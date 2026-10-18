@@ -792,149 +792,108 @@
       questionText.textContent = q.question;
       questionHindi.textContent = q.hindi;
 
-      optionsContainer.replaceChildren();
+     optionsContainer.replaceChildren();
       feedbackBox.className = "feedback";
       feedbackTitle.textContent = "";
       feedbackEnglish.textContent = "";
       feedbackHindi.textContent = "";
       nextButton.style.display = "none";
 
-      q.options.forEach(function(option, index) {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "option-button";
-        button.textContent =
-          String.fromCharCode(65 + index) + ". " + option;
-        button.addEventListener("click", function() {
-          checkAnswer(index);
-        });
-        optionsContainer.appendChild(button);
+      q.options.forEach((optionText, index) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "option-button";
+        btn.textContent = optionText;
+        btn.addEventListener("click", () => handleOptionClick(index, btn));
+        optionsContainer.appendChild(btn);
       });
 
       updateProgress();
     }
 
-    function checkAnswer(selectedIndex) {
+    function handleOptionClick(selectedIndex, selectedButton) {
       if (answered) return;
-
       answered = true;
 
       const q = questions[currentQuestion];
-      const buttons = optionsContainer.querySelectorAll(".option-button");
-      const isCorrect = selectedIndex === q.answer;
+      const allButtons = optionsContainer.querySelectorAll(".option-button");
 
-      buttons.forEach(function(button, index) {
-        button.disabled = true;
-
-        if (index === q.answer) {
-          button.classList.add("correct");
-        }
-
-        if (index === selectedIndex && !isCorrect) {
-          button.classList.add("wrong");
+      allButtons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === q.answer) {
+          btn.classList.add("correct");
+        } else if (idx === selectedIndex) {
+          btn.classList.add("wrong");
         }
       });
 
-      if (isCorrect) {
+      if (selectedIndex === q.answer) {
         score++;
-        feedbackBox.className = "feedback correct-feedback";
-        feedbackTitle.textContent = "Correct Answer! | सही उत्तर!";
-        feedbackHindi.textContent = "बहुत अच्छा! आपका उत्तर सही है।";
+        feedbackBox.classList.add("correct-feedback");
+        feedbackTitle.textContent = "Correct! | सही उत्तर!";
       } else {
-        feedbackBox.className = "feedback wrong-feedback";
-        feedbackTitle.textContent = "Wrong Answer | गलत उत्तर";
-        feedbackHindi.textContent =
-          "सही उत्तर हरे रंग में दिखाया गया है।";
+        feedbackBox.classList.add("wrong-feedback");
+        feedbackTitle.textContent = "Incorrect! | गलत उत्तर!";
       }
 
       feedbackEnglish.textContent = q.explanation;
-      feedbackHindi.textContent += " " + q.explanationHindi;
-
-      updateProgress();
+      feedbackHindi.textContent = q.explanationHindi;
       nextButton.style.display = "inline-block";
 
       if (currentQuestion === questions.length - 1) {
-        nextButton.textContent = "See Final Result | अंतिम परिणाम देखें";
+        nextButton.textContent = "Show Result | परिणाम देखें";
       } else {
         nextButton.textContent = "Next Question | अगला प्रश्न";
       }
+
+      updateProgress();
     }
 
-    function showResult() {
+    function showResults() {
       quizPanel.style.display = "none";
       resultPanel.style.display = "block";
 
-      document.getElementById("finalScore").textContent =
-        score + " / " + questions.length;
+      const totalQuestions = questions.length;
+      const percentage = (score / totalQuestions) * 100;
 
-      document.getElementById("finalScoreHindi").textContent =
-        "आपका स्कोर " + questions.length + " में से " + score + " है।";
+      document.getElementById("finalScore").textContent = `${score} / ${totalQuestions}`;
+      document.getElementById("finalScoreHindi").textContent = `कुल प्राप्तांक: ${score} / ${totalQuestions} (${percentage.toFixed(1)}%)`;
 
-      let message;
-      let messageHindi;
-      let recommendation;
-      let recommendationHindi;
-      // Determine level recommendation based on score out of 40
-       if (score >= 35) {
-        message = "Excellent work! You answered almost every question correctly.";
-        messageHindi = "शानदार! आपने लगभग सभी प्रश्नों के सही उत्तर दिए।";
-        recommendation = "Recommended Practice: You can continue with **Advanced Level** practice.";
-        recommendationHindi = "अनुशंसित अभ्यास: आप **उन्नत स्तर (Advanced Level)** के साथ आगे बढ़ सकते हैं।";
-      } else if (score >= 25) {
-        message = "Very good work! Review the questions you missed to strengthen your concepts.";
-        messageHindi = "बहुत अच्छा! अपनी अवधारणाओं को मजबूत करने के लिए छूटे हुए प्रश्नों को दोहराएँ।";
-        recommendation = "Recommended Practice: You can start from **Developing Level** practice.";
-        recommendationHindi = "अनुशंसित अभ्यास: आप **विकासशील स्तर (Developing Level)** के अभ्यास से शुरुआत कर सकते हैं।";
+      const resultMsg = document.getElementById("resultMessage");
+      const resultMsgHindi = document.getElementById("resultMessageHindi");
+
+      // Dynamic Suggestion Logic (सुझाव लॉजिक)
+      if (percentage < 60) {
+        resultMsg.textContent = "Recommendation: You should strengthen your foundation/basics.";
+        resultMsgHindi.textContent = "सुझाव: आप foundation/basic को मजबूत करें।";
+      } else if (percentage <= 85) {
+        resultMsg.textContent = "Recommendation: You should start with the developing level.";
+        resultMsgHindi.textContent = "सुझाव: आपको developing level से शुरुआत करनी चाहिए।";
       } else {
-        message = "Keep practising! Revise your math basics and try again.";
-        messageHindi = "अभ्यास जारी रखें! गणित की मूल बातों को दोहराएँ और फिर से प्रयास करें।";
-        recommendation = "Recommended Practice: You can start from **Foundation Level** practice.";
-        recommendationHindi = "अनुशंसित अभ्यास: आप **फाउंडेशन स्तर (Foundation Level)** से शुरुआत कर सकते हैं।";
+        resultMsg.textContent = "Recommendation: Great job! You can practice at the advance level.";
+        resultMsgHindi.textContent = "सुझाव: आप advance level की प्रैक्टिस कर सकते हैं।";
       }
-
-      document.getElementById("resultMessage").textContent = message;
-      document.getElementById("resultMessageHindi").textContent = messageHindi;
-      // If you want to show the recommendation inside the result panel, 
-      // you can append or update a designated paragraph. Let's update resultMessage or create/target a recommendation element:
-      let recElement = document.getElementById("recommendationBox");
-      if (!recElement) {
-        recElement = document.createElement("div");
-        recElement.id = "recommendationBox";
-        recElement.style.margin = "15px 0";
-        recElement.style.padding = "14px";
-        recElement.style.background = "var(--light)";
-        recElement.style.borderRadius = "10px";
-        recElement.style.fontWeight = "bold";
-        resultPanel.insertBefore(recElement, restartButton);
-      }
-      recElement.innerHTML = `<p style="margin:0 0 5px; color:var(--primary);">${recommendation}</p><p class="hindi" lang="hi" style="margin:0; color:var(--muted);">${recommendationHindi}</p>`;
-      progressFill.style.width = "100%";
-      progressText.textContent = questions.length + " / " + questions.length;
-      progressBar.setAttribute("aria-valuenow", String(questions.length));
-      scoreDisplay.textContent = score + " / " + questions.length;
     }
 
-    nextButton.addEventListener("click", function() {
-      currentQuestion++;
-      if (currentQuestion < questions.length) {
+    nextButton.addEventListener("click", () => {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
         renderQuestion();
       } else {
-        showResult();
+        showResults();
       }
     });
 
-    restartButton.addEventListener("click", function() {
+    restartButton.addEventListener("click", () => {
       currentQuestion = 0;
       score = 0;
-      answered = false;
       resultPanel.style.display = "none";
       quizPanel.style.display = "block";
       renderQuestion();
     });
 
-    // Initial render call
+    // Start the Quiz
     renderQuestion();
   </script>
-
 </body>
 </html>
