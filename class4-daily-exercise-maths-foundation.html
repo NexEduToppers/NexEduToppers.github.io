@@ -37,7 +37,7 @@
 }
 
 /* Day Button Design - Matching Foundation Theme */
-.day-exercise-btn {
+.day-exercise-btn, .Monday-exercise-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,7 +55,7 @@
   transition: all 0.25s ease;
 }
 
-.day-exercise-btn .hindi-text {
+.day-exercise-btn .hindi-text, .Monday-exercise-btn .hindi-text {
   font-size: 0.88rem;
   font-weight: 600;
   color: #2e7d58;
@@ -64,7 +64,7 @@
 }
 
 /* Hover Effect */
-.day-exercise-btn:hover {
+.day-exercise-btn:hover, .Monday-exercise-btn:hover {
   background: #07965a;
   color: #ffffff;
   border-color: #07965a;
@@ -72,7 +72,7 @@
   box-shadow: 0 6px 14px rgba(7, 150, 90, 0.25);
 }
 
-.day-exercise-btn:hover .hindi-text {
+.day-exercise-btn:hover .hindi-text, .Monday-exercise-btn:hover .hindi-text {
   color: #e4f9ed;
 }
 
@@ -81,21 +81,20 @@
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 10px;
   }
-  .day-exercise-btn {
+  .day-exercise-btn, .Monday-exercise-btn {
     font-size: 0.95rem;
     padding: 10px 8px;
   }
 }
-</style> <!-- Corrected closing style tag -->
+</style>
 
+<!-- पहला सेक्शन: Day 1 से Day 10 -->
 <div class="foundation-days-card">
   <h2>Foundation Level Practice Days | आधार स्तर अभ्यास के दिन</h2>
   <p>Select a day to start your daily practice:</p>
   <p class="hindi-desc" lang="hi">अपने दैनिक अभ्यास को शुरू करने के लिए एक दिन चुनें:</p>
 
-  <!-- Days Grid Container (Day 1 to Day 10) -->
   <div class="days-grid">
-    
     <a href="foundation-day1.html" class="day-exercise-btn">
       Day 1 Exercise
       <span class="hindi-text" lang="hi">दिन 1 अभ्यास</span>
@@ -141,9 +140,55 @@
       <span class="hindi-text" lang="hi">दिन 9 अभ्यास</span>
     </a>
 
-    <a href="foundation-day10.html" class="day-exercise-btn">
+    <span class="day-exercise-btn" style="cursor:default;">
       Day 10 Exercise
       <span class="hindi-text" lang="hi">दिन 10 अभ्यास</span>
+    </span>
+  </div>
+</div>
+
+<!-- दूसरा सेक्शन: Worksheets (Monday to Sunday) -->
+<div class="foundation-days-card">
+  <h2>Foundation Level Worksheets | आधार स्तर की अभ्यास पत्रिका</h2>
+  <p>Select a day to start your practice:</p>
+  <p class="hindi-desc" lang="hi">अभ्यास शुरू करने के लिए दिन चुनें:</p>
+
+  <!-- Days Grid Container (Monday to Sunday) -->
+  <div class="days-grid">
+    
+    <a href="foundation-Monday.html" class="day-exercise-btn">
+      Monday Exercise
+      <span class="hindi-text" lang="hi">सोमवार अभ्यास</span>
+    </a>
+
+    <a href="foundation-Tuesday.html" class="day-exercise-btn">
+      Tuesday Exercise
+      <span class="hindi-text" lang="hi">मंगलवार अभ्यास</span>
+    </a>
+
+    <a href="foundation-Wednesday.html" class="day-exercise-btn">
+      Wednesday Exercise
+      <span class="hindi-text" lang="hi">बुधवार अभ्यास</span>
+    </a>
+
+    <a href="foundation-Thursday.html" class="day-exercise-btn">
+      Thursday Exercise
+      <span class="hindi-text" lang="hi">गुरुवार अभ्यास</span>
+    </a>
+
+    <a href="foundation-Friday.html" class="day-exercise-btn">
+      Friday Exercise
+      <span class="hindi-text" lang="hi">शुक्रवार अभ्यास</span>
+    </a>
+
+    <a href="foundation-Saturday.html" class="day-exercise-btn">
+      Saturday Exercise
+      <span class="hindi-text" lang="hi">शनिवार अभ्यास</span>
+    </a>
+
+    <a href="foundation-Sunday.html" class="day-exercise-btn">
+      Sunday Exercise
+      <span class="hindi-text" lang="hi">रविवार अभ्यास</span>
     </a>
 
   </div>
