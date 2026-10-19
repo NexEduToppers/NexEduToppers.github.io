@@ -89,6 +89,8 @@
         
         .math-input.state-correct {
             background-color: #f0fdf4 !important;
+            border-color:
+#f0fdf4 !important;
             border-color: #22c55e !important;
             color: #15803d !important;
             box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2) !important;
@@ -201,28 +203,13 @@
                     <i class="fa-solid fa-award text-amber-500"></i> Total Marks: 25
                 </span>
             </div>
-
-            <!-- Instructions Box -->
-            <div class="bg-indigo-50/70 border border-indigo-100 rounded-2xl p-4 text-left text-xs sm:text-sm text-indigo-900">
-                <div class="font-heading font-bold text-indigo-950 mb-1 flex items-center gap-2">
-                    <i class="fa-solid fa-circle-info text-indigo-600"></i> Instructions:
-                </div>
-                <ul class="list-disc list-inside space-y-1 text-slate-700 font-medium">
-                    <li>Solve mentally without a calculator.</li>
-                    <li>Read each question carefully.</li>
-                    <li>Try to be both quick and accurate.</li>
-                    <li>Type your answer into the box. Background turns <span class="text-emerald-600 font-bold">GREEN</span> for correct and <span class="text-rose-600 font-bold">RED</span> for incorrect.</li>
-                    <li>Click <span class="font-semibold text-indigo-700">"Check Answer"</span> anytime to toggle the step-by-step explanation.</li>
-                </ul>
-            </div>
         </div>
+        <!-- HEADER CARD CLOSED -->
 
-        <!-- WORKSHEET SECTIONS CONTAINER -->
-        <div id="sections-container" class="space-y-8">
-            <!-- Dynamic Sections render here -->
-        </div>
+        <!-- WORKSHEET QUESTIONS CONTAINER -->
+        <div id="sections-container"></div>
 
-        <!-- FINAL SCOREBOARD & TEACHER'S REMARKS CARD -->
+<!-- FINAL SCOREBOARD & TEACHER'S REMARKS CARD -->
         <div id="summary-section" class="glass-card rounded-3xl p-6 sm:p-8 mt-12 border-2 border-indigo-200 shadow-xl relative">
             <div class="text-center mb-6">
                 <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900 mb-1">
@@ -272,6 +259,18 @@
                 </div>
             </div>
 
+ <!-- GENERATE NEW QUESTIONS BUTTON -->
+        <div class="text-center mb-6">
+            <button id="generate-new-questions-btn" type="button"
+                class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm sm:text-base px-6 py-3 rounded-2xl shadow-lg transition duration-200">
+                Generate New Questions | नए प्रश्न बनाएँ
+            </button>
+
+            <p id="generate-status" class="text-sm text-slate-500 mt-2">
+                Click the button to create a fresh worksheet.
+                | नई वर्कशीट बनाने के लिए बटन दबाएँ।
+            </p>
+        </div>
             <!-- Reset Worksheet Button -->
             <div class="text-center mt-8">
                 <button id="reset-worksheet-btn" class="bg-slate-800 hover:bg-slate-900 text-white font-heading font-bold text-sm px-6 py-3 rounded-2xl shadow-lg transition duration-200 inline-flex items-center gap-2">
@@ -285,7 +284,7 @@
     <!-- JAVASCRIPT LOGIC -->
     <script>
         // --- WORKSHEET DATA STRUCTURE ---
-        const worksheetData = [
+        let worksheetData = [ // CHANGED: allows fresh questions to replace the current worksheet
             {
                 sectionId: 'sec-a',
                 title: 'Section A: Number Sense',
@@ -483,6 +482,191 @@
             }
         ];
 
+        // ADDED: RANDOM QUESTION HELPERS FOR REGENERATING THE ORIGINAL WORKSHEET
+        function randomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function formatNumber(number) {
+            return number.toLocaleString('en-US');
+        }
+
+        function makeQuestion(id, text, answers, explanation) {
+            return {
+                id,
+                text,
+                validAnswers: (Array.isArray(answers) ? answers : [answers]).map(String),
+                explanation
+            };
+        }
+
+        // ADDED: Makes a new set of 25 mixed Class 4 maths questions.
+        function generateFreshWorksheetData() {
+            const questions = [[], [], [], [], []];
+
+            // Section A: Number Sense (Q1-Q5)
+            const thousands = randomInt(1, 9);
+            const hundreds = randomInt(1, 9);
+            const tens = randomInt(0, 9);
+            const ones = randomInt(0, 9);
+            const placeNumber = thousands * 1000 + hundreds * 100 + tens * 10 + ones;
+            questions[0].push(makeQuestion(
+                1,
+                `What is the place value of ${hundreds} in ${formatNumber(placeNumber)}?`,
+                String(hundreds * 100),
+                `${hundreds} is in the hundreds place, so its place value is ${hundreds} × 100 = ${hundreds * 100}.`
+            ));
+
+            const predecessor = randomInt(2000, 9999);
+            questions[0].push(makeQuestion(
+                2,
+                `Write the number that comes just before ${formatNumber(predecessor)}.`,
+                formatNumber(predecessor - 1),
+                `The predecessor is one less: ${formatNumber(predecessor)} − 1 = ${formatNumber(predecessor - 1)}.`
+            ));
+
+            const digits = [];
+            while (digits.length < 4) {
+                const digit = randomInt(1, 9);
+                if (!digits.includes(digit)) digits.push(digit);
+            }
+            const greatestNumber = Number([...digits].sort((a, b) => b - a).join(''));
+            questions[0].push(makeQuestion(
+                3,
+                `Form the greatest four-digit number using ${digits.join(', ')} without repeating any digit.`,
+                formatNumber(greatestNumber),
+                `Arrange the digits from greatest to smallest: ${[...digits].sort((a, b) => b - a).join(', ')}. The number is ${formatNumber(greatestNumber)}.`
+            ));
+
+            const compareNumbers = new Set();
+            while (compareNumbers.size < 4) compareNumbers.add(randomInt(1000, 9999));
+            const compareList = [...compareNumbers];
+            const smallest = Math.min(...compareList);
+            questions[0].push(makeQuestion(
+                4,
+                `Which is the smallest number: ${compareList.map(formatNumber).join('; ')}?`,
+                formatNumber(smallest),
+                `Comparing all four numbers, ${formatNumber(smallest)} is the smallest.`
+            ));
+
+            const patternStart = randomInt(10, 100) * 10;
+            const patternStep = randomInt(2, 9) * 10;
+            const patternNext1 = patternStart + patternStep;
+            const patternNext2 = patternNext1 + patternStep;
+            questions[0].push(makeQuestion(
+                5,
+                `Complete the pattern: ${patternStart}, ${patternStart + patternStep}, ${patternStart + 2 * patternStep}, ____, ____.`,
+                [`${patternNext1}, ${patternNext2}`, `${patternNext1},${patternNext2}`, `${patternNext1} ${patternNext2}`],
+                `The numbers increase by ${patternStep} each time. The missing numbers are ${patternNext1} and ${patternNext2}.`
+            ));
+
+            // Section B: Quick Addition and Subtraction (Q6-Q10)
+            let a = randomInt(20, 900), b = randomInt(20, 900);
+            questions[1].push(makeQuestion(6, `${formatNumber(a)} + ${formatNumber(b)} = ____`, formatNumber(a + b),
+                `${formatNumber(a)} + ${formatNumber(b)} = ${formatNumber(a + b)}.`));
+
+            a = randomInt(300, 1500); b = randomInt(20, Math.min(a - 1, 800));
+            questions[1].push(makeQuestion(7, `${formatNumber(a)} − ${formatNumber(b)} = ____`, formatNumber(a - b),
+                `${formatNumber(a)} − ${formatNumber(b)} = ${formatNumber(a - b)}.`));
+
+            a = randomInt(100, 900); b = randomInt(100, 900);
+            questions[1].push(makeQuestion(8, `${formatNumber(a)} + ${formatNumber(b)} = ____`, formatNumber(a + b),
+                `${formatNumber(a)} + ${formatNumber(b)} = ${formatNumber(a + b)}.`));
+
+            a = randomInt(500, 3000); b = randomInt(100, Math.min(a - 1, 1500));
+            questions[1].push(makeQuestion(9, `${formatNumber(a)} − ${formatNumber(b)} = ____`, formatNumber(a - b),
+                `${formatNumber(a)} − ${formatNumber(b)} = ${formatNumber(a - b)}.`));
+
+            a = randomInt(101, 998);
+            const roundUp = 1000 - a;
+            questions[1].push(makeQuestion(10, `${formatNumber(a)} + ____ = 1,000`, String(roundUp),
+                `${formatNumber(a)} needs ${roundUp} to reach 1,000, because ${formatNumber(a)} + ${roundUp} = 1,000.`));
+
+            // Section C: Multiplication and Division (Q11-Q15)
+            a = randomInt(2, 12); b = randomInt(2, 12);
+            questions[2].push(makeQuestion(11, `${a} × ${b} = ____`, String(a * b),
+                `${a} multiplied by ${b} equals ${a * b}.`));
+
+            a = randomInt(2, 12); b = randomInt(2, 12);
+            questions[2].push(makeQuestion(12, `${a} × ${b} = ____`, String(a * b),
+                `${a} × ${b} = ${a * b}.`));
+
+            b = randomInt(2, 12); const quotient = randomInt(2, 12); a = b * quotient;
+            questions[2].push(makeQuestion(13, `${a} ÷ ${b} = ____`, String(quotient),
+                `Since ${b} × ${quotient} = ${a}, ${a} ÷ ${b} = ${quotient}.`));
+
+            a = randomInt(2, 12); b = randomInt(2, 12);
+            questions[2].push(makeQuestion(14, `${a} × ${b} = ____`, String(a * b),
+                `${a} × ${b} = ${a * b}.`));
+
+            b = randomInt(2, 12); const quotient2 = randomInt(2, 12); a = b * quotient2;
+            questions[2].push(makeQuestion(15, `${a} ÷ ${b} = ____`, String(quotient2),
+                `Since ${b} × ${quotient2} = ${a}, ${a} ÷ ${b} = ${quotient2}.`));
+
+            // Section D: Missing Numbers and Patterns (Q16-Q20)
+            a = randomInt(10, 90); b = randomInt(10, 90);
+            questions[3].push(makeQuestion(16, `${a} + □ = ${a + b}`, String(b),
+                `The missing number is ${a + b} − ${a} = ${b}.`));
+
+            a = randomInt(50, 150); b = randomInt(10, a - 1);
+            questions[3].push(makeQuestion(17, `${a} − □ = ${a - b}`, String(b),
+                `The missing number is ${a} − ${a - b} = ${b}.`));
+
+            a = randomInt(2, 12); b = randomInt(2, 12);
+            questions[3].push(makeQuestion(18, `${a} × □ = ${a * b}`, String(b),
+                `The missing factor is ${a * b} ÷ ${a} = ${b}.`));
+
+            const doubleStart = randomInt(3, 20);
+            questions[3].push(makeQuestion(19, `Complete the pattern: ${doubleStart}, ${doubleStart * 2}, ${doubleStart * 4}, ${doubleStart * 8}, ____.`,
+                String(doubleStart * 16),
+                `Each number doubles. The next number is ${doubleStart * 8} × 2 = ${doubleStart * 16}.`));
+
+            const oddBase = randomInt(2, 9);
+            const multiples = [oddBase * 2, oddBase * 3, oddBase * 4, oddBase * 5];
+            const oddNumber = oddBase * 6 + 1;
+            const oddOptions = [...multiples.slice(0, 3), oddNumber].sort(() => Math.random() - 0.5);
+            questions[3].push(makeQuestion(20, `Find the odd one out: ${oddOptions.join(', ')}.`, String(oddNumber),
+                `${oddNumber} is not a multiple of ${oddBase}, while the other numbers are multiples of ${oddBase}.`));
+
+            // Section E: Everyday Math and Brain Teasers (Q21-Q25)
+            a = randomInt(100, 1000); b = randomInt(20, a - 1);
+            questions[4].push(makeQuestion(21, `Riya has ₹${a}. She spends ₹${b}. How much money is left?`, String(a - b),
+                `Money left = ₹${a} − ₹${b} = ₹${a - b}.`));
+
+            const hour = randomInt(1, 11);
+            const minute = Math.random() < 0.5 ? '00' : '15';
+            const startMinute = Number(minute);
+            const endTotal = hour * 60 + startMinute + 30;
+            const endHour = Math.floor(endTotal / 60) % 12 || 12;
+            const endMinute = String(endTotal % 60).padStart(2, '0');
+            const timeAnswers = [`${endHour}:${endMinute}`, `${endHour}:${endMinute} p.m.`, `${endHour}:${endMinute} pm`, `${endHour}.${endMinute}`];
+            questions[4].push(makeQuestion(22, `What time will it be 30 minutes after ${hour}:${minute} p.m.?`, timeAnswers,
+                `Adding 30 minutes to ${hour}:${minute} p.m. gives ${endHour}:${endMinute} p.m.`));
+
+            const evenNumber = randomInt(10, 99) * 2;
+            questions[4].push(makeQuestion(23, `Half of ${evenNumber} is ____.`, String(evenNumber / 2),
+                `${evenNumber} ÷ 2 = ${evenNumber / 2}.`));
+
+            a = randomInt(3, 9); b = randomInt(4, 12);
+            questions[4].push(makeQuestion(24, `There are ${a} baskets with ${b} apples in each basket. How many apples are there altogether?`,
+                String(a * b), `Total apples = ${a} × ${b} = ${a * b}.`));
+
+            const tensDigit = randomInt(3, 9);
+            const onesDigit = tensDigit - 3;
+            const mysteryNumber = tensDigit * 10 + onesDigit;
+            questions[4].push(makeQuestion(25, `I am a two-digit number. My tens digit is ${tensDigit} and my ones digit is 3 less than my tens digit. What number am I?`,
+                String(mysteryNumber), `The ones digit is ${tensDigit} − 3 = ${onesDigit}. The number is ${mysteryNumber}.`));
+
+
+return [
+                { sectionId: 'sec-a', title: 'Section A: Number Sense', marks: '5 marks', icon: 'fa-hashtag', color: 'indigo', questions: questions[0] },
+                { sectionId: 'sec-b', title: 'Section B: Quick Addition and Subtraction', marks: '5 marks', icon: 'fa-calculator', color: 'blue', questions: questions[1] },
+                { sectionId: 'sec-c', title: 'Section C: Multiplication and Division', marks: '5 marks', icon: 'fa-xmark', color: 'emerald', questions: questions[2] },
+                { sectionId: 'sec-d', title: 'Section D: Missing Numbers and Patterns', marks: '5 marks', icon: 'fa-shapes', color: 'purple', questions: questions[3] },
+                { sectionId: 'sec-e', title: 'Section E: Everyday Math and Brain Teasers', marks: '5 marks', icon: 'fa-lightbulb', color: 'amber', questions: questions[4] }
+            ];
+        }
+
         // --- APP STATE ---
         const userAnswers = {}; // { qId: string }
         const questionStatus = {}; // { qId: boolean }
@@ -550,7 +734,7 @@
             }
         }
 
-        // --- NORMALIZATION HELPER ---
+// --- NORMALIZATION HELPER ---
         function normalizeAnswer(str) {
             if (!str) return '';
             return str
@@ -643,7 +827,7 @@
 
                         <button 
                             id="explain-btn-${q.id}"
-                            onclick="toggleExplanation(${q.id})" 
+onclick="toggleExplanation(${q.id})" 
                             class="px-4 py-2.5 bg-slate-100 hover:bg-indigo-50 text-slate-700 hover:text-indigo-600 border border-slate-300 font-heading text-xs font-bold rounded-xl transition flex items-center gap-1.5 shrink-0">
                             <i class="fa-solid fa-lightbulb text-amber-500"></i>
                             <span>Check Answer</span>
@@ -846,6 +1030,22 @@
 
         // --- SETUP EVENT LISTENERS ---
         function setupEventListeners() {
+            // ADDED: Regenerate the existing 25-question worksheet, not a separate worksheet.
+            document.getElementById('generate-new-questions-btn').addEventListener('click', () => {
+                worksheetData = generateFreshWorksheetData();
+
+                // Clear answers and status from the previous question set.
+                Object.keys(userAnswers).forEach(key => delete userAnswers[key]);
+                Object.keys(questionStatus).forEach(key => delete questionStatus[key]);
+
+                resetTimer();
+                renderWorksheet();
+                updateScoreboard();
+                document.getElementById('generate-status').textContent =
+                    'Fresh questions generated! | नए प्रश्न तैयार हैं!';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
             document.getElementById('timer-toggle-btn').addEventListener('click', toggleTimer);
             document.getElementById('timer-reset-btn').addEventListener('click', resetTimer);
             
@@ -867,151 +1067,5 @@
         }
     </script>
 
-<!-- REUSABLE WORKSHEET GENERATOR -->
-
-<div id="worksheetGenerator" style="margin:20px 0;">
-  <button id="generateWorksheetBtn" type="button">
-    Generate New Questions | नए प्रश्न बनाएँ
-  </button>
-  <p id="worksheetStatus" aria-live="polite"></p>
-  <div id="worksheetContainer"></div>
-</div>
-
-<script>
-(function () {
-  // Change these settings for each worksheet
-  const TOTAL_QUESTIONS = 20;
-  const MIN_NUMBER = 100;
-  const MAX_NUMBER = 9999;
-
-  const container = document.getElementById("worksheetContainer");
-  const button = document.getElementById("generateWorksheetBtn");
-  const status = document.getElementById("worksheetStatus");
-
-  // Random number generator
-  function rand(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  // Create four answer options
-  function makeOptions(correctAnswer) {
-    const options = new Set([correctAnswer]);
-
-    while (options.size < 4) {
-      const offset = rand(1, 30);
-      const wrongAnswer = Math.random() < 0.5
-        ? correctAnswer + offset
-        : Math.max(0, correctAnswer - offset);
-
-      options.add(wrongAnswer);
-    }
-
-    const result = Array.from(options);
-
-    // Shuffle options
-    for (let i = result.length - 1; i > 0; i--) {
-      const j = rand(0, i);
-      [result[i], result[j]] = [result[j], result[i]];
-    }
-
-    return {
-      options: result,
-      answerIndex: result.indexOf(correctAnswer)
-    };
-  }
-
-  // EDIT THIS FUNCTION to set your worksheet topic
-  function generateQuestions() {
-    const questions = [];
-
-    for (let i = 0; i < TOTAL_QUESTIONS; i++) {
-      const a = rand(MIN_NUMBER, MAX_NUMBER);
-      const b = rand(MIN_NUMBER, MAX_NUMBER);
-      const answer = a + b;
-      const optionData = makeOptions(answer);
-
-      questions.push({
-        q: `What is ${a} + ${b}?`,
-        hi: `${a} + ${b} कितना होगा?`,
-        options: optionData.options,
-        ansIndex: optionData.answerIndex,
-        exp: `${a} + ${b} = ${answer}.`,
-        expHi: `${a} + ${b} = ${answer}।`
-      });
-    }
-
-    return questions;
-  }
-
-  // Display the questions
-  function renderWorksheet() {
-    container.replaceChildren();
-
-    const questions = generateQuestions();
-
-    questions.forEach((q, index) => {
-      const card = document.createElement("div");
-      card.className = "question-card";
-
-      const heading = document.createElement("h3");
-      heading.textContent =
-        `Question ${index + 1} of ${questions.length}`;
-
-      const english = document.createElement("p");
-      english.textContent = q.q;
-
-      const hindi = document.createElement("p");
-      hindi.className = "hindi";
-      hindi.textContent = q.hi;
-
-      const optionsBox = document.createElement("div");
-      optionsBox.className = "options-grid";
-
-      const explanation = document.createElement("div");
-      explanation.className = "explanation-box";
-      explanation.hidden = true;
-
-      explanation.textContent = `Explanation: ${q.exp} | स्पष्टीकरण: ${q.expHi}`;
-
-      q.options.forEach((option, optionIndex) => {
-        const answerButton = document.createElement("button");
-        answerButton.type = "button";
-        answerButton.className = "opt-btn";
-        answerButton.textContent =
-          `${String.fromCharCode(65 + optionIndex)}. ${option}`;
-
-        answerButton.addEventListener("click", () => {
-          const allButtons = optionsBox.querySelectorAll("button");
-          allButtons.forEach(btn => btn.disabled = true);
-
-          if (optionIndex === q.ansIndex) {
-            answerButton.classList.add("correct");
-          } else {
-            answerButton.classList.add("wrong");
-            allButtons[q.ansIndex].classList.add("correct");
-          }
-
-          explanation.hidden = false;
-        });
-
-        optionsBox.appendChild(answerButton);
-      });
-
-      card.append(heading, english, hindi, optionsBox, explanation);
-      container.appendChild(card);
-    });
-
-    status.textContent =
-      `${questions.length} questions generated. | ${questions.length} प्रश्न तैयार हैं।`;
-
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
-
-  button.addEventListener("click", renderWorksheet);
-
-  // Generate questions when the page first opens
-  renderWorksheet();
-})();
-</script>
 </body>
 </html>
