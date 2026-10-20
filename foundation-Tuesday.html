@@ -286,203 +286,204 @@
         // --- WORKSHEET DATA STRUCTURE ---
         let worksheetData = [ // CHANGED: allows fresh questions to replace the current worksheet
             {
-                sectionId: 'sec-a',
-                title: 'Section A: Number Sense',
-                marks: '5 marks',
-                icon: 'fa-hashtag',
-                color: 'indigo',
-                questions: [
-                    {
-                        id: 1,
-                        text: 'What is the place value of 7 in 4,735?',
-                        validAnswers: ['700', '7 hundred', '7 hundreds'],
-                        explanation: 'In 4,735, the digit 7 is in the hundreds place, so its place value is 7 × 100 = 700.'
-                    },
-                    {
-                        id: 2,
-                        text: 'Write the number that comes just before 5,000.',
-                        validAnswers: ['4999', '4,999'],
-                        explanation: 'The predecessor of 5,000 is calculated as 5,000 - 1 = 4,999.'
-                    },
-                    {
-                        id: 3,
-                        text: 'Form the greatest four-digit number using 3, 8, 1 and 6 without repeating any digit.',
-                        validAnswers: ['8631', '8,631'],
-                        explanation: 'To form the greatest number, arrange the given digits in descending order: 8, 6, 3, 1 -> 8,631.'
-                    },
-                    {
-                        id: 4,
-                        text: 'Which is the smallest number: 4,509; 4,590; 4,095; 4,950?',
-                        validAnswers: ['4095', '4,095'],
-                        explanation: 'Comparing the hundreds digits (5, 5, 0, 9), 4,095 has 0 in the hundreds place, making it the smallest.'
-                    },
-                    {
-                        id: 5,
-                        text: 'Complete the pattern: 120, 140, 160, ____, ____.',
-                        validAnswers: ['180, 200', '180,200', '180 200', '180 and 200'],
-                        explanation: 'The numbers increase by 20 each time: 160 + 20 = 180, and 180 + 20 = 200.'
-                    }
-                ]
-            },
-            {
-                sectionId: 'sec-b',
-                title: 'Section B: Quick Addition and Subtraction',
-                marks: '5 marks',
-                icon: 'fa-calculator',
-                color: 'blue',
-                questions: [
-                    {
-                        id: 6,
-                        text: '45 + 35 = ____',
-                        validAnswers: ['80'],
-                        explanation: 'Split mentally: 40 + 30 = 70, and 5 + 5 = 10; 70 + 10 = 80.'
-                    },
-                    {
-                        id: 7,
-                        text: '100 − 47 = ____',
-                        validAnswers: ['53'],
-                        explanation: 'Subtract in steps: 100 - 40 = 60, then 60 - 7 = 53.'
-                    },
-                    {
-                        id: 8,
-                        text: '250 + 150 = ____',
-                        validAnswers: ['400'],
-                        explanation: 'Add 50 first: 250 + 50 = 300, then add remaining 100: 300 + 100 = 400.'
-                    },
-                    {
-                        id: 9,
-                        text: '600 − 250 = ____',
-                        validAnswers: ['350'],
-                        explanation: 'Subtract 200 first: 600 - 200 = 400, then subtract 50: 400 - 50 = 350.'
-                    },
-                    {
-                        id: 10,
-                        text: '398 + 2 = ____',
-                        validAnswers: ['400'],
-                        explanation: 'Adding 2 completes the next hundred: 398 + 2 = 400.'
-                    }
-                ]
-            },
-            {
-                sectionId: 'sec-c',
-                title: 'Section C: Multiplication and Division',
-                marks: '5 marks',
-                icon: 'fa-xmark',
-                color: 'emerald',
-                questions: [
-                    {
-                        id: 11,
-                        text: '7 × 8 = ____',
-                        validAnswers: ['56'],
-                        explanation: '7 groups of 8 equal 56.'
-                    },
-                    {
-                        id: 12,
-                        text: '9 × 6 = ____',
-                        validAnswers: ['54'],
-                        explanation: '9 multiplied by 6 equals 54.'
-                    },
-                    {
-                        id: 13,
-                        text: '120 ÷ 10 = ____',
-                        validAnswers: ['12'],
-                        explanation: 'Dividing a number ending in zero by 10 removes one zero: 120 ÷ 10 = 12.'
-                    },
-                    {
-                        id: 14,
-                        text: '8 × 5 = ____',
-                        validAnswers: ['40'],
-                        explanation: '8 multiplied by 5 equals 40.'
-                    },
-                    {
-                        id: 15,
-                        text: '72 ÷ 8 = ____',
-                        validAnswers: ['9'],
-                        explanation: 'Since 8 × 9 = 72, 72 ÷ 8 = 9.'
-                    }
-                ]
-            },
-            {
-                sectionId: 'sec-d',
-                title: 'Section D: Missing Numbers and Patterns',
-                marks: '5 marks',
-                icon: 'fa-shapes',
-                color: 'purple',
-                questions: [
-                    {
-                        id: 16,
-                        text: '35 + □ = 60',
-                        validAnswers: ['25'],
-                        explanation: 'Find the missing addend: 60 - 35 = 25.'
-                    },
-                    {
-                        id: 17,
-                        text: '90 − □ = 40',
-                        validAnswers: ['50'],
-                        explanation: 'Find the missing subtrahend: 90 - 40 = 50.'
-                    },
-                    {
-                        id: 18,
-                        text: '6 × □ = 42',
-                        validAnswers: ['7'],
-                        explanation: 'Divide the product by the known factor: 42 ÷ 6 = 7.'
-                    },
-                    {
-                        id: 19,
-                        text: 'Complete the pattern: 5, 10, 20, 40, ____.',
-                        validAnswers: ['80'],
-                        explanation: 'Each number doubles the previous one: 40 × 2 = 80.'
-                    },
-                    {
-                        id: 20,
-                        text: 'Find the odd one out: 12, 18, 24, 31, 36.',
-                        validAnswers: ['31'],
-                        explanation: 'All numbers (12, 18, 24, 36) are multiples of 6 except 31.'
-                    }
-                ]
-            },
-            {
-                sectionId: 'sec-e',
-                title: 'Section E: Everyday Math and Brain Teasers',
-                marks: '5 marks',
-                icon: 'fa-lightbulb',
-                color: 'amber',
-                questions: [
-                    {
-                        id: 21,
-                        text: 'Riya has ₹100. She buys a notebook for ₹35. How much money is left?',
-                        validAnswers: ['65', '₹65', 'rs 65', '65 rupees', 'rs.65'],
-                        explanation: 'Remaining money = ₹100 - ₹35 = ₹65.'
-                    },
-                    {
-                        id: 22,
-                        text: 'What time will it be 30 minutes after 4:15 p.m.?',
-                        validAnswers: ['4:45', '4:45 p.m.', '4:45 pm', '4:45pm', '4.45'],
-                        explanation: 'Add minutes: 15 minutes + 30 minutes = 45 minutes. So the time is 4:45 p.m.'
-                    },
-                    {
-                        id: 23,
-                        text: 'Half of 86 is ____.',
-                        validAnswers: ['43'],
-                        explanation: '86 ÷ 2 = 43 (Half of 80 is 40, half of 6 is 3; 40 + 3 = 43).'
-                    },
-                    {
-                        id: 24,
-                        text: 'There are 4 baskets with 6 apples in each basket. How many apples are there altogether?',
-                        validAnswers: ['24', '24 apples'],
-                        explanation: 'Total apples = 4 baskets × 6 apples = 24 apples.'
-                    },
-                    {
-                        id: 25,
-                        text: 'I am a two-digit number. My tens digit is 5 and my ones digit is 3 less than my tens digit. What number am I?',
-                        validAnswers: ['52'],
-                        explanation: 'Tens digit = 5. Ones digit = 5 - 3 = 2. Putting them together gives 52.'
-                    }
-                ]
-            }
-        ];
-
-        // ADDED: RANDOM QUESTION HELPERS FOR REGENERATING THE ORIGINAL WORKSHEET
+        sectionId: "sec-a",
+    title: "Section 1: Basic Addition (सामान्य जोड़)",
+    marks: "20 Marks",
+    icon: "fas fa-plus",
+    color: "blue",
+    questions: [
+      {
+        id: "Q1",
+        text: "What is 432 + 215?\n\nप्रश्न: 432 + 215 कितना होगा?",
+        validAnswers: ["(A) 647"],
+        explanation: "$432 + 215 = 647$.\nस्पष्टीकरण: $432$ और $215$ को जोड़ने पर $647$ प्राप्त होता है।"
+      },
+      {
+        id: "Q2",
+        text: "What is 5,230 + 3,142?\n\nप्रश्न: 5,230 + 3,142 कितना होगा?",
+        validAnswers: ["(A) 8,372"],
+        explanation: "$5,230 + 3,142 = 8,372$.\nस्पष्टीकरण: $5,230$ और $3,142$ का योग $8,372$ है।"
+      },
+      {
+        id: "Q3",
+        text: "What is 605 + 283?\n\nप्रश्न: 605 + 283 कितना होगा?",
+        validAnswers: ["(A) 888"],
+        explanation: "$605 + 283 = 888$.\nस्पष्टीकरण: $605$ और $283$ को जोड़ने पर $888$ आता है।"
+      },
+      {
+        id: "Q4",
+        text: "What is 4,100 + 2,500?\n\nप्रश्न: 4,100 + 2,500 कितना होगा?",
+        validAnswers: ["(B) 6,600"],
+        explanation: "$4,100 + 2,500 = 6,600$.\nस्पष्टीकरण: $4,100$ और $2,500$ को जोड़ने पर $6,600$ प्राप्त होता है।"
+      },
+      {
+        id: "Q21",
+        text: "What is 320 + 450?\n\nप्रश्न: 320 + 450 कितना होगा?",
+        validAnswers: ["(A) 770"],
+        explanation: "$320 + 450 = 770$.\nस्पष्टीकरण: $320$ और $450$ का योग $770$ है।"
+      }
+    ]
+  },
+  {
+    sectionId: "sec-b",
+    title: "Section 2: Addition with Carry (हासिल वाले जोड़)",
+    marks: "20 Marks",
+    icon: "fas fa-calculator",
+    color: "green",
+    questions: [
+      {
+        id: "Q5",
+        text: "What is 458 + 276?\n\nप्रश्न: 458 + 276 कितना होगा?",
+        validAnswers: ["(B) 734"],
+        explanation: "$8+6=14$ (4, carry 1); $5+7+1=13$ (3, carry 1); $4+2+1=7$. Total = 734.\nस्पष्टीकरण: हासिल जोड़ते हुए, $458 + 276 = 734$ होता है।"
+      },
+      {
+        id: "Q6",
+        text: "What is 3,485 + 1,842?\n\nप्रश्न: 3,485 + 1,842 कितना होगा?",
+        validAnswers: ["(B) 5,327"],
+        explanation: "Adding with carry gives $3,485 + 1,842 = 5,327$.\nस्पष्टीकरण: हासिल वाले जोड़ के नियम से, $3,485 + 1,842 = 5,327$ प्राप्त होता है।"
+      },
+      {
+        id: "Q7",
+        text: "What is 789 + 432?\n\nप्रश्न: 789 + 432 कितना होगा?",
+        validAnswers: ["(B) 1,221"],
+        explanation: "$789 + 432 = 1,221$.\nस्पष्टीकरण: $789$ में $432$ जोड़ने पर $1,221$ होता है।"
+      },
+      {
+        id: "Q8",
+        text: "What is 2,654 + 3,876?\n\nप्रश्न: 2,654 + 3,876 कितना होगा?",
+        validAnswers: ["(C) 6,530"],
+        explanation: "$2,654 + 3,876 = 6,530$.\nस्पष्टीकरण: $2,654$ और $3,876$ का सही योग $6,530$ है।"
+      },
+      {
+        id: "Q22",
+        text: "What is 678 + 549?\n\nप्रश्न: 678 + 549 कितना होगा?",
+        validAnswers: ["(A) 1,227"],
+        explanation: "$678 + 549 = 1,227$.\nस्पष्टीकरण: हासिल के साथ जोड़ने पर $678 + 549 = 1,227$ प्राप्त होता है।"
+      }
+    ]
+  },
+  {
+    sectionId: "sec-c",
+    title: "Section 3: Place Value & Expanded Form Review (स्थानीय मान और विस्तारित रूप)",
+    marks: "20 Marks",
+    icon: "fas fa-list-ol",
+    color: "purple",
+    questions: [
+      {
+        id: "Q9",
+        text: "What is the place value of 8 in 6,382?\n\nप्रश्न: संख्या 4,732 में 7 का स्थानीय मान क्या है?",
+        validAnswers: ["(C) 700"],
+        explanation: "7 is in the hundreds place, so its place value is 700.\nस्पष्टीकरण: 7 सैकड़े के स्थान पर है, इसलिए इसका स्थानीय मान 700 है।"
+      },
+      {
+        id: "Q10",
+        text: "What number is formed by: 5,000 + 400 + 30 + 8?\n\nप्रश्न: 5,000 + 400 + 30 + 8 से कौन-सी संख्या बनेगी?",
+        validAnswers: ["(A) 5,438"],
+        explanation: "Combining the values gives 5,438.\nस्पष्टीकरण: सभी स्थानीय मानों को मिलाने पर 5,438 बनता है।"
+      },
+      {
+        id: "Q11",
+        text: "What is the expanded form of 3,092?\n\nप्रश्न: संख्या 3,092 का विस्तारित रूप क्या है?",
+        validAnswers: ["(A) 3,000 + 90 + 2"],
+        explanation: "$3,092 = 3$ thousands + 0 hundreds + 9 tens + 2 ones = $3,000 + 90 + 2$.\nस्पष्टीकरण: सैकड़े में 0 होने के कारण इसका विस्तारित रूप $3,000 + 90 + 2$ होगा।"
+      },
+      {
+        id: "Q12",
+        text: "What is the number just after 4,999 (Successor)?\n\nप्रश्न: संख्या 4,999 के ठीक बाद कौन-सी संख्या आती है?",
+        validAnswers: ["(B) 5,000"],
+        explanation: "Adding 1 to 4,999 gives 5,000.\nस्पष्टीकरण: 4,999 में 1 जोड़ने पर 5,000 प्राप्त होता है।"
+      },
+      {
+        id: "Q23",
+        text: "What is the place value of 5 in 5,841?\n\nप्रश्न: संख्या 5,841 में 5 का स्थानीय मान क्या है?",
+        validAnswers: ["(D) 5,000"],
+        explanation: "5 is in the thousands place, so its place value is 5,000.\nस्पष्टीकरण: 5 हजार के स्थान पर है, इसलिए इसका स्थानीय मान 5,000 है।"
+      }
+    ]
+  },
+  {
+    sectionId: "sec-d",
+    title: "Section 4: Number Comparison & Ordering (तुलना और क्रम)",
+    marks: "20 Marks",
+    icon: "fas fa-exchange-alt",
+    color: "orange",
+    questions: [
+      {
+        id: "Q13",
+        text: "Which sign correctly compares: 3,450 ___ 3,540?\n\nप्रश्न: सही चिह्न चुनें: 3,450 ___ 3,540",
+        options: ["(A) >", "(B) <", "(C) =", "(D) +"],
+        validAnswers: ["(B) <"],
+        explanation: "3,450 is less than 3,540, so 3,450 < 3,540.\nस्पष्टीकरण: 3,450, 3,540 से छोटा है, इसलिए < का चिह्न आएगा।"
+      },
+      {
+        id: "Q14",
+        text: "Which is the greatest number among the following?\n\nप्रश्न: निम्नलिखित में से सबसे बड़ी संख्या कौन-सी है?",
+        validAnswers: ["(C) 4,512"],
+        explanation: "Comparing hundreds and tens, 4,512 has the highest value.\nस्पष्टीकरण: सैकड़े और दहाई के अंकों की तुलना करने पर 4,512 सबसे बड़ी है।"
+      },
+      {
+        id: "Q15",
+        text: "Arrange in Ascending Order (Smallest to Greatest): 2341, 1432, 4123, 3214\n\nप्रश्न: आरोही क्रम (छोटे से बड़े) में व्यवस्थित करें: 2341, 1432, 4123, 3214",
+        validAnswers: ["(A) 1432, 2341, 3214, 4123"],
+        explanation: "Sorted from smallest to greatest: 1432 < 2341 < 3214 < 4123.\nस्पष्टीकरण: सबसे छोटी से बड़ी संख्या का सही क्रम 1432, 2341, 3214, 4123 है।"
+      },
+      {
+        id: "Q16",
+        text: "What is 10 more than 7,840?\n\nप्रश्न: 7,840 से 10 अधिक क्या होगा?",
+        validAnswers: ["(A) 7,850"],
+        explanation: "$7,840 + 10 = 7,850$.\nस्पष्टीकरण: 7,840 में 10 जोड़ने पर 7,850 प्राप्त होता है।"
+      },
+      {
+        id: "Q24",
+        text: "Which sign correctly compares: 8,210 ___ 8,120?\n\nप्रश्न: सही चिह्न चुनें: 8,210 ___ 8,120",
+        options: ["(A) >", "(B) <", "(C) =", "(D) +"],
+        validAnswers: ["(A) >"],
+        explanation: "8,210 is greater than 8,120, so 8,210 > 8,120.\nस्पष्टीकरण: 8,210, 8,120 से बड़ा है, इसलिए > का चिह्न आएगा।"
+      }
+    ]
+  },
+  {
+    sectionId: "sec-e",
+    title: "Section 5: Daily Life Word Problems on Addition (दैनिक जीवन के व्यावहारिक सवाल)",
+    marks: "20 Marks",
+    icon: "fas fa-shopping-cart",
+    color: "teal",
+    questions: [
+      {
+        id: "Q17",
+        text: "A school library has 1,450 Hindi books and 1,230 English books. How many total books are there?\n\nप्रश्न: एक स्कूल के पुस्तकालय में 1,450 हिंदी की और 1,230 अंग्रेजी की किताबें हैं। कुल कितनी किताबें हैं?",
+        validAnswers: ["(A) 2,680"],
+        explanation: "$1,450 + 1,230 = 2,680$ total books.\nस्पष्टीकरण: कुल किताबें ज्ञात करने के लिए दोनों को जोड़ेंगे: $1,450 + 1,230 = 2,680$।"
+      },
+      {
+        id: "Q18",
+        text: "Amit has ₹2,450 in his bank account. He deposits ₹1,500 more. How much money does he have now?\n\nप्रश्न: अमित के बैंक खाते में ₹2,450 हैं। वह ₹1,500 और जमा करता है। अब उसके खाते में कुल कितने रुपये हैं?",
+        validAnswers: ["(A) ₹3,950"],
+        explanation: "$2,450 + 1,500 = ₹3,950$.\nस्पष्टीकरण: कुल राशि = $2,450 + 1,500 = ₹3,950$।"
+      },
+      {
+        id: "Q19",
+        text: "A farmer harvested 3,210 oranges on Monday and 2,415 oranges on Tuesday. How many oranges did he harvest in total?\n\nप्रश्न: एक किसान ने सोमवार को 3,210 संतरे और मंगलवार को 2,415 संतरे तोड़े। उसने कुल कितने संतरे तोड़े?",
+        validAnswers: ["(A) 5,625"],
+        explanation: "$3,210 + 2,415 = 5,625$.\nस्पष्टीकरण: दोनों दिनों के संतरों का कुल योग $3,210 + 2,415 = 5,625$ है।"
+      },
+      {
+        id: "Q20",
+        text: "What is the sum of the greatest 3-digit number and the smallest 3-digit number?\n\nप्रश्न: सबसे बड़ी 3-अंकों की संख्या और सबसे छोटी 3-अंकों की संख्या का योग क्या है?",
+        validAnswers: ["(A) 1,099"],
+        explanation: "Greatest 3-digit number = 999, Smallest 3-digit number = 100. Sum = $999 + 100 = 1,099$.\nस्पष्टीकरण: सबसे बड़ी 3-अंकों की संख्या 999 और सबसे छोटी 100 है, जिनका योग $999 + 100 = 1,099$ है।"
+      },
+      {
+        id: "Q25",
+        text: "Rohan bought a shirt for ₹750 and trousers for ₹1,200. How much total money did he spend?\n\nप्रश्न: रोहन ने ₹750 की एक कमीज और ₹1,200 की पतलून खरीदी। उसने कुल कितने रुपये खर्च किए?",
+        validAnswers: ["(A) ₹1,950"],
+        explanation: "Total spent = ₹750 + ₹1,200 = ₹1,950.\nस्पष्टीकरण: कुल खर्च = ₹750 + ₹1,200 = ₹1,950 है।"
+      }
+    ]
+  }
+];
+// ADDED: RANDOM QUESTION HELPERS FOR REGENERATING THE ORIGINAL WORKSHEET
         function randomInt(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
