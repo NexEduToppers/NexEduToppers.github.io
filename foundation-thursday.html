@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundation Thursday - Class 4 Maths Worksheet</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Fredoka', 'sans-serif'],
+                        body: ['Nunito', 'sans-serif'],
+                    },
+                    colors: {
+                        glass: 'rgba(255, 255, 255, 0.75)',
+                        glassDark: 'rgba(30, 41, 59, 0.7)',
+                    },
+                    animation: {
+                        'shake': 'shake 0.4s cubic-bezier(.36,.07,.19,.97) both',
+                        'bounce-short': 'bounceShort 0.5s ease infinite alternate',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                    },
+                    keyframes: {
+                        shake: {
+                            '10%, 90%': { transform: 'translate3d(-2px, 0, 0)' },
+                            '20%, 80%': { transform: 'translate3d(4px, 0, 0)' },
+                            '30%, 50%, 70%': { transform: 'translate3d(-6px, 0, 0)' },
+                            '40%, 60%': { transform: 'translate3d(6px, 0, 0)' },
+                        },
+                        bounceShort: {
+                            '0%': { transform: 'translateY(0)' },
+                            '100%': { transform: 'translateY(-6px)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(99, 102, 241, 0.4)' },
+                            '50%': { boxShadow: '0 0 25px rgba(99, 102, 241, 0.8)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 35%, #e0e7ff 70%, #fae8ff 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        /* Ambient animated background circles */
+        .ambient-shape {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: -1;
+            opacity: 0.6;
+            animation: float 18s ease-in-out infinite alternate;
+        }
+        .shape-1 { background: #3b82f6; width: 300px; height: 300px; top: -50px; left: -50px; }
+        .shape-2 { background: #8b5cf6; width: 350px; height: 350px; bottom: -100px; right: -50px; animation-delay: -5s; }
+        .shape-3 { background: #ec4899; width: 250px; height: 250px; top: 40%; left: 80%; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(60px, 80px) rotate(180deg); }
+        }
+
+        /* Custom Glassmorphic Card Style */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Input styling with states */
+        .math-input {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .math-input.state-correct {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2) !important;
+        }
+
+        .math-input.state-incorrect {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2) !important;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="text-slate-800 pb-16">
+
+    <!-- Ambient background shapes -->
+    <div class="ambient-shape shape-1"></div>
+    <div class="ambient-shape shape-2"></div>
+    <div class="ambient-shape shape-3"></div>
+
+    <!-- Top Sticky Bar for Quick Navigation / Progress -->
+    <div class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/80 shadow-sm py-2.5 px-4 mb-6">
+        <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+                <span class="font-heading font-bold text-lg text-indigo-600 flex items-center gap-1.5">
+                    <i class="fa-solid fa-brain text-xl">
+                    </i> MathSprint
+                </span>
+                <span class="hidden sm:inline text-xs font-semibold px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-700">Class 4</span>
+            </div>
+
+            <!-- Timer Display -->
+            <div class="flex items-center gap-3 bg-slate-100/80 px-3 py-1.5 rounded-xl border border-slate-200">
+                <i class="fa-solid fa-stopwatch text-indigo-500 animate-pulse"></i>
+                <span id="timer-display" class="font-mono font-bold text-base text-slate-700">20:00</span>
+                <div class="flex gap-1">
+                    <button id="timer-toggle-btn" title="Pause/Play Timer" class="text-xs bg-white hover:bg-slate-200 p-1.5 rounded-lg text-slate-600 transition">
+                        <i class="fa-solid fa-pause"></i>
+                    </button>
+                    <button id="timer-reset-btn" title="Reset Timer" class="text-xs bg-white hover:bg-slate-200 p-1.5 rounded-lg text-slate-600 transition">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Score Pill -->
+            <div class="flex items-center gap-4">
+                <div class="text-right">
+                    <div class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Score</div>
+                    <div class="text-lg font-extrabold text-indigo-600 leading-none">
+                        <span id="header-score">0</span> / 25
+                    </div>
+                </div>
+                <!-- Submit / Finish Button -->
+                <a href="#summary-section" class="bg-indigo-600 hover:bg-indigo-700 text-white font-heading text-sm px-4 py-2 rounded-xl shadow-md hover:shadow-indigo-300/50 transition duration-200 flex items-center gap-1.5">
+                    <i class="fa-solid fa-flag-checkered"></i> View Results
+                </a>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="max-w-5xl mx-auto mt-2 bg-slate-200 h-2 rounded-full overflow-hidden">
+            <div id="progress-bar-fill" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-emerald-500 h-full w-0 transition-all duration-300"></div>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="max-w-4xl mx-auto px-4">
+        
+        <!-- HEADER CARD -->
+        <div class="glass-card rounded-3xl p-6 sm:p-8 mb-8 text-center relative overflow-hidden border border-white/60">
+            <div class="absolute -top-12 -right-12 w-32 h-32 bg-indigo-200/50 rounded-full blur-2xl"></div>
+            <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-pink-200/50 rounded-full blur-2xl"></div>
+
+            <div class="inline-block bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-3">
+                Foundation Practice • Day 4 / Thursday
+            </div>
+            
+            <h1 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight mb-2">
+                FOUNDATION THURSDAY - WORKSHEET 4
+            </h1>
+            <p class="text-slate-600 font-medium text-base sm:text-lg mb-6">
+                Fractions, Measurement, Time, Geometry & Word Problems / भिन्न, मापन, समय, ज्यामिति और शब्द-प्रश्न
+            </p>
+
+            <!-- Metadata Info Pills -->
+            <div class="flex flex-wrap justify-center items-center gap-3 text-xs sm:text-sm font-semibold mb-6">
+                <span class="bg-white/80 border border-slate-200/80 px-3.5 py-1.5 rounded-xl shadow-sm text-slate-700 flex items-center gap-1.5">
+                    <i class="fa-solid fa-clock text-indigo-500"></i> Time: 20 Minutes / समय: 20 मिनट
+                </span>
+                <span class="bg-white/80 border border-slate-200/80 px-3.5 py-1.5 rounded-xl shadow-sm text-slate-700 flex items-center gap-1.5">
+                    <i class="fa-solid fa-list-check text-emerald-500"></i> Questions: 25 / प्रश्न: 25
+                </span>
+                <span class="bg-white/80 border border-slate-200/80 px-3.5 py-1.5 rounded-xl shadow-sm text-slate-700 flex items-center gap-1.5">
+                    <i class="fa-solid fa-award text-amber-500"></i> Total Marks: 25 / कुल अंक: 25
+                </span>
+            </div>
+        </div>
+        <!-- HEADER CARD CLOSED -->
+
+        <!-- Learn First section removed as requested. -->
+
+        <!-- WORKSHEET QUESTIONS CONTAINER -->
+        <div id="sections-container"></div>
+
+<!-- FINAL SCOREBOARD & TEACHER'S REMARKS CARD -->
+        <div id="summary-section" class="glass-card rounded-3xl p-6 sm:p-8 mt-12 border-2 border-indigo-200 shadow-xl relative">
+            <div class="text-center mb-6">
+                <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900 mb-1">
+                    Worksheet Assessment & Scoreboard
+                </h2>
+                <p class="text-sm text-slate-500">Review your final score and performance summary / अपना स्कोर देखें</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Total Score Display -->
+                <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-2xl p-6 text-center shadow-lg flex flex-col justify-center items-center">
+                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-100 mb-1">Total Score</span>
+                    <div class="font-heading text-5xl font-extrabold my-1">
+                        <span id="final-score-num">0</span> <span class="text-2xl text-indigo-200">/ 25</span>
+                    </div>
+                    <span id="score-percentage" class="inline-block bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold mt-2">
+                        0% Accuracy
+                    </span>
+                </div>
+
+                <!-- Section Wise Breakdown -->
+                <div class="md:col-span-2 bg-white/90 rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-center">
+                    <h3 class="font-heading font-bold text-slate-800 text-sm mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-simple text-indigo-500"></i> Section Breakdown
+                    </h3>
+                    <div id="section-breakdown-list" class="space-y-2 text-xs sm:text-sm font-semibold">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teacher's Remarks Box -->
+            <div class="bg-amber-50/80 border-2 border-dashed border-amber-300 rounded-2xl p-5 sm:p-6 text-slate-800 relative">
+                <div class="absolute -top-3 left-6 bg-amber-400 text-slate-900 font-heading font-bold text-xs px-3 py-0.5 rounded-full uppercase tracking-wider">
+                    Teacher's Remarks
+                </div>
+                <div class="flex items-start gap-3 mt-1">
+                    <div id="teacher-avatar" class="text-3xl sm:text-4xl text-amber-500 pt-1">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <p id="teacher-remark-text" class="font-heading font-semibold text-base sm:text-lg text-slate-800 leading-snug">
+                            Complete questions to unlock teacher's remark! / शिक्षक की टिप्पणी पाने के लिए प्रश्न हल करें।
+                        </p>
+                        <p class="text-xs text-slate-500 mt-1">Based on accuracy across all 5 sections. / पाँचों भागों के प्रदर्शन पर आधारित।</p>
+                    </div>
+                </div>
+            </div>
+
+ <!-- GENERATE NEW QUESTIONS BUTTON -->
+        <div class="text-center mb-6">
+            <button id="generate-new-questions-btn" type="button"
+                class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm sm:text-base px-6 py-3 rounded-2xl shadow-lg transition duration-200">
+                Generate New Questions | नए प्रश्न बनाएँ
+            </button>
+
+            <p id="generate-status" class="text-sm text-slate-500 mt-2">
+                Click the button to create a fresh worksheet.
+                | नई वर्कशीट बनाने के लिए बटन दबाएँ।
+            </p>
+        </div>
+            <!-- Reset Worksheet Button -->
+            <div class="text-center mt-8">
+                <button id="reset-worksheet-btn" class="bg-slate-800 hover:bg-slate-900 text-white font-heading font-bold text-sm px-6 py-3 rounded-2xl shadow-lg transition duration-200 inline-flex items-center gap-2">
+                    <i class="fa-solid fa-rotate-left"></i> Reset & Try Again / फिर से शुरू करें
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- THURSDAY CLASS 4 MATHS WORKSHEET DATA ---
+        // Fresh randomized questions are created at page load and whenever Generate is clicked.
+        function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+        function makeQuestion(id, text, answers, explanation) {
+            return { id, text, validAnswers: (Array.isArray(answers) ? answers : [answers]).map(String), explanation };
+        }
+
+        function generateFreshWorksheetData() {
+            const q = [[], [], [], [], []];
+            const ri = randomInt;
+            function add(section, id, text, answer, worked) {
+                q[section].push(makeQuestion(id, text, answer, worked));
+            }
+            // Section A: Fractions / भिन्न
+            let den = [2, 3, 4, 5][ri(0,3)];
+            add(0,1,`A whole is divided into ${den} equal parts. What fraction represents one part? / एक पूरी वस्तु को ${den} बराबर भागों में बाँटा गया। एक भाग को कौन-सी भिन्न दर्शाती है?`,`1/${den}`,`There are ${den} equal parts and we take 1 part, so the fraction is 1/${den}. / कुल ${den} बराबर भाग हैं और 1 भाग लिया है, इसलिए भिन्न 1/${den} है।`);
+            const d2 = [2,4,6,8][ri(0,3)];
+            add(0,2,`Simplify the fraction ${d2/2}/${d2}. / भिन्न ${d2/2}/${d2} को सरल करें।`,`1/2`,`Divide the numerator and denominator by ${d2/2}: ${d2/2} ÷ ${d2/2} = 1 and ${d2} ÷ ${d2/2} = 2. So ${d2/2}/${d2} = 1/2. / अंश और हर दोनों को ${d2/2} से भाग दें: ${d2/2} ÷ ${d2/2} = 1 और ${d2} ÷ ${d2/2} = 2। इसलिए ${d2/2}/${d2} = 1/2।`);
+            const d3 = [4,6,8,10][ri(0,3)], n31 = d3/4, n32 = d3/2;
+            add(0,3,`Add: ${n31}/${d3} + ${n32}/${d3}. / जोड़ें: ${n31}/${d3} + ${n32}/${d3}।`,`${n31+n32}/${d3}`,`The denominators are the same, so add the numerators: ${n31} + ${n32} = ${n31+n32}. Keep the denominator ${d3}. Answer = ${n31+n32}/${d3}. / हर समान हैं, इसलिए अंश जोड़ें: ${n31} + ${n32} = ${n31+n32}। हर ${d3} ही रहेगा। उत्तर = ${n31+n32}/${d3}।`);
+            const eatenDen = [3,4,5,6][ri(0,3)], eaten = eatenDen-1;
+            add(0,4,`A pizza is cut into ${eatenDen} equal slices. ${eaten} slices are eaten. What fraction is left? / पिज़्ज़ा के ${eatenDen} बराबर टुकड़े हैं। ${eaten} टुकड़े खा लिए। कितनी भिन्न बची?`,`1/${eatenDen}`,`Start with ${eatenDen}/${eatenDen}. Subtract the ${eaten}/${eatenDen} eaten: ${eatenDen}/${eatenDen} − ${eaten}/${eatenDen} = 1/${eatenDen}. / शुरुआत में ${eatenDen}/${eatenDen} था। खाए गए ${eaten}/${eatenDen} घटाएँ: ${eatenDen}/${eatenDen} − ${eaten}/${eatenDen} = 1/${eatenDen}।`);
+            const bigDen = [3,4,5,6][ri(0,3)], smallDen = bigDen*2;
+            add(0,5,`Which is greater: 1/${bigDen} or 1/${smallDen}? / कौन-सी भिन्न बड़ी है: 1/${bigDen} या 1/${smallDen}?`,`1/${bigDen}`,`Both fractions have numerator 1. When the whole is split into fewer equal parts, each part is larger. Since ${bigDen} is less than ${smallDen}, 1/${bigDen} is greater than 1/${smallDen}. / दोनों के अंश 1 हैं। पूरे को कम बराबर भागों में बाँटने पर हर भाग बड़ा होता है। इसलिए 1/${bigDen}, 1/${smallDen} से बड़ी है।`);
+
+            // Section B: Measurement / मापन
+            let metres = ri(2,8);
+            add(1,6,`How many centimetres are there in ${metres} metres? / ${metres} मीटर में कितने सेंटीमीटर होते हैं?`,String(metres*100),`1 metre = 100 centimetres. So ${metres} × 100 = ${metres*100} centimetres. / 1 मीटर = 100 सेंटीमीटर। इसलिए ${metres} × 100 = ${metres*100} सेंटीमीटर।`);
+            let kg = ri(2,7);
+            add(1,7,`Convert ${kg} kg into grams. / ${kg} किलोग्राम को ग्राम में बदलें।`,String(kg*1000),`1 kg = 1,000 g. So ${kg} × 1,000 = ${kg*1000} g. / 1 किलोग्राम = 1,000 ग्राम। इसलिए ${kg} × 1,000 = ${kg*1000} ग्राम।`);
+            let litres = ri(2,6);
+            add(1,8,`How many millilitres are in ${litres} litres? / ${litres} लीटर में कितने मिलीलीटर हैं?`,String(litres*1000),`1 litre = 1,000 millilitres. So ${litres} × 1,000 = ${litres*1000} mL. / 1 लीटर = 1,000 मिलीलीटर। इसलिए ${litres} × 1,000 = ${litres*1000} मिलीलीटर।`);
+            let length = ri(65,145), cut = ri(15,Math.min(45,length-10));
+            add(1,9,`A ribbon is ${length} cm long. ${cut} cm is cut off. How much is left? / एक रिबन ${length} सेमी लंबा है। ${cut} सेमी काट दिया। कितना बचा?`,String(length-cut),`Split ${cut} into tens and ones: ${Math.floor(cut/10)*10} + ${cut%10}. First subtract the tens part: ${length} − ${Math.floor(cut/10)*10} = ${length-Math.floor(cut/10)*10} cm. Now subtract the remaining ${cut%10} cm: ${length-Math.floor(cut/10)*10} − ${cut%10} = ${length-cut} cm. / ${cut} को दहाई और इकाई में बाँटें: ${Math.floor(cut/10)*10} + ${cut%10}। पहले दहाई वाला हिस्सा घटाएँ: ${length} − ${Math.floor(cut/10)*10} = ${length-Math.floor(cut/10)*10} सेमी। अब बचे हुए ${cut%10} सेमी घटाएँ: ${length-Math.floor(cut/10)*10} − ${cut%10} = ${length-cut} सेमी।`);
+            let cm = ri(2,9)*100 + ri(1,9)*10;
+            add(1,10,`Convert ${cm} cm into metres and centimetres. Give the number of centimetres left after full metres. / ${cm} सेमी को मीटर और सेंटीमीटर में बदलें। पूरे मीटर के बाद बचे सेंटीमीटर बताएँ।`,String(cm%100),`${cm} cm = ${Math.floor(cm/100)} full metre(s) and ${cm%100} cm left, because 100 cm = 1 m. The remaining centimetres are ${cm%100}. / ${cm} सेमी = ${Math.floor(cm/100)} पूरा मीटर और ${cm%100} सेमी शेष, क्योंकि 100 सेमी = 1 मीटर। शेष ${cm%100} सेमी है।`);
+
+            // Section C: Time & Calendar / समय और कैलेंडर
+            let h = ri(1,5), mins = [0,15,30,45][ri(0,3)], addM = [15,30,45][ri(0,2)];
+            let total = h*60+mins+addM, outH = Math.floor(total/60)%12 || 12, outM = total%60;
+            let startTime = `${h}:${String(mins).padStart(2,'0')}`, endTime = `${outH}:${String(outM).padStart(2,'0')}`;
+            add(2,11,`A class starts at ${startTime}. It lasts ${addM} minutes. What time does it end? / कक्षा ${startTime} बजे शुरू होती है। यह ${addM} मिनट चलती है। कब समाप्त होगी?`,endTime,`Add ${addM} minutes to ${startTime}. ${mins} + ${addM} = ${mins+addM} minutes; that is ${Math.floor((mins+addM)/60)} hour(s) and ${(mins+addM)%60} minutes. The end time is ${endTime}. / ${startTime} में ${addM} मिनट जोड़ें। ${mins} + ${addM} = ${mins+addM} मिनट; यानी ${Math.floor((mins+addM)/60)} घंटा और ${(mins+addM)%60} मिनट। समाप्ति का समय ${endTime} है।`);
+            let startH = ri(1,8), duration = [60,90,120,150][ri(0,3)], endTotal = startH*60+duration, endHr = Math.floor(endTotal/60)%12 || 12, endMin = endTotal%60;
+            add(2,12,`A movie starts at ${startH}:00 and lasts ${duration} minutes. What is the finishing time? / फ़िल्म ${startH}:00 बजे शुरू होती है और ${duration} मिनट चलती है। समाप्ति का समय क्या है?`,`${endHr}:${String(endMin).padStart(2,'0')}`,`${duration} minutes = ${Math.floor(duration/60)} hour(s) and ${duration%60} minutes. Add this to ${startH}:00 to get ${endHr}:${String(endMin).padStart(2,'0')}. / ${duration} मिनट = ${Math.floor(duration/60)} घंटा और ${duration%60} मिनट। इसे ${startH}:00 में जोड़ने पर ${endHr}:${String(endMin).padStart(2,'0')} मिलता है।`);
+            let hours = ri(2,8);
+            add(2,13,`Convert ${hours} hours into minutes. / ${hours} घंटे को मिनट में बदलें।`,String(hours*60),`1 hour = 60 minutes. So ${hours} × 60 = ${hours*60} minutes. / 1 घंटा = 60 मिनट। इसलिए ${hours} × 60 = ${hours*60} मिनट।`);
+            let weeks = ri(2,5);
+            add(2,14,`How many days are there in ${weeks} weeks? / ${weeks} सप्ताह में कितने दिन होते हैं?`,String(weeks*7),`1 week has 7 days. So ${weeks} × 7 = ${weeks*7} days. / 1 सप्ताह में 7 दिन होते हैं। इसलिए ${weeks} × 7 = ${weeks*7} दिन।`);
+            let dayNum = ri(4,20), jump = ri(2,7), nextDay = dayNum+jump;
+            add(2,15,`If today is the ${dayNum}th day of a month, what date will it be ${jump} days later? / यदि आज महीने की ${dayNum} तारीख है, तो ${jump} दिन बाद कौन-सी तारीख होगी?`,String(nextDay),`Move forward ${jump} days: ${dayNum} + ${jump} = ${nextDay}. So the date will be the ${nextDay}th. / ${jump} दिन आगे बढ़ें: ${dayNum} + ${jump} = ${nextDay}। तारीख ${nextDay} होगी।`);
+
+            // Section D: Shapes & Geometry / आकृतियाँ और ज्यामिति
+            add(3,16,`How many sides does a hexagon have? / षट्भुज की कितनी भुजाएँ होती हैं?`,'6',`A hexagon is a six-sided shape. So it has 6 sides. / षट्भुज छह भुजाओं वाली आकृति है। इसलिए इसकी 6 भुजाएँ होती हैं।`);
+            add(3,17,`How many corners (vertices) does a rectangle have? / आयत के कितने कोने होते हैं?`,'4',`A rectangle has four corners: one at each meeting point of its sides. Answer = 4. / आयत के चार कोने होते हैं, जहाँ उसकी भुजाएँ मिलती हैं। उत्तर = 4।`);
+            let side = ri(3,12);
+            add(3,18,`A square has side length ${side} cm. What is its perimeter? / एक वर्ग की भुजा ${side} सेमी है। उसका परिमाप कितना है?`,String(side*4),`A square has 4 equal sides. Perimeter = 4 × side = 4 × ${side} = ${side*4} cm. / वर्ग की 4 बराबर भुजाएँ होती हैं। परिमाप = 4 × भुजा = 4 × ${side} = ${side*4} सेमी।`);
+            let l = ri(5,12), w = ri(2,Math.min(8,l-1));
+            add(3,19,`A rectangle is ${l} cm long and ${w} cm wide. Find its perimeter. / एक आयत की लंबाई ${l} सेमी और चौड़ाई ${w} सेमी है। परिमाप निकालें।`,String(2*(l+w)),`Perimeter = 2 × (length + width) = 2 × (${l} + ${w}) = 2 × ${l+w} = ${2*(l+w)} cm. / परिमाप = 2 × (लंबाई + चौड़ाई) = 2 × (${l} + ${w}) = 2 × ${l+w} = ${2*(l+w)} सेमी।`);
+            add(3,20,`Which shape has 3 sides: triangle, square, or pentagon? / किस आकृति की 3 भुजाएँ होती हैं: त्रिभुज, वर्ग या पंचभुज?`,'triangle',`A triangle has 3 sides. A square has 4 and a pentagon has 5. So the answer is triangle. / त्रिभुज की 3, वर्ग की 4 और पंचभुज की 5 भुजाएँ होती हैं। इसलिए उत्तर त्रिभुज है।`);
+
+            // Section E: Mixed Word Problems / मिश्रित शब्द-प्रश्न
+            let apples = ri(24,48), share = [3,4,6][ri(0,2)], kids = [3,4,6][ri(0,2)]; apples = kids*share;
+            add(4,21,`There are ${apples} apples shared equally among ${kids} children. How many apples does each child get? / ${apples} सेब ${kids} बच्चों में बराबर बाँटे गए। हर बच्चे को कितने सेब मिलेंगे?`,String(share),`Share equally by dividing: ${apples} ÷ ${kids} = ${share}. Each child gets ${share} apples. / बराबर बाँटने के लिए भाग दें: ${apples} ÷ ${kids} = ${share}। हर बच्चे को ${share} सेब मिलेंगे।`);
+            let notebooks = ri(3,8), price = ri(10,25);
+            add(4,22,`One notebook costs ₹${price}. What is the cost of ${notebooks} notebooks? / एक कॉपी ₹${price} की है। ${notebooks} कॉपियों का कुल मूल्य कितना होगा?`,String(notebooks*price),`Multiply price by quantity: ${notebooks} × ₹${price} = ₹${notebooks*price}. / कीमत को संख्या से गुणा करें: ${notebooks} × ₹${price} = ₹${notebooks*price}।`);
+            let totalBooks = ri(35,65), borrowed = ri(10,25);
+            add(4,23,`A library has ${totalBooks} books. ${borrowed} books are borrowed. How many remain? / पुस्तकालय में ${totalBooks} किताबें हैं। ${borrowed} किताबें ले ली गईं। कितनी बचीं?`,String(totalBooks-borrowed),`Split ${borrowed} into tens and ones: ${Math.floor(borrowed/10)*10} + ${borrowed%10}. First subtract the tens: ${totalBooks} − ${Math.floor(borrowed/10)*10} = ${totalBooks-Math.floor(borrowed/10)*10}. Then subtract the ones: ${totalBooks-Math.floor(borrowed/10)*10} − ${borrowed%10} = ${totalBooks-borrowed}. So ${totalBooks-borrowed} books remain. / ${borrowed} को दहाई और इकाई में बाँटें: ${Math.floor(borrowed/10)*10} + ${borrowed%10}। पहले दहाई घटाएँ: ${totalBooks} − ${Math.floor(borrowed/10)*10} = ${totalBooks-Math.floor(borrowed/10)*10}। फिर इकाई घटाएँ: ${totalBooks-Math.floor(borrowed/10)*10} − ${borrowed%10} = ${totalBooks-borrowed}। इसलिए ${totalBooks-borrowed} किताबें बचीं।`);
+            let packs = ri(4,9), pencils = ri(6,12);
+            add(4,24,`There are ${packs} packets with ${pencils} pencils in each packet. How many pencils are there altogether? / ${packs} पैकेट हैं और हर पैकेट में ${pencils} पेंसिल हैं। कुल कितनी पेंसिल हैं?`,String(packs*pencils),`Multiply packets by pencils per packet: ${packs} × ${pencils} = ${packs*pencils} pencils. / पैकेटों की संख्या को हर पैकेट की पेंसिल से गुणा करें: ${packs} × ${pencils} = ${packs*pencils} पेंसिल।`);
+            let money = ri(100,250), spend = ri(25,Math.min(90,money-10)), extra = ri(10,35);
+            add(4,25,`Riya has ₹${money}. She spends ₹${spend} and then receives ₹${extra}. How much money does she have now? / रिया के पास ₹${money} हैं। वह ₹${spend} खर्च करती है और फिर उसे ₹${extra} मिलते हैं। अब उसके पास कितने रुपये हैं?`,String(money-spend+extra),`Split ₹${spend} into tens and ones: ₹${Math.floor(spend/10)*10} + ₹${spend%10}. First subtract the tens: ₹${money} − ₹${Math.floor(spend/10)*10} = ₹${money-Math.floor(spend/10)*10}. Then subtract the ones: ₹${money-Math.floor(spend/10)*10} − ₹${spend%10} = ₹${money-spend}. Now add the money received: ₹${money-spend} + ₹${extra} = ₹${money-spend+extra}. / ₹${spend} को दहाई और इकाई में बाँटें: ₹${Math.floor(spend/10)*10} + ₹${spend%10}। पहले दहाई घटाएँ: ₹${money} − ₹${Math.floor(spend/10)*10} = ₹${money-Math.floor(spend/10)*10}। फिर इकाई घटाएँ: ₹${money-Math.floor(spend/10)*10} − ₹${spend%10} = ₹${money-spend}। अब मिले रुपये जोड़ें: ₹${money-spend} + ₹${extra} = ₹${money-spend+extra}।`);
+
+            return [
+              {sectionId:'sec-a',title:'Section A: Fractions / भिन्न',marks:'5 marks',icon:'fa-pie-chart',color:'indigo',questions:q[0]},
+              {sectionId:'sec-b',title:'Section B: Measurement / मापन',marks:'5 marks',icon:'fa-ruler',color:'blue',questions:q[1]},
+              {sectionId:'sec-c',title:'Section C: Time & Calendar / समय और कैलेंडर',marks:'5 marks',icon:'fa-clock',color:'emerald',questions:q[2]},
+              {sectionId:'sec-d',title:'Section D: Shapes & Geometry / आकृतियाँ और ज्यामिति',marks:'5 marks',icon:'fa-shapes',color:'purple',questions:q[3]},
+              {sectionId:'sec-e',title:'Section E: Mixed Word Problems / मिश्रित शब्द-प्रश्न',marks:'5 marks',icon:'fa-brain',color:'amber',questions:q[4]}
+            ];
+        }
+
+        let worksheetData = generateFreshWorksheetData();
+
+        // --- APP STATE ---
+        const userAnswers = {}; // { qId: string }
+        const questionStatus = {}; // { qId: boolean }
+
+        // --- TIMER STATE ---
+        let totalTimeSeconds = 20 * 60;
+        let timerInterval = null;
+        let isTimerRunning = false;
+
+        // --- AUDIO SYNTHESIS (WEB AUDIO API) ---
+        let audioCtx = null;
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return audioCtx;
+        }
+
+        function playSound(type) {
+            try {
+                const ctx = getAudioContext();
+                if (ctx.state === 'suspended') {
+                    ctx.resume();
+                }
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'correct') {
+                    // Pleasant arpeggio chime
+                    const now = ctx.currentTime;
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, now); // C5
+                    osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.1); // E5
+                    osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.2); // G5
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+                    osc.start(now);
+                    osc.stop(now + 0.35);
+                } else if (type === 'incorrect') {
+                    // Soft error buzz
+                    const now = ctx.currentTime;
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(180, now);
+                    osc.frequency.exponentialRampToValueAtTime(110, now + 0.2);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                }
+            } catch (e) {
+                // Audio might be blocked by browser policy until interaction
+            }
+        }
+
+        // --- VOICE NARRATION (SPEECH SYNTHESIS) ---
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // stop current speech
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 0.9;
+                utterance.pitch = 1.0;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+// --- NORMALIZATION HELPER ---
+        function normalizeAnswer(str) {
+            if (!str) return '';
+            return str
+                .toString()
+                .toLowerCase()
+                .trim()
+                // Accept a dot as a time separator too: 4.00 and 4:00 mean the same time.
+                .replace(/\b(\d{1,2})\.(\d{2})\b/g, '$1:$2')
+                .replace(/\b(a\.?m\.?|p\.?m\.?)\b/g, '')
+                .replace(/,/g, '')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function checkIsAnswerCorrect(question, userVal) {
+            const normUser = normalizeAnswer(userVal);
+            if (!normUser) return false;
+            return question.validAnswers.some(ans => normalizeAnswer(ans) === normUser);
+        }
+
+        // --- INITIALIZE UI ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderWorksheet();
+            startTimer();
+            setupEventListeners();
+            updateScoreboard();
+        });
+
+        // RENDER WORKSHEET SECTIONS
+        function renderWorksheet() {
+            const container = document.getElementById('sections-container');
+            container.innerHTML = '';
+
+            worksheetData.forEach(section => {
+                const sectionEl = document.createElement('div');
+                sectionEl.className = 'glass-card rounded-3xl p-5 sm:p-7 shadow-sm border border-white/80';
+                
+                // Section Header
+                sectionEl.innerHTML = `
+                    <div class="flex items-center justify-between border-b border-slate-200/80 pb-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-2xl bg-${section.color}-100 text-${section.color}-600 flex items-center justify-center text-lg font-bold">
+                                <i class="fa-solid ${section.icon}"></i>
+                            </div>
+                            <div>
+                                <h2 class="font-heading font-extrabold text-lg sm:text-xl text-slate-800">
+                                    ${section.title}
+                                </h2>
+                                <span class="text-xs text-slate-500 font-semibold">${section.questions.length} Questions</span>
+                            </div>
+                        </div>
+                        <span class="bg-slate-100 text-slate-700 font-bold text-xs px-3 py-1 rounded-full border border-slate-200">
+                            ${section.marks}
+                        </span>
+                    </div>
+                    <div class="space-y-6">
+                        ${section.questions.map(q => renderQuestionCard(q)).join('')}
+                    </div>
+                `;
+                container.appendChild(sectionEl);
+            });
+        }
+
+        // RENDER SINGLE QUESTION CARD
+        function renderQuestionCard(q) {
+            return `
+                <div id="q-card-${q.id}" class="bg-white/80 rounded-2xl p-4 sm:p-5 border border-slate-200/80 transition-all duration-200 hover:shadow-md">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+                        <div class="flex items-start gap-2.5">
+                            <span class="bg-slate-800 text-white font-heading font-bold text-xs px-2.5 py-1 rounded-lg shrink-0 mt-0.5">
+                                Q${q.id}
+                            </span>
+                            <span class="font-bold text-slate-800 text-base sm:text-lg leading-snug">
+                                ${q.text}
+                            </span>
+                        </div>
+                        <button onclick="speakText('${q.text.replace(/'/g, "\\'")}')" title="Read Aloud" class="self-end sm:self-auto text-xs bg-indigo-50 hover:bg-indigo-100 text-indigo-600 px-2.5 py-1.5 rounded-lg flex items-center gap-1 font-semibold transition shrink-0">
+                            <i class="fa-solid fa-volume-high"></i> Read
+                        </button>
+                    </div>
+
+                    <!-- Input and Actions -->
+                    <div class="flex flex-wrap items-center gap-3">
+                        <div class="relative flex-1 min-w-[200px]">
+                            <input type="text" 
+                                id="input-${q.id}" 
+                                autocomplete="off"
+                                placeholder="Type answer..." 
+                                oninput="handleInputChanged(${q.id})"
+                                class="math-input w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 border-slate-300 focus:outline-none focus:border-indigo-500 bg-white/90 text-slate-800 placeholder:font-normal placeholder:text-slate-400"
+                            />
+                            <span id="badge-${q.id}" class="absolute right-3 top-1/2 -translate-y-1/2 text-lg hidden"></span>
+                        </div>
+
+                        <button
+                            id="check-btn-${q.id}"
+                            type="button"
+                            onclick="checkAnswer(${q.id})"
+                            class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white border border-indigo-700 font-heading text-xs font-bold rounded-xl transition flex items-center gap-1.5 shrink-0">
+                            <i class="fa-solid fa-check"></i>
+                            <span>Check Answer</span>
+                        </button>
+                        <button
+                            id="hint-btn-${q.id}"
+                            type="button"
+                            onclick="toggleHint(${q.id})"
+                            class="px-4 py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 font-heading text-xs font-bold rounded-xl transition flex items-center gap-1.5 shrink-0">
+                            <i class="fa-solid fa-lightbulb"></i>
+                            <span>Hint / संकेत</span>
+                        </button>
+                    </div>
+
+                    <div id="feedback-${q.id}" aria-live="polite" class="hidden mt-3 rounded-xl p-3 text-sm font-semibold"></div>
+                    <div id="hint-${q.id}" class="hidden mt-3 rounded-xl p-3 text-sm text-amber-900 bg-amber-50 border border-amber-200">
+                        <strong>Hint / संकेत:</strong> ${getQuestionHint(q)}
+                    </div>
+
+                    <!-- Step-by-step explanation -->
+                    <div id="explanation-${q.id}" class="hidden mt-4 pt-3 border-t border-slate-200 text-xs sm:text-sm text-slate-700 bg-amber-50/60 p-3.5 rounded-xl border border-amber-200/80">
+                        <div class="font-heading font-bold text-amber-900 mb-1 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check text-emerald-600"></i> Expected Answer: 
+                            <span class="text-emerald-700 font-extrabold underline">${q.validAnswers[0]}</span>
+                        </div>
+                        <p class="text-slate-700 font-medium">
+                            <span class="font-bold text-amber-800">Explanation:</span> ${q.explanation}
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Every question has its own worked-out hint with steps and final answer.
+        function getQuestionHint(q) {
+            return q.explanation || 'Break the question into small steps. / प्रश्न को छोटे-छोटे चरणों में हल करें।';
+        }
+
+        // Typing immediately colors the box: green for a correct answer, red for an incorrect one.
+        // Scoreboard is recalculated from current answers so correct answers count reliably.
+        function handleInputChanged(qId) {
+            const inputEl = document.getElementById(`input-${qId}`);
+            const badgeEl = document.getElementById(`badge-${qId}`);
+            const cardEl = document.getElementById(`q-card-${qId}`);
+            const feedbackEl = document.getElementById(`feedback-${qId}`);
+            userAnswers[qId] = inputEl.value;
+            delete questionStatus[qId];
+            const val = inputEl.value.trim();
+            const q = findQuestion(qId);
+            const baseClass = 'math-input w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 focus:outline-none bg-white/90 text-slate-800 placeholder:font-normal placeholder:text-slate-400';
+
+            if (!val) {
+                inputEl.className = baseClass + ' border-slate-300 focus:border-indigo-500';
+                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg hidden';
+                badgeEl.innerHTML = '';
+            } else if (q && checkIsAnswerCorrect(q, val)) {
+                inputEl.className = baseClass + ' state-correct';
+                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg text-emerald-600 font-bold block';
+                badgeEl.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            } else {
+                inputEl.className = baseClass + ' state-incorrect';
+                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg text-rose-500 font-bold block';
+                badgeEl.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+            }
+            feedbackEl.className = 'hidden mt-3 rounded-xl p-3 text-sm font-semibold';
+            feedbackEl.textContent = '';
+            cardEl.classList.remove('animate-shake');
+            updateScoreboard();
+        }
+
+        function findQuestion(qId) {
+            for (const sec of worksheetData) {
+                const found = sec.questions.find(q => q.id === qId);
+                if (found) return found;
+            }
+            return null;
+        }
+
+        function checkAnswer(qId) {
+            const q = findQuestion(qId);
+            if (!q) return;
+            const inputEl = document.getElementById(`input-${qId}`);
+            const badgeEl = document.getElementById(`badge-${qId}`);
+            const cardEl = document.getElementById(`q-card-${qId}`);
+            const feedbackEl = document.getElementById(`feedback-${qId}`);
+            const explanationEl = document.getElementById(`explanation-${qId}`);
+            const val = inputEl.value.trim();
+
+            if (!val) {
+                feedbackEl.className = 'mt-3 rounded-xl p-3 text-sm font-semibold text-amber-900 bg-amber-50 border border-amber-200';
+                feedbackEl.textContent = 'Please type an answer first. | पहले अपना जवाब लिखें।';
+                inputEl.focus();
+                return;
+            }
+
+            userAnswers[qId] = val;
+            const isCorrect = checkIsAnswerCorrect(q, val);
+            questionStatus[qId] = isCorrect;
+            explanationEl.classList.remove('hidden');
+
+            if (isCorrect) {
+                inputEl.className = 'math-input state-correct w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 focus:outline-none bg-white text-slate-800';
+                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg text-emerald-600 font-bold block';
+                badgeEl.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+                feedbackEl.className = 'mt-3 rounded-xl p-3 text-sm font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200';
+                feedbackEl.textContent = 'Correct answer! / सही जवाब! Well done!';
+                cardEl.classList.remove('animate-shake');
+                playSound('correct');
+            } else {
+                inputEl.className = 'math-input state-incorrect w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 focus:outline-none bg-white text-slate-800';
+                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg text-rose-500 font-bold block';
+                badgeEl.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+                feedbackEl.className = 'mt-3 rounded-xl p-3 text-sm font-semibold text-rose-800 bg-rose-50 border border-rose-200';
+                feedbackEl.textContent = `Wrong answer / गलत जवाब। Correct answer / सही जवाब: ${q.validAnswers[0]}. Try again!`;
+                cardEl.classList.remove('animate-shake');
+                void cardEl.offsetWidth;
+                cardEl.classList.add('animate-shake');
+                playSound('incorrect');
+            }
+            updateScoreboard();
+        }
+
+        function toggleHint(qId) {
+            document.getElementById(`hint-${qId}`).classList.toggle('hidden');
+        }
+
+        // --- SCOREBOARD & PROGRESS UPDATES ---
+        function updateScoreboard() {
+            let totalCorrect = 0;
+            let answeredCount = 0;
+
+            worksheetData.forEach(sec => {
+                sec.questions.forEach(q => {
+                    if (userAnswers[q.id] && userAnswers[q.id].trim() !== '') {
+                        answeredCount++;
+                    }
+                    // Count correctness from the current answer itself, not only from
+                    // questionStatus. This keeps the scoreboard in sync while typing and
+                    // after Check Answer is clicked.
+                    if (userAnswers[q.id] && checkIsAnswerCorrect(q, userAnswers[q.id])) {
+                        totalCorrect++;
+                    }
+                });
+            });
+
+            // Update top bar score & fill
+            document.getElementById('header-score').textContent = totalCorrect;
+            const progressPercent = Math.round((answeredCount / 25) * 100);
+            document.getElementById('progress-bar-fill').style.width = `${progressPercent}%`;
+
+            // Update summary score card
+            document.getElementById('final-score-num').textContent = totalCorrect;
+            const accuracyPercent = Math.round((totalCorrect / 25) * 100);
+            document.getElementById('score-percentage').textContent = `${accuracyPercent}% Accuracy`;
+
+            // Section breakdown list
+            const breakdownContainer = document.getElementById('section-breakdown-list');
+            breakdownContainer.innerHTML = '';
+
+            worksheetData.forEach(sec => {
+                let secCorrect = 0;
+                sec.questions.forEach(q => {
+                    if (userAnswers[q.id] && checkIsAnswerCorrect(q, userAnswers[q.id])) {
+                        secCorrect++;
+                    }
+                });
+
+                const secRow = document.createElement('div');
+                secRow.className = 'flex items-center justify-between p-1.5 rounded-lg bg-slate-50 border border-slate-100';
+                secRow.innerHTML = `
+                    <span class="text-slate-700 font-semibold truncate max-w-[200px] sm:max-w-none">${sec.title}</span>
+                    <span class="font-extrabold ${secCorrect === 5 ? 'text-emerald-600' : 'text-slate-800'}">
+                        ${secCorrect} / 5
+                    </span>
+                `;
+                breakdownContainer.appendChild(secRow);
+            });
+
+            // Update Teacher Remarks based on score
+            updateTeacherRemarks(totalCorrect);
+        }
+
+        function updateTeacherRemarks(score) {
+            const remarkText = document.getElementById('teacher-remark-text');
+            const avatarEl = document.getElementById('teacher-avatar');
+            const attempted = Object.values(userAnswers).some(value => String(value || '').trim() !== '');
+            if (!attempted) {
+                remarkText.textContent = "Complete a few questions to see your feedback! / अपनी प्रतिक्रिया देखने के लिए कुछ प्रश्न हल करें!";
+                avatarEl.innerHTML = '<i class="fa-solid fa-graduation-cap text-indigo-500"></i>';
+                return;
+            }
+
+            if (score >= 23) {
+                remarkText.textContent = "Outstanding! Excellent number sense and speed! You are a Super Star! ⭐⭐⭐⭐⭐";
+                avatarEl.innerHTML = '<i class="fa-solid fa-crown text-amber-500"></i>';
+            } else if (score >= 18) {
+                remarkText.textContent = "Great job! Good effort, keep practicing for perfection! 🌟";
+                avatarEl.innerHTML = '<i class="fa-solid fa-star text-amber-400"></i>';
+            } else {
+                remarkText.textContent = "Nice try! Needs a little more practice on quick calculations. Keep going! 💪";
+                avatarEl.innerHTML = '<i class="fa-solid fa-heart text-rose-500"></i>';
+            }
+        }
+
+        // --- COUNTDOWN TIMER FUNCTIONS ---
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            isTimerRunning = true;
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+                if (isTimerRunning) {
+                    if (totalTimeSeconds > 0) {
+                        totalTimeSeconds--;
+                        updateTimerDisplay();
+                    } else {
+                        clearInterval(timerInterval);
+                        isTimerRunning = false;
+                        alert("Time's up! Review your answers on the scoreboard.");
+                    }
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(totalTimeSeconds / 60);
+            const secs = totalTimeSeconds % 60;
+            const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            document.getElementById('timer-display').textContent = formatted;
+        }
+
+        function toggleTimer() {
+            const toggleBtn = document.getElementById('timer-toggle-btn');
+            isTimerRunning = !isTimerRunning;
+            if (isTimerRunning) {
+                toggleBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            } else {
+                toggleBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+            }
+        }
+
+        function resetTimer() {
+            totalTimeSeconds = 20 * 60;
+            isTimerRunning = true;
+            document.getElementById('timer-toggle-btn').innerHTML = '<i class="fa-solid fa-pause"></i>';
+            updateTimerDisplay();
+        }
+
+        // --- SETUP EVENT LISTENERS ---
+        function setupEventListeners() {
+            // ADDED: Regenerate the existing 25-question worksheet, not a separate worksheet.
+            document.getElementById('generate-new-questions-btn').addEventListener('click', () => {
+                worksheetData = generateFreshWorksheetData();
+
+                // Clear answers and status from the previous question set.
+                Object.keys(userAnswers).forEach(key => delete userAnswers[key]);
+                Object.keys(questionStatus).forEach(key => delete questionStatus[key]);
+
+                resetTimer();
+                renderWorksheet();
+                updateScoreboard();
+                document.getElementById('generate-status').textContent =
+                    'Fresh Thursday questions generated! | गुरुवार के नए प्रश्न तैयार हैं!';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            document.getElementById('timer-toggle-btn').addEventListener('click', toggleTimer);
+            document.getElementById('timer-reset-btn').addEventListener('click', resetTimer);
+            
+            document.getElementById('reset-worksheet-btn').addEventListener('click', () => {
+                if (confirm("Are you sure you want to reset all answers and restart?")) {
+                    worksheetData.forEach(sec => {
+                        sec.questions.forEach(q => {
+                            delete userAnswers[q.id];
+                            delete questionStatus[q.id];
+                            const inputEl = document.getElementById(`input-${q.id}`);
+                            const badgeEl = document.getElementById(`badge-${q.id}`);
+                            const feedbackEl = document.getElementById(`feedback-${q.id}`);
+                            const explanationEl = document.getElementById(`explanation-${q.id}`);
+                            const hintEl = document.getElementById(`hint-${q.id}`);
+                            const cardEl = document.getElementById(`q-card-${q.id}`);
+                            if (inputEl) {
+                                inputEl.value = '';
+                                inputEl.className = 'math-input w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 border-slate-300 focus:outline-none focus:border-indigo-500 bg-white/90 text-slate-800 placeholder:font-normal placeholder:text-slate-400';
+                            }
+                            if (badgeEl) { badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg hidden'; badgeEl.innerHTML = ''; }
+                            if (feedbackEl) { feedbackEl.className = 'hidden mt-3 rounded-xl p-3 text-sm font-semibold'; feedbackEl.textContent = ''; }
+                            if (explanationEl) explanationEl.classList.add('hidden');
+                            if (hintEl) hintEl.classList.add('hidden');
+                            if (cardEl) cardEl.classList.remove('animate-shake');
+                        });
+                    });
+                    updateScoreboard();
+                    resetTimer();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
