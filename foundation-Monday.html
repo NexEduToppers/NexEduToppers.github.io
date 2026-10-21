@@ -502,20 +502,49 @@
         function generateFreshWorksheetData() {
             const questions = [[], [], [], [], []];
 
-            // Section A: Number Sense (Q1-Q5)
-            const thousands = randomInt(1, 9);
-            const hundreds = randomInt(1, 9);
-            const tens = randomInt(0, 9);
-            const ones = randomInt(0, 9);
-            const placeNumber = thousands * 1000 + hundreds * 100 + tens * 10 + ones;
+            // Section A: Number Sense (Q1-Q5). Vary digit length and the place being asked.
+            // Q1: randomly use a 2-, 3-, or 4-digit number and choose a digit that occurs only once.
+            const digitLength = randomInt(2, 4);
+            const placeIndex = randomInt(0, digitLength - 1); // 0 = ones, 1 = tens, 2 = hundreds, 3 = thousands
+            const digitsForPlace = [];
+            for (let i = 0; i < digitLength; i++) {
+                let digit = randomInt(i === 0 ? 1 : 0, 9);
+                if (i === placeIndex) {
+                    while (digitsForPlace.some((d, j) => j !== i && d === digit)) digit = randomInt(1, 9);
+                } else {
+                    let attempts = 0;
+                    while (digitsForPlace[placeIndex] !== undefined && digit === digitsForPlace[placeIndex] && attempts < 20) {
+                        digit = randomInt(i === 0 ? 1 : 0, 9); attempts++;
+                    }
+                }
+                digitsForPlace.push(digit);
+            }
+            // Ensure the target digit is unique in the whole number, avoiding ambiguous questions like 4,881 asking about 8.
+            let targetDigit = digitsForPlace[placeIndex];
+            for (let i = 0; i < digitsForPlace.length; i++) {
+                if (i !== placeIndex && digitsForPlace[i] === targetDigit) {
+                    let replacement = randomInt(i === 0 ? 1 : 0, 9);
+                    while (replacement === targetDigit || digitsForPlace.some((d, j) => j !== i && d === replacement)) replacement = randomInt(i === 0 ? 1 : 0, 9);
+                    digitsForPlace[i] = replacement;
+                }
+            }
+            const placeNumber = Number(digitsForPlace.join(''));
+            targetDigit = digitsForPlace[placeIndex];
+            const placeValue = targetDigit * (10 ** (digitLength - 1 - placeIndex));
+            const placeNames = ['ones', 'tens', 'hundreds', 'thousands'];
+            const placeName = placeNames[digitLength - 1 - placeIndex];
             questions[0].push(makeQuestion(
                 1,
-                `What is the place value of ${hundreds} in ${formatNumber(placeNumber)}?`,
-                String(hundreds * 100),
-                `${hundreds} is in the hundreds place, so its place value is ${hundreds} × 100 = ${hundreds * 100}.`
+                `What is the place value of ${targetDigit} in ${formatNumber(placeNumber)}?`,
+                String(placeValue),
+                `The digit ${targetDigit} is in the ${placeName} place, so its place value is ${targetDigit} × ${10 ** (digitLength - 1 - placeIndex)} = ${placeValue}.`
             ));
 
-            const predecessor = randomInt(2000, 9999);
+            // Q2: vary the number length from 2 to 4 digits, rather than always using 4 digits.
+            const predecessorDigits = randomInt(2, 4);
+            const predecessorMin = predecessorDigits === 2 ? 10 : predecessorDigits === 3 ? 100 : 1000;
+            const predecessorMax = predecessorDigits === 2 ? 99 : predecessorDigits === 3 ? 999 : 9999;
+            const predecessor = randomInt(predecessorMin, predecessorMax);
             questions[0].push(makeQuestion(
                 2,
                 `Write the number that comes just before ${formatNumber(predecessor)}.`,
@@ -536,8 +565,16 @@
                 `Arrange the digits from greatest to smallest: ${[...digits].sort((a, b) => b - a).join(', ')}. The number is ${formatNumber(greatestNumber)}.`
             ));
 
+            // Q4: mix 2-, 3-, and 4-digit options so comparison practice is not always four-digit.
             const compareNumbers = new Set();
-            while (compareNumbers.size < 4) compareNumbers.add(randomInt(1000, 9999));
+            const compareRanges = [[10, 99], [100, 999], [1000, 9999]];
+            compareNumbers.add(randomInt(10, 99));
+            compareNumbers.add(randomInt(100, 999));
+            compareNumbers.add(randomInt(1000, 9999));
+            while (compareNumbers.size < 4) {
+                const [lo, hi] = compareRanges[randomInt(0, compareRanges.length - 1)];
+                compareNumbers.add(randomInt(lo, hi));
+            }
             const compareList = [...compareNumbers];
             const smallest = Math.min(...compareList);
             questions[0].push(makeQuestion(
@@ -863,10 +900,10 @@ return [
         // Each question has its own practical hint in English and Hindi.
         function getQuestionHint(q) {
             const hints = {
-                1: 'In 4,735, read the digits from right to left: ones, tens, hundreds, thousands. The 7 is in the hundreds place. / 4,735 में दाईं ओर से स्थान पढ़ें: इकाई, दहाई, सैकड़ा, हजार। अंक 7 सैकड़े के स्थान पर है।',
-                2: 'The number just before a number is 1 less. Subtract 1 from 5,000. / किसी संख्या से ठीक पहले वाली संख्या उससे 1 कम होती है। 5,000 में से 1 घटाएँ।',
+                1: (() => { const m = q.text.match(/place value of (\d) in ([\d,]+)/i); if (!m) return 'Read the place of the named digit from right to left: ones, tens, hundreds, thousands. / दिए गए अंक का स्थान दाईं ओर से पहचानें: इकाई, दहाई, सैकड़ा, हजार।'; const d = Number(m[1]), n = Number(m[2].replace(/,/g, '')), digits = String(n), idx = digits.indexOf(String(d)), power = digits.length - 1 - idx, names = ['ones','tens','hundreds','thousands']; return `In ${m[2]}, digit ${d} is in the ${names[power]} place. Its place value is ${d} × ${10 ** power}. / ${m[2]} में ${d} ${names[power]} के स्थान पर है। उसका स्थानीय मान ${d} × ${10 ** power} होगा।`; })(),
+                2: (() => { const m = q.text.match(/just before ([\d,]+)/i); const n = m ? m[1] : 'the given number'; return `The number just before it is 1 less. Subtract 1 from ${n}. / ठीक पहले वाली संख्या 1 कम होती है। ${n} में से 1 घटाएँ।`; })(),
                 3: 'To make the greatest number, put the largest digit first, then the next largest, until all four digits are used once. / सबसे बड़ी संख्या बनाने के लिए सबसे बड़ा अंक पहले और फिर बाकी अंकों को बड़े से छोटे क्रम में रखें।',
-                4: 'All options begin with 4. Compare the hundreds digits next; the number with the smallest hundreds digit may be smallest. / सभी संख्याएँ 4 से शुरू होती हैं। अब सैकड़ों वाले अंक की तुलना करें; सबसे छोटा अंक देखें।',
+                4: (() => { const m = q.text.match(/smallest number: ([^?]+)/i); const nums = m ? m[1].split(';').map(x => x.trim()) : []; return `Compare the numbers from left to right. A number with fewer digits is smaller; if lengths match, compare each place from the left. / संख्याओं की बाईं ओर से तुलना करें। कम अंकों वाली संख्या छोटी होती है; अंकों की संख्या बराबर हो तो हर स्थान की तुलना करें।`; })(),
                 5: 'Find the difference between 120 and 140. Check whether the same amount is added from 140 to 160, then continue that pattern twice. / 120 और 140 का अंतर निकालें। देखें कि 140 से 160 में भी उतना ही जुड़ता है; वही नियम दो बार आगे लगाएँ।',
                 6: 'Split into tens and ones: add 40 + 30, then 5 + 5. Add those two totals. / दहाइयाँ और इकाइयाँ अलग जोड़ें: 40 + 30, फिर 5 + 5। दोनों परिणाम जोड़ें।',
                 7: 'Subtract in two steps: take away 40 from 100 first, then take away the remaining 7. / दो चरणों में घटाएँ: पहले 100 में से 40 घटाएँ, फिर बचे हुए 7 घटाएँ।',
@@ -990,7 +1027,10 @@ return [
                     if (userAnswers[q.id] && userAnswers[q.id].trim() !== '') {
                         answeredCount++;
                     }
-                    if (questionStatus[q.id] === true) {
+                    // Count correctness from the current answer itself, not only from
+                    // questionStatus. This keeps the scoreboard in sync while typing and
+                    // after Check Answer is clicked.
+                    if (userAnswers[q.id] && checkIsAnswerCorrect(q, userAnswers[q.id])) {
                         totalCorrect++;
                     }
                 });
@@ -1013,7 +1053,9 @@ return [
             worksheetData.forEach(sec => {
                 let secCorrect = 0;
                 sec.questions.forEach(q => {
-                    if (questionStatus[q.id] === true) secCorrect++;
+                    if (userAnswers[q.id] && checkIsAnswerCorrect(q, userAnswers[q.id])) {
+                        secCorrect++;
+                    }
                 });
 
                 const secRow = document.createElement('div');
