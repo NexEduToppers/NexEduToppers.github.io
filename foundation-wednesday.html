@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundation Wednesday - Mental Math Worksheet 3 | RawaRajpootNexEduToppers</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#2563eb',
+                            indigo: '#4f46e5',
+                            purple: '#7c3aed',
+                            emerald: '#059669',
+                            rose: '#e11d48',
+                            amber: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Segoe UI', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles for smooth scrolling & accessibility */
+        html { scroll-behavior: smooth; }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        input[type=number] { -moz-appearance: textfield; }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen pb-12 selection:bg-indigo-500 selection:text-white">
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-indigo-700 via-purple-700 to-blue-700 text-white shadow-lg py-6 px-4 mb-6">
+        <div class="max-w-6xl mx-auto text-center space-y-2">
+            <div class="text-xs md:text-sm font-semibold tracking-wider uppercase text-indigo-200">
+                RawaRajpootNexEduToppers Learning Academy
+            </div>
+            <h1 class="text-2xl md:text-4xl font-extrabold tracking-tight">
+                FOUNDATION WEDNESDAY – MENTAL MATH WORKSHEET – 3
+            </h1>
+            <h2 class="text-lg md:text-2xl font-bold text-amber-300">
+                बुनियादी बुधवार – मानसिक गणित वर्कशीट – 3
+            </h2>
+            <p class="text-xs md:text-base text-indigo-100 font-medium pt-1">
+                Number Sense, Smart Calculations & Mental Maths | संख्या ज्ञान, समझदारी से गणना और मानसिक गणित
+            </p>
+
+            <!-- Meta Badges -->
+            <div class="flex flex-wrap justify-center gap-2 md:gap-4 pt-3 text-xs md:text-sm">
+                <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30 font-semibold">
+                    🎓 Class / कक्षा: 4
+                </span>
+                <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30 font-semibold">
+                    📝 Questions / प्रश्न: 25
+                </span>
+                <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30 font-semibold">
+                    🏆 Total Marks / कुल अंक: 25
+                </span>
+                <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full border border-white/30 font-semibold">
+                    ⏱️ Time / समय: 20 Mins (20 मिनट)
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto px-4 space-y-6">
+
+        <!-- Sticky Dashboard / Control Panel -->
+        <div class="sticky top-2 z-30 bg-white/95 backdrop-blur-md border border-slate-200 rounded-2xl p-4 shadow-xl space-y-4">
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                
+                <!-- Scorecard Summary -->
+                <div class="md:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+                    <div class="bg-indigo-50 border border-indigo-100 p-2 rounded-xl">
+                        <span class="block text-xs text-indigo-600 font-bold uppercase">Score / अंक</span>
+                        <span id="score-display" class="text-xl font-extrabold text-indigo-700">0 / 25</span>
+                    </div>
+                    <div class="bg-emerald-50 border border-emerald-100 p-2 rounded-xl">
+                        <span class="block text-xs text-emerald-600 font-bold uppercase">Correct / सही</span>
+                        <span id="correct-display" class="text-xl font-extrabold text-emerald-700">0</span>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-100 p-2 rounded-xl">
+                        <span class="block text-xs text-amber-600 font-bold uppercase">Attempted / प्रयास</span>
+                        <span id="attempted-display" class="text-xl font-extrabold text-amber-700">0</span>
+                    </div>
+                    <div class="bg-slate-100 border border-slate-200 p-2 rounded-xl">
+                        <span class="block text-xs text-slate-600 font-bold uppercase">Left / शेष</span>
+                        <span id="remaining-display" class="text-xl font-extrabold text-slate-700">25</span>
+                    </div>
+                </div>
+
+                <!-- Timer Controls -->
+                <div class="md:col-span-5 flex flex-col sm:flex-row items-center justify-between gap-2 bg-slate-100 p-2.5 rounded-xl border border-slate-200">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xl">⏱️</span>
+                        <div>
+                            <div class="text-[10px] uppercase font-bold text-slate-500">Time Remaining / शेष समय</div>
+                            <div id="timer-display" class="text-2xl font-black font-mono text-slate-800 leading-none">20:00</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-1 w-full sm:w-auto justify-end">
+                        <button id="btn-timer-start" onclick="startTimer()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-2.5 py-1.5 rounded-lg text-xs font-bold transition shadow-sm">
+                            Start / शुरू
+                        </button>
+                        <button id="btn-timer-pause" onclick="pauseTimer()" class="bg-amber-500 hover:bg-amber-600 text-white px-2.5 py-1.5 rounded-lg text-xs font-bold transition shadow-sm hidden">
+                            Pause / रोकें
+                        </button>
+                        <button id="btn-timer-reset" onclick="resetTimer()" class="bg-slate-600 hover:bg-slate-700 text-white px-2.5 py-1.5 rounded-lg text-xs font-bold transition shadow-sm">
+                            Reset / रीसेट
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div>
+                <div class="flex justify-between text-xs font-bold text-slate-500 mb-1">
+                    <span>Progress / प्रगति</span>
+                    <span id="progress-text">0% Completed</span>
+                </div>
+                <div class="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
+                    <div id="progress-bar" class="bg-indigo-600 h-3 rounded-full transition-all duration-300 w-0"></div>
+                </div>
+            </div>
+
+            <!-- Global Actions Buttons -->
+            <div class="flex flex-wrap gap-2 pt-1 border-t border-slate-100">
+                <button onclick="generateNewWorksheet()" class="flex-1 min-w-[180px] bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white py-2 px-4 rounded-xl font-bold text-sm transition shadow-md flex items-center justify-center gap-2">
+                    <span>🔄</span>
+                    <span>Generate New Worksheet / नई वर्कशीट बनाएँ</span>
+                </button>
+                <button onclick="resetWorksheet()" class="flex-1 min-w-[160px] bg-slate-600 hover:bg-slate-700 active:bg-slate-800 text-white py-2 px-4 rounded-xl font-bold text-sm transition shadow-md flex items-center justify-center gap-2">
+                    <span>🧹</span>
+                    <span>Reset Worksheet / वर्कशीट रीसेट करें</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Time Up Alert Modal -->
+        <div id="time-up-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+            <div class="bg-white rounded-2xl max-w-md w-full p-6 text-center space-y-4 shadow-2xl border-2 border-rose-500">
+                <div class="text-5xl">⏰</div>
+                <h3 class="text-2xl font-black text-rose-600">Time's Up! / समय समाप्त!</h3>
+                <p class="text-slate-600 font-medium">
+                    The 20-minute timer has completed. Check your overall score!
+                    <br>
+                    20 मिनट का समय पूरा हो चुका है। अपना कुल स्कोर देखें!
+                </p>
+                <button onclick="closeTimeUpModal()" class="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold py-2.5 rounded-xl shadow-lg transition">
+                    OK / ठीक है
+                </button>
+            </div>
+        </div>
+
+        <!-- Questions Sections Container -->
+        <div id="sections-container" class="space-y-8">
+            <!-- Dynamic Sections & Cards injected via JavaScript -->
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-12 text-center text-xs text-slate-500 space-y-1">
+        <p class="font-semibold">RawaRajpootNexEduToppers Learning Academy &copy; 2026</p>
+        <p>Interactive Bilingual Class 4 Mental Maths Foundation Series</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Global State Variables
+        let questionsData = [];
+        let score = 0;
+        let attemptedCount = 0;
+        let correctCount = 0;
+        
+        // Timer Variables
+        let timerInterval = null;
+        let timeRemaining = 20 * 60; // 20 minutes in seconds
+        let isTimerRunning = false;
+
+        // Section Metadata Definitions
+        const SECTIONS = [
+            {
+                id: 'A',
+                titleEn: 'Section A: Fast Addition',
+                titleHi: 'खंड क: तेज़ जोड़',
+                badgeColor: 'bg-indigo-600',
+                borderColor: 'border-indigo-200'
+            },
+            {
+                id: 'B',
+                titleEn: 'Section B: Fast Subtraction',
+                titleHi: 'खंड ख: तेज़ घटाव',
+                badgeColor: 'bg-rose-600',
+                borderColor: 'border-rose-200'
+            },
+            {
+                id: 'C',
+                titleEn: 'Section C: Multiplication Tricks',
+                titleHi: 'खंड ग: गुणा की तरकीबें',
+                badgeColor: 'bg-amber-600',
+                borderColor: 'border-amber-200'
+            },
+            {
+                id: 'D',
+                titleEn: 'Section D: Smart Division',
+                titleHi: 'खंड घ: आसान भाग',
+                badgeColor: 'bg-emerald-600',
+                borderColor: 'border-emerald-200'
+            },
+            {
+                id: 'E',
+                titleEn: 'Section E: Mixed Mental Maths',
+                titleHi: 'खंड ङ: मिश्रित मानसिक गणित',
+                badgeColor: 'bg-purple-600',
+                borderColor: 'border-purple-200'
+            }
+        ];
+
+        // Random Number Helper
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // --- QUESTION GENERATORS FOR ALL 25 SLOTS ---
+
+        function generateQuestions() {
+            const q = [];
+
+            // ================= SECTION A: FAST ADDITION =================
+            // Q1: Splitting tens and ones (e.g. 241 + 62)
+            {
+                const a1 = getRandomInt(120, 350);
+                const tens = getRandomInt(3, 8) * 10;
+                const ones = getRandomInt(1, 9);
+                const a2 = tens + ones;
+                const ans = a1 + a2;
+                q.push({
+                    section: 'A',
+                    qNum: 1,
+                    textEn: `What is ${a1} + ${a2}?`,
+                    textHi: `${a1} + ${a2} कितना है?`,
+                    ans: ans,
+                    hintEn: `Split ${a2} into tens and ones (${tens} + ${ones}). Add the tens first (${a1} + ${tens}), then add the ones (${ones}).`,
+                    hintHi: `${a2} को दहाई और इकाई (${tens} + ${ones}) में बाँटें। पहले दहाई (${a1} + ${tens}) जोड़ें, फिर इकाई (${ones}) जोड़ें।`
+                });
+            }
+
+            // Q2: Adding near 200 or 300 (e.g., + 198 or + 199)
+            {
+                const base = getRandomInt(110, 280);
+                const near = [198, 199, 298, 299][getRandomInt(0, 3)];
+                const hundredRound = near > 200 ? 300 : 200;
+                const diff = hundredRound - near;
+                const ans = base + near;
+                q.push({
+                    section: 'A',
+                    qNum: 2,
+                    textEn: `Find the sum: ${base} + ${near}`,
+                    textHi: `योग फल ज्ञात करें: ${base} + ${near}`,
+                    ans: ans,
+                    hintEn: `Add ${hundredRound} first (${base} + ${hundredRound}), then subtract ${diff} because ${near} is ${diff} less than ${hundredRound}.`,
+                    hintHi: `पहले ${hundredRound} जोड़ें (${base} + ${hundredRound}), फिर ${diff} घटाएं क्योंकि ${near}, ${hundredRound} से ${diff} कम है।`
+                });
+            }
+
+            // Q3: Breaking numbers into hundreds, tens, and ones (e.g., 345 + 124)
+            {
+                const h1 = getRandomInt(1, 4) * 100;
+                const t1 = getRandomInt(2, 5) * 10;
+                const o1 = getRandomInt(1, 5);
+                const n1 = h1 + t1 + o1;
+
+                const h2 = getRandomInt(1, 3) * 100;
+                const t2 = getRandomInt(1, 4) * 10;
+                const o2 = getRandomInt(1, 4);
+                const n2 = h2 + t2 + o2;
+                const ans = n1 + n2;
+                q.push({
+                    section: 'A',
+                    qNum: 3,
+                    textEn: `Calculate: ${n1} + ${n2}`,
+                    textHi: `गणना करें: ${n1} + ${n2}`,
+                    ans: ans,
+                    hintEn: `Break ${n2} into hundreds, tens, and ones (${h2} + ${t2} + ${o2}). Add hundreds to ${n1}, then add tens, then ones.`,
+                    hintHi: `${n2} को सैकड़ा, दहाई और इकाई (${h2} + ${t2} + ${o2}) में तोड़ें। ${n1} में सैकड़ा जोड़ें, फिर दहाई, फिर इकाई जोड़ें।`
+                });
+            }
+
+            // Q4: Making the next hundred or thousand (e.g. 470 + 30 + 150)
+            {
+                const hundredsBase = getRandomInt(2, 6) * 100;
+                const part1 = getRandomInt(2, 8) * 10;
+                const n1 = hundredsBase + part1;
+                const n2 = 100 - part1; // makes next hundred
+                const n3 = getRandomInt(1, 4) * 100 + getRandomInt(1, 9) * 10;
+                const ans = n1 + n2 + n3;
+                q.push({
+                    section: 'A',
+                    qNum: 4,
+                    textEn: `What is ${n1} + ${n2} + ${n3}?`,
+                    textHi: `${n1} + ${n2} + ${n3} कितना है?`,
+                    ans: ans,
+                    hintEn: `Combine ${n1} and ${n2} first to make the exact hundred (${n1 + n2}), then add ${n3}.`,
+                    hintHi: `सैकड़ा पूरा करने के लिए पहले ${n1} और ${n2} को जोड़ें (${n1 + n2}), फिर उसमें ${n3} जोड़ें।`
+                });
+            }
+
+            // Q5: Convenient order of 3 numbers (e.g. 25 + 140 + 75)
+            {
+                const pair1 = [25, 75];
+                const pair2 = [40, 60];
+                const pair3 = [150, 250];
+                const chosenPair = [pair1, pair2, pair3][getRandomInt(0, 2)];
+                const middle = getRandomInt(12, 45) * 10;
+                const ans = chosenPair[0] + chosenPair[1] + middle;
+                q.push({
+                    section: 'A',
+                    qNum: 5,
+                    textEn: `Add mentally: ${chosenPair[0]} + ${middle} + ${chosenPair[1]}`,
+                    textHi: `मानसिक रूप से जोड़ें: ${chosenPair[0]} + ${middle} + ${chosenPair[1]}`,
+                    ans: ans,
+                    hintEn: `Add ${chosenPair[0]} and ${chosenPair[1]} first to get a simple round number (${chosenPair[0] + chosenPair[1]}), then add ${middle}.`,
+                    hintHi: `पहले ${chosenPair[0]} और ${chosenPair[1]} को जोड़कर गोल संख्या (${chosenPair[0] + chosenPair[1]}) प्राप्त करें, फिर ${middle} जोड़ें।`
+                });
+            }
+
+
+            // ================= SECTION B: FAST SUBTRACTION =================
+            // Q6: Subtracting numbers close to 200 or 300 (e.g., 540 - 198)
+            {
+                const start = getRandomInt(350, 750);
+                const near = [198, 199, 298, 299][getRandomInt(0, 3)];
+                const hundredRound = near > 200 ? 300 : 200;
+                const diff = hundredRound - near;
+                const ans = start - near;
+                q.push({
+                    section: 'B',
+                    qNum: 6,
+                    textEn: `Subtract mentally: ${start} - ${near}`,
+                    textHi: `मानसिक रूप से घटाएं: ${start} - ${near}`,
+                    ans: ans,
+                    hintEn: `Subtract ${hundredRound} first (${start} - ${hundredRound}), then add ${diff} back because you subtracted ${diff} extra.`,
+                    hintHi: `पहले ${hundredRound} घटाएं (${start} - ${hundredRound}), फिर ${diff} वापस जोड़ें क्योंकि आपने ${diff} ज़्यादा घटाया था।`
+                });
+            }
+
+            // Q7: Subtracting from 1,000 (e.g., 1000 - 346)
+            {
+                const h = getRandomInt(1, 8);
+                const t = getRandomInt(1, 8);
+                const o = getRandomInt(1, 9);
+                const sub = h * 100 + t * 10 + o;
+                const ans = 1000 - sub;
+                q.push({
+                    section: 'B',
+                    qNum: 7,
+                    textEn: `Find: 1,000 - ${sub}`,
+                    textHi: `ज्ञात करें: 1,000 - ${sub}`,
+                    ans: ans,
+                    hintEn: `Use the rule: Subtract hundreds from 9 (${9 - h}), tens from 9 (${9 - t}), and ones from 10 (${10 - o}).`,
+                    hintHi: `नियम का उपयोग करें: सैकड़ा को 9 से (${9 - h}), दहाई को 9 से (${9 - t}), और इकाई को 10 से (${10 - o}) घटाएं।`
+                });
+            }
+
+            // Q8: Breaking a number into hundreds, tens, and ones (e.g., 685 - 234)
+            {
+                const h1 = getRandomInt(5, 8);
+                const t1 = getRandomInt(5, 9);
+                const o1 = getRandomInt(5, 9);
+                const num1 = h1 * 100 + t1 * 10 + o1;
+
+                const h2 = getRandomInt(1, h1 - 2);
+                const t2 = getRandomInt(1, t1 - 1);
+                const o2 = getRandomInt(1, o1 - 1);
+                const num2 = h2 * 100 + t2 * 10 + o2;
+
+                const ans = num1 - num2;
+                q.push({
+                    section: 'B',
+                    qNum: 8,
+                    textEn: `What is ${num1} - ${num2}?`,
+                    textHi: `${num1} - ${num2} कितना है?`,
+                    ans: ans,
+                    hintEn: `Break ${num2} into ${h2 * 100}, ${t2 * 10}, and ${o2}. Subtract hundreds from ${num1}, then tens, then ones.`,
+                    hintHi: `${num2} को ${h2 * 100}, ${t2 * 10}, और ${o2} में बाँटें। ${num1} में से पहले सैकड़ा, फिर दहाई, फिर इकाई घटाएं।`
+                });
+            }
+
+            // Q9: Subtracting tens and ones in steps (e.g. 154 - 48)
+            {
+                const start = getRandomInt(120, 380);
+                const tens = getRandomInt(2, 5) * 10;
+                const ones = getRandomInt(5, 9);
+                const sub = tens + ones;
+                const ans = start - sub;
+                q.push({
+                    section: 'B',
+                    qNum: 9,
+                    textEn: `Calculate: ${start} - ${sub}`,
+                    textHi: `गणना करें: ${start} - ${sub}`,
+                    ans: ans,
+                    hintEn: `Subtract tens first (${start} - ${tens}), then subtract the remaining ${ones} ones from that result.`,
+                    hintHi: `पहले दहाई घटाएं (${start} - ${tens}), फिर प्राप्त उत्तर में से बची हुई इकाई (${ones}) घटाएं।`
+                });
+            }
+
+            // Q10: Difference between two close numbers (e.g. 402 - 388)
+            {
+                const base = getRandomInt(200, 600);
+                const num1 = base + getRandomInt(2, 8);
+                const num2 = base - getRandomInt(4, 9);
+                const ans = num1 - num2;
+                q.push({
+                    section: 'B',
+                    qNum: 10,
+                    textEn: `Find the difference: ${num1} - ${num2}`,
+                    textHi: `अंतर ज्ञात करें: ${num1} - ${num2}`,
+                    ans: ans,
+                    hintEn: `Count up from ${num2} to ${base} (which is ${base - num2}), then count from ${base} to ${num1} (which is ${num1 - base}), and add those counts.`,
+                    hintHi: `${num2} से ${base} तक की दूरी (${base - num2}) और ${base} से ${num1} तक की दूरी (${num1 - base}) को जोड़ें।`
+                });
+            }
+
+
+            // ================= SECTION C: MULTIPLICATION TRICKS =================
+            // Q11: Multiply by 5 (e.g., 46 x 5)
+            {
+                const even = getRandomInt(12, 48) * 2; // guaranteed even
+                const ans = even * 5;
+                const half = even / 2;
+                q.push({
+                    section: 'C',
+                    qNum: 11,
+                    textEn: `Multiply: ${even} × 5`,
+                    textHi: `गुणा करें: ${even} × 5`,
+                    ans: ans,
+                    hintEn: `To multiply by 5, divide ${even} by 2 to get ${half}, then multiply by 10 (add a zero).`,
+                    hintHi: `5 से गुणा करने के लिए, ${even} को 2 से भाग देकर ${half} निकालें, फिर 10 से गुणा करें (अंत में 0 लगाएं)।`
+                });
+            }
+
+            // Q12: Multiply by 9 (e.g. 28 x 9)
+            {
+                const multiplier = getRandomInt(14, 45);
+                const ans = multiplier * 9;
+                q.push({
+                    section: 'C',
+                    qNum: 12,
+                    textEn: `Find: ${multiplier} × 9`,
+                    textHi: `ज्ञात करें: ${multiplier} × 9`,
+                    ans: ans,
+                    hintEn: `Multiply ${multiplier} by 10 (${multiplier * 10}), then subtract 1 group of ${multiplier} (${multiplier * 10} - ${multiplier}).`,
+                    hintHi: `${multiplier} को 10 से गुणा करें (${multiplier * 10}), फिर उसमें से एक बार ${multiplier} घटा दें (${multiplier * 10} - ${multiplier})।`
+                });
+            }
+
+            // Q13: Multiply by 11 (e.g. 35 x 11)
+            {
+                // Ensure tens + ones < 10 for simple Class 4 mental trick
+                const tens = getRandomInt(2, 6);
+                const ones = getRandomInt(1, 9 - tens);
+                const num = tens * 10 + ones;
+                const ans = num * 11;
+                const middle = tens + ones;
+                q.push({
+                    section: 'C',
+                    qNum: 13,
+                    textEn: `What is ${num} × 11?`,
+                    textHi: `${num} × 11 कितना है?`,
+                    ans: ans,
+                    hintEn: `Place the sum of digits (${tens} + ${ones} = ${middle}) between the tens digit (${tens}) and ones digit (${ones}).`,
+                    hintHi: `अंकों के जोड़ (${tens} + ${ones} = ${middle}) को दहाई के अंक (${tens}) और इकाई के अंक (${ones}) के बीच में रखें।`
+                });
+            }
+
+            // Q14: Multiply by 25 (e.g., 16 x 25)
+            {
+                const multipleOf4 = getRandomInt(3, 12) * 4;
+                const ans = multipleOf4 * 25;
+                const divided = multipleOf4 / 4;
+                q.push({
+                    section: 'C',
+                    qNum: 14,
+                    textEn: `Calculate mentally: ${multipleOf4} × 25`,
+                    textHi: `मानसिक रूप से गणना करें: ${multipleOf4} × 25`,
+                    ans: ans,
+                    hintEn: `Divide ${multipleOf4} by 4 (${divided}) because 25 is 100/4. Then multiply ${divided} by 100.`,
+                    hintHi: `${multipleOf4} को 4 से भाग दें (${divided}) क्योंकि 25 = 100/4 होता है। फिर ${divided} को 100 से गुणा करें।`
+                });
+            }
+
+            // Q15: Breaking one factor (e.g. 14 x 6 = (10x6) + (4x6))
+            {
+                const tensPart = 10;
+                const onesPart = getRandomInt(2, 6);
+                const factor1 = tensPart + onesPart;
+                const factor2 = getRandomInt(4, 8);
+                const ans = factor1 * factor2;
+                q.push({
+                    section: 'C',
+                    qNum: 15,
+                    textEn: `Find product: ${factor1} × ${factor2}`,
+                    textHi: `गुणनफल ज्ञात करें: ${factor1} × ${factor2}`,
+                    ans: ans,
+                    hintEn: `Break ${factor1} into 10 and ${onesPart}. Calculate (10 × ${factor2}) + (${onesPart} × ${factor2}).`,
+                    hintHi: `${factor1} को 10 और ${onesPart} में तोड़ें। (10 × ${factor2}) + (${onesPart} × ${factor2}) की गणना करें।`
+                });
+            }
+
+
+            // ================= SECTION D: SMART DIVISION =================
+            // Q16: Division using multiplication facts (e.g. 56 ÷ 8)
+            {
+                const f1 = getRandomInt(6, 9);
+                const f2 = getRandomInt(6, 9);
+                const prod = f1 * f2;
+                q.push({
+                    section: 'D',
+                    qNum: 16,
+                    textEn: `Divide: ${prod} ÷ ${f1}`,
+                    textHi: `भाग दें: ${prod} ÷ ${f1}`,
+                    ans: f2,
+                    hintEn: `Think of multiplication: What number multiplied by ${f1} equals ${prod}? (${f1} × ? = ${prod})`,
+                    hintHi: `गुणा की तालिका याद करें: ${f1} को किस संख्या से गुणा करने पर ${prod} मिलता है? (${f1} × ? = ${prod})`
+                });
+            }
+
+            // Q17: Division by 4 (halving twice) (e.g. 84 ÷ 4)
+            {
+                const multOf4 = getRandomInt(12, 24) * 4;
+                const half1 = multOf4 / 2;
+                const ans = multOf4 / 4;
+                q.push({
+                    section: 'D',
+                    qNum: 17,
+                    textEn: `Find: ${multOf4} ÷ 4`,
+                    textHi: `ज्ञात करें: ${multOf4} ÷ 4`,
+                    ans: ans,
+                    hintEn: `Half ${multOf4} to get ${half1}, then half ${half1} again to divide by 4.`,
+                    hintHi: `${multOf4} का आधा करें (${half1}), फिर 4 से भाग देने के लिए ${half1} का दोबारा आधा करें।`
+                });
+            }
+
+            // Q18: Equal sharing / division (e.g. 90 chocolates shared among 5)
+            {
+                const divisor = 5;
+                const ans = getRandomInt(12, 25);
+                const total = ans * divisor;
+                q.push({
+                    section: 'D',
+                    qNum: 18,
+                    textEn: `Share ${total} items equally among ${divisor} children. How many items does each child get?`,
+                    textHi: `${total} वस्तुओं को ${divisor} बच्चों में बराबर बाँटें। प्रत्येक बच्चे को कितनी वस्तुएँ मिलेंगी?`,
+                    ans: ans,
+                    hintEn: `To divide ${total} by 5: Double ${total} to get ${total * 2}, then divide by 10.`,
+                    hintHi: `${total} को 5 से भाग देने के लिए: ${total} को दोगुना करें (${total * 2}), फिर 10 से भाग दें।`
+                });
+            }
+
+            // Q19: Finding a missing factor (e.g. ? x 7 = 63)
+            {
+                const f1 = getRandomInt(4, 9);
+                const ans = getRandomInt(5, 9);
+                const prod = f1 * ans;
+                q.push({
+                    section: 'D',
+                    qNum: 19,
+                    textEn: `Find the missing number: ___ × ${f1} = ${prod}`,
+                    textHi: `अज्ञात संख्या ज्ञात करें: ___ × ${f1} = ${prod}`,
+                    ans: ans,
+                    hintEn: `To find the missing factor, divide the product ${prod} by ${f1}.`,
+                    hintHi: `अज्ञात संख्या पाने के लिए गुणनफल ${prod} को ${f1} से भाग दें।`
+                });
+            }
+
+            // Q20: Exact division with tens/hundreds (e.g. 240 ÷ 6)
+            {
+                const divisor = getRandomInt(3, 8);
+                const factor = getRandomInt(4, 9);
+                const total = divisor * factor * 10;
+                const ans = factor * 10;
+                q.push({
+                    section: 'D',
+                    qNum: 20,
+                    textEn: `What is ${total} ÷ ${divisor}?`,
+                    textHi: `${total} ÷ ${divisor} कितना है?`,
+                    ans: ans,
+                    hintEn: `Divide ${total / 10} by ${divisor} to get ${factor}, then append a zero at the end.`,
+                    hintHi: `पहले ${total / 10} को ${divisor} से भाग देकर ${factor} निकालें, फिर अंत में एक शून्य लगा दें।`
+                });
+            }
+
+
+            // ================= SECTION E: MIXED MENTAL MATHS =================
+            // Q21: Multiplication followed by addition (e.g. (6 x 7) + 18)
+            {
+                const m1 = getRandomInt(5, 9);
+                const m2 = getRandomInt(4, 8);
+                const multRes = m1 * m2;
+                const addVal = getRandomInt(12, 35);
+                const ans = multRes + addVal;
+                q.push({
+                    section: 'E',
+                    qNum: 21,
+                    textEn: `Calculate: (${m1} × ${m2}) + ${addVal}`,
+                    textHi: `गणना करें: (${m1} × ${m2}) + ${addVal}`,
+                    ans: ans,
+                    hintEn: `First multiply ${m1} × ${m2} to get ${multRes}, then add ${addVal} to ${multRes}.`,
+                    hintHi: `पहले ${m1} × ${m2} गुणा करके ${multRes} प्राप्त करें, फिर ${multRes} में ${addVal} जोड़ें।`
+                });
+            }
+
+            // Q22: Subtraction followed by addition (e.g. (120 - 45) + 30)
+            {
+                const base = getRandomInt(100, 250);
+                const subVal = getRandomInt(20, 50);
+                const subRes = base - subVal;
+                const addVal = getRandomInt(15, 40);
+                const ans = subRes + addVal;
+                q.push({
+                    section: 'E',
+                    qNum: 22,
+                    textEn: `Solve: (${base} - ${subVal}) + ${addVal}`,
+                    textHi: `हल करें: (${base} - ${subVal}) + ${addVal}`,
+                    ans: ans,
+                    hintEn: `First subtract ${subVal} from ${base} to get ${subRes}, then add ${addVal} to that result.`,
+                    hintHi: `पहले ${base} में से ${subVal} घटाकर ${subRes} प्राप्त करें, फिर उसमें ${addVal} जोड़ें।`
+                });
+            }
+
+            // Q23: Number patterns (e.g. 15, 30, 45, 60, __)
+            {
+                const step = [12, 15, 25, 50][getRandomInt(0, 3)];
+                const start = step;
+                const p1 = start;
+                const p2 = start + step;
+                const p3 = start + step * 2;
+                const p4 = start + step * 3;
+                const ans = start + step * 4;
+                q.push({
+                    section: 'E',
+                    qNum: 23,
+                    textEn: `Find the next number in the pattern: ${p1}, ${p2}, ${p3}, ${p4}, ___`,
+                    textHi: `पैटर्न में अगली संख्या ज्ञात करें: ${p1}, ${p2}, ${p3}, ${p4}, ___`,
+                    ans: ans,
+                    hintEn: `Identify the pattern rule: Each number increases by ${step}. Add ${step} to ${p4}.`,
+                    hintHi: `पैटर्न का नियम समझें: प्रत्येक संख्या में ${step} की वृद्धि हो रही है। ${p4} में ${step} जोड़ें।`
+                });
+            }
+
+            // Q24: Doubling and adding (e.g. Double of 45 + 35)
+            {
+                const baseNum = getRandomInt(25, 75);
+                const doubled = baseNum * 2;
+                const addNum = getRandomInt(20, 60);
+                const ans = doubled + addNum;
+                q.push({
+                    section: 'E',
+                    qNum: 24,
+                    textEn: `What is Double of ${baseNum} + ${addNum}?`,
+                    textHi: `${baseNum} का दोगुना + ${addNum} कितना है?`,
+                    ans: ans,
+                    hintEn: `First double ${baseNum} (${baseNum} × 2 = ${doubled}), then add ${addNum}.`,
+                    hintHi: `पहले ${baseNum} का दोगुना करें (${baseNum} × 2 = ${doubled}), फिर उसमें ${addNum} जोड़ें।`
+                });
+            }
+
+            // Q25: Multiplication followed by subtraction (e.g. (8 x 9) - 25)
+            {
+                const m1 = getRandomInt(6, 9);
+                const m2 = getRandomInt(6, 9);
+                const multRes = m1 * m2;
+                const subVal = getRandomInt(12, multRes - 10);
+                const ans = multRes - subVal;
+                q.push({
+                    section: 'E',
+                    qNum: 25,
+                    textEn: `Calculate: (${m1} × ${m2}) - ${subVal}`,
+                    textHi: `गणना करें: (${m1} × ${m2}) - ${subVal}`,
+                    ans: ans,
+                    hintEn: `First multiply ${m1} × ${m2} to get ${multRes}, then subtract ${subVal} from ${multRes}.`,
+                    hintHi: `पहले ${m1} × ${m2} का गुणा करके ${multRes} निकालें, फिर उसमें से ${subVal} घटाएं।`
+                });
+            }
+
+            return q;
+        }
+
+        // --- UI RENDERING ENGINE ---
+
+        function renderWorksheet() {
+            const container = document.getElementById('sections-container');
+            container.innerHTML = '';
+
+            SECTIONS.forEach(sec => {
+                const secQuestions = questionsData.filter(q => q.section === sec.id);
+
+                const sectionWrapper = document.createElement('section');
+                sectionWrapper.className = 'bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden';
+
+                // Section Header Card
+                const sectionHeader = document.createElement('div');
+                sectionHeader.className = `${sec.badgeColor} text-white px-5 py-3.5 flex flex-wrap items-center justify-between gap-2`;
+                sectionHeader.innerHTML = `
+                    <div>
+                        <h3 class="text-lg md:text-xl font-bold tracking-wide">${sec.titleEn}</h3>
+                        <h4 class="text-xs md:text-sm text-white/90 font-medium">${sec.titleHi}</h4>
+                    </div>
+                    <span class="bg-white/20 backdrop-blur-md text-xs px-3 py-1 rounded-full font-bold">
+                        5 Questions / 5 प्रश्न
+                    </span>
+                `;
+                sectionWrapper.appendChild(sectionHeader);
+
+                // Section Questions Grid/List
+                const questionsList = document.createElement('div');
+                questionsList.className = 'p-4 md:p-6 space-y-6 divide-y divide-slate-100';
+
+                secQuestions.forEach(qData => {
+                    const globalIdx = qData.globalIndex;
+
+                    const qCard = document.createElement('div');
+                    qCard.className = globalIdx === 0 ? 'space-y-3' : 'pt-5 space-y-3';
+                    qCard.id = `q-card-${globalIdx}`;
+
+                    qCard.innerHTML = `
+                        <!-- Question Text -->
+                        <div>
+                            <div class="text-base md:text-lg font-bold text-slate-800">
+                                <span class="text-indigo-600 font-extrabold mr-1">Q${qData.qNum}.</span>
+                                <span>${qData.textEn}</span>
+                            </div>
+                            <div class="text-sm md:text-base text-slate-600 font-medium mt-0.5">
+                                <span class="text-amber-600 font-semibold mr-1">प्रश्न ${qData.qNum}.</span>
+                                <span>${qData.textHi}</span>
+                            </div>
+                        </div>
+
+                        <!-- Input & Actions Row -->
+                        <div class="flex flex-wrap items-center gap-2 pt-1">
+                            <div class="relative flex-1 min-w-[160px] max-w-[240px]">
+                                <input type="text" 
+                                       id="input-${globalIdx}" 
+                                       placeholder="Answer / जवाब"
+                                       onkeydown="if(event.key==='Enter') checkAnswer(${globalIdx})"
+                                       class="w-full bg-slate-50 border-2 border-slate-300 focus:border-indigo-600 focus:bg-white rounded-xl px-3.5 py-2 text-base font-bold text-slate-800 outline-none transition placeholder:font-normal placeholder:text-slate-400">
+                            </div>
+
+                            <button onclick="toggleHint(${globalIdx})" 
+                                    class="bg-amber-100 hover:bg-amber-200 text-amber-800 border border-amber-300 font-bold px-3 py-2 rounded-xl text-xs md:text-sm transition flex items-center gap-1.5">
+                                <span>💡</span>
+                                <span>Hint / संकेत</span>
+                            </button>
+
+                            <button onclick="checkAnswer(${globalIdx})" 
+                                    class="bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-bold px-4 py-2 rounded-xl text-xs md:text-sm transition shadow-sm flex items-center gap-1.5">
+                                <span>✓</span>
+                                <span>Check Answer / जवाब जाँचें</span>
+                            </button>
+                        </div>
+
+                        <!-- Question Specific Hint Box -->
+                        <div id="hint-box-${globalIdx}" class="hidden bg-amber-50 border-l-4 border-amber-500 p-3.5 rounded-r-xl space-y-1 text-xs md:text-sm text-amber-900">
+                            <div class="font-bold flex items-center gap-1 text-amber-800">
+                                <span>🔍</span>
+                                <span>Specific Hint / विशेष संकेत:</span>
+                            </div>
+                            <p class="font-medium">${qData.hintEn}</p>
+                            <p class="font-medium text-amber-800/90">${qData.hintHi}</p>
+                        </div>
+
+                        <!-- Feedback Message Area -->
+                        <div id="feedback-${globalIdx}" class="hidden p-3 rounded-xl text-xs md:text-sm font-bold border space-y-0.5">
+                        </div>
+                    `;
+
+                    questionsList.appendChild(qCard);
+                });
+
+                sectionWrapper.appendChild(questionsList);
+                container.appendChild(sectionWrapper);
+            });
+        }
+
+        // --- ANSWER CHECKING LOGIC ---
+
+        function checkAnswer(index) {
+            const item = questionsData[index];
+            const inputEl = document.getElementById(`input-${index}`);
+            const feedbackEl = document.getElementById(`feedback-${index}`);
+
+            if (!inputEl || !feedbackEl) return;
+
+            // Sanitize input: Remove spaces and optional commas
+            let rawVal = inputEl.value.trim().replace(/,/g, '');
+
+            if (rawVal === "") {
+                feedbackEl.className = "p-3 rounded-xl text-xs md:text-sm font-bold border bg-amber-50 border-amber-300 text-amber-800 space-y-0.5 block";
+                feedbackEl.innerHTML = `
+                    <div>Please enter an answer before checking!</div>
+                    <div class="font-normal">कृपया जवाब जाँचने से पहले उत्तर दर्ज करें!</div>
+                `;
+                return;
+            }
+
+            const numericVal = Number(rawVal);
+            const isCorrect = !isNaN(numericVal) && numericVal === item.ans;
+
+            // Track states
+            const wasAttempted = item.isAttempted;
+            const wasCorrect = item.isCorrect;
+
+            item.isAttempted = true;
+            item.userAnswer = rawVal;
+
+            if (isCorrect) {
+                item.isCorrect = true;
+                feedbackEl.className = "p-3 rounded-xl text-xs md:text-sm font-bold border bg-emerald-50 border-emerald-300 text-emerald-800 space-y-0.5 block";
+                feedbackEl.innerHTML = `
+                    <div class="flex items-center gap-1.5 text-emerald-700">
+                        <span class="text-base">🎉</span>
+                        <span>Correct answer! / सही जवाब!</span>
+                    </div>
+                `;
+                inputEl.className = "w-full bg-emerald-50 border-2 border-emerald-500 rounded-xl px-3.5 py-2 text-base font-bold text-emerald-900 outline-none transition";
+            } else {
+                item.isCorrect = false;
+                const formattedAns = Number(item.ans).toLocaleString();
+                feedbackEl.className = "p-3 rounded-xl text-xs md:text-sm font-bold border bg-rose-50 border-rose-300 text-rose-800 space-y-0.5 block";
+                feedbackEl.innerHTML = `
+                    <div class="flex items-center gap-1.5 text-rose-700">
+                        <span class="text-base">❌</span>
+                        <span>Wrong answer. Try again! / गलत जवाब। फिर से कोशिश करें!</span>
+                    </div>
+                    <div class="text-rose-900 font-semibold pt-0.5">
+                        Correct answer is: <span class="underline font-black">${formattedAns}</span> / सही जवाब है: <span class="underline font-black">${formattedAns}</span>
+                    </div>
+                `;
+                inputEl.className = "w-full bg-rose-50 border-2 border-rose-500 rounded-xl px-3.5 py-2 text-base font-bold text-rose-900 outline-none transition";
+            }
+
+            // Update global counts safely
+            updateScorecard();
+        }
+
+        function updateScorecard() {
+            attemptedCount = questionsData.filter(q => q.isAttempted).length;
+            correctCount = questionsData.filter(q => q.isCorrect).length;
+            score = correctCount;
+            const remainingCount = 25 - attemptedCount;
+
+            document.getElementById('score-display').textContent = `${score} / 25`;
+            document.getElementById('correct-display').textContent = correctCount;
+            document.getElementById('attempted-display').textContent = attemptedCount;
+            document.getElementById('remaining-display').textContent = remainingCount;
+
+            // Update Progress Bar
+            const percent = Math.round((attemptedCount / 25) * 100);
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+
+            if (progressBar && progressText) {
+                progressBar.style.width = `${percent}%`;
+                progressText.textContent = `${percent}% Completed`;
+            }
+        }
+
+        // --- HINT TOGGLE LOGIC ---
+
+        function toggleHint(index) {
+            const hintBox = document.getElementById(`hint-box-${index}`);
+            if (hintBox) {
+                hintBox.classList.toggle('hidden');
+            }
+        }
+
+        // --- TIMER LOGIC ---
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            const formatted = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            const displayEl = document.getElementById('timer-display');
+            if (displayEl) {
+                displayEl.textContent = formatted;
+            }
+        }
+
+        function startTimer() {
+            if (isTimerRunning) return;
+            isTimerRunning = true;
+
+            document.getElementById('btn-timer-start').classList.add('hidden');
+            document.getElementById('btn-timer-pause').classList.remove('hidden');
+
+            timerInterval = setInterval(() => {
+                if (timeRemaining > 0) {
+                    timeRemaining--;
+                    updateTimerDisplay();
+                } else {
+                    pauseTimer();
+                    document.getElementById('time-up-modal').classList.remove('hidden');
+                }
+            }, 1000);
+        }
+
+        function pauseTimer() {
+            isTimerRunning = false;
+            clearInterval(timerInterval);
+            timerInterval = null;
+
+            document.getElementById('btn-timer-start').classList.remove('hidden');
+            document.getElementById('btn-timer-pause').classList.add('hidden');
+        }
+
+        function resetTimer() {
+            pauseTimer();
+            timeRemaining = 20 * 60;
+            updateTimerDisplay();
+        }
+
+        function closeTimeUpModal() {
+            document.getElementById('time-up-modal').classList.add('hidden');
+        }
+
+        // --- WORKSHEET CONTROL FUNCTIONS ---
+
+        function generateNewWorksheet() {
+            // Generate raw question structures
+            const rawQ = generateQuestions();
+
+            // Attach global indices and state variables
+            questionsData = rawQ.map((q, idx) => ({
+                ...q,
+                globalIndex: idx,
+                isAttempted: false,
+                isCorrect: false,
+                userAnswer: ''
+            }));
+
+            // Re-render full UI
+            renderWorksheet();
+
+            // Reset scores & progress
+            updateScorecard();
+
+            // Reset Timer to 20:00
+            resetTimer();
+        }
+
+        function resetWorksheet() {
+            // Reset input state for current question set without regenerating numbers
+            questionsData.forEach((q, idx) => {
+                q.isAttempted = false;
+                q.isCorrect = false;
+                q.userAnswer = '';
+
+                const inputEl = document.getElementById(`input-${idx}`);
+                const feedbackEl = document.getElementById(`feedback-${idx}`);
+                const hintBox = document.getElementById(`hint-box-${idx}`);
+
+                if (inputEl) {
+                    inputEl.value = '';
+                    inputEl.className = "w-full bg-slate-50 border-2 border-slate-300 focus:border-indigo-600 focus:bg-white rounded-xl px-3.5 py-2 text-base font-bold text-slate-800 outline-none transition placeholder:font-normal placeholder:text-slate-400";
+                }
+                if (feedbackEl) {
+                    feedbackEl.className = "hidden p-3 rounded-xl text-xs md:text-sm font-bold border space-y-0.5";
+                    feedbackEl.innerHTML = '';
+                }
+                if (hintBox) {
+                    hintBox.classList.add('hidden');
+                }
+            });
+
+            // Reset scores & progress
+            updateScorecard();
+
+            // Reset Timer
+            resetTimer();
+        }
+
+        // --- INITIALIZATION ---
+        window.onload = function () {
+            generateNewWorksheet();
+        };
+    </script>
+</body>
+</html>
