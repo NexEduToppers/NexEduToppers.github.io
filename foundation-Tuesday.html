@@ -709,7 +709,10 @@
                     if (userAnswers[q.id] && userAnswers[q.id].trim() !== '') {
                         answeredCount++;
                     }
-                    if (questionStatus[q.id] === true) {
+                    // Count correctness from the current answer itself, not only from
+                    // questionStatus. This keeps the scoreboard in sync while typing and
+                    // after Check Answer is clicked.
+                    if (userAnswers[q.id] && checkIsAnswerCorrect(q, userAnswers[q.id])) {
                         totalCorrect++;
                     }
                 });
@@ -732,7 +735,9 @@
             worksheetData.forEach(sec => {
                 let secCorrect = 0;
                 sec.questions.forEach(q => {
-                    if (questionStatus[q.id] === true) secCorrect++;
+                    if (userAnswers[q.id] && checkIsAnswerCorrect(q, userAnswers[q.id])) {
+                        secCorrect++;
+                    }
                 });
 
                 const secRow = document.createElement('div');
