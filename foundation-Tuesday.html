@@ -443,8 +443,12 @@
                 .toString()
                 .toLowerCase()
                 .trim()
-                .replace(/,/g, '') // remove commas
-                .replace(/\s+/g, ' '); // collapse extra spaces
+                // Accept a dot as a time separator too: 4.00 and 4:00 mean the same time.
+                .replace(/\b(\d{1,2})\.(\d{2})\b/g, '$1:$2')
+                .replace(/\b(a\.?m\.?|p\.?m\.?)\b/g, '')
+                .replace(/,/g, '')
+                .replace(/\s+/g, ' ')
+                .trim();
         }
 
         function checkIsAnswerCorrect(question, userVal) {
@@ -564,21 +568,47 @@
             `;
         }
 
-        // Hints explain the concept without giving away the answer.
+        // Question-specific hints: give the child the next useful step, not a generic section hint.
         function getQuestionHint(q) {
-            const section = worksheetData.find(sec => sec.questions.some(item => item.id === q.id));
-            const title = section ? section.title.toLowerCase() : '';
-            if (title.includes('fraction') || title.includes('भिन्न')) return 'Look at how many equal parts there are. For a fraction of a number, divide by the denominator first. / बराबर भागों की संख्या देखें।';
-            if (title.includes('measurement') || title.includes('units') || title.includes('माप')) return 'Remember: 1 m = 100 cm, 1 kg = 1,000 g, and 1 L = 1,000 mL. / इकाइयों का संबंध याद करें।';
-            if (title.includes('time') || title.includes('calendar') || title.includes('समय')) return '1 hour = 60 minutes and 1 week = 7 days. Add minutes carefully. / 1 घंटा = 60 मिनट; समय धीरे-धीरे जोड़ें।';
-            if (title.includes('geometry') || title.includes('shape') || title.includes('ज्यामिति')) return 'Count sides and corners. For a square perimeter, add all four equal sides. / भुजाएँ और कोने गिनें।';
-            if (title.includes('money') || title.includes('estimation') || title.includes('logic') || title.includes('पैसा')) return 'For change, subtract the price from the amount paid. For estimates, round first. / वापस पैसे निकालने के लिए घटाएँ।';
-            if (title.includes('number sense')) return 'Look at the place of each digit, compare numbers from left to right, or find the number that is one less.';
-            if (title.includes('addition and subtraction')) return 'Break numbers into hundreds, tens and ones. Check whether you need to add or subtract.';
-            if (title.includes('multiplication and division')) return 'Think of multiplication as equal groups and division as sharing equally. Use a known table to help.';
-            if (title.includes('patterns')) return 'Compare neighbouring numbers. Find the amount added or taken away, then continue the same rule.';
-            if (title.includes('everyday') || title.includes('brain')) return 'Pick out the important numbers and decide which operation matches the story.';
-            return 'Read carefully, identify the number rule, and solve one small step at a time.';
+            const text = q.text || '';
+            const id = Number(q.id);
+            if (id === 1) return 'Half means split the number into 2 equal groups. Divide the number in the question by 2. / आधा मतलब 2 बराबर भाग। प्रश्न वाली संख्या को 2 से भाग दें।';
+            if (id === 2) return 'To make an equivalent fraction, multiply the numerator and denominator by the same number. Find what number changes the starting denominator to the denominator in the question. / बराबर भिन्न बनाने के लिए अंश और हर को एक ही संख्या से गुणा करें। देखें कि प्रश्न में हर को बदलने के लिए किस संख्या से गुणा करना है।';
+            if (id === 3) return 'First subtract the pieces eaten from the total pieces. Write the pieces left over the original total. / पहले कुल टुकड़ों में से खाए गए टुकड़े घटाएँ। बचे टुकड़े ऊपर और कुल टुकड़े नीचे लिखें।';
+            if (id === 4) return 'A quarter means divide the whole number into 4 equal groups. / एक चौथाई निकालने के लिए पूरी संख्या को 4 बराबर भागों में बाँटें।';
+            if (id === 5) return 'When the whole is the same, halves are larger pieces than quarters. / जब पूरा समान हो, तो आधे का भाग एक चौथाई के भाग से बड़ा होता है।';
+            if (id === 6) return 'Every metre has 100 centimetres. Multiply the number of metres by 100. / 1 मीटर = 100 सेंटीमीटर। मीटर की संख्या को 100 से गुणा करें।';
+            if (id === 7) return 'Every kilogram has 1,000 grams. Multiply the kilograms by 1,000; keep all three zeros. / 1 किलोग्राम = 1,000 ग्राम। किलोग्राम की संख्या को 1,000 से गुणा करें।';
+            if (id === 8) return 'Both lengths are in centimetres, so add the two lengths. / दोनों लंबाइयाँ सेंटीमीटर में हैं, इसलिए दोनों संख्याएँ जोड़ें।';
+            if (id === 9) return 'Every litre has 1,000 millilitres. Multiply the litres by 1,000. / 1 लीटर = 1,000 मिलीलीटर। लीटर की संख्या को 1,000 से गुणा करें।';
+            if (id === 10) return 'A pencil is short, so choose the unit normally used for small lengths—not weight or liquid. / पेंसिल की छोटी लंबाई मापने वाली इकाई चुनें, वज़न या तरल की इकाई नहीं।';
+            if (id === 11) return 'There are 60 minutes in each hour. Multiply the number of hours by 60. / हर घंटे में 60 मिनट होते हैं। घंटों की संख्या को 60 से गुणा करें।';
+            if (id === 12) {
+                const m = text.match(/(\d+)\s+minutes?\s+after\s+(\d{1,2}):(\d{2})/i) || text.match(/(\d{1,2}):(\d{2}).*?(\d+)\s+minutes?/i);
+                if (m) {
+                    let addMinutes, hour, minute;
+                    if (/minutes?\s+after/i.test(m[0])) { addMinutes=Number(m[1]); hour=Number(m[2]); minute=Number(m[3]); }
+                    else { hour=Number(m[1]); minute=Number(m[2]); addMinutes=Number(m[3]); }
+                    const totalMinutes = minute + addMinutes;
+                    if (totalMinutes >= 60) return `Add ${minute} minutes + ${addMinutes} minutes. Since the total reaches or passes 60, carry 1 hour and subtract 60 to find the new minutes. / ${minute} मिनट में ${addMinutes} मिनट जोड़ें। 60 या अधिक होने पर 1 घंटा आगे बढ़ाएँ और 60 घटाकर मिनट निकालें।`;
+                    return `Keep the hour the same and add ${minute} + ${addMinutes} minutes. If the minutes reach 60, move to the next hour. / घंटा वही रखें और ${minute} + ${addMinutes} मिनट जोड़ें। मिनट 60 हों तो अगला घंटा करें।`;
+                }
+                return 'Add the starting minutes and the extra minutes. Every 60 minutes makes 1 extra hour; write the minutes with two digits. / शुरू के मिनटों में दिए गए मिनट जोड़ें। हर 60 मिनट पर 1 घंटा आगे बढ़ता है; मिनट दो अंकों में लिखें।';
+            }
+            if (id === 13) return 'Each week has 7 days. Multiply 7 by the number of weeks in the question. / हर सप्ताह में 7 दिन होते हैं। सप्ताहों की संख्या को 7 से गुणा करें।';
+            if (id === 14) return 'Find the start time given in the question, then add the stated number of full hours. The minutes stay the same unless the question says otherwise. / प्रश्न में दिया गया शुरुआती समय देखें और उसमें दिए गए पूरे घंटे जोड़ें। जब तक प्रश्न कुछ और न कहे, मिनट वही रहेंगे।';
+            if (id === 15) return 'Count the months from January through December. / जनवरी से दिसंबर तक महीनों की गिनती करें।';
+            if (id === 16) return 'Use the polygon name: the prefix tells how many sides it has. / बहुभुज के नाम से भुजाओं की संख्या याद करें।';
+            if (id === 17) return 'Imagine tracing the rectangle around its boundary and count each corner. / आयत की सीमा पर चलते हुए हर कोना गिनें।';
+            if (id === 18) return 'Perimeter means the distance all the way around. A square has 4 equal sides, so add the side 4 times. / परिमाप यानी चारों ओर की कुल लंबाई। वर्ग की 4 बराबर भुजाएँ होती हैं; भुजा को 4 बार जोड़ें।';
+            if (id === 19) return 'A cube has a square on each side of the solid. Count every outside flat surface. / घन की हर बाहरी सपाट सतह गिनें।';
+            if (id === 20) return 'Think of a shape that is round all the way around and has no vertices. / ऐसी आकृति सोचें जो पूरी गोल हो और जिसका कोई शीर्ष/कोना न हो।';
+            if (id === 21) return 'The price is the same for every pencil. Multiply the price of one pencil by the number of pencils. / हर पेंसिल का मूल्य समान है। एक पेंसिल के मूल्य को पेंसिलों की संख्या से गुणा करें।';
+            if (id === 22) return 'Change = money paid − item price. Subtract the smaller amount from the amount paid. / वापस मिलने वाले पैसे = दिए गए पैसे − वस्तु का मूल्य। घटाएँ।';
+            if (id === 23) return 'Round each number to the nearest hundred first, then add the rounded numbers. / पहले दोनों संख्याओं को निकटतम सैकड़े तक गोल करें, फिर जोड़ें।';
+            if (id === 24) return 'There are equal oranges in each box. Multiply the number of boxes by oranges in one box. / हर डिब्बे में बराबर संतरे हैं। डिब्बों की संख्या को एक डिब्बे के संतरों से गुणा करें।';
+            if (id === 25) return 'Compare two neighbouring numbers to find the amount added each time, then continue the same rule. / पास-पास की संख्याओं का अंतर देखें और वही नियम आगे जारी रखें।';
+            return 'Read the question carefully and solve it one small step at a time. / प्रश्न ध्यान से पढ़ें और एक-एक चरण हल करें।';
         }
 
         // Typing immediately colors the box: green for a correct answer, red for an incorrect one.
