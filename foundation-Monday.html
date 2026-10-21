@@ -860,16 +860,36 @@ return [
             `;
         }
 
-        // Hints explain the concept without giving away the answer.
+        // Each question has its own practical hint in English and Hindi.
         function getQuestionHint(q) {
-            const section = worksheetData.find(sec => sec.questions.some(item => item.id === q.id));
-            const title = section ? section.title.toLowerCase() : '';
-            if (title.includes('number sense')) return 'Look at the place of each digit, compare numbers from left to right, or find the number that is one less.';
-            if (title.includes('addition and subtraction')) return 'Break numbers into hundreds, tens and ones. Check whether you need to add or subtract.';
-            if (title.includes('multiplication and division')) return 'Think of multiplication as equal groups and division as sharing equally. Use a known table to help.';
-            if (title.includes('patterns')) return 'Compare neighbouring numbers. Find the amount added or taken away, then continue the same rule.';
-            if (title.includes('everyday') || title.includes('brain')) return 'Pick out the important numbers and decide which operation matches the story.';
-            return 'Read carefully, identify the number rule, and solve one small step at a time.';
+            const hints = {
+                1: 'In 4,735, read the digits from right to left: ones, tens, hundreds, thousands. The 7 is in the hundreds place. / 4,735 में दाईं ओर से स्थान पढ़ें: इकाई, दहाई, सैकड़ा, हजार। अंक 7 सैकड़े के स्थान पर है।',
+                2: 'The number just before a number is 1 less. Subtract 1 from 5,000. / किसी संख्या से ठीक पहले वाली संख्या उससे 1 कम होती है। 5,000 में से 1 घटाएँ।',
+                3: 'To make the greatest number, put the largest digit first, then the next largest, until all four digits are used once. / सबसे बड़ी संख्या बनाने के लिए सबसे बड़ा अंक पहले और फिर बाकी अंकों को बड़े से छोटे क्रम में रखें।',
+                4: 'All options begin with 4. Compare the hundreds digits next; the number with the smallest hundreds digit may be smallest. / सभी संख्याएँ 4 से शुरू होती हैं। अब सैकड़ों वाले अंक की तुलना करें; सबसे छोटा अंक देखें।',
+                5: 'Find the difference between 120 and 140. Check whether the same amount is added from 140 to 160, then continue that pattern twice. / 120 और 140 का अंतर निकालें। देखें कि 140 से 160 में भी उतना ही जुड़ता है; वही नियम दो बार आगे लगाएँ।',
+                6: 'Split into tens and ones: add 40 + 30, then 5 + 5. Add those two totals. / दहाइयाँ और इकाइयाँ अलग जोड़ें: 40 + 30, फिर 5 + 5। दोनों परिणाम जोड़ें।',
+                7: 'Subtract in two steps: take away 40 from 100 first, then take away the remaining 7. / दो चरणों में घटाएँ: पहले 100 में से 40 घटाएँ, फिर बचे हुए 7 घटाएँ।',
+                8: 'Add the hundreds first: 250 + 150 can be thought of as 200 + 100 and 50 + 50. / पहले सैकड़े जोड़ें: 250 + 150 को 200 + 100 और 50 + 50 में बाँटकर सोचें।',
+                9: 'Subtract 200 from 600, then subtract another 50 from what remains. / पहले 600 में से 200 घटाएँ, फिर बची हुई संख्या में से 50 घटाएँ।',
+                10: '398 is very close to the next hundred. Count how many more are needed to reach 400. / 398 अगला सैकड़ा 400 पाने के बहुत करीब है। 400 तक पहुँचने के लिए कितने और चाहिए?',
+                11: 'Use the 7-times table: think of 7 groups of 8, or 8 groups of 7. / 7 का पहाड़ा याद करें: 8 के 7 समूह या 7 के 8 समूह सोचें।',
+                12: 'Use the 9-times table. You can also think of 10 groups of 6, then subtract one group of 6. / 9 का पहाड़ा लगाएँ। चाहें तो 6 के 10 समूह सोचकर एक 6 घटा दें।',
+                13: 'Dividing by 10 moves each digit one place to the right in value. For a whole number ending in zero, remove one zero. / 10 से भाग देने पर अंक का मान दस गुना कम होता है। अंत में शून्य हो तो एक शून्य हटाएँ।',
+                14: 'Multiplication means equal groups. Add 8 five times, or use the 5-times table. / गुणा का अर्थ बराबर समूह हैं। 8 को पाँच बार जोड़ें या 5 का पहाड़ा लगाएँ।',
+                15: 'Ask yourself: what number multiplied by 8 gives 72? Use the 8-times table to find it. / सोचें: 8 को किस संख्या से गुणा करने पर 72 मिलता है? 8 का पहाड़ा देखें।',
+                16: 'The total is 60 and one part is 35. Subtract 35 from 60 to find the missing part. / कुल 60 है और एक भाग 35 है। गायब भाग पाने के लिए 60 में से 35 घटाएँ।',
+                17: 'Think of the subtraction as 90 minus a missing number equals 40. Find the difference between 90 and 40. / 90 में से कोई संख्या घटाने पर 40 बचता है। 90 और 40 का अंतर निकालें।',
+                18: 'The missing factor times 6 equals 42. Divide 42 by 6 to find the factor. / गायब संख्या को 6 से गुणा करने पर 42 मिलता है। उसे खोजने के लिए 42 को 6 से भाग दें।',
+                19: 'Look at how each number changes: 5 to 10, 10 to 20, and 20 to 40. Apply the same rule to 40. / देखें: 5 से 10, 10 से 20 और 20 से 40 कैसे बने। वही नियम 40 पर लगाएँ।',
+                20: 'Check which numbers are divisible by 6 with no remainder. The number that does not fit the same rule is the odd one out. / देखें कि कौन-सी संख्याएँ 6 से पूरी तरह विभाजित होती हैं। जो उसी नियम में नहीं आती, वही अलग है।',
+                21: 'Money left = money started with − cost. Subtract the notebook price from ₹100. / बचे पैसे = शुरू में पैसे − खर्च। ₹100 में से कॉपी की कीमत घटाएँ।',
+                22: 'The starting time is 4:15. Add 30 minutes to 15 minutes; if minutes reach 60, move to the next hour. / समय 4:15 है। 15 मिनट में 30 मिनट जोड़ें; मिनट 60 हों तो अगला घंटा करें।',
+                23: 'Half means two equal parts. Split 86 into 80 and 6, find half of each, then add the two halves. / आधा यानी दो बराबर भाग। 86 को 80 और 6 में बाँटें, दोनों का आधा निकालें और जोड़ें।',
+                24: 'There are 4 equal groups with 6 apples in each. Add 6 four times or multiply 4 by 6. / 4 बराबर समूह हैं और हर समूह में 6 सेब हैं। 6 को चार बार जोड़ें या 4 × 6 करें।',
+                25: 'The tens digit is 5. The ones digit is 3 less than 5, so subtract 3 from 5, then place that digit after the tens digit. / दहाई का अंक 5 है। इकाई का अंक उससे 3 कम है, इसलिए 5 में से 3 घटाएँ और उस अंक को दहाई के बाद लिखें।'
+            };
+            return hints[Number(q.id)] || 'Read the question and identify the exact step it asks for. / प्रश्न ध्यान से पढ़ें और पता करें कि उसमें कौन-सा चरण करना है।';
         }
 
         // Typing immediately colors the box: green for a correct answer, red for an incorrect one.
