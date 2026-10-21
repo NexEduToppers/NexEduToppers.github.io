@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mental Math Worksheet - Class 4</title>
+    <title>Foundation Tuesday - Class 4 Maths Worksheet</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
@@ -89,8 +89,6 @@
         
         .math-input.state-correct {
             background-color: #f0fdf4 !important;
-            border-color:
-#f0fdf4 !important;
             border-color: #22c55e !important;
             color: #15803d !important;
             box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2) !important;
@@ -181,26 +179,26 @@
             <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-pink-200/50 rounded-full blur-2xl"></div>
 
             <div class="inline-block bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-3">
-                Foundation Practice
+                Foundation Practice • Day 2 / Tuesday
             </div>
             
             <h1 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight mb-2">
-                MENTAL MATH WORKSHEET - 1
+                FOUNDATION TUESDAY - WORKSHEET 2
             </h1>
             <p class="text-slate-600 font-medium text-base sm:text-lg mb-6">
-                Number Sense & Quick Calculations
+                Fractions, Measurement, Time, Geometry & Daily-life Maths
             </p>
 
             <!-- Metadata Info Pills -->
             <div class="flex flex-wrap justify-center items-center gap-3 text-xs sm:text-sm font-semibold mb-6">
                 <span class="bg-white/80 border border-slate-200/80 px-3.5 py-1.5 rounded-xl shadow-sm text-slate-700 flex items-center gap-1.5">
-                    <i class="fa-solid fa-clock text-indigo-500"></i> Time: 20 Minutes
+                    <i class="fa-solid fa-clock text-indigo-500"></i> Time: 20 Minutes / समय: 20 मिनट
                 </span>
                 <span class="bg-white/80 border border-slate-200/80 px-3.5 py-1.5 rounded-xl shadow-sm text-slate-700 flex items-center gap-1.5">
-                    <i class="fa-solid fa-list-check text-emerald-500"></i> Questions: 25
+                    <i class="fa-solid fa-list-check text-emerald-500"></i> Questions: 25 / प्रश्न: 25
                 </span>
                 <span class="bg-white/80 border border-slate-200/80 px-3.5 py-1.5 rounded-xl shadow-sm text-slate-700 flex items-center gap-1.5">
-                    <i class="fa-solid fa-award text-amber-500"></i> Total Marks: 25
+                    <i class="fa-solid fa-award text-amber-500"></i> Total Marks: 25 / कुल अंक: 25
                 </span>
             </div>
         </div>
@@ -215,7 +213,7 @@
                 <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900 mb-1">
                     Worksheet Assessment & Scoreboard
                 </h2>
-                <p class="text-sm text-slate-500">Review your final score and performance summary</p>
+                <p class="text-sm text-slate-500">Review your final score and performance summary / अपना स्कोर देखें</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -252,9 +250,9 @@
                     </div>
                     <div>
                         <p id="teacher-remark-text" class="font-heading font-semibold text-base sm:text-lg text-slate-800 leading-snug">
-                            Complete questions to unlock teacher's remark!
+                            Complete questions to unlock teacher's remark! / शिक्षक की टिप्पणी पाने के लिए प्रश्न हल करें।
                         </p>
-                        <p class="text-xs text-slate-500 mt-1">Based on accuracy and speed across all 5 sections.</p>
+                        <p class="text-xs text-slate-500 mt-1">Based on accuracy across all 5 sections. / पाँचों भागों के प्रदर्शन पर आधारित।</p>
                     </div>
                 </div>
             </div>
@@ -284,387 +282,90 @@
     <!-- JAVASCRIPT LOGIC -->
     <script>
         // --- WORKSHEET DATA STRUCTURE ---
-        let worksheetData = [ // CHANGED: allows fresh questions to replace the current worksheet
-            {
-        sectionId: "sec-a",
-    title: "Section 1: Basic Addition (सामान्य जोड़)",
-    marks: "20 Marks",
-    icon: "fas fa-plus",
-    color: "blue",
-    questions: [
-      {
-        id: "Q1",
-        text: "What is 432 + 215?\n\nप्रश्न: 432 + 215 कितना होगा?",
-        validAnswers: ["(A) 647"],
-        explanation: "$432 + 215 = 647$.\nस्पष्टीकरण: $432$ और $215$ को जोड़ने पर $647$ प्राप्त होता है।"
-      },
-      {
-        id: "Q2",
-        text: "What is 5,230 + 3,142?\n\nप्रश्न: 5,230 + 3,142 कितना होगा?",
-        validAnswers: ["(A) 8,372"],
-        explanation: "$5,230 + 3,142 = 8,372$.\nस्पष्टीकरण: $5,230$ और $3,142$ का योग $8,372$ है।"
-      },
-      {
-        id: "Q3",
-        text: "What is 605 + 283?\n\nप्रश्न: 605 + 283 कितना होगा?",
-        validAnswers: ["(A) 888"],
-        explanation: "$605 + 283 = 888$.\nस्पष्टीकरण: $605$ और $283$ को जोड़ने पर $888$ आता है।"
-      },
-      {
-        id: "Q4",
-        text: "What is 4,100 + 2,500?\n\nप्रश्न: 4,100 + 2,500 कितना होगा?",
-        validAnswers: ["(B) 6,600"],
-        explanation: "$4,100 + 2,500 = 6,600$.\nस्पष्टीकरण: $4,100$ और $2,500$ को जोड़ने पर $6,600$ प्राप्त होता है।"
-      },
-      {
-        id: "Q21",
-        text: "What is 320 + 450?\n\nप्रश्न: 320 + 450 कितना होगा?",
-        validAnswers: ["(A) 770"],
-        explanation: "$320 + 450 = 770$.\nस्पष्टीकरण: $320$ और $450$ का योग $770$ है।"
-      }
-    ]
-  },
-  {
-    sectionId: "sec-b",
-    title: "Section 2: Addition with Carry (हासिल वाले जोड़)",
-    marks: "20 Marks",
-    icon: "fas fa-calculator",
-    color: "green",
-    questions: [
-      {
-        id: "Q5",
-        text: "What is 458 + 276?\n\nप्रश्न: 458 + 276 कितना होगा?",
-        validAnswers: ["(B) 734"],
-        explanation: "$8+6=14$ (4, carry 1); $5+7+1=13$ (3, carry 1); $4+2+1=7$. Total = 734.\nस्पष्टीकरण: हासिल जोड़ते हुए, $458 + 276 = 734$ होता है।"
-      },
-      {
-        id: "Q6",
-        text: "What is 3,485 + 1,842?\n\nप्रश्न: 3,485 + 1,842 कितना होगा?",
-        validAnswers: ["(B) 5,327"],
-        explanation: "Adding with carry gives $3,485 + 1,842 = 5,327$.\nस्पष्टीकरण: हासिल वाले जोड़ के नियम से, $3,485 + 1,842 = 5,327$ प्राप्त होता है।"
-      },
-      {
-        id: "Q7",
-        text: "What is 789 + 432?\n\nप्रश्न: 789 + 432 कितना होगा?",
-        validAnswers: ["(B) 1,221"],
-        explanation: "$789 + 432 = 1,221$.\nस्पष्टीकरण: $789$ में $432$ जोड़ने पर $1,221$ होता है।"
-      },
-      {
-        id: "Q8",
-        text: "What is 2,654 + 3,876?\n\nप्रश्न: 2,654 + 3,876 कितना होगा?",
-        validAnswers: ["(C) 6,530"],
-        explanation: "$2,654 + 3,876 = 6,530$.\nस्पष्टीकरण: $2,654$ और $3,876$ का सही योग $6,530$ है।"
-      },
-      {
-        id: "Q22",
-        text: "What is 678 + 549?\n\nप्रश्न: 678 + 549 कितना होगा?",
-        validAnswers: ["(A) 1,227"],
-        explanation: "$678 + 549 = 1,227$.\nस्पष्टीकरण: हासिल के साथ जोड़ने पर $678 + 549 = 1,227$ प्राप्त होता है।"
-      }
-    ]
-  },
-  {
-    sectionId: "sec-c",
-    title: "Section 3: Place Value & Expanded Form Review (स्थानीय मान और विस्तारित रूप)",
-    marks: "20 Marks",
-    icon: "fas fa-list-ol",
-    color: "purple",
-    questions: [
-      {
-        id: "Q9",
-        text: "What is the place value of 8 in 6,382?\n\nप्रश्न: संख्या 4,732 में 7 का स्थानीय मान क्या है?",
-        validAnswers: ["(C) 700"],
-        explanation: "7 is in the hundreds place, so its place value is 700.\nस्पष्टीकरण: 7 सैकड़े के स्थान पर है, इसलिए इसका स्थानीय मान 700 है।"
-      },
-      {
-        id: "Q10",
-        text: "What number is formed by: 5,000 + 400 + 30 + 8?\n\nप्रश्न: 5,000 + 400 + 30 + 8 से कौन-सी संख्या बनेगी?",
-        validAnswers: ["(A) 5,438"],
-        explanation: "Combining the values gives 5,438.\nस्पष्टीकरण: सभी स्थानीय मानों को मिलाने पर 5,438 बनता है।"
-      },
-      {
-        id: "Q11",
-        text: "What is the expanded form of 3,092?\n\nप्रश्न: संख्या 3,092 का विस्तारित रूप क्या है?",
-        validAnswers: ["(A) 3,000 + 90 + 2"],
-        explanation: "$3,092 = 3$ thousands + 0 hundreds + 9 tens + 2 ones = $3,000 + 90 + 2$.\nस्पष्टीकरण: सैकड़े में 0 होने के कारण इसका विस्तारित रूप $3,000 + 90 + 2$ होगा।"
-      },
-      {
-        id: "Q12",
-        text: "What is the number just after 4,999 (Successor)?\n\nप्रश्न: संख्या 4,999 के ठीक बाद कौन-सी संख्या आती है?",
-        validAnswers: ["(B) 5,000"],
-        explanation: "Adding 1 to 4,999 gives 5,000.\nस्पष्टीकरण: 4,999 में 1 जोड़ने पर 5,000 प्राप्त होता है।"
-      },
-      {
-        id: "Q23",
-        text: "What is the place value of 5 in 5,841?\n\nप्रश्न: संख्या 5,841 में 5 का स्थानीय मान क्या है?",
-        validAnswers: ["(D) 5,000"],
-        explanation: "5 is in the thousands place, so its place value is 5,000.\nस्पष्टीकरण: 5 हजार के स्थान पर है, इसलिए इसका स्थानीय मान 5,000 है।"
-      }
-    ]
-  },
-  {
-    sectionId: "sec-d",
-    title: "Section 4: Number Comparison & Ordering (तुलना और क्रम)",
-    marks: "20 Marks",
-    icon: "fas fa-exchange-alt",
-    color: "orange",
-    questions: [
-      {
-        id: "Q13",
-        text: "Which sign correctly compares: 3,450 ___ 3,540?\n\nप्रश्न: सही चिह्न चुनें: 3,450 ___ 3,540",
-        options: ["(A) >", "(B) <", "(C) =", "(D) +"],
-        validAnswers: ["(B) <"],
-        explanation: "3,450 is less than 3,540, so 3,450 < 3,540.\nस्पष्टीकरण: 3,450, 3,540 से छोटा है, इसलिए < का चिह्न आएगा।"
-      },
-      {
-        id: "Q14",
-        text: "Which is the greatest number among the following?\n\nप्रश्न: निम्नलिखित में से सबसे बड़ी संख्या कौन-सी है?",
-        validAnswers: ["(C) 4,512"],
-        explanation: "Comparing hundreds and tens, 4,512 has the highest value.\nस्पष्टीकरण: सैकड़े और दहाई के अंकों की तुलना करने पर 4,512 सबसे बड़ी है।"
-      },
-      {
-        id: "Q15",
-        text: "Arrange in Ascending Order (Smallest to Greatest): 2341, 1432, 4123, 3214\n\nप्रश्न: आरोही क्रम (छोटे से बड़े) में व्यवस्थित करें: 2341, 1432, 4123, 3214",
-        validAnswers: ["(A) 1432, 2341, 3214, 4123"],
-        explanation: "Sorted from smallest to greatest: 1432 < 2341 < 3214 < 4123.\nस्पष्टीकरण: सबसे छोटी से बड़ी संख्या का सही क्रम 1432, 2341, 3214, 4123 है।"
-      },
-      {
-        id: "Q16",
-        text: "What is 10 more than 7,840?\n\nप्रश्न: 7,840 से 10 अधिक क्या होगा?",
-        validAnswers: ["(A) 7,850"],
-        explanation: "$7,840 + 10 = 7,850$.\nस्पष्टीकरण: 7,840 में 10 जोड़ने पर 7,850 प्राप्त होता है।"
-      },
-      {
-        id: "Q24",
-        text: "Which sign correctly compares: 8,210 ___ 8,120?\n\nप्रश्न: सही चिह्न चुनें: 8,210 ___ 8,120",
-        options: ["(A) >", "(B) <", "(C) =", "(D) +"],
-        validAnswers: ["(A) >"],
-        explanation: "8,210 is greater than 8,120, so 8,210 > 8,120.\nस्पष्टीकरण: 8,210, 8,120 से बड़ा है, इसलिए > का चिह्न आएगा।"
-      }
-    ]
-  },
-  {
-    sectionId: "sec-e",
-    title: "Section 5: Daily Life Word Problems on Addition (दैनिक जीवन के व्यावहारिक सवाल)",
-    marks: "20 Marks",
-    icon: "fas fa-shopping-cart",
-    color: "teal",
-    questions: [
-      {
-        id: "Q17",
-        text: "A school library has 1,450 Hindi books and 1,230 English books. How many total books are there?\n\nप्रश्न: एक स्कूल के पुस्तकालय में 1,450 हिंदी की और 1,230 अंग्रेजी की किताबें हैं। कुल कितनी किताबें हैं?",
-        validAnswers: ["(A) 2,680"],
-        explanation: "$1,450 + 1,230 = 2,680$ total books.\nस्पष्टीकरण: कुल किताबें ज्ञात करने के लिए दोनों को जोड़ेंगे: $1,450 + 1,230 = 2,680$।"
-      },
-      {
-        id: "Q18",
-        text: "Amit has ₹2,450 in his bank account. He deposits ₹1,500 more. How much money does he have now?\n\nप्रश्न: अमित के बैंक खाते में ₹2,450 हैं। वह ₹1,500 और जमा करता है। अब उसके खाते में कुल कितने रुपये हैं?",
-        validAnswers: ["(A) ₹3,950"],
-        explanation: "$2,450 + 1,500 = ₹3,950$.\nस्पष्टीकरण: कुल राशि = $2,450 + 1,500 = ₹3,950$।"
-      },
-      {
-        id: "Q19",
-        text: "A farmer harvested 3,210 oranges on Monday and 2,415 oranges on Tuesday. How many oranges did he harvest in total?\n\nप्रश्न: एक किसान ने सोमवार को 3,210 संतरे और मंगलवार को 2,415 संतरे तोड़े। उसने कुल कितने संतरे तोड़े?",
-        validAnswers: ["(A) 5,625"],
-        explanation: "$3,210 + 2,415 = 5,625$.\nस्पष्टीकरण: दोनों दिनों के संतरों का कुल योग $3,210 + 2,415 = 5,625$ है।"
-      },
-      {
-        id: "Q20",
-        text: "What is the sum of the greatest 3-digit number and the smallest 3-digit number?\n\nप्रश्न: सबसे बड़ी 3-अंकों की संख्या और सबसे छोटी 3-अंकों की संख्या का योग क्या है?",
-        validAnswers: ["(A) 1,099"],
-        explanation: "Greatest 3-digit number = 999, Smallest 3-digit number = 100. Sum = $999 + 100 = 1,099$.\nस्पष्टीकरण: सबसे बड़ी 3-अंकों की संख्या 999 और सबसे छोटी 100 है, जिनका योग $999 + 100 = 1,099$ है।"
-      },
-      {
-        id: "Q25",
-        text: "Rohan bought a shirt for ₹750 and trousers for ₹1,200. How much total money did he spend?\n\nप्रश्न: रोहन ने ₹750 की एक कमीज और ₹1,200 की पतलून खरीदी। उसने कुल कितने रुपये खर्च किए?",
-        validAnswers: ["(A) ₹1,950"],
-        explanation: "Total spent = ₹750 + ₹1,200 = ₹1,950.\nस्पष्टीकरण: कुल खर्च = ₹750 + ₹1,200 = ₹1,950 है।"
-      }
-    ]
-  }
+        let worksheetData = [
+  { sectionId:'sec-a', title:'Section A: Fractions / भिन्न', marks:'5 marks', icon:'fa-chart-pie', color:'indigo', questions:[
+    {id:1,text:'What is 1/2 of 18? / 18 का आधा कितना है?',validAnswers:['9'],explanation:'Half means divide by 2: 18 ÷ 2 = 9. / आधा निकालने के लिए 2 से भाग दें।'},
+    {id:2,text:'Which fraction is one quarter: 1/2, 1/3, or 1/4? Type the fraction. / एक चौथाई कौन-सा भिन्न है?',validAnswers:['1/4','one quarter','one fourth'],explanation:'One quarter is written as 1/4. / एक चौथाई को 1/4 लिखते हैं।'},
+    {id:3,text:'A pizza is cut into 8 equal slices. Riya eats 3. What fraction is left? / पिज़्ज़ा के 8 टुकड़ों में से 3 खाए गए। कितना भाग बचा?',validAnswers:['5/8','five eighths'],explanation:'8 − 3 = 5 slices remain, so 5/8 is left. / 5 टुकड़े बचे, इसलिए 5/8 भाग बचा।'},
+    {id:4,text:'Complete: 1/2 = __/4. / पूरा करें: 1/2 = __/4',validAnswers:['2'],explanation:'Multiply numerator and denominator by 2: 1/2 = 2/4. / ऊपर और नीचे 2 से गुणा करें।'},
+    {id:5,text:'Which is greater: 1/2 or 1/4? Type the greater fraction. / 1/2 और 1/4 में कौन बड़ा है?',validAnswers:['1/2','one half','half'],explanation:'One half is greater than one quarter. / आधा, एक चौथाई से बड़ा होता है।'}
+  ]},
+  { sectionId:'sec-b', title:'Section B: Measurement & Units / माप और इकाइयाँ', marks:'5 marks', icon:'fa-ruler', color:'blue', questions:[
+    {id:6,text:'1 metre = how many centimetres? / 1 मीटर में कितने सेंटीमीटर होते हैं?',validAnswers:['100','100 cm','100 centimetres'],explanation:'1 metre = 100 centimetres. / 1 मीटर = 100 सेंटीमीटर।'},
+    {id:7,text:'3 kg = how many grams? / 3 किलोग्राम में कितने ग्राम?',validAnswers:['3000','3,000','3000 g'],explanation:'1 kg = 1,000 g, so 3 kg = 3,000 g. / 3 × 1,000 = 3,000 ग्राम।'},
+    {id:8,text:'A ribbon is 85 cm long. Another is 40 cm long. What is their total length in cm? / 85 सेमी और 40 सेमी की कुल लंबाई?',validAnswers:['125','125 cm'],explanation:'85 + 40 = 125 cm. / दोनों लंबाइयाँ जोड़ें: 125 सेमी।'},
+    {id:9,text:'A bottle holds 1 litre. How many millilitres is that? / 1 लीटर में कितने मिलीलीटर?',validAnswers:['1000','1,000','1000 ml'],explanation:'1 litre = 1,000 millilitres. / 1 लीटर = 1,000 मिलीलीटर।'},
+    {id:10,text:'Which unit is best for measuring the weight of a school bag: cm, kg, or litre? Type the unit. / स्कूल बैग का वज़न किस इकाई में मापेंगे?',validAnswers:['kg','kilogram','kilograms'],explanation:'Weight is measured in kilograms (kg). / वज़न किलोग्राम में मापा जाता है।'}
+  ]},
+  { sectionId:'sec-c', title:'Section C: Time & Calendar / समय और कैलेंडर', marks:'5 marks', icon:'fa-clock', color:'emerald', questions:[
+    {id:11,text:'How many minutes are there in 2 hours? / 2 घंटे में कितने मिनट?',validAnswers:['120','120 minutes'],explanation:'2 × 60 = 120 minutes. / 2 × 60 = 120 मिनट।'},
+    {id:12,text:'What time is 45 minutes after 3:20? Use HH:MM. / 3:20 के 45 मिनट बाद क्या समय होगा?',validAnswers:['4:05','4.05','4:05 pm','4:05 p.m.'],explanation:'20 + 45 = 65 minutes, which is 1 hour 5 minutes later: 4:05. / समय 4:05 होगा।'},
+    {id:13,text:'How many days are there in 3 weeks? / 3 सप्ताह में कितने दिन?',validAnswers:['21','21 days'],explanation:'Each week has 7 days: 3 × 7 = 21. / 3 × 7 = 21 दिन।'},
+    {id:14,text:'A movie starts at 2:00 and ends at 3:30. How long is it? Type hours and minutes, e.g. 1 hour 30 minutes. / फिल्म 2 बजे शुरू होकर 3:30 पर खत्म होती है। अवधि?',validAnswers:['1 hour 30 minutes','90 minutes','1 hr 30 min','1:30'],explanation:'From 2:00 to 3:00 is 1 hour, then 30 more minutes. / कुल 1 घंटा 30 मिनट।'},
+    {id:15,text:'How many months are there in one year? / एक साल में कितने महीने?',validAnswers:['12','12 months'],explanation:'There are 12 months in one year. / एक वर्ष में 12 महीने होते हैं।'}
+  ]},
+  { sectionId:'sec-d', title:'Section D: Shapes & Geometry / आकृतियाँ और ज्यामिति', marks:'5 marks', icon:'fa-shapes', color:'purple', questions:[
+    {id:16,text:'How many sides does a hexagon have? / षट्भुज की कितनी भुजाएँ होती हैं?',validAnswers:['6','six'],explanation:'A hexagon has 6 sides. / षट्भुज की 6 भुजाएँ होती हैं।'},
+    {id:17,text:'How many corners does a rectangle have? / आयत के कितने कोने होते हैं?',validAnswers:['4','four'],explanation:'A rectangle has 4 corners. / आयत के 4 कोने होते हैं।'},
+    {id:18,text:'A square has sides of 5 cm each. What is its perimeter in cm? / 5 सेमी भुजा वाले वर्ग का परिमाप?',validAnswers:['20','20 cm'],explanation:'Perimeter = 4 × side = 4 × 5 = 20 cm. / परिमाप = 4 × 5 = 20 सेमी।'},
+    {id:19,text:'How many faces does a cube have? / घन के कितने फलक होते हैं?',validAnswers:['6','six'],explanation:'A cube has 6 equal square faces. / घन के 6 फलक होते हैं।'},
+    {id:20,text:'Which 2D shape has no corners: circle, triangle, or square? Type the shape. / किस आकृति का कोई कोना नहीं होता?',validAnswers:['circle','a circle'],explanation:'A circle has no corners or vertices. / वृत्त का कोई कोना नहीं होता।'}
+  ]},
+  { sectionId:'sec-e', title:'Section E: Money, Estimation & Logic / पैसा, अनुमान और तर्क', marks:'5 marks', icon:'fa-lightbulb', color:'amber', questions:[
+    {id:21,text:'A pencil costs ₹8. How much do 5 pencils cost? Type the number of rupees. / ₹8 की 5 पेंसिलों का कुल मूल्य?',validAnswers:['40','₹40','40 rupees'],explanation:'5 × ₹8 = ₹40. / 5 × 8 = ₹40।'},
+    {id:22,text:'You pay ₹100 for an item costing ₹67. How much change should you get? / ₹67 की चीज़ के लिए ₹100 दिए। कितने रुपये वापस मिलेंगे?',validAnswers:['33','₹33','33 rupees'],explanation:'₹100 − ₹67 = ₹33. / ₹100 − ₹67 = ₹33।'},
+    {id:23,text:'Estimate 198 + 301 by rounding each number to the nearest hundred. / निकटतम सैकड़े तक पूर्णांकित करके 198 + 301 का अनुमान लगाएँ।',validAnswers:['500','500 approx','about 500'],explanation:'198 rounds to 200 and 301 rounds to 300; 200 + 300 = 500. / 200 + 300 = लगभग 500।'},
+    {id:24,text:'A shop has 4 boxes with 6 oranges in each. How many oranges altogether? / 4 डिब्बों में हर एक में 6 संतरे हैं। कुल कितने?',validAnswers:['24','24 oranges'],explanation:'4 × 6 = 24 oranges. / 4 × 6 = 24 संतरे।'},
+    {id:25,text:'Find the next number: 2, 5, 8, 11, ____. / अगली संख्या बताइए: 2, 5, 8, 11, ____',validAnswers:['14'],explanation:'Add 3 each time: 11 + 3 = 14. / हर बार 3 जोड़ें: 14।'}
+  ]}
 ];
-// ADDED: RANDOM QUESTION HELPERS FOR REGENERATING THE ORIGINAL WORKSHEET
-        function randomInt(min, max) {
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
 
-        function formatNumber(number) {
-            return number.toLocaleString('en-US');
-        }
-
+        // Helpers used to generate fresh questions for this Tuesday worksheet.
+        function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+        function formatNumber(number) { return number.toLocaleString('en-US'); }
         function makeQuestion(id, text, answers, explanation) {
-            return {
-                id,
-                text,
-                validAnswers: (Array.isArray(answers) ? answers : [answers]).map(String),
-                explanation
-            };
+            return { id, text, validAnswers: (Array.isArray(answers) ? answers : [answers]).map(String), explanation };
         }
 
-        // ADDED: Makes a new set of 25 mixed Class 4 maths questions.
         function generateFreshWorksheetData() {
-            const questions = [[], [], [], [], []];
-
-            // Section A: Number Sense (Q1-Q5)
-            const thousands = randomInt(1, 9);
-            const hundreds = randomInt(1, 9);
-            const tens = randomInt(0, 9);
-            const ones = randomInt(0, 9);
-            const placeNumber = thousands * 1000 + hundreds * 100 + tens * 10 + ones;
-            questions[0].push(makeQuestion(
-                1,
-                `What is the place value of ${hundreds} in ${formatNumber(placeNumber)}?`,
-                String(hundreds * 100),
-                `${hundreds} is in the hundreds place, so its place value is ${hundreds} × 100 = ${hundreds * 100}.`
-            ));
-
-            const predecessor = randomInt(2000, 9999);
-            questions[0].push(makeQuestion(
-                2,
-                `Write the number that comes just before ${formatNumber(predecessor)}.`,
-                formatNumber(predecessor - 1),
-                `The predecessor is one less: ${formatNumber(predecessor)} − 1 = ${formatNumber(predecessor - 1)}.`
-            ));
-
-            const digits = [];
-            while (digits.length < 4) {
-                const digit = randomInt(1, 9);
-                if (!digits.includes(digit)) digits.push(digit);
-            }
-            const greatestNumber = Number([...digits].sort((a, b) => b - a).join(''));
-            questions[0].push(makeQuestion(
-                3,
-                `Form the greatest four-digit number using ${digits.join(', ')} without repeating any digit.`,
-                formatNumber(greatestNumber),
-                `Arrange the digits from greatest to smallest: ${[...digits].sort((a, b) => b - a).join(', ')}. The number is ${formatNumber(greatestNumber)}.`
-            ));
-
-            const compareNumbers = new Set();
-            while (compareNumbers.size < 4) compareNumbers.add(randomInt(1000, 9999));
-            const compareList = [...compareNumbers];
-            const smallest = Math.min(...compareList);
-            questions[0].push(makeQuestion(
-                4,
-                `Which is the smallest number: ${compareList.map(formatNumber).join('; ')}?`,
-                formatNumber(smallest),
-                `Comparing all four numbers, ${formatNumber(smallest)} is the smallest.`
-            ));
-
-            const patternStart = randomInt(10, 100) * 10;
-            const patternStep = randomInt(2, 9) * 10;
-            const patternNext1 = patternStart + patternStep;
-            const patternNext2 = patternNext1 + patternStep;
-            questions[0].push(makeQuestion(
-                5,
-                `Complete the pattern: ${patternStart}, ${patternStart + patternStep}, ${patternStart + 2 * patternStep}, ____, ____.`,
-                [`${patternNext1}, ${patternNext2}`, `${patternNext1},${patternNext2}`, `${patternNext1} ${patternNext2}`],
-                `The numbers increase by ${patternStep} each time. The missing numbers are ${patternNext1} and ${patternNext2}.`
-            ));
-
-            // Section B: Quick Addition and Subtraction (Q6-Q10)
-            let a = randomInt(20, 900), b = randomInt(20, 900);
-            questions[1].push(makeQuestion(6, `${formatNumber(a)} + ${formatNumber(b)} = ____`, formatNumber(a + b),
-                `${formatNumber(a)} + ${formatNumber(b)} = ${formatNumber(a + b)}.`));
-
-            a = randomInt(300, 1500); b = randomInt(20, Math.min(a - 1, 800));
-            questions[1].push(makeQuestion(7, `${formatNumber(a)} − ${formatNumber(b)} = ____`, formatNumber(a - b),
-                `${formatNumber(a)} − ${formatNumber(b)} = ${formatNumber(a - b)}.`));
-
-            a = randomInt(100, 900); b = randomInt(100, 900);
-            questions[1].push(makeQuestion(8, `${formatNumber(a)} + ${formatNumber(b)} = ____`, formatNumber(a + b),
-                `${formatNumber(a)} + ${formatNumber(b)} = ${formatNumber(a + b)}.`));
-
-            a = randomInt(500, 3000); b = randomInt(100, Math.min(a - 1, 1500));
-            questions[1].push(makeQuestion(9, `${formatNumber(a)} − ${formatNumber(b)} = ____`, formatNumber(a - b),
-                `${formatNumber(a)} − ${formatNumber(b)} = ${formatNumber(a - b)}.`));
-
-            a = randomInt(101, 998);
-            const roundUp = 1000 - a;
-            questions[1].push(makeQuestion(10, `${formatNumber(a)} + ____ = 1,000`, String(roundUp),
-                `${formatNumber(a)} needs ${roundUp} to reach 1,000, because ${formatNumber(a)} + ${roundUp} = 1,000.`));
-
-            // Section C: Multiplication and Division (Q11-Q15)
-            a = randomInt(2, 12); b = randomInt(2, 12);
-            questions[2].push(makeQuestion(11, `${a} × ${b} = ____`, String(a * b),
-                `${a} multiplied by ${b} equals ${a * b}.`));
-
-            a = randomInt(2, 12); b = randomInt(2, 12);
-            questions[2].push(makeQuestion(12, `${a} × ${b} = ____`, String(a * b),
-                `${a} × ${b} = ${a * b}.`));
-
-            b = randomInt(2, 12); const quotient = randomInt(2, 12); a = b * quotient;
-            questions[2].push(makeQuestion(13, `${a} ÷ ${b} = ____`, String(quotient),
-                `Since ${b} × ${quotient} = ${a}, ${a} ÷ ${b} = ${quotient}.`));
-
-            a = randomInt(2, 12); b = randomInt(2, 12);
-            questions[2].push(makeQuestion(14, `${a} × ${b} = ____`, String(a * b),
-                `${a} × ${b} = ${a * b}.`));
-
-            b = randomInt(2, 12); const quotient2 = randomInt(2, 12); a = b * quotient2;
-            questions[2].push(makeQuestion(15, `${a} ÷ ${b} = ____`, String(quotient2),
-                `Since ${b} × ${quotient2} = ${a}, ${a} ÷ ${b} = ${quotient2}.`));
-
-            // Section D: Missing Numbers and Patterns (Q16-Q20)
-            a = randomInt(10, 90); b = randomInt(10, 90);
-            questions[3].push(makeQuestion(16, `${a} + □ = ${a + b}`, String(b),
-                `The missing number is ${a + b} − ${a} = ${b}.`));
-
-            a = randomInt(50, 150); b = randomInt(10, a - 1);
-            questions[3].push(makeQuestion(17, `${a} − □ = ${a - b}`, String(b),
-                `The missing number is ${a} − ${a - b} = ${b}.`));
-
-            a = randomInt(2, 12); b = randomInt(2, 12);
-            questions[3].push(makeQuestion(18, `${a} × □ = ${a * b}`, String(b),
-                `The missing factor is ${a * b} ÷ ${a} = ${b}.`));
-
-            const doubleStart = randomInt(3, 20);
-            questions[3].push(makeQuestion(19, `Complete the pattern: ${doubleStart}, ${doubleStart * 2}, ${doubleStart * 4}, ${doubleStart * 8}, ____.`,
-                String(doubleStart * 16),
-                `Each number doubles. The next number is ${doubleStart * 8} × 2 = ${doubleStart * 16}.`));
-
-            const oddBase = randomInt(2, 9);
-            const multiples = [oddBase * 2, oddBase * 3, oddBase * 4, oddBase * 5];
-            const oddNumber = oddBase * 6 + 1;
-            const oddOptions = [...multiples.slice(0, 3), oddNumber].sort(() => Math.random() - 0.5);
-            questions[3].push(makeQuestion(20, `Find the odd one out: ${oddOptions.join(', ')}.`, String(oddNumber),
-                `${oddNumber} is not a multiple of ${oddBase}, while the other numbers are multiples of ${oddBase}.`));
-
-            // Section E: Everyday Math and Brain Teasers (Q21-Q25)
-            a = randomInt(100, 1000); b = randomInt(20, a - 1);
-            questions[4].push(makeQuestion(21, `Riya has ₹${a}. She spends ₹${b}. How much money is left?`, String(a - b),
-                `Money left = ₹${a} − ₹${b} = ₹${a - b}.`));
-
-            const hour = randomInt(1, 11);
-            const minute = Math.random() < 0.5 ? '00' : '15';
-            const startMinute = Number(minute);
-            const endTotal = hour * 60 + startMinute + 30;
-            const endHour = Math.floor(endTotal / 60) % 12 || 12;
-            const endMinute = String(endTotal % 60).padStart(2, '0');
-            const timeAnswers = [`${endHour}:${endMinute}`, `${endHour}:${endMinute} p.m.`, `${endHour}:${endMinute} pm`, `${endHour}.${endMinute}`];
-            questions[4].push(makeQuestion(22, `What time will it be 30 minutes after ${hour}:${minute} p.m.?`, timeAnswers,
-                `Adding 30 minutes to ${hour}:${minute} p.m. gives ${endHour}:${endMinute} p.m.`));
-
-            const evenNumber = randomInt(10, 99) * 2;
-            questions[4].push(makeQuestion(23, `Half of ${evenNumber} is ____.`, String(evenNumber / 2),
-                `${evenNumber} ÷ 2 = ${evenNumber / 2}.`));
-
-            a = randomInt(3, 9); b = randomInt(4, 12);
-            questions[4].push(makeQuestion(24, `There are ${a} baskets with ${b} apples in each basket. How many apples are there altogether?`,
-                String(a * b), `Total apples = ${a} × ${b} = ${a * b}.`));
-
-            const tensDigit = randomInt(3, 9);
-            const onesDigit = tensDigit - 3;
-            const mysteryNumber = tensDigit * 10 + onesDigit;
-            questions[4].push(makeQuestion(25, `I am a two-digit number. My tens digit is ${tensDigit} and my ones digit is 3 less than my tens digit. What number am I?`,
-                String(mysteryNumber), `The ones digit is ${tensDigit} − 3 = ${onesDigit}. The number is ${mysteryNumber}.`));
-
-
-return [
-                { sectionId: 'sec-a', title: 'Section A: Number Sense', marks: '5 marks', icon: 'fa-hashtag', color: 'indigo', questions: questions[0] },
-                { sectionId: 'sec-b', title: 'Section B: Quick Addition and Subtraction', marks: '5 marks', icon: 'fa-calculator', color: 'blue', questions: questions[1] },
-                { sectionId: 'sec-c', title: 'Section C: Multiplication and Division', marks: '5 marks', icon: 'fa-xmark', color: 'emerald', questions: questions[2] },
-                { sectionId: 'sec-d', title: 'Section D: Missing Numbers and Patterns', marks: '5 marks', icon: 'fa-shapes', color: 'purple', questions: questions[3] },
-                { sectionId: 'sec-e', title: 'Section E: Everyday Math and Brain Teasers', marks: '5 marks', icon: 'fa-lightbulb', color: 'amber', questions: questions[4] }
+            const q = [[], [], [], [], []];
+            let a, b;
+            // Fractions
+            a = randomInt(2, 12); q[0].push(makeQuestion(1, `What is 1/2 of ${a*2}? / ${a*2} का आधा?`, String(a), `Half of ${a*2} is ${a*2} ÷ 2 = ${a}. / ${a*2} ÷ 2 = ${a}.`));
+            a = randomInt(2, 9); q[0].push(makeQuestion(2, `Complete: 1/2 = __/${a*2}. / पूरा करें: 1/2 = __/${a*2}`, String(a), `Multiply numerator and denominator by ${a}: 1/2 = ${a}/${a*2}.`));
+            a = randomInt(5, 10); b = randomInt(1, a-1); q[0].push(makeQuestion(3, `A cake has ${a} equal pieces. ${b} are eaten. How many pieces remain? Type the fraction left. / ${a} टुकड़ों में से ${b} खाए गए। बचा हुआ भिन्न?`, `${a-b}/${a}`, `${a-b} of ${a} pieces remain, so the fraction is ${a-b}/${a}.`));
+            a = randomInt(2, 8); q[0].push(makeQuestion(4, `What is 1/4 of ${a*4}? / ${a*4} का एक चौथाई?`, String(a), `${a*4} ÷ 4 = ${a}.`));
+            q[0].push(makeQuestion(5, 'Which is greater: 1/2 or 1/4? Type the greater fraction. / 1/2 या 1/4 में कौन बड़ा?', '1/2', 'One half is greater than one quarter. / आधा एक चौथाई से बड़ा है।'));
+            // Measurement
+            a = randomInt(2, 9); q[1].push(makeQuestion(6, `${a} metres = how many centimetres? / ${a} मीटर में कितने सेंटीमीटर?`, String(a*100), `${a} × 100 = ${a*100} cm.`));
+            a = randomInt(2, 7); q[1].push(makeQuestion(7, `${a} kg = how many grams? / ${a} किलोग्राम में कितने ग्राम?`, String(a*1000), `${a} × 1,000 = ${a*1000} grams.`));
+            a = randomInt(20, 90); b = randomInt(10, 60); q[1].push(makeQuestion(8, `A rope is ${a} cm and another is ${b} cm. What is the total length in cm? / ${a} सेमी और ${b} सेमी की कुल लंबाई?`, String(a+b), `${a} + ${b} = ${a+b} cm.`));
+            a = randomInt(2, 8); q[1].push(makeQuestion(9, `${a} litres = how many millilitres? / ${a} लीटर में कितने मिलीलीटर?`, String(a*1000), `${a} × 1,000 = ${a*1000} ml.`));
+            q[1].push(makeQuestion(10, 'Which unit is best for measuring the length of a pencil: cm, kg, or litre? Type the unit. / पेंसिल की लंबाई किस इकाई में मापेंगे?', 'cm', 'Length is measured in centimetres (cm). / लंबाई सेंटीमीटर में मापते हैं।'));
+            // Time
+            a = randomInt(2, 5); q[2].push(makeQuestion(11, `How many minutes are there in ${a} hours? / ${a} घंटे में कितने मिनट?`, String(a*60), `${a} × 60 = ${a*60} minutes.`));
+            a = randomInt(1, 11); b = Math.random()<0.5 ? 15 : 30; let total=a*60+b+30, eh=Math.floor(total/60), em=total%60; let time=`${eh}:${String(em).padStart(2,'0')}`; q[2].push(makeQuestion(12, `What time is 30 minutes after ${a}:${String(b).padStart(2,'0')}? Use HH:MM. / ${a}:${String(b).padStart(2,'0')} के 30 मिनट बाद?`, time, `Adding 30 minutes gives ${time}.`));
+            a = randomInt(2, 6); q[2].push(makeQuestion(13, `How many days are there in ${a} weeks? / ${a} सप्ताह में कितने दिन?`, String(a*7), `${a} × 7 = ${a*7} days.`));
+            a = randomInt(1, 3); q[2].push(makeQuestion(14, `A class starts at 9:00 and lasts ${a} hour${a>1?'s':''}. At what time does it end? Use HH:MM. / कक्षा 9:00 बजे शुरू होती है और ${a} घंटे चलती है। कब खत्म होगी?`, `${9+a}:00`, `9:00 + ${a} hour${a>1?'s':''} = ${9+a}:00.`));
+            q[2].push(makeQuestion(15, 'How many months are there in one year? / एक साल में कितने महीने?', '12', 'One year has 12 months. / एक साल में 12 महीने होते हैं।'));
+            // Geometry
+            a = randomInt(5, 8); const shapeNames={5:'pentagon',6:'hexagon',7:'heptagon',8:'octagon'}; q[3].push(makeQuestion(16, `How many sides does a ${shapeNames[a]} have? / ${shapeNames[a]} की कितनी भुजाएँ?`, String(a), `A ${shapeNames[a]} has ${a} sides.`));
+            q[3].push(makeQuestion(17, 'How many corners does a rectangle have? / आयत के कितने कोने?', '4', 'A rectangle has 4 corners. / आयत के 4 कोने होते हैं।'));
+            a = randomInt(2, 12); q[3].push(makeQuestion(18, `A square has sides of ${a} cm. What is its perimeter in cm? / ${a} सेमी भुजा वाले वर्ग का परिमाप?`, String(a*4), `Perimeter = 4 × ${a} = ${a*4} cm.`));
+            q[3].push(makeQuestion(19, 'How many faces does a cube have? / घन के कितने फलक?', '6', 'A cube has 6 faces. / घन के 6 फलक होते हैं।'));
+            q[3].push(makeQuestion(20, 'Which 2D shape has no corners: circle, triangle, or square? Type the shape. / किस आकृति का कोई कोना नहीं?', 'circle', 'A circle has no corners. / वृत्त का कोई कोना नहीं होता।'));
+            // Money, estimation, logic
+            a = randomInt(5, 20); b = randomInt(2, 8); q[4].push(makeQuestion(21, `One pencil costs ₹${a}. How much do ${b} pencils cost? / ₹${a} की ${b} पेंसिलों का मूल्य?`, String(a*b), `${a} × ${b} = ₹${a*b}.`));
+            a = randomInt(50, 100); b = randomInt(10, a-1); q[4].push(makeQuestion(22, `You pay ₹${a} for an item costing ₹${b}. How much change do you get? / ₹${b} की चीज़ के लिए ₹${a} दिए। वापस कितने?`, String(a-b), `₹${a} − ₹${b} = ₹${a-b}.`));
+            a = randomInt(145, 249); b = randomInt(251, 349); let approx=Math.round(a/100)*100+Math.round(b/100)*100; q[4].push(makeQuestion(23, `Estimate ${a} + ${b} by rounding to the nearest hundred. / निकटतम सैकड़े तक पूर्णांकित करके ${a} + ${b} का अनुमान?`, String(approx), `${a} rounds to ${Math.round(a/100)*100}; ${b} rounds to ${Math.round(b/100)*100}; total ≈ ${approx}.`));
+            a = randomInt(3, 9); b = randomInt(4, 10); q[4].push(makeQuestion(24, `There are ${a} boxes with ${b} oranges each. How many oranges altogether? / ${a} डिब्बों में हर एक में ${b} संतरे। कुल?`, String(a*b), `${a} × ${b} = ${a*b}.`));
+            a = randomInt(2, 12); q[4].push(makeQuestion(25, `Find the next number: ${a}, ${a+3}, ${a+6}, ${a+9}, ____. / अगली संख्या बताइए।`, String(a+12), `Add 3 each time: ${a+9} + 3 = ${a+12}.`));
+            return [
+              {sectionId:'sec-a',title:'Section A: Fractions / भिन्न',marks:'5 marks',icon:'fa-chart-pie',color:'indigo',questions:q[0]},
+              {sectionId:'sec-b',title:'Section B: Measurement & Units / माप और इकाइयाँ',marks:'5 marks',icon:'fa-ruler',color:'blue',questions:q[1]},
+              {sectionId:'sec-c',title:'Section C: Time & Calendar / समय और कैलेंडर',marks:'5 marks',icon:'fa-clock',color:'emerald',questions:q[2]},
+              {sectionId:'sec-d',title:'Section D: Shapes & Geometry / आकृतियाँ और ज्यामिति',marks:'5 marks',icon:'fa-shapes',color:'purple',questions:q[3]},
+              {sectionId:'sec-e',title:'Section E: Money, Estimation & Logic / पैसा, अनुमान और तर्क',marks:'5 marks',icon:'fa-lightbulb',color:'amber',questions:q[4]}
             ];
         }
 
@@ -826,16 +527,30 @@ return [
                             <span id="badge-${q.id}" class="absolute right-3 top-1/2 -translate-y-1/2 text-lg hidden"></span>
                         </div>
 
-                        <button 
-                            id="explain-btn-${q.id}"
-onclick="toggleExplanation(${q.id})" 
-                            class="px-4 py-2.5 bg-slate-100 hover:bg-indigo-50 text-slate-700 hover:text-indigo-600 border border-slate-300 font-heading text-xs font-bold rounded-xl transition flex items-center gap-1.5 shrink-0">
-                            <i class="fa-solid fa-lightbulb text-amber-500"></i>
+                        <button
+                            id="check-btn-${q.id}"
+                            type="button"
+                            onclick="checkAnswer(${q.id})"
+                            class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white border border-indigo-700 font-heading text-xs font-bold rounded-xl transition flex items-center gap-1.5 shrink-0">
+                            <i class="fa-solid fa-check"></i>
                             <span>Check Answer</span>
+                        </button>
+                        <button
+                            id="hint-btn-${q.id}"
+                            type="button"
+                            onclick="toggleHint(${q.id})"
+                            class="px-4 py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 font-heading text-xs font-bold rounded-xl transition flex items-center gap-1.5 shrink-0">
+                            <i class="fa-solid fa-lightbulb"></i>
+                            <span>Hint / संकेत</span>
                         </button>
                     </div>
 
-                    <!-- Collapsible Explanation Box -->
+                    <div id="feedback-${q.id}" aria-live="polite" class="hidden mt-3 rounded-xl p-3 text-sm font-semibold"></div>
+                    <div id="hint-${q.id}" class="hidden mt-3 rounded-xl p-3 text-sm text-amber-900 bg-amber-50 border border-amber-200">
+                        <strong>Hint / संकेत:</strong> ${getQuestionHint(q)}
+                    </div>
+
+                    <!-- Step-by-step explanation -->
                     <div id="explanation-${q.id}" class="hidden mt-4 pt-3 border-t border-slate-200 text-xs sm:text-sm text-slate-700 bg-amber-50/60 p-3.5 rounded-xl border border-amber-200/80">
                         <div class="font-heading font-bold text-amber-900 mb-1 flex items-center gap-1.5">
                             <i class="fa-solid fa-circle-check text-emerald-600"></i> Expected Answer: 
@@ -849,73 +564,109 @@ onclick="toggleExplanation(${q.id})"
             `;
         }
 
-        // --- REAL-TIME INPUT EVALUATION & FEEDBACK ---
+        // Hints explain the concept without giving away the answer.
+        function getQuestionHint(q) {
+            const section = worksheetData.find(sec => sec.questions.some(item => item.id === q.id));
+            const title = section ? section.title.toLowerCase() : '';
+            if (title.includes('fraction') || title.includes('भिन्न')) return 'Look at how many equal parts there are. For a fraction of a number, divide by the denominator first. / बराबर भागों की संख्या देखें।';
+            if (title.includes('measurement') || title.includes('units') || title.includes('माप')) return 'Remember: 1 m = 100 cm, 1 kg = 1,000 g, and 1 L = 1,000 mL. / इकाइयों का संबंध याद करें।';
+            if (title.includes('time') || title.includes('calendar') || title.includes('समय')) return '1 hour = 60 minutes and 1 week = 7 days. Add minutes carefully. / 1 घंटा = 60 मिनट; समय धीरे-धीरे जोड़ें।';
+            if (title.includes('geometry') || title.includes('shape') || title.includes('ज्यामिति')) return 'Count sides and corners. For a square perimeter, add all four equal sides. / भुजाएँ और कोने गिनें।';
+            if (title.includes('money') || title.includes('estimation') || title.includes('logic') || title.includes('पैसा')) return 'For change, subtract the price from the amount paid. For estimates, round first. / वापस पैसे निकालने के लिए घटाएँ।';
+            if (title.includes('number sense')) return 'Look at the place of each digit, compare numbers from left to right, or find the number that is one less.';
+            if (title.includes('addition and subtraction')) return 'Break numbers into hundreds, tens and ones. Check whether you need to add or subtract.';
+            if (title.includes('multiplication and division')) return 'Think of multiplication as equal groups and division as sharing equally. Use a known table to help.';
+            if (title.includes('patterns')) return 'Compare neighbouring numbers. Find the amount added or taken away, then continue the same rule.';
+            if (title.includes('everyday') || title.includes('brain')) return 'Pick out the important numbers and decide which operation matches the story.';
+            return 'Read carefully, identify the number rule, and solve one small step at a time.';
+        }
+
+        // Typing immediately colors the box: green for a correct answer, red for an incorrect one.
+        // The score is still updated only after the learner clicks Check Answer.
         function handleInputChanged(qId) {
             const inputEl = document.getElementById(`input-${qId}`);
             const badgeEl = document.getElementById(`badge-${qId}`);
             const cardEl = document.getElementById(`q-card-${qId}`);
-            const val = inputEl.value;
+            const feedbackEl = document.getElementById(`feedback-${qId}`);
+            userAnswers[qId] = inputEl.value;
+            delete questionStatus[qId];
+            const val = inputEl.value.trim();
+            const q = findQuestion(qId);
+            const baseClass = 'math-input w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 focus:outline-none bg-white/90 text-slate-800 placeholder:font-normal placeholder:text-slate-400';
 
-            userAnswers[qId] = val;
-
-            // Find question data
-            let currentQ = null;
-            for (const sec of worksheetData) {
-                const found = sec.questions.find(q => q.id === qId);
-                if (found) { currentQ = found; break; }
-            }
-
-            if (!val.trim()) {
-                // Empty state
-                inputEl.className = "math-input w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 border-slate-300 focus:outline-none focus:border-indigo-500 bg-white/90 text-slate-800 placeholder:font-normal placeholder:text-slate-400";
-                badgeEl.className = "absolute right-3 top-1/2 -translate-y-1/2 text-lg hidden";
-                delete questionStatus[qId];
-                updateScoreboard();
-                return;
-            }
-
-            const isCorrect = checkIsAnswerCorrect(currentQ, val);
-
-            if (isCorrect) {
-                if (questionStatus[qId] !== true) {
-                    playSound('correct');
-                }
-                questionStatus[qId] = true;
-                inputEl.className = "math-input state-correct w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 focus:outline-none bg-white text-slate-800";
-                badgeEl.className = "absolute right-3 top-1/2 -translate-y-1/2 text-lg text-emerald-600 font-bold block";
+            if (!val) {
+                inputEl.className = baseClass + ' border-slate-300 focus:border-indigo-500';
+                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg hidden';
+                badgeEl.innerHTML = '';
+            } else if (q && checkIsAnswerCorrect(q, val)) {
+                inputEl.className = baseClass + ' state-correct';
+                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg text-emerald-600 font-bold block';
                 badgeEl.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
-                cardEl.classList.remove('animate-shake');
             } else {
-                if (questionStatus[qId] === true) {
-                    // changed from correct to incorrect
-                    playSound('incorrect');
-                }
-                questionStatus[qId] = false;
-                inputEl.className = "math-input state-incorrect w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 focus:outline-none bg-white text-slate-800";
-                badgeEl.className = "absolute right-3 top-1/2 -translate-y-1/2 text-lg text-rose-500 font-bold block";
+                inputEl.className = baseClass + ' state-incorrect';
+                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg text-rose-500 font-bold block';
                 badgeEl.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
-                
-                // Add error shake effect on incorrect input
-                cardEl.classList.remove('animate-shake');
-                void cardEl.offsetWidth; // trigger reflow
-                cardEl.classList.add('animate-shake');
             }
-
+            feedbackEl.className = 'hidden mt-3 rounded-xl p-3 text-sm font-semibold';
+            feedbackEl.textContent = '';
+            cardEl.classList.remove('animate-shake');
             updateScoreboard();
         }
 
-        // --- TOGGLE EXPLANATION BOX ---
-        function toggleExplanation(qId) {
-            const expEl = document.getElementById(`explanation-${qId}`);
-            const btnEl = document.getElementById(`explain-btn-${qId}`);
-
-            if (expEl.classList.contains('hidden')) {
-                expEl.classList.remove('hidden');
-                btnEl.classList.add('bg-indigo-100', 'text-indigo-700', 'border-indigo-300');
-            } else {
-                expEl.classList.add('hidden');
-                btnEl.classList.remove('bg-indigo-100', 'text-indigo-700', 'border-indigo-300');
+        function findQuestion(qId) {
+            for (const sec of worksheetData) {
+                const found = sec.questions.find(q => q.id === qId);
+                if (found) return found;
             }
+            return null;
+        }
+
+        function checkAnswer(qId) {
+            const q = findQuestion(qId);
+            if (!q) return;
+            const inputEl = document.getElementById(`input-${qId}`);
+            const badgeEl = document.getElementById(`badge-${qId}`);
+            const cardEl = document.getElementById(`q-card-${qId}`);
+            const feedbackEl = document.getElementById(`feedback-${qId}`);
+            const explanationEl = document.getElementById(`explanation-${qId}`);
+            const val = inputEl.value.trim();
+
+            if (!val) {
+                feedbackEl.className = 'mt-3 rounded-xl p-3 text-sm font-semibold text-amber-900 bg-amber-50 border border-amber-200';
+                feedbackEl.textContent = 'Please type an answer first. | पहले अपना जवाब लिखें।';
+                inputEl.focus();
+                return;
+            }
+
+            userAnswers[qId] = val;
+            const isCorrect = checkIsAnswerCorrect(q, val);
+            questionStatus[qId] = isCorrect;
+            explanationEl.classList.remove('hidden');
+
+            if (isCorrect) {
+                inputEl.className = 'math-input state-correct w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 focus:outline-none bg-white text-slate-800';
+                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg text-emerald-600 font-bold block';
+                badgeEl.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+                feedbackEl.className = 'mt-3 rounded-xl p-3 text-sm font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200';
+                feedbackEl.textContent = 'Correct answer! / सही जवाब! Well done!';
+                cardEl.classList.remove('animate-shake');
+                playSound('correct');
+            } else {
+                inputEl.className = 'math-input state-incorrect w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 focus:outline-none bg-white text-slate-800';
+                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg text-rose-500 font-bold block';
+                badgeEl.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+                feedbackEl.className = 'mt-3 rounded-xl p-3 text-sm font-semibold text-rose-800 bg-rose-50 border border-rose-200';
+                feedbackEl.textContent = `Wrong answer / गलत जवाब। Correct answer / सही जवाब: ${q.validAnswers[0]}. Try again!`;
+                cardEl.classList.remove('animate-shake');
+                void cardEl.offsetWidth;
+                cardEl.classList.add('animate-shake');
+                playSound('incorrect');
+            }
+            updateScoreboard();
+        }
+
+        function toggleHint(qId) {
+            document.getElementById(`hint-${qId}`).classList.toggle('hidden');
         }
 
         // --- SCOREBOARD & PROGRESS UPDATES ---
@@ -1043,7 +794,7 @@ onclick="toggleExplanation(${q.id})"
                 renderWorksheet();
                 updateScoreboard();
                 document.getElementById('generate-status').textContent =
-                    'Fresh questions generated! | नए प्रश्न तैयार हैं!';
+                    'Fresh Tuesday questions generated! | मंगलवार के नए प्रश्न तैयार हैं!';
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
@@ -1057,10 +808,23 @@ onclick="toggleExplanation(${q.id})"
                             delete userAnswers[q.id];
                             delete questionStatus[q.id];
                             const inputEl = document.getElementById(`input-${q.id}`);
-                            if (inputEl) inputEl.value = '';
-                            handleInputChanged(q.id);
+                            const badgeEl = document.getElementById(`badge-${q.id}`);
+                            const feedbackEl = document.getElementById(`feedback-${q.id}`);
+                            const explanationEl = document.getElementById(`explanation-${q.id}`);
+                            const hintEl = document.getElementById(`hint-${q.id}`);
+                            const cardEl = document.getElementById(`q-card-${q.id}`);
+                            if (inputEl) {
+                                inputEl.value = '';
+                                inputEl.className = 'math-input w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 border-slate-300 focus:outline-none focus:border-indigo-500 bg-white/90 text-slate-800 placeholder:font-normal placeholder:text-slate-400';
+                            }
+                            if (badgeEl) { badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg hidden'; badgeEl.innerHTML = ''; }
+                            if (feedbackEl) { feedbackEl.className = 'hidden mt-3 rounded-xl p-3 text-sm font-semibold'; feedbackEl.textContent = ''; }
+                            if (explanationEl) explanationEl.classList.add('hidden');
+                            if (hintEl) hintEl.classList.add('hidden');
+                            if (cardEl) cardEl.classList.remove('animate-shake');
                         });
                     });
+                    updateScoreboard();
                     resetTimer();
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
