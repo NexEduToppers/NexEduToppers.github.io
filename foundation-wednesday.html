@@ -539,41 +539,150 @@
             `;
         }
 
-        // Each question has its own mental-maths hint, in English and Hindi.
+        // Every question gets a complete, worked-out hint using its current randomized numbers.
+        // Hints intentionally show intermediate calculations and the final answer in English + Hindi.
         function getQuestionHint(q) {
-            // Build each hint from the actual question shown, including its newly generated numbers.
-            const englishQuestion = String(q.text || '').split(' / ')[0];
-            const nums = (englishQuestion.match(/\d[\d,]*/g) || [])
-                .map(n => Number(n.replace(/,/g, '')));
-            const n = nums;
-            const hints = {
-                1: `For ${n[0]} + ${n[1]}, split ${n[1]} into tens and ones, add the tens first, then the ones. / ${n[0]} + ${n[1]} में ${n[1]} को दहाई और इकाई में बाँटें। पहले दहाई, फिर इकाई जोड़ें।`,
-                2: `For ${n[0]} + 199, add 200 first, then subtract 1: ${n[0]} + 200 − 1. / ${n[0]} + 199 में पहले 200 जोड़ें, फिर 1 घटाएँ।`,
-                3: `For ${n[0]} + ${n[1]}, add the hundreds, tens and ones in parts. You can start with the hundreds. / ${n[0]} + ${n[1]} में सैकड़े, दहाई और इकाई अलग-अलग जोड़ें।`,
-                4: `For ${n[0]} + ${n[1]} + ${n[2]}, look for two numbers that make an easy round ten or hundred, then add the remaining number. / ${n[0]} + ${n[1]} + ${n[2]} में पहले ऐसी दो संख्याएँ जोड़ें जिनसे आसान दहाई या सैकड़ा बने।`,
-                5: `Find the gap from ${n[0]} to 1,000. Count up to the next hundred, then count to 1,000; add the two gaps. / ${n[0]} से 1,000 तक का अंतर निकालें। अगले सैकड़े तक और फिर 1,000 तक का अंतर जोड़ें।`,
-                6: `In ${n[0]} − 100, only the hundreds place changes. Reduce the hundreds by one; keep tens and ones the same. / ${n[0]} − 100 में सैकड़े वाली जगह 1 कम करें; दहाई और इकाई वही रहेंगी।`,
-                7: `For ${n[0]} − 198, subtract 200 first, then add 2 back: ${n[0]} − 200 + 2. / ${n[0]} − 198 में पहले 200 घटाएँ, फिर 2 वापस जोड़ें।`,
-                8: `For ${n[0]} − ${n[1]}, subtract the hundreds first, then subtract the tens and ones. Regroup if needed. / ${n[0]} − ${n[1]} में पहले सैकड़े, फिर दहाई और इकाई घटाएँ। ज़रूरत हो तो उधार लें।`,
-                9: `For 1,000 − ${n[1]}, count up from ${n[1]} to the next hundred, then up to 1,000. Add those jumps. / 1,000 − ${n[1]} में पहले अगले सैकड़े तक, फिर 1,000 तक गिनें और अंतर जोड़ें।`,
-                10: `For ${n[0]} − ${n[1]}, split ${n[1]} into hundreds, tens and ones, then subtract each part one at a time. / ${n[0]} − ${n[1]} में ${n[1]} को सैकड़े, दहाई और इकाई में बाँटकर घटाएँ।`,
-                11: `${n[0]} × 5: multiply ${n[0]} by 10, then take half of that result. / ${n[0]} × 5 के लिए ${n[0]} को 10 से गुणा करें, फिर उसका आधा लें।`,
-                12: `${n[0]} × 9: multiply ${n[0]} by 10, then subtract ${n[0]} once. / ${n[0]} × 9 के लिए ${n[0]} को 10 से गुणा करें, फिर ${n[0]} घटाएँ।`,
-                13: `${n[0]} × 11: calculate ${n[0]} × 10, then add ${n[0]} one more time. / ${n[0]} × 11 के लिए पहले ${n[0]} × 10 करें, फिर ${n[0]} जोड़ें।`,
-                14: `${n[0]} × 25: because 25 × 4 = 100, multiply ${n[0]} by 100 and divide that result by 4. / ${n[0]} × 25 में पहले ${n[0]} को 100 से गुणा करें, फिर 4 से भाग दें।`,
-                15: `${n[0]} × 6: calculate ${n[0]} × 5 first, then add one more ${n[0]}. / ${n[0]} × 6 में पहले ${n[0]} × 5 करें, फिर ${n[0]} एक बार और जोड़ें।`,
-                16: `For ${n[0]} ÷ ${n[1]}, ask what number multiplied by ${n[1]} gives ${n[0]}. Use that multiplication table. / ${n[0]} ÷ ${n[1]} में सोचें कि किस संख्या को ${n[1]} से गुणा करने पर ${n[0]} मिलेगा।`,
-                17: `For ${n[0]} ÷ ${n[1]}, use the ${n[1]} times table to find which number makes ${n[0]}. / ${n[0]} ÷ ${n[1]} के लिए ${n[1]} के पहाड़े में ${n[0]} खोजें।`,
-                18: `For ${n[0]} ÷ ${n[1]}, find the number that multiplied by ${n[1]} gives ${n[0]}. / ${n[0]} ÷ ${n[1]} में वह संख्या खोजें जिसे ${n[1]} से गुणा करने पर ${n[0]} मिले।`,
-                19: `For ${n[0]} ÷ ${n[1]}, use the ${n[1]} times table and reverse the multiplication. / ${n[0]} ÷ ${n[1]} के लिए ${n[1]} का पहाड़ा उल्टा सोचें।`,
-                20: `${n[0]} ÷ ${n[1]} means finding half of ${n[0]}. Split it into two equal parts. / ${n[0]} ÷ ${n[1]} का मतलब ${n[0]} का आधा निकालना है।`,
-                21: `For ${n[0]} × 5 + ${n[1]}, do the multiplication first, then add ${n[1]}. / ${n[0]} × 5 + ${n[1]} में पहले गुणा करें, फिर ${n[1]} जोड़ें।`,
-                22: `For ${n[0]} × 4 − ${n[1]}, multiply ${n[0]} by 4 first, then subtract ${n[1]}. / ${n[0]} × 4 − ${n[1]} में पहले ${n[0]} को 4 से गुणा करें, फिर ${n[1]} घटाएँ।`,
-                23: `Compare ${n[0]}, ${n[1]}, ${n[2]} and ${n[3]}. Find how much each number increases, then add that same amount to ${n[3]}. / ${n[0]}, ${n[1]}, ${n[2]} और ${n[3]} के बीच का अंतर देखें। वही अंतर ${n[3]} में जोड़ें।`,
-                24: `For __ × ${n[0]} = ${n[1]}, divide ${n[1]} by ${n[0]} to find the missing number. / __ × ${n[0]} = ${n[1]} में खाली संख्या पाने के लिए ${n[1]} को ${n[0]} से भाग दें।`,
-                25: `For ${n[0]} + ${n[1]} − ${n[2]}, notice that ${n[1]} − ${n[2]} leaves one ${n[2]}. Add that to ${n[0]}. / ${n[0]} + ${n[1]} − ${n[2]} में ${n[1]} में से ${n[2]} घटाने पर एक ${n[2]} बचेगा। उसे ${n[0]} में जोड़ें।`
-            };
-            return hints[Number(q.id)] || 'Break this calculation into smaller, easier steps. / गणना को छोटे और आसान भागों में बाँटें।';
+            const englishQuestion = String(q.text || '').split(' / ')[0].split(':').pop().trim();
+            const n = (englishQuestion.match(/\d[\d,]*/g) || [])
+                .map(value => Number(value.replace(/,/g, '')));
+            const answer = Number(q.validAnswers[0]);
+            const fmt = value => Number(value).toLocaleString('en-US');
+            const id = Number(q.id);
+            let en = '';
+            let hi = '';
+
+            switch (id) {
+                case 1: {
+                    const a=n[0], b=n[1], tens=Math.floor(b/10)*10, ones=b%10, step=a+tens;
+                    en = `For ${fmt(a)} + ${fmt(b)}, split ${fmt(b)} into tens and ones: ${fmt(tens)} + ${ones}. First add the tens: ${fmt(a)} + ${fmt(tens)} = ${fmt(step)}. Then add the ones: ${fmt(step)} + ${ones} = ${fmt(answer)}. So, the answer is ${fmt(answer)}.`;
+                    hi = `${fmt(a)} + ${fmt(b)} में ${fmt(b)} को दहाई और इकाई में बाँटें: ${fmt(tens)} + ${ones}। पहले दहाई जोड़ें: ${fmt(a)} + ${fmt(tens)} = ${fmt(step)}। फिर इकाई जोड़ें: ${fmt(step)} + ${ones} = ${fmt(answer)}। इसलिए उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                case 2: {
+                    const a=n[0], step=a+200;
+                    en=`For ${fmt(a)} + 199, add 200 first, then subtract 1: ${fmt(a)} + 200 = ${fmt(step)}; ${fmt(step)} − 1 = ${fmt(answer)}. So, the answer is ${fmt(answer)}.`;
+                    hi=`${fmt(a)} + 199 में पहले 200 जोड़ें, फिर 1 घटाएँ: ${fmt(a)} + 200 = ${fmt(step)}; ${fmt(step)} − 1 = ${fmt(answer)}। इसलिए उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                case 3: {
+                    const a=n[0], b=n[1], h=Math.floor(b/100)*100, t=Math.floor((b%100)/10)*10, o=b%10, s1=a+h, s2=s1+t;
+                    en=`Split ${fmt(b)} into hundreds, tens and ones: ${fmt(h)} + ${fmt(t)} + ${o}. Add each part: ${fmt(a)} + ${fmt(h)} = ${fmt(s1)}; ${fmt(s1)} + ${fmt(t)} = ${fmt(s2)}; ${fmt(s2)} + ${o} = ${fmt(answer)}. Answer: ${fmt(answer)}.`;
+                    hi=`${fmt(b)} को सैकड़े, दहाई और इकाई में बाँटें: ${fmt(h)} + ${fmt(t)} + ${o}। अब एक-एक भाग जोड़ें: ${fmt(a)} + ${fmt(h)} = ${fmt(s1)}; ${fmt(s1)} + ${fmt(t)} = ${fmt(s2)}; ${fmt(s2)} + ${o} = ${fmt(answer)}। उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                case 4: {
+                    const a=n[0], b=n[1], c=n[2], s1=a+b;
+                    en=`Add the first two numbers, then the third: ${fmt(a)} + ${fmt(b)} = ${fmt(s1)}; ${fmt(s1)} + ${fmt(c)} = ${fmt(answer)}. Answer: ${fmt(answer)}.`;
+                    hi=`पहले दो संख्याएँ जोड़ें, फिर तीसरी संख्या: ${fmt(a)} + ${fmt(b)} = ${fmt(s1)}; ${fmt(s1)} + ${fmt(c)} = ${fmt(answer)}। उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                case 5: {
+                    const a=n[0], gap=1000-a;
+                    en=`Find what must be added to ${fmt(a)} to reach 1,000: 1,000 − ${fmt(a)} = ${fmt(gap)}. Check: ${fmt(a)} + ${fmt(gap)} = 1,000. Answer: ${fmt(gap)}.`;
+                    hi=`${fmt(a)} में जोड़कर 1,000 बनाने वाली संख्या निकालें: 1,000 − ${fmt(a)} = ${fmt(gap)}। जाँचें: ${fmt(a)} + ${fmt(gap)} = 1,000। उत्तर ${fmt(gap)} है।`;
+                    break;
+                }
+                case 6: {
+                    const a=n[0];
+                    en=`Subtract one hundred: ${fmt(a)} − 100 = ${fmt(answer)}. Answer: ${fmt(answer)}.`;
+                    hi=`एक सैकड़ा घटाएँ: ${fmt(a)} − 100 = ${fmt(answer)}। उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                case 7: {
+                    const a=n[0], s1=a-200;
+                    en=`Subtract 200 first, then add 2 back: ${fmt(a)} − 200 = ${fmt(s1)}; ${fmt(s1)} + 2 = ${fmt(answer)}. Answer: ${fmt(answer)}.`;
+                    hi=`पहले 200 घटाएँ, फिर 2 वापस जोड़ें: ${fmt(a)} − 200 = ${fmt(s1)}; ${fmt(s1)} + 2 = ${fmt(answer)}। उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                case 8: {
+                    const a=n[0], b=n[1], h=Math.floor(b/100)*100, t=Math.floor((b%100)/10)*10, o=b%10, s1=a-h, s2=s1-t;
+                    en=`Split ${fmt(b)} into ${fmt(h)}, ${fmt(t)} and ${o}. Subtract each part: ${fmt(a)} − ${fmt(h)} = ${fmt(s1)}; ${fmt(s1)} − ${fmt(t)} = ${fmt(s2)}; ${fmt(s2)} − ${o} = ${fmt(answer)}. Answer: ${fmt(answer)}.`;
+                    hi=`${fmt(b)} को ${fmt(h)}, ${fmt(t)} और ${o} में बाँटें। अब हर भाग घटाएँ: ${fmt(a)} − ${fmt(h)} = ${fmt(s1)}; ${fmt(s1)} − ${fmt(t)} = ${fmt(s2)}; ${fmt(s2)} − ${o} = ${fmt(answer)}। उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                case 9: {
+                    const a=n[1], gap=1000-a;
+                    en=`Find the difference from ${fmt(a)} to 1,000: 1,000 − ${fmt(a)} = ${fmt(gap)}. Answer: ${fmt(gap)}.`;
+                    hi=`${fmt(a)} से 1,000 तक का अंतर निकालें: 1,000 − ${fmt(a)} = ${fmt(gap)}। उत्तर ${fmt(gap)} है।`;
+                    break;
+                }
+                case 10: {
+                    const a=n[0], b=n[1], h=Math.floor(b/100)*100, t=Math.floor((b%100)/10)*10, o=b%10, s1=a-h, s2=s1-t;
+                    en=`Split ${fmt(b)} into ${fmt(h)}, ${fmt(t)} and ${o}. Then subtract step by step: ${fmt(a)} − ${fmt(h)} = ${fmt(s1)}; ${fmt(s1)} − ${fmt(t)} = ${fmt(s2)}; ${fmt(s2)} − ${o} = ${fmt(answer)}. Answer: ${fmt(answer)}.`;
+                    hi=`${fmt(b)} को ${fmt(h)}, ${fmt(t)} और ${o} में बाँटें। फिर क्रम से घटाएँ: ${fmt(a)} − ${fmt(h)} = ${fmt(s1)}; ${fmt(s1)} − ${fmt(t)} = ${fmt(s2)}; ${fmt(s2)} − ${o} = ${fmt(answer)}। उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                case 11: {
+                    const a=n[0], s1=a*10;
+                    en=`To multiply ${fmt(a)} by 5, multiply by 10 and then halve: ${fmt(a)} × 10 = ${fmt(s1)}; ${fmt(s1)} ÷ 2 = ${fmt(answer)}. Answer: ${fmt(answer)}.`;
+                    hi=`${fmt(a)} को 5 से गुणा करने के लिए पहले 10 से गुणा करें, फिर आधा करें: ${fmt(a)} × 10 = ${fmt(s1)}; ${fmt(s1)} ÷ 2 = ${fmt(answer)}। उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                case 12: {
+                    const a=n[0], s1=a*10;
+                    en=`To multiply ${fmt(a)} by 9, multiply by 10 and subtract the number once: ${fmt(a)} × 10 = ${fmt(s1)}; ${fmt(s1)} − ${fmt(a)} = ${fmt(answer)}. Answer: ${fmt(answer)}.`;
+                    hi=`${fmt(a)} को 9 से गुणा करने के लिए पहले 10 से गुणा करें, फिर ${fmt(a)} घटाएँ: ${fmt(a)} × 10 = ${fmt(s1)}; ${fmt(s1)} − ${fmt(a)} = ${fmt(answer)}। उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                case 13: {
+                    const a=n[0], s1=a*10;
+                    en=`Multiply by 11 as ×10 plus the number once more: ${fmt(a)} × 10 = ${fmt(s1)}; ${fmt(s1)} + ${fmt(a)} = ${fmt(answer)}. Answer: ${fmt(answer)}.`;
+                    hi=`11 से गुणा करने के लिए पहले 10 से गुणा करें, फिर वही संख्या जोड़ें: ${fmt(a)} × 10 = ${fmt(s1)}; ${fmt(s1)} + ${fmt(a)} = ${fmt(answer)}। उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                case 14: {
+                    const a=n[0], s1=a*100;
+                    en=`Since 25 × 4 = 100, multiply by 100 and divide by 4: ${fmt(a)} × 100 = ${fmt(s1)}; ${fmt(s1)} ÷ 4 = ${fmt(answer)}. Answer: ${fmt(answer)}.`;
+                    hi=`क्योंकि 25 × 4 = 100, इसलिए पहले 100 से गुणा और फिर 4 से भाग दें: ${fmt(a)} × 100 = ${fmt(s1)}; ${fmt(s1)} ÷ 4 = ${fmt(answer)}। उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                case 15: {
+                    const a=n[0], s1=a*5;
+                    en=`Multiply by 6 as ×5 plus one more group: ${fmt(a)} × 5 = ${fmt(s1)}; ${fmt(s1)} + ${fmt(a)} = ${fmt(answer)}. Answer: ${fmt(answer)}.`;
+                    hi=`6 से गुणा करने के लिए पहले 5 से गुणा करें, फिर एक बार वही संख्या जोड़ें: ${fmt(a)} × 5 = ${fmt(s1)}; ${fmt(s1)} + ${fmt(a)} = ${fmt(answer)}। उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                case 16: case 17: case 18: case 19: case 20: {
+                    const dividend=n[0], divisor=n[1];
+                    en=`Use the related multiplication fact: ${fmt(answer)} × ${fmt(divisor)} = ${fmt(dividend)}. So ${fmt(dividend)} ÷ ${fmt(divisor)} = ${fmt(answer)}. Answer: ${fmt(answer)}.`;
+                    hi=`इससे जुड़ा गुणा याद करें: ${fmt(answer)} × ${fmt(divisor)} = ${fmt(dividend)}। इसलिए ${fmt(dividend)} ÷ ${fmt(divisor)} = ${fmt(answer)}। उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                case 21: {
+                    const a=n[0], b=n[2], s1=a*5;
+                    en=`Follow the order of operations: multiply first, then add. ${fmt(a)} × 5 = ${fmt(s1)}; ${fmt(s1)} + ${fmt(b)} = ${fmt(answer)}. Answer: ${fmt(answer)}.`;
+                    hi=`पहले गुणा करें, फिर जोड़ें: ${fmt(a)} × 5 = ${fmt(s1)}; ${fmt(s1)} + ${fmt(b)} = ${fmt(answer)}। उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                case 22: {
+                    const a=n[0], b=n[2], s1=a*4;
+                    en=`Multiply first, then subtract: ${fmt(a)} × 4 = ${fmt(s1)}; ${fmt(s1)} − ${fmt(b)} = ${fmt(answer)}. Answer: ${fmt(answer)}.`;
+                    hi=`पहले गुणा करें, फिर घटाएँ: ${fmt(a)} × 4 = ${fmt(s1)}; ${fmt(s1)} − ${fmt(b)} = ${fmt(answer)}। उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                case 23: {
+                    const a=n[0], next=n[3]+7;
+                    en=`The pattern increases by 7 each time: ${fmt(n[0])}, ${fmt(n[1])}, ${fmt(n[2])}, ${fmt(n[3])}. Add 7 to the last number: ${fmt(n[3])} + 7 = ${fmt(next)}. Answer: ${fmt(next)}.`;
+                    hi=`इस क्रम में हर बार 7 बढ़ता है: ${fmt(n[0])}, ${fmt(n[1])}, ${fmt(n[2])}, ${fmt(n[3])}। आखिरी संख्या में 7 जोड़ें: ${fmt(n[3])} + 7 = ${fmt(next)}। उत्तर ${fmt(next)} है।`;
+                    break;
+                }
+                case 24: {
+                    const multiplier=n[0], product=n[1];
+                    en=`To find the missing number, divide the product by ${fmt(multiplier)}: ${fmt(product)} ÷ ${fmt(multiplier)} = ${fmt(answer)}. Check: ${fmt(answer)} × ${fmt(multiplier)} = ${fmt(product)}. Answer: ${fmt(answer)}.`;
+                    hi=`खाली संख्या निकालने के लिए गुणनफल को ${fmt(multiplier)} से भाग दें: ${fmt(product)} ÷ ${fmt(multiplier)} = ${fmt(answer)}। जाँचें: ${fmt(answer)} × ${fmt(multiplier)} = ${fmt(product)}। उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                case 25: {
+                    const doubledA=n[0], doubledB=n[1], b=n[2], s1=doubledA+doubledB;
+                    en=`Add the doubled numbers first: ${fmt(doubledA)} + ${fmt(doubledB)} = ${fmt(s1)}; then subtract ${fmt(b)}: ${fmt(s1)} − ${fmt(b)} = ${fmt(answer)}. Answer: ${fmt(answer)}.`;
+                    hi=`पहले दोनों दुगुनी संख्याएँ जोड़ें: ${fmt(doubledA)} + ${fmt(doubledB)} = ${fmt(s1)}; फिर ${fmt(b)} घटाएँ: ${fmt(s1)} − ${fmt(b)} = ${fmt(answer)}। उत्तर ${fmt(answer)} है।`;
+                    break;
+                }
+                default:
+                    en=`Work through the calculation step by step. The answer is ${fmt(answer)}.`;
+                    hi=`गणना को चरण-दर-चरण हल करें। उत्तर ${fmt(answer)} है।`;
+            }
+            return `${en} / ${hi}`;
         }
 
         // Typing immediately colors the box: green for a correct answer, red for an incorrect one.
