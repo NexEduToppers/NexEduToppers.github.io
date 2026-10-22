@@ -138,7 +138,7 @@
             <!-- Timer Display -->
             <div class="flex items-center gap-3 bg-slate-100/80 px-3 py-1.5 rounded-xl border border-slate-200">
                 <i class="fa-solid fa-stopwatch text-indigo-500 animate-pulse"></i>
-                <span id="timer-display" class="font-mono font-bold text-base text-slate-700">20:00</span>
+                <span id="timer-display" class="font-mono font-bold text-base text-slate-700">30:00</span>
                 <div class="flex gap-1">
                     <button id="timer-toggle-btn" title="Pause/Play Timer" class="text-xs bg-white hover:bg-slate-200 p-1.5 rounded-lg text-slate-600 transition">
                         <i class="fa-solid fa-pause"></i>
@@ -154,7 +154,7 @@
                 <div class="text-right">
                     <div class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Score</div>
                     <div class="text-lg font-extrabold text-indigo-600 leading-none">
-                        <span id="header-score">0</span> / 25
+                        <span id="header-score">0</span> / <span class="total-question-count">35</span>
                     </div>
                 </div>
                 <!-- Submit / Finish Button -->
@@ -192,13 +192,13 @@
             <!-- Metadata Info Pills -->
             <div class="flex flex-wrap justify-center items-center gap-3 text-xs sm:text-sm font-semibold mb-6">
                 <span class="bg-white/80 border border-slate-200/80 px-3.5 py-1.5 rounded-xl shadow-sm text-slate-700 flex items-center gap-1.5">
-                    <i class="fa-solid fa-clock text-indigo-500"></i> Time: 20 Minutes / समय: 20 मिनट
+                    <i class="fa-solid fa-clock text-indigo-500"></i> Time: 30 Minutes / समय: 30 मिनट
                 </span>
                 <span class="bg-white/80 border border-slate-200/80 px-3.5 py-1.5 rounded-xl shadow-sm text-slate-700 flex items-center gap-1.5">
-                    <i class="fa-solid fa-list-check text-emerald-500"></i> Questions: 25 / प्रश्न: 25
+                    <i class="fa-solid fa-list-check text-emerald-500"></i> Questions: <span class="total-question-count">35</span> / प्रश्न: <span class="total-question-count">35</span>
                 </span>
                 <span class="bg-white/80 border border-slate-200/80 px-3.5 py-1.5 rounded-xl shadow-sm text-slate-700 flex items-center gap-1.5">
-                    <i class="fa-solid fa-award text-amber-500"></i> Total Marks: 25 / कुल अंक: 25
+                    <i class="fa-solid fa-award text-amber-500"></i> Total Marks: <span class="total-question-count">35</span> / कुल अंक: <span class="total-question-count">35</span>
                 </span>
             </div>
         </div>
@@ -233,7 +233,7 @@
                 <!-- Section Wise Breakdown -->
                 <div class="md:col-span-2 bg-white/90 rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-center">
                     <h3 class="font-heading font-bold text-slate-800 text-sm mb-3 flex items-center gap-2">
-                        <i class="fa-solid fa-chart-simple text-indigo-500"></i> Section Breakdown
+                        <i class="fa-solid fa-chart-simple text-indigo-500"></i> Weekly Learning Areas / साप्ताहिक विषय
                     </h3>
                     <div id="section-breakdown-list" class="space-y-2 text-xs sm:text-sm font-semibold">
                         <!-- Filled by JS -->
@@ -254,7 +254,7 @@
                         <p id="teacher-remark-text" class="font-heading font-semibold text-base sm:text-lg text-slate-800 leading-snug">
                             Complete questions to unlock teacher's remark! / शिक्षक की टिप्पणी पाने के लिए प्रश्न हल करें।
                         </p>
-                        <p class="text-xs text-slate-500 mt-1">Based on accuracy across all 5 sections. / पाँचों भागों के प्रदर्शन पर आधारित।</p>
+                        <p class="text-xs text-slate-500 mt-1">Based on your mixed weekly revision. / पूरे सप्ताह की मिश्रित दोहराई पर आधारित।</p>
                     </div>
                 </div>
             </div>
@@ -287,667 +287,293 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // --- SUNDAY CLASS 4 MATHS WORKSHEET DATA ---
-        // Fresh randomized questions are created at page load and whenever Generate is clicked.
-        function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
-        function makeQuestion(id, text, answers, explanation) {
-            return { id, text, validAnswers: (Array.isArray(answers) ? answers : [answers]).map(String), explanation };
+        // SUNDAY: one mixed assessment covering the learning points from all seven days.
+        const TOTAL_QUESTIONS = 35;
+        const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+        const pick = arr => arr[randomInt(0, arr.length - 1)];
+        let lastPlaceIndex = -1;
+        let generationNumber = 0;
+
+        function makeQuestion(category, text, answers, explanation) {
+            const validAnswers = (Array.isArray(answers) ? answers : [answers]).map(String);
+            return { id: 0, category, text, validAnswers, explanation };
         }
-
-        function generateFreshWorksheetData() {
-            const q = [[], [], [], [], []];
-            const ri = randomInt;
-            function add(section, id, text, answer, worked) {
-                q[section].push(makeQuestion(id, text, answer, worked));
-            }
-
-            // Section A: Number Sense Revision / संख्या ज्ञान की दोहराई
-            // Place value changes each time: ones, tens, hundreds, thousands, or ten-thousands.
-            const placeChoices = [
+        function fmt(n) { return Number(n).toLocaleString('en-US'); }
+        function fmtTime(totalMinutes) {
+            const h24 = Math.floor((totalMinutes % 1440) / 60);
+            const mins = totalMinutes % 60;
+            const h12 = h24 % 12 || 12;
+            return `${h12}:${String(mins).padStart(2,'0')} ${h24 >= 12 ? 'PM' : 'AM'}`;
+        }
+        function makePlaceValueQuestion() {
+            const places = [
                 {name:'ones', hi:'इकाई', value:1},
                 {name:'tens', hi:'दहाई', value:10},
                 {name:'hundreds', hi:'सैकड़े', value:100},
                 {name:'thousands', hi:'हज़ार', value:1000},
                 {name:'ten-thousands', hi:'दस हज़ार', value:10000}
             ];
-            const place = placeChoices[ri(0, placeChoices.length-1)];
-            const placeNum = place.value === 10000 ? ri(1,9)*10000 + ri(1,9)*1000 + ri(0,9)*100 + ri(0,9)*10 + ri(1,9)
-                : place.value === 1000 ? ri(1,9)*1000 + ri(1,9)*100 + ri(0,9)*10 + ri(1,9)
-                : place.value === 100 ? ri(1,9)*1000 + ri(1,9)*100 + ri(0,9)*10 + ri(1,9)
-                : place.value === 10 ? ri(1,9)*1000 + ri(0,9)*100 + ri(1,9)*10 + ri(1,9)
-                : ri(1,9)*1000 + ri(0,9)*100 + ri(0,9)*10 + ri(1,9);
-            const placeDigit = Math.floor(placeNum / place.value) % 10;
-            const placeAnswer = placeDigit * place.value;
-            add(0,1,`What is the value of the digit in the ${place.name} place in ${placeNum.toLocaleString('en-US')}? / ${placeNum.toLocaleString('en-US')} में ${place.hi} के स्थान पर अंक का स्थानीय मान क्या है?`,String(placeAnswer),
-                `The digit in the ${place.name} place is ${placeDigit}. Its value is ${placeDigit} × ${place.value.toLocaleString('en-US')} = ${placeAnswer.toLocaleString('en-US')}. / ${place.hi} के स्थान पर अंक ${placeDigit} है। उसका स्थानीय मान ${placeDigit} × ${place.value.toLocaleString('en-US')} = ${placeAnswer.toLocaleString('en-US')} है।`);
-            const roundNum = ri(21,89)*10 + ri(0,9), rounded = Math.round(roundNum/100)*100;
-            add(0,2,`Round ${roundNum} to the nearest hundred. / ${roundNum} को निकटतम सैकड़े तक पूर्णांकित करें।`,String(rounded),
-                `Look at the tens digit of ${roundNum}. The number is ${roundNum%100} away from ${Math.floor(roundNum/100)*100} and ${100-roundNum%100} away from the next hundred. The nearer hundred is ${rounded}. / ${roundNum} को दोनों पास के सैकड़ों से तुलना करें। यह ${Math.floor(roundNum/100)*100} से ${roundNum%100} दूर और अगले सैकड़े से ${100-roundNum%100} दूर है। निकटतम सैकड़ा ${rounded} है।`);
-            const div3 = ri(12,49)*3, digitSum = String(div3).split('').reduce((a,b)=>a+Number(b),0);
-            add(0,3,`Is ${div3} divisible by 3? Type Yes or No. / क्या ${div3} संख्या 3 से विभाज्य है? Yes या No लिखें।`,'yes',
-                `Add its digits: ${String(div3).split('').join(' + ')} = ${digitSum}. Since ${digitSum} is divisible by 3, ${div3} is also divisible by 3. Answer: Yes. / अंकों को जोड़ें: ${String(div3).split('').join(' + ')} = ${digitSum}। ${digitSum}, 3 से विभाज्य है, इसलिए ${div3} भी 3 से विभाज्य है। उत्तर: Yes।`);
-            const factorBase = [18,20,24,28,30,36,40,42][ri(0,7)];
-            const factors = Array.from({length:factorBase},(_,i)=>i+1).filter(n=>factorBase%n===0);
-            add(0,4,`Write one factor of ${factorBase} other than 1 and itself. / ${factorBase} का 1 और स्वयं के अलावा कोई एक गुणनखंड लिखें।`,factors.slice(1,-1).map(String),
-                `A factor divides a number exactly. ${factorBase} ÷ ${factors[1]} = ${factorBase/factors[1]} and ${factorBase} ÷ ${factors[2]} = ${factorBase/factors[2]}, with no remainder. So ${factors[1]} and ${factors[2]} are two factors. / गुणनखंड वह संख्या है जिससे भाग देने पर शेष 0 आए। ${factorBase} ÷ ${factors[1]} = ${factorBase/factors[1]} और ${factorBase} ÷ ${factors[2]} = ${factorBase/factors[2]}। इसलिए ${factors[1]} और ${factors[2]} दो गुणनखंड हैं।`);
-            const multBase=ri(4,12), multPos=ri(3,8), ordinal=multPos%10===1&&multPos!==11?'st':multPos%10===2&&multPos!==12?'nd':multPos%10===3&&multPos!==13?'rd':'th';
-            add(0,5,`What is the ${multPos}${ordinal} multiple of ${multBase}? / ${multBase} का ${multPos}वाँ गुणज क्या है?`,String(multBase*multPos),
-                `List or multiply: ${multBase}, ${multBase*2}, ${multBase*3}, … The ${multPos}th multiple is ${multBase} × ${multPos} = ${multBase*multPos}. / गुणज लिखें: ${multBase}, ${multBase*2}, ${multBase*3}, … ${multPos}वाँ गुणज ${multBase} × ${multPos} = ${multBase*multPos} है।`);
+            let ix = randomInt(0, places.length - 1);
+            if (lastPlaceIndex >= 0 && ix === lastPlaceIndex) ix = (ix + randomInt(1, places.length - 1)) % places.length;
+            lastPlaceIndex = ix;
+            const place = places[ix];
+            let number = randomInt(10000, 99999);
+            // Ensure the selected place contains a non-zero digit, so the question is meaningful.
+            while (Math.floor(number / place.value) % 10 === 0) number = randomInt(10000, 99999);
+            const digit = Math.floor(number / place.value) % 10;
+            const answer = digit * place.value;
+            return makeQuestion('Number sense / संख्या ज्ञान',
+                `What is the value of the digit in the ${place.name} place in ${fmt(number)}? / ${fmt(number)} में ${place.hi} के स्थान पर अंक का स्थानीय मान क्या है?`,
+                String(answer),
+                `The digit in the ${place.name} place is ${digit}. Multiply it by its place value: ${digit} × ${fmt(place.value)} = ${fmt(answer)}. / ${place.hi} के स्थान पर अंक ${digit} है। इसे उसके स्थान के मान से गुणा करें: ${digit} × ${fmt(place.value)} = ${fmt(answer)}।`);
+        }
+        function generateFreshWorksheetData() {
+            const questions = [];
+            const add = (category, text, answer, explanation) => questions.push(makeQuestion(category, text, answer, explanation));
 
-            // Section B: Operations Revision / गणनाओं की दोहराई
-            const addA=ri(230,780), addB=ri(110,490), addSum=addA+addB;
-            add(1,6,`Add ${addA} + ${addB}. / जोड़ें: ${addA} + ${addB}।`,String(addSum),
-                `Add hundreds, tens and ones, or add in parts: ${addA} + ${addB} = ${addSum}. / सैकड़े, दहाई और इकाई जोड़ें या हिस्सों में जोड़ें: ${addA} + ${addB} = ${addSum}।`);
-            const subA=ri(520,980), subB=ri(120,Math.min(480,subA-100)), subDiff=subA-subB;
-            add(1,7,`Subtract ${subA} − ${subB}. / घटाएँ: ${subA} − ${subB}।`,String(subDiff),
-                `Subtract in parts: ${subA} − ${Math.floor(subB/100)*100} = ${subA-Math.floor(subB/100)*100}; then subtract ${subB%100}: ${subA-Math.floor(subB/100)*100} − ${subB%100} = ${subDiff}. / पहले ${Math.floor(subB/100)*100} घटाएँ: ${subA} − ${Math.floor(subB/100)*100} = ${subA-Math.floor(subB/100)*100}। फिर ${subB%100} घटाएँ: ${subA-Math.floor(subB/100)*100} − ${subB%100} = ${subDiff}।`);
-            const mulA=ri(12,39), mulB=ri(3,9), mulProd=mulA*mulB;
-            add(1,8,`Multiply ${mulA} × ${mulB}. / गुणा करें: ${mulA} × ${mulB}।`,String(mulProd),
-                `Break ${mulA} into tens and ones: ${Math.floor(mulA/10)*10} × ${mulB} = ${Math.floor(mulA/10)*10*mulB}; ${mulA%10} × ${mulB} = ${(mulA%10)*mulB}. Add them: ${Math.floor(mulA/10)*10*mulB} + ${(mulA%10)*mulB} = ${mulProd}. / ${mulA} को दहाई और इकाई में बाँटें: ${Math.floor(mulA/10)*10} × ${mulB} = ${Math.floor(mulA/10)*10*mulB}; ${mulA%10} × ${mulB} = ${(mulA%10)*mulB}। जोड़ें: ${Math.floor(mulA/10)*10*mulB} + ${(mulA%10)*mulB} = ${mulProd}।`);
-            const divB=ri(4,12), divQ=ri(12,35), divA=divB*divQ;
-            add(1,9,`Divide ${divA} ÷ ${divB}. / भाग दें: ${divA} ÷ ${divB}।`,String(divQ),
-                `Think of the multiplication fact: ${divB} × ${divQ} = ${divA}. So ${divA} ÷ ${divB} = ${divQ}. / गुणा याद करें: ${divB} × ${divQ} = ${divA}। इसलिए ${divA} ÷ ${divB} = ${divQ}।`);
-            const missingA=ri(120,480), missingB=ri(100,300), missingSum=missingA+missingB;
-            add(1,10,`Find the missing number: □ + ${missingB} = ${missingSum}. / खाली स्थान भरें: □ + ${missingB} = ${missingSum}।`,String(missingA),
-                `To find the missing number, subtract ${missingB} from ${missingSum}: ${missingSum} − ${missingB} = ${missingA}. Check: ${missingA} + ${missingB} = ${missingSum}. / खाली संख्या पाने के लिए ${missingSum} में से ${missingB} घटाएँ: ${missingSum} − ${missingB} = ${missingA}। जाँच: ${missingA} + ${missingB} = ${missingSum}।`);
+            // 1. Place value (the place rotates on every regeneration)
+            questions.push(makePlaceValueQuestion());
 
-            // Section C: Mental Maths / मानसिक गणित
-            const fracDen=[2,3,4,5,6,8,10][ri(0,6)], fracNum=ri(1,fracDen-1), fracWhole=fracDen*ri(4,12), fracAns=fracWhole/fracDen*fracNum;
-            add(2,11,`Find ${fracNum}/${fracDen} of ${fracWhole}. / ${fracWhole} का ${fracNum}/${fracDen} भाग ज्ञात करें।`,String(fracAns),
-                `First divide by the denominator: ${fracWhole} ÷ ${fracDen} = ${fracWhole/fracDen}. Then multiply by the numerator: ${fracWhole/fracDen} × ${fracNum} = ${fracAns}. / पहले हर से भाग दें: ${fracWhole} ÷ ${fracDen} = ${fracWhole/fracDen}। फिर अंश से गुणा करें: ${fracWhole/fracDen} × ${fracNum} = ${fracAns}।`);
-            const hour=ri(1,10), mins=[0,15,30,45][ri(0,3)], duration=ri(1,3)*60+ [0,15,30,45][ri(0,3)], startMinutes=hour*60+mins, endMinutes=startMinutes+duration;
-            const fmtTime=m=>`${Math.floor((m%(24*60))/60)||12}:${String(m%60).padStart(2,'0')} ${Math.floor((m%(24*60))/60)>=12?'PM':'AM'}`;
-            add(2,12,`A class starts at ${fmtTime(startMinutes)} and lasts ${Math.floor(duration/60)} hour${Math.floor(duration/60)===1?'':'s'} ${duration%60?duration%60+' minutes':''}. When does it end? / कक्षा ${fmtTime(startMinutes)} पर शुरू होती है और ${Math.floor(duration/60)} घंटे ${duration%60?duration%60+' मिनट':''} चलती है। यह कब समाप्त होगी?`,fmtTime(endMinutes),
-                `Add ${Math.floor(duration/60)} hour${Math.floor(duration/60)===1?'':'s'} to ${fmtTime(startMinutes)}: the time becomes ${fmtTime(startMinutes+Math.floor(duration/60)*60)}. Then add ${duration%60} minutes: ${fmtTime(endMinutes)}. / ${fmtTime(startMinutes)} में ${Math.floor(duration/60)} घंटे जोड़ें, समय ${fmtTime(startMinutes+Math.floor(duration/60)*60)} होगा। फिर ${duration%60} मिनट जोड़ें: ${fmtTime(endMinutes)}।`);
-            const rupees=ri(50,300), paise=ri(10,95), paid=rupees+paise/100, item1=ri(15,70), item2=ri(10,60), cost=item1+item2, change=Math.round((paid-cost)*100)/100;
-            const cost1=ri(20,65), cost2=ri(15,55), paidR=cost1+cost2+ri(1,6)*10, changeMoney=paidR-cost1-cost2;
-            add(2,13,`A child pays ₹${paidR} for items costing ₹${cost1} and ₹${cost2}. How much change should the child get? / एक बच्चा ₹${paidR} देकर ₹${cost1} और ₹${cost2} की चीज़ें खरीदता है। उसे कितने रुपये वापस मिलेंगे?`,String(changeMoney),
-                `First add the costs: ₹${cost1} + ₹${cost2} = ₹${cost1+cost2}. Subtract from the money paid: ₹${paidR} − ₹${cost1+cost2} = ₹${changeMoney}. / पहले कीमतें जोड़ें: ₹${cost1} + ₹${cost2} = ₹${cost1+cost2}। फिर दिए गए पैसों में से घटाएँ: ₹${paidR} − ₹${cost1+cost2} = ₹${changeMoney}।`);
-            const cm=ri(2,9)*100, extraCm=ri(10,90), totalCm=cm+extraCm;
-            add(2,14,`Convert ${totalCm} cm into metres and centimetres. / ${totalCm} सेंटीमीटर को मीटर और सेंटीमीटर में बदलें।`,`${Math.floor(totalCm/100)} m ${totalCm%100} cm`,
-                `100 cm = 1 m. ${totalCm} cm contains ${Math.floor(totalCm/100)} full hundred centimetres and ${totalCm%100} cm left. Answer: ${Math.floor(totalCm/100)} m ${totalCm%100} cm. / 100 cm = 1 m। ${totalCm} cm में ${Math.floor(totalCm/100)} पूरे मीटर और ${totalCm%100} cm बचते हैं। उत्तर: ${Math.floor(totalCm/100)} m ${totalCm%100} cm।`);
-            const n1=ri(25,75), n2=ri(15,65), n3=ri(5,25), mental=n1+n2-n3;
-            add(2,15,`Calculate mentally: ${n1} + ${n2} − ${n3}. / मन में हल करें: ${n1} + ${n2} − ${n3}।`,String(mental),
-                `Make an easy addition first: ${n1} + ${n2} = ${n1+n2}. Then subtract: ${n1+n2} − ${n3} = ${mental}. / पहले जोड़ें: ${n1} + ${n2} = ${n1+n2}। फिर घटाएँ: ${n1+n2} − ${n3} = ${mental}।`);
+            // 2. Compare numbers / number sense
+            const n1 = randomInt(210, 899), n2 = randomInt(210, 899), greater = Math.max(n1,n2), lesser = Math.min(n1,n2);
+            add('Number sense / संख्या ज्ञान', `Which number is greater: ${fmt(n1)} or ${fmt(n2)}? / कौन-सी संख्या बड़ी है: ${fmt(n1)} या ${fmt(n2)}?`, String(greater),
+                `Compare the hundreds digits first. If they match, compare tens, then ones. ${fmt(greater)} is greater than ${fmt(lesser)}. / पहले सैकड़े के अंक देखें। समान हों तो दहाई और फिर इकाई देखें। ${fmt(greater)}, ${fmt(lesser)} से बड़ी है।`);
 
-            // Section D: Reasoning Test / तर्कशक्ति परीक्षा
-            const patStart=ri(8,35), patStep=ri(3,12), patAnswer=patStart+4*patStep;
-            add(3,16,`Find the next number: ${patStart}, ${patStart+patStep}, ${patStart+2*patStep}, ${patStart+3*patStep}, __. / अगली संख्या ज्ञात करें: ${patStart}, ${patStart+patStep}, ${patStart+2*patStep}, ${patStart+3*patStep}, __।`,String(patAnswer),
-                `Find the change between two numbers: ${patStart+patStep} − ${patStart} = ${patStep}. Keep adding ${patStep}: ${patStart+3*patStep} + ${patStep} = ${patAnswer}. / दो संख्याओं का अंतर देखें: ${patStart+patStep} − ${patStart} = ${patStep}। हर बार ${patStep} जोड़ें: ${patStart+3*patStep} + ${patStep} = ${patAnswer}।`);
-            const rectL=ri(5,18), rectW=ri(3,12), perimeter=2*(rectL+rectW);
-            add(3,17,`A rectangle is ${rectL} cm long and ${rectW} cm wide. Find its perimeter. / एक आयत की लंबाई ${rectL} cm और चौड़ाई ${rectW} cm है। उसका परिमाप ज्ञात करें।`,String(perimeter),
-                `Add length and width: ${rectL} + ${rectW} = ${rectL+rectW}. A rectangle has two lengths and two widths, so ${rectL+rectW} × 2 = ${perimeter} cm. / लंबाई और चौड़ाई जोड़ें: ${rectL} + ${rectW} = ${rectL+rectW}। आयत में दो लंबाइयाँ और दो चौड़ाइयाँ होती हैं, इसलिए ${rectL+rectW} × 2 = ${perimeter} cm।`);
-            const oddA=ri(5,25)*2+1, oddB=oddA+2, oddC=oddB+2, oddTotal=oddA+oddB+oddC;
-            add(3,18,`Find the sum of three consecutive odd numbers: ${oddA}, ${oddB}, ${oddC}. / तीन लगातार विषम संख्याओं ${oddA}, ${oddB}, ${oddC} का योग ज्ञात करें।`,String(oddTotal),
-                `Add the first two: ${oddA} + ${oddB} = ${oddA+oddB}. Then add the third: ${oddA+oddB} + ${oddC} = ${oddTotal}. / पहले दो जोड़ें: ${oddA} + ${oddB} = ${oddA+oddB}। फिर तीसरी संख्या जोड़ें: ${oddA+oddB} + ${oddC} = ${oddTotal}।`);
-            const logicTotal=ri(25,80), logicPart=ri(5,20), logicMissing=logicTotal-logicPart;
-            add(3,19,`A number plus ${logicPart} equals ${logicTotal}. What is the number? / किसी संख्या में ${logicPart} जोड़ने पर ${logicTotal} मिलता है। वह संख्या क्या है?`,String(logicMissing),
-                `Undo the addition by subtracting: ${logicTotal} − ${logicPart} = ${logicMissing}. Check: ${logicMissing} + ${logicPart} = ${logicTotal}. / जोड़ को उलटने के लिए घटाएँ: ${logicTotal} − ${logicPart} = ${logicMissing}। जाँच: ${logicMissing} + ${logicPart} = ${logicTotal}।`);
-            const coins=ri(3,8), eachCoin=ri(5,20), totalCoins=coins*eachCoin;
-            add(3,20,`There are ${coins} equal groups with ${eachCoin} objects in each group. How many objects are there altogether? / ${coins} बराबर समूह हैं और हर समूह में ${eachCoin} वस्तुएँ हैं। कुल कितनी वस्तुएँ हैं?`,String(totalCoins),
-                `Equal groups mean multiplication: ${coins} × ${eachCoin} = ${totalCoins}. You can also add ${eachCoin} ${coins} times. / बराबर समूह होने पर गुणा करें: ${coins} × ${eachCoin} = ${totalCoins}। आप ${eachCoin} को ${coins} बार जोड़कर भी उत्तर पा सकते हैं।`);
+            // 3. Rounding
+            const roundMode = pick([10,100,1000]);
+            const roundN = roundMode===10 ? randomInt(121,989) : roundMode===100 ? randomInt(121,989) : randomInt(1100,9899);
+            const rounded = Math.round(roundN/roundMode)*roundMode;
+            add('Number sense / संख्या ज्ञान', `Round ${fmt(roundN)} to the nearest ${roundMode===10?'ten':roundMode===100?'hundred':'thousand'}. / ${fmt(roundN)} को निकटतम ${roundMode===10?'दहाई':roundMode===100?'सैकड़े':'हज़ार'} तक पूर्णांकित करें।`, String(rounded),
+                `Look at the digit immediately to the right of the place being rounded. If it is 5 or more, round up; otherwise round down. ${fmt(roundN)} rounds to ${fmt(rounded)}. / जिस स्थान तक पूर्णांकित करना है, उसके ठीक दाईं ओर का अंक देखें। अंक 5 या अधिक हो तो ऊपर, अन्यथा नीचे करें। ${fmt(roundN)} का उत्तर ${fmt(rounded)} है।`);
 
-            // Section E: Mixed Final Assessment / मिश्रित अंतिम परीक्षा
-            const apples=ri(35,85), given=ri(5,Math.min(25,apples-5)), remaining=apples-given;
-            add(4,21,`A shop has ${apples} apples. It sells ${given} apples. How many apples are left? / एक दुकान में ${apples} सेब हैं। ${given} सेब बिक गए। कितने सेब बचे?`,String(remaining),
-                `Start with ${apples} apples and subtract the ${given} sold: ${apples} − ${given} = ${remaining}. / ${apples} सेबों में से बिके हुए ${given} सेब घटाएँ: ${apples} − ${given} = ${remaining}।`);
-            const eqN=ri(2,6), eqD=ri(3,8), eqF=ri(2,4), eqAnswer=eqN*eqF;
-            add(4,22,`Complete the equivalent fraction: ${eqN}/${eqD} = ?/${eqD*eqF}. / समतुल्य भिन्न पूरी करें: ${eqN}/${eqD} = ?/${eqD*eqF}।`,String(eqAnswer),
-                `The denominator ${eqD} was multiplied by ${eqF} to get ${eqD*eqF}. Multiply the numerator by the same number: ${eqN} × ${eqF} = ${eqAnswer}. / हर ${eqD} को ${eqF} से गुणा करके ${eqD*eqF} मिला। अंश को भी उसी संख्या से गुणा करें: ${eqN} × ${eqF} = ${eqAnswer}।`);
-            const side=ri(4,14), squarePer=side*4;
-            add(4,23,`A square has sides of ${side} cm each. Find its perimeter. / एक वर्ग की प्रत्येक भुजा ${side} cm है। उसका परिमाप ज्ञात करें।`,String(squarePer),
-                `A square has 4 equal sides. Add ${side} four times: ${side} + ${side} + ${side} + ${side} = ${squarePer} cm. / वर्ग की 4 बराबर भुजाएँ होती हैं। ${side} को चार बार जोड़ें: ${side} + ${side} + ${side} + ${side} = ${squarePer} cm।`);
-            const lcmA=[4,5,6,8,10,12][ri(0,5)], lcmB=[3,4,6,9,10,12][ri(0,5)];
-            const gcd=(a,b)=>b?gcd(b,a%b):a, lcm=lcmA*lcmB/gcd(lcmA,lcmB);
-            const listA=Array.from({length:lcm/lcmA},(_,i)=>(i+1)*lcmA), listB=Array.from({length:lcm/lcmB},(_,i)=>(i+1)*lcmB);
-            add(4,24,`Find the smallest common multiple of ${lcmA} and ${lcmB}. / ${lcmA} और ${lcmB} का सबसे छोटा सार्व गुणज ज्ञात करें।`,String(lcm),
-                `Multiples of ${lcmA}: ${listA.join(', ')}. / ${lcmA} के गुणज: ${listA.join(', ')}।<br>Multiples of ${lcmB}: ${listB.join(', ')}. / ${lcmB} के गुणज: ${listB.join(', ')}।<br>The first number in both lists is ${lcm}. So the smallest common multiple is ${lcm}. / दोनों सूचियों में सबसे पहली समान संख्या ${lcm} है। इसलिए सबसे छोटा सार्व गुणज ${lcm} है।`);
-            const price1=ri(25,80), price2=ri(15,60), qty=ri(2,5), totalCost=price1*qty+price2;
-            add(4,25,`A notebook costs ₹${price1}. A pen costs ₹${price2}. What is the total cost of ${qty} notebooks and 1 pen? / एक कॉपी ₹${price1} की है और एक पेन ₹${price2} का है। ${qty} कॉपियों और 1 पेन की कुल कीमत क्या है?`,String(totalCost),
-                `Cost of ${qty} notebooks: ${qty} × ₹${price1} = ₹${qty*price1}. Add the pen: ₹${qty*price1} + ₹${price2} = ₹${totalCost}. / ${qty} कॉपियों की कीमत: ${qty} × ₹${price1} = ₹${qty*price1}। पेन की कीमत जोड़ें: ₹${qty*price1} + ₹${price2} = ₹${totalCost}।`);
+            // 4-8. Four operations and missing number
+            const a = randomInt(245,789), b = randomInt(111,456), sum = a+b;
+            add('Operations / संक्रियाएँ', `Add ${a} + ${b}. / जोड़ें: ${a} + ${b}।`, String(sum),
+                `Split ${b} into hundreds, tens and ones: ${b} = ${Math.floor(b/100)*100} + ${Math.floor(b%100/10)*10} + ${b%10}. Then ${a} + ${Math.floor(b/100)*100} = ${a+Math.floor(b/100)*100}; add the remaining ${b%100}: ${a+Math.floor(b/100)*100} + ${b%100} = ${sum}. / ${b} को सैकड़े, दहाई और इकाई में बाँटें। फिर हिस्सों में जोड़ें: ${a} + ${b} = ${sum}।`);
+            const sa = randomInt(620,999), sb = randomInt(125,Math.min(489,sa-100)), diff=sa-sb;
+            add('Operations / संक्रियाएँ', `Subtract ${sa} − ${sb}. / घटाएँ: ${sa} − ${sb}।`, String(diff),
+                `Subtract in parts: ${sa} − ${Math.floor(sb/100)*100} = ${sa-Math.floor(sb/100)*100}; then ${sa-Math.floor(sb/100)*100} − ${sb%100} = ${diff}. / पहले ${Math.floor(sb/100)*100} घटाएँ: ${sa} − ${Math.floor(sb/100)*100} = ${sa-Math.floor(sb/100)*100}। फिर ${sb%100} घटाएँ: ${sa-Math.floor(sb/100)*100} − ${sb%100} = ${diff}।`);
+            const ma=randomInt(12,39), mb=randomInt(3,9), mp=ma*mb;
+            add('Mental maths / मानसिक गणित', `Multiply ${ma} × ${mb}. / गुणा करें: ${ma} × ${mb}।`, String(mp),
+                `Split ${ma}: ${Math.floor(ma/10)*10} × ${mb} = ${Math.floor(ma/10)*10*mb}; ${ma%10} × ${mb} = ${(ma%10)*mb}. Add: ${Math.floor(ma/10)*10*mb} + ${(ma%10)*mb} = ${mp}. / ${ma} को दहाई और इकाई में बाँटें। दोनों गुणनफल जोड़ने पर ${mp} मिलता है।`);
+            const db=pick([4,5,6,7,8,9,10,12]), dq=randomInt(12,35), da=db*dq;
+            add('Operations / संक्रियाएँ', `Divide ${da} ÷ ${db}. / भाग दें: ${da} ÷ ${db}।`, String(dq),
+                `Use the related multiplication fact: ${db} × ${dq} = ${da}. Therefore ${da} ÷ ${db} = ${dq}. / संबंधित गुणा याद करें: ${db} × ${dq} = ${da}। इसलिए ${da} ÷ ${db} = ${dq}।`);
+            const missing=randomInt(125,399), addend=randomInt(101,299), total=missing+addend;
+            add('Missing numbers / लुप्त संख्या', `Find the missing number: □ + ${addend} = ${total}. / खाली स्थान भरें: □ + ${addend} = ${total}।`, String(missing),
+                `Use the opposite operation: ${total} − ${addend} = ${missing}. Check: ${missing} + ${addend} = ${total}. / उलटी संक्रिया करें: ${total} − ${addend} = ${missing}। जाँच: ${missing} + ${addend} = ${total}।`);
 
-            // Change the question TYPES as well as the numbers on each regeneration.
-            // Fraction questions rotate among equivalent fractions, comparison, and word problems.
-            const fractionVariant = ri(0,2);
-            if (fractionVariant === 0) {
-                const n=ri(1,4), d=ri(n+1,8), m=ri(2,4), ans=n*m;
-                q[2][0]=makeQuestion(11,`Complete the equivalent fraction: ${n}/${d} = ?/${d*m}. / समतुल्य भिन्न पूरी करें: ${n}/${d} = ?/${d*m}।`,String(ans),
-                    `The denominator ${d} was multiplied by ${m}. Multiply the numerator by the same number: ${n} × ${m} = ${ans}. / हर ${d} को ${m} से गुणा किया गया। अंश को भी उसी संख्या से गुणा करें: ${n} × ${m} = ${ans}।`);
-            } else if (fractionVariant === 1) {
-                const d=ri(3,10), a=ri(1,d-1); let b=ri(1,d-1); if (a===b) b = a===d-1 ? a-1 : a+1; const correct=a>b?`${a}/${d}`:`${b}/${d}`;
-                q[2][0]=makeQuestion(11,`Which fraction is greater: ${a}/${d} or ${b}/${d}? Write the greater fraction. / कौन-सी भिन्न बड़ी है: ${a}/${d} या ${b}/${d}? बड़ी भिन्न लिखें।`,correct,
-                    `Both fractions have the same denominator, ${d}. Compare the numerators ${a} and ${b}. The fraction with the larger numerator is greater. / दोनों भिन्नों का हर ${d} समान है। अंश ${a} और ${b} की तुलना करें। बड़ा अंश वाली भिन्न बड़ी होती है।`);
-            } else {
-                const total=ri(12,40), den=[2,3,4,5][ri(0,3)], num=ri(1,den-1), whole=total-total%den, ans=whole/den*num;
-                q[2][0]=makeQuestion(11,`Riya has ${whole} stickers and gives ${num}/${den} of them to a friend. How many stickers does she give? / रिया के पास ${whole} स्टिकर हैं। वह उनमें से ${num}/${den} भाग दोस्त को देती है। वह कितने स्टिकर देती है?`,String(ans),
-                    `Divide by the denominator: ${whole} ÷ ${den} = ${whole/den}. Multiply by the numerator: ${whole/den} × ${num} = ${ans}. / हर से भाग दें: ${whole} ÷ ${den} = ${whole/den}। अंश से गुणा करें: ${whole/den} × ${num} = ${ans}।`);
-            }
+            // 9-10. Patterns and mental calculation
+            const step=pick([4,6,7,8,9,12]), startN=randomInt(10,60), seq=[startN,startN+step,startN+2*step,startN+3*step], next= startN+4*step;
+            add('Patterns & reasoning / पैटर्न और तर्क', `Find the next number: ${seq.join(', ')}, __. / अगली संख्या ज्ञात करें: ${seq.join(', ')}, __।`, String(next),
+                `Find the difference: ${seq[1]} − ${seq[0]} = ${step}. Each number increases by ${step}, so ${seq[3]} + ${step} = ${next}. / अंतर देखें: ${seq[1]} − ${seq[0]} = ${step}। हर बार ${step} जुड़ता है, इसलिए ${seq[3]} + ${step} = ${next}।`);
+            const x=randomInt(25,68), y=randomInt(12,35), z=randomInt(8,24), mental=x+y-z;
+            add('Mental maths / मानसिक गणित', `Calculate mentally: ${x} + ${y} − ${z}. / मन में हल करें: ${x} + ${y} − ${z}।`, String(mental),
+                `Add first: ${x} + ${y} = ${x+y}. Then subtract: ${x+y} − ${z} = ${mental}. / पहले जोड़ें: ${x} + ${y} = ${x+y}। फिर घटाएँ: ${x+y} − ${z} = ${mental}।`);
 
-            // Divisibility question changes its rule, not just its number.
-            const divisor=[2,3,5][ri(0,2)];
-            const divValue=divisor===2?ri(10,99):divisor===5?ri(10,99):ri(10,99);
-            const isDivisible=divValue%divisor===0;
-            const ruleHint=divisor===2?'A number is divisible by 2 if its last digit is 0, 2, 4, 6, or 8. / अंतिम अंक 0, 2, 4, 6 या 8 हो तो संख्या 2 से विभाज्य होती है।':divisor===5?'A number is divisible by 5 if its last digit is 0 or 5. / अंतिम अंक 0 या 5 हो तो संख्या 5 से विभाज्य होती है।':'Add the digits; if their sum is divisible by 3, the number is divisible by 3. / अंकों का योग 3 से विभाज्य हो, तो संख्या भी 3 से विभाज्य होती है।';
-            const divExplanation=divisor===2?`The last digit of ${divValue} is ${divValue%10}. ${isDivisible?'It is even, so the answer is Yes.':'It is odd, so the answer is No.'} / ${divValue} का अंतिम अंक ${divValue%10} है। ${isDivisible?'यह सम संख्या है, इसलिए उत्तर Yes है।':'यह विषम संख्या है, इसलिए उत्तर No है।'}`:divisor===5?`The last digit of ${divValue} is ${divValue%10}. ${isDivisible?'It ends in 0 or 5, so the answer is Yes.':'It does not end in 0 or 5, so the answer is No.'} / ${divValue} का अंतिम अंक ${divValue%10} है। ${isDivisible?'यह 0 या 5 पर समाप्त होती है, इसलिए उत्तर Yes है।':'यह 0 या 5 पर समाप्त नहीं होती, इसलिए उत्तर No है।'}`:`${ruleHint} Digit sum: ${String(divValue).split('').join(' + ')} = ${String(divValue).split('').reduce((a,b)=>a+Number(b),0)}. Answer: ${isDivisible?'Yes':'No'}. / ${ruleHint} उत्तर: ${isDivisible?'Yes':'No'}।`;
-            q[0][2]=makeQuestion(3,`Is ${divValue} divisible by ${divisor}? Type Yes or No. / क्या ${divValue} संख्या ${divisor} से विभाज्य है? Yes या No लिखें।`,isDivisible?'yes':'no',divExplanation);
+            // 11-14. Fraction skills: equivalence, comparison, fraction of quantity, word problem
+            const fd=pick([2,3,4,5,6,7,8]), fn=randomInt(1,fd-1), fm=pick([2,3,4]);
+            add('Fractions / भिन्न', `Complete the equivalent fraction: ${fn}/${fd} = ?/${fd*fm}. / समतुल्य भिन्न पूरी करें: ${fn}/${fd} = ?/${fd*fm}।`, String(fn*fm),
+                `The denominator ${fd} was multiplied by ${fm}. Multiply the numerator by the same number: ${fn} × ${fm} = ${fn*fm}. / हर ${fd} को ${fm} से गुणा किया गया है। अंश को भी ${fm} से गुणा करें: ${fn} × ${fm} = ${fn*fm}।`);
+            const cd=pick([4,5,6,8,10]), ca=randomInt(1,cd-1), cb=randomInt(1,cd-1), fracAns=ca===cb?'Equal':ca>cb?`${ca}/${cd}`:`${cb}/${cd}`;
+            add('Fractions / भिन्न', `Compare ${ca}/${cd} and ${cb}/${cd}. Write the greater fraction, or Equal. / ${ca}/${cd} और ${cb}/${cd} की तुलना करें। बड़ी भिन्न या Equal लिखें।`, fracAns,
+                `The denominators are the same, so compare the numerators: ${ca} and ${cb}. ${ca===cb?'They are equal, so the fractions are equal.':`${Math.max(ca,cb)} is greater, so ${fracAns} is the greater fraction.`} / हर समान हैं, इसलिए अंश ${ca} और ${cb} की तुलना करें। सही उत्तर ${fracAns} है।`);
+            const fden=pick([2,3,4,5,6,8]), fnum=randomInt(1,fden-1), whole=fden*randomInt(3,12), fvalue=whole/fden*fnum;
+            add('Fractions / भिन्न', `Find ${fnum}/${fden} of ${whole}. / ${whole} का ${fnum}/${fden} भाग ज्ञात करें।`, String(fvalue),
+                `Divide by the denominator: ${whole} ÷ ${fden} = ${whole/fden}. Multiply by the numerator: ${whole/fden} × ${fnum} = ${fvalue}. / पहले हर से भाग दें: ${whole} ÷ ${fden} = ${whole/fden}। फिर अंश से गुणा करें: ${whole/fden} × ${fnum} = ${fvalue}।`);
+            const sweetsDen=pick([2,3,4,5]), sweetsNum=randomInt(1,sweetsDen-1), sweetsTotal=sweetsDen*randomInt(4,12), eaten=sweetsTotal/sweetsDen*sweetsNum;
+            add('Fractions & word problems / भिन्न और शब्द-प्रश्न', `A box has ${sweetsTotal} sweets. ${sweetsNum}/${sweetsDen} of them are eaten. How many sweets are eaten? / एक डिब्बे में ${sweetsTotal} मिठाइयाँ हैं। उनमें से ${sweetsNum}/${sweetsDen} भाग खा लिया जाता है। कितनी मिठाइयाँ खाई गईं?`, String(eaten),
+                `Divide the total by the denominator: ${sweetsTotal} ÷ ${sweetsDen} = ${sweetsTotal/sweetsDen}. Multiply by the numerator: ${sweetsTotal/sweetsDen} × ${sweetsNum} = ${eaten}. / कुल मिठाइयों को हर ${sweetsDen} से भाग दें, फिर अंश ${sweetsNum} से गुणा करें। उत्तर ${eaten} मिठाइयाँ है।`);
 
-            // Number-sense questions also rotate between different skills.
-            const senseVariant=ri(0,2);
-            if(senseVariant===0){
-                const a=ri(120,999), b=ri(120,999), bigger=Math.max(a,b);
-                q[0][1]=makeQuestion(2,`Which number is greater: ${a} or ${b}? / कौन-सी संख्या बड़ी है: ${a} या ${b}?`,String(bigger),`Compare digits from left to right, starting with the hundreds place. The greater number is ${bigger}. / बाईं ओर से अंकों की तुलना करें, पहले सैकड़े के स्थान से। बड़ी संख्या ${bigger} है।`);
-            } else if(senseVariant===1){
-                const a=ri(100,999), b=ri(100,999), c=ri(100,999), ordered=[a,b,c].sort((x,y)=>x-y);
-                q[0][1]=makeQuestion(2,`Write these numbers in ascending order: ${a}, ${b}, ${c}. / इन संख्याओं को आरोही क्रम में लिखें: ${a}, ${b}, ${c}।`,ordered.join(', '),`Ascending order means smallest to largest. Compare the hundreds, tens, and ones digits; the order is ${ordered.join(', ')}. / आरोही क्रम का अर्थ छोटे से बड़े क्रम में है। सैकड़े, दहाई और इकाई के अंकों की तुलना करें; क्रम ${ordered.join(', ')} है।`);
-            }
+            // 15-17. Measurement units
+            const cm=pick([125,238,305,472,586,749,864]);
+            add('Measurement / मापन', `Convert ${cm} cm into metres and centimetres. / ${cm} सेंटीमीटर को मीटर और सेंटीमीटर में बदलें।`, [`${Math.floor(cm/100)} m ${cm%100} cm`, `${Math.floor(cm/100)}m ${cm%100}cm`, `${Math.floor(cm/100)} metres ${cm%100} centimetres`],
+                `100 cm = 1 m. ${cm} cm contains ${Math.floor(cm/100)} full metre(s) (${Math.floor(cm/100)*100} cm) with ${cm%100} cm left. Answer: ${Math.floor(cm/100)} m ${cm%100} cm. / 100 cm = 1 m। ${cm} cm में ${Math.floor(cm/100)} मीटर (${Math.floor(cm/100)*100} cm) और ${cm%100} cm शेष हैं। उत्तर: ${Math.floor(cm/100)} m ${cm%100} cm।`);
+            const kg=pick([2,3,4,5,6,7,8]), grams=kg*1000+pick([250,500,750]);
+            add('Measurement / मापन', `Convert ${grams} g into kilograms and grams. / ${grams} ग्राम को किलोग्राम और ग्राम में बदलें।`, [`${Math.floor(grams/1000)} kg ${grams%1000} g`, `${Math.floor(grams/1000)}kg ${grams%1000}g`],
+                `1,000 g = 1 kg. ${grams} g = ${Math.floor(grams/1000)*1000} g + ${grams%1000} g, so the answer is ${Math.floor(grams/1000)} kg ${grams%1000} g. / 1,000 g = 1 kg। ${grams} g = ${Math.floor(grams/1000)*1000} g + ${grams%1000} g। उत्तर ${Math.floor(grams/1000)} kg ${grams%1000} g है।`);
+            const litres=pick([2,3,4,5]), ml=litres*1000+pick([100,250,500,750]);
+            add('Measurement / मापन', `Convert ${ml} mL into litres and millilitres. / ${ml} मिलीलीटर को लीटर और मिलीलीटर में बदलें।`, [`${Math.floor(ml/1000)} L ${ml%1000} mL`, `${Math.floor(ml/1000)}L ${ml%1000}mL`],
+                `1,000 mL = 1 L. ${ml} mL = ${Math.floor(ml/1000)} L and ${ml%1000} mL left. / 1,000 mL = 1 L। ${ml} mL में ${Math.floor(ml/1000)} L और ${ml%1000} mL शेष हैं।`);
 
-            const factorVariant=ri(0,1);
-            if(factorVariant===1){
-                const candidates=[11,13,17,19,21,23,25,27,29,31,33,35];
-                const primeTest=candidates[ri(0,candidates.length-1)];
-                const primeDivisors=[];
-                for(let d=2;d<primeTest;d++) if(primeTest%d===0) primeDivisors.push(d);
-                const isPrime=primeDivisors.length===0;
-                q[0][3]=makeQuestion(4,`Is ${primeTest} a prime number or a composite number? / क्या ${primeTest} अभाज्य संख्या है या भाज्य संख्या?`,isPrime?'prime':'composite',
-                    isPrime?`${primeTest} has exactly two factors: 1 and ${primeTest}. So it is prime. / ${primeTest} के केवल दो गुणनखंड हैं: 1 और ${primeTest}। इसलिए यह अभाज्य है।`:`${primeTest} can be divided exactly by ${primeDivisors[0]} (and has factors other than 1 and itself), so it is composite. / ${primeTest}, ${primeDivisors[0]} से पूरी तरह विभाजित होती है और इसके 1 व स्वयं के अलावा भी गुणनखंड हैं, इसलिए यह भाज्य है।`);
-            }
+            // 18-19. Time and calendar
+            const start=pick([7*60+15,8*60+30,9*60+45,10*60+15,11*60+20,13*60+10,14*60+25]);
+            const durH=pick([1,2,3]), durM=pick([15,30,45]), end=(start+durH*60+durM)%1440;
+            add('Time & calendar / समय और कैलेंडर', `A class starts at ${fmtTime(start)} and lasts ${durH} hour(s) ${durM} minutes. When does it end? / कक्षा ${fmtTime(start)} पर शुरू होती है और ${durH} घंटे ${durM} मिनट चलती है। यह कब समाप्त होगी?`, fmtTime(end),
+                `Add ${durH} hour(s): ${fmtTime(start)} becomes ${fmtTime(start+durH*60)}. Then add ${durM} minutes: the class ends at ${fmtTime(end)}. / पहले ${durH} घंटे जोड़ें: समय ${fmtTime(start+durH*60)} होगा। फिर ${durM} मिनट जोड़ें। समाप्ति का समय ${fmtTime(end)} है।`);
+            const days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], daysHi=['सोमवार','मंगलवार','बुधवार','गुरुवार','शुक्रवार','शनिवार','रविवार'];
+            const dayIndex=randomInt(0,6), after=randomInt(2,13), resultIndex=(dayIndex+after)%7;
+            add('Time & calendar / समय और कैलेंडर', `If today is ${days[dayIndex]}, what day will it be ${after} days later? / यदि आज ${daysHi[dayIndex]} है, तो ${after} दिन बाद कौन-सा दिन होगा?`, [days[resultIndex],daysHi[resultIndex]],
+                `Count forward in a 7-day cycle. ${after} days = ${Math.floor(after/7)} full week(s) and ${after%7} extra day(s). Counting ${after%7} day(s) after ${days[dayIndex]} gives ${days[resultIndex]}. / सप्ताह में 7 दिन होते हैं। ${after} दिन आगे गिनने पर ${daysHi[resultIndex]} आता है।`);
 
-            // The mixed assessment's fraction item also changes between several formats.
-            const mixedFracVariant=ri(0,2);
-            if(mixedFracVariant===0){
-                const d=ri(3,9), n=ri(1,d-1), mult=ri(2,4), ans=n*mult;
-                q[4][1]=makeQuestion(22,`Complete: ${n}/${d} = ?/${d*mult}. / पूरा करें: ${n}/${d} = ?/${d*mult}।`,String(ans),`Multiply the denominator by ${mult}, so multiply the numerator by ${mult} too: ${n} × ${mult} = ${ans}. / हर को ${mult} से गुणा किया गया है, इसलिए अंश को भी ${mult} से गुणा करें: ${n} × ${mult} = ${ans}।`);
-            } else if(mixedFracVariant===1){
-                const d=ri(3,9), a=ri(1,d-1), b=ri(1,d-1), ans=a===b?'equal':a>b?`${a}/${d}`:`${b}/${d}`;
-                q[4][1]=makeQuestion(22,`Compare ${a}/${d} and ${b}/${d}. Write the greater fraction, or write Equal. / ${a}/${d} और ${b}/${d} की तुलना करें। बड़ी भिन्न लिखें या Equal लिखें।`,ans,`The denominators are the same. Compare numerators ${a} and ${b}; the greater numerator gives the greater fraction. / हर समान हैं। अंश ${a} और ${b} की तुलना करें; बड़ा अंश बड़ी भिन्न देता है।`);
-            } else {
-                const d=[2,3,4,5][ri(0,3)], n=ri(1,d-1), amount=d*ri(3,10), ans=amount/d*n;
-                q[4][1]=makeQuestion(22,`A box has ${amount} sweets. ${n}/${d} of the sweets are eaten. How many sweets are eaten? / एक डिब्बे में ${amount} मिठाइयाँ हैं। ${n}/${d} भाग मिठाइयाँ खा ली जाती हैं। कितनी मिठाइयाँ खाई गईं?`,String(ans),`Divide by the denominator: ${amount} ÷ ${d} = ${amount/d}. Multiply by the numerator: ${amount/d} × ${n} = ${ans}. / हर से भाग दें: ${amount} ÷ ${d} = ${amount/d}। अंश से गुणा करें: ${amount/d} × ${n} = ${ans}।`);
-            }
+            // 20-22. Basic geometry and perimeter
+            add('Geometry / ज्यामिति', `Which shape has 4 equal sides and 4 right angles? / किस आकृति की 4 बराबर भुजाएँ और 4 समकोण होते हैं?`, ['square','a square','वर्ग'],
+                `A square has four equal sides and four right angles. Answer: Square / वर्ग।`);
+            const length=randomInt(8,24), width=randomInt(4,12), rectP=2*(length+width);
+            add('Geometry / ज्यामिति', `A rectangle is ${length} cm long and ${width} cm wide. Find its perimeter. / एक आयत की लंबाई ${length} cm और चौड़ाई ${width} cm है। उसका परिमाप ज्ञात करें।`, String(rectP),
+                `Perimeter = 2 × (length + width) = 2 × (${length} + ${width}) = 2 × ${length+width} = ${rectP} cm. / परिमाप = 2 × (लंबाई + चौड़ाई) = 2 × (${length} + ${width}) = ${rectP} cm।`);
+            const side=randomInt(4,15), squareP=4*side;
+            add('Geometry / ज्यामिति', `A square has sides of ${side} cm each. Find its perimeter. / एक वर्ग की प्रत्येक भुजा ${side} cm है। उसका परिमाप ज्ञात करें।`, String(squareP),
+                `A square has 4 equal sides. Perimeter = 4 × ${side} = ${squareP} cm. / वर्ग की 4 बराबर भुजाएँ होती हैं। परिमाप = 4 × ${side} = ${squareP} cm।`);
 
-            // Shuffle question types within each section so the order changes too.
-            // Reassign the display IDs after shuffling so numbering remains 1–25 and answer tracking stays correct.
-            for (let sectionIndex=0; sectionIndex<q.length; sectionIndex++) {
-                for (let i=q[sectionIndex].length-1; i>0; i--) {
-                    const j=ri(0,i); [q[sectionIndex][i],q[sectionIndex][j]]=[q[sectionIndex][j],q[sectionIndex][i]];
-                }
-                q[sectionIndex].forEach((question,index)=>{ question.id=sectionIndex*5+index+1; });
-            }
+            // 23-26. Factors, multiples, primes, divisibility
+            const factorN=pick([18,20,24,28,30,32,36,40,42,48]), possibleFactors=[];
+            for(let i=2;i<factorN;i++) if(factorN%i===0) possibleFactors.push(i);
+            add('Factors & multiples / गुणनखंड और गुणज', `Write one factor of ${factorN} other than 1 and itself. / ${factorN} का 1 और स्वयं के अलावा कोई एक गुणनखंड लिखें।`, possibleFactors.map(String),
+                `${factorN} ÷ ${possibleFactors[0]} = ${factorN/possibleFactors[0]} with no remainder, so ${possibleFactors[0]} is a factor. / ${factorN} ÷ ${possibleFactors[0]} = ${factorN/possibleFactors[0]} और शेष 0 है, इसलिए ${possibleFactors[0]} इसका गुणनखंड है।`);
+            const multBase=randomInt(4,12), multPosition=randomInt(4,9), multAnswer=multBase*multPosition;
+            add('Factors & multiples / गुणनखंड और गुणज', `What is the ${multPosition}${multPosition===1?'st':multPosition===2?'nd':multPosition===3?'rd':'th'} multiple of ${multBase}? / ${multBase} का ${multPosition}वाँ गुणज क्या है?`, String(multAnswer),
+                `Multiply the number by the position: ${multBase} × ${multPosition} = ${multAnswer}. / संख्या को क्रम से गुणा करें: ${multBase} × ${multPosition} = ${multAnswer}।`);
+            const primeN=pick([17,19,21,23,25,27,29,31,33,35,37,39]), divs=[];
+            for(let i=2;i<primeN;i++) if(primeN%i===0) divs.push(i);
+            const primeAnswer=divs.length===0?'prime':'composite';
+            add('Prime numbers / अभाज्य संख्याएँ', `Is ${primeN} a prime number or a composite number? / क्या ${primeN} अभाज्य संख्या है या भाज्य संख्या?`, primeAnswer==='prime'?['prime','prime number','अभाज्य']:['composite','composite number','भाज्य'],
+                divs.length===0?`${primeN} has exactly two factors: 1 and ${primeN}. It is prime. / ${primeN} के केवल दो गुणनखंड 1 और ${primeN} हैं, इसलिए यह अभाज्य है।`:`${primeN} is divisible by ${divs[0]} because ${primeN} ÷ ${divs[0]} = ${primeN/divs[0]}. It has more than two factors, so it is composite. / ${primeN} ÷ ${divs[0]} = ${primeN/divs[0]}। इसके दो से अधिक गुणनखंड हैं, इसलिए यह भाज्य है।`);
+            const divisor=pick([2,3,5,10]), divNum=randomInt(20,99)*10+randomInt(0,9);
+            const digitSum=String(divNum).split('').reduce((acc,ch)=>acc+Number(ch),0);
+            const divisible=divisor===2?divNum%2===0:divisor===3?digitSum%3===0:divisor===5?divNum%5===0:divNum%10===0;
+            add('Divisibility / विभाज्यता', `Is ${divNum} divisible by ${divisor}? Type Yes or No. / क्या ${divNum}, ${divisor} से विभाज्य है? Yes या No लिखें।`, divisible?'yes':'no',
+                divisor===2?`A number is divisible by 2 if its last digit is even. ${divNum} ends in ${divNum%10}, so the answer is ${divisible?'Yes':'No'}. / अंतिम अंक सम हो तो संख्या 2 से विभाज्य होती है। उत्तर ${divisible?'Yes':'No'} है।`:divisor===3?`Add the digits: ${String(divNum).split('').join(' + ')} = ${digitSum}. ${digitSum%3===0?'The sum is divisible by 3, so the answer is Yes.':'The sum is not divisible by 3, so the answer is No.'} / अंकों का योग ${digitSum} है। उत्तर ${divisible?'Yes':'No'} है।`:divisor===5?`A number is divisible by 5 if it ends in 0 or 5. ${divNum} ends in ${divNum%10}, so the answer is ${divisible?'Yes':'No'}. / अंतिम अंक 0 या 5 हो तो संख्या 5 से विभाज्य होती है। उत्तर ${divisible?'Yes':'No'} है.`:`A number is divisible by 10 if it ends in 0. ${divNum} ends in ${divNum%10}, so the answer is ${divisible?'Yes':'No'}. / अंतिम अंक 0 हो तो संख्या 10 से विभाज्य होती है। उत्तर ${divisible?'Yes':'No'} है।`);
 
-            return [
-              {sectionId:'sec-a',title:'Section A: Number Sense Revision / संख्या ज्ञान की दोहराई',marks:'5 marks',icon:'fa-hashtag',color:'indigo',questions:q[0]},
-              {sectionId:'sec-b',title:'Section B: Operations Revision / गणनाओं की दोहराई',marks:'5 marks',icon:'fa-calculator',color:'blue',questions:q[1]},
-              {sectionId:'sec-c',title:'Section C: Mental Maths Test / मानसिक गणित परीक्षा',marks:'5 marks',icon:'fa-brain',color:'emerald',questions:q[2]},
-              {sectionId:'sec-d',title:'Section D: Reasoning Test / तर्कशक्ति परीक्षा',marks:'5 marks',icon:'fa-puzzle-piece',color:'purple',questions:q[3]},
-              {sectionId:'sec-e',title:'Section E: Mixed Final Assessment / मिश्रित अंतिम परीक्षा',marks:'5 marks',icon:'fa-trophy',color:'amber',questions:q[4]}
-            ];
+            // 27. Logic puzzle
+            const logicTarget=pick([24,30,36,42,48]);
+            add('Logical reasoning / तार्किक सोच', `I am an even number between ${logicTarget-6} and ${logicTarget+6}, and I am a multiple of 6. One possible answer is the middle number. What is it? / मैं ${logicTarget-6} और ${logicTarget+6} के बीच की सम संख्या हूँ और 6 का गुणज हूँ। बीच वाली संख्या क्या है?`, String(logicTarget),
+                `The middle number is ${logicTarget}. It is even and ${logicTarget} ÷ 6 = ${logicTarget/6}, so it is a multiple of 6. / बीच की संख्या ${logicTarget} है। यह सम है और ${logicTarget} ÷ 6 = ${logicTarget/6}, इसलिए यह 6 का गुणज है।`);
+
+            // 28-32. Real-life maths: shopping, change, multi-step, measurement, word problem
+            const itemA=pick([18,24,29,35,42,48]), itemB=pick([12,17,26,31,39,45]), countA=randomInt(2,4), shoppingTotal=itemA*countA+itemB;
+            add('Shopping & money / खरीदारी और पैसा', `A notebook costs ₹${itemA} and a pen costs ₹${itemB}. What is the total cost of ${countA} notebooks and 1 pen? / एक कॉपी ₹${itemA} और एक पेन ₹${itemB} का है। ${countA} कॉपियों और 1 पेन की कुल कीमत क्या है?`, String(shoppingTotal),
+                `Cost of notebooks = ${countA} × ₹${itemA} = ₹${itemA*countA}. Add the pen: ₹${itemA*countA} + ₹${itemB} = ₹${shoppingTotal}. / कॉपियों की कीमत = ${countA} × ₹${itemA} = ₹${itemA*countA}। पेन की कीमत जोड़ें: ₹${itemA*countA} + ₹${itemB} = ₹${shoppingTotal}।`);
+            const paid=pick([100,150,200,500]), price=pick([27,38,46,59,67,74]);
+            const change=paid-price;
+            add('Shopping & money / खरीदारी और पैसा', `You pay ₹${paid} for an item costing ₹${price}. How much change should you get? / ₹${price} की वस्तु के लिए आप ₹${paid} देते हैं। कितने रुपये वापस मिलेंगे?`, String(change),
+                `Change = money paid − cost = ₹${paid} − ₹${price} = ₹${change}. / वापस पैसे = दिए गए पैसे − कीमत = ₹${paid} − ₹${price} = ₹${change}।`);
+            const pencilsPerBox=randomInt(6,12), boxes=randomInt(3,6), givenAway=randomInt(4,15), remaining=boxes*pencilsPerBox-givenAway;
+            add('Multi-step problems / बहु-चरणीय प्रश्न', `There are ${boxes} boxes with ${pencilsPerBox} pencils in each. ${givenAway} pencils are given away. How many remain? / ${boxes} डिब्बों में प्रत्येक में ${pencilsPerBox} पेंसिल हैं। ${givenAway} पेंसिल दे दी गईं। कितनी बचीं?`, String(remaining),
+                `First multiply: ${boxes} × ${pencilsPerBox} = ${boxes*pencilsPerBox} pencils. Then subtract: ${boxes*pencilsPerBox} − ${givenAway} = ${remaining}. / पहले गुणा करें: ${boxes} × ${pencilsPerBox} = ${boxes*pencilsPerBox} पेंसिल। फिर घटाएँ: ${boxes*pencilsPerBox} − ${givenAway} = ${remaining} पेंसिल।`);
+            const ribbonM=randomInt(2,5), cutCm=pick([35,45,65,75,85,95]), leftCm=ribbonM*100-cutCm;
+            add('Measurement word problems / मापन के शब्द-प्रश्न', `A ${ribbonM} m ribbon is cut by ${cutCm} cm. How many centimetres remain? / ${ribbonM} मीटर की रिबन में से ${cutCm} cm काट दिए। कितने सेंटीमीटर बचे?`, String(leftCm),
+                `Convert metres to centimetres: ${ribbonM} m = ${ribbonM} × 100 = ${ribbonM*100} cm. Subtract ${cutCm}: ${ribbonM*100} − ${cutCm} = ${leftCm} cm. / ${ribbonM} m = ${ribbonM*100} cm। फिर ${cutCm} घटाएँ: ${ribbonM*100} − ${cutCm} = ${leftCm} cm।`);
+            const applesStart=randomInt(45,90), boughtMore=randomInt(12,35), sold=randomInt(10,30), applesEnd=applesStart+boughtMore-sold;
+            add('Word problems / शब्द-प्रश्न', `A shop has ${applesStart} apples, buys ${boughtMore} more, then sells ${sold}. How many apples are left? / एक दुकान में ${applesStart} सेब हैं। ${boughtMore} और खरीदे, फिर ${sold} बेच दिए। कितने सेब बचे?`, String(applesEnd),
+                `Add the new apples: ${applesStart} + ${boughtMore} = ${applesStart+boughtMore}. Subtract the sold apples: ${applesStart+boughtMore} − ${sold} = ${applesEnd}. / पहले जोड़ें: ${applesStart} + ${boughtMore} = ${applesStart+boughtMore}। फिर घटाएँ: ${applesStart+boughtMore} − ${sold} = ${applesEnd}।`);
+
+            // 33-35. Mental strategies, division strategy, competitive challenge
+            let tenA=randomInt(36,79); while(tenA%10===0) tenA=randomInt(36,79); const tenB=randomInt(12,29), tenSum=tenA+tenB;
+            add('Mental strategies / मानसिक गणना की युक्तियाँ', `Use a quick method to add ${tenA} + ${tenB}. / ${tenA} + ${tenB} को जल्दी जोड़ें।`, String(tenSum),
+                `Make a round ten: split ${tenB} into ${Math.ceil(tenB/10)*10-tenB} and ${tenB-(Math.ceil(tenB/10)*10-tenB)}. First ${tenA} + ${Math.ceil(tenB/10)*10-tenB} = ${tenA+Math.ceil(tenB/10)*10-tenB}; then add the rest to get ${tenSum}. / पहले संख्या को अगले पूरे दस तक पहुँचाएँ, फिर बचा हुआ भाग जोड़ें। उत्तर ${tenSum} है।`);
+            const quotient=pick([25,35,45,55,65,75,85,95]), dividend=quotient*5;
+            add('Division strategies / भाग की युक्तियाँ', `Calculate ${dividend} ÷ 5. / ${dividend} ÷ 5 हल करें।`, String(quotient),
+                `To divide by 5, double the number and divide by 10: (${dividend} × 2) ÷ 10 = ${dividend*2} ÷ 10 = ${quotient}. / 5 से भाग देने के लिए संख्या को दोगुना करके 10 से भाग दें: (${dividend} × 2) ÷ 10 = ${dividend*2} ÷ 10 = ${quotient}।`);
+            const patternBase=randomInt(2,5), challengeSeq=[patternBase,patternBase*2+2,patternBase*3+6,patternBase*4+12], challengeAns=patternBase*5+20;
+            add('Competitive challenge / प्रतियोगी चुनौती', `Find the next number: ${challengeSeq.join(', ')}, __. / अगली संख्या ज्ञात करें: ${challengeSeq.join(', ')}, __।`, String(challengeAns),
+                `Look at the differences: ${challengeSeq[1]-challengeSeq[0]}, ${challengeSeq[2]-challengeSeq[1]}, ${challengeSeq[3]-challengeSeq[2]}. They increase by 2 each time, so the next difference is ${challengeSeq[3]-challengeSeq[2]+2}. Add it: ${challengeSeq[3]} + ${challengeSeq[3]-challengeSeq[2]+2} = ${challengeAns}. / अंतर हर बार 2 से बढ़ रहा है। अगला अंतर ${challengeSeq[3]-challengeSeq[2]+2} होगा। ${challengeSeq[3]} + ${challengeSeq[3]-challengeSeq[2]+2} = ${challengeAns}।`);
+
+            // Shuffle all topics together: there are no visible topic sections on Sunday.
+            for (let i=questions.length-1;i>0;i--) { const j=randomInt(0,i); [questions[i],questions[j]]=[questions[j],questions[i]]; }
+            questions.forEach((question,index)=>question.id=index+1);
+            generationNumber++;
+            return questions;
         }
 
         let worksheetData = generateFreshWorksheetData();
-
-        // --- APP STATE ---
-        const userAnswers = {}; // { qId: string }
-        const questionStatus = {}; // { qId: boolean }
-
-        // --- TIMER STATE ---
-        let totalTimeSeconds = 20 * 60;
+        const userAnswers = {};
+        const questionStatus = {};
+        let totalTimeSeconds = 30 * 60;
         let timerInterval = null;
         let isTimerRunning = false;
-
-        // --- AUDIO SYNTHESIS (WEB AUDIO API) ---
         let audioCtx = null;
+
         function getAudioContext() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             return audioCtx;
         }
-
         function playSound(type) {
             try {
-                const ctx = getAudioContext();
-                if (ctx.state === 'suspended') {
-                    ctx.resume();
-                }
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-
-                if (type === 'correct') {
-                    // Pleasant arpeggio chime
-                    const now = ctx.currentTime;
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(523.25, now); // C5
-                    osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.1); // E5
-                    osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.2); // G5
-                    gain.gain.setValueAtTime(0.15, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
-                    osc.start(now);
-                    osc.stop(now + 0.35);
-                } else if (type === 'incorrect') {
-                    // Soft error buzz
-                    const now = ctx.currentTime;
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(180, now);
-                    osc.frequency.exponentialRampToValueAtTime(110, now + 0.2);
-                    gain.gain.setValueAtTime(0.2, now);
-                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
-                    osc.start(now);
-                    osc.stop(now + 0.25);
-                }
-            } catch (e) {
-                // Audio might be blocked by browser policy until interaction
-            }
+                const ctx=getAudioContext(); if(ctx.state==='suspended') ctx.resume();
+                const osc=ctx.createOscillator(), gain=ctx.createGain(); osc.connect(gain); gain.connect(ctx.destination);
+                const now=ctx.currentTime;
+                if(type==='correct') { osc.type='sine'; osc.frequency.setValueAtTime(523.25,now); osc.frequency.exponentialRampToValueAtTime(659.25,now+0.1); osc.frequency.exponentialRampToValueAtTime(783.99,now+0.2); gain.gain.setValueAtTime(0.15,now); gain.gain.exponentialRampToValueAtTime(0.001,now+0.35); osc.start(now); osc.stop(now+0.35); }
+                else { osc.type='triangle'; osc.frequency.setValueAtTime(180,now); osc.frequency.exponentialRampToValueAtTime(110,now+0.2); gain.gain.setValueAtTime(0.2,now); gain.gain.exponentialRampToValueAtTime(0.001,now+0.25); osc.start(now); osc.stop(now+0.25); }
+            } catch(e) { /* Audio may be blocked until the first interaction. */ }
         }
-
-        // --- VOICE NARRATION (SPEECH SYNTHESIS) ---
         function speakText(text) {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel(); // stop current speech
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.rate = 0.9;
-                utterance.pitch = 1.0;
-                window.speechSynthesis.speak(utterance);
-            }
+            if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); const utterance=new SpeechSynthesisUtterance(text); utterance.rate=0.9; utterance.pitch=1; window.speechSynthesis.speak(utterance); }
         }
-
-// --- NORMALIZATION HELPER ---
+        function speakQuestion(qId) { const q=findQuestion(qId); if(q) speakText(q.text.replace(' / ','। ')); }
         function normalizeAnswer(str) {
-            if (!str) return '';
-            return str
-                .toString()
-                .toLowerCase()
-                .trim()
-                // Accept a dot as a time separator too: 4.00 and 4:00 mean the same time.
-                .replace(/\b(\d{1,2})\.(\d{2})\b/g, '$1:$2')
-                .replace(/\b(a\.?m\.?|p\.?m\.?)\b/g, '')
-                .replace(/,/g, '')
-                .replace(/\s+/g, ' ')
-                .trim();
+            if(!str) return '';
+            return String(str).toLowerCase().trim().replace(/\b(\d{1,2})\.(\d{2})\b/g,'$1:$2').replace(/\b(a\.m\.?|p\.m\.?)\b/g, m=>m.replace(/\./g,'')).replace(/,/g,'').replace(/\s+/g,' ').trim();
         }
-
-        function checkIsAnswerCorrect(question, userVal) {
-            const normUser = normalizeAnswer(userVal);
-            if (!normUser) return false;
-            return question.validAnswers.some(ans => normalizeAnswer(ans) === normUser);
+        function checkIsAnswerCorrect(question,userVal) {
+            const value=normalizeAnswer(userVal); if(!value) return false;
+            return question.validAnswers.some(ans=>normalizeAnswer(ans)===value);
         }
-
-        // --- INITIALIZE UI ---
-        document.addEventListener('DOMContentLoaded', () => {
-            renderWorksheet();
-            startTimer();
-            setupEventListeners();
-            updateScoreboard();
+        document.addEventListener('DOMContentLoaded',()=>{
+            renderWorksheet(); startTimer(); setupEventListeners(); updateScoreboard();
         });
-
-        // RENDER WORKSHEET SECTIONS
         function renderWorksheet() {
-            const container = document.getElementById('sections-container');
-            container.innerHTML = '';
-
-            worksheetData.forEach(section => {
-                const sectionEl = document.createElement('div');
-                sectionEl.className = 'glass-card rounded-3xl p-5 sm:p-7 shadow-sm border border-white/80';
-                
-                // Section Header
-                sectionEl.innerHTML = `
-                    <div class="flex items-center justify-between border-b border-slate-200/80 pb-4 mb-6">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-2xl bg-${section.color}-100 text-${section.color}-600 flex items-center justify-center text-lg font-bold">
-                                <i class="fa-solid ${section.icon}"></i>
-                            </div>
-                            <div>
-                                <h2 class="font-heading font-extrabold text-lg sm:text-xl text-slate-800">
-                                    ${section.title}
-                                </h2>
-                                <span class="text-xs text-slate-500 font-semibold">${section.questions.length} Questions</span>
-                            </div>
-                        </div>
-                        <span class="bg-slate-100 text-slate-700 font-bold text-xs px-3 py-1 rounded-full border border-slate-200">
-                            ${section.marks}
-                        </span>
-                    </div>
-                    <div class="space-y-6">
-                        ${section.questions.map(q => renderQuestionCard(q)).join('')}
-                    </div>
-                `;
-                container.appendChild(sectionEl);
-            });
+            const container=document.getElementById('sections-container');
+            container.innerHTML=`<div class="glass-card rounded-3xl p-4 sm:p-6 border border-white/80"><div class="flex flex-wrap items-center justify-between gap-2 mb-5 border-b border-slate-200 pb-4"><div><h2 class="font-heading font-extrabold text-xl sm:text-2xl text-slate-800">Mixed Weekly Revision / पूरे सप्ताह की मिश्रित दोहराई</h2><p class="text-sm text-slate-500 mt-1">All learning areas are mixed together. / सभी विषयों के प्रश्न मिले-जुले हैं।</p></div><span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold">${worksheetData.length} Questions / प्रश्न</span></div><div class="space-y-5">${worksheetData.map(renderQuestionCard).join('')}</div></div>`;
+            document.querySelectorAll('.total-question-count').forEach(el=>el.textContent=worksheetData.length);
+            document.getElementById('header-score').parentElement.querySelector('span:last-child').textContent=` / ${worksheetData.length}`;
+            document.getElementById('final-score-num').nextElementSibling.textContent=`/ ${worksheetData.length}`;
         }
-
-        // RENDER SINGLE QUESTION CARD
         function renderQuestionCard(q) {
-            return `
-                <div id="q-card-${q.id}" class="bg-white/80 rounded-2xl p-4 sm:p-5 border border-slate-200/80 transition-all duration-200 hover:shadow-md">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
-                        <div class="flex items-start gap-2.5">
-                            <span class="bg-slate-800 text-white font-heading font-bold text-xs px-2.5 py-1 rounded-lg shrink-0 mt-0.5">
-                                Q${q.id}
-                            </span>
-                            <span class="font-bold text-slate-800 text-base sm:text-lg leading-snug">
-                                ${q.text}
-                            </span>
-                        </div>
-                        <button onclick="speakText('${q.text.replace(/'/g, "\\'")}')" title="Read Aloud" class="self-end sm:self-auto text-xs bg-indigo-50 hover:bg-indigo-100 text-indigo-600 px-2.5 py-1.5 rounded-lg flex items-center gap-1 font-semibold transition shrink-0">
-                            <i class="fa-solid fa-volume-high"></i> Read
-                        </button>
-                    </div>
-
-                    <!-- Input and Actions -->
-                    <div class="flex flex-wrap items-center gap-3">
-                        <div class="relative flex-1 min-w-[200px]">
-                            <input type="text" 
-                                id="input-${q.id}" 
-                                autocomplete="off"
-                                placeholder="Type answer..." 
-                                oninput="handleInputChanged(${q.id})"
-                                class="math-input w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 border-slate-300 focus:outline-none focus:border-indigo-500 bg-white/90 text-slate-800 placeholder:font-normal placeholder:text-slate-400"
-                            />
-                            <span id="badge-${q.id}" class="absolute right-3 top-1/2 -translate-y-1/2 text-lg hidden"></span>
-                        </div>
-
-                        <button
-                            id="check-btn-${q.id}"
-                            type="button"
-                            onclick="checkAnswer(${q.id})"
-                            class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white border border-indigo-700 font-heading text-xs font-bold rounded-xl transition flex items-center gap-1.5 shrink-0">
-                            <i class="fa-solid fa-check"></i>
-                            <span>Check Answer</span>
-                        </button>
-                        <button
-                            id="hint-btn-${q.id}"
-                            type="button"
-                            onclick="toggleHint(${q.id})"
-                            class="px-4 py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 font-heading text-xs font-bold rounded-xl transition flex items-center gap-1.5 shrink-0">
-                            <i class="fa-solid fa-lightbulb"></i>
-                            <span>Hint / संकेत</span>
-                        </button>
-                    </div>
-
-                    <div id="feedback-${q.id}" aria-live="polite" class="hidden mt-3 rounded-xl p-3 text-sm font-semibold"></div>
-                    <div id="hint-${q.id}" class="hidden mt-3 rounded-xl p-3 text-sm text-amber-900 bg-amber-50 border border-amber-200">
-                        <strong>Hint / संकेत:</strong> ${getQuestionHint(q)}
-                    </div>
-
-                    <!-- Step-by-step explanation -->
-                    <div id="explanation-${q.id}" class="hidden mt-4 pt-3 border-t border-slate-200 text-xs sm:text-sm text-slate-700 bg-amber-50/60 p-3.5 rounded-xl border border-amber-200/80">
-                        <div class="font-heading font-bold text-amber-900 mb-1 flex items-center gap-1.5">
-                            <i class="fa-solid fa-circle-check text-emerald-600"></i> Expected Answer: 
-                            <span class="text-emerald-700 font-extrabold underline">${q.validAnswers[0]}</span>
-                        </div>
-                        <p class="text-slate-700 font-medium">
-                            <span class="font-bold text-amber-800">Explanation:</span> ${q.explanation}
-                        </p>
-                    </div>
-                </div>
-            `;
+            return `<div id="q-card-${q.id}" class="bg-white/85 rounded-2xl p-4 sm:p-5 border border-slate-200/80 transition-all duration-200 hover:shadow-md"><div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3"><div class="flex items-start gap-2.5"><span class="bg-slate-800 text-white font-heading font-bold text-xs px-2.5 py-1 rounded-lg shrink-0 mt-0.5">Q${q.id}</span><span class="font-bold text-slate-800 text-base sm:text-lg leading-snug">${q.text}</span></div><button onclick="speakQuestion(${q.id})" title="Read aloud" class="self-end sm:self-auto text-xs bg-indigo-50 hover:bg-indigo-100 text-indigo-600 px-2.5 py-1.5 rounded-lg flex items-center gap-1 font-semibold transition shrink-0"><i class="fa-solid fa-volume-high"></i> Read / सुनें</button></div><div class="flex flex-wrap items-center gap-3"><div class="relative flex-1 min-w-[200px]"><input type="text" id="input-${q.id}" autocomplete="off" placeholder="Type answer... / जवाब लिखें" oninput="handleInputChanged(${q.id})" class="math-input w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 border-slate-300 focus:outline-none focus:border-indigo-500 bg-white/90 text-slate-800 placeholder:font-normal placeholder:text-slate-400"/><span id="badge-${q.id}" class="absolute right-3 top-1/2 -translate-y-1/2 text-lg hidden"></span></div><button id="check-btn-${q.id}" type="button" onclick="checkAnswer(${q.id})" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white border border-indigo-700 font-heading text-xs font-bold rounded-xl transition flex items-center gap-1.5 shrink-0"><i class="fa-solid fa-check"></i><span>Check Answer / जवाब जाँचें</span></button><button id="hint-btn-${q.id}" type="button" onclick="toggleHint(${q.id})" class="px-4 py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 font-heading text-xs font-bold rounded-xl transition flex items-center gap-1.5 shrink-0"><i class="fa-solid fa-lightbulb"></i><span>Hint / संकेत</span></button></div><div id="feedback-${q.id}" aria-live="polite" class="hidden mt-3 rounded-xl p-3 text-sm font-semibold"></div><div id="hint-${q.id}" class="hidden mt-3 rounded-xl p-3 text-sm text-amber-900 bg-amber-50 border border-amber-200"><strong>Hint / संकेत:</strong> ${q.explanation}</div><div id="explanation-${q.id}" class="hidden mt-4 pt-3 border-t border-slate-200 text-xs sm:text-sm text-slate-700 bg-amber-50/60 p-3.5 rounded-xl border border-amber-200/80"><div class="font-heading font-bold text-amber-900 mb-1">Correct answer / सही जवाब: <span class="text-emerald-700 font-extrabold underline">${q.validAnswers[0]}</span></div><p class="text-slate-700 font-medium"><span class="font-bold text-amber-800">Worked solution / पूरा हल:</span> ${q.explanation}</p></div></div>`;
         }
-
-        // Every question has its own worked-out hint with steps and final answer.
-        function getQuestionHint(q) {
-            return q.explanation || 'Break the question into small steps. / प्रश्न को छोटे-छोटे चरणों में हल करें।';
-        }
-
-        // Typing immediately colors the box: green for a correct answer, red for an incorrect one.
-        // Scoreboard is recalculated from current answers so correct answers count reliably.
+        function findQuestion(qId) { return worksheetData.find(q=>q.id===qId)||null; }
         function handleInputChanged(qId) {
-            const inputEl = document.getElementById(`input-${qId}`);
-            const badgeEl = document.getElementById(`badge-${qId}`);
-            const cardEl = document.getElementById(`q-card-${qId}`);
-            const feedbackEl = document.getElementById(`feedback-${qId}`);
-            userAnswers[qId] = inputEl.value;
-            delete questionStatus[qId];
-            const val = inputEl.value.trim();
-            const q = findQuestion(qId);
-            const baseClass = 'math-input w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 focus:outline-none bg-white/90 text-slate-800 placeholder:font-normal placeholder:text-slate-400';
-
-            if (!val) {
-                inputEl.className = baseClass + ' border-slate-300 focus:border-indigo-500';
-                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg hidden';
-                badgeEl.innerHTML = '';
-            } else if (q && checkIsAnswerCorrect(q, val)) {
-                inputEl.className = baseClass + ' state-correct';
-                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg text-emerald-600 font-bold block';
-                badgeEl.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
-            } else {
-                inputEl.className = baseClass + ' state-incorrect';
-                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg text-rose-500 font-bold block';
-                badgeEl.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
-            }
-            feedbackEl.className = 'hidden mt-3 rounded-xl p-3 text-sm font-semibold';
-            feedbackEl.textContent = '';
-            cardEl.classList.remove('animate-shake');
-            updateScoreboard();
+            const input=document.getElementById(`input-${qId}`), badge=document.getElementById(`badge-${qId}`), feedback=document.getElementById(`feedback-${qId}`), card=document.getElementById(`q-card-${qId}`), q=findQuestion(qId);
+            userAnswers[qId]=input.value; delete questionStatus[qId];
+            const base='math-input w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 focus:outline-none bg-white/90 text-slate-800 placeholder:font-normal placeholder:text-slate-400';
+            if(!input.value.trim()) { input.className=base+' border-slate-300 focus:border-indigo-500'; badge.className='absolute right-3 top-1/2 -translate-y-1/2 text-lg hidden'; badge.innerHTML=''; }
+            else if(checkIsAnswerCorrect(q,input.value)) { input.className=base+' state-correct'; badge.className='absolute right-3 top-1/2 -translate-y-1/2 text-lg text-emerald-600 font-bold block'; badge.innerHTML='<i class="fa-solid fa-circle-check"></i>'; }
+            else { input.className=base+' state-incorrect'; badge.className='absolute right-3 top-1/2 -translate-y-1/2 text-lg text-rose-500 font-bold block'; badge.innerHTML='<i class="fa-solid fa-circle-xmark"></i>'; }
+            feedback.className='hidden mt-3 rounded-xl p-3 text-sm font-semibold'; feedback.textContent=''; card.classList.remove('animate-shake'); updateScoreboard();
         }
-
-        function findQuestion(qId) {
-            for (const sec of worksheetData) {
-                const found = sec.questions.find(q => q.id === qId);
-                if (found) return found;
-            }
-            return null;
-        }
-
         function checkAnswer(qId) {
-            const q = findQuestion(qId);
-            if (!q) return;
-            const inputEl = document.getElementById(`input-${qId}`);
-            const badgeEl = document.getElementById(`badge-${qId}`);
-            const cardEl = document.getElementById(`q-card-${qId}`);
-            const feedbackEl = document.getElementById(`feedback-${qId}`);
-            const explanationEl = document.getElementById(`explanation-${qId}`);
-            const val = inputEl.value.trim();
-
-            if (!val) {
-                feedbackEl.className = 'mt-3 rounded-xl p-3 text-sm font-semibold text-amber-900 bg-amber-50 border border-amber-200';
-                feedbackEl.textContent = 'Please type an answer first. | पहले अपना जवाब लिखें।';
-                inputEl.focus();
-                return;
-            }
-
-            userAnswers[qId] = val;
-            const isCorrect = checkIsAnswerCorrect(q, val);
-            questionStatus[qId] = isCorrect;
-            explanationEl.classList.remove('hidden');
-
-            if (isCorrect) {
-                inputEl.className = 'math-input state-correct w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 focus:outline-none bg-white text-slate-800';
-                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg text-emerald-600 font-bold block';
-                badgeEl.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
-                feedbackEl.className = 'mt-3 rounded-xl p-3 text-sm font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200';
-                feedbackEl.textContent = 'Correct answer! / सही जवाब! Well done!';
-                cardEl.classList.remove('animate-shake');
-                playSound('correct');
-            } else {
-                inputEl.className = 'math-input state-incorrect w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 focus:outline-none bg-white text-slate-800';
-                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg text-rose-500 font-bold block';
-                badgeEl.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
-                feedbackEl.className = 'mt-3 rounded-xl p-3 text-sm font-semibold text-rose-800 bg-rose-50 border border-rose-200';
-                feedbackEl.textContent = `Wrong answer / गलत जवाब। Correct answer / सही जवाब: ${q.validAnswers[0]}. Try again!`;
-                cardEl.classList.remove('animate-shake');
-                void cardEl.offsetWidth;
-                cardEl.classList.add('animate-shake');
-                playSound('incorrect');
-            }
+            const q=findQuestion(qId), input=document.getElementById(`input-${qId}`), badge=document.getElementById(`badge-${qId}`), feedback=document.getElementById(`feedback-${qId}`), explanation=document.getElementById(`explanation-${qId}`), card=document.getElementById(`q-card-${qId}`);
+            if(!input.value.trim()) { feedback.className='mt-3 rounded-xl p-3 text-sm font-semibold text-amber-900 bg-amber-50 border border-amber-200'; feedback.textContent='Please type an answer first. / पहले अपना जवाब लिखें।'; input.focus(); return; }
+            userAnswers[qId]=input.value; const correct=checkIsAnswerCorrect(q,input.value); questionStatus[qId]=correct; explanation.classList.remove('hidden');
+            if(correct) { input.className='math-input state-correct w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 focus:outline-none bg-white text-slate-800'; badge.className='absolute right-3 top-1/2 -translate-y-1/2 text-lg text-emerald-600 font-bold block'; badge.innerHTML='<i class="fa-solid fa-circle-check"></i>'; feedback.className='mt-3 rounded-xl p-3 text-sm font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200'; feedback.textContent='Correct answer! / सही जवाब! Well done! / बहुत अच्छा!'; playSound('correct'); }
+            else { input.className='math-input state-incorrect w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 focus:outline-none bg-white text-slate-800'; badge.className='absolute right-3 top-1/2 -translate-y-1/2 text-lg text-rose-500 font-bold block'; badge.innerHTML='<i class="fa-solid fa-circle-xmark"></i>'; feedback.className='mt-3 rounded-xl p-3 text-sm font-semibold text-rose-800 bg-rose-50 border border-rose-200'; feedback.textContent=`Wrong answer / गलत जवाब। Correct answer / सही जवाब: ${q.validAnswers[0]}. Try again! / फिर कोशिश करें!`; card.classList.remove('animate-shake'); void card.offsetWidth; card.classList.add('animate-shake'); playSound('incorrect'); }
             updateScoreboard();
         }
-
-        function toggleHint(qId) {
-            document.getElementById(`hint-${qId}`).classList.toggle('hidden');
-        }
-
-        // --- SCOREBOARD & PROGRESS UPDATES ---
+        function toggleHint(qId) { document.getElementById(`hint-${qId}`).classList.toggle('hidden'); }
         function updateScoreboard() {
-            let totalCorrect = 0;
-            let answeredCount = 0;
-
-            worksheetData.forEach(sec => {
-                sec.questions.forEach(q => {
-                    if (userAnswers[q.id] && userAnswers[q.id].trim() !== '') {
-                        answeredCount++;
-                    }
-                    // Count correctness from the current answer itself, not only from
-                    // questionStatus. This keeps the scoreboard in sync while typing and
-                    // after Check Answer is clicked.
-                    if (userAnswers[q.id] && checkIsAnswerCorrect(q, userAnswers[q.id])) {
-                        totalCorrect++;
-                    }
-                });
-            });
-
-            // Update top bar score & fill
-            document.getElementById('header-score').textContent = totalCorrect;
-            const progressPercent = Math.round((answeredCount / 25) * 100);
-            document.getElementById('progress-bar-fill').style.width = `${progressPercent}%`;
-
-            // Update summary score card
-            document.getElementById('final-score-num').textContent = totalCorrect;
-            const accuracyPercent = Math.round((totalCorrect / 25) * 100);
-            document.getElementById('score-percentage').textContent = `${accuracyPercent}% Accuracy`;
-
-            // Section breakdown list
-            const breakdownContainer = document.getElementById('section-breakdown-list');
-            breakdownContainer.innerHTML = '';
-
-            worksheetData.forEach(sec => {
-                let secCorrect = 0;
-                sec.questions.forEach(q => {
-                    if (userAnswers[q.id] && checkIsAnswerCorrect(q, userAnswers[q.id])) {
-                        secCorrect++;
-                    }
-                });
-
-                const secRow = document.createElement('div');
-                secRow.className = 'flex items-center justify-between p-1.5 rounded-lg bg-slate-50 border border-slate-100';
-                secRow.innerHTML = `
-                    <span class="text-slate-700 font-semibold truncate max-w-[200px] sm:max-w-none">${sec.title}</span>
-                    <span class="font-extrabold ${secCorrect === 5 ? 'text-emerald-600' : 'text-slate-800'}">
-                        ${secCorrect} / 5
-                    </span>
-                `;
-                breakdownContainer.appendChild(secRow);
-            });
-
-            // Update Teacher Remarks based on score
-            updateTeacherRemarks(totalCorrect);
+            let correct=0, answered=0;
+            worksheetData.forEach(q=>{ const val=String(userAnswers[q.id]||'').trim(); if(val) answered++; if(val&&checkIsAnswerCorrect(q,val)) correct++; });
+            const total=worksheetData.length;
+            document.getElementById('header-score').textContent=correct; document.getElementById('progress-bar-fill').style.width=`${Math.round(answered/total*100)}%`;
+            document.getElementById('final-score-num').textContent=correct; document.getElementById('score-percentage').textContent=`${Math.round(correct/total*100)}% Accuracy / सटीकता`;
+            const areaCounts={}; worksheetData.forEach(q=>{ if(!areaCounts[q.category]) areaCounts[q.category]={total:0,correct:0}; areaCounts[q.category].total++; if(userAnswers[q.id]&&checkIsAnswerCorrect(q,userAnswers[q.id])) areaCounts[q.category].correct++; });
+            const breakdown=document.getElementById('section-breakdown-list'); breakdown.innerHTML='';
+            Object.entries(areaCounts).forEach(([category,stats])=>{ const row=document.createElement('div'); row.className='flex items-center justify-between gap-3 p-2 rounded-lg bg-slate-50 border border-slate-100'; row.innerHTML=`<span class="text-slate-700 font-semibold">${category}</span><span class="font-extrabold whitespace-nowrap ${stats.correct===stats.total?'text-emerald-600':'text-slate-800'}">${stats.correct} / ${stats.total}</span>`; breakdown.appendChild(row); });
+            updateTeacherRemarks(correct,answered,total);
         }
-
-        function updateTeacherRemarks(score) {
-            const remarkText = document.getElementById('teacher-remark-text');
-            const avatarEl = document.getElementById('teacher-avatar');
-            const attempted = Object.values(userAnswers).some(value => String(value || '').trim() !== '');
-            if (!attempted) {
-                remarkText.textContent = "Complete a few questions to see your feedback! / अपनी प्रतिक्रिया देखने के लिए कुछ प्रश्न हल करें!";
-                avatarEl.innerHTML = '<i class="fa-solid fa-graduation-cap text-indigo-500"></i>';
-                return;
-            }
-
-            if (score >= 23) {
-                remarkText.textContent = "Outstanding! Excellent number sense and speed! You are a Super Star! ⭐⭐⭐⭐⭐";
-                avatarEl.innerHTML = '<i class="fa-solid fa-crown text-amber-500"></i>';
-            } else if (score >= 18) {
-                remarkText.textContent = "Great job! Good effort, keep practicing for perfection! 🌟";
-                avatarEl.innerHTML = '<i class="fa-solid fa-star text-amber-400"></i>';
-            } else {
-                remarkText.textContent = "Nice try! Needs a little more practice on quick calculations. Keep going! 💪";
-                avatarEl.innerHTML = '<i class="fa-solid fa-heart text-rose-500"></i>';
-            }
+        function updateTeacherRemarks(score,answered,total) {
+            const remark=document.getElementById('teacher-remark-text'), avatar=document.getElementById('teacher-avatar');
+            if(!answered) { remark.textContent='Complete some questions to see your feedback! / प्रतिक्रिया देखने के लिए कुछ प्रश्न हल करें।'; avatar.innerHTML='<i class="fa-solid fa-graduation-cap text-indigo-500"></i>'; return; }
+            const pct=score/total*100;
+            if(pct>=90) { remark.textContent='Outstanding! Excellent work across the weekly learning plan! / शानदार! पूरे सप्ताह की पढ़ाई में बहुत अच्छा प्रदर्शन! ⭐⭐⭐⭐⭐'; avatar.innerHTML='<i class="fa-solid fa-crown text-amber-500"></i>'; }
+            else if(pct>=70) { remark.textContent='Great job! Review the questions you missed and keep practising! / बहुत अच्छा! छूटे हुए सवाल दोहराएँ और अभ्यास जारी रखें! 🌟'; avatar.innerHTML='<i class="fa-solid fa-star text-amber-400"></i>'; }
+            else { remark.textContent='Nice try! Use the hints to practise the concepts that need more work. / अच्छी कोशिश! जिन विषयों में कठिनाई है, उनके संकेत देखकर अभ्यास करें। 💪'; avatar.innerHTML='<i class="fa-solid fa-heart text-rose-500"></i>'; }
         }
-
-        // --- COUNTDOWN TIMER FUNCTIONS ---
-        function startTimer() {
-            if (timerInterval) clearInterval(timerInterval);
-            isTimerRunning = true;
-            updateTimerDisplay();
-
-            timerInterval = setInterval(() => {
-                if (isTimerRunning) {
-                    if (totalTimeSeconds > 0) {
-                        totalTimeSeconds--;
-                        updateTimerDisplay();
-                    } else {
-                        clearInterval(timerInterval);
-                        isTimerRunning = false;
-                        alert("Time's up! Review your answers on the scoreboard.");
-                    }
-                }
-            }, 1000);
+        function updateTimerDisplay() { const m=Math.floor(totalTimeSeconds/60), sec=totalTimeSeconds%60; document.getElementById('timer-display').textContent=`${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`; }
+        function startTimer() { if(timerInterval) clearInterval(timerInterval); isTimerRunning=true; updateTimerDisplay(); timerInterval=setInterval(()=>{ if(isTimerRunning){ if(totalTimeSeconds>0){totalTimeSeconds--;updateTimerDisplay();} else {clearInterval(timerInterval);timerInterval=null;isTimerRunning=false;document.getElementById('timer-toggle-btn').innerHTML='<i class="fa-solid fa-play"></i>';alert("Time's up! Review your answers on the scoreboard. / समय पूरा हुआ! अपना स्कोर देखें।");} } },1000); }
+        function toggleTimer() { isTimerRunning=!isTimerRunning; document.getElementById('timer-toggle-btn').innerHTML=isTimerRunning?'<i class="fa-solid fa-pause"></i>':'<i class="fa-solid fa-play"></i>'; }
+        function resetTimer() { totalTimeSeconds=30*60; startTimer(); }
+        function clearAllAnswers() {
+            Object.keys(userAnswers).forEach(k=>delete userAnswers[k]); Object.keys(questionStatus).forEach(k=>delete questionStatus[k]);
+            worksheetData.forEach(q=>{ const input=document.getElementById(`input-${q.id}`), badge=document.getElementById(`badge-${q.id}`), feedback=document.getElementById(`feedback-${q.id}`), explanation=document.getElementById(`explanation-${q.id}`), hint=document.getElementById(`hint-${q.id}`), card=document.getElementById(`q-card-${q.id}`); if(input){input.value='';input.className='math-input w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 border-slate-300 focus:outline-none focus:border-indigo-500 bg-white/90 text-slate-800 placeholder:font-normal placeholder:text-slate-400';} if(badge){badge.className='absolute right-3 top-1/2 -translate-y-1/2 text-lg hidden';badge.innerHTML='';} if(feedback){feedback.className='hidden mt-3 rounded-xl p-3 text-sm font-semibold';feedback.textContent='';} if(explanation) explanation.classList.add('hidden'); if(hint) hint.classList.add('hidden'); if(card) card.classList.remove('animate-shake'); });
+            updateScoreboard(); resetTimer();
         }
-
-        function updateTimerDisplay() {
-            const mins = Math.floor(totalTimeSeconds / 60);
-            const secs = totalTimeSeconds % 60;
-            const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-            document.getElementById('timer-display').textContent = formatted;
-        }
-
-        function toggleTimer() {
-            const toggleBtn = document.getElementById('timer-toggle-btn');
-            isTimerRunning = !isTimerRunning;
-            if (isTimerRunning) {
-                toggleBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-            } else {
-                toggleBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-            }
-        }
-
-        function resetTimer() {
-            totalTimeSeconds = 20 * 60;
-            isTimerRunning = true;
-            document.getElementById('timer-toggle-btn').innerHTML = '<i class="fa-solid fa-pause"></i>';
-            updateTimerDisplay();
-        }
-
-        // --- SETUP EVENT LISTENERS ---
         function setupEventListeners() {
-            // ADDED: Regenerate the existing 25-question worksheet, not a separate worksheet.
-            document.getElementById('generate-new-questions-btn').addEventListener('click', () => {
-                worksheetData = generateFreshWorksheetData();
-
-                // Clear answers and status from the previous question set.
-                Object.keys(userAnswers).forEach(key => delete userAnswers[key]);
-                Object.keys(questionStatus).forEach(key => delete questionStatus[key]);
-
-                resetTimer();
-                renderWorksheet();
-                updateScoreboard();
-                document.getElementById('generate-status').textContent =
-                    'Fresh Sunday revision questions generated! | रविवार के नए दोहराई प्रश्न तैयार हैं!';
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-
-            document.getElementById('timer-toggle-btn').addEventListener('click', toggleTimer);
-            document.getElementById('timer-reset-btn').addEventListener('click', resetTimer);
-            
-            document.getElementById('reset-worksheet-btn').addEventListener('click', () => {
-                if (confirm("Are you sure you want to reset all answers and restart?")) {
-                    worksheetData.forEach(sec => {
-                        sec.questions.forEach(q => {
-                            delete userAnswers[q.id];
-                            delete questionStatus[q.id];
-                            const inputEl = document.getElementById(`input-${q.id}`);
-                            const badgeEl = document.getElementById(`badge-${q.id}`);
-                            const feedbackEl = document.getElementById(`feedback-${q.id}`);
-                            const explanationEl = document.getElementById(`explanation-${q.id}`);
-                            const hintEl = document.getElementById(`hint-${q.id}`);
-                            const cardEl = document.getElementById(`q-card-${q.id}`);
-                            if (inputEl) {
-                                inputEl.value = '';
-                                inputEl.className = 'math-input w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 border-slate-300 focus:outline-none focus:border-indigo-500 bg-white/90 text-slate-800 placeholder:font-normal placeholder:text-slate-400';
-                            }
-                            if (badgeEl) { badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg hidden'; badgeEl.innerHTML = ''; }
-                            if (feedbackEl) { feedbackEl.className = 'hidden mt-3 rounded-xl p-3 text-sm font-semibold'; feedbackEl.textContent = ''; }
-                            if (explanationEl) explanationEl.classList.add('hidden');
-                            if (hintEl) hintEl.classList.add('hidden');
-                            if (cardEl) cardEl.classList.remove('animate-shake');
-                        });
-                    });
-                    updateScoreboard();
-                    resetTimer();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-            });
+            document.getElementById('generate-new-questions-btn').addEventListener('click',()=>{ worksheetData=generateFreshWorksheetData(); clearAllAnswers(); renderWorksheet(); updateScoreboard(); document.getElementById('generate-status').textContent='A fresh mixed worksheet with all weekly learning areas is ready! / सभी साप्ताहिक विषयों की नई मिश्रित वर्कशीट तैयार है!'; window.scrollTo({top:0,behavior:'smooth'}); });
+            document.getElementById('timer-toggle-btn').addEventListener('click',toggleTimer);
+            document.getElementById('timer-reset-btn').addEventListener('click',resetTimer);
+            document.getElementById('reset-worksheet-btn').addEventListener('click',()=>{ if(confirm('Reset all answers and restart this worksheet? / सभी जवाब मिटाकर फिर से शुरू करें?')) clearAllAnswers(); });
         }
     </script>
 
