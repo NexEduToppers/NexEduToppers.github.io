@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundation Saturday - Class 4 Maths Worksheet</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['Fredoka', 'sans-serif'],
+                        body: ['Nunito', 'sans-serif'],
+                    },
+                    colors: {
+                        glass: 'rgba(255, 255, 255, 0.75)',
+                        glassDark: 'rgba(30, 41, 59, 0.7)',
+                    },
+                    animation: {
+                        'shake': 'shake 0.4s cubic-bezier(.36,.07,.19,.97) both',
+                        'bounce-short': 'bounceShort 0.5s ease infinite alternate',
+                        'pulse-glow': 'pulseGlow 2s infinite',
+                    },
+                    keyframes: {
+                        shake: {
+                            '10%, 90%': { transform: 'translate3d(-2px, 0, 0)' },
+                            '20%, 80%': { transform: 'translate3d(4px, 0, 0)' },
+                            '30%, 50%, 70%': { transform: 'translate3d(-6px, 0, 0)' },
+                            '40%, 60%': { transform: 'translate3d(6px, 0, 0)' },
+                        },
+                        bounceShort: {
+                            '0%': { transform: 'translateY(0)' },
+                            '100%': { transform: 'translateY(-6px)' }
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(99, 102, 241, 0.4)' },
+                            '50%': { boxShadow: '0 0 25px rgba(99, 102, 241, 0.8)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 35%, #e0e7ff 70%, #fae8ff 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        /* Ambient animated background circles */
+        .ambient-shape {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: -1;
+            opacity: 0.6;
+            animation: float 18s ease-in-out infinite alternate;
+        }
+        .shape-1 { background: #3b82f6; width: 300px; height: 300px; top: -50px; left: -50px; }
+        .shape-2 { background: #8b5cf6; width: 350px; height: 350px; bottom: -100px; right: -50px; animation-delay: -5s; }
+        .shape-3 { background: #ec4899; width: 250px; height: 250px; top: 40%; left: 80%; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(60px, 80px) rotate(180deg); }
+        }
+
+        /* Custom Glassmorphic Card Style */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Input styling with states */
+        .math-input {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .math-input.state-correct {
+            background-color: #f0fdf4 !important;
+            border-color: #22c55e !important;
+            color: #15803d !important;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2) !important;
+        }
+
+        .math-input.state-incorrect {
+            background-color: #fef2f2 !important;
+            border-color: #ef4444 !important;
+            color: #b91c1c !important;
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2) !important;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="text-slate-800 pb-16">
+
+    <!-- Ambient background shapes -->
+    <div class="ambient-shape shape-1"></div>
+    <div class="ambient-shape shape-2"></div>
+    <div class="ambient-shape shape-3"></div>
+
+    <!-- Top Sticky Bar for Quick Navigation / Progress -->
+    <div class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/80 shadow-sm py-2.5 px-4 mb-6">
+        <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+                <span class="font-heading font-bold text-lg text-indigo-600 flex items-center gap-1.5">
+                    <i class="fa-solid fa-brain text-xl">
+                    </i> MathSprint
+                </span>
+                <span class="hidden sm:inline text-xs font-semibold px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-700">Class 4</span>
+            </div>
+
+            <!-- Timer Display -->
+            <div class="flex items-center gap-3 bg-slate-100/80 px-3 py-1.5 rounded-xl border border-slate-200">
+                <i class="fa-solid fa-stopwatch text-indigo-500 animate-pulse"></i>
+                <span id="timer-display" class="font-mono font-bold text-base text-slate-700">20:00</span>
+                <div class="flex gap-1">
+                    <button id="timer-toggle-btn" title="Pause/Play Timer" class="text-xs bg-white hover:bg-slate-200 p-1.5 rounded-lg text-slate-600 transition">
+                        <i class="fa-solid fa-pause"></i>
+                    </button>
+                    <button id="timer-reset-btn" title="Reset Timer" class="text-xs bg-white hover:bg-slate-200 p-1.5 rounded-lg text-slate-600 transition">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Score Pill -->
+            <div class="flex items-center gap-4">
+                <div class="text-right">
+                    <div class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Score</div>
+                    <div class="text-lg font-extrabold text-indigo-600 leading-none">
+                        <span id="header-score">0</span> / 25
+                    </div>
+                </div>
+                <!-- Submit / Finish Button -->
+                <a href="#summary-section" class="bg-indigo-600 hover:bg-indigo-700 text-white font-heading text-sm px-4 py-2 rounded-xl shadow-md hover:shadow-indigo-300/50 transition duration-200 flex items-center gap-1.5">
+                    <i class="fa-solid fa-flag-checkered"></i> View Results
+                </a>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="max-w-5xl mx-auto mt-2 bg-slate-200 h-2 rounded-full overflow-hidden">
+            <div id="progress-bar-fill" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-emerald-500 h-full w-0 transition-all duration-300"></div>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="max-w-4xl mx-auto px-4">
+        
+        <!-- HEADER CARD -->
+        <div class="glass-card rounded-3xl p-6 sm:p-8 mb-8 text-center relative overflow-hidden border border-white/60">
+            <div class="absolute -top-12 -right-12 w-32 h-32 bg-indigo-200/50 rounded-full blur-2xl"></div>
+            <div class="absolute -bottom-12 -left-12 w-32 h-32 bg-pink-200/50 rounded-full blur-2xl"></div>
+
+            <div class="inline-block bg-indigo-100 text-indigo-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-3">
+                Foundation Practice • Day 6 / Saturday
+            </div>
+            
+            <h1 class="font-heading font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight mb-2">
+                FOUNDATION SATURDAY - WORKSHEET 6
+            </h1>
+            <p class="text-slate-600 font-medium text-base sm:text-lg mb-6">
+                Prime Numbers, Factors, Fractions, Advanced Maths & Entrance Reasoning / अभाज्य संख्याएँ, गुणनखंड, भिन्न, उन्नत गणित और प्रवेश परीक्षा तर्कशक्ति
+            </p>
+
+            <!-- Metadata Info Pills -->
+            <div class="flex flex-wrap justify-center items-center gap-3 text-xs sm:text-sm font-semibold mb-6">
+                <span class="bg-white/80 border border-slate-200/80 px-3.5 py-1.5 rounded-xl shadow-sm text-slate-700 flex items-center gap-1.5">
+                    <i class="fa-solid fa-clock text-indigo-500"></i> Time: 20 Minutes / समय: 20 मिनट
+                </span>
+                <span class="bg-white/80 border border-slate-200/80 px-3.5 py-1.5 rounded-xl shadow-sm text-slate-700 flex items-center gap-1.5">
+                    <i class="fa-solid fa-list-check text-emerald-500"></i> Questions: 25 / प्रश्न: 25
+                </span>
+                <span class="bg-white/80 border border-slate-200/80 px-3.5 py-1.5 rounded-xl shadow-sm text-slate-700 flex items-center gap-1.5">
+                    <i class="fa-solid fa-award text-amber-500"></i> Total Marks: 25 / कुल अंक: 25
+                </span>
+            </div>
+        </div>
+        <!-- HEADER CARD CLOSED -->
+
+        <!-- Learn First section removed as requested. -->
+
+        <!-- WORKSHEET QUESTIONS CONTAINER -->
+        <div id="sections-container"></div>
+
+<!-- FINAL SCOREBOARD & TEACHER'S REMARKS CARD -->
+        <div id="summary-section" class="glass-card rounded-3xl p-6 sm:p-8 mt-12 border-2 border-indigo-200 shadow-xl relative">
+            <div class="text-center mb-6">
+                <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900 mb-1">
+                    Worksheet Assessment & Scoreboard
+                </h2>
+                <p class="text-sm text-slate-500">Review your final score and performance summary / अपना स्कोर देखें</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- Total Score Display -->
+                <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-2xl p-6 text-center shadow-lg flex flex-col justify-center items-center">
+                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-100 mb-1">Total Score</span>
+                    <div class="font-heading text-5xl font-extrabold my-1">
+                        <span id="final-score-num">0</span> <span class="text-2xl text-indigo-200">/ 25</span>
+                    </div>
+                    <span id="score-percentage" class="inline-block bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold mt-2">
+                        0% Accuracy
+                    </span>
+                </div>
+
+                <!-- Section Wise Breakdown -->
+                <div class="md:col-span-2 bg-white/90 rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-center">
+                    <h3 class="font-heading font-bold text-slate-800 text-sm mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-simple text-indigo-500"></i> Section Breakdown
+                    </h3>
+                    <div id="section-breakdown-list" class="space-y-2 text-xs sm:text-sm font-semibold">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teacher's Remarks Box -->
+            <div class="bg-amber-50/80 border-2 border-dashed border-amber-300 rounded-2xl p-5 sm:p-6 text-slate-800 relative">
+                <div class="absolute -top-3 left-6 bg-amber-400 text-slate-900 font-heading font-bold text-xs px-3 py-0.5 rounded-full uppercase tracking-wider">
+                    Teacher's Remarks
+                </div>
+                <div class="flex items-start gap-3 mt-1">
+                    <div id="teacher-avatar" class="text-3xl sm:text-4xl text-amber-500 pt-1">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <p id="teacher-remark-text" class="font-heading font-semibold text-base sm:text-lg text-slate-800 leading-snug">
+                            Complete questions to unlock teacher's remark! / शिक्षक की टिप्पणी पाने के लिए प्रश्न हल करें।
+                        </p>
+                        <p class="text-xs text-slate-500 mt-1">Based on accuracy across all 5 sections. / पाँचों भागों के प्रदर्शन पर आधारित।</p>
+                    </div>
+                </div>
+            </div>
+
+ <!-- GENERATE NEW QUESTIONS BUTTON -->
+        <div class="text-center mb-6">
+            <button id="generate-new-questions-btn" type="button"
+                class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm sm:text-base px-6 py-3 rounded-2xl shadow-lg transition duration-200">
+                Generate New Questions | नए प्रश्न बनाएँ
+            </button>
+
+            <p id="generate-status" class="text-sm text-slate-500 mt-2">
+                Click the button to create a fresh worksheet.
+                | नई वर्कशीट बनाने के लिए बटन दबाएँ।
+            </p>
+        </div>
+            <!-- Reset Worksheet Button -->
+            <div class="text-center mt-8">
+                <button id="reset-worksheet-btn" class="bg-slate-800 hover:bg-slate-900 text-white font-heading font-bold text-sm px-6 py-3 rounded-2xl shadow-lg transition duration-200 inline-flex items-center gap-2">
+                    <i class="fa-solid fa-rotate-left"></i> Reset & Try Again / फिर से शुरू करें
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+        <div class="mt-8 mb-6 rounded-2xl border border-slate-200 bg-white/80 p-4 text-xs leading-relaxed text-slate-600">
+            <strong>Disclaimer / अस्वीकरण:</strong> RawaRajpootNexEduToppers Learning Academy is an independent educational platform and is not affiliated with, endorsed by, or associated with NCERT. For official textbooks and curriculum information, please refer to NCERT's official resources. / RawaRajpootNexEduToppers Learning Academy एक स्वतंत्र शैक्षिक मंच है और NCERT से संबद्ध या समर्थित नहीं है। आधिकारिक पाठ्यपुस्तकों और पाठ्यक्रम की जानकारी के लिए NCERT के आधिकारिक संसाधन देखें।
+        </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- SATURDAY CLASS 4 MATHS WORKSHEET DATA ---
+        // Fresh randomized questions are created at page load and whenever Generate is clicked.
+        function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+        function makeQuestion(id, text, answers, explanation) {
+            return { id, text, validAnswers: (Array.isArray(answers) ? answers : [answers]).map(String), explanation };
+        }
+
+        function generateFreshWorksheetData() {
+            const q = [[], [], [], [], []];
+            const ri = randomInt;
+            function add(section, id, text, answer, worked) {
+                q[section].push(makeQuestion(id, text, answer, worked));
+            }
+
+            // Section A: Prime Numbers & Divisibility / अभाज्य संख्याएँ और विभाज्यता
+            let primeA = [11,13,17,19,23,29,31,37][ri(0,7)];
+            add(0,1,`Is ${primeA} a prime number? Type Yes or No. / क्या ${primeA} अभाज्य संख्या है? Yes या No लिखें.`, 'yes',
+                `${primeA} has exactly two factors: 1 and ${primeA}. So it is prime. Answer: Yes. / ${primeA} के केवल दो गुणनखंड हैं: 1 और ${primeA}। इसलिए यह अभाज्य संख्या है। उत्तर: Yes।`);
+            let divisible3 = ri(12,29)*3;
+            add(0,2,`Is ${divisible3} divisible by 3? Type Yes or No. / क्या ${divisible3} संख्या 3 से विभाज्य है? Yes या No लिखें।`,'yes',
+                `Add the digits: ${String(divisible3).split('').join(' + ')} = ${String(divisible3).split('').reduce((a,b)=>a+Number(b),0)}. This digit sum is divisible by 3, so ${divisible3} is divisible by 3. Answer: Yes. / अंकों को जोड़ें: ${String(divisible3).split('').join(' + ')} = ${String(divisible3).split('').reduce((a,b)=>a+Number(b),0)}। अंकों का योग 3 से विभाज्य है, इसलिए ${divisible3} भी 3 से विभाज्य है। उत्तर: Yes।`);
+            let evenNum=ri(21,49)*2;
+            add(0,3,`Which is the smallest prime factor of ${evenNum}? / ${evenNum} का सबसे छोटा अभाज्य गुणनखंड कौन-सा है?`,'2',
+                `${evenNum} is even, so it can be divided by 2: ${evenNum} ÷ 2 = ${evenNum/2}. Since 2 is prime and is the smallest prime number, the answer is 2. / ${evenNum} सम संख्या है, इसलिए इसे 2 से भाग दिया जा सकता है: ${evenNum} ÷ 2 = ${evenNum/2}। 2 सबसे छोटी अभाज्य संख्या है। उत्तर: 2।`);
+            let divNum=ri(12,30)*5;
+            add(0,4,`Is ${divNum} divisible by 5? Type Yes or No. / क्या ${divNum} संख्या 5 से विभाज्य है? Yes या No लिखें।`,'yes',
+                `The ones digit of ${divNum} is ${divNum%10}. Numbers ending in 0 or 5 are divisible by 5, so ${divNum} is divisible by 5. Answer: Yes. / ${divNum} का इकाई अंक ${divNum%10} है। जिन संख्याओं के अंत में 0 या 5 होता है, वे 5 से विभाज्य होती हैं। उत्तर: Yes।`);
+            let compLeft=ri(4,9), compRight=ri(4,7), comp=compLeft*compRight;
+            add(0,5,`Is ${comp} a prime number or a composite number? Type Prime or Composite. / ${comp} अभाज्य संख्या है या भाज्य संख्या? Prime या Composite लिखें।`,'composite',
+                `${comp} = ${compLeft} × ${compRight}. It has factors ${compLeft} and ${compRight} besides 1 and itself, so it has more than two factors. Answer: Composite. / ${comp} = ${compLeft} × ${compRight}। इसके 1 और स्वयं के अलावा ${compLeft} तथा ${compRight} भी गुणनखंड हैं। इसलिए यह भाज्य संख्या है। उत्तर: Composite।`);
+
+            // Section B: Factors & Multiples / गुणनखंड और गुणज
+            let factorBase=[18,20,24,28,30,36,40,42][ri(0,7)];
+            let factorCount=0; for(let i=1;i<=factorBase;i++) if(factorBase%i===0) factorCount++;
+            add(1,6,`How many factors does ${factorBase} have? / ${factorBase} के कुल कितने गुणनखंड हैं?`,String(factorCount),
+                `List factor pairs: 1 × ${factorBase}; ${2} × ${factorBase/2}; and continue until the pairs repeat. The factors are ${Array.from({length:factorBase},(_,i)=>i+1).filter(n=>factorBase%n===0).join(', ')}. There are ${factorCount} factors. / गुणनखंडों के जोड़े बनाएं: 1 × ${factorBase}, 2 × ${factorBase/2} आदि। इसके गुणनखंड हैं: ${Array.from({length:factorBase},(_,i)=>i+1).filter(n=>factorBase%n===0).join(', ')}। कुल ${factorCount} गुणनखंड हैं।`);
+            let mBase=ri(4,9), mMultiplier=ri(3,8);
+            add(1,7,`What is the ${mMultiplier}th multiple of ${mBase}? / ${mBase} का ${mMultiplier}वाँ गुणज क्या है?`,String(mBase*mMultiplier),
+                `Multiply the number by the multiple position: ${mBase} × ${mMultiplier} = ${mBase*mMultiplier}. Answer: ${mBase*mMultiplier}. / संख्या को गुणज के क्रम से गुणा करें: ${mBase} × ${mMultiplier} = ${mBase*mMultiplier}। उत्तर: ${mBase*mMultiplier}।`);
+            let commonA=[12,18,20,24,30][ri(0,4)], commonB=[8,10,12,15,18][ri(0,4)];
+            let gcd=(a,b)=>b?gcd(b,a%b):a; let lcm=commonA*commonB/gcd(commonA,commonB);
+            const multiplesA = Array.from({length:lcm/commonA}, (_,i)=>(i+1)*commonA);
+            const multiplesB = Array.from({length:lcm/commonB}, (_,i)=>(i+1)*commonB);
+            add(1,8,`Find the smallest common multiple of ${commonA} and ${commonB}. / ${commonA} और ${commonB} का सबसे छोटा सार्व गुणज ज्ञात करें।`,String(lcm),
+                `Multiples of ${commonA}: ${multiplesA.join(', ')}. / ${commonA} के गुणज: ${multiplesA.join(', ')}।<br>Multiples of ${commonB}: ${multiplesB.join(', ')}. / ${commonB} के गुणज: ${multiplesB.join(', ')}।<br>The first number appearing in both lists is ${lcm}, so the smallest common multiple is ${lcm}. / दोनों सूचियों में सबसे पहले समान संख्या ${lcm} है, इसलिए सबसे छोटा सार्व गुणज ${lcm} है।`);
+            let fA=ri(2,6), fB=ri(2,6), factorNum=fA*fB;
+            add(1,9,`Which number is a factor of ${factorNum}: ${fA}, ${factorNum+1}, or ${factorNum+2}? / इनमें से कौन-सी संख्या ${factorNum} का गुणनखंड है: ${fA}, ${factorNum+1}, या ${factorNum+2}?`,String(fA),
+                `${factorNum} ÷ ${fA} = ${factorNum/fA} with no remainder, so ${fA} is a factor. / ${factorNum} ÷ ${fA} = ${factorNum/fA} और शेष 0 है, इसलिए ${fA} इसका गुणनखंड है।`);
+            let x=ri(2,8), y=ri(3,9), multSum=x*y;
+            add(1,10,`Write the smallest positive number that is a multiple of both ${x} and ${multSum}. / वह सबसे छोटी धनात्मक संख्या लिखें जो ${x} और ${multSum} दोनों का गुणज है।`,String(multSum),
+                `${multSum} = ${x} × ${y}, so ${multSum} is already a multiple of ${x}; every number is a multiple of itself. Answer: ${multSum}. / ${multSum} = ${x} × ${y}, इसलिए ${multSum}, ${x} का गुणज है और हर संख्या स्वयं का भी गुणज होती है। उत्तर: ${multSum}।`);
+
+            // Section C: Fractions / भिन्न
+            let den=ri(3,9), numer=ri(1,den-1), factor=ri(2,4);
+            add(2,11,`Complete the equivalent fraction: ${numer}/${den} = ?/${den*factor}. / समतुल्य भिन्न पूरा करें: ${numer}/${den} = ?/${den*factor}।`,String(numer*factor),
+                `The denominator ${den} was multiplied by ${factor}. Multiply the numerator by the same number: ${numer} × ${factor} = ${numer*factor}. So ${numer}/${den} = ${numer*factor}/${den*factor}. / हर ${den} को ${factor} से गुणा किया गया है। अंश को भी उसी संख्या से गुणा करें: ${numer} × ${factor} = ${numer*factor}। उत्तर: ${numer*factor}।`);
+            let compareDen=ri(4,10), ca=ri(1,compareDen-1), cb=ri(1,compareDen-1); if(ca===cb) cb=cb===1?2:cb-1; let larger=Math.max(ca,cb);
+            add(2,12,`Which fraction is larger: ${ca}/${compareDen} or ${cb}/${compareDen}? Write the larger fraction. / कौन-सी भिन्न बड़ी है: ${ca}/${compareDen} या ${cb}/${compareDen}? बड़ी भिन्न लिखें।`,`${larger}/${compareDen}`,
+                `Both fractions have the same denominator (${compareDen}), so compare the numerators. ${ca} and ${cb}: the larger numerator is ${larger}. Answer: ${larger}/${compareDen}. / दोनों भिन्नों का हर ${compareDen} समान है, इसलिए अंशों की तुलना करें। ${ca} और ${cb} में बड़ा अंश ${larger} है। उत्तर: ${larger}/${compareDen}।`);
+            let whole=ri(3,7), pieces=ri(1,whole-1), part=whole*pieces;
+            add(2,13,`What is ${pieces}/${whole} of ${part}? / ${part} का ${pieces}/${whole} भाग कितना है?`,String(part*pieces/whole),
+                `First divide by the denominator: ${part} ÷ ${whole} = ${part/whole}. Then multiply by the numerator: ${part/whole} × ${pieces} = ${part*pieces/whole}. / पहले हर से भाग दें: ${part} ÷ ${whole} = ${part/whole}। फिर अंश से गुणा करें: ${part/whole} × ${pieces} = ${part*pieces/whole}।`);
+            let fracD=ri(4,10), fracN=ri(1,fracD-1), remN=fracD-fracN;
+            add(2,14,`A pizza is cut into ${fracD} equal slices. ${fracN} slices are eaten. What fraction is left? / एक पिज़्ज़ा ${fracD} बराबर टुकड़ों में कटा है। ${fracN} टुकड़े खा लिए गए। कितना भाग बचा?`,`${remN}/${fracD}`,
+                `Total slices = ${fracD}. Slices left = ${fracD} − ${fracN} = ${remN}. The fraction left is ${remN}/${fracD}. / कुल टुकड़े ${fracD} हैं। बचे टुकड़े = ${fracD} − ${fracN} = ${remN}। बची हुई भिन्न ${remN}/${fracD} है।`);
+            let fa=ri(1,4), fb=ri(1,4), fd=ri(5,9); if(fa+fb>=fd) {fa=1;fb=2;fd=6;}
+            add(2,15,`Add the fractions: ${fa}/${fd} + ${fb}/${fd}. / भिन्न जोड़ें: ${fa}/${fd} + ${fb}/${fd}।`,`${fa+fb}/${fd}`,
+                `The denominators are equal, so add the numerators: ${fa} + ${fb} = ${fa+fb}. Keep the denominator ${fd}. Answer: ${fa+fb}/${fd}. / हर समान हैं, इसलिए अंश जोड़ें: ${fa} + ${fb} = ${fa+fb}। हर ${fd} ही रहेगा। उत्तर: ${fa+fb}/${fd}।`);
+
+            // Section D: Advanced Number Problems / उन्नत संख्या-आधारित प्रश्न
+            let numA=ri(230,680), numB=ri(110,290), numC=ri(25,95), adv=numA+numB-numC;
+            add(3,16,`Calculate: ${numA} + ${numB} − ${numC}. / हल करें: ${numA} + ${numB} − ${numC}।`,String(adv),
+                `Add first: ${numA} + ${numB} = ${numA+numB}. Then subtract: ${numA+numB} − ${numC} = ${adv}. / पहले जोड़ें: ${numA} + ${numB} = ${numA+numB}। फिर घटाएँ: ${numA+numB} − ${numC} = ${adv}।`);
+            let hundreds=ri(3,8), tens=ri(1,9), ones=ri(0,9), placeNum=hundreds*1000+tens*10+ones;
+            add(3,17,`What is the value of the digit ${hundreds} in ${placeNum.toLocaleString('en-US')}? / ${placeNum.toLocaleString('en-US')} में अंक ${hundreds} का स्थानीय मान क्या है?`,String(hundreds*1000),
+                `The digit ${hundreds} is in the thousands place. Its value is ${hundreds} × 1,000 = ${hundreds*1000}. / अंक ${hundreds} हज़ार के स्थान पर है। इसका स्थानीय मान ${hundreds} × 1,000 = ${hundreds*1000} है।`);
+            let box=ri(6,12), eachN=ri(12,25), leftN=ri(10,45), totalN=box*eachN+leftN;
+            add(3,18,`A library has ${box} shelves with ${eachN} books on each shelf and ${leftN} extra books. How many books are there? / एक पुस्तकालय में ${box} अलमारियाँ हैं, हर अलमारी में ${eachN} किताबें हैं और ${leftN} अतिरिक्त किताबें हैं। कुल कितनी किताबें हैं?`,String(totalN),
+                `Books on shelves: ${box} × ${eachN} = ${box*eachN}. Add extra books: ${box*eachN} + ${leftN} = ${totalN}. / अलमारियों की किताबें: ${box} × ${eachN} = ${box*eachN}। अतिरिक्त किताबें जोड़ें: ${box*eachN} + ${leftN} = ${totalN}।`);
+            let div=ri(4,9), quo=ri(12,25), dividend=div*quo;
+            add(3,19,`Divide ${dividend} by ${div}. / ${dividend} को ${div} से भाग दें।`,String(quo),
+                `${div} × ${quo} = ${dividend}, so ${dividend} ÷ ${div} = ${quo}. / ${div} × ${quo} = ${dividend}, इसलिए ${dividend} ÷ ${div} = ${quo}।`);
+            let three=ri(120,350), double=three*2, after=double+ri(20,90);
+            add(3,20,`A number is ${three}. Double it, then add ${after-double}. What is the result? / एक संख्या ${three} है। उसे दोगुना करें, फिर ${after-double} जोड़ें। परिणाम क्या होगा?`,String(after),
+                `Double the number: ${three} × 2 = ${double}. Add ${after-double}: ${double} + ${after-double} = ${after}. / संख्या को दोगुना करें: ${three} × 2 = ${double}। अब ${after-double} जोड़ें: ${double} + ${after-double} = ${after}।`);
+
+            // Section E: Entrance Exam Reasoning / प्रवेश परीक्षा तर्कशक्ति
+            let seqStart=ri(4,15), seqStep=ri(3,9), seqFourth=seqStart+3*seqStep, seqNext=seqFourth+seqStep;
+            add(4,21,`Find the next number: ${seqStart}, ${seqStart+seqStep}, ${seqStart+2*seqStep}, ${seqFourth}, __. / अगली संख्या ज्ञात करें: ${seqStart}, ${seqStart+seqStep}, ${seqStart+2*seqStep}, ${seqFourth}, __।`,String(seqNext),
+                `Each number increases by ${seqStep}: ${seqStart+seqStep} − ${seqStart} = ${seqStep}. Add ${seqStep} to ${seqFourth}: ${seqFourth} + ${seqStep} = ${seqNext}. / हर बार ${seqStep} बढ़ रहा है। ${seqFourth} + ${seqStep} = ${seqNext}।`);
+            let patternBase=ri(2,6), sq1=patternBase*patternBase, sq2=(patternBase+1)**2, sq3=(patternBase+2)**2, sq4=(patternBase+3)**2;
+            add(4,22,`Complete the pattern: ${sq1}, ${sq2}, ${sq3}, __. / क्रम पूरा करें: ${sq1}, ${sq2}, ${sq3}, __।`,String(sq4),
+                `These are square numbers: ${patternBase} × ${patternBase} = ${sq1}; ${patternBase+1} × ${patternBase+1} = ${sq2}; ${patternBase+2} × ${patternBase+2} = ${sq3}. Next: ${patternBase+3} × ${patternBase+3} = ${sq4}. / ये वर्ग संख्याएँ हैं। अगली संख्या ${patternBase+3} × ${patternBase+3} = ${sq4} है।`);
+            let logicA=ri(15,45), logicB=ri(5,14), logicC=logicA-logicB;
+            add(4,23,`If □ + ${logicB} = ${logicA}, what number does □ represent? / यदि □ + ${logicB} = ${logicA}, तो □ के स्थान पर कौन-सी संख्या आएगी?`,String(logicC),
+                `Subtract ${logicB} from both sides: ${logicA} − ${logicB} = ${logicC}. Check: ${logicC} + ${logicB} = ${logicA}. / दोनों ओर से ${logicB} घटाएँ: ${logicA} − ${logicB} = ${logicC}। जाँच: ${logicC} + ${logicB} = ${logicA}।`);
+            let odd1=ri(10,30)*2+1, odd2=odd1+2, odd3=odd2+2, oddSum=odd1+odd2+odd3;
+            add(4,24,`Find the sum of these three consecutive odd numbers: ${odd1}, ${odd2}, ${odd3}. / इन तीन लगातार विषम संख्याओं का योग निकालें: ${odd1}, ${odd2}, ${odd3}।`,String(oddSum),
+                `Add the first two: ${odd1} + ${odd2} = ${odd1+odd2}. Then add the third: ${odd1+odd2} + ${odd3} = ${oddSum}. / पहले दो जोड़ें: ${odd1} + ${odd2} = ${odd1+odd2}। फिर तीसरी संख्या जोड़ें: ${odd1+odd2} + ${odd3} = ${oddSum}।`);
+            let rA=ri(2,8), rB=ri(3,9), rC=ri(2,6), rAnswer=(rA+rB)*rC;
+            add(4,25,`A puzzle rule says: add ${rA} and ${rB}, then multiply the sum by ${rC}. What is the answer? / पहेली का नियम है: ${rA} और ${rB} जोड़ें, फिर योग को ${rC} से गुणा करें। उत्तर क्या है?`,String(rAnswer),
+                `Follow the rule in order: ${rA} + ${rB} = ${rA+rB}. Then multiply: ${rA+rB} × ${rC} = ${rAnswer}. / नियम के अनुसार पहले जोड़ें: ${rA} + ${rB} = ${rA+rB}। फिर गुणा करें: ${rA+rB} × ${rC} = ${rAnswer}।`);
+
+            return [
+              {sectionId:'sec-a',title:'Section A: Prime Numbers & Divisibility / अभाज्य संख्याएँ और विभाज्यता',marks:'5 marks',icon:'fa-divide',color:'indigo',questions:q[0]},
+              {sectionId:'sec-b',title:'Section B: Factors & Multiples / गुणनखंड और गुणज',marks:'5 marks',icon:'fa-sitemap',color:'blue',questions:q[1]},
+              {sectionId:'sec-c',title:'Section C: Fractions / भिन्न',marks:'5 marks',icon:'fa-pizza-slice',color:'emerald',questions:q[2]},
+              {sectionId:'sec-d',title:'Section D: Advanced Number Problems / उन्नत संख्या-आधारित प्रश्न',marks:'5 marks',icon:'fa-calculator',color:'purple',questions:q[3]},
+              {sectionId:'sec-e',title:'Section E: Entrance Exam Reasoning / प्रवेश परीक्षा तर्कशक्ति',marks:'5 marks',icon:'fa-brain',color:'amber',questions:q[4]}
+            ];
+        }
+
+        let worksheetData = generateFreshWorksheetData();
+
+        // --- APP STATE ---
+        const userAnswers = {}; // { qId: string }
+        const questionStatus = {}; // { qId: boolean }
+
+        // --- TIMER STATE ---
+        let totalTimeSeconds = 20 * 60;
+        let timerInterval = null;
+        let isTimerRunning = false;
+
+        // --- AUDIO SYNTHESIS (WEB AUDIO API) ---
+        let audioCtx = null;
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return audioCtx;
+        }
+
+        function playSound(type) {
+            try {
+                const ctx = getAudioContext();
+                if (ctx.state === 'suspended') {
+                    ctx.resume();
+                }
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (type === 'correct') {
+                    // Pleasant arpeggio chime
+                    const now = ctx.currentTime;
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(523.25, now); // C5
+                    osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.1); // E5
+                    osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.2); // G5
+                    gain.gain.setValueAtTime(0.15, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+                    osc.start(now);
+                    osc.stop(now + 0.35);
+                } else if (type === 'incorrect') {
+                    // Soft error buzz
+                    const now = ctx.currentTime;
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(180, now);
+                    osc.frequency.exponentialRampToValueAtTime(110, now + 0.2);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                }
+            } catch (e) {
+                // Audio might be blocked by browser policy until interaction
+            }
+        }
+
+        // --- VOICE NARRATION (SPEECH SYNTHESIS) ---
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // stop current speech
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 0.9;
+                utterance.pitch = 1.0;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+// --- NORMALIZATION HELPER ---
+        function normalizeAnswer(str) {
+            if (!str) return '';
+            return str
+                .toString()
+                .toLowerCase()
+                .trim()
+                // Accept a dot as a time separator too: 4.00 and 4:00 mean the same time.
+                .replace(/\b(\d{1,2})\.(\d{2})\b/g, '$1:$2')
+                .replace(/\b(a\.?m\.?|p\.?m\.?)\b/g, '')
+                .replace(/,/g, '')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function checkIsAnswerCorrect(question, userVal) {
+            const normUser = normalizeAnswer(userVal);
+            if (!normUser) return false;
+            return question.validAnswers.some(ans => normalizeAnswer(ans) === normUser);
+        }
+
+        // --- INITIALIZE UI ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderWorksheet();
+            startTimer();
+            setupEventListeners();
+            updateScoreboard();
+        });
+
+        // RENDER WORKSHEET SECTIONS
+        function renderWorksheet() {
+            const container = document.getElementById('sections-container');
+            container.innerHTML = '';
+
+            worksheetData.forEach(section => {
+                const sectionEl = document.createElement('div');
+                sectionEl.className = 'glass-card rounded-3xl p-5 sm:p-7 shadow-sm border border-white/80';
+                
+                // Section Header
+                sectionEl.innerHTML = `
+                    <div class="flex items-center justify-between border-b border-slate-200/80 pb-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-2xl bg-${section.color}-100 text-${section.color}-600 flex items-center justify-center text-lg font-bold">
+                                <i class="fa-solid ${section.icon}"></i>
+                            </div>
+                            <div>
+                                <h2 class="font-heading font-extrabold text-lg sm:text-xl text-slate-800">
+                                    ${section.title}
+                                </h2>
+                                <span class="text-xs text-slate-500 font-semibold">${section.questions.length} Questions</span>
+                            </div>
+                        </div>
+                        <span class="bg-slate-100 text-slate-700 font-bold text-xs px-3 py-1 rounded-full border border-slate-200">
+                            ${section.marks}
+                        </span>
+                    </div>
+                    <div class="space-y-6">
+                        ${section.questions.map(q => renderQuestionCard(q)).join('')}
+                    </div>
+                `;
+                container.appendChild(sectionEl);
+            });
+        }
+
+        // RENDER SINGLE QUESTION CARD
+        function renderQuestionCard(q) {
+            return `
+                <div id="q-card-${q.id}" class="bg-white/80 rounded-2xl p-4 sm:p-5 border border-slate-200/80 transition-all duration-200 hover:shadow-md">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+                        <div class="flex items-start gap-2.5">
+                            <span class="bg-slate-800 text-white font-heading font-bold text-xs px-2.5 py-1 rounded-lg shrink-0 mt-0.5">
+                                Q${q.id}
+                            </span>
+                            <span class="font-bold text-slate-800 text-base sm:text-lg leading-snug">
+                                ${q.text}
+                            </span>
+                        </div>
+                        <button onclick="speakText('${q.text.replace(/'/g, "\\'")}')" title="Read Aloud" class="self-end sm:self-auto text-xs bg-indigo-50 hover:bg-indigo-100 text-indigo-600 px-2.5 py-1.5 rounded-lg flex items-center gap-1 font-semibold transition shrink-0">
+                            <i class="fa-solid fa-volume-high"></i> Read
+                        </button>
+                    </div>
+
+                    <!-- Input and Actions -->
+                    <div class="flex flex-wrap items-center gap-3">
+                        <div class="relative flex-1 min-w-[200px]">
+                            <input type="text" 
+                                id="input-${q.id}" 
+                                autocomplete="off"
+                                placeholder="Type answer..." 
+                                oninput="handleInputChanged(${q.id})"
+                                class="math-input w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 border-slate-300 focus:outline-none focus:border-indigo-500 bg-white/90 text-slate-800 placeholder:font-normal placeholder:text-slate-400"
+                            />
+                            <span id="badge-${q.id}" class="absolute right-3 top-1/2 -translate-y-1/2 text-lg hidden"></span>
+                        </div>
+
+                        <button
+                            id="check-btn-${q.id}"
+                            type="button"
+                            onclick="checkAnswer(${q.id})"
+                            class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white border border-indigo-700 font-heading text-xs font-bold rounded-xl transition flex items-center gap-1.5 shrink-0">
+                            <i class="fa-solid fa-check"></i>
+                            <span>Check Answer</span>
+                        </button>
+                        <button
+                            id="hint-btn-${q.id}"
+                            type="button"
+                            onclick="toggleHint(${q.id})"
+                            class="px-4 py-2.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 font-heading text-xs font-bold rounded-xl transition flex items-center gap-1.5 shrink-0">
+                            <i class="fa-solid fa-lightbulb"></i>
+                            <span>Hint / संकेत</span>
+                        </button>
+                    </div>
+
+                    <div id="feedback-${q.id}" aria-live="polite" class="hidden mt-3 rounded-xl p-3 text-sm font-semibold"></div>
+                    <div id="hint-${q.id}" class="hidden mt-3 rounded-xl p-3 text-sm text-amber-900 bg-amber-50 border border-amber-200">
+                        <strong>Hint / संकेत:</strong> ${getQuestionHint(q)}
+                    </div>
+
+                    <!-- Step-by-step explanation -->
+                    <div id="explanation-${q.id}" class="hidden mt-4 pt-3 border-t border-slate-200 text-xs sm:text-sm text-slate-700 bg-amber-50/60 p-3.5 rounded-xl border border-amber-200/80">
+                        <div class="font-heading font-bold text-amber-900 mb-1 flex items-center gap-1.5">
+                            <i class="fa-solid fa-circle-check text-emerald-600"></i> Expected Answer: 
+                            <span class="text-emerald-700 font-extrabold underline">${q.validAnswers[0]}</span>
+                        </div>
+                        <p class="text-slate-700 font-medium">
+                            <span class="font-bold text-amber-800">Explanation:</span> ${q.explanation}
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Every question has its own worked-out hint with steps and final answer.
+        function getQuestionHint(q) {
+            return q.explanation || 'Break the question into small steps. / प्रश्न को छोटे-छोटे चरणों में हल करें।';
+        }
+
+        // Typing immediately colors the box: green for a correct answer, red for an incorrect one.
+        // Scoreboard is recalculated from current answers so correct answers count reliably.
+        function handleInputChanged(qId) {
+            const inputEl = document.getElementById(`input-${qId}`);
+            const badgeEl = document.getElementById(`badge-${qId}`);
+            const cardEl = document.getElementById(`q-card-${qId}`);
+            const feedbackEl = document.getElementById(`feedback-${qId}`);
+            userAnswers[qId] = inputEl.value;
+            delete questionStatus[qId];
+            const val = inputEl.value.trim();
+            const q = findQuestion(qId);
+            const baseClass = 'math-input w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 focus:outline-none bg-white/90 text-slate-800 placeholder:font-normal placeholder:text-slate-400';
+
+            if (!val) {
+                inputEl.className = baseClass + ' border-slate-300 focus:border-indigo-500';
+                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg hidden';
+                badgeEl.innerHTML = '';
+            } else if (q && checkIsAnswerCorrect(q, val)) {
+                inputEl.className = baseClass + ' state-correct';
+                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg text-emerald-600 font-bold block';
+                badgeEl.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            } else {
+                inputEl.className = baseClass + ' state-incorrect';
+                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg text-rose-500 font-bold block';
+                badgeEl.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+            }
+            feedbackEl.className = 'hidden mt-3 rounded-xl p-3 text-sm font-semibold';
+            feedbackEl.textContent = '';
+            cardEl.classList.remove('animate-shake');
+            updateScoreboard();
+        }
+
+        function findQuestion(qId) {
+            for (const sec of worksheetData) {
+                const found = sec.questions.find(q => q.id === qId);
+                if (found) return found;
+            }
+            return null;
+        }
+
+        function checkAnswer(qId) {
+            const q = findQuestion(qId);
+            if (!q) return;
+            const inputEl = document.getElementById(`input-${qId}`);
+            const badgeEl = document.getElementById(`badge-${qId}`);
+            const cardEl = document.getElementById(`q-card-${qId}`);
+            const feedbackEl = document.getElementById(`feedback-${qId}`);
+            const explanationEl = document.getElementById(`explanation-${qId}`);
+            const val = inputEl.value.trim();
+
+            if (!val) {
+                feedbackEl.className = 'mt-3 rounded-xl p-3 text-sm font-semibold text-amber-900 bg-amber-50 border border-amber-200';
+                feedbackEl.textContent = 'Please type an answer first. | पहले अपना जवाब लिखें।';
+                inputEl.focus();
+                return;
+            }
+
+            userAnswers[qId] = val;
+            const isCorrect = checkIsAnswerCorrect(q, val);
+            questionStatus[qId] = isCorrect;
+            explanationEl.classList.remove('hidden');
+
+            if (isCorrect) {
+                inputEl.className = 'math-input state-correct w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 focus:outline-none bg-white text-slate-800';
+                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg text-emerald-600 font-bold block';
+                badgeEl.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+                feedbackEl.className = 'mt-3 rounded-xl p-3 text-sm font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200';
+                feedbackEl.textContent = 'Correct answer! / सही जवाब! Well done!';
+                cardEl.classList.remove('animate-shake');
+                playSound('correct');
+            } else {
+                inputEl.className = 'math-input state-incorrect w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 focus:outline-none bg-white text-slate-800';
+                badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg text-rose-500 font-bold block';
+                badgeEl.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
+                feedbackEl.className = 'mt-3 rounded-xl p-3 text-sm font-semibold text-rose-800 bg-rose-50 border border-rose-200';
+                feedbackEl.textContent = `Wrong answer / गलत जवाब। Correct answer / सही जवाब: ${q.validAnswers[0]}. Try again!`;
+                cardEl.classList.remove('animate-shake');
+                void cardEl.offsetWidth;
+                cardEl.classList.add('animate-shake');
+                playSound('incorrect');
+            }
+            updateScoreboard();
+        }
+
+        function toggleHint(qId) {
+            document.getElementById(`hint-${qId}`).classList.toggle('hidden');
+        }
+
+        // --- SCOREBOARD & PROGRESS UPDATES ---
+        function updateScoreboard() {
+            let totalCorrect = 0;
+            let answeredCount = 0;
+
+            worksheetData.forEach(sec => {
+                sec.questions.forEach(q => {
+                    if (userAnswers[q.id] && userAnswers[q.id].trim() !== '') {
+                        answeredCount++;
+                    }
+                    // Count correctness from the current answer itself, not only from
+                    // questionStatus. This keeps the scoreboard in sync while typing and
+                    // after Check Answer is clicked.
+                    if (userAnswers[q.id] && checkIsAnswerCorrect(q, userAnswers[q.id])) {
+                        totalCorrect++;
+                    }
+                });
+            });
+
+            // Update top bar score & fill
+            document.getElementById('header-score').textContent = totalCorrect;
+            const progressPercent = Math.round((answeredCount / 25) * 100);
+            document.getElementById('progress-bar-fill').style.width = `${progressPercent}%`;
+
+            // Update summary score card
+            document.getElementById('final-score-num').textContent = totalCorrect;
+            const accuracyPercent = Math.round((totalCorrect / 25) * 100);
+            document.getElementById('score-percentage').textContent = `${accuracyPercent}% Accuracy`;
+
+            // Section breakdown list
+            const breakdownContainer = document.getElementById('section-breakdown-list');
+            breakdownContainer.innerHTML = '';
+
+            worksheetData.forEach(sec => {
+                let secCorrect = 0;
+                sec.questions.forEach(q => {
+                    if (userAnswers[q.id] && checkIsAnswerCorrect(q, userAnswers[q.id])) {
+                        secCorrect++;
+                    }
+                });
+
+                const secRow = document.createElement('div');
+                secRow.className = 'flex items-center justify-between p-1.5 rounded-lg bg-slate-50 border border-slate-100';
+                secRow.innerHTML = `
+                    <span class="text-slate-700 font-semibold truncate max-w-[200px] sm:max-w-none">${sec.title}</span>
+                    <span class="font-extrabold ${secCorrect === 5 ? 'text-emerald-600' : 'text-slate-800'}">
+                        ${secCorrect} / 5
+                    </span>
+                `;
+                breakdownContainer.appendChild(secRow);
+            });
+
+            // Update Teacher Remarks based on score
+            updateTeacherRemarks(totalCorrect);
+        }
+
+        function updateTeacherRemarks(score) {
+            const remarkText = document.getElementById('teacher-remark-text');
+            const avatarEl = document.getElementById('teacher-avatar');
+            const attempted = Object.values(userAnswers).some(value => String(value || '').trim() !== '');
+            if (!attempted) {
+                remarkText.textContent = "Complete a few questions to see your feedback! / अपनी प्रतिक्रिया देखने के लिए कुछ प्रश्न हल करें!";
+                avatarEl.innerHTML = '<i class="fa-solid fa-graduation-cap text-indigo-500"></i>';
+                return;
+            }
+
+            if (score >= 23) {
+                remarkText.textContent = "Outstanding! Excellent number sense and speed! You are a Super Star! ⭐⭐⭐⭐⭐";
+                avatarEl.innerHTML = '<i class="fa-solid fa-crown text-amber-500"></i>';
+            } else if (score >= 18) {
+                remarkText.textContent = "Great job! Good effort, keep practicing for perfection! 🌟";
+                avatarEl.innerHTML = '<i class="fa-solid fa-star text-amber-400"></i>';
+            } else {
+                remarkText.textContent = "Nice try! Needs a little more practice on quick calculations. Keep going! 💪";
+                avatarEl.innerHTML = '<i class="fa-solid fa-heart text-rose-500"></i>';
+            }
+        }
+
+        // --- COUNTDOWN TIMER FUNCTIONS ---
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            isTimerRunning = true;
+            updateTimerDisplay();
+
+            timerInterval = setInterval(() => {
+                if (isTimerRunning) {
+                    if (totalTimeSeconds > 0) {
+                        totalTimeSeconds--;
+                        updateTimerDisplay();
+                    } else {
+                        clearInterval(timerInterval);
+                        isTimerRunning = false;
+                        alert("Time's up! Review your answers on the scoreboard.");
+                    }
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(totalTimeSeconds / 60);
+            const secs = totalTimeSeconds % 60;
+            const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            document.getElementById('timer-display').textContent = formatted;
+        }
+
+        function toggleTimer() {
+            const toggleBtn = document.getElementById('timer-toggle-btn');
+            isTimerRunning = !isTimerRunning;
+            if (isTimerRunning) {
+                toggleBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            } else {
+                toggleBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+            }
+        }
+
+        function resetTimer() {
+            totalTimeSeconds = 20 * 60;
+            isTimerRunning = true;
+            document.getElementById('timer-toggle-btn').innerHTML = '<i class="fa-solid fa-pause"></i>';
+            updateTimerDisplay();
+        }
+
+        // --- SETUP EVENT LISTENERS ---
+        function setupEventListeners() {
+            // ADDED: Regenerate the existing 25-question worksheet, not a separate worksheet.
+            document.getElementById('generate-new-questions-btn').addEventListener('click', () => {
+                worksheetData = generateFreshWorksheetData();
+
+                // Clear answers and status from the previous question set.
+                Object.keys(userAnswers).forEach(key => delete userAnswers[key]);
+                Object.keys(questionStatus).forEach(key => delete questionStatus[key]);
+
+                resetTimer();
+                renderWorksheet();
+                updateScoreboard();
+                document.getElementById('generate-status').textContent =
+                    'Fresh Saturday questions generated! | शनिवार के नए प्रश्न तैयार हैं!';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            document.getElementById('timer-toggle-btn').addEventListener('click', toggleTimer);
+            document.getElementById('timer-reset-btn').addEventListener('click', resetTimer);
+            
+            document.getElementById('reset-worksheet-btn').addEventListener('click', () => {
+                if (confirm("Are you sure you want to reset all answers and restart?")) {
+                    worksheetData.forEach(sec => {
+                        sec.questions.forEach(q => {
+                            delete userAnswers[q.id];
+                            delete questionStatus[q.id];
+                            const inputEl = document.getElementById(`input-${q.id}`);
+                            const badgeEl = document.getElementById(`badge-${q.id}`);
+                            const feedbackEl = document.getElementById(`feedback-${q.id}`);
+                            const explanationEl = document.getElementById(`explanation-${q.id}`);
+                            const hintEl = document.getElementById(`hint-${q.id}`);
+                            const cardEl = document.getElementById(`q-card-${q.id}`);
+                            if (inputEl) {
+                                inputEl.value = '';
+                                inputEl.className = 'math-input w-full px-4 py-2.5 text-base font-bold rounded-xl border-2 border-slate-300 focus:outline-none focus:border-indigo-500 bg-white/90 text-slate-800 placeholder:font-normal placeholder:text-slate-400';
+                            }
+                            if (badgeEl) { badgeEl.className = 'absolute right-3 top-1/2 -translate-y-1/2 text-lg hidden'; badgeEl.innerHTML = ''; }
+                            if (feedbackEl) { feedbackEl.className = 'hidden mt-3 rounded-xl p-3 text-sm font-semibold'; feedbackEl.textContent = ''; }
+                            if (explanationEl) explanationEl.classList.add('hidden');
+                            if (hintEl) hintEl.classList.add('hidden');
+                            if (cardEl) cardEl.classList.remove('animate-shake');
+                        });
+                    });
+                    updateScoreboard();
+                    resetTimer();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
