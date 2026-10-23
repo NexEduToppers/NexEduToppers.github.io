@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="Day 5 Exercise: Chapter Basics. Bilingual English and Hindi practice quiz.">
+  <meta name="description" content="Day 5 Exercise: Mixed Practice Quiz from Days 1 to 4. Bilingual English and Hindi practice quiz.">
 
   <title>Day 5 Exercise - RawaRajpootNexEduToppers</title>
 
@@ -23,7 +23,7 @@
       --red-text: #a32121;
     }
 
-     * {
+    * {
       box-sizing: border-box;
     }
 
@@ -303,27 +303,23 @@
 
   <header>
     <h1>RawaRajpootNexEduToppers Learning Academy</h1>
-    <p>Day 5 | Exercise (Q1–Q40)</p>
-    <h2 style="color:white; margin:10px 0;">MATHEMATICS BASICS</h2>
-    <p>Place Value, Numbers & Operations</p>
-    <p lang="hi">स्थानीय मान, संख्याएँ और संक्रियाएँ</p>
+    <p>Day 5 | Mixed Exercise (Q1–Q40)</p>
+    <h2 style="color:white; margin:10px 0;">DAYS 1 TO 4 MIXED PRACTICE QUIZ</h2>
+    <p>Addition, Subtraction, Multiplication & Division Basics</p>
+    <p lang="hi">दिन 1 से 4 के मिक्स्ड प्रश्न: जोड़, घटाना, गुणा और भाग</p>
   </header>
 
   <main class="container">
 
     <section class="card">
-      <h2>Welcome to Day 5 Exercise | प्रश्नोत्तरी में आपका स्वागत है</h2>
+      <h2>Welcome to Day 5 Mixed Practice | मिक्स्ड अभ्यास में आपका स्वागत है</h2>
 
       <p>
-        Answer 40 multiple-choice questions based on Class 4 Mathematics.
-        Choose one answer for each question. You will receive feedback
-        after every answer.
+        Answer 40 mixed multiple-choice questions based on Days 1 to 4 concepts (Addition, Subtraction, Multiplication, Division & Divisibility).
       </p>
 
       <p class="hindi" lang="hi">
-        कक्षा 4 की गणित पर आधारित 40 बहुविकल्पीय प्रश्नों के उत्तर दें।
-        प्रत्येक प्रश्न के लिए एक विकल्प चुनें। हर उत्तर के बाद आपको
-        प्रतिक्रिया और सही उत्तर की जानकारी मिलेगी।
+        दिन 1 से 4 के अवधारणाओं (जोड़, घटाना, गुणा, भाग और विभाज्यता) पर आधारित 40 मिक्स्ड बहुविकल्पीय प्रश्नों के उत्तर दें।
       </p>
 
       <div class="quiz-info">
@@ -381,7 +377,7 @@
       <!-- Button Action Container -->
       <div id="resultActions" style="margin-top: 20px; display: flex; flex-direction: column; gap: 12px;">
         <button class="action-button" id="restartButton" type="button" style="margin-top: 0; width: 100%;">
-          Try Again | फिर से प्रयास करें
+          Generate New Quiz | नई क्विज़ बनाएँ
         </button>
         
         <a class="back-link" href="class4-daily-exercise-maths-foundation.html" style="text-align: center; margin: 0; display: block;">
@@ -425,340 +421,112 @@
   <script>
     "use strict";
 
-    const questions = [
-{
-  question: "What is 7 × 8?",
-  hindi: "7 × 8 कितना है?",
-  options: ["54", "56", "48", "64"],
-  answer: 1,
-  explanation: "7 × 8 = 56.",
-  explanationHindi: "7 × 8 = 56।"
-},
-{
-  question: "What is 9 × 6?",
-  hindi: "9 × 6 कितना है?",
-  options: ["45", "56", "54", "63"],
-  answer: 2,
-  explanation: "9 × 6 = 54.",
-  explanationHindi: "9 × 6 = 54।"
-},
-{
-  question: "What is 144 ÷ 12?",
-  hindi: "144 ÷ 12 कितना है?",
-  options: ["11", "12", "13", "14"],
-  answer: 1,
-  explanation: "144 ÷ 12 = 12 because 12 × 12 = 144.",
-  explanationHindi: "144 ÷ 12 = 12, क्योंकि 12 × 12 = 144।"
-},
-{
-  question: "What is 81 ÷ 9?",
-  hindi: "81 ÷ 9 कितना है?",
-  options: ["8", "7", "9", "6"],
-  answer: 2,
-  explanation: "81 ÷ 9 = 9 because 9 × 9 = 81.",
-  explanationHindi: "81 ÷ 9 = 9, क्योंकि 9 × 9 = 81।"
-},
-{
-  question: "What is 356 + 247?",
-  hindi: "356 + 247 कितना है?",
-  options: ["593", "603", "613", "503"],
-  answer: 1,
-  explanation: "356 + 247 = 603.",
-  explanationHindi: "356 + 247 = 603।"
-},
-{
-  question: "What is 700 − 368?",
-  hindi: "700 − 368 कितना है?",
-  options: ["342", "332", "432", "322"],
-  answer: 1,
-  explanation: "700 − 368 = 332.",
-  explanationHindi: "700 − 368 = 332।"
-},
-{
-  question: "What is 24 × 3?",
-  hindi: "24 × 3 कितना है?",
-  options: ["62", "72", "82", "68"],
-  answer: 1,
-  explanation: "24 × 3 = 72.",
-  explanationHindi: "24 × 3 = 72।"
-},
-{
-  question: "What is 96 ÷ 4?",
-  hindi: "96 ÷ 4 कितना है?",
-  options: ["22", "24", "26", "28"],
-  answer: 1,
-  explanation: "96 ÷ 4 = 24 because 24 × 4 = 96.",
-  explanationHindi: "96 ÷ 4 = 24, क्योंकि 24 × 4 = 96।"
-},
-{
-  question: "Which is the smallest number?",
-  hindi: "सबसे छोटी संख्या कौन-सी है?",
-  options: ["409", "490", "904", "940"],
-  answer: 0,
-  explanation: "409 is the smallest number among the four options.",
-  explanationHindi: "दिए गए चार विकल्पों में 409 सबसे छोटी संख्या है।"
-},
-{
-  question: "What is the place value of 7 in 3,742?",
-  hindi: "3,742 में 7 का स्थानीय मान क्या है?",
-  options: ["7", "70", "700", "7,000"],
-  answer: 2,
-  explanation: "The digit 7 is in the hundreds place, so its place value is 700.",
-  explanationHindi: "अंक 7 सैकड़े के स्थान पर है, इसलिए उसका स्थानीय मान 700 है।"
-},
-{
-  question: "Which number comes just after 9,999?",
-  hindi: "9,999 के ठीक बाद कौन-सी संख्या आती है?",
-  options: ["9,998", "10,000", "10,001", "9,990"],
-  answer: 1,
-  explanation: "The number after 9,999 is 10,000.",
-  explanationHindi: "9,999 के बाद आने वाली संख्या 10,000 है।"
-},
-{
-  question: "Which is an even number?",
-  hindi: "सम संख्या कौन-सी है?",
-  options: ["37", "51", "68", "93"],
-  answer: 2,
-  explanation: "68 is even because it is divisible by 2.",
-  explanationHindi: "68 सम संख्या है, क्योंकि यह 2 से पूरी तरह विभाजित होती है।"
-},
-{
-  question: "Which is an odd number?",
-  hindi: "विषम संख्या कौन-सी है?",
-  options: ["42", "64", "88", "75"],
-  answer: 3,
-  explanation: "75 is odd because it is not divisible by 2 without a remainder.",
-  explanationHindi: "75 विषम संख्या है, क्योंकि यह 2 से बिना शेषफल के विभाजित नहीं होती।"
-},
-{
-  question: "What is 1,000 − 1?",
-  hindi: "1,000 − 1 कितना है?",
-  options: ["999", "990", "1,001", "900"],
-  answer: 0,
-  explanation: "1,000 − 1 = 999.",
-  explanationHindi: "1,000 − 1 = 999।"
-},
-{
-  question: "Round 347 to the nearest ten.",
-  hindi: "347 को निकटतम दहाई तक पूर्णांकित करें।",
-  options: ["340", "350", "300", "400"],
-  answer: 1,
-  explanation: "The ones digit is 7, so 347 rounds up to 350.",
-  explanationHindi: "इकाई का अंक 7 है, इसलिए 347 को पूर्णांकित करने पर 350 मिलता है।"
-},
-{
-  question: "What is half of 86?",
-  hindi: "86 का आधा कितना है?",
-  options: ["42", "43", "44", "46"],
-  answer: 1,
-  explanation: "Half of 86 is 86 ÷ 2 = 43.",
-  explanationHindi: "86 का आधा 86 ÷ 2 = 43 है।"
-},
-{
-  question: "What is one-fourth of 20?",
-  hindi: "20 का एक-चौथाई कितना है?",
-  options: ["4", "5", "6", "10"],
-  answer: 1,
-  explanation: "One-fourth of 20 is 20 ÷ 4 = 5.",
-  explanationHindi: "20 का एक-चौथाई 20 ÷ 4 = 5 है।"
-},
-{
-  question: "Which fraction means one-half?",
-  hindi: "कौन-सी भिन्न आधा दर्शाती है?",
-  options: ["1/3", "1/4", "1/2", "2/3"],
-  answer: 2,
-  explanation: "1/2 represents one of two equal parts.",
-  explanationHindi: "1/2 दो बराबर भागों में से एक भाग दर्शाता है।"
-},
-{
-  question: "Which fraction is greater?",
-  hindi: "कौन-सी भिन्न बड़ी है?",
-  options: ["1/4", "1/2", "They are equal / दोनों बराबर हैं", "Cannot compare / तुलना नहीं कर सकते"],
-  answer: 1,
-  explanation: "One-half is greater than one-quarter.",
-  explanationHindi: "आधा, एक-चौथाई से बड़ा होता है।"
-},
-{
-  question: "How many centimetres are in 1 metre?",
-  hindi: "1 मीटर में कितने सेंटीमीटर होते हैं?",
-  options: ["10", "100", "1,000", "50"],
-  answer: 1,
-  explanation: "1 metre = 100 centimetres.",
-  explanationHindi: "1 मीटर = 100 सेंटीमीटर।"
-},
-{
-  question: "How many grams are in 1 kilogram?",
-  hindi: "1 किलोग्राम में कितने ग्राम होते हैं?",
-  options: ["100", "500", "1,000", "10,000"],
-  answer: 2,
-  explanation: "1 kilogram = 1,000 grams.",
-  explanationHindi: "1 किलोग्राम = 1,000 ग्राम।"
-},
-{
-  question: "How many minutes are in 2 hours?",
-  hindi: "2 घंटे में कितने मिनट होते हैं?",
-  options: ["60", "100", "120", "180"],
-  answer: 2,
-  explanation: "Each hour has 60 minutes, so 2 × 60 = 120 minutes.",
-  explanationHindi: "एक घंटे में 60 मिनट होते हैं, इसलिए 2 × 60 = 120 मिनट।"
-},
-{
-  question: "How many days are there in a week?",
-  hindi: "एक सप्ताह में कितने दिन होते हैं?",
-  options: ["5", "6", "7", "8"],
-  answer: 2,
-  explanation: "A week has 7 days.",
-  explanationHindi: "एक सप्ताह में 7 दिन होते हैं।"
-},
-{
-  question: "What time is 30 minutes after 4:15?",
-  hindi: "4:15 के 30 मिनट बाद क्या समय होगा?",
-  options: ["4:35", "4:45", "5:15", "4:30"],
-  answer: 1,
-  explanation: "Adding 30 minutes to 4:15 gives 4:45.",
-  explanationHindi: "4:15 में 30 मिनट जोड़ने पर 4:45 होता है।"
-},
-{
-  question: "How many equal sides does a square have?",
-  hindi: "वर्ग की कितनी बराबर भुजाएँ होती हैं?",
-  options: ["2", "3", "4", "5"],
-  answer: 2,
-  explanation: "A square has four equal sides.",
-  explanationHindi: "वर्ग की चारों भुजाएँ बराबर होती हैं।"
-},
-{
-  question: "How many corners does a rectangle have?",
-  hindi: "आयत के कितने कोने होते हैं?",
-  options: ["2", "3", "4", "6"],
-  answer: 2,
-  explanation: "A rectangle has four corners.",
-  explanationHindi: "आयत के चार कोने होते हैं।"
-},
-{
-  question: "What is the perimeter of a square with side 5 cm?",
-  hindi: "5 सेमी भुजा वाले वर्ग का परिमाप कितना है?",
-  options: ["10 cm", "15 cm", "20 cm", "25 cm"],
-  answer: 2,
-  explanation: "Perimeter of a square = 4 × side = 4 × 5 = 20 cm.",
-  explanationHindi: "वर्ग का परिमाप = 4 × भुजा = 4 × 5 = 20 सेमी।"
-},
-{
-  question: "How many sides does a triangle have?",
-  hindi: "त्रिभुज की कितनी भुजाएँ होती हैं?",
-  options: ["2", "3", "4", "5"],
-  answer: 1,
-  explanation: "A triangle has three sides.",
-  explanationHindi: "त्रिभुज की तीन भुजाएँ होती हैं।"
-},
-{
-  question: "One pencil costs ₹7. What is the cost of 5 pencils?",
-  hindi: "एक पेंसिल ₹7 की है। 5 पेंसिलों की कीमत कितनी होगी?",
-  options: ["₹30", "₹35", "₹40", "₹45"],
-  answer: 1,
-  explanation: "5 pencils cost 5 × ₹7 = ₹35.",
-  explanationHindi: "5 पेंसिलों की कीमत 5 × ₹7 = ₹35 होगी।"
-},
-{
-  question: "You have ₹100 and spend ₹37. How much money remains?",
-  hindi: "आपके पास ₹100 हैं और आप ₹37 खर्च करते हैं। कितने रुपये बचेंगे?",
-  options: ["₹53", "₹63", "₹73", "₹67"],
-  answer: 1,
-  explanation: "₹100 − ₹37 = ₹63.",
-  explanationHindi: "₹100 − ₹37 = ₹63।"
-},
-{
-  question: "There are 6 boxes with 8 apples in each box. How many apples are there altogether?",
-  hindi: "6 डिब्बों में हर डिब्बे में 8 सेब हैं। कुल कितने सेब हैं?",
-  options: ["42", "46", "48", "56"],
-  answer: 2,
-  explanation: "6 × 8 = 48 apples.",
-  explanationHindi: "6 × 8 = 48 सेब।"
-},
-{
-  question: "24 chocolates are shared equally among 4 children. How many does each child get?",
-  hindi: "24 चॉकलेट 4 बच्चों में बराबर बाँटी जाती हैं। प्रत्येक बच्चे को कितनी मिलेंगी?",
-  options: ["4", "5", "6", "8"],
-  answer: 2,
-  explanation: "24 ÷ 4 = 6 chocolates for each child.",
-  explanationHindi: "24 ÷ 4 = 6, इसलिए प्रत्येक बच्चे को 6 चॉकलेट मिलेंगी।"
-},
-{
-  question: "What is 15 + 25 + 10?",
-  hindi: "15 + 25 + 10 कितना है?",
-  options: ["40", "45", "50", "55"],
-  answer: 2,
-  explanation: "15 + 25 + 10 = 50.",
-  explanationHindi: "15 + 25 + 10 = 50।"
-},
-{
-  question: "What is 5 × (6 + 2)?",
-  hindi: "5 × (6 + 2) कितना है?",
-  options: ["32", "40", "42", "50"],
-  answer: 1,
-  explanation: "First add 6 + 2 = 8, then multiply 5 × 8 = 40.",
-  explanationHindi: "पहले 6 + 2 = 8 करें, फिर 5 × 8 = 40।"
-},
-{
-  question: "Complete the pattern: 12, 15, 18, __.",
-  hindi: "क्रम पूरा करें: 12, 15, 18, __।",
-  options: ["19", "20", "21", "22"],
-  answer: 2,
-  explanation: "The pattern increases by 3 each time, so 18 + 3 = 21.",
-  explanationHindi: "इस क्रम में हर बार 3 जुड़ता है, इसलिए 18 + 3 = 21।"
-},
-{
-  question: "Which number is a multiple of 5?",
-  hindi: "कौन-सी संख्या 5 का गुणज है?",
-  options: ["32", "41", "55", "68"],
-  answer: 2,
-  explanation: "55 is a multiple of 5 because it ends in 5.",
-  explanationHindi: "55, 5 का गुणज है, क्योंकि इसके अंत में 5 है।"
-},
-{
-  question: "What is 3/4 of 12?",
-  hindi: "12 का 3/4 कितना है?",
-  options: ["3", "6", "9", "10"],
-  answer: 2,
-  explanation: "One-fourth of 12 is 3, so three-fourths is 3 × 3 = 9.",
-  explanationHindi: "12 का एक-चौथाई 3 है, इसलिए तीन-चौथाई 3 × 3 = 9 है।"
-},
-{
-  question: "A book has 80 pages. You have read 25 pages. How many pages are left?",
-  hindi: "एक किताब में 80 पृष्ठ हैं। आपने 25 पृष्ठ पढ़ लिए। कितने पृष्ठ बाकी हैं?",
-  options: ["45", "50", "55", "65"],
-  answer: 2,
-  explanation: "80 − 25 = 55 pages remain.",
-  explanationHindi: "80 − 25 = 55 पृष्ठ बाकी हैं।"
-},
-{
-  question: "Which unit is best for measuring the length of a classroom?",
-  hindi: "कक्षा की लंबाई मापने के लिए कौन-सी इकाई उपयुक्त है?",
-  options: ["Millimetres / मिलीमीटर", "Centimetres / सेंटीमीटर", "Metres / मीटर", "Kilograms / किलोग्राम"],
-  answer: 2,
-  explanation: "Metres are suitable for measuring the length of a classroom.",
-  explanationHindi: "कक्षा की लंबाई मापने के लिए मीटर उपयुक्त है।"
-},
-{
-  question: "What is 10 × 10?",
-  hindi: "10 × 10 कितना है?",
-  options: ["20", "100", "1,000", "110"],
-  answer: 1,
-  explanation: "10 × 10 = 100.",
-  explanationHindi: "10 × 10 = 100।"
-},
-{
-  question: "Which statement is correct?",
-  hindi: "कौन-सा कथन सही है?",
-  options: ["1 hour = 100 minutes / 1 घंटा = 100 मिनट", "1 kg = 100 g / 1 किलोग्राम = 100 ग्राम", "1 metre = 100 cm / 1 मीटर = 100 सेमी", "1 week = 5 days / 1 सप्ताह = 5 दिन"],
-  answer: 2,
-  explanation: "1 metre equals 100 centimetres.",
-  explanationHindi: "1 मीटर में 100 सेंटीमीटर होते हैं।"
-}
-    ];
-
+    let questions = [];
     let currentQuestion = 0;
     let score = 0;
     let answered = false;
+
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function formatNum(num) {
+      return num.toLocaleString('en-US');
+    }
+
+    function generateDistractors(ans) {
+      let distractors = new Set();
+      let offsets = [1, -1, 2, -2, 5, -5, 10, -10, 20, -20, 100, -100];
+      offsets.sort(() => Math.random() - 0.5);
+      for (let offset of offsets) {
+        let d = ans + offset;
+        if (d > 0 && d !== ans) {
+          distractors.add(d);
+        }
+        if (distractors.size >= 3) break;
+      }
+      let fallback = 1;
+      while (distractors.size < 3) {
+        let d = ans + fallback;
+        if (d > 0 && d !== ans) {
+          distractors.add(d);
+        }
+        fallback++;
+      }
+      return Array.from(distractors);
+    }
+
+    function createMixedQuestion() {
+      // Choose randomly between Addition (0), Subtraction (1), Multiplication (2), Division (3)
+      let type = getRandomInt(0, 3);
+      let num1, num2, ans, qText, qHi, expl, explHi;
+
+      if (type === 0) {
+        // Addition (Day 1 style)
+        num1 = getRandomInt(40, 850);
+        num2 = getRandomInt(20, 450);
+        ans = num1 + num2;
+        qText = "What is " + formatNum(num1) + " + " + formatNum(num2) + "?";
+        qHi = formatNum(num1) + " + " + formatNum(num2) + " कितना है?";
+        expl = "Sum of numbers is " + formatNum(ans);
+        explHi = "संख्याओं का योग " + formatNum(ans) + " है।";
+      } else if (type === 1) {
+        // Subtraction (Day 2 style)
+        num1 = getRandomInt(100, 900);
+        num2 = getRandomInt(20, num1 - 10);
+        ans = num1 - num2;
+        qText = "What is " + formatNum(num1) + " - " + formatNum(num2) + "?";
+        qHi = formatNum(num1) + " - " + formatNum(num2) + " कितना है?";
+        expl = "Difference of numbers is " + formatNum(ans);
+        explHi = "संख्याओं का अंतर " + formatNum(ans) + " है।";
+      } else if (type === 2) {
+        // Multiplication (Day 3 style)
+        num1 = getRandomInt(12, 45);
+        num2 = getRandomInt(4, 15);
+        ans = num1 * num2;
+        qText = "What is " + formatNum(num1) + " × " + formatNum(num2) + "?";
+        qHi = formatNum(num1) + " × " + formatNum(num2) + " कितना है?";
+        expl = "Product of numbers is " + formatNum(ans);
+        explHi = "संख्याओं का गुणनफल " + formatNum(ans) + " है।";
+      } else {
+        // Division (Day 4 style)
+        num2 = [4, 5, 6, 7, 8, 9, 10][getRandomInt(0, 6)];
+        let multiplier = getRandomInt(10, 35);
+        num1 = num2 * multiplier;
+        ans = num1 / num2;
+        qText = "What is " + formatNum(num1) + " ÷ " + formatNum(num2) + "?";
+        qHi = formatNum(num1) + " ÷ " + formatNum(num2) + " कितना है?";
+        expl = "Division result is " + formatNum(ans);
+        explHi = "भागफल " + formatNum(ans) + " है।";
+      }
+
+      let dists = generateDistractors(ans);
+      let optionsList = [ans, dists[0], dists[1], dists[2]];
+      
+      let optionObjs = optionsList.map((val, idx) => ({ val: val, isCorrect: idx === 0 }));
+      optionObjs.sort(() => Math.random() - 0.5);
+      
+      let shuffledOptions = optionObjs.map(o => formatNum(o.val));
+      let correctIndex = optionObjs.findIndex(o => o.isCorrect);
+
+      return {
+        question: qText,
+        hindi: qHi,
+        options: shuffledOptions,
+        answer: correctIndex,
+        explanation: expl,
+        explanationHindi: explHi
+      };
+    }
+
+    function buildQuizQuestions() {
+      let list = [];
+      // Generate exactly 40 mixed questions from Days 1 to 4
+      for (let i = 0; i < 40; i++) {
+        list.push(createMixedQuestion());
+      }
+      return list;
+    }
 
     const questionNumber = document.getElementById("questionNumber");
     const questionText = document.getElementById("questionText");
@@ -865,7 +633,8 @@
         nextButton.textContent = "Next Question | अगला प्रश्न";
       }
     }
-function showResult() {
+
+    function showResult() {
       quizPanel.style.display = "none";
       resultPanel.style.display = "block";
 
@@ -878,7 +647,6 @@ function showResult() {
       let message;
       let messageHindi;
 
-      // Score-based feedback message without recommendations
       if (score >= 15) {
         message = "Very good work! Review the questions you missed to strengthen your concepts.";
         messageHindi = "बहुत अच्छा! अपनी अवधारणाओं को मजबूत करने के लिए छूटे हुए प्रश्नों को दोहराएँ।";
@@ -906,6 +674,7 @@ function showResult() {
     });
 
     restartButton.addEventListener("click", function() {
+      questions = buildQuizQuestions();
       currentQuestion = 0;
       score = 0;
       answered = false;
@@ -914,7 +683,8 @@ function showResult() {
       renderQuestion();
     });
 
-    // Initial render call
+    // Initial load call
+    questions = buildQuizQuestions();
     renderQuestion();
   </script>
 
