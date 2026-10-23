@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="Day 5 Exercise: Mixed Practice Quiz from Days 1 to 4. Bilingual English and Hindi practice quiz.">
+  <meta name="description" content="DMAS Rule Exercise: Order of Operations, Rules, Hacks and Practice Quiz. Bilingual English and Hindi.">
 
-  <title>Day 5 Exercise - RawaRajpootNexEduToppers</title>
+  <title>DMAS Rules Exercise - RawaRajpootNexEduToppers</title>
 
   <style>
     :root {
@@ -303,24 +303,36 @@
 
   <header>
     <h1>RawaRajpootNexEduToppers Learning Academy</h1>
-    <p>Day 5 | Mixed Exercise (Q1–Q40)</p>
-    <h2 style="color:white; margin:10px 0;">DAYS 1 TO 4 MIXED PRACTICE QUIZ</h2>
-    <p>Addition, Subtraction, Multiplication & Division Basics</p>
-    <p lang="hi">दिन 1 से 4 के मिक्स्ड प्रश्न: जोड़, घटाना, गुणा और भाग</p>
+    <p>DMAS Special Exercise (Q1–Q40)</p>
+    <h2 style="color:white; margin:10px 0;">ORDER OF OPERATIONS: DMAS RULE</h2>
+    <p>Learn DMAS Rules, Hacks and Practice Mental Math Quiz</p>
+    <p lang="hi">DMAS नियम (भाग, गुणा, जोड़, घटाना), ट्रिक्स और प्रश्नोत्तरी से अभ्यास</p>
   </header>
 
   <main class="container">
 
     <section class="card">
-      <h2>Welcome to Day 5 Mixed Practice | मिक्स्ड अभ्यास में आपका स्वागत है</h2>
+      <h2>बच्चों, आइए गणित के सबसे जरूरी नियम **DMAS** को समझें:</h2>
+      
+      <p>जब किसी सवाल में एक से ज्यादा चिन्ह (जैसे +, -, ×, ÷) एक साथ दिए हों, तो हम उन्हें अपनी मर्जी से हल नहीं करते, बल्कि एक निश्चित नियम से करते हैं जिसे **DMAS** कहते हैं।</p>
 
-      <p>
-        Answer 40 mixed multiple-choice questions based on Days 1 to 4 concepts (Addition, Subtraction, Multiplication, Division & Divisibility).
-      </p>
+      <h2>📌 What is DMAS? (DMAS का पूरा नाम):</h2>
+      <p><b>D - Division (भाग):</b> सबसे पहले भाग (÷) करें।</p>
+      <p><b>M - Multiplication (गुणा):</b> दूसरे नंबर पर गुणा (×) करें।</p>
+      <p><b>A - Addition (जोड़):</b> तीसरे नंबर पर जोड़ (+) करें।</p>
+      <p><b>S - Subtraction (घटाना):</b> सबसे अंत में घटाना (-) करें।</p>
 
-      <p class="hindi" lang="hi">
-        दिन 1 से 4 के अवधारणाओं (जोड़, घटाना, गुणा, भाग और विभाज्यता) पर आधारित 40 मिक्स्ड बहुविकल्पीय प्रश्नों के उत्तर दें।
-      </p>
+      <hr style="border: 0; border-top: 1px solid var(--border); margin: 20px 0;">
+
+      <h2>🚀 DMAS Solving Hacks & Examples (हल करने की जादुई ट्रिक्स):</h2>
+
+      <h2>Example: 20 ÷ 4 + 3 × 2 - 5 = ?</h2>
+      <p><b>Step 1 (Division - भाग):</b> सबसे पहले 20 ÷ 4 को हल करें = 5<br>नया समीकरण: 5 + 3 × 2 - 5</p>
+      <p><b>Step 2 (Multiplication - गुणा):</b> अब 3 × 2 को हल करें = 6<br>नया समीकरण: 5 + 6 - 5</p>
+      <p><b>Step 3 (Addition - जोड़):</b> अब 5 + 6 को जोड़ें = 11<br>नया समीकरण: 11 - 5</p>
+      <p><b>Step 4 (Subtraction - घटाना):</b> अंत में 11 में से 5 घटाएँ = <b>6</b> (अंतिम उत्तर)</p>
+
+      <h3>अब नीचे दी गई प्रश्नोत्तरी से DMAS नियमों का अभ्यास करें</h3>
 
       <div class="quiz-info">
         <strong>Questions:</strong> 40
@@ -436,11 +448,11 @@
 
     function generateDistractors(ans) {
       let distractors = new Set();
-      let offsets = [1, -1, 2, -2, 5, -5, 10, -10, 20, -20, 100, -100];
+      let offsets = [1, -1, 2, -2, 5, -5, 10, -10];
       offsets.sort(() => Math.random() - 0.5);
       for (let offset of offsets) {
         let d = ans + offset;
-        if (d > 0 && d !== ans) {
+        if (d >= 0 && d !== ans) {
           distractors.add(d);
         }
         if (distractors.size >= 3) break;
@@ -448,7 +460,7 @@
       let fallback = 1;
       while (distractors.size < 3) {
         let d = ans + fallback;
-        if (d > 0 && d !== ans) {
+        if (d >= 0 && d !== ans) {
           distractors.add(d);
         }
         fallback++;
@@ -456,74 +468,51 @@
       return Array.from(distractors);
     }
 
-    function createMixedQuestion() {
-      // Choose randomly between Addition (0), Subtraction (1), Multiplication (2), Division (3)
-      let type = getRandomInt(0, 3);
-      let num1, num2, ans, qText, qHi, expl, explHi;
+    function createDMASQuestion() {
+      // Create clean DMAS expressions with integer results
+      // Pattern: a ÷ b + c × d - e or similar variants
+      let b = [2, 3, 4, 5][getRandomInt(0, 3)];
+      let quotient = getRandomInt(2, 10);
+      let a = b * quotient; // ensures clean division a / b = quotient
 
-      if (type === 0) {
-        // Addition (Day 1 style)
-        num1 = getRandomInt(40, 850);
-        num2 = getRandomInt(20, 450);
-        ans = num1 + num2;
-        qText = "What is " + formatNum(num1) + " + " + formatNum(num2) + "?";
-        qHi = formatNum(num1) + " + " + formatNum(num2) + " कितना है?";
-        expl = "Sum of numbers is " + formatNum(ans);
-        explHi = "संख्याओं का योग " + formatNum(ans) + " है।";
-      } else if (type === 1) {
-        // Subtraction (Day 2 style)
-        num1 = getRandomInt(100, 900);
-        num2 = getRandomInt(20, num1 - 10);
-        ans = num1 - num2;
-        qText = "What is " + formatNum(num1) + " - " + formatNum(num2) + "?";
-        qHi = formatNum(num1) + " - " + formatNum(num2) + " कितना है?";
-        expl = "Difference of numbers is " + formatNum(ans);
-        explHi = "संख्याओं का अंतर " + formatNum(ans) + " है।";
-      } else if (type === 2) {
-        // Multiplication (Day 3 style)
-        num1 = getRandomInt(12, 45);
-        num2 = getRandomInt(4, 15);
-        ans = num1 * num2;
-        qText = "What is " + formatNum(num1) + " × " + formatNum(num2) + "?";
-        qHi = formatNum(num1) + " × " + formatNum(num2) + " कितना है?";
-        expl = "Product of numbers is " + formatNum(ans);
-        explHi = "संख्याओं का गुणनफल " + formatNum(ans) + " है।";
-      } else {
-        // Division (Day 4 style)
-        num2 = [4, 5, 6, 7, 8, 9, 10][getRandomInt(0, 6)];
-        let multiplier = getRandomInt(10, 35);
-        num1 = num2 * multiplier;
-        ans = num1 / num2;
-        qText = "What is " + formatNum(num1) + " ÷ " + formatNum(num2) + "?";
-        qHi = formatNum(num1) + " ÷ " + formatNum(num2) + " कितना है?";
-        expl = "Division result is " + formatNum(ans);
-        explHi = "भागफल " + formatNum(ans) + " है।";
-      }
+      let c = getRandomInt(2, 6);
+      let d = getRandomInt(2, 6);
+      let product = c * d;
+
+      let e = getRandomInt(1, Math.min(10, quotient + product));
+
+      // Expression: a ÷ b + c × d - e
+      let ans = quotient + product - e;
+
+      let qText = "What is " + a + " ÷ " + b + " + " + c + " × " + d + " - " + e + "?";
+      let qHi = a + " ÷ " + b + " + " + c + " × " + d + " - " + e + " कितना होगा?";
 
       let dists = generateDistractors(ans);
       let optionsList = [ans, dists[0], dists[1], dists[2]];
-      
+
       let optionObjs = optionsList.map((val, idx) => ({ val: val, isCorrect: idx === 0 }));
       optionObjs.sort(() => Math.random() - 0.5);
-      
+
       let shuffledOptions = optionObjs.map(o => formatNum(o.val));
       let correctIndex = optionObjs.findIndex(o => o.isCorrect);
+
+      let explanation = "Follow DMAS: First divide (" + a + "÷" + b + "=" + quotient + "), then multiply (" + c + "×" + d + "=" + product + "), then add and subtract to get " + ans;
+      let explanationHindi = "DMAS नियम के अनुसार: पहले भाग (" + a + "÷" + b + "=" + quotient + "), फिर गुणा (" + c + "×" + d + "=" + product + "), अंत में जोड़कर व घटाकर उत्तर " + ans + " प्राप्त होगा।";
 
       return {
         question: qText,
         hindi: qHi,
         options: shuffledOptions,
         answer: correctIndex,
-        explanation: expl,
-        explanationHindi: explHi
+        explanation: explanation,
+        explanationHindi: explanationHindi
       };
     }
 
     function buildQuizQuestions() {
       let list = [];
-      // Generate exactly 40 mixed questions from Days 1 to 4
       for (let i = 0; i < 40; i++) {
-        list.push(createMixedQuestion());
+        list.push(createDMASQuestion());
       }
       return list;
     }
