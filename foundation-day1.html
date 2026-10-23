@@ -408,7 +408,7 @@
       <!-- Button Action Container -->
       <div id="resultActions" style="margin-top: 20px; display: flex; flex-direction: column; gap: 12px;">
         <button class="action-button" id="restartButton" type="button" style="margin-top: 0; width: 100%;">
-          Try Again | फिर से प्रयास करें
+          Generate New Quiz | नई क्विज़ बनाएँ
         </button>
         
         <a class="back-link" href="class4-daily-exercise-maths-foundation.html" style="text-align: center; margin: 0; display: block;">
@@ -452,332 +452,130 @@
   <script>
     "use strict";
 
-const questions = [
-  {
-    question: "What is 36 + 27?",
-    hindi: "36 + 27 कितना है?",
-    options: ["53", "63", "61", "73"],
-    answer: 1,
-    explanation: "First add 30+20=50, then add 6+7=13, Now add 50+13=63",
-    explanationHindi: "पहले जोड़ें 30+20=50, फिर जोड़ें 6+7=13, अब जोड़ें 50+13=63"
-  },
-  {
-    question: "What is 45 + 38?",
-    hindi: "45 + 38 कितना है?",
-    options: ["83", "73", "85", "82"],
-    answer: 0,
-    explanation: "First add 40+30=70, then add 5+8=13, Now add 70+13=83",
-    explanationHindi: "पहले जोड़ें 40+30=70, फिर जोड़ें 5+8=13, अब जोड़ें 70+13=83"
-  },
-  {
-    question: "What is 52 + 19?",
-    hindi: "52 + 19 कितना है?",
-    options: ["61", "71", "73", "69"],
-    answer: 1,
-    explanation: "First add 52+20=72, then subtract 1, Now add 72-1=71",
-    explanationHindi: "पहले जोड़ें 52+20=72, फिर 1 घटाएँ, अब जोड़ें 72-1=71"
-  },
-  {
-    question: "What is 64 + 28?",
-    hindi: "64 + 28 कितना है?",
-    options: ["92", "82", "94", "88"],
-    answer: 0,
-    explanation: "First add 60+20=80, then add 4+8=12, Now add 80+12=92",
-    explanationHindi: "पहले जोड़ें 60+20=80, फिर जोड़ें 4+8=12, अब जोड़ें 80+12=92"
-  },
-  {
-    question: "What is 73 + 16?",
-    hindi: "73 + 16 कितना है?",
-    options: ["87", "89", "99", "88"],
-    answer: 1,
-    explanation: "First add 70+10=80, then add 3+6=9, Now add 80+9=89",
-    explanationHindi: "पहले जोड़ें 70+10=80, फिर जोड़ें 3+6=9, अब जोड़ें 80+9=89"
-  },
-  {
-    question: "What is 49 + 36?",
-    hindi: "49 + 36 कितना है?",
-    options: ["84", "85", "75", "86"],
-    answer: 1,
-    explanation: "First add 50+36=86, then subtract 1, Now add 86-1=85",
-    explanationHindi: "पहले जोड़ें 50+36=86, फिर 1 घटाएँ, अब जोड़ें 86-1=85"
-  },
-  {
-    question: "What is 81 + 17?",
-    hindi: "81 + 17 कितना है?",
-    options: ["98", "97", "88", "99"],
-    answer: 0,
-    explanation: "First add 80+10=90, then add 1+7=8, Now add 90+8=98",
-    explanationHindi: "पहले जोड़ें 80+10=90, फिर जोड़ें 1+7=8, अब जोड़ें 90+8=98"
-  },
-  {
-    question: "What is 29 + 54?",
-    hindi: "29 + 54 कितना है?",
-    options: ["81", "83", "73", "85"],
-    answer: 1,
-    explanation: "First add 30+54=84, then subtract 1, Now add 84-1=83",
-    explanationHindi: "पहले जोड़ें 30+54=84, फिर 1 घटाएँ, अब जोड़ें 84-1=83"
-  },
-  {
-    question: "What is 67 + 25?",
-    hindi: "67 + 25 कितना है?",
-    options: ["91", "92", "82", "93"],
-    answer: 1,
-    explanation: "First add 60+20=80, then add 7+5=12, Now add 80+12=92",
-    explanationHindi: "पहले जोड़ें 60+20=80, फिर जोड़ें 7+5=12, अब जोड़ें 80+12=92"
-  },
-  {
-    question: "What is 58 + 24?",
-    hindi: "58 + 24 कितना है?",
-    options: ["81", "82", "72", "84"],
-    answer: 1,
-    explanation: "First add 60+24=84, then subtract 2, Now add 84-2=82",
-    explanationHindi: "पहले जोड़ें 60+24=84, फिर 2 घटाएँ, अब जोड़ें 84-2=82"
-  },
-  {
-    question: "What is 33 + 46?",
-    hindi: "33 + 46 कितना है?",
-    options: ["79", "78", "89", "69"],
-    answer: 0,
-    explanation: "First add 30+40=70, then add 3+6=9, Now add 70+9=79",
-    explanationHindi: "पहले जोड़ें 30+40=70, फिर जोड़ें 3+6=9, अब जोड़ें 70+9=79"
-  },
-  {
-    question: "What is 75 + 18?",
-    hindi: "75 + 18 कितना है?",
-    options: ["92", "93", "83", "95"],
-    answer: 1,
-    explanation: "First add 75+20=95, then subtract 2, Now add 95-2=93",
-    explanationHindi: "पहले जोड़ें 75+20=95, फिर 2 घटाएँ, अब जोड़ें 95-2=93"
-  },
-  {
-    question: "What is 88 + 11?",
-    hindi: "88 + 11 कितना है?",
-    options: ["99", "98", "97", "101"],
-    answer: 0,
-    explanation: "First add 80+10=90, then add 8+1=9, Now add 90+9=99",
-    explanationHindi: "पहले जोड़ें 80+10=90, फिर जोड़ें 8+1=9, अब जोड़ें 90+9=99"
-  },
-  {
-    question: "What is 42 + 37?",
-    hindi: "42 + 37 कितना है?",
-    options: ["78", "79", "89", "77"],
-    answer: 1,
-    explanation: "First add 40+30=70, then add 2+7=9, Now add 70+9=79",
-    explanationHindi: "पहले जोड़ें 40+30=70, फिर जोड़ें 2+7=9, अब जोड़ें 70+9=79"
-  },
-  {
-    question: "What is 19 + 65?",
-    hindi: "19 + 65 कितना है?",
-    options: ["83", "84", "74", "85"],
-    answer: 1,
-    explanation: "First add 20+65=85, then subtract 1, Now add 85-1=84",
-    explanationHindi: "पहले जोड़ें 20+65=85, फिर 1 घटाएँ, अब जोड़ें 85-1=84"
-  },
-  {
-    question: "What is 345 + 234?",
-    hindi: "345 + 234 कितना है?",
-    options: ["578", "579", "569", "589"],
-    answer: 1,
-    explanation: "First add 300+200=500, then add 40+30=70, then add 5+4=9, Now add 500+70+9=579",
-    explanationHindi: "पहले जोड़ें 300+200=500, फिर जोड़ें 40+30=70, फिर जोड़ें 5+4=9, अब जोड़ें 500+70+9=579"
-  },
-  {
-    question: "What is 462 + 315?",
-    hindi: "462 + 315 कितना है?",
-    options: ["777", "767", "787", "775"],
-    answer: 0,
-    explanation: "First add 400+300=700, then add 60+10=70, then add 2+5=7, Now add 700+70+7=777",
-    explanationHindi: "पहले जोड़ें 400+300=700, फिर जोड़ें 60+10=70, फिर जोड़ें 2+5=7, अब जोड़ें 700+70+7=777"
-  },
-  {
-    question: "What is 198 + 245?",
-    hindi: "198 + 245 कितना है?",
-    options: ["442", "443", "433", "453"],
-    answer: 1,
-    explanation: "First add 200+245=445, then subtract 2, Now add 445-2=443",
-    explanationHindi: "पहले जोड़ें 200+245=445, फिर 2 घटाएँ, अब जोड़ें 445-2=443"
-  },
-  {
-    question: "What is 520 + 130?",
-    hindi: "520 + 130 कितना है?",
-    options: ["640", "650", "660", "630"],
-    answer: 1,
-    explanation: "First add 500+100=600, then add 20+30=50, Now add 600+50=650",
-    explanationHindi: "पहले जोड़ें 500+100=600, फिर जोड़ें 20+30=50, अब जोड़ें 600+50=650"
-  },
-  {
-    question: "What is 260 + 140?",
-    hindi: "260 + 140 कितना है?",
-    options: ["390", "400", "410", "380"],
-    answer: 1,
-    explanation: "First add 200+100=300, then add 60+40=100, Now add 300+100=400",
-    explanationHindi: "पहले जोड़ें 200+100=300, फिर जोड़ें 60+40=100, अब जोड़ें 300+100=400"
-  },
-  {
-    question: "What is 468 + 257?",
-    hindi: "468 + 257 कितना है?",
-    options: ["715", "725", "735", "723"],
-    answer: 1,
-    explanation: "First add 400+200=600, then add 60+50=110, then add 8+7=15, Now add 600+110+15=725",
-    explanationHindi: "पहले जोड़ें 400+200=600, फिर जोड़ें 60+50=110, फिर जोड़ें 8+7=15, अब जोड़ें 600+110+15=725"
-  },
-  {
-    question: "What is 299 + 150?",
-    hindi: "299 + 150 कितना है?",
-    options: ["448", "449", "459", "439"],
-    answer: 1,
-    explanation: "First add 300+150=450, then subtract 1, Now add 450-1=449",
-    explanationHindi: "पहले जोड़ें 300+150=450, फिर 1 घटाएँ, अब जोड़ें 450-1=449"
-  },
-  {
-    question: "What is 612 + 235?",
-    hindi: "612 + 235 कितना है?",
-    options: ["846", "847", "837", "857"],
-    answer: 1,
-    explanation: "First add 600+200=800, then add 10+30=40, then add 2+5=7, Now add 800+40+7=847",
-    explanationHindi: "पहले जोड़ें 600+200=800, फिर जोड़ें 10+30=40, फिर जोड़ें 2+5=7, अब जोड़ें 800+40+7=847"
-  },
-  {
-    question: "What is 350 + 425?",
-    hindi: "350 + 425 कितना है?",
-    options: ["765", "775", "785", "755"],
-    answer: 1,
-    explanation: "First add 300+400=700, then add 50+20=70, then add 0+5=5, Now add 700+70+5=775",
-    explanationHindi: "पहले जोड़ें 300+400=700, फिर जोड़ें 50+20=70, फिर जोड़ें 0+5=5, अब जोड़ें 700+70+5=775"
-  },
-  {
-    question: "What is 495 + 210?",
-    hindi: "495 + 210 कितना है?",
-    options: ["704", "705", "695", "715"],
-    answer: 1,
-    explanation: "First add 500+210=710, then subtract 5, Now add 710-5=705",
-    explanationHindi: "पहले जोड़ें 500+210=710, फिर 5 घटाएँ, अब जोड़ें 710-5=705"
-  },
-  {
-    question: "What is 123 + 456?",
-    hindi: "123 + 456 कितना है?",
-    options: ["578", "579", "589", "569"],
-    answer: 1,
-    explanation: "First add 100+400=500, then add 20+50=70, then add 3+6=9, Now add 500+70+9=579",
-    explanationHindi: "पहले जोड़ें 100+400=500, फिर जोड़ें 20+50=70, फिर जोड़ें 3+6=9, अब जोड़ें 500+70+9=579"
-  },
-  {
-    question: "What is 740 + 155?",
-    hindi: "740 + 155 कितना है?",
-    options: ["885", "895", "890", "905"],
-    answer: 1,
-    explanation: "First add 700+100=800, then add 40+50=90, then add 0+5=5, Now add 800+90+5=895",
-    explanationHindi: "पहले जोड़ें 700+100=800, फिर जोड़ें 40+50=90, फिर जोड़ें 0+5=5, अब जोड़ें 800+90+5=895"
-  },
-  {
-    question: "What is 397 + 120?",
-    hindi: "397 + 120 कितना है?",
-    options: ["516", "517", "507", "527"],
-    answer: 1,
-    explanation: "First add 400+120=520, then subtract 3, Now add 520-3=517",
-    explanationHindi: "पहले जोड़ें 400+120=520, फिर 3 घटाएँ, अब जोड़ें 520-3=517"
-  },
-  {
-    question: "What is 531 + 246?",
-    hindi: "531 + 246 कितना है?",
-    options: ["776", "777", "787", "767"],
-    answer: 1,
-    explanation: "First add 500+200=700, then add 30+40=70, then add 1+6=7, Now add 700+70+7=777",
-    explanationHindi: "पहले जोड़ें 500+200=700, फिर जोड़ें 30+40=70, फिर जोड़ें 1+6=7, अब जोड़ें 700+70+7=777"
-  },
-  {
-    question: "What is 805 + 180?",
-    hindi: "805 + 180 कितना है?",
-    options: ["975", "985", "995", "965"],
-    answer: 1,
-    explanation: "First add 800+100=900, then add 0+80=80, then add 5+0=5, Now add 900+80+5=985",
-    explanationHindi: "पहले जोड़ें 800+100=900, फिर जोड़ें 0+80=80, फिर जोड़ें 5+0=5, अब जोड़ें 900+80+5=985"
-  },
-  {
-    question: "What is 2,468 + 3,157?",
-    hindi: "2,468 + 3,157 कितना है?",
-    options: ["5,615", "5,625", "5,635", "5,525"],
-    answer: 1,
-    explanation: "First add 2000+3000=5000, then add 400+100=500, then add 60+50=110, then add 8+7=15, Now add 5000+500+110+15=5625",
-    explanationHindi: "पहले जोड़ें 2000+3000=5000, फिर जोड़ें 400+100=500, फिर जोड़ें 60+50=110, फिर जोड़ें 8+7=15, अब जोड़ें 5000+500+110+15=5625"
-  },
-  {
-    question: "What is 3,998 + 2,475?",
-    hindi: "3,998 + 2,475 कितना है?",
-    options: ["6,472", "6,473", "6,475", "6,471"],
-    answer: 1,
-    explanation: "First add 4000+2475=6475, then subtract 2, Now add 6475-2=6473",
-    explanationHindi: "पहले जोड़ें 4000+2475=6475, फिर 2 घटाएँ, अब जोड़ें 6475-2=6473"
-  },
-  {
-    question: "What is 3,452 + 2,136?",
-    hindi: "3,452 + 2,136 कितना है?",
-    options: ["5,578", "5,588", "5,598", "5,488"],
-    answer: 1,
-    explanation: "First add 3000+2000=5000, then add 400+100=500, then add 50+30=80, then add 2+6=8, Now add 5000+500+80+8=5588",
-    explanationHindi: "पहले जोड़ें 3000+2000=5000, फिर जोड़ें 400+100=500, फिर जोड़ें 50+30=80, फिर जोड़ें 2+6=8, अब जोड़ें 5000+500+80+8=5588"
-  },
-  {
-    question: "What is 4,685 + 2,577?",
-    hindi: "4,685 + 2,577 कितना है?",
-    options: ["7,252", "7,262", "7,272", "7,162"],
-    answer: 1,
-    explanation: "First add 4000+2000=6000, then add 600+500=1100, then add 80+70=150, then add 5+7=12, Now add 6000+1100+150+12=7262",
-    explanationHindi: "पहले जोड़ें 4000+2000=6000, फिर जोड़ें 600+500=1100, फिर जोड़ें 80+70=150, फिर जोड़ें 5+7=12, अब जोड़ें 6000+1100+150+12=7262"
-  },
-  {
-    question: "What is 1,995 + 1,230?",
-    hindi: "1,995 + 1,230 कितना है?",
-    options: ["3,220", "3,225", "3,235", "3,215"],
-    answer: 1,
-    explanation: "First add 2000+1230=3230, then subtract 5, Now add 3230-5=3225",
-    explanationHindi: "पहले जोड़ें 2000+1230=3230, फिर 5 घटाएँ, अब जोड़ें 3230-5=3225"
-  },
-  {
-    question: "What is 12,300 + 14,500?",
-    hindi: "12,300 + 14,500 कितना है?",
-    options: ["26,700", "26,800", "25,800", "26,900"],
-    answer: 1,
-    explanation: "First add 12000+14000=26000, then add 300+500=800, Now add 26000+800=26800",
-    explanationHindi: "पहले जोड़ें 12000+14000=26000, फिर जोड़ें 300+500=800, अब जोड़ें 26000+800=26800"
-  },
-  {
-    question: "What is 29,990 + 15,000?",
-    hindi: "29,990 + 15,000 कितना है?",
-    options: ["44,980", "44,990", "45,000", "44,970"],
-    answer: 1,
-    explanation: "First add 30000+15000=45000, then subtract 10, Now add 45000-10=44990",
-    explanationHindi: "पहले जोड़ें 30000+15000=45000, फिर 10 घटाएँ, अब जोड़ें 45000-10=44990"
-  },
-  {
-    question: "What is 20,400 + 30,500?",
-    hindi: "20,400 + 30,500 कितना है?",
-    options: ["50,800", "50,900", "51,000", "50,700"],
-    answer: 1,
-    explanation: "First add 20000+30000=50000, then add 400+500=900, Now add 50000+900=50900",
-    explanationHindi: "पहले जोड़ें 20000+30000=50000, फिर जोड़ें 400+500=900, अब जोड़ें 50000+900=50900"
-  },
-  {
-    question: "What is 45,250 + 12,340?",
-    hindi: "45,250 + 12,340 कितना है?",
-    options: ["57,580", "57,590", "57,690", "56,590"],
-    answer: 1,
-    explanation: "First add 45000+12000=57000, then add 200+300=500, then add 50+40=90, Now add 57000+500+90=57590",
-    explanationHindi: "पहले जोड़ें 45000+12000=57000, फिर जोड़ें 200+300=500, फिर जोड़ें 50+40=90, अब जोड़ें 57000+500+90=57590"
-  },
-  {
-    question: "What is 19,995 + 10,200?",
-    hindi: "19,995 + 10,200 कितना है?",
-    options: ["30,190", "30,195", "30,205", "30,185"],
-    answer: 1,
-    explanation: "First add 20000+10200=30200, then subtract 5, Now add 30200-5=30195",
-    explanationHindi: "पहले जोड़ें 20000+10200=30200, फिर 5 घटाएँ, अब जोड़ें 30200-5=30195"
-  }
-];
-
+    let questions = [];
     let currentQuestion = 0;
     let score = 0;
     let answered = false;
+
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function formatNum(num) {
+      return num.toLocaleString('en-US');
+    }
+
+    function generateDistractors(ans) {
+      let distractors = new Set();
+      let offsets = [1, -1, 10, -10, 2, -2, 5, -5, 20, -20, 100, -100];
+      offsets.sort(() => Math.random() - 0.5);
+      for (let offset of offsets) {
+        let d = ans + offset;
+        if (d > 0 && d !== ans) {
+          distractors.add(d);
+        }
+        if (distractors.size >= 3) break;
+      }
+      let fallback = 1;
+      while (distractors.size < 3) {
+        let d = ans + fallback;
+        if (d > 0 && d !== ans) {
+          distractors.add(d);
+        }
+        fallback++;
+      }
+      return Array.from(distractors);
+    }
+
+    function createQuestionData(num1, num2, type, methodNote, methodNoteHi) {
+      let ans = num1 + num2;
+      let qText = "What is " + formatNum(num1) + " + " + formatNum(num2) + "?";
+      let qHi = formatNum(num1) + " + " + formatNum(num2) + " कितना है?";
+      
+      let dists = generateDistractors(ans);
+      let optionsList = [ans, dists[0], dists[1], dists[2]];
+      
+      let optionObjs = optionsList.map((val, idx) => ({ val: val, isCorrect: idx === 0 }));
+      optionObjs.sort(() => Math.random() - 0.5);
+      
+      let shuffledOptions = optionObjs.map(o => formatNum(o.val));
+      let correctIndex = optionObjs.findIndex(o => o.isCorrect);
+
+      return {
+        question: qText,
+        hindi: qHi,
+        options: shuffledOptions,
+        answer: correctIndex,
+        explanation: methodNote || ("First add numbers, total is " + formatNum(ans)),
+        explanationHindi: methodNoteHi || ("इन संख्याओं को जोड़ने पर कुल योग " + formatNum(ans) + " है।")
+      };
+    }
+
+    function buildQuizQuestions() {
+      let list = [];
+
+      // 1. 2-digit normal addition (12 questions)
+      for (let i = 0; i < 12; i++) {
+        let n1 = getRandomInt(30, 85);
+        let n2 = getRandomInt(12, 48);
+        let ans = n1 + n2;
+        let t1 = Math.floor(n1 / 10) * 10;
+        let t2 = Math.floor(n2 / 10) * 10;
+        let o1 = n1 - t1;
+        let o2 = n2 - t2;
+        let expl = "First add " + t1 + "+" + t2 + "=" + (t1+t2) + ", then add " + o1 + "+" + o2 + "=" + (o1+o2) + ", Now add " + (t1+t2) + "+" + (o1+o2) + "=" + ans;
+        let explHi = "पहले जोड़ें " + t1 + "+" + t2 + "=" + (t1+t2) + ", फिर जोड़ें " + o1 + "+" + o2 + "=" + (o1+o2) + ", अब जोड़ें " + (t1+t2) + "+" + (o1+o2) + "=" + ans;
+        list.push(createQuestionData(n1, n2, '2digit', expl, explHi));
+      }
+
+      // 2. 2-digit compensation addition (6 questions)
+      for (let i = 0; i < 6; i++) {
+        let base = [39, 49, 59, 29, 69, 79][getRandomInt(0, 5)];
+        let n2 = getRandomInt(15, 45);
+        let ans = base + n2;
+        let rounded = base + 1;
+        let expl = "First add " + rounded + "+" + n2 + "=" + (rounded+n2) + ", then subtract 1, Now add " + (rounded+n2) + "-1=" + ans;
+        let explHi = "पहले जोड़ें " + rounded + "+" + n2 + "=" + (rounded+n2) + ", फिर 1 घटाएँ, अब जोड़ें " + (rounded+n2) + "-1=" + ans;
+        list.push(createQuestionData(base, n2, '2digitComp', expl, explHi));
+      }
+
+      // 3. 3-digit normal addition (10 questions)
+      for (let i = 0; i < 10; i++) {
+        let n1 = getRandomInt(300, 750);
+        let n2 = getRandomInt(110, 350);
+        let ans = n1 + n2;
+        let h1 = Math.floor(n1 / 100) * 100;
+        let h2 = Math.floor(n2 / 100) * 100;
+        let rem1 = n1 - h1;
+        let rem2 = n2 - h2;
+        let expl = "First add " + h1 + "+" + h2 + "=" + (h1+h2) + ", then add remainder " + rem1 + "+" + rem2 + "=" + (rem1+rem2) + ", Now add total " + ans;
+        let explHi = "पहले सैकड़े जोड़ें " + h1 + "+" + h2 + "=" + (h1+h2) + ", फिर बाकी जोड़ें " + rem1 + "+" + rem2 + "=" + (rem1+rem2) + ", कुल जोड़ " + ans;
+        list.push(createQuestionData(n1, n2, '3digit', expl, explHi));
+      }
+
+      // 4. 4-digit addition (6 questions)
+      for (let i = 0; i < 6; i++) {
+        let n1 = getRandomInt(2000, 5000);
+        let n2 = getRandomInt(1100, 3000);
+        let ans = n1 + n2;
+        let expl = "First add thousands, then hundreds, tens and units, total is " + formatNum(ans);
+        let explHi = "पहले हजार, सैकड़े, दहाई और इकाई जोड़ें, कुल योग " + formatNum(ans) + " है।";
+        list.push(createQuestionData(n1, n2, '4digit', expl, explHi));
+      }
+
+      // 5. Larger/five-digit addition (6 questions) -> total 40
+      for (let i = 0; i < 6; i++) {
+        let n1 = getRandomInt(12000, 35000);
+        let n2 = getRandomInt(10000, 20000);
+        let ans = n1 + n2;
+        let expl = "First add ten-thousands and thousands, then add hundreds and tens, total is " + formatNum(ans);
+        let explHi = "पहले दस-हजार और हजार जोड़ें, फिर सैकड़े जोड़ें, कुल योग " + formatNum(ans) + " है।";
+        list.push(createQuestionData(n1, n2, '5digit', expl, explHi));
+      }
+
+      list.sort(() => Math.random() - 0.5);
+      return list;
+    }
 
     const questionNumber = document.getElementById("questionNumber");
     const questionText = document.getElementById("questionText");
@@ -884,7 +682,8 @@ const questions = [
         nextButton.textContent = "Next Question | अगला प्रश्न";
       }
     }
-function showResult() {
+
+    function showResult() {
       quizPanel.style.display = "none";
       resultPanel.style.display = "block";
 
@@ -897,7 +696,6 @@ function showResult() {
       let message;
       let messageHindi;
 
-      // Score-based feedback message without recommendations
       if (score >= 15) {
         message = "Very good work! Review the questions you missed to strengthen your concepts.";
         messageHindi = "बहुत अच्छा! अपनी अवधारणाओं को मजबूत करने के लिए छूटे हुए प्रश्नों को दोहराएँ।";
@@ -925,6 +723,7 @@ function showResult() {
     });
 
     restartButton.addEventListener("click", function() {
+      questions = buildQuizQuestions();
       currentQuestion = 0;
       score = 0;
       answered = false;
@@ -933,7 +732,8 @@ function showResult() {
       renderQuestion();
     });
 
-    // Initial render call
+    // Initial load call
+    questions = buildQuizQuestions();
     renderQuestion();
   </script>
 
