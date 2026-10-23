@@ -411,7 +411,7 @@
       <!-- Button Action Container -->
       <div id="resultActions" style="margin-top: 20px; display: flex; flex-direction: column; gap: 12px;">
         <button class="action-button" id="restartButton" type="button" style="margin-top: 0; width: 100%;">
-          Try Again | फिर से प्रयास करें
+          Generate New Quiz | नई क्विज़ बनाएँ
         </button>
         
         <a class="back-link" href="class4-daily-exercise-maths-foundation.html" style="text-align: center; margin: 0; display: block;">
@@ -455,347 +455,149 @@
   <script>
     "use strict";
 
-const questions = [
-  // -------------------------------------------------------------
-  // 2-DIGIT SUBTRACTION QUESTIONS (1 to 15)
-  // -------------------------------------------------------------
-  {
-    question: "What is 58 - 24?",
-    hindi: "58 - 24 कितना है?",
-    options: ["32", "34", "36", "38"],
-    answer: 1,
-    explanation: "First subtract 58-20=38, then subtract 38-4=34",
-    explanationHindi: "पहले घटाएँ 58-20=38, फिर घटाएँ 38-4=34"
-  },
-  {
-    question: "What is 53 - 19?",
-    hindi: "53 - 19 कितना है?",
-    options: ["32", "34", "33", "35"],
-    answer: 1,
-    explanation: "First subtract 53-20=33, then add back extra 1, Now 33+1=34",
-    explanationHindi: "पहले घटाएँ 53-20=33, फिर अतिरिक्त 1 जोड़ें, अब 33+1=34"
-  },
-  {
-    question: "What is 67 - 25?",
-    hindi: "67 - 25 कितना है?",
-    options: ["41", "42", "43", "44"],
-    answer: 1,
-    explanation: "First subtract 67-20=47, then subtract 47-5=42",
-    explanationHindi: "पहले घटाएँ 67-20=47, फिर घटाएँ 47-5=42"
-  },
-  {
-    question: "What is 84 - 39?",
-    hindi: "84 - 39 कितना है?",
-    options: ["44", "45", "46", "43"],
-    answer: 1,
-    explanation: "First subtract 84-40=44, then add back extra 1, Now 44+1=45",
-    explanationHindi: "पहले घटाएँ 84-40=44, फिर अतिरिक्त 1 जोड़ें, अब 44+1=45"
-  },
-  {
-    question: "What is 76 - 32?",
-    hindi: "76 - 32 कितना है?",
-    options: ["42", "44", "46", "48"],
-    answer: 1,
-    explanation: "First subtract 76-30=46, then subtract 46-2=44",
-    explanationHindi: "पहले घटाएँ 76-30=46, फिर घटाएँ 46-2=44"
-  },
-  {
-    question: "What is 91 - 48?",
-    hindi: "91 - 48 कितना है?",
-    options: ["42", "43", "44", "41"],
-    answer: 1,
-    explanation: "First subtract 91-50=41, then add back extra 2, Now 41+2=43",
-    explanationHindi: "पहले घटाएँ 91-50=41, फिर अतिरिक्त 2 जोड़ें, अब 41+2=43"
-  },
-  {
-    question: "What is 65 - 23?",
-    hindi: "65 - 23 कितना है?",
-    options: ["41", "42", "43", "40"],
-    answer: 1,
-    explanation: "First subtract 65-20=45, then subtract 45-3=42",
-    explanationHindi: "पहले घटाएँ 65-20=45, फिर घटाएँ 45-3=42"
-  },
-  {
-    question: "What is 72 - 29?",
-    hindi: "72 - 29 कितना है?",
-    options: ["42", "43", "44", "41"],
-    answer: 1,
-    explanation: "First subtract 72-30=42, then add back extra 1, Now 42+1=43",
-    explanationHindi: "पहले घटाएँ 72-30=42, फिर अतिरिक्त 1 जोड़ें, अब 42+1=43"
-  },
-  {
-    question: "What is 88 - 45?",
-    hindi: "88 - 45 कितना है?",
-    options: ["42", "43", "44", "45"],
-    answer: 1,
-    explanation: "First subtract 88-40=48, then subtract 48-5=43",
-    explanationHindi: "पहले घटाएँ 88-40=48, फिर घटाएँ 48-5=43"
-  },
-  {
-    question: "What is 62 - 18?",
-    hindi: "62 - 18 कितना है?",
-    options: ["43", "44", "45", "42"],
-    answer: 1,
-    explanation: "First subtract 62-20=42, then add back extra 2, Now 42+2=44",
-    explanationHindi: "पहले घटाएँ 62-20=42, फिर अतिरिक्त 2 जोड़ें, अब 42+2=44"
-  },
-  {
-    question: "What is 95 - 34?",
-    hindi: "95 - 34 कितना है?",
-    options: ["60", "61", "62", "63"],
-    answer: 1,
-    explanation: "First subtract 95-30=65, then subtract 65-4=61",
-    explanationHindi: "पहले घटाएँ 95-30=65, फिर घटाएँ 65-4=61"
-  },
-  {
-    question: "What is 43 - 19?",
-    hindi: "43 - 19 कितना है?",
-    options: ["23", "24", "25", "22"],
-    answer: 1,
-    explanation: "First subtract 43-20=23, then add back extra 1, Now 23+1=24",
-    explanationHindi: "पहले घटाएँ 43-20=23, फिर अतिरिक्त 1 जोड़ें, अब 23+1=24"
-  },
-  {
-    question: "What is 79 - 26?",
-    hindi: "79 - 26 कितना है?",
-    options: ["52", "53", "54", "51"],
-    answer: 1,
-    explanation: "First subtract 79-20=59, then subtract 59-6=53",
-    explanationHindi: "पहले घटाएँ 79-20=59, फिर घटाएँ 59-6=53"
-  },
-  {
-    question: "What is 85 - 38?",
-    hindi: "85 - 38 कितना है?",
-    options: ["46", "47", "48", "45"],
-    answer: 1,
-    explanation: "First subtract 85-40=45, then add back extra 2, Now 45+2=47",
-    explanationHindi: "पहले घटाएँ 85-40=45, फिर अतिरिक्त 2 जोड़ें, अब 45+2=47"
-  },
-  {
-    question: "What is 56 - 21?",
-    hindi: "56 - 21 कितना है?",
-    options: ["34", "35", "36", "37"],
-    answer: 1,
-    explanation: "First subtract 56-20=36, then subtract 36-1=35",
-    explanationHindi: "पहले घटाएँ 56-20=36, फिर घटाएँ 36-1=35"
-  },
-
-  // -------------------------------------------------------------
-  // 3-DIGIT SUBTRACTION QUESTIONS (16 to 30)
-  // -------------------------------------------------------------
-  {
-    question: "What is 345 - 123?",
-    hindi: "345 - 123 कितना है?",
-    options: ["221", "222", "223", "224"],
-    answer: 1,
-    explanation: "First subtract 345-100=245, then subtract 245-20=225, then subtract 225-3=222",
-    explanationHindi: "पहले घटाएँ 345-100=245, फिर घटाएँ 245-20=225, फिर घटाएँ 225-3=222"
-  },
-  {
-    question: "What is 452 - 198?",
-    hindi: "452 - 198 कितना है?",
-    options: ["253", "254", "255", "252"],
-    answer: 1,
-    explanation: "First subtract 452-200=252, then add back extra 2, Now 252+2=254",
-    explanationHindi: "पहले घटाएँ 452-200=252, फिर अतिरिक्त 2 जोड़ें, अब 252+2=254"
-  },
-  {
-    question: "What is 567 - 234?",
-    hindi: "567 - 234 कितना है?",
-    options: ["332", "333", "334", "335"],
-    answer: 1,
-    explanation: "First subtract 567-200=367, then subtract 367-30=337, then subtract 337-4=333",
-    explanationHindi: "पहले घटाएँ 567-200=367, फिर घटाएँ 367-30=337, फिर घटाएँ 337-4=333"
-  },
-  {
-    question: "What is 640 - 299?",
-    hindi: "640 - 299 कितना है?",
-    options: ["340", "341", "342", "339"],
-    answer: 1,
-    explanation: "First subtract 640-300=340, then add back extra 1, Now 340+1=341",
-    explanationHindi: "पहले घटाएँ 640-300=340, फिर अतिरिक्त 1 जोड़ें, अब 340+1=341"
-  },
-  {
-    question: "What is 789 - 345?",
-    hindi: "789 - 345 कितना है?",
-    options: ["443", "444", "445", "446"],
-    answer: 1,
-    explanation: "First subtract 789-300=489, then subtract 489-40=449, then subtract 449-5=444",
-    explanationHindi: "पहले घटाएँ 789-300=489, फिर घटाएँ 489-40=449, फिर घटाएँ 449-5=444"
-  },
-  {
-    question: "What is 512 - 195?",
-    hindi: "512 - 195 कितना है?",
-    options: ["316", "317", "318", "315"],
-    answer: 1,
-    explanation: "First subtract 512-200=312, then add back extra 5, Now 312+5=317",
-    explanationHindi: "पहले घटाएँ 512-200=312, फिर अतिरिक्त 5 जोड़ें, अब 312+5=317"
-  },
-  {
-    question: "What is 856 - 421?",
-    hindi: "856 - 421 कितना है?",
-    options: ["434", "435", "436", "437"],
-    answer: 1,
-    explanation: "First subtract 856-400=456, then subtract 456-20=436, then subtract 436-1=435",
-    explanationHindi: "पहले घटाएँ 856-400=456, फिर घटाएँ 456-20=436, फिर घटाएँ 436-1=435"
-  },
-  {
-    question: "What is 730 - 390?",
-    hindi: "730 - 390 कितना है?",
-    options: ["339", "340", "341", "350"],
-    answer: 1,
-    explanation: "First subtract 730-400=330, then add back extra 10, Now 330+10=340",
-    explanationHindi: "पहले घटाएँ 730-400=330, फिर अतिरिक्त 10 जोड़ें, अब 330+10=340"
-  },
-  {
-    question: "What is 964 - 532?",
-    hindi: "964 - 532 कितना है?",
-    options: ["431", "432", "433", "434"],
-    answer: 1,
-    explanation: "First subtract 964-500=464, then subtract 464-30=434, then subtract 434-2=432",
-    explanationHindi: "पहले घटाएँ 964-500=464, फिर घटाएँ 464-30=434, फिर घटाएँ 434-2=432"
-  },
-  {
-    question: "What is 625 - 297?",
-    hindi: "625 - 297 कितना है?",
-    options: ["327", "328", "329", "326"],
-    answer: 1,
-    explanation: "First subtract 625-300=325, then add back extra 3, Now 325+3=328",
-    explanationHindi: "पहले घटाएँ 625-300=325, फिर अतिरिक्त 3 जोड़ें, अब 325+3=328"
-  },
-  {
-    question: "What is 478 - 215?",
-    hindi: "478 - 215 कितना है?",
-    options: ["262", "263", "264", "265"],
-    answer: 1,
-    explanation: "First subtract 478-200=278, then subtract 278-10=268, then subtract 268-5=263",
-    explanationHindi: "पहले घटाएँ 478-200=278, फिर घटाएँ 278-10=268, फिर घटाएँ 268-5=263"
-  },
-  {
-    question: "What is 810 - 495?",
-    hindi: "810 - 495 कितना है?",
-    options: ["314", "315", "316", "317"],
-    answer: 1,
-    explanation: "First subtract 810-500=310, then add back extra 5, Now 310+5=315",
-    explanationHindi: "पहले घटाएँ 810-500=310, फिर अतिरिक्त 5 जोड़ें, अब 310+5=315"
-  },
-  {
-    question: "What is 693 - 351?",
-    hindi: "693 - 351 कितना है?",
-    options: ["341", "342", "343", "344"],
-    answer: 1,
-    explanation: "First subtract 693-300=393, then subtract 393-50=343, then subtract 343-1=342",
-    explanationHindi: "पहले घटाएँ 693-300=393, फिर घटाएँ 393-50=343, फिर घटाएँ 343-1=342"
-  },
-  {
-    question: "What is 540 - 199?",
-    hindi: "540 - 199 कितना है?",
-    options: ["340", "341", "342", "339"],
-    answer: 1,
-    explanation: "First subtract 540-200=340, then add back extra 1, Now 340+1=341",
-    explanationHindi: "पहले घटाएँ 540-200=340, फिर अतिरिक्त 1 जोड़ें, अब 340+1=341"
-  },
-  {
-    question: "What is 755 - 230?",
-    hindi: "755 - 230 कितना है?",
-    options: ["524", "525", "526", "527"],
-    answer: 1,
-    explanation: "First subtract 755-200=555, then subtract 555-30=525",
-    explanationHindi: "पहले घटाएँ 755-200=555, फिर घटाएँ 555-30=525"
-  },
-
-  // -------------------------------------------------------------
-  // 4-DIGIT SUBTRACTION QUESTIONS (31 to 35)
-  // -------------------------------------------------------------
-  {
-    question: "What is 3,452 - 1,231?",
-    hindi: "3,452 - 1,231 कितना है?",
-    options: ["2,220", "2,221", "2,222", "2,223"],
-    answer: 1,
-    explanation: "First subtract 3452-1000=2452, then subtract 2452-200=2252, then subtract 2252-30=2222, then subtract 2222-1=2221",
-    explanationHindi: "पहले घटाएँ 3452-1000=2452, फिर घटाएँ 2452-200=2252, फिर घटाएँ 2252-30=2222, फिर घटाएँ 2222-1=2221"
-  },
-  {
-    question: "What is 4,675 - 1,998?",
-    hindi: "4,675 - 1,998 कितना है?",
-    options: ["2,676", "2,677", "2,678", "2,675"],
-    answer: 1,
-    explanation: "First subtract 4675-2000=2675, then add back extra 2, Now 2675+2=2677",
-    explanationHindi: "पहले घटाएँ 4675-2000=2675, फिर अतिरिक्त 2 जोड़ें, अब 2675+2=2677"
-  },
-  {
-    question: "What is 5,894 - 2,341?",
-    hindi: "5,894 - 2,341 कितना है?",
-    options: ["3,552", "3,553", "3,554", "3,555"],
-    answer: 1,
-    explanation: "First subtract 5894-2000=3894, then subtract 3894-300=3594, then subtract 3594-40=3554, then subtract 3554-1=3553",
-    explanationHindi: "पहले घटाएँ 5894-2000=3894, फिर घटाएँ 3894-300=3594, फिर घटाएँ 3594-40=3554, फिर घटाएँ 3554-1=3553"
-  },
-  {
-    question: "What is 6,500 - 2,995?",
-    hindi: "6,500 - 2,995 कितना है?",
-    options: ["3,504", "3,505", "3,506", "3,500"],
-    answer: 1,
-    explanation: "First subtract 6500-3000=3500, then add back extra 5, Now 3500+5=3505",
-    explanationHindi: "पहले घटाएँ 6500-3000=3500, फिर अतिरिक्त 5 जोड़ें, अब 3500+5=3505"
-  },
-  {
-    question: "What is 7,832 - 3,410?",
-    hindi: "7,832 - 3,410 कितना है?",
-    options: ["4,421", "4,422", "4,423", "4,420"],
-    answer: 1,
-    explanation: "First subtract 7832-3000=4832, then subtract 4832-400=4432, then subtract 4432-10=4422",
-    explanationHindi: "पहले घटाएँ 7832-3000=4832, फिर घटाएँ 4832-400=4432, फिर घटाएँ 4432-10=4422"
-  },
-
-  // -------------------------------------------------------------
-  // 5-DIGIT SUBTRACTION QUESTIONS (36 to 40)
-  // -------------------------------------------------------------
-  {
-    question: "What is 26,800 - 14,500?",
-    hindi: "26,800 - 14,500 कितना है?",
-    options: ["12,200", "12,300", "12,400", "12,100"],
-    answer: 1,
-    explanation: "First subtract 26800-14000=12800, then subtract 12800-500=12300",
-    explanationHindi: "पहले घटाएँ 26800-14000=12800, फिर घटाएँ 12800-500=12300"
-  },
-  {
-    question: "What is 45,000 - 19,990?",
-    hindi: "45,000 - 19,990 कितना है?",
-    options: ["25,000", "25,010", "25,020", "24,990"],
-    answer: 1,
-    explanation: "First subtract 45000-20000=25000, then add back extra 10, Now 25000+10=25010",
-    explanationHindi: "पहले घटाएँ 45000-20000=25000, फिर अतिरिक्त 10 जोड़ें, अब 25000+10=25010"
-  },
-  {
-    question: "What is 58,950 - 23,410?",
-    hindi: "58,950 - 23,410 कितना है?",
-    options: ["35,530", "35,540", "35,550", "35,520"],
-    answer: 1,
-    explanation: "First subtract 58950-23000=35950, then subtract 35950-400=35550, then subtract 35550-10=35540",
-    explanationHindi: "पहले घटाएँ 58950-23000=35950, फिर घटाएँ 35950-400=35550, फिर घटाएँ 35550-10=35540"
-  },
-  {
-    question: "What is 30,200 - 19,995?",
-    hindi: "30,200 - 19,995 कितना है?",
-    options: ["10,204", "10,205", "10,206", "10,200"],
-    answer: 1,
-    explanation: "First subtract 30200-20000=10200, then add back extra 5, Now 10200+5=10205",
-    explanationHindi: "पहले घटाएँ 30200-20000=10200, फिर अतिरिक्त 5 जोड़ें, अब 10200+5=10205"
-  },
-  {
-    question: "What is 50,900 - 20,400?",
-    hindi: "50,900 - 20,400 कितना है?",
-    options: ["30,400", "30,500", "30,600", "30,300"],
-    answer: 1,
-    explanation: "First subtract 50900-20000=30900, then subtract 30900-400=30500",
-    explanationHindi: "पहले घटाएँ 50900-20000=30900, फिर घटाएँ 30900-400=30500"
-  }
-];
-
+    let questions = [];
     let currentQuestion = 0;
     let score = 0;
     let answered = false;
+
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function formatNum(num) {
+      return num.toLocaleString('en-US');
+    }
+
+    function generateDistractors(ans) {
+      let distractors = new Set();
+      let offsets = [1, -1, 10, -10, 2, -2, 5, -5, 20, -20, 100, -100];
+      offsets.sort(() => Math.random() - 0.5);
+      for (let offset of offsets) {
+        let d = ans + offset;
+        if (d > 0 && d !== ans) {
+          distractors.add(d);
+        }
+        if (distractors.size >= 3) break;
+      }
+      let fallback = 1;
+      while (distractors.size < 3) {
+        let d = ans + fallback;
+        if (d > 0 && d !== ans) {
+          distractors.add(d);
+        }
+        fallback++;
+      }
+      return Array.from(distractors);
+    }
+
+    function createQuestionData(num1, num2, methodNote, methodNoteHi) {
+      let ans = num1 - num2;
+      let qText = "What is " + formatNum(num1) + " - " + formatNum(num2) + "?";
+      let qHi = formatNum(num1) + " - " + formatNum(num2) + " कितना है?";
+      
+      let dists = generateDistractors(ans);
+      let optionsList = [ans, dists[0], dists[1], dists[2]];
+      
+      let optionObjs = optionsList.map((val, idx) => ({ val: val, isCorrect: idx === 0 }));
+      optionObjs.sort(() => Math.random() - 0.5);
+      
+      let shuffledOptions = optionObjs.map(o => formatNum(o.val));
+      let correctIndex = optionObjs.findIndex(o => o.isCorrect);
+
+      return {
+        question: qText,
+        hindi: qHi,
+        options: shuffledOptions,
+        answer: correctIndex,
+        explanation: methodNote || ("First subtract numbers, result is " + formatNum(ans)),
+        explanationHindi: methodNoteHi || ("इन संख्याओं को घटाने पर परिणाम " + formatNum(ans) + " है।")
+      };
+    }
+
+    function buildQuizQuestions() {
+      let list = [];
+
+      // SECTION 1: 2-Digit Subtraction (Q1 - Q15) [Easy Level]
+      for (let i = 0; i < 10; i++) {
+        let n1 = getRandomInt(50, 95);
+        let n2 = getRandomInt(15, 45);
+        if (n1 <= n2) {
+          let temp = n1;
+          n1 = n2;
+          n2 = temp;
+        }
+        let ans = n1 - n2;
+        let expl = "First subtract tens, then ones, result is " + ans;
+        let explHi = "पहले दहाई और फिर इकाई घटाएँ, परिणाम " + ans + " है।";
+        list.push(createQuestionData(n1, n2, expl, explHi));
+      }
+      for (let i = 0; i < 5; i++) {
+        let base = getRandomInt(50, 85);
+        let n2 = [19, 29, 39, 49][getRandomInt(0, 3)];
+        if (base <= n2) base = n2 + 15;
+        let ans = base - n2;
+        let rounded = n2 + 1;
+        let expl = "Make " + n2 + " into " + rounded + " by adding 1, subtract " + rounded + ", then add back 1, result is " + ans;
+        let explHi = "संख्या " + n2 + " को 1 जोड़कर " + rounded + " बनाएँ, घटाएँ, फिर 1 वापस जोड़ें, परिणाम " + ans + " है।";
+        list.push(createQuestionData(base, n2, expl, explHi));
+      }
+
+      // SECTION 2: 3-Digit Subtraction (Q16 - Q30) [Medium Level]
+      for (let i = 0; i < 10; i++) {
+        let n1 = getRandomInt(300, 900);
+        let n2 = getRandomInt(110, 450);
+        if (n1 <= n2) {
+          let temp = n1;
+          n1 = n2;
+          n2 = temp;
+        }
+        let ans = n1 - n2;
+        let expl = "First subtract hundreds, then tens and ones, result is " + ans;
+        let explHi = "पहले सैकड़े, फिर दहाई और इकाई घटाएँ, परिणाम " + ans + " है।";
+        list.push(createQuestionData(n1, n2, expl, explHi));
+      }
+      for (let i = 0; i < 5; i++) {
+        let base = getRandomInt(400, 850);
+        let n2 = [198, 299, 390, 495][getRandomInt(0, 3)];
+        if (base <= n2) base = n2 + 120;
+        let ans = base - n2;
+        let expl = "Use compensation method, subtract nearest round number and adjust, result is " + ans;
+        let explHi = "समायोजन विधि का उपयोग करें, निकटतम गोल संख्या घटाकर समायोजित करें, परिणाम " + ans + " है।";
+        list.push(createQuestionData(base, n2, expl, explHi));
+      }
+
+      // SECTION 3: 4-Digit Subtraction (Q31 - Q35) [Hard Level]
+      for (let i = 0; i < 5; i++) {
+        let n1 = getRandomInt(3000, 8000);
+        let n2 = getRandomInt(1100, 3500);
+        if (n1 <= n2) {
+          let temp = n1;
+          n1 = n2;
+          n2 = temp;
+        }
+        let ans = n1 - n2;
+        let expl = "Subtract place by place from thousands to units, result is " + formatNum(ans);
+        let explHi = "हजार से इकाई तक स्थान-दर-स्थान घटाएँ, परिणाम " + formatNum(ans) + " है।";
+        list.push(createQuestionData(n1, n2, expl, explHi));
+      }
+
+      // SECTION 4: 5-Digit Subtraction (Q36 - Q40) [Advanced Level]
+      for (let i = 0; i < 5; i++) {
+        let n1 = getRandomInt(25000, 60000);
+        let n2 = getRandomInt(12000, 24000);
+        if (n1 <= n2) {
+          let temp = n1;
+          n1 = n2;
+          n2 = temp;
+        }
+        let ans = n1 - n2;
+        let expl = "Subtract ten-thousands and thousands progressively, result is " + formatNum(ans);
+        let explHi = "दस-हजार और हजार को क्रमिक रूप से घटाएँ, परिणाम " + formatNum(ans) + " है।";
+        list.push(createQuestionData(n1, n2, expl, explHi));
+      }
+
+      return list;
+    }
 
     const questionNumber = document.getElementById("questionNumber");
     const questionText = document.getElementById("questionText");
@@ -943,6 +745,7 @@ const questions = [
     });
 
     restartButton.addEventListener("click", function() {
+      questions = buildQuizQuestions();
       currentQuestion = 0;
       score = 0;
       answered = false;
@@ -951,7 +754,8 @@ const questions = [
       renderQuestion();
     });
 
-    // Initial render call
+    // Initial load call
+    questions = buildQuizQuestions();
     renderQuestion();
   </script>
 
