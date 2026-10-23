@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="Day 2 Exercise: Fast Subtraction. Bilingual English and Hindi practice quiz.">
+  <meta name="description" content="Day 2 Exercise: Subtraction Basics. Bilingual English and Hindi practice quiz.">
 
-  <title>Day 2 Exercise - RawaRajpootNexEduToppers</title>
+  <title>Day 2 Exercise - Subtraction - RawaRajpootNexEduToppers</title>
 
   <style>
     :root {
@@ -23,7 +23,7 @@
       --red-text: #a32121;
     }
 
-    * {
+     * {
       box-sizing: border-box;
     }
 
@@ -311,50 +311,21 @@
   <main class="container">
 
     <section class="card">
-      <h2>बच्चों, नीचे दिये गये तरीकों को ध्यान से पढ़ें, इन तरीकों से आप बिना कॉपी और पेंसिल के ही सिर्फ अपने दिमाग मे बड़ी से बड़ी संख्याओं को तेजी से घटाकर बता सकेंगे</h2>
-      
-      <h2>Rule 1: Break Numbers Apart (संख्याओं को तोड़कर घटाना)</h2>
-      
-      <h2>Example 1: 58 - 24 = ?</h2>
-      <p>First of all Break the Second Number: 20+4</p>
-      <p>Now Subtract Tens: 58 - 20 = 38</p>
-      <p>Now Subtract Ones: 38 - 4 = 34</p>
-      <p>Answer = 34</p>
-
-      <h2>Example 2: 345 - 123 = ?</h2>
-      <p>First of all Break the Second Number: 100+20+3</p>
-      <p>Now Subtract Hundreds: 345 - 100 = 245</p>
-      <p>Now Subtract Tens: 245 - 20 = 225</p>
-      <p>Now Subtract Ones: 225 - 3 = 222</p>
-      <p>Answer = 222</p>
-
-      <h2>Example 3: 3,452 - 1,231 = ?</h2>
-      <p>First of all Break the Second Number: 1000+200+30+1</p>
-      <p>Now Subtract Thousands: 3452 - 1000 = 2452</p>
-      <p>Now Subtract Hundreds: 2452 - 200 = 2252</p>
-      <p>Now Subtract Tens: 2252 - 30 = 2222</p>
-      <p>Now Subtract Ones: 2222 - 1 = 2221</p>
-      <p>Answer = 2221</p>
+      <h2>बच्चों, नीचे दिये गये तरीकों को ध्यान से पढ़ें, इन तरीकों से आप बिना कॉपी और पेंसिल के ही दिमाग में तेजी से घटा सकेंगे।</h2>
+      <h2>Rule 1: दूसरी संख्या को तोड़कर घटाना</h2>
+      <h2>Example: 78 - 35 = ?</h2>
+      <p>सबसे पहले दूसरी संख्या 35 को तोड़ेंगे: 30 + 5</p>
+      <p>अब पहली संख्या में से 30 घटाएँगे: 78 - 30 = 48</p>
+      <p>अब बचे हुए 5 को भी घटाएँगे: 48 - 5 = 43</p>
+      <p>Result: 43</p>
 
       <h2>Rule 2: Compensation Method (समायोजन की विधि)</h2>
-      <p>इस तरीके मे आप किसी संख्या को पास की आसान संख्या बनाइए, फिर घटाइए और फिर पास की संख्या बनाने के लिए जितना अतिरिक्त घटाया था उसे वापस जोड़ दीजिए।</p>
+      <h2>Example: 84 - 29 = ?</h2>
+      <p>29 को आसान बनाने के लिए 30 घटाएँगे: 84 - 30 = 54</p>
+      <p>चूँकि हमने 1 ज़्यादा घटा दिया था, इसलिए उत्तर में 1 जोड़ देंगे: 54 + 1 = 55</p>
+      <p>Result: 55</p>
 
-      <h2>Example 1: 53 - 19 = ?</h2>
-      <p>Make 19 into 20 by adding 1</p>
-      <p>Now Subtract 20: 53 - 20 = 33</p>
-      <p>Now Add back the extra 1: 33 + 1, Answer = 34</p>
-
-      <h2>Example 2: 452 - 198 = ?</h2>
-      <p>Make 198 into 200 by adding 2</p>
-      <p>Now Subtract 200: 452 - 200 = 252</p>
-      <p>Now Add back the extra 2: 252 + 2, Answer = 254</p>
-
-      <h2>Example 3: 4675 - 1998 = ?</h2>
-      <p>Make 1998 into 2000 by adding 2</p>
-      <p>Now Subtract 2000: 4675 - 2000 = 2675</p>
-      <p>Now Add back the extra 2: 2675 + 2, Answer = 2677</p>
-
-      <h3>अब नीचे दी गई प्रश्नोत्तरी से संख्याओं को तेजी से घटाने का अभ्यास करें</h3>
+      <h3>अब नीचे दी गई प्रश्नोत्तरी से घटाव का अभ्यास करें:</h3>
 
       <div class="quiz-info">
         <strong>Questions:</strong> 40
@@ -408,7 +379,6 @@
       <p class="result-message" id="resultMessage"></p>
       <p class="hindi" lang="hi" id="resultMessageHindi"></p>
 
-      <!-- Button Action Container -->
       <div id="resultActions" style="margin-top: 20px; display: flex; flex-direction: column; gap: 12px;">
         <button class="action-button" id="restartButton" type="button" style="margin-top: 0; width: 100%;">
           Generate New Quiz | नई क्विज़ बनाएँ
@@ -474,7 +444,7 @@
       offsets.sort(() => Math.random() - 0.5);
       for (let offset of offsets) {
         let d = ans + offset;
-        if (d > 0 && d !== ans) {
+        if (d >= 0 && d !== ans) {
           distractors.add(d);
         }
         if (distractors.size >= 3) break;
@@ -482,7 +452,7 @@
       let fallback = 1;
       while (distractors.size < 3) {
         let d = ans + fallback;
-        if (d > 0 && d !== ans) {
+        if (d >= 0 && d !== ans) {
           distractors.add(d);
         }
         fallback++;
@@ -509,91 +479,149 @@
         hindi: qHi,
         options: shuffledOptions,
         answer: correctIndex,
-        explanation: methodNote || ("First subtract numbers, result is " + formatNum(ans)),
-        explanationHindi: methodNoteHi || ("इन संख्याओं को घटाने पर परिणाम " + formatNum(ans) + " है।")
+        explanation: methodNote || ("Subtract numbers, difference is " + formatNum(ans)),
+        explanationHindi: methodNoteHi || ("इन संख्याओं को घटाने पर अंतर " + formatNum(ans) + " है।")
       };
     }
 
+    function createLevelQuestion(level) {
+      let n1, n2, expl, explHi;
+
+      if (level === 1) {
+        // Easy: 2-Digit Subtraction
+        n1 = getRandomInt(45, 99);
+        n2 = getRandomInt(12, n1 - 10);
+        let ans = n1 - n2;
+        expl = "Subtract tens and ones places: " + n1 + " - " + n2 + " = " + ans;
+        explHi = "दहाई और इकाई के अंकों को घटाएँ: " + n1 + " - " + n2 + " = " + ans;
+      } else if (level === 2) {
+        // Medium: 3-Digit Subtraction
+        n1 = getRandomInt(350, 950);
+        n2 = getRandomInt(110, n1 - 100);
+        let ans = n1 - n2;
+        expl = "Subtract hundreds, tens and units: " + n1 + " - " + n2 + " = " + ans;
+        explHi = "सैकड़े, दहाई और इकाई के मान घटाएँ: " + n1 + " - " + n2 + " = " + ans;
+      } else {
+        // Hard: 4-Digit Subtraction
+        n1 = getRandomInt(3000, 9500);
+        n2 = getRandomInt(1050, n1 - 500);
+        let ans = n1 - n2;
+        expl = "Subtract thousands, hundreds, tens and units: " + formatNum(n1) + " - " + formatNum(n2) + " = " + formatNum(ans);
+        explHi = "हजार, सैकड़े, दहाई और इकाई के मान घटाएँ: " + formatNum(n1) + " - " + formatNum(n2) + " = " + formatNum(ans);
+      }
+
+      return createQuestionData(n1, n2, expl, explHi);
+    }
+
+    // 10 Distinct Subtraction Real-Life Scenarios for Questions 31 to 40
+    function createRealLifeScenarioQuestion(type) {
+      let names = ["Rohan", "Riya", "Amit", "Priya", "Rahul", "Sneha", "Vikas", "Pooja"];
+      let name = names[getRandomInt(0, names.length - 1)];
+      let n1, n2, qEn, qHi;
+
+      switch(type) {
+        case 0: // 1. Shopping & Remaining Money
+          n1 = getRandomInt(300, 800);
+          n2 = getRandomInt(100, n1 - 50);
+          qEn = name + " had ₹" + formatNum(n1) + " and spent ₹" + formatNum(n2) + " on a toy. How much money is left with " + name + "?";
+          qHi = name + " के पास ₹" + formatNum(n1) + " थे और उसने ₹" + formatNum(n2) + " का खिलौना खरीदा। " + name + " के पास अब कितने रुपये बचे हैं?";
+          break;
+        case 1: // 2. Fruits Left
+          n1 = getRandomInt(250, 600);
+          n2 = getRandomInt(80, n1 - 100);
+          qEn = "A shopkeeper had " + formatNum(n1) + " apples. He sold " + formatNum(n2) + " apples during the day. How many apples are left?";
+          qHi = "एक दुकानदार के पास " + formatNum(n1) + " सेब थे। उसने दिन में " + formatNum(n2) + " सेब बेच दिए। अब कितने सेब बचे हैं?";
+          break;
+        case 2: // 3. Bus Passengers Alighted
+          n1 = getRandomInt(150, 350);
+          n2 = getRandomInt(40, n1 - 30);
+          qEn = "There were " + formatNum(n1) + " passengers on a train. " + formatNum(n2) + " passengers got down at the station. How many passengers remain on the train?";
+          qHi = "एक ट्रेन में " + formatNum(n1) + " यात्री थे। स्टेशन पर " + formatNum(n2) + " यात्री उतर गए। अब ट्रेन में कितने यात्री बचे हैं?";
+          break;
+        case 3: // 4. Items Used / Left
+          n1 = getRandomInt(200, 500);
+          n2 = getRandomInt(50, n1 - 80);
+          qEn = name + " had " + formatNum(n1) + " marbles. He gave " + formatNum(n2) + " marbles to his friend. How many marbles does " + name + " have left?";
+          qHi = name + " के पास " + formatNum(n1) + " कंचे थे। उसने " + formatNum(n2) + " कंचे अपने दोस्त को दे दिए। अब " + name + " के पास कितने कंचे बचे हैं?";
+          break;
+        case 4: // 5. Time Difference / Target
+          n1 = getRandomInt(60, 120);
+          n2 = getRandomInt(20, n1 - 15);
+          qEn = name + " set a target to study for " + n1 + " minutes. So far, " + name + " has studied for " + n2 + " minutes. How many more minutes are left?";
+          qHi = name + " ने " + n1 + " मिनट पढ़ाई करने का लक्ष्य रखा। अब तक " + n2 + " मिनट पढ़ाई हो चुकी है। अब कितने मिनट और बाकी हैं?";
+          break;
+        case 5: // 6. Distance Remaining
+          n1 = getRandomInt(350, 800);
+          n2 = getRandomInt(120, n1 - 100);
+          qEn = "The total distance of a trip is " + formatNum(n1) + " km. A car has covered " + formatNum(n2) + " km. How much distance is still remaining?";
+          qHi = "कुल यात्रा " + formatNum(n1) + " किमी की है। एक कार ने " + formatNum(n2) + " किमी दूरी तय कर ली है। अब कितनी दूरी तय करनी बाकी है?";
+          break;
+        case 6: // 7. Score Difference
+          n1 = getRandomInt(150, 300);
+          n2 = getRandomInt(60, n1 - 20);
+          qEn = name + " scored " + n1 + " points in a game, while his friend scored " + n2 + " points. By how many points did " + name + " win?";
+          qHi = name + " ने खेल में " + n1 + " अंक बनाए, जबकि उसके दोस्त ने " + n2 + " अंक बनाए। " + name + " कितने अंकों से जीता?";
+          break;
+        case 7: // 8. Pages Remaining to Read
+          n1 = getRandomInt(120, 250);
+          n2 = getRandomInt(40, n1 - 30);
+          qEn = "A book has " + n1 + " pages in total. " + name + " has read " + n2 + " pages. How many pages are left to read?";
+          qHi = "एक किताब में कुल " + n1 + " पृष्ठ हैं। " + name + " ने " + n2 + " पृष्ठ पढ़ लिए हैं। अब कितने पृष्ठ पढ़ने बाकी हैं?";
+          break;
+        case 8: // 9. Capacity / Liquid Left
+          n1 = getRandomInt(500, 950);
+          n2 = getRandomInt(150, n1 - 100);
+          qEn = "A container had " + formatNum(n1) + " ml of juice. " + formatNum(n2) + " ml was consumed. How much juice is left in the container?";
+          qHi = "एक बर्तन में " + formatNum(n1) + " मिलीलीटर जूस था। " + formatNum(n2) + " मिलीलीटर जूस पी लिया गया। बर्तन में कितना जूस बचा है?";
+          break;
+        case 9: // 10. Weight Difference
+          n1 = getRandomInt(15, 45);
+          n2 = getRandomInt(5, n1 - 5);
+          qEn = "A sack of flour weighed " + n1 + " kg. " + name + "'s family used " + n2 + " kg this month. How many kg of flour is left?";
+          qHi = "आटे की एक बोरी " + n1 + " किलो की थी। " + name + " के परिवार ने इस महीने " + n2 + " किलो आटा इस्तेमाल कर लिया। अब कितना किलो आटा बचा है?";
+          break;
+      }
+
+      let ans = n1 - n2;
+      let dists = generateDistractors(ans);
+      let optionsList = [ans, dists[0], dists[1], dists[2]];
+      let optionObjs = optionsList.map((val, idx) => ({ val: val, isCorrect: idx === 0 }));
+      optionObjs.sort(() => Math.random() - 0.5);
+      let shuffledOptions = optionObjs.map(o => formatNum(o.val));
+      let correctIndex = optionObjs.findIndex(o => o.isCorrect);
+
+      return {
+        question: qEn,
+        hindi: qHi,
+        options: shuffledOptions,
+        answer: correctIndex,
+        explanation: "Subtract quantities: " + formatNum(n1) + " - " + formatNum(n2) + " = " + formatNum(ans),
+        explanationHindi: "मात्राओं को घटाएँ: " + formatNum(n1) + " - " + formatNum(n2) + " = " + formatNum(ans)
+      };
+    }
+
+    // Strict Easy-to-Hard Block-wise Generation (Q1-10 Easy, Q11-20 Medium, Q21-30 Hard, Q31-40 10 Unique Subtraction Scenarios)
     function buildQuizQuestions() {
       let list = [];
 
-      // SECTION 1: 2-Digit Subtraction (Q1 - Q15) [Easy Level]
+      // Block 1: Questions 1 to 10 -> Easy Level (2-Digit Subtraction)
       for (let i = 0; i < 10; i++) {
-        let n1 = getRandomInt(50, 95);
-        let n2 = getRandomInt(15, 45);
-        if (n1 <= n2) {
-          let temp = n1;
-          n1 = n2;
-          n2 = temp;
-        }
-        let ans = n1 - n2;
-        let expl = "First subtract tens, then ones, result is " + ans;
-        let explHi = "पहले दहाई और फिर इकाई घटाएँ, परिणाम " + ans + " है।";
-        list.push(createQuestionData(n1, n2, expl, explHi));
-      }
-      for (let i = 0; i < 5; i++) {
-        let base = getRandomInt(50, 85);
-        let n2 = [19, 29, 39, 49][getRandomInt(0, 3)];
-        if (base <= n2) base = n2 + 15;
-        let ans = base - n2;
-        let rounded = n2 + 1;
-        let expl = "Make " + n2 + " into " + rounded + " by adding 1, subtract " + rounded + ", then add back 1, result is " + ans;
-        let explHi = "संख्या " + n2 + " को 1 जोड़कर " + rounded + " बनाएँ, घटाएँ, फिर 1 वापस जोड़ें, परिणाम " + ans + " है।";
-        list.push(createQuestionData(base, n2, expl, explHi));
+        list.push(createLevelQuestion(1));
       }
 
-      // SECTION 2: 3-Digit Subtraction (Q16 - Q30) [Medium Level]
+      // Block 2: Questions 11 to 20 -> Medium Level (3-Digit Subtraction)
       for (let i = 0; i < 10; i++) {
-        let n1 = getRandomInt(300, 900);
-        let n2 = getRandomInt(110, 450);
-        if (n1 <= n2) {
-          let temp = n1;
-          n1 = n2;
-          n2 = temp;
-        }
-        let ans = n1 - n2;
-        let expl = "First subtract hundreds, then tens and ones, result is " + ans;
-        let explHi = "पहले सैकड़े, फिर दहाई और इकाई घटाएँ, परिणाम " + ans + " है।";
-        list.push(createQuestionData(n1, n2, expl, explHi));
-      }
-      for (let i = 0; i < 5; i++) {
-        let base = getRandomInt(400, 850);
-        let n2 = [198, 299, 390, 495][getRandomInt(0, 3)];
-        if (base <= n2) base = n2 + 120;
-        let ans = base - n2;
-        let expl = "Use compensation method, subtract nearest round number and adjust, result is " + ans;
-        let explHi = "समायोजन विधि का उपयोग करें, निकटतम गोल संख्या घटाकर समायोजित करें, परिणाम " + ans + " है।";
-        list.push(createQuestionData(base, n2, expl, explHi));
+        list.push(createLevelQuestion(2));
       }
 
-      // SECTION 3: 4-Digit Subtraction (Q31 - Q35) [Hard Level]
-      for (let i = 0; i < 5; i++) {
-        let n1 = getRandomInt(3000, 8000);
-        let n2 = getRandomInt(1100, 3500);
-        if (n1 <= n2) {
-          let temp = n1;
-          n1 = n2;
-          n2 = temp;
-        }
-        let ans = n1 - n2;
-        let expl = "Subtract place by place from thousands to units, result is " + formatNum(ans);
-        let explHi = "हजार से इकाई तक स्थान-दर-स्थान घटाएँ, परिणाम " + formatNum(ans) + " है।";
-        list.push(createQuestionData(n1, n2, expl, explHi));
+      // Block 3: Questions 21 to 30 -> Harder Level (4-Digit Subtraction)
+      for (let i = 0; i < 10; i++) {
+        list.push(createLevelQuestion(3));
       }
 
-      // SECTION 4: 5-Digit Subtraction (Q36 - Q40) [Advanced Level]
-      for (let i = 0; i < 5; i++) {
-        let n1 = getRandomInt(25000, 60000);
-        let n2 = getRandomInt(12000, 24000);
-        if (n1 <= n2) {
-          let temp = n1;
-          n1 = n2;
-          n2 = temp;
-        }
-        let ans = n1 - n2;
-        let expl = "Subtract ten-thousands and thousands progressively, result is " + formatNum(ans);
-        let explHi = "दस-हजार और हजार को क्रमिक रूप से घटाएँ, परिणाम " + formatNum(ans) + " है।";
-        list.push(createQuestionData(n1, n2, expl, explHi));
+      // Block 4: Questions 31 to 40 -> 10 Unique Subtraction Word Problems (No repetition)
+      for (let i = 0; i < 10; i++) {
+        list.push(createRealLifeScenarioQuestion(i));
       }
 
       return list;
@@ -693,7 +721,7 @@
       }
 
       feedbackEnglish.textContent = q.explanation;
-      feedbackHindi.textContent = q.explanationHindi;
+      feedbackHindi.textContent += " " + q.explanationHindi;
 
       updateProgress();
       nextButton.style.display = "inline-block";
