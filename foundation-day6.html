@@ -266,6 +266,41 @@
       font-size: 13px;
     }
 
+
+    /* Read Aloud controls */
+    .read-aloud-card {
+      background: #fff;
+      border: 2px solid #c9dcf5;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 14px rgba(26, 53, 87, 0.06);
+    }
+    .read-aloud-card h2 { margin-bottom: 6px; }
+    .read-aloud-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 12px;
+    }
+    .read-aloud-buttons button {
+      border: 0;
+      border-radius: 9px;
+      padding: 10px 14px;
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+      background: var(--primary);
+      color: white;
+    }
+    .read-aloud-buttons button.secondary { background: #087f8c; }
+    .read-aloud-buttons button.stop { background: #a32121; }
+    .read-aloud-buttons button:focus-visible {
+      outline: 3px solid #f0ad4e;
+      outline-offset: 3px;
+    }
+    #speechStatus { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
+
     @media (max-width: 600px) {
       header {
         padding: 23px 12px;
@@ -310,6 +345,20 @@
   </header>
 
   <main class="container">
+
+    <section class="read-aloud-card" aria-label="Read aloud controls">
+      <h2>Read Aloud | सुनकर पढ़ें</h2>
+      <p>Listen to this lesson in English and Hindi. Voice availability depends on your browser and device.
+      <span lang="hi">इस पाठ को अंग्रेज़ी और हिंदी में सुनें। आवाज़ की उपलब्धता आपके ब्राउज़र और डिवाइस पर निर्भर करती है।</span></p>
+      <div class="read-aloud-buttons">
+        <button type="button" id="readAloudBtn">▶ Read Aloud | पढ़कर सुनाएँ</button>
+        <button type="button" class="secondary" id="pauseResumeBtn">⏸ Pause | रोकें</button>
+        <button type="button" class="stop" id="stopReadingBtn">■ Stop | बंद करें</button>
+        <button type="button" class="secondary" id="slowerBtn">− Slower | धीमा</button>
+        <button type="button" class="secondary" id="fasterBtn">+ Faster | तेज़</button>
+      </div>
+      <p id="speechStatus" aria-live="polite">Ready to read | सुनाने के लिए तैयार</p>
+    </section>
 
     <section class="card">
       <h2>बच्चों, आइए भिन्न (Fractions) के प्रकार और उन्हें हल करने की Fast Tricks समझें:</h2>
@@ -455,6 +504,148 @@
 
   <script>
     "use strict";
+
+    // Free browser-based bilingual Read Aloud (no audio files or paid API).
+    (function setupReadAloud() {
+      const readBtn = document.getElementById("readAloudBtn");
+      const pauseBtn = document.getElementById("pauseResumeBtn");
+      const stopBtn = document.getElementById("stopReadingBtn");
+      const slowerBtn = document.getElementById("slowerBtn");
+      const fasterBtn = document.getElementById("fasterBtn");
+      const status = document.getElementById("speechStatus");
+
+      if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
+        status.textContent = "Read Aloud is not supported in this browser. Try an updated Chrome or Edge browser. | इस ब्राउज़र में Read Aloud उपलब्ध नहीं है। Chrome या Edge का नया संस्करण आज़माएँ।";
+        [readBtn, pauseBtn, stopBtn, slowerBtn, fasterBtn].forEach(btn => btn.disabled = true);
+        return;
+      }
+
+      let speechRate = 1;
+      let chunks = [];
+      let chunkIndex = 0;
+      let isReading = false;
+
+      function chooseVoice(language) {
+        const voices = window.speechSynthesis.getVoices();
+        if (language === "hi-IN") {
+          return voices.find(v => /^hi(-|_)/i.test(v.lang)) ||
+                 voices.find(v => /hindi/i.test(v.name)) || null;
+        }
+        return voices.find(v => /^en-IN/i.test(v.lang)) ||
+               voices.find(v => /^en(-|_)/i.test(v.lang)) || null;
+      }
+
+      function splitText(text) {
+        return text.split(/\n+/).map(line => line.trim()).filter(Boolean)
+          .map(line => ({
+            text: line,
+            lang: /[\u0900-\u097F]/.test(line) ? "hi-IN" : "en-IN"
+          }));
+      }
+
+      function speakNext() {
+        if (!isReading || chunkIndex >= chunks.length) {
+          isReading = false;
+          status.textContent = "Finished reading | पढ़कर सुनाना पूरा हुआ";
+          return;
+        }
+        const item = chunks[chunkIndex++];
+        const utterance = new SpeechSynthesisUtterance(item.text);
+        utterance.lang = item.lang;
+        utterance.rate = speechRate;
+        const voice = chooseVoice(item.lang);
+        if (voice) utterance.voice = voice;
+        utterance.onend = speakNext;
+        utterance.onerror = function(event) {
+          if (event.error !== "canceled" && event.error !== "interrupted") {
+            status.textContent = "Some text could not be read. Check your device's speech voices. | कुछ पाठ नहीं पढ़ा जा सका। डिवाइस की आवाज़ सेटिंग जाँचें।";
+            isReading = false;
+          }
+        };
+        status.textContent = "Reading | पढ़ रहा है… (" + chunkIndex + "/" + chunks.length + ")";
+        window.speechSynthesis.speak(utterance);
+      }
+
+      function collectPageText() {
+        const parts = [];
+        const header = document.querySelector("header");
+        if (header) parts.push(header.innerText);
+        const main = document.querySelector("main");
+        if (main) {
+          const clone = main.cloneNode(true);
+          const controls = clone.querySelector(".read-aloud-card");
+          if (controls) controls.remove();
+          // Avoid reading hidden result content or hidden feedback.
+          clone.querySelectorAll('[style*="display: none"], #resultPanel, #feedbackBox, #nextButton').forEach(el => el.remove());
+          parts.push(clone.innerText);
+        }
+        const disclaimer = document.querySelector(".site-disclaimer");
+        if (disclaimer) parts.push(disclaimer.innerText);
+        return parts.join("\n");
+      }
+
+      readBtn.addEventListener("click", function() {
+        window.speechSynthesis.cancel();
+        chunks = splitText(collectPageText());
+        chunkIndex = 0;
+        isReading = true;
+        if (!chunks.length) {
+          status.textContent = "No text found to read. | पढ़ने के लिए पाठ नहीं मिला।";
+          isReading = false;
+          return;
+        }
+        speakNext();
+      });
+
+      pauseBtn.addEventListener("click", function() {
+        if (window.speechSynthesis.paused) {
+          window.speechSynthesis.resume();
+          status.textContent = "Reading resumed | फिर से पढ़ना शुरू";
+          pauseBtn.textContent = "⏸ Pause | रोकें";
+        } else if (window.speechSynthesis.speaking) {
+          window.speechSynthesis.pause();
+          status.textContent = "Paused | पढ़ना रुका हुआ है";
+          pauseBtn.textContent = "▶ Resume | फिर शुरू करें";
+        }
+      });
+
+      stopBtn.addEventListener("click", function() {
+        window.speechSynthesis.cancel();
+        isReading = false;
+        chunks = [];
+        chunkIndex = 0;
+        pauseBtn.textContent = "⏸ Pause | रोकें";
+        status.textContent = "Stopped | पढ़ना बंद कर दिया गया";
+      });
+
+      slowerBtn.addEventListener("click", function() {
+        speechRate = Math.max(0.6, Math.round((speechRate - 0.2) * 10) / 10);
+        status.textContent = "Reading speed: " + speechRate.toFixed(1) + "× | पढ़ने की गति";
+        if (window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+          window.speechSynthesis.cancel();
+          chunkIndex = Math.max(0, chunkIndex - 1);
+          isReading = true;
+          speakNext();
+        }
+      });
+
+      fasterBtn.addEventListener("click", function() {
+        speechRate = Math.min(1.6, Math.round((speechRate + 0.2) * 10) / 10);
+        status.textContent = "Reading speed: " + speechRate.toFixed(1) + "× | पढ़ने की गति";
+        if (window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+          window.speechSynthesis.cancel();
+          chunkIndex = Math.max(0, chunkIndex - 1);
+          isReading = true;
+          speakNext();
+        }
+      });
+
+      window.speechSynthesis.onvoiceschanged = function() {
+        // Voices are loaded by the browser; select the best available voice when speaking.
+      };
+    })();
+
+
 
     let questions = [];
     let currentQuestion = 0;
