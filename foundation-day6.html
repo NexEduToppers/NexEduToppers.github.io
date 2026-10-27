@@ -243,6 +243,79 @@
       background: #dcecff;
     }
 
+
+    .poster-card { padding: 12px; }
+
+    .poster-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 0;
+    }
+
+    .fractions-poster {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    /* Clickable YouTube badge positioned inside the poster's first card. */
+    .poster-video-hotspot {
+      position: absolute;
+      left: 19%;
+      top: 42%;
+      transform: translate(-50%, -50%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 9px;
+      border: 2px solid #fff;
+      border-radius: 8px;
+      background: #e62117;
+      color: #fff;
+      font-size: clamp(9px, 1.8vw, 13px);
+      font-weight: 700;
+      line-height: 1.2;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(0,0,0,.22);
+      z-index: 2;
+    }
+
+    .poster-video-hotspot:hover,
+    .poster-video-hotspot:focus-visible {
+      background: #b9150d;
+      outline: 3px solid #ffd54f;
+      outline-offset: 2px;
+    }
+
+    .poster-caption {
+      text-align: center;
+      margin: 10px 4px 0;
+      font-size: 14px;
+    }
+
+    .video-card {
+      text-align: center;
+      border-top: 4px solid var(--secondary);
+    }
+
+    .video-card p {
+      margin: 8px 0;
+    }
+
+    .video-button {
+      text-decoration: none;
+      margin-top: 12px;
+    }
+
+    .video-note {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 12px !important;
+    }
+
     .site-disclaimer {
       background: #e9eef5;
       border-top: 1px solid #cbd5e1;
@@ -296,137 +369,56 @@
         scroll-behavior: auto !important;
       }
     }
-css
-/* Fractions Poster */
-.poster-section {
-  padding: 0;
-  overflow: hidden;
-}
-
-.poster-wrap {
-  position: relative;
-  width: 100%;
-  line-height: 0;
-}
-
-.poster-wrap img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.poster-video-link {
-  position: absolute;
-  left: 1.35%;
-  top: 14%;
-  width: 36.2%;
-  height: 31.4%;
-  display: block;
-  border-radius: 16px;
-  background: transparent;
-  cursor: pointer;
-}
-
-.poster-video-link:hover,
-.poster-video-link:focus-visible {
-  outline: 3px solid rgba(255, 0, 0, 0.8);
-  outline-offset: -3px;
-  background: rgba(255, 0, 0, 0.04);
-}
-
-.poster-video-link span {
-  position: absolute;
-  left: 12px;
-  bottom: 12px;
-  line-height: 1.3;
-  background: #dc0000;
-  color: #fff;
-  border-radius: 20px;
-  padding: 7px 12px;
-  font-weight: bold;
-  font-size: 14px;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.poster-video-link:hover span,
-.poster-video-link:focus-visible span {
-  opacity: 1;
-}
-
-.quiz-intro-card {
-  margin-top: 20px;
-}
-
-@media (max-width: 600px) {
-  .poster-video-link {
-    border-radius: 8px;
-  }
-
-  .poster-video-link span {
-    font-size: 11px;
-    left: 5px;
-    bottom: 5px;
-    padding: 4px 7px;
-  }
-}
   </style>
 </head>
 
 <body>
 
   <header>
-
+    <h1>RawaRajpootNexEduToppers Learning Academy</h1>
+    <p>Fractions Special Exercise (Q1–Q40)</p>
+    <h2 style="color:white; margin:10px 0;">FRACTIONS: TYPES & FAST TRICKS</h2>
+    <p>Learn Fraction Rules, Fast Calculation Hacks and Practice Quiz</p>
+    <p lang="hi">भिन्न के प्रकार, जादुई नियम और प्रश्नोत्तरी से अभ्यास</p>
   </header>
 
   <main class="container">
-<section class="card poster-section" aria-label="Fractions learning poster">
-  <div class="poster-wrap">
-    <img
-      src="fractions-poster.png"
-      alt="Fractions: Types, Fast Tricks and Practice"
-    >
 
-    <a
-      class="poster-video-link"
-      href="https://youtube.com/shorts/JWdjDTskbQQ?si=sTKGaz5HeQuqNVin"
-      target="_blank"
-      rel="noopener noreferrer"
-      title="Fraction क्या है? वीडियो देखें"
-      aria-label="Fraction क्या है? YouTube वीडियो देखें"
-    >
-      <span>▶ वीडियो देखें</span>
-    </a>
-  </div>
-</section>
+    <section class="card poster-card" aria-label="Fractions poster">
+      <div class="poster-wrap">
+        <img class="fractions-poster" src="fractions-poster-gemini.png" alt="Fractions poster: types of fractions and fast calculation rules" loading="eager">
+        <a class="poster-video-hotspot" href="https://youtube.com/shorts/JWdjDTskbQQ?si=sTKGaz5HeQuqNVin" target="_blank" rel="noopener noreferrer" aria-label="Open the Fraction kya hai video" title="Video Link: Fraction क्या है?">
+          <span aria-hidden="true">Video Link ▶</span>
+        </a>
+      </div>
+      <p class="hindi poster-caption" lang="hi">पहले कार्ड के खाली स्थान में दिए गए Video Link पर क्लिक करके वीडियो देखें।</p>
 
-<section class="card quiz-intro-card">
-  <h2>Fractions Practice Quiz | भिन्नों की अभ्यास प्रश्नोत्तरी</h2>
-  <p>पोस्टर पढ़ने के बाद नीचे दिए गए 40 सवाल हल करें। | Read the poster, then answer the 40 questions below.</p>
+      <h3>अब नीचे दी गई प्रश्नोत्तरी से भिन्नों का अभ्यास करें</h3>
 
-  <div class="quiz-info">
-    <strong>Questions:</strong> 40
-    <span lang="hi"> | प्रश्न: 40</span>
-    <br>
-    <strong>Score:</strong>
-    <span id="scoreDisplay" aria-live="polite">0 / 40</span>
-    <br>
-    <strong>Progress:</strong>
-    <span id="progressText">0 / 40</span>
+      <div class="quiz-info">
+        <strong>Questions:</strong> 40
+        <span lang="hi"> | प्रश्न: 40</span>
+        <br>
+        <strong>Score:</strong>
+        <span id="scoreDisplay" aria-live="polite">0 / 40</span>
+        <br>
+        <strong>Progress:</strong>
+        <span id="progressText">0 / 40</span>
+        <div
+          class="progress-track"
+          role="progressbar"
+          aria-label="Quiz progress"
+          aria-valuemin="0"
+          aria-valuemax="40"
+          aria-valuenow="0"
+          id="progressBar"
+        >
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </section>
 
-    <div
-      class="progress-track"
-      role="progressbar"
-      aria-label="Quiz progress"
-      aria-valuemin="0"
-      aria-valuemax="40"
-      aria-valuenow="0"
-      id="progressBar"
-    >
-      <div class="progress-fill" id="progressFill"></div>
-    </div>
-  </div>
-</section>
+
     <section class="card" id="quizPanel">
       <div class="question-number" id="questionNumber">
         Question 1 of 40
